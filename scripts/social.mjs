@@ -13,8 +13,23 @@ const normal=fontkit.create(await fs.readFile(new URL('../assets/fonts/Lato-Regu
 function width(text,size,bold=true){const f=bold?font:normal;return f.layout(text).glyphs.reduce((a,g)=>a+g.advanceWidth,0)*size/f.unitsPerEm;}
 function text(s,x,y,size,color,bold=true){const f=bold?font:normal,run=f.layout(s);let at=0,p=[];for(let i=0;i<run.glyphs.length;i++){const pos=run.positions[i];p.push(`<path d="${run.glyphs[i].path.toSVG()}" transform="translate(${at+pos.xOffset} ${pos.yOffset})"/>`);at+=pos.xAdvance;}return `<g fill="${color}" transform="translate(${x} ${y}) scale(${size/f.unitsPerEm} ${-size/f.unitsPerEm})">${p.join('')}</g>`;}
 function lines(s,size,max,limit=4){let out=[],line='';for(const word of s.split(/\s+/)){const next=(line?line+' ':'')+word;if(width(next,size)>max&&line){out.push(line);line=word;}else line=next;}if(line)out.push(line);if(out.length>limit)return lines(s,size-3,max,limit);return {lines:out,size};}
+function outlineLabels(svg){
+ const result=svg.replace(/<text\b([^>]*)>([^<]*)<\/text>/g,(_,attributes,label)=>{
+  const a=Object.fromEntries([...attributes.matchAll(/([\w:-]+)="([^"]*)"/g)].map(m=>[m[1],m[2]]));
+  label=label.replaceAll('&amp;','&').replaceAll('&lt;','<').replaceAll('&gt;','>').replaceAll('&quot;','"').replaceAll('&apos;',"'");
+  const bold=a['font-weight']==='bold'||Number(a['font-weight'])>=600,f=bold?font:normal,size=parseFloat(a['font-size']||16);
+  for(const char of label)if(!f.hasGlyphForCodePoint(char.codePointAt(0)))throw Error('Missing social icon glyph: '+char);
+  let x=parseFloat(a.x||0),y=parseFloat(a.y||0),w=width(label,size,bold);
+  if(a['text-anchor']==='middle')x-=w/2;else if(a['text-anchor']==='end')x-=w;
+  if(a['dominant-baseline']==='middle')y+=(f.xHeight||f.ascent*.5)/f.unitsPerEm*size/2;
+  const extra=['opacity','filter','clip-path','stroke','stroke-width'].filter(k=>a[k]).map(k=>` ${k}="${a[k]}"`).join('');
+  return `<g${a.transform?' transform="'+a.transform+'"':''}${extra}>${text(label,x,y,size,a.fill||'#000',bold)}</g>`;
+ });
+ if(/<text\b/.test(result))throw Error('Unoutlined nested text in social artwork');
+ return result;
+}
 export async function cover(out,route,title,desc){
- const parts=route.split('/').filter(Boolean),base=parts[0],m=SLUGS.indexOf(parts[2]),name=base==='horoskooppi'&&parts[1]?'zodiac-'+parts[1]:m>=0?'month-'+(m+1):TOOL_ART[base]||'calendar',svg=await fs.readFile(out+'/art/'+name+'.svg','utf8');
+ const parts=route.split('/').filter(Boolean),base=parts[0],m=SLUGS.indexOf(parts[2]),name=base==='horoskooppi'&&parts[1]?'zodiac-'+parts[1]:m>=0?'month-'+(m+1):TOOL_ART[base]||'calendar',svg=outlineLabels(await fs.readFile(out+'/art/'+name+'.svg','utf8'));
  const photoId=base==='juhlapyhat'?photos.find(p=>p.applicableSlugs?.includes(parts[1]))?.id:base==='yliopistojen-kalenterit'?parts[1]:['auringonnousu-ja-lasku','kuun-nousu-ja-lasku','paivan-pituus','koulujen-lomat'].includes(base)?parts[1]:base==='kylvokalenteri'&&parts[1]?'crop-'+(parts[1]==='avomaankurkku'?'kurkku':parts[1]):base==='oppaat'?guides.find(g=>g.slug===parts[1])?.photo:base==='kuukalenteri'?'moon-full':null;
  const photo=photos.find(p=>p.id===photoId),photoBytes=photo?await fs.readFile(new URL(photo.src.slice(1),ROOT)):null;
  const hash=createHash('sha256').update(RENDERER_HASH).update(route+title+desc+svg).update(photoBytes||'').update(photo?JSON.stringify({author:photo.author,license:photo.license,source:photo.source}):'').digest('hex').slice(0,20),src='/assets/social/'+hash+'.jpg',file=out+'/social/'+hash+'.jpg';
