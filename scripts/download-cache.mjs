@@ -16,9 +16,12 @@ if(process.env.CI||process.env.CF_PAGES){
    const response=await fetch(manifest.url,{signal:AbortSignal.timeout(300000)});if(!response.ok)throw Error('Cache response '+response.status);
    await pipeline(Readable.fromWeb(response.body),createWriteStream(archive));
    const sha=createHash('sha256');await pipeline(createReadStream(archive),sha);if(sha.digest('hex')!==manifest.sha256)throw Error('Template archive checksum differs');
-   const listing=spawnSync('tar',['-tzf',archive],{encoding:'utf8'});if(listing.status!==0)throw Error('Cannot inspect archive');
+   const tarVersion=spawnSync('tar',['--version'],{encoding:'utf8'});
+   const literalNames=tarVersion.stdout?.includes('GNU tar')?['--quoting-style=literal']:[];
+   const listing=spawnSync('tar',[...literalNames,'-tzf',archive],{encoding:'utf8'});if(listing.status!==0)throw Error('Cannot inspect archive');
    const allowed=new Set([...manifest.files.map(f=>f.path),'reports/export-cache.json','reports/lunar-cache.json','reports/planner-cache.json']);
-   if(listing.stdout.trim().split('\n').some(p=>!allowed.has(p.normalize('NFC'))))throw Error('Unexpected archive path');
+   const unexpected=listing.stdout.trim().split('\n').find(p=>!allowed.has(p.normalize('NFC')));
+   if(unexpected)throw Error('Unexpected archive path: '+JSON.stringify(unexpected));
    const extraction=spawnSync('tar',['-xzf',archive,'-C',root],{stdio:'inherit'});if(extraction.status!==0)throw Error('Cannot unpack template cache');
    for(const f of manifest.files){const b=await fs.readFile(path.join(root,f.path));if(b.length!==f.bytes||createHash('sha256').update(b).digest('hex')!==f.sha256)throw Error('Template integrity: '+f.path);}
    console.log('Verified all '+manifest.files.length+' template files; source hashes are checked again by each renderer.');
