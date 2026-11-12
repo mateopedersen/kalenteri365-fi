@@ -4,6 +4,7 @@ import {calTable,esc,icon,table,link} from './ui.mjs';
 const $=(s,root=document)=>root.querySelector(s),$$=(s,root=document)=>[...root.querySelectorAll(s)];
 const config=JSON.parse($('#page-config').textContent),KEY='kalenteri365-fi-v1',today=new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Helsinki',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 let saved;try{saved=JSON.parse(localStorage.getItem(KEY)||'null');if(!saved){const old=JSON.parse(localStorage.getItem('kalenteri365-v1')||'null');if(old){saved={version:1,events:(old.events||[]).map(e=>({...e,title:e.name,category:'personal',repeat:'none'})),tasks:(old.tasks||[]).map(t=>({...t,title:t.name})),notes:old.notes||{},plans:{},city:CITIES.find(c=>c[1]===old.city)?.[0]||'helsinki'};localStorage.setItem(KEY,JSON.stringify(saved));}}}catch{}let state={version:1,events:[],notes:{},tasks:[],plans:{},city:'helsinki',...(saved?.version===1?saved:{})};
+if(state.city==='mariehamn')state.city='maarianhamina';
 let selected=today,y=config.year||2027,m=config.month||1,view='month',filters=new Set(['holiday','flag','personal','work','family','school']);
 let toastTimer;function toast(s){$('#toast').textContent=s;$('#toast').classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').classList.remove('visible'),4000);}
 function persist(){try{localStorage.setItem(KEY,JSON.stringify(state));return true;}catch{toast('Tallennus ei onnistunut. Tarkista selaimen tallennustila ja ota varmuuskopio.');return false;}}
