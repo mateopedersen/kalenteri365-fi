@@ -13,7 +13,7 @@ for (const file of ['engine.mjs', 'office-exports.mjs', 'binary-exports.mjs']) {
   await writeFile(join(dir, file), await readFile(new URL('../assets/studio/' + file, import.meta.url)));
 }
 await writeFile(join(dir, 'finland-data.mjs'), 'export const FINLAND_HOLIDAYS={};export const STUDIO_PHOTOS=[];');
-const {initialState, normalize} = await import(pathToFileURL(join(dir, 'engine.mjs')));
+const {initialState, normalize, parseEvents} = await import(pathToFileURL(join(dir, 'engine.mjs')));
 const {createDocx, createXlsx} = await import(pathToFileURL(join(dir, 'office-exports.mjs')));
 
 const image = {
@@ -21,6 +21,12 @@ const image = {
   width: 1,
   height: 1,
 };
+
+test('Finnish CSV recurrence flags preserve annual reminders', () => {
+  const rows = parseEvents('2028-02-29;Syntymäpäivä;Kyllä\n2028-03-01;Yhteinen ilta;ei\n2028-03-02;Muistutus;kylla');
+  assert.equal(rows.length, 3);
+  assert.deepEqual(rows.map(row => row.annual), [true, false, true]);
+});
 
 test('new projects and older projects without a resolution use 600 dpi', () => {
   const state = initialState(2028);

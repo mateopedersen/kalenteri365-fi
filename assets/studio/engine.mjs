@@ -173,7 +173,7 @@ export function parseEvents(source,kind='csv'){
   }else{
     for(const line of source.split(/\r?\n/)){
       const cells=[];let value='',quoted=false;for(let i=0;i<line.length;i++){const c=line[i];if(c==='"'&&line[i+1]==='"'&&quoted){value+='"';i++;}else if(c==='"')quoted=!quoted;else if((c===','||c===';')&&!quoted){cells.push(value);value='';}else value+=c;}cells.push(value);
-      if(cells.length>=2)out.push({date:cells[0].trim(),title:cells[1].trim(),annual:/^(1|true|yes|jā|ja)$/i.test(cells[2]?.trim()||''),color:hex(cells[3]?.trim(),'#205c7d')});
+      if(cells.length>=2)out.push({date:cells[0].trim(),title:cells[1].trim(),annual:/^(1|true|yes|kyllä|kylla|jā|ja)$/i.test(cells[2]?.trim()||''),color:hex(cells[3]?.trim(),'#205c7d')});
     }
   }
   return out.filter(e=>validDate(e.date)&&e.title).slice(0,500).map(e=>({...e,id:uid(),title:text(e.title,120)}));
