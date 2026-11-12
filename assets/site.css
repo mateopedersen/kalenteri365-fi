@@ -34,3 +34,6 @@
 .left-rail{align-items:start}.city-panel{padding:0!important}.tools-menu{padding:0;border:0;background:transparent;box-shadow:none;margin-top:0;margin-bottom:0}
 
 @media print{body[data-kind="editor"] .page-heading{display:none}body[data-kind="editor"] .editor-photo{max-height:35mm;object-fit:contain}body[data-kind="editor"] .calendar-table td{height:17mm}body[data-kind="editor"] .editor-preview{break-inside:avoid}}
+.planner-sheet{position:relative}
+.tool-card{min-width:0;overflow-wrap:anywhere;hyphens:auto}
+@media(max-width:800px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
