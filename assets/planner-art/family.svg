@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="180" viewBox="0 0 360 180" fill="none" role="img" aria-labelledby="family-title family-desc"><title id="family-title">Perheen suunnitelma</title><desc id="family-desc">Ripustettu kalenteri, värikoodattuja yhteisiä suunnitelmia ja erillisiä muistilappuja.</desc><defs>
+ <linearGradient id="family-paper" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fffdf7"/><stop offset=".6" stop-color="#faf6e9"/><stop offset="1" stop-color="#e7e1d1"/></linearGradient>
+ <linearGradient id="family-navy" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#426780"/><stop offset=".3" stop-color="#234b67"/><stop offset=".7" stop-color="#12374f"/><stop offset="1" stop-color="#09283d"/></linearGradient>
+ <linearGradient id="family-navySide" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#173d56"/><stop offset="1" stop-color="#071f31"/></linearGradient>
+ <linearGradient id="family-ice" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e2f0e7"/><stop offset=".45" stop-color="#beddd0"/><stop offset="1" stop-color="#7eaea1"/></linearGradient>
+ <linearGradient id="family-metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fafcfa"/><stop offset=".16" stop-color="#bfcacb"/><stop offset=".4" stop-color="#eff4f0"/><stop offset=".68" stop-color="#8a9fa3"/><stop offset=".85" stop-color="#b8c9c9"/><stop offset="1" stop-color="#657e85"/></linearGradient>
+ <linearGradient id="family-wood" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e2c6a0"/><stop offset=".4" stop-color="#cda777"/><stop offset="1" stop-color="#a77c50"/></linearGradient>
+ <linearGradient id="family-gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f9e9be"/><stop offset=".32" stop-color="#d8bd82"/><stop offset=".62" stop-color="#f1deb2"/><stop offset="1" stop-color="#a88852"/></linearGradient>
+ <radialGradient id="family-face" cx=".34" cy=".22" r=".95"><stop stop-color="#fffef9"/><stop offset=".7" stop-color="#eff1e8"/><stop offset="1" stop-color="#d5e0dc"/></radialGradient>
+ <radialGradient id="family-faceDark" cx=".3" cy=".24" r=".9"><stop stop-color="#325c73"/><stop offset=".55" stop-color="#173f57"/><stop offset="1" stop-color="#09283e"/></radialGradient>
+ <linearGradient id="family-pencilPaint" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#143c55"/><stop offset=".35" stop-color="#567f8c"/><stop offset=".52" stop-color="#9ab6ad"/><stop offset=".67" stop-color="#3c6c7b"/><stop offset="1" stop-color="#12364c"/></linearGradient>
+ <filter id="family-softShadow" x="-.5" y="-.8" width="2" height="2.6"><feGaussianBlur stdDeviation="4"/></filter>
+ <filter id="family-objectShadow" x="-.25" y="-.25" width="1.6" height="1.7"><feDropShadow dx="1.5" dy="4" stdDeviation="3" flood-color="#163143" flood-opacity=".14"/></filter>
+ </defs>
+ <ellipse cx="177" cy="161" rx="106" ry="8" fill="#1a3946" opacity=".11" filter="url(#family-softShadow)"/>
+ <!-- Suspended wall calendar. -->
+ <path d="m143 38 34-21 35 21" stroke="#ba9a71" stroke-width="2.2"/>
+ <circle cx="177" cy="15" r="4" fill="url(#family-wood)"/>
+ <circle cx="176" cy="14" r="1.5" fill="#f0dec0"/>
+ <g filter="url(#family-objectShadow)">
+  <rect x="104" y="38" width="153" height="114" rx="6" fill="#b1beb7"/>
+  <rect x="99" y="34" width="153" height="115" rx="6" fill="url(#family-paper)" stroke="#d5cfbd" stroke-width="1"/>
+  <path d="M105 34h141a6 6 0 0 1 6 6v17H99V40a6 6 0 0 1 6-6Z" fill="url(#family-navy)"/>
+  <path d="M100 56h151" stroke="#6e8e98" stroke-width=".8"/>
+  <path d="M109 143h132" stroke="#ccc9ba" stroke-width=".8"/>
+  <path d="M114 61v74m18-74v74m18-74v74m18-74v74m18-74v74m18-74v74m18-74v74m18-74v74M108 79h132m-132 18h132m-132 18h132m-132 18h132" stroke="#d3d9ce" stroke-width=".7"/>
+  <rect x="113" y="64" width="14" height="5" rx="2" fill="#b6d4c6"/>
+  <rect x="131" y="64" width="14" height="5" rx="2" fill="#b6d4c6"/>
+  <rect x="149" y="64" width="14" height="5" rx="2" fill="#b6d4c6"/>
+  <rect x="167" y="64" width="14" height="5" rx="2" fill="#b6d4c6"/>
+  <rect x="185" y="64" width="14" height="5" rx="2" fill="#b6d4c6"/>
+  <rect x="203" y="64" width="14" height="5" rx="2" fill="#d6c6aa"/>
+  <rect x="221" y="64" width="14" height="5" rx="2" fill="#d6c6aa"/>
+  <rect x="116" y="84" width="12" height="8" rx="2" fill="#7da6ad"/>
+  <rect x="152" y="84" width="12" height="8" rx="2" fill="#dec397"/>
+  <rect x="188" y="84" width="12" height="8" rx="2" fill="#bed5c5"/>
+  <rect x="134" y="102" width="12" height="8" rx="2" fill="#bed5c5"/>
+  <rect x="170" y="102" width="12" height="8" rx="2" fill="#7da6ad"/>
+  <rect x="206" y="102" width="12" height="8" rx="2" fill="#e1b8a6"/>
+  <rect x="116" y="120" width="12" height="8" rx="2" fill="#e1b8a6"/>
+  <rect x="152" y="120" width="12" height="8" rx="2" fill="#7da6ad"/>
+  <rect x="188" y="120" width="12" height="8" rx="2" fill="#dec397"/>
+  <path d="M127 45c0-8-7-10-7-17 0-6 8-7 9-2" stroke="#193749" stroke-width="4" stroke-linecap="round"/>
+  <path d="M127 44c-1-7-6-9-6-16 0-4 5-5 7-2" stroke="url(#family-metal)" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M228 45c0-8-7-10-7-17 0-6 8-7 9-2" stroke="#193749" stroke-width="4" stroke-linecap="round"/>
+  <path d="M228 44c-1-7-6-9-6-16 0-4 5-5 7-2" stroke="url(#family-metal)" stroke-width="2.2" stroke-linecap="round"/>
+ </g>
+ <!-- Separate shared notes with turned paper corners. -->
+ <g transform="rotate(-9 93 133)" filter="url(#family-objectShadow)">
+  <path d="M67 111h51v42H67Z" fill="#91b8ad"/>
+  <path d="M65 109h51v37l-9 7H65Z" fill="url(#family-ice)"/>
+  <path d="m107 146 9-7v7l-9 7Z" fill="#83aea1"/>
+  <path d="M74 127h30m-30 6h25m-25 6h19" stroke="#5e9186" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M80 109h20v6H80Z" fill="#f3e3c4" fill-opacity=".8"/>
+ </g>
+ <g transform="rotate(8 260 122)" filter="url(#family-objectShadow)">
+  <path d="M231 101h58v43h-58Z" fill="#c5a980"/>
+  <path d="M229 98h58v38l-8 7h-50Z" fill="#f1ddaf"/>
+  <path d="m279 136 8-7v7l-8 7Z" fill="#cfb37b"/>
+  <path d="M241 98h30v6h-30Z" fill="#fff8e0" fill-opacity=".8"/>
+  <path d="m240 118 3 3 6-7" stroke="#557e7b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M254 117h20m-20 7h15m-34 7h34" stroke="#a2885f" stroke-width="1.3" stroke-linecap="round"/>
+ </g></svg>

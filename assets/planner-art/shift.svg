@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="180" viewBox="0 0 360 180" fill="none" role="img" aria-labelledby="shift-title shift-desc"><title id="shift-title">Vuorosuunnitelma</title><desc id="shift-desc">Kaksi eri aikaa näyttävää kelloa ja päivä- sekä yövuoron suunnittelukortit.</desc><defs>
+ <linearGradient id="shift-paper" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fffdf7"/><stop offset=".6" stop-color="#faf6e9"/><stop offset="1" stop-color="#e7e1d1"/></linearGradient>
+ <linearGradient id="shift-navy" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#426780"/><stop offset=".3" stop-color="#234b67"/><stop offset=".7" stop-color="#12374f"/><stop offset="1" stop-color="#09283d"/></linearGradient>
+ <linearGradient id="shift-navySide" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#173d56"/><stop offset="1" stop-color="#071f31"/></linearGradient>
+ <linearGradient id="shift-ice" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e2f0e7"/><stop offset=".45" stop-color="#beddd0"/><stop offset="1" stop-color="#7eaea1"/></linearGradient>
+ <linearGradient id="shift-metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fafcfa"/><stop offset=".16" stop-color="#bfcacb"/><stop offset=".4" stop-color="#eff4f0"/><stop offset=".68" stop-color="#8a9fa3"/><stop offset=".85" stop-color="#b8c9c9"/><stop offset="1" stop-color="#657e85"/></linearGradient>
+ <linearGradient id="shift-wood" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e2c6a0"/><stop offset=".4" stop-color="#cda777"/><stop offset="1" stop-color="#a77c50"/></linearGradient>
+ <linearGradient id="shift-gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f9e9be"/><stop offset=".32" stop-color="#d8bd82"/><stop offset=".62" stop-color="#f1deb2"/><stop offset="1" stop-color="#a88852"/></linearGradient>
+ <radialGradient id="shift-face" cx=".34" cy=".22" r=".95"><stop stop-color="#fffef9"/><stop offset=".7" stop-color="#eff1e8"/><stop offset="1" stop-color="#d5e0dc"/></radialGradient>
+ <radialGradient id="shift-faceDark" cx=".3" cy=".24" r=".9"><stop stop-color="#325c73"/><stop offset=".55" stop-color="#173f57"/><stop offset="1" stop-color="#09283e"/></radialGradient>
+ <linearGradient id="shift-pencilPaint" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#143c55"/><stop offset=".35" stop-color="#567f8c"/><stop offset=".52" stop-color="#9ab6ad"/><stop offset=".67" stop-color="#3c6c7b"/><stop offset="1" stop-color="#12364c"/></linearGradient>
+ <filter id="shift-softShadow" x="-.5" y="-.8" width="2" height="2.6"><feGaussianBlur stdDeviation="4"/></filter>
+ <filter id="shift-objectShadow" x="-.25" y="-.25" width="1.6" height="1.7"><feDropShadow dx="1.5" dy="4" stdDeviation="3" flood-color="#163143" flood-opacity=".14"/></filter>
+ </defs>
+ <ellipse cx="177" cy="160" rx="113" ry="9" fill="#173748" opacity=".14" filter="url(#shift-softShadow)"/>
+ <!-- Rear pale-faced clock with a continuous beveled shell. -->
+ <g filter="url(#shift-objectShadow)">
+  <circle cx="136" cy="91" r="57" fill="#1b394b"/>
+  <circle cx="132" cy="87" r="57" fill="url(#shift-metal)"/>
+  <circle cx="132" cy="87" r="53" fill="#adc0c0"/>
+  <circle cx="132" cy="87" r="51" fill="url(#shift-face)"/>
+  <circle cx="132" cy="87" r="47" stroke="#b8c9c5" stroke-width=".7"/>
+ <path d="M132.00 44.00 132.00 40.00" stroke="#537583" stroke-width="2.3" stroke-linecap="round"/><path d="M153.50 49.76 155.50 46.30" stroke="#537583" stroke-width="1.3" stroke-linecap="round"/><path d="M169.24 65.50 172.70 63.50" stroke="#537583" stroke-width="1.3" stroke-linecap="round"/><path d="M175.00 87.00 179.00 87.00" stroke="#537583" stroke-width="2.3" stroke-linecap="round"/><path d="M169.24 108.50 172.70 110.50" stroke="#537583" stroke-width="1.3" stroke-linecap="round"/><path d="M153.50 124.24 155.50 127.70" stroke="#537583" stroke-width="1.3" stroke-linecap="round"/><path d="M132.00 130.00 132.00 134.00" stroke="#537583" stroke-width="2.3" stroke-linecap="round"/><path d="M110.50 124.24 108.50 127.70" stroke="#537583" stroke-width="1.3" stroke-linecap="round"/><path d="M94.76 108.50 91.30 110.50" stroke="#537583" stroke-width="1.3" stroke-linecap="round"/><path d="M89.00 87.00 85.00 87.00" stroke="#537583" stroke-width="2.3" stroke-linecap="round"/><path d="M94.76 65.50 91.30 63.50" stroke="#537583" stroke-width="1.3" stroke-linecap="round"/><path d="M110.50 49.76 108.50 46.30" stroke="#537583" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M132 87 114 66" stroke="#264b5e" stroke-width="5" stroke-linecap="round"/>
+  <path d="M132 87 158 76" stroke="#577f89" stroke-width="3" stroke-linecap="round"/>
+  <path d="M125 95 153 65" stroke="#b79261" stroke-width="1"/>
+  <circle cx="132" cy="87" r="4" fill="url(#shift-gold)"/>
+  <path d="M96 63c9-19 29-25 47-22" stroke="#fff" stroke-width="3" opacity=".46" stroke-linecap="round"/>
+ </g>
+ <!-- Smaller dark clock, set to a distinctly different time. -->
+ <g filter="url(#shift-objectShadow)">
+  <circle cx="232" cy="106" r="45" fill="#0a293c"/>
+  <circle cx="229" cy="103" r="45" fill="url(#shift-gold)"/>
+  <circle cx="229" cy="103" r="41.5" fill="#a8b7b0"/>
+  <circle cx="229" cy="103" r="39.5" fill="url(#shift-faceDark)"/>
+  <circle cx="229" cy="103" r="36" stroke="#6a929d" stroke-width=".65"/>
+ <path d="M229.00 71.00 229.00 68.00" stroke="#dbe9d9" stroke-width="2" stroke-linecap="round"/><path d="M245.00 75.29 246.50 72.69" stroke="#dbe9d9" stroke-width="1.1" stroke-linecap="round"/><path d="M256.71 87.00 259.31 85.50" stroke="#dbe9d9" stroke-width="1.1" stroke-linecap="round"/><path d="M261.00 103.00 264.00 103.00" stroke="#dbe9d9" stroke-width="2" stroke-linecap="round"/><path d="M256.71 119.00 259.31 120.50" stroke="#dbe9d9" stroke-width="1.1" stroke-linecap="round"/><path d="M245.00 130.71 246.50 133.31" stroke="#dbe9d9" stroke-width="1.1" stroke-linecap="round"/><path d="M229.00 135.00 229.00 138.00" stroke="#dbe9d9" stroke-width="2" stroke-linecap="round"/><path d="M213.00 130.71 211.50 133.31" stroke="#dbe9d9" stroke-width="1.1" stroke-linecap="round"/><path d="M201.29 119.00 198.69 120.50" stroke="#dbe9d9" stroke-width="1.1" stroke-linecap="round"/><path d="M197.00 103.00 194.00 103.00" stroke="#dbe9d9" stroke-width="2" stroke-linecap="round"/><path d="M201.29 87.00 198.69 85.50" stroke="#dbe9d9" stroke-width="1.1" stroke-linecap="round"/><path d="M213.00 75.29 211.50 72.69" stroke="#dbe9d9" stroke-width="1.1" stroke-linecap="round"/>
+  <path d="M229 103 221 122" stroke="#efe5cc" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M229 103h-25" stroke="#c2d9ce" stroke-width="2.8" stroke-linecap="round"/>
+  <path d="m225 97 15 25" stroke="#d8b06c" stroke-width=".9"/>
+  <circle cx="229" cy="103" r="3.2" fill="url(#shift-gold)"/>
+  <path d="M202 79c10-10 23-13 34-9" stroke="#cce3de" stroke-width="2.5" opacity=".38" stroke-linecap="round"/>
+ </g>
+ <!-- Two removable shift cards with simple, nonverbal day/night markers. -->
+ <g transform="rotate(-5 156 145)" filter="url(#shift-objectShadow)">
+  <rect x="120" y="130" width="73" height="30" rx="4" fill="url(#shift-paper)" stroke="#c6cabb" stroke-width=".7"/>
+  <path d="M120 135a5 5 0 0 1 5-5h4v30h-4a5 5 0 0 1-5-5Z" fill="#afcdbd"/>
+  <circle cx="139" cy="145" r="4" fill="url(#shift-gold)"/>
+  <path d="M139 138v-2m0 18v-2m-7-7h-2m18 0h-2m-12-5-1-1m12 12-1-1m-10 0-1 1m12-12-1 1" stroke="#b69561" stroke-width=".8" stroke-linecap="round"/>
+  <path d="M151 141h32m-32 5h26m-26 5h19" stroke="#819d98" stroke-width="1.5" stroke-linecap="round"/>
+ </g>
+ <g transform="rotate(6 232 149)" filter="url(#shift-objectShadow)">
+  <rect x="201" y="135" width="70" height="28" rx="4" fill="url(#shift-ice)" stroke="#6f9b91" stroke-width=".7"/>
+  <path d="M201 140a5 5 0 0 1 5-5h4v28h-4a5 5 0 0 1-5-5Z" fill="#31556a"/>
+  <path d="M222 143a5 5 0 1 0 4 7 6 6 0 0 1-4-7Z" fill="#34596b"/>
+  <path d="M234 143h27m-27 5h21m-21 5h15" stroke="#5a877e" stroke-width="1.4" stroke-linecap="round"/>
+ </g></svg>

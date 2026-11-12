@@ -1,0 +1,2005 @@
+{
+  "checkedAt": "2026-11-12",
+  "sources": [
+    {
+      "id": "church-law",
+      "title_fi": "Kirkkolaki 652/2023, 1 luku 6 §",
+      "url": "https://www.finlex.fi/fi/lainsaadanto/2023/652",
+      "publisher": "Finlex",
+      "scope": "Kirkolliset juhlapäivät",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "almanac-holidays",
+      "title_fi": "Liputus- ja juhlapäivät",
+      "url": "https://almanakka.helsinki.fi/fi/liputus-ja-juhlapaivat/",
+      "publisher": "Helsingin yliopiston almanakkatoimisto",
+      "scope": "Juhlapyhien laskentasäännöt ja merkkipäivät",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "flags",
+      "title_fi": "Liputuspäivät ja ajat",
+      "url": "https://intermin.fi/suomen-lippu/liputuspaivat",
+      "publisher": "Sisäministeriö",
+      "scope": "Viralliset ja vakiintuneet liputuspäivät",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "flag-law",
+      "title_fi": "Asetus liputuksesta Suomen lipulla 383/1978",
+      "url": "https://www.finlex.fi/fi/lainsaadanto/1978/383",
+      "publisher": "Finlex",
+      "scope": "Virallinen liputus ja liputusajat",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "education",
+      "title_fi": "Työajat",
+      "url": "https://www.oph.fi/fi/koulutus-ja-tutkinnot/tyoajat",
+      "publisher": "Opetushallitus",
+      "scope": "Perusopetuksen työpäivien säännöt",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "helsinki-schools",
+      "title_fi": "Koulujen ja oppilaitosten työ- ja loma-ajat",
+      "url": "https://www.hel.fi/fi/kasvatus-ja-koulutus/koulujen-ja-oppilaitosten-tyo-ja-loma-ajat",
+      "publisher": "Helsingin kaupunki",
+      "scope": "2026/2027 ja 2027/2028",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "helsinki-decision",
+      "title_fi": "Työ- ja loma-ajat 2026–2028, esi- ja perusopetus",
+      "url": "https://paatokset.hel.fi/fi/asia/hel-2025-015947",
+      "publisher": "Helsingin kaupunki",
+      "scope": "Päätös paikallisista koulupäivistä",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "espoo-schools",
+      "title_fi": "Lukuvuosien 2026–2028 työ- ja loma-ajat",
+      "url": "https://admin.espoo.fi/sites/default/files/2025-11/Seuraavien%20lukuvuosien%20ty%C3%B6-%20ja%20loma-ajat.pdf",
+      "publisher": "Espoon kaupunki",
+      "scope": "Perusopetuksen julkaistu PDF",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "vantaa-schools",
+      "title_fi": "Työ- ja loma-ajat kouluissa",
+      "url": "https://www.vantaa.fi/fi/kasvatus-ja-koulutus/tyo-ja-loma-ajat-kouluissa",
+      "publisher": "Vantaan kaupunki",
+      "scope": "Koulumuotokohtaiset ajat",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "oulu-schools",
+      "title_fi": "Koulujen työ- ja loma-ajat",
+      "url": "https://www.ouka.fi/opiskelu-perusopetuksessa/koulujen-tyo-ja-loma-ajat",
+      "publisher": "Oulun kaupunki",
+      "scope": "Perusopetus 2026–2028 ja koulukohtaiset poikkeukset",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "tuusula-schools",
+      "title_fi": "Koulujen työ- ja loma-ajat",
+      "url": "https://tuusula.fi/etusivu/varhaiskasvatus-ja-oppiminen/perusopetus/perusopetuksessa/koulujen-tyo-ja-loma-ajat/",
+      "publisher": "Tuusulan kunta",
+      "scope": "Koulut ja esiopetus 2026–2028",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "helsinki-university",
+      "title_fi": "Lukuvuosi ja opetusperiodit",
+      "url": "https://studies.helsinki.fi/ohjeet/artikkeli/lukuvuosi-ja-opetusperiodit",
+      "publisher": "Helsingin yliopisto",
+      "scope": "Opetusperiodit 2026–2028, ohjelmakohtaiset poikkeukset",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "aalto",
+      "title_fi": "Lukuvuosikalenteri",
+      "url": "https://www.aalto.fi/fi/opiskelijan-opas/lukuvuosikalenteri",
+      "publisher": "Aalto-yliopisto",
+      "scope": "Opetusperiodit 2026–2028 ja kevättauot",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "tampere-university",
+      "title_fi": "Lukuvuoden aikataulut",
+      "url": "https://opiskelijanopas.tuni.fi/fi/tampereen-yliopisto/opintojen-suorittaminen/lukuvuoden-aikataulut",
+      "publisher": "Tampereen yliopisto",
+      "scope": "Julkaistu aikataulu 2026–2030, päivitetty 2.10.2026",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "turku-university",
+      "title_fi": "Lukuvuosi ja opetusperiodit",
+      "url": "https://www.utu.fi/fi/opiskelijalle/lukuvuosi-ja-opetusperiodit",
+      "publisher": "Turun yliopisto",
+      "scope": "Opetusperiodit 2026–2030",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "oulu-university",
+      "title_fi": "Opetusperiodit",
+      "url": "https://www.oulu.fi/fi/opiskelijalle/opintojen-suorittaminen/opetusperiodit",
+      "publisher": "Oulun yliopisto",
+      "scope": "Opetusperiodit 2026–2032",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "growing-season",
+      "title_fi": "Terminen kasvukausi",
+      "url": "https://www.ilmatieteenlaitos.fi/terminen-kasvukausi",
+      "publisher": "Ilmatieteen laitos",
+      "scope": "Kasvukauden määritelmä ja vertailukausi 1991–2020",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "thermal-seasons",
+      "title_fi": "Termiset vuodenajat",
+      "url": "https://www.ilmatieteenlaitos.fi/termiset-vuodenajat",
+      "publisher": "Ilmatieteen laitos",
+      "scope": "Alueellinen vuodenaikojen ajoitus",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "sun-moon",
+      "title_fi": "Aurinko ja kuu, kysymyksiä ja vastauksia",
+      "url": "https://www.ilmatieteenlaitos.fi/aurinko-ja-kuu-kysymyksia-ja-vastauksia",
+      "publisher": "Ilmatieteen laitos",
+      "scope": "Nousu, lasku, hämärä ja napaseudun poikkeukset",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "astronomical-seasons",
+      "title_fi": "Tähtitieteelliset vuodenajat",
+      "url": "https://www.ilmatieteenlaitos.fi/tahtitieteelliset-vuodenajat",
+      "publisher": "Ilmatieteen laitos",
+      "scope": "Tähtitieteellinen vuodenaika ja yötön yö",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "daylight-saving",
+      "title_fi": "Valtioneuvoston asetus kesäajasta 753/2001",
+      "url": "https://finlex.fi/fi/lainsaadanto/saadoskokoelma/2001/753",
+      "publisher": "Finlex",
+      "scope": "Kesäaika alkaa maaliskuun ja päättyy lokakuun viimeisenä sunnuntaina",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "seedlings",
+      "title_fi": "Taimikasvatus",
+      "url": "https://www.martat.fi/puutarha/puutarhan-tyot/taimikasvatus/",
+      "publisher": "Martat, puutarhaohjeiden julkaisija",
+      "scope": "Kasvikohtaiset esikasvatuskuukaudet; ei valtion viranomainen",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "tomato",
+      "title_fi": "Tomaatin kasvatus",
+      "url": "https://www.martat.fi/puutarha/hyotykasvit/tomaatin-kasvatus/",
+      "publisher": "Martat",
+      "scope": "Esikasvatus maaliskuusta huhtikuun alkuun, 5–8 viikkoa",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "pepper",
+      "title_fi": "Paprikan kasvatus",
+      "url": "https://www.martat.fi/puutarha/hyotykasvit/paprikan-kasvatus/",
+      "publisher": "Martat",
+      "scope": "Maaliskuu, lisävalolla helmikuu, ulos kesäkuussa ja maahan vähintään 15 °C",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "cucumber",
+      "title_fi": "Kasvihuonekurkun kasvatus",
+      "url": "https://www.martat.fi/puutarha/hyotykasvit/kasvihuonekurkun-kasvatus/",
+      "publisher": "Martat",
+      "scope": "Huhti–toukokuu, esikasvatus 3–4 viikkoa, kasvualusta vähintään 15 °C",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "carrot",
+      "title_fi": "Porkkanan kasvatus",
+      "url": "https://www.martat.fi/puutarha/hyotykasvit/porkkanan-kasvatus/",
+      "publisher": "Martat",
+      "scope": "Suorakylvö varhain keväällä, olosuhteet ratkaisevat",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "potato",
+      "title_fi": "Perunan kasvatus",
+      "url": "https://www.martat.fi/puutarha/hyotykasvit/perunan-kasvatus/",
+      "publisher": "Martat",
+      "scope": "Idätys 2–4 viikkoa; istutus kun maa vähintään 8 °C",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "pea",
+      "title_fi": "Herneen kasvatus",
+      "url": "https://www.martat.fi/puutarha/hyotykasvit/herneen-kasvatus/",
+      "publisher": "Martat",
+      "scope": "Touko–kesäkuu, maa vähintään 8 °C",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "herbs",
+      "title_fi": "Kylvä oma yrttiruukku",
+      "url": "https://www.martat.fi/puutarha/hyotykasvit/tuoksuvat-ja-maistuvat-yrtit/kylva-oma-yrttiruukku/",
+      "publisher": "Martat",
+      "scope": "Basilikan ja persiljan ruukkukylvö maalis–huhtikuussa",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "containers",
+      "title_fi": "Suunnittele ruukkuviljelyn kasvit",
+      "url": "https://www.martat.fi/puutarha/puutarhan-tyot/suunnittele-ruukkuviljelyn-kasvit/",
+      "publisher": "Martat",
+      "scope": "Porkkanan astiaviljely huhti–toukokuu, retiisi varhainen kevät, salaatti alle 25 °C",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "name-rights",
+      "title_fi": "Nimipäivien tekijänoikeus",
+      "url": "https://almanakka.helsinki.fi/fi/nimipaivat/nimipaivien-tekijanoikeus/",
+      "publisher": "Helsingin yliopiston almanakkatoimisto",
+      "scope": "Koko nimipäiväluettelon julkaiseminen vaatii luvan",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "name-revisions",
+      "title_fi": "Nimipäivähinnasto",
+      "url": "https://almanakka.helsinki.fi/fi/nimipaivat/nimipaivahinnasto/",
+      "publisher": "Helsingin yliopiston almanakkatoimisto",
+      "scope": "Vuoden 2025 luettelo voimassa 2029 loppuun; vuoden 2030 tietoja ei oleteta samoiksi",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "election-2027",
+      "title_fi": "Vuoden 2027 eduskuntavaalit",
+      "url": "https://www.kuntaliitto.fi/yleiskirjeet/2026/vuoden-2027-eduskuntavaalit",
+      "publisher": "Kuntaliitto, yleiskirje 10/2026",
+      "scope": "Vaalipäivä 18.4.2027, ennakkoäänestys 7.–13.4. kotimaassa",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "tove",
+      "title_fi": "Tove Janssonin päivä",
+      "url": "https://almanakka.helsinki.fi/ajankohtaista/tove-jansson-rakastettu-kuvataiteilija-ja-kirjailija",
+      "publisher": "Helsingin yliopiston almanakkatoimisto",
+      "scope": "9.8. merkkipäivä; lähde kuvaa suosituksia vuosille 2020–2022, ei tulevien vuosien määräystä",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "annual-leave-law",
+      "title_fi": "Vuosilomalaki 162/2005",
+      "url": "https://www.finlex.fi/fi/lainsaadanto/2005/162",
+      "publisher": "Finlex",
+      "scope": "Vuosilomalain arkipäivälaskenta ja työehtosopimuksen mahdolliset poikkeukset; tarkista ajantasainen pykälä ennen oikeudellista laskuria",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "jyu-calendar",
+      "title_fi": "Lukuvuosi ja opetusajat",
+      "url": "https://www.jyu.fi/fi/opiskelijalle/kandi-ja-maisteriopiskelijan-ohjeet/ilmoittautuminen-ja-opintoaika/lukuvuosi-ja-opetusjaksot",
+      "publisher": "Jyväskylän yliopisto",
+      "scope": "Yliopiston julkaisemat opetusperiodit ja opetustauot",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "lut-calendar",
+      "title_fi": "Lukuvuosi ja opetusajat",
+      "url": "https://elut.lut.fi/fi/opintojen-suorittaminen/opintojen-suunnittelu/opiskelijan-aikataulut",
+      "publisher": "LUT-yliopisto",
+      "scope": "Yliopiston julkaisemat opetusperiodit ja opetustauot",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "uef-calendar",
+      "title_fi": "Lukuvuosi ja opetusajat",
+      "url": "https://kamu.uef.fi/tietopankki/perustutkinto-opiskelija/opiskelu/opintojen-suunnittelu/lukuvuoden-ajankohtia/",
+      "publisher": "Itä-Suomen yliopisto",
+      "scope": "Yliopiston julkaisemat opetusperiodit ja opetustauot",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "vaasa-calendar",
+      "title_fi": "Lukuvuosi ja opetusajat",
+      "url": "https://www.uwasa.fi/fi/opiskelijat/lukuvuoden-opetusajat-ja-ilmoittautuminen",
+      "publisher": "Vaasan yliopisto",
+      "scope": "Yliopiston julkaisemat opetusperiodit ja opetustauot",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "lapland-calendar",
+      "title_fi": "Lukuvuosi ja opetusajat",
+      "url": "https://ulapland.fi/opiskelijalle/lukuvuosi-ilmoittautuminen-ja-opintoaika/",
+      "publisher": "Lapin yliopisto",
+      "scope": "Yliopiston julkaisemat opetusperiodit ja opetustauot",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "uniarts-calendar",
+      "title_fi": "Lukuvuosi ja opetusajat",
+      "url": "https://opiskelija.uniarts.fi/yleistieto/lukuvuoden-yhteiset-aikataulut/",
+      "publisher": "Taideyliopisto",
+      "scope": "Yliopiston julkaisemat opetusperiodit ja opetustauot",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "hanken-calendar",
+      "title_fi": "Lukuvuosi ja opetusajat",
+      "url": "https://www.hanken.fi/en/students/study-practicalities/timetable-academic-year",
+      "publisher": "Hanken",
+      "scope": "Yliopiston julkaisemat opetusperiodit ja opetustauot",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "abo-calendar",
+      "title_fi": "Lukuvuosi ja opetusajat",
+      "url": "https://www.abo.fi/studera-hos-oss/lasaret/",
+      "publisher": "Åbo Akademi",
+      "scope": "Yliopiston julkaisemat opetusperiodit ja opetustauot",
+      "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "mpkk-calendar",
+      "title_fi": "Lukuvuosi ja opetusajat",
+      "url": "https://maanpuolustuskorkeakoulu.fi/opiskelu",
+      "publisher": "Maanpuolustuskorkeakoulu",
+      "scope": "Yliopiston julkaisemat opetusperiodit ja opetustauot",
+      "checkedAt": "2026-11-12"
+    }
+  ],
+  "schoolCalendars": [
+    {
+      "municipality": "Helsinki",
+      "academicYear": "2026/2027",
+      "schoolType": "perusopetus",
+      "language": "fi",
+      "status": "published_by_provider",
+      "sourceId": "helsinki-schools",
+      "autumnStart": "2026-08-12",
+      "autumnBreak": [
+        "2026-10-12",
+        "2026-10-16"
+      ],
+      "christmasBreak": [
+        "2026-12-21",
+        "2027-01-06"
+      ],
+      "springStart": "2027-01-07",
+      "winterBreak": [
+        "2027-02-22",
+        "2027-02-26"
+      ],
+      "lastSchoolDay": "2027-06-05",
+      "notes_fi": "Koulukohtaiset poikkeukset tarkistetaan koulun tiedotteesta."
+    },
+    {
+      "municipality": "Helsinki",
+      "academicYear": "2027/2028",
+      "schoolType": "perusopetus",
+      "language": "fi",
+      "status": "published_by_provider",
+      "sourceId": "helsinki-schools",
+      "autumnStart": "2027-08-11",
+      "autumnBreak": [
+        "2027-10-18",
+        "2027-10-22"
+      ],
+      "christmasBreak": [
+        "2027-12-23",
+        "2028-01-07"
+      ],
+      "springStart": "2028-01-10",
+      "winterBreak": [
+        "2028-02-21",
+        "2028-02-25"
+      ],
+      "lastSchoolDay": "2028-06-03",
+      "notes_fi": "Esiopetus päättyy jo 2.6.2028."
+    },
+    {
+      "municipality": "Espoo",
+      "academicYear": "2026/2027",
+      "schoolType": "perusopetus",
+      "language": "fi",
+      "status": "published_by_provider",
+      "sourceId": "espoo-schools",
+      "autumnStart": "2026-08-13",
+      "autumnBreak": [
+        "2026-10-12",
+        "2026-10-16"
+      ],
+      "christmasBreak": [
+        "2026-12-23",
+        "2027-01-06"
+      ],
+      "springStart": "2027-01-07",
+      "winterBreak": [
+        "2027-02-22",
+        "2027-02-26"
+      ],
+      "lastSchoolDay": "2027-06-05",
+      "notes_fi": "Koulukohtaiset poikkeukset tarkistetaan koulun tiedotteesta."
+    },
+    {
+      "municipality": "Espoo",
+      "academicYear": "2027/2028",
+      "schoolType": "perusopetus",
+      "language": "fi",
+      "status": "published_by_provider",
+      "sourceId": "espoo-schools",
+      "autumnStart": "2027-08-11",
+      "autumnBreak": [
+        "2027-10-18",
+        "2027-10-22"
+      ],
+      "christmasBreak": [
+        "2027-12-23",
+        "2028-01-07"
+      ],
+      "springStart": "2028-01-10",
+      "winterBreak": [
+        "2028-02-21",
+        "2028-02-25"
+      ],
+      "lastSchoolDay": "2028-06-03",
+      "notes_fi": "Esiopetus päättyy jo 2.6.2028."
+    },
+    {
+      "municipality": "Vantaa",
+      "academicYear": "2026/2027",
+      "schoolType": "perusopetus",
+      "language": "fi",
+      "status": "published_by_provider",
+      "sourceId": "vantaa-schools",
+      "autumnStart": "2026-08-13",
+      "autumnBreak": [
+        "2026-10-12",
+        "2026-10-16"
+      ],
+      "christmasBreak": [
+        "2026-12-23",
+        "2027-01-06"
+      ],
+      "springStart": "2027-01-07",
+      "winterBreak": [
+        "2027-02-22",
+        "2027-02-26"
+      ],
+      "lastSchoolDay": "2027-06-05",
+      "notes_fi": "Koulukohtaiset poikkeukset tarkistetaan koulun tiedotteesta."
+    },
+    {
+      "municipality": "Vantaa",
+      "academicYear": "2027/2028",
+      "schoolType": "perusopetus",
+      "language": "fi",
+      "status": "published_by_provider",
+      "sourceId": "vantaa-schools",
+      "autumnStart": "2027-08-11",
+      "autumnBreak": [
+        "2027-10-18",
+        "2027-10-22"
+      ],
+      "christmasBreak": [
+        "2027-12-23",
+        "2028-01-07"
+      ],
+      "springStart": "2028-01-10",
+      "winterBreak": [
+        "2028-02-21",
+        "2028-02-25"
+      ],
+      "lastSchoolDay": "2028-06-03",
+      "notes_fi": "Esiopetus päättyy jo 2.6.2028."
+    },
+    {
+      "municipality": "Oulu",
+      "academicYear": "2026/2027",
+      "schoolType": "perusopetus",
+      "language": "fi",
+      "status": "published_by_provider",
+      "sourceId": "oulu-schools",
+      "autumnStart": "2026-08-12",
+      "autumnBreak": [
+        "2026-10-19",
+        "2026-10-23"
+      ],
+      "christmasBreak": [
+        "2026-12-23",
+        "2027-01-06"
+      ],
+      "springStart": "2027-01-07",
+      "winterBreak": [
+        "2027-03-08",
+        "2027-03-12"
+      ],
+      "lastSchoolDay": "2027-06-05",
+      "notes_fi": "7.5.2027 on lisäksi vapaapäivä. Koulukohtaisia lauantaityöpäiviä ja korvaavia vapaita on julkaistu."
+    },
+    {
+      "municipality": "Oulu",
+      "academicYear": "2027/2028",
+      "schoolType": "perusopetus",
+      "language": "fi",
+      "status": "published_by_provider",
+      "sourceId": "oulu-schools",
+      "autumnStart": "2027-08-11",
+      "autumnBreak": [
+        "2027-10-25",
+        "2027-10-29"
+      ],
+      "christmasBreak": [
+        "2027-12-23",
+        "2028-01-07"
+      ],
+      "springStart": "2028-01-10",
+      "winterBreak": [
+        "2028-03-06",
+        "2028-03-10"
+      ],
+      "lastSchoolDay": "2028-06-03",
+      "notes_fi": ""
+    },
+    {
+      "municipality": "Tuusula",
+      "academicYear": "2026/2027",
+      "schoolType": "perusopetus",
+      "language": "fi",
+      "status": "published_by_provider",
+      "sourceId": "tuusula-schools",
+      "autumnStart": "2026-08-13",
+      "autumnBreak": [
+        "2026-10-12",
+        "2026-10-18"
+      ],
+      "christmasBreak": [
+        "2026-12-23",
+        "2027-01-06"
+      ],
+      "springStart": "2027-01-07",
+      "winterBreak": [
+        "2027-02-22",
+        "2027-02-28"
+      ],
+      "lastSchoolDay": "2027-06-05",
+      "notes_fi": "Lähteen lomavälit sisältävät viikonloput; niitä ei saa verrata koulupäivien määrään suoraan."
+    },
+    {
+      "municipality": "Tuusula",
+      "academicYear": "2027/2028",
+      "schoolType": "perusopetus",
+      "language": "fi",
+      "status": "published_by_provider",
+      "sourceId": "tuusula-schools",
+      "autumnStart": "2027-08-11",
+      "autumnBreak": [
+        "2027-10-18",
+        "2027-10-24"
+      ],
+      "christmasBreak": [
+        "2027-12-23",
+        "2028-01-09"
+      ],
+      "springStart": "2028-01-10",
+      "winterBreak": [
+        "2028-02-21",
+        "2028-02-27"
+      ],
+      "lastSchoolDay": "2028-06-03",
+      "notes_fi": "Lähteen lomavälit sisältävät viikonloput."
+    }
+  ],
+  "universityCalendars": [
+    {
+      "institution": "Aalto-yliopisto",
+      "sourceId": "aalto",
+      "academicYear": "2026/2027",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2026-08-31",
+          "end": "2026-10-18"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2026-10-19",
+          "end": "2026-12-06"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2027-01-11",
+          "end": "2027-02-28"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2027-03-01",
+          "end": "2027-04-25"
+        },
+        {
+          "label": "5. opetusperiodi",
+          "start": "2027-04-26",
+          "end": "2027-06-13"
+        }
+      ],
+      "teachingBreaks": [
+        {
+          "label": "Kevättauko, ei opetusta eikä tenttejä",
+          "start": "2027-03-25",
+          "end": "2027-03-31"
+        }
+      ],
+      "notes_fi": "Periodit I–IV sisältävät arviointiviikon. Kesäjakso voi sisältää opetusta."
+    },
+    {
+      "institution": "Aalto-yliopisto",
+      "sourceId": "aalto",
+      "academicYear": "2027/2028",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2027-09-06",
+          "end": "2027-10-24"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2027-10-25",
+          "end": "2027-12-12"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2028-01-10",
+          "end": "2028-02-27"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2028-02-28",
+          "end": "2028-04-23"
+        },
+        {
+          "label": "5. opetusperiodi",
+          "start": "2028-04-24",
+          "end": "2028-06-11"
+        }
+      ],
+      "teachingBreaks": [
+        {
+          "label": "Kevättauko, ei opetusta eikä tenttejä",
+          "start": "2028-04-13",
+          "end": "2028-04-19"
+        }
+      ],
+      "notes_fi": "Periodit I–IV sisältävät arviointiviikon. Kesäjakso voi sisältää opetusta."
+    },
+    {
+      "institution": "Hanken",
+      "sourceId": "hanken-calendar",
+      "academicYear": "2026/2027",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2026-08-31",
+          "end": "2026-10-16"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2026-10-26",
+          "end": "2026-12-11"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2027-01-18",
+          "end": "2027-03-05"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2027-03-15",
+          "end": "2027-05-07"
+        }
+      ],
+      "teachingBreaks": [
+        {
+          "label": "Pääsiäistauko",
+          "start": "2027-03-25",
+          "end": "2027-03-31"
+        }
+      ],
+      "notes_fi": "Tenttiviikot ovat erillisiä opetusperiodeista eivätkä tarkoita lomaa. Kesäjaksot ja orientaatio on julkaistu Hankenin lukuvuosiaikataulussa. Tarkista oman kurssin toteutus Sisusta."
+    },
+    {
+      "institution": "Hanken",
+      "sourceId": "hanken-calendar",
+      "academicYear": "2027/2028",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2027-08-30",
+          "end": "2027-10-15"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2027-10-25",
+          "end": "2027-12-10"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2028-01-17",
+          "end": "2028-03-03"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2028-03-13",
+          "end": "2028-05-05"
+        }
+      ],
+      "teachingBreaks": [
+        {
+          "label": "Pääsiäistauko",
+          "start": "2028-04-13",
+          "end": "2028-04-19"
+        }
+      ],
+      "notes_fi": "Tenttiviikot ovat erillisiä opetusperiodeista eivätkä tarkoita lomaa. Kesäjaksot ja orientaatio on julkaistu Hankenin lukuvuosiaikataulussa. Tarkista oman kurssin toteutus Sisusta."
+    },
+    {
+      "institution": "Helsingin yliopisto",
+      "sourceId": "helsinki-university",
+      "academicYear": "2026/2027",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2026-08-31",
+          "end": "2026-10-18"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2026-10-26",
+          "end": "2026-12-13"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2027-01-18",
+          "end": "2027-03-07"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2027-03-15",
+          "end": "2027-05-09"
+        }
+      ],
+      "teachingBreaks": [],
+      "notes_fi": "Lääketieteen, hammaslääketieteen ja eläinlääketieteen ohjelmissa on poikkeuksia. Tentti- ja lukuviikot eivät ole lomaa."
+    },
+    {
+      "institution": "Helsingin yliopisto",
+      "sourceId": "helsinki-university",
+      "academicYear": "2027/2028",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2027-09-06",
+          "end": "2027-10-24"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2027-11-01",
+          "end": "2027-12-19"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2028-01-17",
+          "end": "2028-03-05"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2028-03-13",
+          "end": "2028-05-07"
+        }
+      ],
+      "teachingBreaks": [],
+      "notes_fi": "Intensiivijaksot ja tenttiviikot ovat erillisiä; neljäs periodi sisältää opetustauon pääsiäisenä. Oman kurssin ajat tarkistetaan Sisusta."
+    },
+    {
+      "institution": "Itä-Suomen yliopisto",
+      "sourceId": "uef-calendar",
+      "academicYear": "2026/2027",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2026-09-01",
+          "end": "2026-10-23"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2026-10-26",
+          "end": "2026-12-11"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2027-01-07",
+          "end": "2027-03-12"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2027-03-15",
+          "end": "2027-05-28"
+        }
+      ],
+      "teachingBreaks": [
+        {
+          "label": "Joululoma",
+          "start": "2026-12-14",
+          "end": "2027-01-06"
+        },
+        {
+          "label": "Pääsiäisloma",
+          "start": "2027-03-25",
+          "end": "2027-03-31"
+        }
+      ],
+      "notes_fi": "Yliopistossa ei ole yleistä syys- tai kevätlomaa. Opetusta voidaan järjestää myös periodien ulkopuolella, mutta ei julkaistuilla joulu- ja pääsiäislomilla. Oman koulutuksen aikataulu löytyy Pepistä."
+    },
+    {
+      "institution": "Jyväskylän yliopisto",
+      "sourceId": "jyu-calendar",
+      "academicYear": "2026/2027",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2026-08-01",
+          "end": "2026-10-25"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2026-10-26",
+          "end": "2026-12-31"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2027-01-01",
+          "end": "2027-03-21"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2027-03-22",
+          "end": "2027-05-30"
+        },
+        {
+          "label": "Kesäjakso",
+          "start": "2027-05-31",
+          "end": "2027-07-31"
+        }
+      ],
+      "teachingBreaks": [
+        {
+          "label": "Pääsiäistauko",
+          "start": "2027-03-22",
+          "end": "2027-03-29"
+        }
+      ],
+      "notes_fi": "Periodin rajat eivät tarkoita päivittäistä lähiopetusta. Tarkista kurssin toteutus Sisusta. Joulun opetuksettomat päivät ja kesäopetus on määritelty yliopiston omassa aikataulussa."
+    },
+    {
+      "institution": "Jyväskylän yliopisto",
+      "sourceId": "jyu-calendar",
+      "academicYear": "2027/2028",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2027-08-01",
+          "end": "2027-10-24"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2027-10-25",
+          "end": "2027-12-31"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2028-01-01",
+          "end": "2028-03-19"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2028-03-20",
+          "end": "2028-05-28"
+        },
+        {
+          "label": "Kesäjakso",
+          "start": "2028-05-29",
+          "end": "2028-07-31"
+        }
+      ],
+      "teachingBreaks": [
+        {
+          "label": "Pääsiäistauko",
+          "start": "2028-04-10",
+          "end": "2028-04-17"
+        }
+      ],
+      "notes_fi": "Periodin rajat eivät tarkoita päivittäistä lähiopetusta. Tarkista kurssin toteutus Sisusta. Joulun opetuksettomat päivät ja kesäopetus on määritelty yliopiston omassa aikataulussa."
+    },
+    {
+      "institution": "LUT-yliopisto",
+      "sourceId": "lut-calendar",
+      "academicYear": "2026/2027",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2026-08-31",
+          "end": "2026-10-16"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2026-10-26",
+          "end": "2026-12-11"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2027-01-11",
+          "end": "2027-02-26"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2027-03-08",
+          "end": "2027-04-23"
+        },
+        {
+          "label": "Kesäjakso",
+          "start": "2027-05-31",
+          "end": "2027-07-31"
+        }
+      ],
+      "teachingBreaks": [
+        {
+          "label": "Ei opetusta eikä lukujärjestyksen mukaisia tenttejä",
+          "start": "2026-12-23",
+          "end": "2027-01-01"
+        }
+      ],
+      "notes_fi": "Periodien väliin sijoittuu tentti- ja intensiiviviikkoja. Niitä ei merkitä lomiksi. Lukujärjestys ja kampuskohtaiset toteutukset tarkistetaan eLUT-palvelusta."
+    },
+    {
+      "institution": "LUT-yliopisto",
+      "sourceId": "lut-calendar",
+      "academicYear": "2027/2028",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2027-09-06",
+          "end": "2027-10-22"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2027-11-01",
+          "end": "2027-12-17"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2028-01-10",
+          "end": "2028-02-25"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2028-03-06",
+          "end": "2028-04-21"
+        },
+        {
+          "label": "Kesäjakso",
+          "start": "2028-06-01",
+          "end": "2028-07-31"
+        }
+      ],
+      "teachingBreaks": [
+        {
+          "label": "Ei opetusta eikä lukujärjestyksen mukaisia tenttejä",
+          "start": "2027-12-27",
+          "end": "2027-12-31"
+        }
+      ],
+      "notes_fi": "Periodien väliin sijoittuu tentti- ja intensiiviviikkoja. Niitä ei merkitä lomiksi. Lukujärjestys ja kampuskohtaiset toteutukset tarkistetaan eLUT-palvelusta."
+    },
+    {
+      "institution": "Lapin yliopisto",
+      "sourceId": "lapland-calendar",
+      "academicYear": "2026/2027",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2026-08-10",
+          "end": "2026-10-17"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2026-10-20",
+          "end": "2026-12-20"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2027-01-07",
+          "end": "2027-03-06"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2027-03-15",
+          "end": "2027-06-12"
+        }
+      ],
+      "teachingBreaks": [],
+      "notes_fi": "Periodien ulkopuolella voi olla kesäopetusta. Viidennelle periodille ei anneta tässä kiinteitä päivämääriä. Koulutusohjelman ja opintojakson toteutus ratkaisee oman läsnäoloaikataulun."
+    },
+    {
+      "institution": "Lapin yliopisto",
+      "sourceId": "lapland-calendar",
+      "academicYear": "2027/2028",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2027-08-16",
+          "end": "2027-10-23"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2027-10-25",
+          "end": "2027-12-18"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2028-01-07",
+          "end": "2028-03-04"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2028-03-15",
+          "end": "2028-06-10"
+        }
+      ],
+      "teachingBreaks": [],
+      "notes_fi": "Periodien ulkopuolella voi olla kesäopetusta. Viidennelle periodille ei anneta tässä kiinteitä päivämääriä. Koulutusohjelman ja opintojakson toteutus ratkaisee oman läsnäoloaikataulun."
+    },
+    {
+      "institution": "Lapin yliopisto",
+      "sourceId": "lapland-calendar",
+      "academicYear": "2028/2029",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2028-08-14",
+          "end": "2028-10-21"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2028-10-23",
+          "end": "2028-12-20"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2029-01-08",
+          "end": "2029-03-03"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2029-03-12",
+          "end": "2029-06-09"
+        }
+      ],
+      "teachingBreaks": [],
+      "notes_fi": "Periodien ulkopuolella voi olla kesäopetusta. Viidennelle periodille ei anneta tässä kiinteitä päivämääriä. Koulutusohjelman ja opintojakson toteutus ratkaisee oman läsnäoloaikataulun."
+    },
+    {
+      "institution": "Lapin yliopisto",
+      "sourceId": "lapland-calendar",
+      "academicYear": "2029/2030",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2029-08-13",
+          "end": "2029-10-20"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2029-10-22",
+          "end": "2029-12-20"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2030-01-07",
+          "end": "2030-03-02"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2030-03-11",
+          "end": "2030-06-08"
+        }
+      ],
+      "teachingBreaks": [],
+      "notes_fi": "Periodien ulkopuolella voi olla kesäopetusta. Viidennelle periodille ei anneta tässä kiinteitä päivämääriä. Koulutusohjelman ja opintojakson toteutus ratkaisee oman läsnäoloaikataulun."
+    },
+    {
+      "institution": "Maanpuolustuskorkeakoulu",
+      "sourceId": "mpkk-calendar",
+      "academicYear": "2026/2027",
+      "status": "published_by_institution",
+      "periods": [],
+      "teachingBreaks": [],
+      "notes_fi": "Yhteistä julkista loma-aikataulua ei löytynyt tarkistetuista lähteistä 12.11.2026. Opintosuunnan harjoitukset, palvelus ja opetus voivat noudattaa omia aikataulujaan. Tarkista oma aikataulusi korkeakoulun opiskelijapalveluista. Peruskoulujen loma-aikoja ei sovelleta tähän automaattisesti."
+    },
+    {
+      "institution": "Oulun yliopisto",
+      "sourceId": "oulu-university",
+      "academicYear": "2027/2028",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2027-08-01",
+          "end": "2027-10-31"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2027-11-01",
+          "end": "2027-12-31"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2028-01-01",
+          "end": "2028-03-12"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2028-03-13",
+          "end": "2028-05-07"
+        },
+        {
+          "label": "5. opetusperiodi",
+          "start": "2028-05-08",
+          "end": "2028-07-31"
+        }
+      ],
+      "teachingBreaks": [],
+      "notes_fi": "Periodien koko aikaväli ei tarkoita jatkuvaa lähiopetusta. Kurssin omat ajat löytyvät opinto-oppaasta."
+    },
+    {
+      "institution": "Oulun yliopisto",
+      "sourceId": "oulu-university",
+      "academicYear": "2028/2029",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2028-08-01",
+          "end": "2028-10-29"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2028-10-30",
+          "end": "2028-12-31"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2029-01-01",
+          "end": "2029-03-11"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2029-03-12",
+          "end": "2029-05-06"
+        },
+        {
+          "label": "5. opetusperiodi",
+          "start": "2029-05-07",
+          "end": "2029-07-31"
+        }
+      ],
+      "teachingBreaks": [],
+      "notes_fi": "Periodien koko aikaväli ei tarkoita jatkuvaa lähiopetusta. Kurssin omat ajat löytyvät opinto-oppaasta."
+    },
+    {
+      "institution": "Oulun yliopisto",
+      "sourceId": "oulu-university",
+      "academicYear": "2029/2030",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2029-08-01",
+          "end": "2029-10-28"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2029-10-29",
+          "end": "2029-12-31"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2030-01-01",
+          "end": "2030-03-10"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2030-03-11",
+          "end": "2030-05-05"
+        },
+        {
+          "label": "5. opetusperiodi",
+          "start": "2030-05-06",
+          "end": "2030-07-31"
+        }
+      ],
+      "teachingBreaks": [],
+      "notes_fi": "Periodien koko aikaväli ei tarkoita jatkuvaa lähiopetusta. Kurssin omat ajat löytyvät opinto-oppaasta."
+    },
+    {
+      "institution": "Taideyliopisto",
+      "sourceId": "uniarts-calendar",
+      "academicYear": "2026/2027",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "Yhteinen opetus ja kesäopetus",
+          "start": "2026-08-03",
+          "end": "2026-08-21"
+        },
+        {
+          "label": "1. opetusperiodi",
+          "start": "2026-08-24",
+          "end": "2026-10-09"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2026-10-19",
+          "end": "2026-12-18"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2027-01-07",
+          "end": "2027-02-19"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2027-03-01",
+          "end": "2027-05-07"
+        },
+        {
+          "label": "5. opetusperiodi",
+          "start": "2027-05-10",
+          "end": "2027-06-18"
+        }
+      ],
+      "teachingBreaks": [
+        {
+          "label": "Ryhmäopetuksen syystauko",
+          "start": "2026-10-12",
+          "end": "2026-10-18"
+        },
+        {
+          "label": "Ryhmäopetuksen joulutauko",
+          "start": "2026-12-21",
+          "end": "2027-01-06"
+        },
+        {
+          "label": "Ryhmäopetuksen talvitauko",
+          "start": "2027-02-22",
+          "end": "2027-02-28"
+        },
+        {
+          "label": "Ryhmäopetuksen pääsiäistauko",
+          "start": "2027-03-25",
+          "end": "2027-03-31"
+        }
+      ],
+      "notes_fi": "Tauot koskevat säännöllistä ryhmäopetusta. Akatemioiden yksilöopetus, projektit, intensiiviopinnot ja esitykset voivat noudattaa omaa aikatauluaan."
+    },
+    {
+      "institution": "Tampereen yliopisto",
+      "sourceId": "tampere-university",
+      "academicYear": "2027/2028",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2027-08-30",
+          "end": "2027-10-17"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2027-10-25",
+          "end": "2027-12-12"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2028-01-10",
+          "end": "2028-02-27"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2028-03-06",
+          "end": "2028-05-31"
+        }
+      ],
+      "teachingBreaks": [
+        {
+          "label": "Joulutauko",
+          "start": "2027-12-23",
+          "end": "2028-01-02"
+        },
+        {
+          "label": "Pääsiäistauko",
+          "start": "2028-04-12",
+          "end": "2028-04-18"
+        }
+      ],
+      "notes_fi": "Neljännen periodin opetus voi päättyä jo huhtikuun lopussa; lähde ilmoittaa toukokuun loppurajan. Tentti- ja kesäopetus esitetään erikseen, ei lomana."
+    },
+    {
+      "institution": "Tampereen yliopisto",
+      "sourceId": "tampere-university",
+      "academicYear": "2028/2029",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2028-08-28",
+          "end": "2028-10-15"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2028-10-23",
+          "end": "2028-12-10"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2029-01-08",
+          "end": "2029-02-25"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2029-03-05",
+          "end": "2029-05-31"
+        }
+      ],
+      "teachingBreaks": [
+        {
+          "label": "Joulutauko",
+          "start": "2028-12-23",
+          "end": "2029-01-01"
+        },
+        {
+          "label": "Pääsiäistauko",
+          "start": "2029-03-28",
+          "end": "2029-04-03"
+        }
+      ],
+      "notes_fi": "Neljännen periodin opetus voi päättyä jo huhtikuun lopussa; lähde ilmoittaa toukokuun loppurajan. Tentti- ja kesäopetus esitetään erikseen, ei lomana."
+    },
+    {
+      "institution": "Tampereen yliopisto",
+      "sourceId": "tampere-university",
+      "academicYear": "2029/2030",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2029-08-27",
+          "end": "2029-10-14"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2029-10-22",
+          "end": "2029-12-09"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2030-01-07",
+          "end": "2030-02-24"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2030-03-04",
+          "end": "2030-05-31"
+        }
+      ],
+      "teachingBreaks": [
+        {
+          "label": "Joulutauko",
+          "start": "2029-12-21",
+          "end": "2030-01-01"
+        },
+        {
+          "label": "Pääsiäistauko",
+          "start": "2030-04-17",
+          "end": "2030-04-23"
+        }
+      ],
+      "notes_fi": "Neljännen periodin opetus voi päättyä jo huhtikuun lopussa; lähde ilmoittaa toukokuun loppurajan. Tentti- ja kesäopetus esitetään erikseen, ei lomana."
+    },
+    {
+      "institution": "Turun yliopisto",
+      "sourceId": "turku-university",
+      "academicYear": "2027/2028",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2027-08-01",
+          "end": "2027-10-22"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2027-10-25",
+          "end": "2027-12-17"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2028-01-10",
+          "end": "2028-03-10"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2028-03-13",
+          "end": "2028-05-19"
+        }
+      ],
+      "teachingBreaks": [],
+      "notes_fi": "Ensimmäinen periodi alkaa hallinnollisesti 1.8., mutta pääsääntöinen opetus alkaa vasta elokuun lopussa. Lääketieteen ja matemaattis-luonnontieteellisten opintojen poikkeukset tarkistetaan tiedekunnasta."
+    },
+    {
+      "institution": "Turun yliopisto",
+      "sourceId": "turku-university",
+      "academicYear": "2028/2029",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2028-08-01",
+          "end": "2028-10-20"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2028-10-23",
+          "end": "2028-12-15"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2029-01-08",
+          "end": "2029-03-09"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2029-03-12",
+          "end": "2029-05-18"
+        }
+      ],
+      "teachingBreaks": [],
+      "notes_fi": "Ensimmäinen periodi alkaa hallinnollisesti 1.8., mutta pääsääntöinen opetus alkaa vasta elokuun lopussa. Lääketieteen ja matemaattis-luonnontieteellisten opintojen poikkeukset tarkistetaan tiedekunnasta."
+    },
+    {
+      "institution": "Turun yliopisto",
+      "sourceId": "turku-university",
+      "academicYear": "2029/2030",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2029-08-01",
+          "end": "2029-10-19"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2029-10-22",
+          "end": "2029-12-14"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2030-01-07",
+          "end": "2030-03-08"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2030-03-11",
+          "end": "2030-05-17"
+        }
+      ],
+      "teachingBreaks": [],
+      "notes_fi": "Ensimmäinen periodi alkaa hallinnollisesti 1.8., mutta pääsääntöinen opetus alkaa vasta elokuun lopussa. Lääketieteen ja matemaattis-luonnontieteellisten opintojen poikkeukset tarkistetaan tiedekunnasta."
+    },
+    {
+      "institution": "Vaasan yliopisto",
+      "sourceId": "vaasa-calendar",
+      "academicYear": "2026/2027",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2026-08-01",
+          "end": "2026-10-18"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2026-10-19",
+          "end": "2026-12-31"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2027-01-01",
+          "end": "2027-03-14"
+        },
+        {
+          "label": "Kesäperiodi",
+          "start": "2027-06-01",
+          "end": "2027-07-31"
+        }
+      ],
+      "teachingBreaks": [],
+      "notes_fi": "Opetus alkaa syksyllä 31.8.2026 ja keväällä 7.1.2027. Neljännen periodin vuosiluku on lähteen suomen- ja englanninkielisissä versioissa ristiriitainen. Sen päivämääriä ei siksi sisällytetä tähän luetteloon tai kalenteritiedostoon. Tarkista neljäs periodi yliopistolta."
+    },
+    {
+      "institution": "Åbo Akademi",
+      "sourceId": "abo-calendar",
+      "academicYear": "2026/2027",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "Periodi I · viikot 36–43",
+          "start": "2026-08-31",
+          "end": "2026-10-25"
+        },
+        {
+          "label": "Periodi II · viikot 44–51",
+          "start": "2026-10-26",
+          "end": "2026-12-20"
+        },
+        {
+          "label": "Periodi III · viikot 2–11",
+          "start": "2027-01-11",
+          "end": "2027-03-21"
+        },
+        {
+          "label": "Periodi IV · viikot 12–21",
+          "start": "2027-03-22",
+          "end": "2027-05-30"
+        }
+      ],
+      "teachingBreaks": [],
+      "notes_fi": "Päivämäärät on laskettu Åbo Akademin julkaisemista toistuvista ISO-viikkorajoista (rehtorin päätös 31/2020). Ne eivät ole erikseen vahvistettu loma-aikataulu. Uusien opiskelijoiden orientaatio on viikolla 35; kurssikohtaiset poikkeukset tarkistetaan yliopistolta."
+    },
+    {
+      "institution": "Åbo Akademi",
+      "sourceId": "abo-calendar",
+      "academicYear": "2027/2028",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "Periodi I · viikot 36–43",
+          "start": "2027-09-06",
+          "end": "2027-10-31"
+        },
+        {
+          "label": "Periodi II · viikot 44–51",
+          "start": "2027-11-01",
+          "end": "2027-12-26"
+        },
+        {
+          "label": "Periodi III · viikot 2–11",
+          "start": "2028-01-10",
+          "end": "2028-03-19"
+        },
+        {
+          "label": "Periodi IV · viikot 12–21",
+          "start": "2028-03-20",
+          "end": "2028-05-28"
+        }
+      ],
+      "teachingBreaks": [],
+      "notes_fi": "Päivämäärät on laskettu Åbo Akademin julkaisemista toistuvista ISO-viikkorajoista (rehtorin päätös 31/2020). Ne eivät ole erikseen vahvistettu loma-aikataulu. Uusien opiskelijoiden orientaatio on viikolla 35; kurssikohtaiset poikkeukset tarkistetaan yliopistolta."
+    },
+    {
+      "institution": "Åbo Akademi",
+      "sourceId": "abo-calendar",
+      "academicYear": "2028/2029",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "Periodi I · viikot 36–43",
+          "start": "2028-09-04",
+          "end": "2028-10-29"
+        },
+        {
+          "label": "Periodi II · viikot 44–51",
+          "start": "2028-10-30",
+          "end": "2028-12-24"
+        },
+        {
+          "label": "Periodi III · viikot 2–11",
+          "start": "2029-01-08",
+          "end": "2029-03-18"
+        },
+        {
+          "label": "Periodi IV · viikot 12–21",
+          "start": "2029-03-19",
+          "end": "2029-05-27"
+        }
+      ],
+      "teachingBreaks": [],
+      "notes_fi": "Päivämäärät on laskettu Åbo Akademin julkaisemista toistuvista ISO-viikkorajoista (rehtorin päätös 31/2020). Ne eivät ole erikseen vahvistettu loma-aikataulu. Uusien opiskelijoiden orientaatio on viikolla 35; kurssikohtaiset poikkeukset tarkistetaan yliopistolta."
+    },
+    {
+      "institution": "Åbo Akademi",
+      "sourceId": "abo-calendar",
+      "academicYear": "2029/2030",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "Periodi I · viikot 36–43",
+          "start": "2029-09-03",
+          "end": "2029-10-28"
+        },
+        {
+          "label": "Periodi II · viikot 44–51",
+          "start": "2029-10-29",
+          "end": "2029-12-23"
+        },
+        {
+          "label": "Periodi III · viikot 2–11",
+          "start": "2030-01-07",
+          "end": "2030-03-17"
+        },
+        {
+          "label": "Periodi IV · viikot 12–21",
+          "start": "2030-03-18",
+          "end": "2030-05-26"
+        }
+      ],
+      "teachingBreaks": [],
+      "notes_fi": "Päivämäärät on laskettu Åbo Akademin julkaisemista toistuvista ISO-viikkorajoista (rehtorin päätös 31/2020). Ne eivät ole erikseen vahvistettu loma-aikataulu. Uusien opiskelijoiden orientaatio on viikolla 35; kurssikohtaiset poikkeukset tarkistetaan yliopistolta."
+    }
+  ],
+  "crops": [
+    {
+      "slug": "tomaatti",
+      "name": "Tomaatti",
+      "sourceIds": [
+        "tomato"
+      ],
+      "indoorMonths": [
+        3,
+        4
+      ],
+      "window_fi": "Maaliskuusta huhtikuun alkuun",
+      "weeksBeforePlanting": [
+        5,
+        8
+      ],
+      "outdoorRule_fi": "Hallanvaaran jälkeen. Etelä-Suomen kasvihuoneeseen usein toukokuun loppupuolella; avomaalle noin kesäkuussa olosuhteiden mukaan.",
+      "status": "source_supported_guidance_not_guaranteed_date"
+    },
+    {
+      "slug": "paprika",
+      "name": "Paprika",
+      "sourceIds": [
+        "pepper"
+      ],
+      "indoorMonths": [
+        3
+      ],
+      "withGrowLightMonths": [
+        2
+      ],
+      "outdoorMonths": [
+        6
+      ],
+      "minimumSoilC": 15,
+      "window_fi": "Maaliskuussa, lisävalolla jo helmikuussa",
+      "status": "source_supported_guidance_not_guaranteed_date"
+    },
+    {
+      "slug": "kurkku",
+      "name": "Kasvihuonekurkku",
+      "sourceIds": [
+        "cucumber"
+      ],
+      "indoorMonths": [
+        4,
+        5
+      ],
+      "weeksBeforePlanting": [
+        3,
+        4
+      ],
+      "minimumSoilC": 15,
+      "minimumNightC": [
+        10,
+        12
+      ],
+      "window_fi": "Huhti–toukokuussa; avomaankurkku on eri kasvatusryhmä",
+      "status": "source_supported_guidance_not_guaranteed_date"
+    },
+    {
+      "slug": "avomaankurkku",
+      "name": "Avomaankurkku",
+      "sourceIds": [
+        "seedlings"
+      ],
+      "indoorMonths": [
+        5
+      ],
+      "window_fi": "Esikasvatus toukokuun alussa; istutus vasta hallattomaan ja lämpimään kasvupaikkaan",
+      "status": "source_supported_guidance_not_guaranteed_date"
+    },
+    {
+      "slug": "herne",
+      "name": "Herne",
+      "sourceIds": [
+        "pea"
+      ],
+      "directMonths": [
+        5,
+        6
+      ],
+      "minimumSoilC": 8,
+      "window_fi": "Suorakylvö touko–kesäkuussa",
+      "status": "source_supported_guidance_not_guaranteed_date"
+    },
+    {
+      "slug": "peruna",
+      "name": "Peruna",
+      "sourceIds": [
+        "potato"
+      ],
+      "minimumSoilC": 8,
+      "presproutingWeeks": [
+        2,
+        4
+      ],
+      "window_fi": "Istuta maan lämmettyä vähintään 8 asteeseen. Koko Suomelle yhteistä varmaa istutuspäivää ei ole.",
+      "status": "source_supported_guidance_not_guaranteed_date"
+    },
+    {
+      "slug": "porkkana",
+      "name": "Porkkana",
+      "sourceIds": [
+        "carrot",
+        "containers"
+      ],
+      "containerDirectMonths": [
+        4,
+        5
+      ],
+      "window_fi": "Suorakylvö varhain keväällä; huhti–toukokuu koskee lähteen astiaviljelyä, ei ehdotonta koko maan avomaajaksoa.",
+      "status": "source_supported_guidance_not_guaranteed_date"
+    },
+    {
+      "slug": "basilika",
+      "name": "Basilika",
+      "sourceIds": [
+        "seedlings",
+        "herbs"
+      ],
+      "indoorMonths": [
+        3,
+        4
+      ],
+      "window_fi": "Ruukkukylvö maalis–huhtikuussa, taimikasvatusohjeessa erityisesti huhtikuu. Ulkoistutus riippuu lämpimistä öistä.",
+      "status": "source_supported_guidance_not_guaranteed_date"
+    },
+    {
+      "slug": "persilja",
+      "name": "Persilja",
+      "sourceIds": [
+        "herbs"
+      ],
+      "indoorMonths": [
+        3,
+        4
+      ],
+      "window_fi": "Ruukkukylvö maalis–huhtikuussa. Itäminen voi olla hidasta.",
+      "status": "source_supported_guidance_not_guaranteed_date"
+    },
+    {
+      "slug": "salaatti",
+      "name": "Salaatti",
+      "sourceIds": [
+        "seedlings",
+        "containers"
+      ],
+      "indoorMonths": [
+        4
+      ],
+      "maximumGerminationC": 25,
+      "window_fi": "Keräsalaatin esikasvatus huhtikuussa. Lehtisalaattia pieninä toistuvina erinä viileään kasvupaikkaan; ei keskikesän paahteeseen.",
+      "status": "source_supported_guidance_not_guaranteed_date"
+    },
+    {
+      "slug": "retiisi",
+      "name": "Retiisi",
+      "sourceIds": [
+        "containers"
+      ],
+      "window_fi": "Kylvä varhain keväällä viileään kasvupaikkaan. Täsmällistä koko maan kuukausirajaa ei ole varmistettu tässä tutkimuksessa.",
+      "status": "source_supported_guidance_not_guaranteed_date"
+    },
+    {
+      "slug": "kesakurpitsa",
+      "name": "Kesäkurpitsa",
+      "sourceIds": [
+        "seedlings"
+      ],
+      "indoorMonths": [
+        5
+      ],
+      "window_fi": "Nopeakasvuisen kurpitsan esikasvatus aloitetaan toukokuun alussa; ulos hallanvaaran jälkeen.",
+      "status": "source_supported_guidance_not_guaranteed_date"
+    },
+    {
+      "slug": "sipuli",
+      "name": "Sipuli",
+      "sourceIds": [],
+      "status": "needs_specific_variety_and_source",
+      "window_fi": "Erota istukassipuli, siemenestä kasvatettava sipuli ja monivuotiset sipulit. Yhteistä täsmällistä kuukausiväliä ei vahvistettu."
+    }
+  ],
+  "copy_fi": {
+    "schoolIntro": "Valitse paikkakunta ja lukuvuosi. Näet julkaistut syys-, joulu- ja talvilomat sekä koulun aloitus- ja päättymispäivät. Tarkista oman koulun mahdolliset poikkeukset ennen matkan varaamista.",
+    "schoolUnpublished": "Tämän paikkakunnan lukuvuoden loma-aikoja ei ole vielä vahvistettu tässä kalenterissa.",
+    "universityIntro": "Vertaa korkeakoulujen opetusperiodeja ja julkaistuja opetustaukoja. Tenttiviikko tai periodin ulkopuolinen aika ei automaattisesti ole lomaa. Oman koulutusohjelman ja kurssin aikataulu ratkaisee.",
+    "plantIntro": "Suunnittele kylvöt kasvupaikan, kasvilajin ja maan lämpötilan mukaan. Esikasvatus alkaa sisällä, mutta ulos istuttaminen odottaa hallanvaaran väistymistä. Tallenna oma kylvöpäivä ja seuraa kasvua.",
+    "plantTimingLabel": "Suuntaa antava ajankohta",
+    "placeLabel": "Paikkakunta",
+    "polarNight": "Aurinko ei nouse tänä päivänä.",
+    "midnightSun": "Aurinko ei laske tänä päivänä.",
+    "workdayIntro": "Laske maanantaista perjantaihin osuvat työpäivät ja valitse aattojen käsittely erikseen. Tulos on yleinen suunnitteluarvio. Oma työvuoro- tai työehtosopimus voi muuttaa työpäiviä.",
+    "holidayLegend": [
+      "Pyhäpäivä",
+      "Virallinen liputuspäivä",
+      "Vakiintunut liputuspäivä",
+      "Aatto",
+      "Muu merkkipäivä"
+    ],
+    "nameDays": "Suomalaiset ja suomenruotsalaiset nimipäivät löytyvät Yliopiston almanakkatoimistosta. Koko nimipäiväluetteloa ei julkaista tässä palvelussa ilman asianmukaista lupaa.",
+    "downloadImage": "Kuva",
+    "plannerCounting": "Laskentatapa",
+    "plannerModes": [
+      "Työpäivät maanantaista perjantaihin",
+      "Vuosiloman arkipäivälaskenta, sopimus huomioiden"
+    ]
+  },
+  "flagClassification": {
+    "sourceIds": [
+      "flags",
+      "flag-law"
+    ],
+    "officialFixed": [
+      {
+        "month": 2,
+        "day": 28,
+        "name": "Kalevalan päivä, suomalaisen kulttuurin päivä"
+      },
+      {
+        "month": 5,
+        "day": 1,
+        "name": "Vappu, suomalaisen työn päivä"
+      },
+      {
+        "month": 6,
+        "day": 4,
+        "name": "Puolustusvoimain lippujuhlan päivä"
+      },
+      {
+        "month": 12,
+        "day": 6,
+        "name": "Itsenäisyyspäivä"
+      }
+    ],
+    "officialMoving": [
+      {
+        "name": "Äitienpäivä",
+        "rule": "Toukokuun toinen sunnuntai"
+      },
+      {
+        "name": "Juhannuspäivä, Suomen lipun päivä",
+        "rule": "Kesäkuun 20.–26. päivän välinen lauantai"
+      },
+      {
+        "name": "Isänpäivä",
+        "rule": "Marraskuun toinen sunnuntai"
+      }
+    ],
+    "established": [
+      {
+        "month": 2,
+        "day": 5,
+        "name": "J. L. Runebergin päivä"
+      },
+      {
+        "month": 3,
+        "day": 19,
+        "name": "Minna Canthin päivä, tasa-arvon päivä"
+      },
+      {
+        "month": 4,
+        "day": 9,
+        "name": "Mikael Agricolan päivä, suomen kielen päivä"
+      },
+      {
+        "month": 4,
+        "day": 27,
+        "name": "Kansallinen veteraanipäivä"
+      },
+      {
+        "month": 5,
+        "day": 9,
+        "name": "Eurooppa-päivä"
+      },
+      {
+        "month": 5,
+        "day": 12,
+        "name": "J. V. Snellmanin päivä, suomalaisuuden päivä"
+      },
+      {
+        "month": 7,
+        "day": 6,
+        "name": "Eino Leinon päivä, runon ja suven päivä"
+      },
+      {
+        "month": 10,
+        "day": 1,
+        "name": "Miina Sillanpään ja kansalaisvaikuttamisen päivä"
+      },
+      {
+        "month": 10,
+        "day": 10,
+        "name": "Aleksis Kiven päivä, suomalaisen kirjallisuuden päivä"
+      },
+      {
+        "month": 10,
+        "day": 24,
+        "name": "Yhdistyneiden Kansakuntien päivä"
+      },
+      {
+        "month": 11,
+        "day": 6,
+        "name": "Ruotsalaisuuden päivä, svenska dagen"
+      },
+      {
+        "month": 11,
+        "day": 20,
+        "name": "Lapsen oikeuksien päivä"
+      },
+      {
+        "month": 12,
+        "day": 8,
+        "name": "Jean Sibeliuksen päivä, suomalaisen musiikin päivä"
+      },
+      {
+        "name": "Kaatuneitten muistopäivä",
+        "rule": "Toukokuun kolmas sunnuntai"
+      },
+      {
+        "name": "Suomen luonnon päivä",
+        "rule": "Elokuun viimeinen lauantai"
+      }
+    ],
+    "additionalNotes_fi": "Vaalipäivät ja presidentin virkaanastuminen ovat erillisiä virallisia liputuspäiviä. Ahvenanmaalla ja saamelaisilla on omat liputuspäivät. Tove Janssonin 9.8. on hyödyllinen merkkipäivä, mutta tulevien vuosien liputussuositus on tarkistettava vuosikohtaisesti. Suomen luonnon päivä on ministeriön tässä lähteessä vakiintunut, ei asetuksen virallinen päivä."
+  }
+}

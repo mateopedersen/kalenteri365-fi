@@ -1,0 +1,58 @@
+{
+  "reference": "Python zoneinfo, Europe/Helsinki, round-trip tested folds",
+  "cases": [
+    {
+      "date": "1900-01-01",
+      "time": "12:00",
+      "candidates": [
+        {
+          "utc": "1900-01-01T10:20:11Z",
+          "offsetSeconds": 5989
+        }
+      ]
+    },
+    {
+      "date": "1981-03-29",
+      "time": "02:30",
+      "candidates": []
+    },
+    {
+      "date": "2027-03-28",
+      "time": "03:30",
+      "candidates": []
+    },
+    {
+      "date": "2027-10-31",
+      "time": "03:30",
+      "candidates": [
+        {
+          "utc": "2027-10-31T00:30:00Z",
+          "offsetSeconds": 10800
+        },
+        {
+          "utc": "2027-10-31T01:30:00Z",
+          "offsetSeconds": 7200
+        }
+      ]
+    },
+    {
+      "date": "2030-03-31",
+      "time": "03:30",
+      "candidates": []
+    },
+    {
+      "date": "2030-10-27",
+      "time": "03:30",
+      "candidates": [
+        {
+          "utc": "2030-10-27T00:30:00Z",
+          "offsetSeconds": 10800
+        },
+        {
+          "utc": "2030-10-27T01:30:00Z",
+          "offsetSeconds": 7200
+        }
+      ]
+    }
+  ]
+}

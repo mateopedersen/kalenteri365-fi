@@ -1,0 +1,90 @@
+[
+  {
+    "season": "kevaan",
+    "year": 2027,
+    "source": "https://www.ylioppilastutkinto.fi/fi/tutkinnon-suorittaminen/koepaivat/kevaan-2027-koepaivat",
+    "checkedAt": "2026-11-12",
+    "exams": [
+      {
+        "date": "2027-03-16",
+        "subjects": "äidinkieli ja kirjallisuus (suomi ja ruotsi), lukutaidon koe suomi toisena kielenä ja kirjallisuus, lukutaidon ja kuullun ymmärtämisen osakoe"
+      },
+      {
+        "date": "2027-03-18",
+        "subjects": "vieras kieli, lyhyt oppimäärä englanti ranska espanja saksa venäjä italia portugali latina saame"
+      },
+      {
+        "date": "2027-03-19",
+        "subjects": "äidinkieli ja kirjallisuus (suomi ja ruotsi), kirjoitustaidon koe suomi toisena kielenä ja kirjallisuus, kirjoitustaidon osakoe"
+      },
+      {
+        "date": "2027-03-22",
+        "subjects": "vieras kieli, pitkä oppimäärä englanti ranska espanja saksa venäjä"
+      },
+      {
+        "date": "2027-03-24",
+        "subjects": "matematiikka, pitkä ja lyhyt oppimäärä"
+      },
+      {
+        "date": "2027-03-30",
+        "subjects": "reaali (psykologia, filosofia, historia, fysiikka, biologia)"
+      },
+      {
+        "date": "2027-03-31",
+        "subjects": "toinen kotimainen kieli, pitkä ja keskipitkä oppimäärä"
+      },
+      {
+        "date": "2027-04-02",
+        "subjects": "reaali (uskonto, elämänkatsomustieto, yhteiskuntaoppi, kemia, maantiede, terveystieto)"
+      },
+      {
+        "date": "2027-04-05",
+        "subjects": "saamen äidinkieli ja kirjallisuus -koe"
+      }
+    ]
+  },
+  {
+    "season": "syksyn",
+    "year": 2027,
+    "source": "https://www.ylioppilastutkinto.fi/fi/tutkinnon-suorittaminen/koepaivat/syksyn-2027-koepaivat",
+    "checkedAt": "2026-11-12",
+    "exams": [
+      {
+        "date": "2027-09-20",
+        "subjects": "äidinkieli ja kirjallisuus (suomi ja ruotsi), lukutaidon koe suomi toisena kielenä ja kirjallisuus, lukutaidon ja kuullun ymmärtämisen osakoe"
+      },
+      {
+        "date": "2027-09-22",
+        "subjects": "psykologia, filosofia, historia, fysiikka, biologia"
+      },
+      {
+        "date": "2027-09-24",
+        "subjects": "vieras kieli, pitkä oppimäärä englanti ranska espanja saksa venäjä"
+      },
+      {
+        "date": "2027-09-27",
+        "subjects": "toinen kotimainen kieli, pitkä ja keskipitkä oppimäärä"
+      },
+      {
+        "date": "2027-09-28",
+        "subjects": "uskonto, elämänkatsomustieto, yhteiskuntaoppi, kemia, maantiede, terveystieto"
+      },
+      {
+        "date": "2027-09-30",
+        "subjects": "matematiikka, pitkä ja lyhyt oppimäärä"
+      },
+      {
+        "date": "2027-10-01",
+        "subjects": "äidinkieli ja kirjallisuus (suomi ja ruotsi), kirjoitustaidon koe suomi toisena kielenä ja kirjallisuus, kirjoitustaidon osakoe"
+      },
+      {
+        "date": "2027-10-04",
+        "subjects": "vieras kieli, lyhyt oppimäärä englanti ranska espanja saksa venäjä italia portugali latina saame"
+      },
+      {
+        "date": "2027-10-06",
+        "subjects": "saamen äidinkieli ja kirjallisuus -koe"
+      }
+    ]
+  }
+]

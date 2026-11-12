@@ -1,72 +1,1498 @@
-import {weatherCondition} from './weather.mjs';
-import {MONTHS,SLUGS,DAYS,YEARS,CITIES,date,parse,iso,add,day,fi,week,weekStart,daysInMonth,holidays,leap,cap} from './calendar.mjs';
-import {calTable,esc,icon,table,link} from './ui.mjs';
-const $=(s,root=document)=>root.querySelector(s),$$=(s,root=document)=>[...root.querySelectorAll(s)];
-const config=JSON.parse($('#page-config').textContent),KEY='kalenteri365-fi-v1',today=new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Helsinki',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
-let saved;try{saved=JSON.parse(localStorage.getItem(KEY)||'null');if(!saved){const old=JSON.parse(localStorage.getItem('kalenteri365-v1')||'null');if(old){saved={version:1,events:(old.events||[]).map(e=>({...e,title:e.name,category:'personal',repeat:'none'})),tasks:(old.tasks||[]).map(t=>({...t,title:t.name})),notes:old.notes||{},plans:{},city:CITIES.find(c=>c[1]===old.city)?.[0]||'helsinki'};localStorage.setItem(KEY,JSON.stringify(saved));}}}catch{}let state={version:1,events:[],notes:{},tasks:[],plans:{},city:'helsinki',...(saved?.version===1?saved:{})};
-if(state.city==='mariehamn')state.city='maarianhamina';
-let selected=today,y=config.year||2027,m=config.month||1,view='month',filters=new Set(['holiday','flag','personal','work','family','school']);
-let toastTimer;function toast(s){$('#toast').textContent=s;$('#toast').classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').classList.remove('visible'),4000);}
-function persist(){try{localStorage.setItem(KEY,JSON.stringify(state));return true;}catch{toast('Tallennus ei onnistunut. Tarkista selaimen tallennustila ja ota varmuuskopio.');return false;}}
-function download(name,content,type){const url=URL.createObjectURL(new Blob([content],{type}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
-function occurs(e,ds){if(e.date>ds||e.exdates?.includes(ds))return false;if(!e.repeat||e.repeat==='none')return e.date===ds;let a=parse(e.date),b=parse(ds),gap=Math.round((b-a)/86400000),interval=e.interval||1;if(e.until&&ds>e.until)return false;return e.repeat==='daily'?gap%interval===0:e.repeat==='weekly'?gap%(7*interval)===0:e.repeat==='monthly'?b.getUTCDate()===a.getUTCDate()&&((b.getUTCFullYear()-a.getUTCFullYear())*12+b.getUTCMonth()-a.getUTCMonth())%interval===0:e.repeat==='yearly'?b.getUTCMonth()===a.getUTCMonth()&&b.getUTCDate()===a.getUTCDate()&&(b.getUTCFullYear()-a.getUTCFullYear())%interval===0:false;}
-const eventAt=ds=>state.events.filter(e=>occurs(e,ds));
-function listHTML(events,ds){return events.map(e=>`<button type="button" class="agenda-item" data-edit-event="${esc(e.id)}">${e.time?esc(e.time)+' · ':''}${esc(e.title)}${e.repeat&&e.repeat!=='none'?' ↻':''}</button>`).join('');}
-function renderDay(){if(!$('#selected-date'))return;$('#selected-date').textContent=cap(DAYS[day(parse(selected))])+', '+fi(parse(selected));const items=eventAt(selected),hs=holidays(parse(selected).getUTCFullYear()).filter(h=>h.date===selected);$('#day-events').innerHTML=hs.map(h=>`<li>${link('/juhlapyhat/'+h.slug+'/',esc(h.name))}</li>`).join('')+(items.length?items.map(e=>`<li><button type="button" data-edit-event="${esc(e.id)}">${e.time?esc(e.time)+' · ':''}${esc(e.title)}</button></li>`).join(''):hs.length?'':'<li class="empty">Tämä päivä on vielä avoin suunnitelmillesi.</li>');$('#day-notes').value=state.notes[selected]||'';$('#stat-week').textContent=week(parse(selected)).number;$('#stat-day').textContent=Math.floor((parse(selected)-date(parse(selected).getUTCFullYear(),1,1))/86400000)+1;$('#stat-month').textContent=daysInMonth(y,m);renderTasks();}
-function saveNotes(){if($('#day-notes')){state.notes[selected]=$('#day-notes').value;persist();}}
-function selectDate(ds){saveNotes();selected=ds;renderCalendar();renderDay();}
-function renderCalendar(){if(!$('#calendar-view'))return;const root=$('#calendar-view');$('#calendar-title').textContent=view==='day'?fi(parse(selected)):view==='week'?`Viikko ${week(parse(selected)).number} · ${week(parse(selected)).year}`:view==='year'?String(y):cap(MONTHS[m-1])+' '+y;
- $('#jump-year').value=y;$('#jump-month').value=m;const foot=$('.calendar-footer');if(foot){const dl=$('a[href^="/pdf-kalenteri/"]',foot),ed=$('a[href^="/luo-kalenteri/"]',foot);if(dl){dl.hidden=!YEARS.includes(y);dl.href='/pdf-kalenteri/'+y+'/'+SLUGS[m-1]+'/';}if(ed){ed.hidden=!YEARS.includes(y);ed.href='/luo-kalenteri/?year='+y+'&month='+m;}}$$('.subyears a').forEach(a=>a.classList.toggle('active',Number(a.textContent)===y));
- $$('[data-view]').forEach(b=>{b.classList.toggle('active',b.dataset.view===view);b.setAttribute('aria-pressed',String(b.dataset.view===view));});
- if(view==='month'){root.innerHTML=calTable(y,m);$$('td[data-date]',root).forEach(td=>{let ds=td.dataset.date;td.classList.toggle('is-today',ds===today);td.classList.toggle('is-selected',ds===selected);$$('.cal-event',td).forEach(a=>{let typ=a.classList.contains('holiday')||a.classList.contains('eve')?'holiday':'flag';a.hidden=!filters.has(typ);});for(const e of eventAt(ds).filter(e=>filters.has(e.category||'personal'))){let b=document.createElement('button');b.type='button';b.className='cal-event personal '+(e.category||'personal');b.dataset.editEvent=e.id;b.textContent=(e.time?e.time+' ':'')+e.title;td.append(b);}});}
- else if(view==='year'){root.innerHTML=`<div class="year-grid">${MONTHS.map((mm,i)=>`<article class="month-card"><h3><button class="textbtn" data-goto-month="${i+1}">${cap(mm)}</button></h3>${calTable(y,i+1,{mini:true})}</article>`).join('')}</div>`;}
- else {let ds=view==='week'?Array.from({length:7},(_,i)=>iso(add(parse(selected),-day(parse(selected))+i))):view==='day'?[selected]:Array.from({length:daysInMonth(y,m)},(_,i)=>iso(date(y,m,i+1)));let blocks=ds.map(s=>{let hs=holidays(parse(s).getUTCFullYear()).filter(h=>h.date===s&&filters.has(['holiday','eve'].includes(h.type)?'holiday':'flag')),es=eventAt(s).filter(e=>filters.has(e.category||'personal'));return `<article class="${view==='week'?'week-day':'day-agenda-item'}"><strong><button class="textbtn" data-select-date="${s}">${cap(DAYS[day(parse(s))])} ${fi(parse(s))}</button></strong>${hs.map(h=>`<div class="agenda-item">${link('/juhlapyhat/'+h.slug+'/',esc(h.name))}</div>`).join('')}${listHTML(es,s)}${!es.length&&!hs.length?'<p class="small">Ei merkintöjä</p>':''}</article>`;});root.innerHTML=`<div class="${view==='week'?'week-agenda':'day-agenda'}">${blocks.join('')}</div>`;}
- let u=new URL(location.href);if(config.kind==='home'||config.kind==='calendar'){u.searchParams.set('year',y);u.searchParams.set('month',m);u.searchParams.set('date',selected);u.searchParams.set('view',view);history.replaceState(null,'',u);}
- renderDay();
+import { dayEvents } from "./solar-day.mjs";
+import { moonSVG } from "./lunar.mjs";
+import { searchPages } from "./search.mjs";
+import { homeView, cleanHomeURL, loadCalendarState } from "./home-view.mjs";
+import {
+  MONTHS,
+  SLUGS,
+  DAYS,
+  YEARS,
+  CITIES,
+  date,
+  parse,
+  iso,
+  add,
+  day,
+  fi,
+  week,
+  weekStart,
+  daysInMonth,
+  holidays,
+  leap,
+  cap,
+} from "./calendar.mjs";
+import { calTable, esc, icon, table, link } from "./ui.mjs";
+const $ = (s, root = document) => root.querySelector(s),
+  $$ = (s, root = document) => [...root.querySelectorAll(s)];
+const config = JSON.parse($("#page-config").textContent),
+  KEY = "kalenteri365-fi-v1",
+  today = new Intl.DateTimeFormat("sv-SE", {
+    timeZone: "Europe/Helsinki",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date());
+let state=loadCalendarState(localStorage,CITIES);
+let selected = today,
+  y = config.year || 2027,
+  m = config.month || 1,
+  view = "month",
+  filters = new Set([
+    "holiday",
+    "flag",
+    "personal",
+    "work",
+    "family",
+    "school",
+  ]);
+let toastTimer;
+function toast(s) {
+  $("#toast").hidden = false;
+  $("#toast").textContent = s;
+  $("#toast").classList.add("visible");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    $("#toast").classList.remove("visible");
+    $("#toast").hidden = true;
+  }, 4000);
 }
-function renderTasks(){if(!$('#tasks'))return;$('#tasks').innerHTML=state.tasks.filter(t=>t.date===selected).map(t=>`<li><label><input type="checkbox" data-task-toggle="${esc(t.id)}" ${t.done?'checked':''}><span>${esc(t.title)}</span></label><button type="button" data-task-remove="${esc(t.id)}" aria-label="Poista tehtävä ${esc(t.title)}">×</button></li>`).join('');}
-function openEvent(id=null){const form=$('#event-form'),e=id?state.events.find(e=>e.id===id):null;form.reset();form.elements.id.value=e?.id||'';form.elements.title.value=e?.title||'';form.elements.date.value=e?.date||selected;form.elements.time.value=e?.time||'';form.elements.category.value=e?.category||'personal';form.elements.repeat.value=e?.repeat||config.defaultRepeat||'none';form.elements.note.value=e?.note||'';$('[data-action="delete-event"]').hidden=!e;$('#event-dialog').showModal();setTimeout(()=>form.elements.title.focus(),0);}
-$('#event-form').addEventListener('submit',ev=>{ev.preventDefault();const fd=new FormData(ev.currentTarget),id=fd.get('id')||crypto.randomUUID(),obj={id,title:fd.get('title').trim(),date:fd.get('date'),time:fd.get('time'),category:fd.get('category'),repeat:fd.get('repeat'),note:fd.get('note')};if(!obj.title)return;const i=state.events.findIndex(e=>e.id===id);if(i>=0)state.events[i]={...state.events[i],...obj};else state.events.push(obj);persist();$('#event-dialog').close();renderCalendar();renderBirthdays();toast('Tapahtuma tallennettu.');});
-function eventICS(){const escICS=s=>String(s||'').replace(/\\/g,'\\\\').replace(/\n/g,'\\n').replace(/[,;]/g,c=>'\\'+c);let lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Kalenteri365.fi//Personal//FI','CALSCALE:GREGORIAN'];for(let e of state.events){lines.push('BEGIN:VEVENT','UID:'+e.id.replace(/[\r\n]/g,'')+'@kalenteri365.fi','DTSTAMP:'+new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d+Z/,'Z'));lines.push(e.time?'DTSTART;TZID=Europe/Helsinki:'+e.date.replaceAll('-','')+'T'+e.time.replace(':','')+'00':'DTSTART;VALUE=DATE:'+e.date.replaceAll('-',''));if(!e.time)lines.push('DTEND;VALUE=DATE:'+iso(add(parse(e.date),1)).replaceAll('-',''));lines.push('SUMMARY:'+escICS(e.title),'DESCRIPTION:'+escICS(e.note),'CATEGORIES:'+escICS(e.category));if(e.repeat&&e.repeat!=='none')lines.push('RRULE:FREQ='+e.repeat.toUpperCase()+(e.interval?' ;INTERVAL='+e.interval:'').replace(' ;',';')+(e.until?';UNTIL='+e.until.replaceAll('-','')+'T235959Z':''));if(e.exdates?.length)lines.push('EXDATE;VALUE=DATE:'+e.exdates.map(x=>x.replaceAll('-','')).join(','));lines.push('END:VEVENT');}lines.push('END:VCALENDAR');const fold=line=>{let o='',n=0;for(let c of line){let b=new TextEncoder().encode(c).length;if(n+b>74){o+='\r\n ';n=1;}o+=c;n+=b;}return o;};return lines.map(fold).join('\r\n')+'\r\n';}
-async function importICS(file){let raw=await file.text();if(raw.length>5e6)throw Error('Tiedosto on liian suuri. Enimmäiskoko on 5 Mt.');let blocks=raw.replace(/\r?\n[ \t]/g,'').match(/BEGIN:VEVENT[\s\S]*?END:VEVENT/g)||[];if(!blocks.length)throw Error('Tiedostossa ei ole luettavia tapahtumia.');let count=0,skipped=0;const unesc=s=>(s||'').replace(/\\n/gi,'\n').replace(/\\([,;\\])/g,'$1');for(let b of blocks){let fields={};for(let line of b.split(/\r?\n/)){let i=line.indexOf(':');if(i<0)continue;let k=line.slice(0,i),v=line.slice(i+1),name=k.split(';')[0];fields[name]={key:k,value:v};}let dt=fields.DTSTART?.value;if(!dt||!/^\d{8}(T\d{6}Z?)?$/.test(dt)){skipped++;continue;}let ds=dt.slice(0,4)+'-'+dt.slice(4,6)+'-'+dt.slice(6,8),tm=dt.includes('T')?dt.slice(9,11)+':'+dt.slice(11,13):'';if(tm&&dt.endsWith('Z')){let utc=new Date(ds+'T'+tm+':'+dt.slice(13,15)+'Z');ds=new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Helsinki'}).format(utc);tm=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Helsinki',hour:'2-digit',minute:'2-digit'}).format(utc);}else if(tm&&fields.DTSTART.key.includes('TZID=')&&!fields.DTSTART.key.includes('TZID=Europe/Helsinki')){skipped++;continue;}
- let rule=fields.RRULE?.value||'',opts=Object.fromEntries(rule.split(';').filter(Boolean).map(x=>x.split('=')));if(rule&&(Object.keys(opts).some(k=>!['FREQ','INTERVAL','UNTIL'].includes(k))||!['DAILY','WEEKLY','MONTHLY','YEARLY'].includes(opts.FREQ))){skipped++;continue;}
- let uid=fields.UID?.value||crypto.randomUUID(),id=uid.endsWith('@kalenteri365.fi')?uid.slice(0,-'@kalenteri365.fi'.length):'ics-'+uid;if(state.events.some(e=>e.id===id))continue;state.events.push({id,date:ds,time:tm,title:unesc(fields.SUMMARY?.value)||'Tuotu tapahtuma',note:unesc(fields.DESCRIPTION?.value),category:['personal','work','family','school'].includes(fields.CATEGORIES?.value)?fields.CATEGORIES.value:'personal',repeat:opts.FREQ?.toLowerCase()||'none',interval:Math.max(1,Number(opts.INTERVAL)||1),until:opts.UNTIL?opts.UNTIL.slice(0,4)+'-'+opts.UNTIL.slice(4,6)+'-'+opts.UNTIL.slice(6,8):null,exdates:fields.EXDATE?.value.split(',').map(v=>v.slice(0,4)+'-'+v.slice(4,6)+'-'+v.slice(6,8))||[]});count++;}persist();renderCalendar();toast(`Tuotu ${count} tapahtumaa.${skipped?' '+skipped+' tapahtumaa ohitettiin: tukematon toistosääntö tai aikavyöhyke.':''}`);}
-document.addEventListener('click',e=>{const action=e.target.closest('[data-action]')?.dataset.action,edit=e.target.closest('[data-edit-event]'),ds=e.target.closest('[data-select-date]')?.dataset.selectDate,gm=e.target.closest('[data-goto-month]')?.dataset.gotoMonth;if(edit){openEvent(edit.dataset.editEvent);return;}if(ds){if($('#calendar-view'))selectDate(ds);else if(!$('#editor-preview'))location.href='/?year='+ds.slice(0,4)+'&month='+Number(ds.slice(5,7))+'&date='+ds+'&view=day';return;}if(gm){m=+gm;view='month';renderCalendar();return;}if(e.target.closest('[data-view]')){saveNotes();view=e.target.closest('[data-view]').dataset.view;renderCalendar();return;}if(!action)return;switch(action){case 'menu':document.body.classList.toggle('menu-open');e.target.closest('button').setAttribute('aria-expanded',String(document.body.classList.contains('menu-open')));break;case 'print':saveNotes();window.print();break;case 'new-event':openEvent();break;case 'close-dialog':$('#event-dialog').close();break;case 'delete-event':state.events=state.events.filter(e=>e.id!==$('#event-form').elements.id.value);persist();$('#event-dialog').close();renderCalendar();renderBirthdays();toast('Tapahtuma poistettu.');break;case 'save-notes':saveNotes();toast('Muistiinpano tallennettu.');break;case 'today':saveNotes();selected=today;y=+today.slice(0,4);m=+today.slice(5,7);renderCalendar();break;case 'prev-month':case 'next-month':{saveNotes();const n=action==='next-month'?1:-1;if(view==='day'||view==='week'){selected=iso(add(parse(selected),n*(view==='week'?7:1)));y=+selected.slice(0,4);m=+selected.slice(5,7);}else if(view==='year'){y+=n;selected=iso(date(y,m,1));}else{let d=date(y,m+n,1);y=d.getUTCFullYear();m=d.getUTCMonth()+1;selected=iso(d);}if(config.kind==='calendar'&&view==='month'&&YEARS.includes(y)){location.href='/kalenteri/'+y+'/'+SLUGS[m-1]+'/?date='+selected+'&view='+view;}else renderCalendar();break;}case 'export-ics':download('oma-kalenteri.ics',eventICS(),'text/calendar;charset=utf-8');break;case 'backup':saveNotes();download('kalenteri365-varmuuskopio.json',JSON.stringify(state,null,2),'application/json');toast('Varmuuskopio ladattu.');break;case 'export-shifts':if(!shiftEvents.length){toast('Luo ensin vuoroluettelo.');return;}download('tyovuorot.ics',simpleICS(shiftEvents),'text/calendar');break;case 'editor-webp':editorWebP();break;}});
-document.addEventListener('change',async e=>{const t=e.target;if(t.matches('[data-filter]')){t.checked?filters.add(t.dataset.filter):filters.delete(t.dataset.filter);$$('[data-filter]').filter(x=>x.dataset.filter===t.dataset.filter).forEach(x=>x.checked=t.checked);renderCalendar();}if(t.id==='jump-year'||t.id==='jump-month'){saveNotes();y=+$('#jump-year').value;m=+$('#jump-month').value;selected=iso(date(y,m,1));if(config.kind==='calendar'&&YEARS.includes(y))location.href='/kalenteri/'+y+'/'+SLUGS[m-1]+'/';else renderCalendar();}if(t.matches('[data-task-toggle]')){let task=state.tasks.find(x=>x.id===t.dataset.taskToggle);task.done=t.checked;persist();renderTasks();}try{if(t.id==='import-ics'&&t.files[0])await importICS(t.files[0]);if(t.id==='restore-json'&&t.files[0]){let raw=await t.files[0].text(),obj=JSON.parse(raw);if(obj.version!==1||!Array.isArray(obj.events)||!obj.notes||!Array.isArray(obj.tasks)||!obj.plans||obj.events.length>10000||obj.events.some(e=>typeof e.title!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(e.date)||typeof e.id!=='string'))throw Error('Varmuuskopion muotoa ei tunnistettu.');obj.events=obj.events.map(e=>({id:e.id.replace(/[\r\n]/g,''),date:e.date,title:e.title.slice(0,160),time:/^\d{2}:\d{2}$/.test(e.time||'')?e.time:'',note:typeof e.note==='string'?e.note.slice(0,2000):'',category:['personal','work','family','school'].includes(e.category)?e.category:'personal',repeat:['none','daily','weekly','monthly','yearly'].includes(e.repeat)?e.repeat:'none',interval:Math.max(1,Math.min(366,Number(e.interval)||1)),until:/^\d{4}-\d{2}-\d{2}$/.test(e.until||'')?e.until:null,exdates:Array.isArray(e.exdates)?e.exdates.filter(d=>typeof d==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(d)):[]}));state={...state,...obj};persist();renderCalendar();renderBirthdays();toast('Varmuuskopio palautettu.');}}catch(err){toast(err.message);}if(t.type==='file')t.value='';});
-document.addEventListener('click',e=>{const id=e.target.closest('[data-task-remove]')?.dataset.taskRemove;if(id){state.tasks=state.tasks.filter(t=>t.id!==id);persist();renderTasks();}});
-$('#task-form')?.addEventListener('submit',e=>{e.preventDefault();const input=$('#task-title');if(!input.value.trim())return;state.tasks.push({id:crypto.randomUUID(),date:selected,title:input.value.trim(),done:false});persist();input.value='';renderTasks();});
-$('#day-notes')?.addEventListener('blur',saveNotes);$('#day-notes')?.addEventListener('input',saveNotes);
-function renderBirthdays(){if($('#birthdays'))$('#birthdays').innerHTML=state.events.filter(e=>e.repeat==='yearly').sort((a,b)=>a.date.slice(5).localeCompare(b.date.slice(5))).map(e=>`<button class="agenda-item" data-edit-event="${esc(e.id)}">${esc(e.date.slice(8)+'.'+e.date.slice(5,7)+'.')} · ${esc(e.title)}</button>`).join('')||'<p class="empty">Ei vielä vuosittaisia muistutuksia.</p>';}
-if($('#calendar-view')){const mobileFilters=document.createElement('details');mobileFilters.className='mobile-filters no-print';mobileFilters.innerHTML='<summary>Näytettävät kalenterit</summary>'+[['holiday','Suomen pyhäpäivät'],['flag','Liputus- ja merkkipäivät'],['personal','Oma'],['work','Työ'],['family','Perhe'],['school','Opiskelu']].map(([v,n])=>'<label><input type="checkbox" data-filter="'+v+'" checked>'+n+'</label>').join('');$('.viewbar').after(mobileFilters);const q=new URL(location.href).searchParams;if(config.kind==='home'){y=Number(q.get('year'))||Number(today.slice(0,4));m=Number(q.get('month'))||Number(today.slice(5,7));if(y<2026||y>2031)y=2027;if(m<1||m>12)m=1;selected=/^\d{4}-\d{2}-\d{2}$/.test(q.get('date')||'')?q.get('date'):today;view=['month','week','day','list','year'].includes(q.get('view'))?q.get('view'):'month';}else{selected=/^\d{4}-\d{2}-\d{2}$/.test(q.get('date')||'')?q.get('date'):iso(date(y,m,1));view=['month','week','day','list','year'].includes(q.get('view'))?q.get('view'):'month';}renderCalendar();let upcoming=[...holidays(+today.slice(0,4)),...holidays(+today.slice(0,4)+1)].filter(h=>h.type==='holiday'&&h.date>=today).slice(0,3);$('#upcoming').innerHTML=upcoming.map(h=>link('/juhlapyhat/'+h.slug+'/',`<time>${parse(h.date).getUTCDate()}.${parse(h.date).getUTCMonth()+1}.</time><div><strong>${esc(h.name)}</strong><span>${Math.round((parse(h.date)-parse(today))/86400000)} päivän päästä</span></div>`,'upcoming-item')).join('');}
-function clock(){if(!$('#helsinki-clock'))return;$('#helsinki-clock').innerHTML=new Intl.DateTimeFormat('fi-FI',{timeZone:'Europe/Helsinki',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date()).replace('.',':')+'<small>Suomen aika</small>';$('#today-date').textContent=new Intl.DateTimeFormat('fi-FI',{timeZone:'Europe/Helsinki',weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date());}clock();if($('#helsinki-clock'))setInterval(clock,30000);
-let weatherSequence=0;async function weather(){const seq=++weatherSequence;let city=CITIES.find(c=>c[0]===state.city)||CITIES[0];try{const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${city[2]}&longitude=${city[3]}&current=temperature_2m,weather_code,is_day&timezone=Europe%2FHelsinki`,{signal:AbortSignal.timeout(7000)});if(!r.ok)throw Error();let d=await r.json();if(seq!==weatherSequence)return;let condition=weatherCondition(d.current.weather_code,Boolean(d.current.is_day)),desc=condition.name;$('#weather').innerHTML=icon(condition.icon)+'<span>'+desc+'<br><small>'+city[1]+'</small></span><strong>'+Math.round(d.current.temperature_2m)+'°</strong>';$('#weather-note').textContent='Open-Meteo · '+d.current.time.replace('T',' ')+' · Kuvitus';}catch{if(seq!==weatherSequence)return;$('#weather').innerHTML=icon('sun')+'<span>Sää ei ole saatavilla</span>';$('#weather-note').textContent='Yritä uudelleen valitsemalla paikkakunta.';}}
-if($('#city-select')){$('#city-select').value=state.city;$('#city-select').addEventListener('change',e=>{state.city=e.target.value;persist();weather();});weather();}
-const bindForm=(id,fn)=>$(id)?.addEventListener('submit',e=>{e.preventDefault();try{fn(new FormData(e.currentTarget));}catch(err){toast(err.message||'Tarkista annetut tiedot.');}});
-const result=(s,id='#calc-result')=>{$(id).innerHTML=s;};
-bindForm('#date-diff',f=>{let diff=Math.round((parse(f.get('end'))-parse(f.get('start')))/86400000),inc=f.get('inclusive');result(`<strong>${Math.abs(diff)+(inc?1:0)} päivää</strong><p>${diff<0?'Loppupäivä on ennen alkupäivää. ':''}${inc?'Molemmat rajapäivät mukana.':'Loppupäivä ei sisälly määrään.'}</p>`);});
-bindForm('#date-add',f=>result(`<strong>${fi(add(parse(f.get('start')),+f.get('amount')))}</strong><p>${cap(DAYS[day(add(parse(f.get('start')),+f.get('amount')))])}</p>`,'#add-result'));
-bindForm('#work-calc',f=>{let a=parse(f.get('start')),b=parse(f.get('end'));if(b<a)throw Error('Loppupäivän on oltava alkupäivän jälkeen.');if(b-a>86400000*366*20)throw Error('Valitse enintään 20 vuoden ajanjakso.');let n=0,p=0,w=0,cache={};for(let d=a;d<=b;d=add(d,1)){if(day(d)>4)continue;w++;let hs=cache[d.getUTCFullYear()]??=holidays(d.getUTCFullYear());if(hs.some(h=>h.date===iso(d)&&(h.type==='holiday'||f.get('eves')&&h.type==='eve')))p++;else n++;}result(`<strong>${n} työpäivää</strong><p>${(n*+f.get('hours')).toLocaleString('fi-FI')} tuntia · ${w} ma–pe-päivää − ${p} valittua pyhä- tai aattopäivää. Rajapäivät mukana.</p>`);});
-bindForm('#week-calc',f=>{let w=week(parse(f.get('date')));result(`<strong>Viikko ${w.number} / ${w.year}</strong><p>${fi(weekStart(w.year,w.number))}–${fi(add(weekStart(w.year,w.number),6))}</p>`);});
-bindForm('#day-calc',f=>{let d=parse(f.get('date')),n=Math.round((d-date(d.getUTCFullYear(),1,1))/86400000)+1;result(`<strong>Vuoden ${n}. päivä</strong><p>Vuodessa on ${leap(d.getUTCFullYear())?366:365} päivää. Päivän jälkeen jäljellä ${(leap(d.getUTCFullYear())?366:365)-n} päivää.</p>`);});
-bindForm('#leap-calc',f=>result(`<strong>${f.get('year')}: ${leap(+f.get('year'))?'karkausvuosi':'tavallinen vuosi'}</strong><p>${leap(+f.get('year'))?'366 päivää · Helmikuussa 29 päivää.':'365 päivää · Helmikuussa 28 päivää.'}</p>`));
-bindForm('#countdown-form',f=>{let n=Math.round((parse(f.get('target'))-parse(today))/86400000);result(`<strong>${Math.abs(n)} päivää ${n<0?'sitten':'jäljellä'}</strong><p>${esc(f.get('title'))} · ${fi(parse(f.get('target')))}</p>`,'#countdown-result');});
-bindForm('#vacation-form',f=>{let yy=+f.get('year'),budget=+f.get('budget'),max=+f.get('length'),hs=holidays(yy),free=d=>day(d)>4||hs.some(h=>h.date===iso(d)&&(h.type==='holiday'||f.get('eves')&&h.type==='eve')),found=[];for(let a=date(yy,1,1);a<=date(yy,12,31);a=add(a,1)){if(!free(a))continue;let needed=[];for(let l=1;l<=max;l++){let b=add(a,l-1);if(b.getUTCFullYear()!==yy)break;if(!free(b))needed.push(iso(b));if(needed.length>budget)break;if(l>=3&&free(b))found.push({a:iso(a),b:iso(b),n:l,needed:[...needed]});}}found.sort((a,b)=>b.n-a.n||a.needed.length-b.needed.length||a.a.localeCompare(b.a));let selectedOptions=[];for(let o of found){if(selectedOptions.some(p=>!(o.b<p.a||o.a>p.b)))continue;selectedOptions.push(o);if(selectedOptions.length>=10)break;}$('#vacation-result').innerHTML=selectedOptions.length?table(['Vapaa','Päiviä','Lomapäiviä','Haettavat päivät'],selectedOptions.map(o=>[`${fi(parse(o.a))}–${fi(parse(o.b))}`,o.n,o.needed.length,o.needed.map(d=>fi(parse(d))).join(', ')||'Ei tarvita'])):'<p>Näillä valinnoilla ei löytynyt vähintään kolmen päivän vapaata.</p>';});
-let shiftEvents=[];bindForm('#shift-form',f=>{let cycle=f.get('cycle').split(',').map(s=>s.trim()).filter(Boolean);if(!cycle.length||cycle.length>50)throw Error('Anna 1–50 vuoroa.');shiftEvents=Array.from({length:+f.get('count')},(_,i)=>({date:iso(add(parse(f.get('start')),i)),name:cycle[i%cycle.length],slug:'shift-'+i}));$('#shift-result').innerHTML=table(['Päivämäärä','Päivä','Vuoro'],shiftEvents.map(e=>[fi(parse(e.date)),cap(DAYS[day(parse(e.date))]),esc(e.name)]));});
-function simpleICS(es){return ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Kalenteri365.fi//FI',...es.flatMap((e,i)=>['BEGIN:VEVENT',`UID:${e.date}-${i}@kalenteri365.fi`,'DTSTAMP:20261112T000000Z','DTSTART;VALUE=DATE:'+e.date.replaceAll('-',''),'DTEND;VALUE=DATE:'+iso(add(parse(e.date),1)).replaceAll('-',''),'SUMMARY:'+e.name.replace(/[;,]/g,c=>'\\'+c),'END:VEVENT']),'END:VCALENDAR'].join('\r\n')+'\r\n';}
-$$('[data-plan]').forEach(el=>{let k=el.dataset.plan;if(state.plans[k]!==undefined)el.value=state.plans[k];el.addEventListener('input',()=>{state.plans[k]=el.value;persist();});});
-function sheetLoad(){const ds=$('#planner-date')?.value||'2027-01-04';$$('[data-sheet]').forEach(el=>{let key=el.dataset.sheet+'-'+ds;el.value=state.plans[key]||'';el.oninput=()=>{state.plans[key]=el.value;persist();};});if($('#planner-heading'))$('#planner-heading').textContent=($('#planner-title').value||'Oma suunnitelma')+' · '+fi(parse(ds));}
-$('#planner-date')?.addEventListener('change',sheetLoad);$('#planner-title')?.addEventListener('input',sheetLoad);sheetLoad();renderBirthdays();
-let photoData='';function renderEditor(){if(!$('#editor-preview'))return;let yy=+$('#editor-year').value,mm=+$('#editor-month').value,blank=$('#editor-blank').checked,title=$('#editor-title').value||(blank?'Oma kuukausi':cap(MONTHS[mm-1])+' '+yy),color=$('#editor-color').value;$('#editor-preview').style.setProperty('--accent',color);$('#editor-preview').innerHTML=`<h2 class="editor-title" style="color:${esc(color)}">${esc(title)}</h2>${photoData?'<img class="editor-photo" src="'+photoData+'" alt="Oma kalenterikuva">':''}${calTable(yy,mm)}<footer>www.Kalenteri365.fi</footer>`;if(blank){$$('.date-num,#editor-preview .weekno', $('#editor-preview')).forEach(el=>el.textContent='');$$('.cal-event',$('#editor-preview')).forEach(el=>el.remove());}else{if(!$('#editor-holidays').checked)$$('.cal-event',$('#editor-preview')).forEach(el=>el.remove());$$('td[data-date]',$('#editor-preview')).forEach(td=>{for(let e of eventAt(td.dataset.date)){let s=document.createElement('span');s.className='cal-event personal';s.textContent=e.title;td.append(s);}});}}
-if($('#editor-year')){const q=new URL(location.href).searchParams;if(YEARS.includes(+q.get('year')))$('#editor-year').value=q.get('year');if(+q.get('month')>=1&&+q.get('month')<=12)$('#editor-month').value=q.get('month');for(let id of ['editor-year','editor-month','editor-title','editor-color','editor-holidays','editor-blank'])$('#'+id).addEventListener('input',renderEditor);$('#editor-photo').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;if(file.size>10e6){toast('Valitse enintään 10 Mt kuva.');return;}const reader=new FileReader();reader.onload=()=>{photoData=reader.result;renderEditor();};reader.readAsDataURL(file);});renderEditor();}
-async function editorWebP(){await document.fonts.ready;const root=$('#editor-preview');if(!root)return;const W=2400,H=photoData?2200:1700,c=document.createElement('canvas');c.width=W;c.height=H;const ctx=c.getContext('2d'),color=$('#editor-color').value;ctx.fillStyle='white';ctx.fillRect(0,0,W,H);ctx.fillStyle=color;ctx.font='700 70px Lato';ctx.fillText($('.editor-title',root).textContent,80,120,W-160);let top=190;if(photoData){let img=new Image();img.src=photoData;await img.decode();const scale=Math.min((W-160)/img.width,450/img.height),iw=img.width*scale,ih=img.height*scale;ctx.drawImage(img,(W-iw)/2,top,iw,ih);top+=490;}let rows=$$('tbody tr',root),cw=(W-160)/8,rh=(H-top-170)/(rows.length+1);ctx.font='700 28px Lato';$$('thead th',root).forEach((th,i)=>{ctx.fillStyle=color;ctx.fillRect(80+i*cw,top,cw,rh);ctx.fillStyle='white';ctx.fillText(th.textContent,100+i*cw,top+40);});top+=rh;rows.forEach((tr,ri)=>{[...tr.children].forEach((td,i)=>{const xx=80+i*cw,tt=top+ri*rh;ctx.strokeStyle='#d6dfe4';ctx.strokeRect(xx,tt,cw,rh);ctx.fillStyle=color;ctx.font='700 29px Lato';ctx.fillText($('.date-num',td)?.textContent||td.textContent.trim().slice(0,3),xx+13,tt+38);ctx.font='400 17px Lato';$$('.cal-event',td).forEach((e,j)=>{let words=e.textContent.split(' '),line='',yy=tt+65+j*27;for(let w of words){let n=line?line+' '+w:w;if(ctx.measureText(n).width>cw-24&&line){ctx.fillText(line,xx+12,yy);yy+=21;line=w;}else line=n;}ctx.fillText(line,xx+12,yy);});});});ctx.fillStyle='#687985';ctx.font='24px Lato';ctx.fillText('www.Kalenteri365.fi',80,H-55);c.toBlob(b=>{if(b)download('oma-kalenteri.webp',b,'image/webp');},'image/webp',.92);}
-const normalize=s=>s.toLocaleLowerCase('fi').normalize('NFD').replace(/\p{Diacritic}/gu,'');
-let searchIndexPromise;function getIndex(){return searchIndexPromise??=fetch('/assets/search.json').then(r=>{if(!r.ok)throw Error('Haku ei ole saatavilla.');return r.json();}).then(ps=>ps.map(p=>({...p,searchTitle:normalize(p.title),searchText:normalize(p.title+' '+p.description)}))).catch(e=>{searchIndexPromise=null;throw e;});}
-let searchSequence=0;async function search(q,target,max=8){const token=++searchSequence,query=normalize(q.trim()),words=query.split(/\s+/).filter(Boolean);if(!words.length){target.innerHTML='';return;}try{const found=(await getIndex()).filter(p=>words.every(w=>p.searchText.includes(w))).map(p=>({p,score:(p.searchTitle===query?100:0)+(p.searchTitle.startsWith(query)?40:0)+(p.searchTitle.includes(query)?20:0)-p.path.split('/').length})).sort((a,b)=>b.score-a.score).slice(0,max).map(x=>x.p);if(token!==searchSequence)return;target.innerHTML=found.length?found.map(p=>link(p.path,esc(p.title))).join(''):'<p class="small" style="padding:10px">Ei tuloksia. Kokeile esimerkiksi ”2028” tai ”Kuu”.</p>';}catch(e){target.textContent=e.message;}}
-$('#site-search')?.addEventListener('focus',()=>{getIndex().catch(()=>{});},{once:true});
-$('#site-search')?.addEventListener('input',async e=>{const box=$('#search-results');box.hidden=!e.target.value.trim();if(!box.hidden)await search(e.target.value,box);});$('#site-search')?.addEventListener('keydown',e=>{if(e.key==='Escape')$('#search-results').hidden=true;if(e.key==='ArrowDown')$('#search-results a')?.focus();});document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))$('#search-results').hidden=true;});
-bindForm('#page-search-form',f=>search(f.get('q'),$('#page-search-results'),60));if($('#page-search')){const q=new URL(location.href).searchParams.get('q');if(q){$('#page-search').value=q;search(q,$('#page-search-results'),60);}}
-let astronomyPromise;async function astronomy(){if(window.Astronomy)return window.Astronomy;if(!astronomyPromise)astronomyPromise=new Promise((resolve,reject)=>{let s=document.createElement('script');s.src='/assets/astronomy.min.js';s.onload=()=>resolve(window.Astronomy);s.onerror=()=>reject(Error('Tähtitieteellisen laskennan lataus epäonnistui.'));document.head.append(s);});return astronomyPromise;}
-bindForm('#astro-form',async f=>{try{let A=await astronomy(),city=CITIES.find(c=>c[0]===f.get('city')),ds=f.get('date'),obs=new A.Observer(city[2],city[3],0),local=d=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Helsinki'}).format(d),fmt=d=>new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Helsinki',hour:'2-digit',minute:'2-digit'}).format(d),probe=new Date(ds+'T00:00:00Z'),offset=Number(new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Helsinki',timeZoneName:'shortOffset'}).formatToParts(new Date(+probe-7200000)).find(p=>p.type==='timeZoneName').value.replace('GMT+','')),start=new Date(+probe-offset*3600000),body=config.body||'Sun',get=dir=>{let v=A.SearchRiseSet(body,obs,dir,start,1);return v&&local(v.date)===ds?v.date:null;},rise=get(1),set=get(-1);let duration=body==='Sun'&&rise&&set?Math.round((set-rise)/60000):null,eq=A.Equator(body,start,obs,true,true),alt=A.Horizon(start,obs,eq.ra,eq.dec,'normal').altitude;$('#astro-result').innerHTML=`<strong>${city[1]} · ${fi(parse(ds))}</strong><p>Nousu: ${rise?fmt(rise):'—'} · Lasku: ${set?fmt(set):'—'}${duration!==null?` · Päivän pituus: ${Math.floor(duration/60)} h ${duration%60} min`:!rise&&!set?` · ${body==='Sun'?'Aurinko':'Kuu'} on koko päivän ${alt>0?'horisontin yläpuolella':'horisontin alapuolella'}.`:''}</p>`;}catch(err){toast(err.message);}});
-if($('#astro-form')){const form=$('#astro-form');if(config.city)form.elements.city.value=config.city;form.requestSubmit();}
-const signNames=['Kauris','Vesimies','Kalat','Oinas','Härkä','Kaksoset','Rapu','Leijona','Neitsyt','Vaaka','Skorpioni','Jousimies'];bindForm('#zodiac-form',f=>{let d=parse(f.get('date')),mo=d.getUTCMonth(),cut=[20,19,21,20,21,21,23,23,23,23,22,22][mo],idx=(mo+(d.getUTCDate()>=cut?1:0))%12;result(`<strong>${signNames[idx]}</strong><p>Tavanomainen länsimainen horoskooppimerkki.</p>`);});
-if($('#reflection')){const texts=['Aloita yhdestä tärkeästä asiasta. Jätä päivään myös pieni hetki, jossa sinun ei tarvitse saada mitään valmiiksi.','Selkeä suunnitelma syntyy usein lyhentämällä tehtävälistaa. Valitse tänään kolme asiaa, joilla on sinulle merkitystä.','Pieni yhteydenotto voi piristää päivää. Varaa hetki ystävälle ja toinen omalle rauhallesi.','Kirjoita keskeneräinen ajatus muistiin. Sen ei tarvitse valmistua tänään, kunhan annat sille tilaa.','Tarkista viikon aikataulu ja jätä siirtymille väljyyttä. Kiireettömyyskin saa olla suunnitelma.','Huomaa jokin jo onnistunut asia. Voit rakentaa seuraavan pienen askeleen sen varaan.','Palaa siihen, mitä itse pidät tärkeänä. Yksi rauhallinen päätös voi selkeyttää koko päivää.'];const seed=[...today+config.sign].reduce((s,c)=>s+c.charCodeAt(0),0);$('#reflection').textContent=texts[seed%texts.length];$('#reflection-date').textContent=new Intl.DateTimeFormat('fi-FI',{timeZone:'Europe/Helsinki',dateStyle:'long'}).format(new Date());}
+function persist() {
+  try {
+    localStorage.setItem(KEY, JSON.stringify(state));
+    return true;
+  } catch {
+    toast(
+      "Tallennus ei onnistunut. Tarkista selaimen tallennustila ja ota varmuuskopio.",
+    );
+    return false;
+  }
+}
+function download(name, content, type) {
+  const url = URL.createObjectURL(new Blob([content], { type }));
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = name;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+function occurs(e, ds) {
+  if (e.date > ds || e.exdates?.includes(ds)) return false;
+  if (!e.repeat || e.repeat === "none") return e.date === ds;
+  let a = parse(e.date),
+    b = parse(ds),
+    gap = Math.round((b - a) / 86400000),
+    interval = e.interval || 1;
+  if (e.until && ds > e.until) return false;
+  return e.repeat === "daily"
+    ? gap % interval === 0
+    : e.repeat === "weekly"
+      ? gap % (7 * interval) === 0
+      : e.repeat === "monthly"
+        ? b.getUTCDate() === a.getUTCDate() &&
+          ((b.getUTCFullYear() - a.getUTCFullYear()) * 12 +
+            b.getUTCMonth() -
+            a.getUTCMonth()) %
+            interval ===
+            0
+        : e.repeat === "yearly"
+          ? b.getUTCMonth() === a.getUTCMonth() &&
+            b.getUTCDate() === a.getUTCDate() &&
+            (b.getUTCFullYear() - a.getUTCFullYear()) % interval === 0
+          : false;
+}
+const eventAt = (ds) => state.events.filter((e) => occurs(e, ds));
+function listHTML(events, ds) {
+  return events
+    .map(
+      (e) =>
+        `<button type="button" class="agenda-item" data-edit-event="${esc(e.id)}">${e.time ? esc(e.time) + " · " : ""}${esc(e.title)}${e.repeat && e.repeat !== "none" ? " ↻" : ""}</button>`,
+    )
+    .join("");
+}
+function renderDay() {
+  if (!$("#selected-date")) return;
+  $("#selected-date").textContent =
+    cap(DAYS[day(parse(selected))]) + ", " + fi(parse(selected));
+  const items = eventAt(selected),
+    hs = holidays(parse(selected).getUTCFullYear()).filter(
+      (h) => h.date === selected,
+    );
+  $("#day-events").innerHTML =
+    hs
+      .map(
+        (h) => `<li>${link("/juhlapyhat/" + h.slug + "/", esc(h.name))}</li>`,
+      )
+      .join("") +
+    (items.length
+      ? items
+          .map(
+            (e) =>
+              `<li><button type="button" data-edit-event="${esc(e.id)}">${e.time ? esc(e.time) + " · " : ""}${esc(e.title)}</button></li>`,
+          )
+          .join("")
+      : hs.length
+        ? ""
+        : '<li class="empty">Tämä päivä on vielä avoin suunnitelmillesi.</li>');
+  $("#day-notes").value = state.notes[selected] || "";
+  $("#stat-week").textContent = week(parse(selected)).number;
+  $("#stat-day").textContent =
+    Math.floor(
+      (parse(selected) - date(parse(selected).getUTCFullYear(), 1, 1)) /
+        86400000,
+    ) + 1;
+  $("#stat-month").textContent = daysInMonth(y, m);
+  renderTasks();
+}
+function saveNotes() {
+  if ($("#day-notes")) {
+    state.notes[selected] = $("#day-notes").value;
+    persist();
+  }
+}
+function selectDate(ds) {
+  saveNotes();
+  selected = ds;
+  renderCalendar();
+  renderDay();
+}
+function renderCalendar() {
+  if (!$("#calendar-view")) return;
+  const root = $("#calendar-view");
+  $("#calendar-title").textContent =
+    view === "day"
+      ? fi(parse(selected))
+      : view === "week"
+        ? `Viikko ${week(parse(selected)).number} · ${week(parse(selected)).year}`
+        : view === "year"
+          ? String(y)
+          : cap(MONTHS[m - 1]) + " " + y;
+  $("#jump-year").value = y;
+  $("#jump-month").value = m;
+  const foot = $(".calendar-footer");
+  if (foot) {
+    const dl = $('a[href^="/pdf-kalenteri/"]', foot),
+      ed = $('a[href^="/luo-kalenteri/"]', foot);
+    if (dl) {
+      dl.hidden = !YEARS.includes(y);
+      dl.href = "/pdf-kalenteri/" + y + "/" + SLUGS[m - 1] + "/";
+    }
+    if (ed) {
+      ed.hidden = !YEARS.includes(y);
+      ed.href = "/luo-kalenteri/?year=" + y + "&month=" + m;
+    }
+  }
+  $$(".subyears a").forEach((a) =>
+    a.classList.toggle("active", Number(a.textContent) === y),
+  );
+  $$("[data-view]").forEach((b) => {
+    b.classList.toggle("active", b.dataset.view === view);
+    b.setAttribute("aria-pressed", String(b.dataset.view === view));
+  });
+  if (view === "month") {
+    root.innerHTML = calTable(y, m);
+    $$("td[data-date]", root).forEach((td) => {
+      let ds = td.dataset.date;
+      td.classList.toggle("is-today", ds === today);
+      td.classList.toggle("is-selected", ds === selected);
+      $$(".cal-event", td).forEach((a) => {
+        let typ =
+          a.classList.contains("holiday") || a.classList.contains("eve")
+            ? "holiday"
+            : "flag";
+        a.hidden = !filters.has(typ);
+      });
+      for (const e of eventAt(ds).filter((e) =>
+        filters.has(e.category || "personal"),
+      )) {
+        let b = document.createElement("button");
+        b.type = "button";
+        b.className = "cal-event personal " + (e.category || "personal");
+        b.dataset.editEvent = e.id;
+        b.textContent = (e.time ? e.time + " " : "") + e.title;
+        td.append(b);
+      }
+    });
+  } else if (view === "year") {
+    root.innerHTML = `<div class="year-grid">${MONTHS.map((mm, i) => `<article class="month-card"><h3><button class="textbtn" data-goto-month="${i + 1}">${cap(mm)}</button></h3>${calTable(y, i + 1, { mini: true })}</article>`).join("")}</div>`;
+  } else {
+    let ds =
+      view === "week"
+        ? Array.from({ length: 7 }, (_, i) =>
+            iso(add(parse(selected), -day(parse(selected)) + i)),
+          )
+        : view === "day"
+          ? [selected]
+          : Array.from({ length: daysInMonth(y, m) }, (_, i) =>
+              iso(date(y, m, i + 1)),
+            );
+    let blocks = ds.map((s) => {
+      let hs = holidays(parse(s).getUTCFullYear()).filter(
+          (h) =>
+            h.date === s &&
+            filters.has(
+              ["holiday", "eve"].includes(h.type) ? "holiday" : "flag",
+            ),
+        ),
+        es = eventAt(s).filter((e) => filters.has(e.category || "personal"));
+      return `<article class="${view === "week" ? "week-day" : "day-agenda-item"}"><strong><button class="textbtn" data-select-date="${s}">${cap(DAYS[day(parse(s))])} ${fi(parse(s))}</button></strong>${hs.map((h) => `<div class="agenda-item">${link("/juhlapyhat/" + h.slug + "/", esc(h.name))}</div>`).join("")}${listHTML(es, s)}${!es.length && !hs.length ? '<p class="small">Ei merkintöjä</p>' : ""}</article>`;
+    });
+    root.innerHTML = `<div class="${view === "week" ? "week-agenda" : "day-agenda"}">${blocks.join("")}</div>`;
+  }
+  if (config.kind === "home") {
+    state.homeCalendar = { year: y, month: m, date: selected, view };
+    persist();
+    const clean = cleanHomeURL(location.href);
+    if (clean !== location.pathname + location.search + location.hash)
+      history.replaceState(null, "", clean);
+  } else if (config.kind === "calendar") {
+    const u = new URL(location.href);
+    u.searchParams.set("date", selected);
+    u.searchParams.set("view", view);
+    history.replaceState(null, "", u);
+  }
+  renderDay();
+}
+function renderTasks() {
+  if (!$("#tasks")) return;
+  $("#tasks").innerHTML = state.tasks
+    .filter((t) => t.date === selected)
+    .map(
+      (t) =>
+        `<li><label><input type="checkbox" data-task-toggle="${esc(t.id)}" ${t.done ? "checked" : ""}><span>${esc(t.title)}</span></label><button type="button" data-task-remove="${esc(t.id)}" aria-label="Poista tehtävä ${esc(t.title)}">×</button></li>`,
+    )
+    .join("");
+}
+function openEvent(id = null) {
+  const form = $("#event-form"),
+    e = id ? state.events.find((e) => e.id === id) : null;
+  form.reset();
+  form.elements.id.value = e?.id || "";
+  form.elements.title.value = e?.title || "";
+  form.elements.date.value = e?.date || selected;
+  form.elements.time.value = e?.time || "";
+  form.elements.category.value = e?.category || "personal";
+  form.elements.repeat.value = e?.repeat || config.defaultRepeat || "none";
+  form.elements.note.value = e?.note || "";
+  $('[data-action="delete-event"]').hidden = !e;
+  $("#event-dialog").showModal();
+  setTimeout(() => form.elements.title.focus(), 0);
+}
+$("#event-form").addEventListener("submit", (ev) => {
+  ev.preventDefault();
+  const fd = new FormData(ev.currentTarget),
+    id = fd.get("id") || crypto.randomUUID(),
+    obj = {
+      id,
+      title: fd.get("title").trim(),
+      date: fd.get("date"),
+      time: fd.get("time"),
+      category: fd.get("category"),
+      repeat: fd.get("repeat"),
+      note: fd.get("note"),
+    };
+  if (!obj.title) return;
+  const i = state.events.findIndex((e) => e.id === id);
+  if (i >= 0) state.events[i] = { ...state.events[i], ...obj };
+  else state.events.push(obj);
+  persist();
+  $("#event-dialog").close();
+  renderCalendar();
+  renderBirthdays();
+  toast("Tapahtuma tallennettu.");
+});
+function eventICS() {
+  const escICS = (s) =>
+    String(s || "")
+      .replace(/\\/g, "\\\\")
+      .replace(/\n/g, "\\n")
+      .replace(/[,;]/g, (c) => "\\" + c);
+  let lines = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//Kalenteri365.fi//Personal//FI",
+    "CALSCALE:GREGORIAN",
+  ];
+  for (let e of state.events) {
+    lines.push(
+      "BEGIN:VEVENT",
+      "UID:" + e.id.replace(/[\r\n]/g, "") + "@kalenteri365.fi",
+      "DTSTAMP:" +
+        new Date()
+          .toISOString()
+          .replace(/[-:]/g, "")
+          .replace(/\.\d+Z/, "Z"),
+    );
+    lines.push(
+      e.time
+        ? "DTSTART;TZID=Europe/Helsinki:" +
+            e.date.replaceAll("-", "") +
+            "T" +
+            e.time.replace(":", "") +
+            "00"
+        : "DTSTART;VALUE=DATE:" + e.date.replaceAll("-", ""),
+    );
+    if (!e.time)
+      lines.push(
+        "DTEND;VALUE=DATE:" + iso(add(parse(e.date), 1)).replaceAll("-", ""),
+      );
+    lines.push(
+      "SUMMARY:" + escICS(e.title),
+      "DESCRIPTION:" + escICS(e.note),
+      "CATEGORIES:" + escICS(e.category),
+    );
+    if (e.repeat && e.repeat !== "none")
+      lines.push(
+        "RRULE:FREQ=" +
+          e.repeat.toUpperCase() +
+          (e.interval ? " ;INTERVAL=" + e.interval : "").replace(" ;", ";") +
+          (e.until ? ";UNTIL=" + e.until.replaceAll("-", "") + "T235959Z" : ""),
+      );
+    if (e.exdates?.length)
+      lines.push(
+        "EXDATE;VALUE=DATE:" +
+          e.exdates.map((x) => x.replaceAll("-", "")).join(","),
+      );
+    lines.push("END:VEVENT");
+  }
+  lines.push("END:VCALENDAR");
+  const fold = (line) => {
+    let o = "",
+      n = 0;
+    for (let c of line) {
+      let b = new TextEncoder().encode(c).length;
+      if (n + b > 74) {
+        o += "\r\n ";
+        n = 1;
+      }
+      o += c;
+      n += b;
+    }
+    return o;
+  };
+  return lines.map(fold).join("\r\n") + "\r\n";
+}
+async function importICS(file) {
+  let raw = await file.text();
+  if (raw.length > 5e6)
+    throw Error("Tiedosto on liian suuri. Enimmäiskoko on 5 Mt.");
+  let blocks =
+    raw.replace(/\r?\n[ \t]/g, "").match(/BEGIN:VEVENT[\s\S]*?END:VEVENT/g) ||
+    [];
+  if (!blocks.length) throw Error("Tiedostossa ei ole luettavia tapahtumia.");
+  let count = 0,
+    skipped = 0;
+  const unesc = (s) =>
+    (s || "").replace(/\\n/gi, "\n").replace(/\\([,;\\])/g, "$1");
+  for (let b of blocks) {
+    let fields = {};
+    for (let line of b.split(/\r?\n/)) {
+      let i = line.indexOf(":");
+      if (i < 0) continue;
+      let k = line.slice(0, i),
+        v = line.slice(i + 1),
+        name = k.split(";")[0];
+      fields[name] = { key: k, value: v };
+    }
+    let dt = fields.DTSTART?.value;
+    if (!dt || !/^\d{8}(T\d{6}Z?)?$/.test(dt)) {
+      skipped++;
+      continue;
+    }
+    let ds = dt.slice(0, 4) + "-" + dt.slice(4, 6) + "-" + dt.slice(6, 8),
+      tm = dt.includes("T") ? dt.slice(9, 11) + ":" + dt.slice(11, 13) : "";
+    if (tm && dt.endsWith("Z")) {
+      let utc = new Date(ds + "T" + tm + ":" + dt.slice(13, 15) + "Z");
+      ds = new Intl.DateTimeFormat("sv-SE", {
+        timeZone: "Europe/Helsinki",
+      }).format(utc);
+      tm = new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Europe/Helsinki",
+        hour: "2-digit",
+        minute: "2-digit",
+      }).format(utc);
+    } else if (
+      tm &&
+      fields.DTSTART.key.includes("TZID=") &&
+      !fields.DTSTART.key.includes("TZID=Europe/Helsinki")
+    ) {
+      skipped++;
+      continue;
+    }
+    let rule = fields.RRULE?.value || "",
+      opts = Object.fromEntries(
+        rule
+          .split(";")
+          .filter(Boolean)
+          .map((x) => x.split("=")),
+      );
+    if (
+      rule &&
+      (Object.keys(opts).some(
+        (k) => !["FREQ", "INTERVAL", "UNTIL"].includes(k),
+      ) ||
+        !["DAILY", "WEEKLY", "MONTHLY", "YEARLY"].includes(opts.FREQ))
+    ) {
+      skipped++;
+      continue;
+    }
+    let uid = fields.UID?.value || crypto.randomUUID(),
+      id = uid.endsWith("@kalenteri365.fi")
+        ? uid.slice(0, -"@kalenteri365.fi".length)
+        : "ics-" + uid;
+    if (state.events.some((e) => e.id === id)) continue;
+    state.events.push({
+      id,
+      date: ds,
+      time: tm,
+      title: unesc(fields.SUMMARY?.value) || "Tuotu tapahtuma",
+      note: unesc(fields.DESCRIPTION?.value),
+      category: ["personal", "work", "family", "school"].includes(
+        fields.CATEGORIES?.value,
+      )
+        ? fields.CATEGORIES.value
+        : "personal",
+      repeat: opts.FREQ?.toLowerCase() || "none",
+      interval: Math.max(1, Number(opts.INTERVAL) || 1),
+      until: opts.UNTIL
+        ? opts.UNTIL.slice(0, 4) +
+          "-" +
+          opts.UNTIL.slice(4, 6) +
+          "-" +
+          opts.UNTIL.slice(6, 8)
+        : null,
+      exdates:
+        fields.EXDATE?.value
+          .split(",")
+          .map(
+            (v) => v.slice(0, 4) + "-" + v.slice(4, 6) + "-" + v.slice(6, 8),
+          ) || [],
+    });
+    count++;
+  }
+  persist();
+  renderCalendar();
+  toast(
+    `Tuotu ${count} tapahtumaa.${skipped ? " " + skipped + " tapahtumaa ohitettiin: tukematon toistosääntö tai aikavyöhyke." : ""}`,
+  );
+}
+document.addEventListener("click", (e) => {
+  const action = e.target.closest("[data-action]")?.dataset.action,
+    edit = e.target.closest("[data-edit-event]"),
+    ds = e.target.closest("[data-select-date]")?.dataset.selectDate,
+    gm = e.target.closest("[data-goto-month]")?.dataset.gotoMonth;
+  if (edit) {
+    openEvent(edit.dataset.editEvent);
+    return;
+  }
+  if (ds) {
+    if ($("#calendar-view")) selectDate(ds);
+    else if (!$("#editor-preview"))
+      location.href =
+        "/?year=" +
+        ds.slice(0, 4) +
+        "&month=" +
+        Number(ds.slice(5, 7)) +
+        "&date=" +
+        ds +
+        "&view=day";
+    return;
+  }
+  if (gm) {
+    m = +gm;
+    view = "month";
+    renderCalendar();
+    return;
+  }
+  if (e.target.closest("[data-view]")) {
+    saveNotes();
+    view = e.target.closest("[data-view]").dataset.view;
+    renderCalendar();
+    return;
+  }
+  if (!action) return;
+  switch (action) {
+    case "menu":
+      document.body.classList.toggle("menu-open");
+      e.target
+        .closest("button")
+        .setAttribute(
+          "aria-expanded",
+          String(document.body.classList.contains("menu-open")),
+        );
+      break;
+    case "print":
+      saveNotes();
+      window.print();
+      break;
+    case "new-event":
+      openEvent();
+      break;
+    case "close-dialog":
+      $("#event-dialog").close();
+      break;
+    case "delete-event":
+      state.events = state.events.filter(
+        (e) => e.id !== $("#event-form").elements.id.value,
+      );
+      persist();
+      $("#event-dialog").close();
+      renderCalendar();
+      renderBirthdays();
+      toast("Tapahtuma poistettu.");
+      break;
+    case "save-notes":
+      saveNotes();
+      toast("Muistiinpano tallennettu.");
+      break;
+    case "today":
+      saveNotes();
+      selected = today;
+      y = +today.slice(0, 4);
+      m = +today.slice(5, 7);
+      renderCalendar();
+      break;
+    case "prev-month":
+    case "next-month": {
+      saveNotes();
+      const n = action === "next-month" ? 1 : -1;
+      if (view === "day" || view === "week") {
+        selected = iso(add(parse(selected), n * (view === "week" ? 7 : 1)));
+        y = +selected.slice(0, 4);
+        m = +selected.slice(5, 7);
+      } else if (view === "year") {
+        y += n;
+        selected = iso(date(y, m, 1));
+      } else {
+        let d = date(y, m + n, 1);
+        y = d.getUTCFullYear();
+        m = d.getUTCMonth() + 1;
+        selected = iso(d);
+      }
+      if (config.kind === "calendar" && view === "month" && YEARS.includes(y)) {
+        location.href =
+          "/kalenteri/" +
+          y +
+          "/" +
+          SLUGS[m - 1] +
+          "/?date=" +
+          selected +
+          "&view=" +
+          view;
+      } else renderCalendar();
+      break;
+    }
+    case "export-ics":
+      download("oma-kalenteri.ics", eventICS(), "text/calendar;charset=utf-8");
+      break;
+    case "backup":
+      saveNotes();
+      download(
+        "kalenteri365-varmuuskopio.json",
+        JSON.stringify(state, null, 2),
+        "application/json",
+      );
+      toast("Varmuuskopio ladattu.");
+      break;
+    case "export-shifts":
+      if (!shiftEvents.length) {
+        toast("Luo ensin vuoroluettelo.");
+        return;
+      }
+      download("tyovuorot.ics", simpleICS(shiftEvents), "text/calendar");
+      break;
+    case "editor-webp":
+      editorWebP();
+      break;
+  }
+});
+document.addEventListener("change", async (e) => {
+  const t = e.target;
+  if (t.matches("[data-filter]")) {
+    t.checked
+      ? filters.add(t.dataset.filter)
+      : filters.delete(t.dataset.filter);
+    $$("[data-filter]")
+      .filter((x) => x.dataset.filter === t.dataset.filter)
+      .forEach((x) => (x.checked = t.checked));
+    renderCalendar();
+  }
+  if (t.id === "jump-year" || t.id === "jump-month") {
+    saveNotes();
+    y = +$("#jump-year").value;
+    m = +$("#jump-month").value;
+    selected = iso(date(y, m, 1));
+    if (config.kind === "calendar" && YEARS.includes(y))
+      location.href = "/kalenteri/" + y + "/" + SLUGS[m - 1] + "/";
+    else renderCalendar();
+  }
+  if (t.matches("[data-task-toggle]")) {
+    let task = state.tasks.find((x) => x.id === t.dataset.taskToggle);
+    task.done = t.checked;
+    persist();
+    renderTasks();
+  }
+  try {
+    if (t.id === "import-ics" && t.files[0]) await importICS(t.files[0]);
+    if (t.id === "restore-json" && t.files[0]) {
+      let raw = await t.files[0].text(),
+        obj = JSON.parse(raw);
+      if (
+        obj.version !== 1 ||
+        !Array.isArray(obj.events) ||
+        !obj.notes ||
+        !Array.isArray(obj.tasks) ||
+        !obj.plans ||
+        obj.events.length > 10000 ||
+        obj.events.some(
+          (e) =>
+            typeof e.title !== "string" ||
+            !/^\d{4}-\d{2}-\d{2}$/.test(e.date) ||
+            typeof e.id !== "string",
+        )
+      )
+        throw Error("Varmuuskopion muotoa ei tunnistettu.");
+      obj.events = obj.events.map((e) => ({
+        id: e.id.replace(/[\r\n]/g, ""),
+        date: e.date,
+        title: e.title.slice(0, 160),
+        time: /^\d{2}:\d{2}$/.test(e.time || "") ? e.time : "",
+        note: typeof e.note === "string" ? e.note.slice(0, 2000) : "",
+        category: ["personal", "work", "family", "school"].includes(e.category)
+          ? e.category
+          : "personal",
+        repeat: ["none", "daily", "weekly", "monthly", "yearly"].includes(
+          e.repeat,
+        )
+          ? e.repeat
+          : "none",
+        interval: Math.max(1, Math.min(366, Number(e.interval) || 1)),
+        until: /^\d{4}-\d{2}-\d{2}$/.test(e.until || "") ? e.until : null,
+        exdates: Array.isArray(e.exdates)
+          ? e.exdates.filter(
+              (d) => typeof d === "string" && /^\d{4}-\d{2}-\d{2}$/.test(d),
+            )
+          : [],
+      }));
+      state = { ...state, ...obj };
+      persist();
+      renderCalendar();
+      renderBirthdays();
+      toast("Varmuuskopio palautettu.");
+    }
+  } catch (err) {
+    toast(err.message);
+  }
+  if (t.type === "file") t.value = "";
+});
+document.addEventListener("click", (e) => {
+  const id = e.target.closest("[data-task-remove]")?.dataset.taskRemove;
+  if (id) {
+    state.tasks = state.tasks.filter((t) => t.id !== id);
+    persist();
+    renderTasks();
+  }
+});
+$("#task-form")?.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const input = $("#task-title");
+  if (!input.value.trim()) return;
+  state.tasks.push({
+    id: crypto.randomUUID(),
+    date: selected,
+    title: input.value.trim(),
+    done: false,
+  });
+  persist();
+  input.value = "";
+  renderTasks();
+});
+$("#day-notes")?.addEventListener("blur", saveNotes);
+$("#day-notes")?.addEventListener("input", saveNotes);
+function renderBirthdays() {
+  if ($("#birthdays"))
+    $("#birthdays").innerHTML =
+      state.events
+        .filter((e) => e.repeat === "yearly")
+        .sort((a, b) => a.date.slice(5).localeCompare(b.date.slice(5)))
+        .map(
+          (e) =>
+            `<button class="agenda-item" data-edit-event="${esc(e.id)}">${esc(e.date.slice(8) + "." + e.date.slice(5, 7) + ".")} · ${esc(e.title)}</button>`,
+        )
+        .join("") || '<p class="empty">Ei vielä vuosittaisia muistutuksia.</p>';
+}
+if ($("#calendar-view")) {
+  const mobileFilters = document.createElement("details");
+  mobileFilters.className = "mobile-filters no-print";
+  mobileFilters.innerHTML =
+    "<summary>Näytettävät kalenterit</summary>" +
+    [
+      ["holiday", "Suomen pyhäpäivät"],
+      ["flag", "Liputus- ja merkkipäivät"],
+      ["personal", "Oma"],
+      ["work", "Työ"],
+      ["family", "Perhe"],
+      ["school", "Opiskelu"],
+    ]
+      .map(
+        ([v, n]) =>
+          '<label><input type="checkbox" data-filter="' +
+          v +
+          '" checked>' +
+          n +
+          "</label>",
+      )
+      .join("");
+  $(".viewbar").after(mobileFilters);
+  const q = new URL(location.href).searchParams;
+  if (config.kind === "home") {
+    const initial = homeView(location.href, state.homeCalendar, today);
+    y = initial.year;
+    m = initial.month;
+    selected = initial.date;
+    view = initial.view;
+  } else {
+    selected = /^\d{4}-\d{2}-\d{2}$/.test(q.get("date") || "")
+      ? q.get("date")
+      : iso(date(y, m, 1));
+    view = ["month", "week", "day", "list", "year"].includes(q.get("view"))
+      ? q.get("view")
+      : "month";
+  }
+  renderCalendar();
+  let upcoming = [
+    ...holidays(+today.slice(0, 4)),
+    ...holidays(+today.slice(0, 4) + 1),
+  ]
+    .filter((h) => h.type === "holiday" && h.date >= today)
+    .slice(0, 3);
+  $("#upcoming").innerHTML = upcoming
+    .map((h) =>
+      link(
+        "/juhlapyhat/" + h.slug + "/",
+        `<time>${parse(h.date).getUTCDate()}.${parse(h.date).getUTCMonth() + 1}.</time><div><strong>${esc(h.name)}</strong><span>${Math.round((parse(h.date) - parse(today)) / 86400000)} päivän päästä</span></div>`,
+        "upcoming-item",
+      ),
+    )
+    .join("");
+}
+function clock(){if(!$('#helsinki-clock'))return;const now=new Date(),parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Helsinki',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(now).split(':'),h=Number(parts[0]),m=Number(parts[1]),sec=Number(parts[2]);$('#helsinki-clock').innerHTML='<span>'+parts[0]+':'+parts[1]+'</span><sup>'+parts[2]+'</sup>';$('#clock-zone').textContent=(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Helsinki',timeZoneName:'short'}).formatToParts(now).find(p=>p.type==='timeZoneName').value)+' · Helsinki';for(const [id,angle] of [['clock-hour',(h%12)*30+m/2],['clock-minute',m*6+sec/10],['clock-second',sec*6]])$('#'+id)?.setAttribute('transform','rotate('+angle+' 49 48)');$('#today-date').textContent=cap(new Intl.DateTimeFormat('fi-FI',{timeZone:'Europe/Helsinki',weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(now));}
+clock();if($('#helsinki-clock'))setInterval(clock,1000);
+const weatherMemory = new Map();
+let weatherSequence = 0,
+  weatherController;
+function paintWeather(city,d){$('#weather').innerHTML=icon(d.icon)+'<span><strong class="weather-condition">'+esc(d.name)+'</strong><small>'+esc(city[1])+' · tuuli '+Number(d.wind??0).toLocaleString('fi-FI',{maximumFractionDigits:1})+' m/s</small></span><strong class="weather-temp">'+Math.round(d.temperature)+'<sup>°C</sup></strong>';$('#weather-note').innerHTML='<a href="https://www.met.no/" target="_blank" rel="noopener">MET Norway</a> · '+new Intl.DateTimeFormat('fi-FI',{timeZone:'Europe/Helsinki',hour:'2-digit',minute:'2-digit'}).format(new Date(d.time))+' · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>';}
+async function weather() {
+  const seq = ++weatherSequence,
+    city = CITIES.find((c) => c[0] === state.city) || CITIES[0];
+  weatherController?.abort();
+  weatherController = new AbortController();
+  let cached = weatherMemory.get(city[0]);
+  try {
+    cached ??= JSON.parse(
+      sessionStorage.getItem("fi-met-weather-" + city[0]) || "null",
+    );
+  } catch {}
+  if (cached && Date.parse(cached.data.expiresAt)>Date.now()) {
+    paintWeather(city, cached.data);
+    return;
+  }
+  $("#weather").innerHTML =
+    icon("cloud") +
+    "<span>Haetaan säätä<br><small>" +
+    esc(city[1]) +
+    "</small></span><strong>…</strong>";
+  $("#weather-note").textContent = "Sääennuste päivittyy.";
+  const timer = setTimeout(() => {
+    if (seq === weatherSequence) weatherController.abort();
+  }, 7000);
+  try {
+    const r = await fetch('/api/weather?place='+encodeURIComponent(city[0]),{signal:weatherController.signal});
+    if (!r.ok) throw Error();
+    const data = await r.json();
+    if (seq !== weatherSequence) return;
+    const entry = { at: Date.now(), data };
+    weatherMemory.set(city[0], entry);
+    try {
+      sessionStorage.setItem("fi-met-weather-" + city[0], JSON.stringify(entry));
+    } catch {}
+    paintWeather(city, data);
+  } catch {
+    if (seq !== weatherSequence) return;
+    if (cached) {
+      paintWeather(city, cached.data);
+      $("#weather-note").textContent += " · Aiemmin haettu ennuste";
+    } else {
+      $("#weather").innerHTML =
+        icon("cloud") +
+        "<span>Sääennuste ei ole saatavilla<br><small>" +
+        esc(city[1]) +
+        "</small></span>";
+      $("#weather-note").textContent = "Kokeile hetken kuluttua uudelleen.";
+    }
+  } finally {
+    clearTimeout(timer);
+  }
+}
+if ($("#city-select")) {
+  $("#city-select").value = state.city;
+  $("#city-select").addEventListener("change", (e) => {
+    state.city = e.target.value;
+    state.citySource="manual";
+    $("#place-choice-note").textContent="Valitsemasi paikkakunta · sama aikavyöhyke koko Suomessa.";
+    persist();
+    updateCityPhoto(state.city);
+    weather();
+  });
+  weather();
+}
+const bindForm = (id, fn) =>
+  $(id)?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    try {
+      fn(new FormData(e.currentTarget));
+    } catch (err) {
+      toast(err.message || "Tarkista annetut tiedot.");
+    }
+  });
+const result = (s, id = "#calc-result") => {
+  $(id).innerHTML = s;
+};
+bindForm("#date-diff", (f) => {
+  let diff = Math.round(
+      (parse(f.get("end")) - parse(f.get("start"))) / 86400000,
+    ),
+    inc = f.get("inclusive");
+  result(
+    `<strong>${Math.abs(diff) + (inc ? 1 : 0)} päivää</strong><p>${diff < 0 ? "Loppupäivä on ennen alkupäivää. " : ""}${inc ? "Molemmat rajapäivät mukana." : "Loppupäivä ei sisälly määrään."}</p>`,
+  );
+});
+bindForm("#date-add", (f) =>
+  result(
+    `<strong>${fi(add(parse(f.get("start")), +f.get("amount")))}</strong><p>${cap(DAYS[day(add(parse(f.get("start")), +f.get("amount")))])}</p>`,
+    "#add-result",
+  ),
+);
+bindForm("#work-calc", (f) => {
+  let a = parse(f.get("start")),
+    b = parse(f.get("end"));
+  if (b < a) throw Error("Loppupäivän on oltava alkupäivän jälkeen.");
+  if (b - a > 86400000 * 366 * 20)
+    throw Error("Valitse enintään 20 vuoden ajanjakso.");
+  let n = 0,
+    p = 0,
+    w = 0,
+    cache = {};
+  for (let d = a; d <= b; d = add(d, 1)) {
+    if (day(d) > 4) continue;
+    w++;
+    let hs = (cache[d.getUTCFullYear()] ??= holidays(d.getUTCFullYear()));
+    if (
+      hs.some(
+        (h) =>
+          h.date === iso(d) &&
+          (h.type === "holiday" || (f.get("eves") && h.type === "eve")),
+      )
+    )
+      p++;
+    else n++;
+  }
+  result(
+    `<strong>${n} työpäivää</strong><p>${(n * +f.get("hours")).toLocaleString("fi-FI")} tuntia · ${w} ma–pe-päivää − ${p} valittua pyhä- tai aattopäivää. Rajapäivät mukana.</p>`,
+  );
+});
+bindForm("#week-calc", (f) => {
+  let w = week(parse(f.get("date")));
+  result(
+    `<strong>Viikko ${w.number} / ${w.year}</strong><p>${fi(weekStart(w.year, w.number))}–${fi(add(weekStart(w.year, w.number), 6))}</p>`,
+  );
+});
+bindForm("#day-calc", (f) => {
+  let d = parse(f.get("date")),
+    n = Math.round((d - date(d.getUTCFullYear(), 1, 1)) / 86400000) + 1;
+  result(
+    `<strong>Vuoden ${n}. päivä</strong><p>Vuodessa on ${leap(d.getUTCFullYear()) ? 366 : 365} päivää. Päivän jälkeen jäljellä ${(leap(d.getUTCFullYear()) ? 366 : 365) - n} päivää.</p>`,
+  );
+});
+bindForm("#leap-calc", (f) =>
+  result(
+    `<strong>${f.get("year")}: ${leap(+f.get("year")) ? "karkausvuosi" : "tavallinen vuosi"}</strong><p>${leap(+f.get("year")) ? "366 päivää · Helmikuussa 29 päivää." : "365 päivää · Helmikuussa 28 päivää."}</p>`,
+  ),
+);
+bindForm("#countdown-form", (f) => {
+  let n = Math.round((parse(f.get("target")) - parse(today)) / 86400000);
+  result(
+    `<strong>${Math.abs(n)} päivää ${n < 0 ? "sitten" : "jäljellä"}</strong><p>${esc(f.get("title"))} · ${fi(parse(f.get("target")))}</p>`,
+    "#countdown-result",
+  );
+});
+bindForm("#vacation-form", (f) => {
+  let yy = +f.get("year"),
+    budget = +f.get("budget"),
+    max = +f.get("length"),
+    hs = holidays(yy),
+    free = (d) =>
+      day(d) > 4 ||
+      hs.some(
+        (h) =>
+          h.date === iso(d) &&
+          (h.type === "holiday" || (f.get("eves") && h.type === "eve")),
+      ),
+    found = [];
+  for (let a = date(yy, 1, 1); a <= date(yy, 12, 31); a = add(a, 1)) {
+    if (!free(a)) continue;
+    let needed = [];
+    for (let l = 1; l <= max; l++) {
+      let b = add(a, l - 1);
+      if (b.getUTCFullYear() !== yy) break;
+      if (!free(b)) needed.push(iso(b));
+      if (needed.length > budget) break;
+      if (l >= 3 && free(b))
+        found.push({ a: iso(a), b: iso(b), n: l, needed: [...needed] });
+    }
+  }
+  found.sort(
+    (a, b) =>
+      b.n - a.n || a.needed.length - b.needed.length || a.a.localeCompare(b.a),
+  );
+  let selectedOptions = [];
+  for (let o of found) {
+    if (selectedOptions.some((p) => !(o.b < p.a || o.a > p.b))) continue;
+    selectedOptions.push(o);
+    if (selectedOptions.length >= 10) break;
+  }
+  $("#vacation-result").innerHTML = selectedOptions.length
+    ? table(
+        ["Vapaa", "Päiviä", "Lomapäiviä", "Haettavat päivät"],
+        selectedOptions.map((o) => [
+          `${fi(parse(o.a))}–${fi(parse(o.b))}`,
+          o.n,
+          o.needed.length,
+          o.needed.map((d) => fi(parse(d))).join(", ") || "Ei tarvita",
+        ]),
+      )
+    : "<p>Näillä valinnoilla ei löytynyt vähintään kolmen päivän vapaata.</p>";
+});
+let shiftEvents = [];
+bindForm("#shift-form", (f) => {
+  let cycle = f
+    .get("cycle")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  if (!cycle.length || cycle.length > 50) throw Error("Anna 1–50 vuoroa.");
+  shiftEvents = Array.from({ length: +f.get("count") }, (_, i) => ({
+    date: iso(add(parse(f.get("start")), i)),
+    name: cycle[i % cycle.length],
+    slug: "shift-" + i,
+  }));
+  $("#shift-result").innerHTML = table(
+    ["Päivämäärä", "Päivä", "Vuoro"],
+    shiftEvents.map((e) => [
+      fi(parse(e.date)),
+      cap(DAYS[day(parse(e.date))]),
+      esc(e.name),
+    ]),
+  );
+});
+function simpleICS(es) {
+  return (
+    [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//Kalenteri365.fi//FI",
+      ...es.flatMap((e, i) => [
+        "BEGIN:VEVENT",
+        `UID:${e.date}-${i}@kalenteri365.fi`,
+        "DTSTAMP:20261112T000000Z",
+        "DTSTART;VALUE=DATE:" + e.date.replaceAll("-", ""),
+        "DTEND;VALUE=DATE:" + iso(add(parse(e.date), 1)).replaceAll("-", ""),
+        "SUMMARY:" + e.name.replace(/[;,]/g, (c) => "\\" + c),
+        "END:VEVENT",
+      ]),
+      "END:VCALENDAR",
+    ].join("\r\n") + "\r\n"
+  );
+}
+$$("[data-plan]").forEach((el) => {
+  let k = el.dataset.plan;
+  if (state.plans[k] !== undefined) el.value = state.plans[k];
+  el.addEventListener("input", () => {
+    state.plans[k] = el.value;
+    persist();
+  });
+});
+function sheetLoad() {
+  const input = $("#planner-date");
+  if(!input) return;
+  const root = $(".sheet-workspace"), base = root?.dataset.sheetBase;
+  let ds = input.value;
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(ds)||Number.isNaN(+parse(ds)))return;
+  if(root?.dataset.sheetKind==='week') ds=iso(add(parse(ds),-day(parse(ds))));
+  input.value=ds;
+  if(base){state.plans[base+'-date']=ds;persist();}
+  $$("[data-sheet]").forEach((el) => {
+    const key = el.dataset.sheet + "-" + ds;
+    el.value = state.plans[key] || "";
+    el.oninput = () => {state.plans[key] = el.value;persist();};
+  });
+  $$("[data-sheet-day]").forEach(el=>{el.textContent=fi(add(parse(ds),Number(el.dataset.sheetDay)));el.dateTime=iso(add(parse(ds),Number(el.dataset.sheetDay)));});
+  if ($("#planner-heading")) $("#planner-heading").textContent = ($("#planner-title").value || "Oma suunnitelma") + " · " + fi(parse(ds));
+}
+if($(".sheet-workspace")){
+  const base=$(".sheet-workspace").dataset.sheetBase;
+  if(state.plans[base+'-date'])$("#planner-date").value=state.plans[base+'-date'];
+  for(const [id,step] of [['sheet-prev',-1],['sheet-next',1]])$('#'+id).onclick=()=>{const d=parse($("#planner-date").value);if(Number.isNaN(+d))return;$("#planner-date").value=iso(add(d,step*($('.sheet-workspace').dataset.sheetKind==='day'?1:7)));sheetLoad();};
+}
+$("#planner-date")?.addEventListener("change", sheetLoad);
+$("#planner-title")?.addEventListener("input", sheetLoad);
+sheetLoad();
+renderBirthdays();
+let photoData = "";
+function renderEditor() {
+  if (!$("#editor-preview")) return;
+  let yy = +$("#editor-year").value,
+    mm = +$("#editor-month").value,
+    blank = $("#editor-blank").checked,
+    title =
+      $("#editor-title").value ||
+      (blank ? "Oma kuukausi" : cap(MONTHS[mm - 1]) + " " + yy),
+    color = $("#editor-color").value;
+  $("#editor-preview").style.setProperty("--accent", color);
+  $("#editor-preview").innerHTML =
+    `<h2 class="editor-title" style="color:${esc(color)}">${esc(title)}</h2>${photoData ? '<img class="editor-photo" src="' + photoData + '" alt="Oma kalenterikuva">' : ""}${calTable(yy, mm)}<footer>www.Kalenteri365.fi</footer>`;
+  if (blank) {
+    $$(".date-num,#editor-preview .weekno", $("#editor-preview")).forEach(
+      (el) => (el.textContent = ""),
+    );
+    $$(".cal-event", $("#editor-preview")).forEach((el) => el.remove());
+  } else {
+    if (!$("#editor-holidays").checked)
+      $$(".cal-event", $("#editor-preview")).forEach((el) => el.remove());
+    $$("td[data-date]", $("#editor-preview")).forEach((td) => {
+      for (let e of eventAt(td.dataset.date)) {
+        let s = document.createElement("span");
+        s.className = "cal-event personal";
+        s.textContent = e.title;
+        td.append(s);
+      }
+    });
+  }
+}
+if ($("#editor-year") && !$("[data-studio]")) {
+  const q = new URL(location.href).searchParams;
+  if (YEARS.includes(+q.get("year"))) $("#editor-year").value = q.get("year");
+  if (+q.get("month") >= 1 && +q.get("month") <= 12)
+    $("#editor-month").value = q.get("month");
+  for (let id of [
+    "editor-year",
+    "editor-month",
+    "editor-title",
+    "editor-color",
+    "editor-holidays",
+    "editor-blank",
+  ])
+    $("#" + id).addEventListener("input", renderEditor);
+  $("#editor-photo").addEventListener("change", async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 10e6) {
+      toast("Valitse enintään 10 Mt kuva.");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      photoData = reader.result;
+      renderEditor();
+    };
+    reader.readAsDataURL(file);
+  });
+  renderEditor();
+}
+async function editorWebP() {
+  await document.fonts.ready;
+  const root = $("#editor-preview");
+  if (!root) return;
+  const W = 2400,
+    H = photoData ? 2200 : 1700,
+    c = document.createElement("canvas");
+  c.width = W;
+  c.height = H;
+  const ctx = c.getContext("2d"),
+    color = $("#editor-color").value;
+  ctx.fillStyle = "white";
+  ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = color;
+  ctx.font = "700 70px Lato";
+  ctx.fillText($(".editor-title", root).textContent, 80, 120, W - 160);
+  let top = 190;
+  if (photoData) {
+    let img = new Image();
+    img.src = photoData;
+    await img.decode();
+    const scale = Math.min((W - 160) / img.width, 450 / img.height),
+      iw = img.width * scale,
+      ih = img.height * scale;
+    ctx.drawImage(img, (W - iw) / 2, top, iw, ih);
+    top += 490;
+  }
+  let rows = $$("tbody tr", root),
+    cw = (W - 160) / 8,
+    rh = (H - top - 170) / (rows.length + 1);
+  ctx.font = "700 28px Lato";
+  $$("thead th", root).forEach((th, i) => {
+    ctx.fillStyle = color;
+    ctx.fillRect(80 + i * cw, top, cw, rh);
+    ctx.fillStyle = "white";
+    ctx.fillText(th.textContent, 100 + i * cw, top + 40);
+  });
+  top += rh;
+  rows.forEach((tr, ri) => {
+    [...tr.children].forEach((td, i) => {
+      const xx = 80 + i * cw,
+        tt = top + ri * rh;
+      ctx.strokeStyle = "#d6dfe4";
+      ctx.strokeRect(xx, tt, cw, rh);
+      ctx.fillStyle = color;
+      ctx.font = "700 29px Lato";
+      ctx.fillText(
+        $(".date-num", td)?.textContent || td.textContent.trim().slice(0, 3),
+        xx + 13,
+        tt + 38,
+      );
+      ctx.font = "400 17px Lato";
+      $$(".cal-event", td).forEach((e, j) => {
+        let words = e.textContent.split(" "),
+          line = "",
+          yy = tt + 65 + j * 27;
+        for (let w of words) {
+          let n = line ? line + " " + w : w;
+          if (ctx.measureText(n).width > cw - 24 && line) {
+            ctx.fillText(line, xx + 12, yy);
+            yy += 21;
+            line = w;
+          } else line = n;
+        }
+        ctx.fillText(line, xx + 12, yy);
+      });
+    });
+  });
+  ctx.fillStyle = "#687985";
+  ctx.font = "24px Lato";
+  ctx.fillText("www.Kalenteri365.fi", 80, H - 55);
+  c.toBlob(
+    (b) => {
+      if (b) download("oma-kalenteri.webp", b, "image/webp");
+    },
+    "image/webp",
+    0.92,
+  );
+}
+let searchIndexPromise;
+function getIndex() {
+  return (searchIndexPromise ??= fetch("/assets/search.json")
+    .then((r) => {
+      if (!r.ok) throw Error("Haku ei ole saatavilla.");
+      return r.json();
+    })
+    .catch((e) => {
+      searchIndexPromise = null;
+      throw e;
+    }));
+}
+let searchSequence = 0;
+async function search(q, target, max = 8) {
+  const token = ++searchSequence;
+  if (!q.trim()) {
+    target.innerHTML = "";
+    return;
+  }
+  try {
+    const found = searchPages(await getIndex(), q, max);
+    if (token !== searchSequence) return;
+    target.innerHTML = found.length
+      ? '<div class="search-count">' +
+        found.length +
+        " ehdotusta</div>" +
+        found
+          .map((p) =>
+            link(
+              p.path,
+              "<strong>" +
+                esc(p.title) +
+                "</strong><small>" +
+                esc(p.description) +
+                "</small>",
+            ),
+          )
+          .join("")
+      : '<p class="search-empty">Ei osumia. Kokeile esimerkiksi vuotta, paikkakuntaa tai hakua ”talviloma”.</p>';
+  } catch (e) {
+    target.textContent = e.message;
+  }
+}
+$("#site-search")?.addEventListener(
+  "focus",
+  () => {
+    getIndex().catch(() => {});
+  },
+  { once: true },
+);
+$("#site-search")?.addEventListener("input", async (e) => {
+  const box = $("#search-results");
+  box.hidden = !e.target.value.trim();
+  if (!box.hidden) await search(e.target.value, box);
+});
+$("#site-search")?.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") $("#search-results").hidden = true;
+  if (e.key === "ArrowDown") $("#search-results a")?.focus();
+});
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".search-wrap")) $("#search-results").hidden = true;
+});
+bindForm("#page-search-form", (f) =>
+  search(f.get("q"), $("#page-search-results"), 60),
+);
+if ($("#page-search")) {
+  const q = new URL(location.href).searchParams.get("q");
+  if (q) {
+    $("#page-search").value = q;
+    search(q, $("#page-search-results"), 60);
+  }
+}
+let astronomyPromise;
+async function astronomy() {
+  if (window.Astronomy) return window.Astronomy;
+  if (!astronomyPromise)
+    astronomyPromise = new Promise((resolve, reject) => {
+      let s = document.createElement("script");
+      s.src = "/assets/astronomy.min.js";
+      s.onload = () => resolve(window.Astronomy);
+      s.onerror = () =>
+        reject(Error("Tähtitieteellisen laskennan lataus epäonnistui."));
+      document.head.append(s);
+    });
+  return astronomyPromise;
+}
+bindForm("#astro-form", async (f) => {
+  try {
+    const A = await astronomy(),
+      city = CITIES.find((c) => c[0] === f.get("city")),
+      ds = f.get("date"),
+      body = config.body || "Sun",
+      r = dayEvents(A, city, ds, body),
+      fmt = (d) =>
+        new Intl.DateTimeFormat("en-GB", {
+          timeZone: "Europe/Helsinki",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        }).format(d);
+    $("#astro-result").innerHTML =
+      `<strong>${city[1]} · ${fi(parse(ds))}</strong><p>Nousu: ${r.rise ? fmt(r.rise) : "—"} · Lasku: ${r.set ? fmt(r.set) : "—"}${r.duration !== null ? ` · Päivän pituus: ${Math.floor(r.duration / 60)} h ${r.duration % 60} min` : ""}</p>${r.polar ? `<p>${body === "Sun" ? "Aurinko" : "Kuu"} on koko paikallisen päivän horisontin ${r.polar === "up" ? "yläpuolella" : "alapuolella"}.</p>` : ""}`;
+    if (body === "Sun") {
+      const scene = await import("./solar-fi.mjs");
+      scene.connectSolar(A, $("#astro-form"), r);
+    }
+  } catch (err) {
+    toast(err.message);
+  }
+});
+if ($("#astro-form")) {
+  const form = $("#astro-form");
+  if (config.city) form.elements.city.value = config.city;
+  form.requestSubmit();
+}
+const signNames = [
+  "Kauris",
+  "Vesimies",
+  "Kalat",
+  "Oinas",
+  "Härkä",
+  "Kaksoset",
+  "Rapu",
+  "Leijona",
+  "Neitsyt",
+  "Vaaka",
+  "Skorpioni",
+  "Jousimies",
+];
+bindForm("#zodiac-form", (f) => {
+  let d = parse(f.get("date")),
+    mo = d.getUTCMonth(),
+    cut = [20, 19, 21, 20, 21, 21, 23, 23, 23, 23, 22, 22][mo],
+    idx = (mo + (d.getUTCDate() >= cut ? 1 : 0)) % 12;
+  result(
+    `<strong>${signNames[idx]}</strong><p>Tavanomainen länsimainen horoskooppimerkki.</p>`,
+  );
+});
+$("#season-year")?.addEventListener("change", (e) => {
+  $$("[data-season-year]").forEach(
+    (s) => (s.hidden = s.dataset.seasonYear !== e.target.value),
+  );
+});
+
+$(".search-wrap form")?.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const box = $("#search-results");
+  box.hidden = false;
+  search($("#site-search").value, box, 12);
+});
+$("#search-results")?.addEventListener("keydown", (e) => {
+  const links = $$("#search-results a"),
+    at = links.indexOf(document.activeElement);
+  if (e.key === "ArrowDown") {
+    e.preventDefault();
+    links[(at + 1) % links.length]?.focus();
+  }
+  if (e.key === "ArrowUp") {
+    e.preventDefault();
+    if (at <= 0) $("#site-search").focus();
+    else links[at - 1]?.focus();
+  }
+  if (e.key === "Escape") {
+    $("#search-results").hidden = true;
+    $("#site-search").focus();
+  }
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape")
+    $$(".tools-menu[open]").forEach((d) => (d.open = false));
+});
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".tools-menu"))
+    $$(".tools-menu[open]").forEach((d) => (d.open = false));
+});
+
+$("#tool-filter")?.addEventListener("input", (e) => {
+  const q = e.target.value
+    .toLocaleLowerCase("fi")
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "");
+  let visible = 0;
+  $$(".tool-directory .tool-card").forEach((card) => {
+    card.hidden = !card.textContent
+      .toLocaleLowerCase("fi")
+      .normalize("NFD")
+      .replace(/\p{Diacritic}/gu, "")
+      .includes(q);
+    if (!card.hidden) visible++;
+  });
+  $$("[data-tool-group]").forEach(
+    (g) => (g.hidden = !$(".tool-card:not([hidden])", g)),
+  );
+  $("#tool-count").textContent = visible + " työkalua";
+});
+
+document.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-moon-date]");
+  if (!b) return;
+  $$("[data-moon-date]").forEach((d) => {
+    d.classList.toggle("selected", d === b);
+    d.setAttribute("aria-pressed", String(d === b));
+  });
+  $("#moon-selected-title").textContent = fi(parse(b.dataset.moonDate));
+  $("#moon-selected-disc").innerHTML = moonSVG(
+    Number(b.dataset.moonAngle),
+    "selected-disc",
+  );
+  $("#moon-selected-light").textContent =
+    (100 * Number(b.dataset.moonLight)).toLocaleString("fi-FI", {
+      maximumFractionDigits: 1,
+    }) + " % valaistuna";
+});
+
+if ($("#ascendant-form")) import("./ascendant-fi.mjs");
+
+if ($("[data-studio]")) import("./studio-ui.mjs");
+
+// Keep the last fully decoded photo visible until the next selection is ready.
+let photoIndexPromise,
+  photoToken = 0;
+const decodedPhotos = new Map();
+function photoIndex() {
+  return (photoIndexPromise ??= fetch("/assets/photo-index.json").then((r) =>
+    r.json(),
+  ));
+}
+function decodeCityPhoto(p) {
+  if (decodedPhotos.has(p.id)) return decodedPhotos.get(p.id);
+  const image = new Image();
+  image.src = p.src.replace(".webp", "-640.webp");
+  const promise = image
+    .decode()
+    .then(() => image)
+    .catch((e) => {
+      decodedPhotos.delete(p.id);
+      throw e;
+    });
+  decodedPhotos.set(p.id, promise);
+  return promise;
+}
+async function updateCityPhoto(id) {
+  const token = ++photoToken;
+  try {
+    const list = await photoIndex(),
+      p = list.find((p) => p.id === id);
+    if (!p) return;
+    const image = await decodeCityPhoto(p);
+    if (token !== photoToken) return;
+    const target = $("#city-photo");
+    if (!target) return;
+    target.src = image.src;
+    target.alt = p.alt;
+    $("#city-caption").textContent = p.name;
+  } catch {}
+}
+$("#city-select")?.addEventListener(
+  "pointerdown",
+  () => {
+    photoIndex()
+      .then((list) => {
+        let n = 0;
+        const next = () => {
+          const p = list[n++];
+          if (!p) return;
+          decodeCityPhoto(p)
+            .catch(() => {})
+            .finally(() => setTimeout(next, 120));
+        };
+        next();
+      })
+      .catch(() => {});
+  },
+  { once: true },
+);
+
+if ($("#city-photo")) updateCityPhoto(state.city);
+
+if(document.querySelector("[data-horoscope-sign], [data-collection-date]"))import("./horoscope-fi.mjs");
+
+document.addEventListener('click',e=>{const b=e.target.closest('[data-add-date]');if(!b)return;openEvent();const f=$('#event-form');f.elements.date.value=b.dataset.addDate;f.elements.title.value=b.dataset.addTitle||'';});
+
+if($('#city-select')&&!state.citySource){fetch('/api/place').then(r=>r.ok?r.json():null).then(p=>{if(!p?.detected||state.citySource==='manual')return;state.city=p.id;state.citySource='ip';persist();$('#city-select').value=p.id;$('#place-choice-note').textContent='IP-sijaintiin perustuva arvio. Voit vaihtaa paikkakunnan.';updateCityPhoto(p.id);weather();}).catch(()=>{});}
+
+$('#garden-month')?.addEventListener('change',e=>{let count=0;document.querySelectorAll('[data-crop-months]').forEach(card=>{card.hidden=Boolean(e.target.value)&&!card.dataset.cropMonths.split(',').includes(e.target.value);if(!card.hidden)count++;});$('#garden-count').textContent=count+' kasvia';});
+bindForm('#sowing-form',f=>{const from=Number(f.get('minWeeks')),to=Number(f.get('maxWeeks'));if(from>to)throw Error('Lyhin kasvatusaika ei voi olla pisintä suurempi.');const d=parse(f.get('planting'));$('#sowing-result').innerHTML='<strong>'+fi(add(d,-to*7))+'–'+fi(add(d,-from*7))+'</strong><p>Esikasvatuksen aloitus annetulla '+from+'–'+to+' viikon kestolla. Istutuspäivä '+fi(d)+' on oma suunnitelmasi, ei paikallinen hallattomuusennuste.</p>';});
+
+const storageNotice=$('#storage-notice');if(storageNotice){let acknowledged=false;try{acknowledged=Number(localStorage.getItem('fi-storage-notice-until'))>Date.now();}catch{}if(!acknowledged)storageNotice.hidden=false;$('#storage-dismiss').onclick=()=>{try{localStorage.setItem('fi-storage-notice-until',String(Date.now()+180*86400000));}catch{}storageNotice.hidden=true;};}
+
+if(document.querySelector('.shift-app'))import('./shift-fi.mjs');
+
+window.addEventListener('beforeprint',()=>{
+ const calendarPanel=$('.calendar-panel');if(calendarPanel)calendarPanel.dataset.printTitle=$('#calendar-title')?.textContent||'';
+  for(const el of document.querySelectorAll('.sheet-workspace textarea,.weekly-workspace textarea')){
+    el.parentElement.querySelector('.print-value')?.remove();
+    const value=document.createElement('span');value.className='print-value';value.textContent=el.value||' ';value.setAttribute('aria-hidden','true');el.after(value);
+  }
+});
+window.addEventListener('afterprint',()=>document.querySelectorAll('.print-value').forEach(el=>el.remove()));
+
+document.addEventListener('click',async event=>{
+ const button=event.target.closest('[data-share-open]');if(!button)return;
+ button.disabled=true;
+ try{const {openShare}=await import('./share-fi.mjs');openShare({url:document.querySelector('link[rel=canonical]')?.href||location.href,title:document.querySelector('h1')?.textContent||document.title,image:document.querySelector('meta[property="og:image"]')?.content});}
+ catch{toast('Jakamista ei voitu avata. Yritä uudelleen.');}
+ finally{button.disabled=false;}
+});
+
+$('#exam-filter')?.addEventListener('input',e=>{const q=e.target.value.toLocaleLowerCase('fi').trim();let n=0;$$('[data-exam-subject]').forEach(row=>{row.hidden=!row.dataset.examSubject.includes(q);if(!row.hidden)n++;});$('#exam-filter-status').textContent=n+' koepäivää';});

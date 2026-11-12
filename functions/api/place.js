@@ -1,0 +1,2 @@
+import {CITIES} from '../../src/calendar.mjs';
+export function onRequestGet({request}){const cf=request.cf||{},lat=Number(cf.latitude),lon=Number(cf.longitude);let city=CITIES[0],detected=false;if(cf.country==='FI'&&Number.isFinite(lat)&&Number.isFinite(lon)){city=CITIES.reduce((a,b)=>{const dist=c=>(c[2]-lat)**2+((c[3]-lon)*Math.cos(lat*Math.PI/180))**2;return dist(b)<dist(a)?b:a});detected=true;}return Response.json({id:city[0],name:city[1],detected,approximate:true},{headers:{'Cache-Control':'private, no-store','X-Robots-Tag':'noindex'}});}

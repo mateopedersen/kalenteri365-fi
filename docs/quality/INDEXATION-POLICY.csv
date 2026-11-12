@@ -1,0 +1,8 @@
+class,policy,canonical,sitemap
+"Public calendar, tool, article and factual reference","index,follow",self absolute Finnish URL,yes
+Photo/license directory,"noindex,follow",self,no
+404,404 and noindex,no preferred indexed target,no
+Personal browser data,not published; localStorage only,page base URL only,never personal contents
+Homepage state query,restore state; clean URL,https://kalenteri365.fi/,base URL only
+Month view query,shareable state,same year/month base URL,base URL only
+Binary public PDF/Image,crawlable original,no blanket homepage canonical,image sitemap and contextual download links

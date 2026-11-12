@@ -1,21 +1,64 @@
-import {MONTHS,SLUGS,YEARS,holidays,parse,fi,cap,SOURCES} from '../src/calendar.mjs';
-const guides=[
- ['viikkonumerot','Miten ISO-viikkonumero luetaan?','grid','Viikko alkaa maanantaina ja päättyy sunnuntaina. ISO-vuoden ensimmäinen viikko sisältää tammikuun neljännen päivän, joten vuodenvaihteen päivät voivat kuulua edelliseen tai seuraavaan viikkovuoteen.','Kun sovit lomasta tai työvuorosta, merkitse viikkonumeron rinnalle myös päivämääräväli. Viikkokalenterista näet kunkin viikon maanantain ja sunnuntain ja voit kirjoittaa oman suunnitelmasi.','/viikkonumerot/'],
- ['juhannus-suomessa','Juhannus ja kesän vapaat Suomessa','flag','Juhannuspäivä on kesäkuun 20. ja 26. päivän väliin osuva lauantai. Juhannusaatto on sitä edeltävä perjantai. Juhannuspäivä on myös Suomen lipun päivä.','Tarkista aaton työjärjestelyt omasta sopimuksestasi. Lomasuunnittelijassa voit käsitellä aattoja erillisenä valintana ja vertailla, miten omat lomapäivät liittyvät viikonloppuun.','/juhlapyhat/juhannuspaiva/'],
- ['perheen-viikko','Perheen viikko selkeämmäksi','family','Kirjaa ensin viikon kiinteät menot: työvuorot, koulupäivät ja harrastukset. Lisää sen jälkeen yhteiset ruoka- ja ostossuunnitelmat. Väljä aikataulu auttaa huomaamaan päällekkäisyydet.','Perhekalenterin kentät tallentuvat käyttämääsi selaimeen. Tiedot eivät synkronoidu perheen muihin laitteisiin. Tulosta viikko yhteiseen käyttöön ja ota omista tapahtumista varmuuskopio.','/perhekalenteri/'],
- ['tyopaivat-ja-aatot','Työpäivät, arkipyhät ja aatot','briefcase','Työpäivälaskuri käyttää maanantaista perjantaihin ulottuvaa viikkoa ja vähentää niille osuvat yleiset pyhäpäivät. Lauantaille tai sunnuntaille osuva pyhä ei tällöin vähennä työpäiviä toistamiseen.','Aatto ei ole sama asia kuin yleinen pyhäpäivä. Valitse jouluaaton ja juhannusaaton käsittely erikseen. Työehtosopimus, oma työvuorokierto ja henkilökohtaiset vapaat voivat tuottaa eri tuloksen kuin yleinen laskuri.','/tyopaivalaskuri/'],
- ['koulujen-lomat','Koulujen lomat ovat paikallisia','school','Koulun työ- ja loma-ajat kannattaa tarkistaa omalta opetuksen järjestäjältä. Syys- ja talvilomien ajankohdat vaihtelevat kunnittain, ja eri koulumuotojen aikatauluissa voi olla eroja.','Sivustomme Helsingin tiedoissa nimetään paikkakunta, koulumuoto ja lukuvuosi. Lukujärjestykseen voit lisätä omat oppitunnit ja harrastukset; ylioppilaskokeiden päivät tarkistetaan Ylioppilastutkintolautakunnasta.','/koulujen-lomat/'],
- ['auringon-ajat','Auringon ajat Suomen eri puolilla','sun','Auringonnousu, auringonlasku ja päivän pituus riippuvat päivämäärästä ja havaintopaikasta. Etelä-Suomen ja pohjoisen Lapin kesä- ja talvipäivät eroavat huomattavasti toisistaan.','Valitse laskuriin oma paikkakunta. Ajat esitetään Europe/Helsinki-aikavyöhykkeellä kesäaika huomioiden. Maaston muodot, rakennukset ja sää voivat muuttaa sitä, milloin näet Auringon itse.','/auringonnousu-ja-lasku/'],
- ['kuun-vaiheet','Kuun vaiheet ja paikallinen havainto','moon','Uusikuu, ensimmäinen neljännes, täysikuu ja viimeinen neljännes kuvaavat Kuun valaistun osan muuttumista. Kalenterin vaihehetket on muunnettu Suomen paikalliseen aikaan.','Vaihe ja näkyvyys ovat eri asioita: Kuu voi olla vaihehetkellä havaintopaikan horisontin alapuolella. Kuun nousu- ja laskulaskurilla voit tarkistaa paikalliset ajat ja suunnitella havaintosi.','/kuukalenteri/'],
- ['kalenterin-tulostus','Valitse sopiva tulostettava kalenteri','download','Vuosikalenteri auttaa hahmottamaan vuoden kokonaisuutena. Kuukausipohja jättää enemmän tilaa päivittäisille merkinnöille. Pystyarkki tarjoaa erillisen muistiinpanoalueen.','Valitse PDF tulostukseen tai WebP yhteensopivaan kuvaohjelmaan. PDF:n vektorit säilyvät terävinä suurennettaessa. Tarkista tulostusikkunasta paperikoko ja suunta ennen tulostamista.','/pdf-kalenteri/'],
- ['kalenterin-varmuuskopio','Omat merkinnät turvallisesti talteen','edit','Omat tapahtumat ja muistiinpanot tallentuvat vain selaimeen, jossa niitä käytät. Yksityisen selausikkunan sulkeminen tai sivustotietojen poistaminen voi hävittää paikallisen tallennuksen.','JSON-varmuuskopio säilyttää suunnittelijan tiedot. ICS-vienti on tarkoitettu tapahtumien siirtämiseen kalenteriohjelmaan. Muistiinpanot ja tehtävälistat eivät muutu erillisiksi ICS-kalenteritapahtumiksi.','/'],
- ['syksyn-suunnittelu','Syksyn suunnitelmat yhdellä silmäyksellä','leaf','Syksyyn voi osua uuden lukuvuoden alku, harrastusvuoroja ja työprojektien määräaikoja. Aloita kuukausinäkymästä ja siirrä seuraavan viikon tärkeimmät asiat viikkosuunnitelmaan.','Varaa välitavoitteille omat päivät ja jätä tilaa muutoksille. Vuodenaikojen tähtitieteelliset ajankohdat eivät ole sääennusteita: paikallinen syksyn eteneminen riippuu lämpötilasta ja havaintopaikasta.','/paivasuunnittelija/']
-];
-const plants=[['tomaatti','Tomaatti','Pitkä kasvukausi ja runsas valon tarve. Esikasvatuksen ajoitus riippuu lajikkeesta sekä siitä, kasvaako tomaatti kasvihuoneessa vai ulkona.','Istuta ulos vasta, kun kasvupaikka on riittävän lämmin eikä hallaa ole odotettavissa. Karaise taimet vähitellen ja tarkista siemenpakkauksen lajikekohtaiset ohjeet.'],['porkkana','Porkkana','Suorakylvettävä juures, joka hyötyy kuohkeasta ja kivettömästä kasvualustasta.','Pidä kylvös kosteana itämisen aikana. Harvenna tarpeen mukaan ja sovita kylvöaika kasvupaikkaan sekä lajikkeeseen.'],['kurkku','Kurkku','Lämpöä tarvitseva kasvi. Avomaa- ja kasvihuonekurkuilla on erilaiset kasvuolosuhteet.','Kylvö ja istutus ajoitetaan lämpimään maahan ja hallattomaan ajankohtaan. Tarkista lajikkeen kasvatusohje ennen esikasvatusta.'],['herne','Herne','Suorakylvettävä kasvi, jonka lajike ratkaisee muun muassa tuennan tarpeen.','Valitse valoisa kasvupaikka ja kylvä sopivasti lämmenneeseen maahan. Tallenna oma kylvöpäivä ja seuraa kasvua muistiinpanoissa.'],['salaatti','Salaatti','Salaattia voi kasvattaa useana eränä, jotta satoa saadaan pidemmältä ajalta.','Tarkista lajikkeen lämpötilavaatimukset. Kuumuus ja kuivuus voivat vaikuttaa itämiseen ja kasvin laatuun.'],['peruna','Peruna','Peruna istutetaan lajikkeelle ja kasvupaikalle sopivaan lämmenneeseen maahan.','Suojaa versot hallalta ja huolehdi kasvuston vedensaannista. Istutusajankohta vaihtelee Suomen eri alueilla.'],['sipuli','Sipuli','Kasvatustapa riippuu siitä, käytätkö siementä, taimea vai istukassipulia.','Valitse lajikkeelle sopiva kasvupaikka ja tarkista istutusohje. Merkitse istutus ja hoitotyöt omaan kalenteriisi.'],['basilika','Basilika','Basilika viihtyy lämpimässä ja valoisassa paikassa. Se on herkkä kylmälle.','Esikasvata tai kasvata ruukussa. Siirrä ulos vain riittävän lämpimään ja vältä kylmiä öitä.'],['paprika','Paprika','Paprika tarvitsee pitkän kasvukauden, lämpöä ja riittävästi valoa.','Esikasvatuksen ajankohta vaihtelee lajikkeen ja kasvupaikan mukaan. Tutustu pakkauksen ohjeisiin ja suunnittele mahdollinen lisävalo.'],['retiisi','Retiisi','Nopeakasvuinen juures soveltuu toistuviin pieniin kylvöihin.','Tasainen kosteus auttaa kasvua. Kuumuus voi heikentää laatua, joten huomioi lajike ja kasvatuskausi.'],['persilja','Persilja','Persiljan siemenet voivat itää hitaasti. Tasainen kosteus on tärkeää.','Merkitse kylvöpäivä muistiin ja anna itämiselle aikaa. Viljelytapa ja korjuu riippuvat lajikkeesta ja käyttötarkoituksesta.'],['kesakurpitsa','Kesäkurpitsa','Kesäkurpitsa tarvitsee lämpimän kasvupaikan ja tilaa lehtien kasvulle.','Istuta hallojen jälkeen. Karaise esikasvatetut taimet ja huolehdi tasaisesta kastelusta.']];
-export async function extraPages({page,section,table,notice,toolCards,link,art}){
- await page('/tahtitieteellinen-kalenteri/','Tähtitieteellinen kalenteri Suomessa','Aurinko, Kuu, vuodenajat ja pimennykset Suomen ajassa.',`<div class="feature-banner">${art('moon')}<div><h2>Taivas kuuluu jokaiseen vuodenaikaan.</h2><p>Valitse ilmiö ja paikkakunta. Erota laskettu ajankohta paikallisesta näkyvyydestä.</p></div></div>`+toolCards((await import('../src/ui.mjs')).tools.filter(t=>t[4]==='Luonto ja taivas'&&t[0]!=='kylvokalenteri')));
- await page('/oppaat/','Kalenterioppaat arjen suunnitteluun','Käytännön oppaat kalenteriin, Suomen juhliin, työpäiviin ja luonnon seuraamiseen.',`<div class="cards">${guides.map(([s,t,i,a])=>link('/oppaat/'+s+'/',art(i)+`<h2>${t}</h2><p>${a.split('. ')[0]}.</p><span>Lue opas →</span>`,'tool-card')).join('')}</div>`);
- for(const [s,t,i,a,b,related] of guides)await page('/oppaat/'+s+'/',t,a.split('. ')[0]+'.',`<article class="long-text"><div class="guide-art">${art(i)}</div><h2>Suunnittele omaan arkeesi</h2><p>${a}</p><h2>Kokeile käytännössä</h2><p>${b}</p><div class="actions">${link(related,'Avaa aiheeseen liittyvä työkalu →','btn')}${link('/oppaat/','Kaikki oppaat','btn secondary')}</div><p class="small">Laskentaperusteet ja alkuperäiset tietolähteet: ${link('/lahteet/','Lähteet ja laskentatavat')}.</p></article>`);
- for(let m=1;m<=12;m++)await page('/merkkipaivat/'+SLUGS[m-1]+'/',cap(MONTHS[m-1])+' – Suomen juhlat ja merkkipäivät',`Katso ${MONTHS[m-1]}n pyhäpäivät, liputuspäivät ja muut muistettavat päivät vuosina 2027–2030.`,YEARS.map(y=>section(cap(MONTHS[m-1])+' '+y,table(['Päivä','Juhla','Tyyppi'],holidays(y).filter(h=>+h.date.slice(5,7)===m).map(h=>[fi(parse(h.date)),link('/juhlapyhat/'+h.slug+'/',h.name),({flag:'Liputuspäivä',holiday:'Pyhäpäivä',eve:'Aatto',observance:'Merkkipäivä'})[h.type]])))).join(''));
- for(const [s,n,a,b] of plants)await page('/kylvokalenteri/'+s+'/',n+' – kylvön ja kasvatuksen suunnittelu',a,`<article class="long-text"><div class="guide-art">${art('leaf')}</div><h2>${n} omassa puutarhassa</h2><p>${a}</p><p>${b}</p>${notice('Kasvuolot, lajike ja hallariski ratkaisevat. Tämä opas ei määritä koko Suomeen yhteistä kylvöpäivää eikä perusta viljelyä Kuun vaiheisiin.')}<div class="actions">${link('/kylvokalenteri/','Lisää oma kylvömuistutus','btn')}${link('https://www.martat.fi/puutarha/','Marttojen puutarhaohjeet →','btn secondary')}</div></article>`);
+import {
+  MONTHS,
+  SLUGS,
+  YEARS,
+  holidays,
+  parse,
+  fi,
+  cap,
+  SOURCES,
+} from "../src/calendar.mjs";
+import guides from '../data/guides.json' with {type:'json'};
+import {photo} from '../src/photos.mjs';
+import {esc} from '../src/ui.mjs';
+export async function extraPages({
+  page,
+  section,
+  table,
+  notice,
+  toolCards,
+  link,
+  art,
+}) {
+  await page(
+    "/tahtitieteellinen-kalenteri/",
+    "Tähtitieteellinen kalenteri Suomessa",
+    "Aurinko, Kuu, vuodenajat ja pimennykset Suomen ajassa.",
+    `<div class="feature-banner">${art("moon")}<div><h2>Taivas kuuluu jokaiseen vuodenaikaan.</h2><p>Valitse ilmiö ja paikkakunta. Erota laskettu ajankohta paikallisesta näkyvyydestä.</p></div></div>` +
+      toolCards(
+        (await import("../src/ui.mjs")).tools.filter(
+          (t) => t[4] === "Luonto ja taivas" && t[0] !== "kylvokalenteri",
+        ),
+      ),
+  );
+  await page('/oppaat/','Kalenterioppaat arjen suunnitteluun','20 käytännön opasta Suomen kalenteriin, juhlapäiviin, työvuoroihin ja oman ajan suunnitteluun.',
+    `<p class="education-intro">Selkeät vastaukset kalenterin tavallisiin kysymyksiin. Jokaisessa oppaassa on käytännön esimerkkejä ja sopivat työkalut jatkoon.</p><div class="cards guide-directory">${guides.map(g=>link('/oppaat/'+g.slug+'/',`<div class="guide-cover">${photo(g.photo,{sizes:'(max-width:600px) 95vw, 30vw'})}</div><div class="education-card-copy"><h2>${esc(g.title)}</h2><p>${esc(g.intro)}</p><span class="topic-open">Lue opas →</span></div>`,'tool-card')).join('')}</div>`);
+  for(const g of guides)await page('/oppaat/'+g.slug+'/',g.title,g.intro,
+    `<article class="long-text original-guide"><figure class="guide-lead">${photo(g.photo,{lazy:false,sizes:'(max-width:800px) 95vw, 780px'})}</figure><p class="guide-intro">${esc(g.intro)}</p>${g.sections.map(s=>`<section><h2>${esc(s.title)}</h2>${s.paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}</section>`).join('')}<section class="guide-tools"><h2>Kokeile omilla tiedoillasi</h2><div class="actions">${g.links.map((url,i)=>link(url,['Avaa aiheeseen liittyvä työkalu','Katso myös','Jatka suunnittelua'][i],'btn '+(i?'secondary':''))).join('')}</div></section><section class="guide-references"><h2>Lisätietoa alkuperäisistä lähteistä</h2><ul>${g.sources.map(([u,t])=>`<li>${link(u,esc(t))}</li>`).join('')}</ul></section></article>`);
+  for (let m = 1; m <= 12; m++)
+    await page(
+      "/merkkipaivat/" + SLUGS[m - 1] + "/",
+      cap(MONTHS[m - 1]) + " – Suomen juhlat ja merkkipäivät",
+      `Katso ${MONTHS[m - 1]}n pyhäpäivät, liputuspäivät ja muut muistettavat päivät vuosina 2027–2030.`,
+      YEARS.map((y) =>
+        section(
+          cap(MONTHS[m - 1]) + " " + y,
+          table(
+            ["Päivä", "Juhla", "Tyyppi"],
+            holidays(y)
+              .filter((h) => +h.date.slice(5, 7) === m)
+              .map((h) => [
+                fi(parse(h.date)),
+                link("/juhlapyhat/" + h.slug + "/", h.name),
+                {
+                  flag: "Liputuspäivä",
+                  holiday: "Pyhäpäivä",
+                  eve: "Aatto",
+                  observance: "Merkkipäivä",
+                }[h.type],
+              ]),
+          ),
+        ),
+      ).join(""),
+    );
 }

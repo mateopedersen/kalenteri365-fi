@@ -1,0 +1,1 @@
+Kalenteri365 calendar family artwork. Finnish colour adaptation of the owner's original vector library. Raster photographs are not used in category or zodiac icons. Category shapes use SVG paths, gradients and material shadows. Assets are distributed with the site source; no external font requests. Source family: mateopedersen/kalendars365-latvia, 2026-11-12.
