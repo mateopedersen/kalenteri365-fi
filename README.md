@@ -13,17 +13,17 @@ corepack pnpm build
 corepack pnpm start
 ```
 
-The output is `dist/`. The build verifies Lato TTF checksums, generates 1,117 HTML pages, and creates 208 vector PDFs, 208 A4 WebP downloads at 600 ppi, plus lightweight gallery previews. The first build rasterizes the downloads and takes several minutes. Unchanged local exports are cached by the source hash. The source repository intentionally excludes generated output, local personal records and downloaded fonts. The font license is included; fonts are fetched from Google Fonts and checked against fixed SHA-256 values.
+The output is `dist/`. The build verifies Lato TTF checksums, generates 1,154 HTML pages, and creates 208 vector PDFs, 208 A4 WebP downloads at 600 ppi, plus lightweight gallery previews. The first build rasterizes the downloads and takes several minutes. Unchanged local exports are cached by the source hash. The source repository intentionally excludes generated output, local personal records and downloaded fonts. The font license is included; fonts are fetched from Google Fonts and checked against fixed SHA-256 values.
 
 ## Cloudflare Pages
 
-Create a Pages project from `mateopedersen/kalenteri365-fi`:
+Existing Pages project `kalenteri365-fi` is connected to `mateopedersen/kalenteri365-fi`:
 
 | Setting | Value |
 |---|---|
 | Branch | `main` |
 | Framework | None |
-| Build command | `pnpm build` |
+| Build command | `npm test && npm run build` |
 | Output directory | `dist` |
 | Node version | `24` (`.node-version`) |
 

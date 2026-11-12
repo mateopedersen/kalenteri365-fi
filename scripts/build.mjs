@@ -140,7 +140,7 @@ if(!process.argv.includes('--html-only')){
 }
 console.log('Build complete:',pages.length,'pages,',exportIndex.length,'PDF + WebP pairs');
 
-const assetFiles=['site.css','app.mjs','ui.mjs','calendar.mjs','data.json','search.json'];
+const assetFiles=['site.css','app.mjs','ui.mjs','calendar.mjs','data.json','search.json','weather.mjs'];
 const assetHash=createHash('sha256');for(const f of assetFiles)assetHash.update(await fs.readFile(path.join(ASSET,f)));
 const version=assetHash.digest('hex').slice(0,12);
 for(const f of assetFiles){let buf=await fs.readFile(path.join(ASSET,f),'utf8');for(const dep of assetFiles)buf=buf.replaceAll(dep,dep.replace(/(\.[^.]+)$/,'.'+version+'$1'));await fs.writeFile(path.join(ASSET,f.replace(/(\.[^.]+)$/,'.'+version+'$1')),buf);}
