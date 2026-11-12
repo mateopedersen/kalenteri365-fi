@@ -10,3 +10,7 @@
 8. Gizli anahtarları çıktı alma. IndexNow, Search Console ve Bing tarafında kabul yanıtını indekslenmiş olmakla karıştırma.
 
 Bu depo Google/Bing hesap kimliği veya bilinmeyen izleme kodu üretmez. Üretimden hemen sonraki kaynak/metadata/indirme kontrolü ile 7/28/56 günlük gerçek kullanıcı ve arama performansı izlemesi ayrı işlerdir; bunlar zamanlanmış otomasyon gibi sunulmaz.
+
+## IndexNow ilk bildirim
+
+Yayın commit ve canlı sitemap eşleşmesi doğrulandıktan sonra `python3 scripts/submit_indexnow.py --submit --report /repo-disinda/indexnow-receipt.json` çalıştırılır. Komut önce canlı sahiplik dosyasını denetler, sonra en fazla bir POST gönderir; kendiliğinden tekrar denemez. `--submit` olmadan yalnız yerel sitemap ve index kuralları kontrol edilir. 200 yalnız alındı yanıtıdır; 202 anahtar doğrulamasının beklediğini belirtir. İkisi de Google/Bing indekslenme garantisi değildir. Cloudflare Crawler Hints veya başka ek hizmet bu komutla etkinleştirilmez.

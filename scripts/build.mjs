@@ -72,6 +72,9 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".."),
 await fs.mkdir(OUT, { recursive: true });
 await fs.mkdir(ASSET, { recursive: true });
 await fs.mkdir(path.join(OUT, "lataukset"), { recursive: true });
+const indexnow=JSON.parse(await fs.readFile(path.join(ROOT,'data/indexnow.json'),'utf8'));
+if(indexnow.host!=='kalenteri365.fi'||!/^[0-9a-f]{32}$/.test(indexnow.key)||indexnow.keyLocation!==`https://kalenteri365.fi/${indexnow.key}.txt`)throw Error('Invalid IndexNow host/key configuration');
+await fs.copyFile(path.join(ROOT,indexnow.key+'.txt'),path.join(OUT,indexnow.key+'.txt'));
 await fs.cp(path.join(ROOT, "assets"), ASSET, { recursive: true });
 await makeArt(path.join(ASSET, "art"));
 for (const p of PHOTO_CREDITS.filter((p) => p.src.endsWith(".webp"))) {

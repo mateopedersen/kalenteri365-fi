@@ -16,4 +16,5 @@ jobs:
       - run: corepack enable
       - run: corepack pnpm install --frozen-lockfile
       - run: corepack pnpm test
+      - run: python3 -m unittest discover -s tests -p 'indexnow_test.py'
       - run: corepack pnpm build

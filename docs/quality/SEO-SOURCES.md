@@ -55,3 +55,5 @@ Kaynak ve tarih alanları `data/finland.json`, fotoğraf hakları `data/photo-cr
 - [Cloudflare başlık kuralları](https://developers.cloudflare.com/pages/configuration/headers/)
 - [USNO astronomi API](https://aa.usno.navy.mil/data/api)
 - [MET Norway kullanım koşulları](https://api.met.no/doc/TermsOfService)
+
+- IndexNow protokolü ve 200/202 yanıtlarının anlamı: https://www.indexnow.org/documentation (12 Kasım 2026).
