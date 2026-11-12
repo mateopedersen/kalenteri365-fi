@@ -44,3 +44,7 @@ Connect `kalenteri365.fi` and `www.kalenteri365.fi` as custom domains. `_redirec
 `pnpm test` covers all 48 month grids and 1,461 civil dates, ISO boundaries, Finnish movable holidays, business-day conventions, UTF-8 ICS folding, lunar phases, polar days and DST boundary rise/set calculations. `pnpm check` checks all generated HTML links, language, H1/canonical/structured data, single-page PDFs, A4 raster dimensions and actual EXIF 600 ppi metadata. Reports are in `reports/`.
 
 Source and editorial limitations appear on `/lahteet/`. Horoscopes are explicitly dated entertainment reflections, not predictions. The name-day service links to the licensor rather than republishing its protected database.
+
+## Canonical host
+
+Cloudflare Single Redirect `Kalenteri365 www to canonical` sends `https://www.kalenteri365.fi/*` to `https://kalenteri365.fi/${1}` with HTTP 301 and preserves the query string. Domain redirects are configured at zone level because Pages `_redirects` supports path redirects only. Keep this rule when changing builds or custom domains.
