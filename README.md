@@ -1,37 +1,46 @@
 # Kalenteri365.fi
 
-Finnish calendar and planning site, prepared for Cloudflare Pages deployments from `main`.
+Finnish calendar and planning site for 2027–2030, inspired by the owner's Kalendars365.lv and Koledar365.si projects. The implementation generates searchable static HTML, then adds browser-local planning interactions. No server database or paid runtime service is needed.
 
 ## Build
 
-Node.js 22 or newer. No npm dependencies.
+Requires Node.js 22 or newer (24 recommended). Install the exact dependencies from `pnpm-lock.yaml`:
 
 ```sh
-npm test
-npm run build
-npm run dev
+corepack pnpm install --frozen-lockfile
+corepack pnpm test
+corepack pnpm build
+corepack pnpm start
 ```
 
-Cloudflare Pages settings: framework **None**, build command **npm test && npm run build**, output directory **dist**. The server prints `http://127.0.0.1:4173` for local previews.
+The output is `dist/`. The build verifies Lato TTF checksums, generates 1,117 HTML pages, and creates 208 vector PDFs, 208 A4 WebP downloads at 600 ppi, plus lightweight gallery previews. The first build rasterizes the downloads and takes several minutes. Unchanged local exports are cached by the source hash. The source repository intentionally excludes generated output, local personal records and downloaded fonts. The font license is included; fonts are fetched from Google Fonts and checked against fixed SHA-256 values.
 
-The build generates 71 Finnish pages (plus a 404 page) and 52 A4 landscape vector PDFs for 2027–2030. Calendars use Monday-first grids and ISO week numbers. Personal all-day events, notes and tasks stay in browser localStorage. ICS exports include events, not notes or tasks.
+## Cloudflare Pages
 
-## Sources and limits
+Create a Pages project from `mateopedersen/kalenteri365-fi`:
 
-Finnish holiday rules: University of Helsinki Almanac Office. School holiday data: Helsinki's confirmed Finnish-language municipal school terms for 2026–2028. These are not presented as nationwide dates. Christmas Eve and Midsummer Eve are labeled separately and optionally excluded from the Monday–Friday workday model. Vacation estimates are not a full annual leave entitlement calculation.
+| Setting | Value |
+|---|---|
+| Branch | `main` |
+| Framework | None |
+| Build command | `pnpm build` |
+| Output directory | `dist` |
+| Node version | `24` (`.node-version`) |
 
-Sunrise and sunset are approximate NOAA-equation results for selected Finnish cities, displayed in Europe/Helsinki. No weather API or IP-location tracking is used. No licensed name-day database is reproduced.
+Connect `kalenteri365.fi` and `www.kalenteri365.fi` as custom domains. `_redirects` sends www to the canonical apex. Do not add an SPA wildcard fallback: unknown paths must keep their 404 status. `_headers` contains security headers and asset caching rules.
 
-The site uses Lato from Google Fonts. PDF files use PDF-standard Helvetica with WinAnsi encoding for Finnish characters. Original SVG landscape and icon artwork lives in `src/ui.js`.
+## Features
 
-## Structure
+- Annual and monthly calendars, Monday-first ISO weeks, Finnish public holidays, eves and flag days.
+- Month, week, day, list and year views. Events, simple repeat rules, notes and tasks stored in localStorage.
+- ICS import/export and JSON backup/restore. Imports support date-only and Helsinki/UTC timed events, basic daily/weekly/monthly/yearly recurrence, interval, until and excluded dates. Unsupported complex recurrence or foreign TZID events are reported as skipped rather than silently changed. Cross-device sync is not implemented.
+- Date differences, date arithmetic, business days, working hours, day-of-year, leap years, holiday planning and shift cycles.
+- Calendar editor with a local photo, color and title; printable custom calendars and WebP export. Family, daily, school and study planners plus timetables save browser-local fields.
+- Astronomy Engine 2.1.19: lunar phases, local rise/set, polar conditions, seasons and eclipses. 25 Finnish locations, each with 2027–2030 comparisons. Open-Meteo weather for the chosen city.
+- Official source links for copyrighted name-day data, individual benefit dates and examination timetables. Published Helsinki school holidays are scoped to their actual municipality, school type and school year; unpublished future dates are not invented.
 
-- `src/calendar.js`: date, holiday, workday, ICS and solar calculations.
-- `src/ui.js`: shared accessible HTML rendering and original SVG artwork.
-- `src/app.js`: browser-local planner and interactive tools.
-- `src/style.css`: responsive layout and print styles.
-- `scripts/build.mjs`: static pages, sitemap, metadata and Cloudflare headers.
-- `scripts/pdf.mjs`: dependency-free vector PDF generator.
-- `scripts/calendar.test.mjs`: date boundaries, Finnish holiday anchors, workday/ICS/solar/PDF checks.
+## Verification
 
-Sources were checked on 12 November 2026. Deployment is not verified until the Cloudflare project reports a successful build and the public domain has been checked.
+`pnpm test` covers all 48 month grids and 1,461 civil dates, ISO boundaries, Finnish movable holidays, business-day conventions, UTF-8 ICS folding, lunar phases, polar days and DST boundary rise/set calculations. `pnpm check` checks all generated HTML links, language, H1/canonical/structured data, single-page PDFs, A4 raster dimensions and actual EXIF 600 ppi metadata. Reports are in `reports/`.
+
+Source and editorial limitations appear on `/lahteet/`. Horoscopes are explicitly dated entertainment reflections, not predictions. The name-day service links to the licensor rather than republishing its protected database.
