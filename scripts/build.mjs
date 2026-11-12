@@ -159,6 +159,9 @@ await fs.writeFile(
     ";export const STUDIO_PHOTOS=[];",
 );
 const searchText=new Map();
+const downloadHash=createHash('sha256');
+for(const source of ['src/exports.mjs','src/calendar.mjs','src/lunar-exports.mjs','src/astronomy.mjs','src/lunar.mjs','src/planner-exports.mjs','assets/photos/moon-full.jpg','assets/fonts/Lato-Regular.ttf','assets/fonts/Lato-Bold.ttf',...['school','week','family','shift'].map(name=>'assets/planner-art/'+name+'.svg')])downloadHash.update(await fs.readFile(path.join(ROOT,source)));
+const downloadVersion=downloadHash.digest('hex').slice(0,16);
 const pages = [],
   exportIndex = [];
 async function page(p, title, desc, body, kind = "page", extra = {}) {
@@ -177,6 +180,7 @@ async function page(p, title, desc, body, kind = "page", extra = {}) {
         .join(""),
       "topic-guide",
     );
+  body=body.replace(/((?:href|src)=")(\/lataukset\/[^"?]+\.(?:pdf|webp))"/g,(_,attribute,url)=>attribute+url+'?v='+downloadVersion+'"');
   let folder = path.join(OUT, p);
   await fs.mkdir(folder, { recursive: true });
   await fs.writeFile(
@@ -1144,7 +1148,7 @@ await fs.writeFile(
 const imageEntries=[];
 for(const p of pages.filter(p=>p.indexable)){
  const html=await fs.readFile(path.join(OUT,p.path,'index.html'),'utf8'),images=[];
- for(const m of html.matchAll(/<img\b[^>]*>/g)){const src=m[0].match(/src="([^"?]+)(?:[^"\s]*)?"/),alt=m[0].match(/alt="([^"]+)"/);if(src&&alt&&(/\/assets\/photos\//.test(src[1])||/\/lataukset\//.test(src[1]))&&!images.some(x=>x.src===src[1]))images.push({src:src[1],alt:alt[1]});}
+ for(const m of html.matchAll(/<img\b[^>]*>/g)){const src=m[0].match(/src="([^"?]+)(?:[^"\s]*)?"/),alt=m[0].match(/alt="([^"]+)"/);if(src&&alt&&(/\/assets\/photos\//.test(src[1])||/\/lataukset\//.test(src[1]))){const original=PHOTO_CREDITS.find(p=>[p.src,p.src.replace('.webp','-320.webp'),p.src.replace('.webp','-640.webp')].includes(src[1]))?.src||src[1].replace('-preview.webp','.webp');if(!images.some(x=>x.src===original))images.push({src:original,alt:alt[1]});}}
  if(images.length)imageEntries.push(`<url><loc>https://kalenteri365.fi${esc(p.path)}</loc>${images.slice(0,8).map(i=>`<image:image><image:loc>https://kalenteri365.fi${esc(i.src)}</image:loc><image:caption>${i.alt}</image:caption></image:image>`).join('')}</url>`);
 }
 await fs.writeFile(path.join(OUT,'sitemap-images.xml'),'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">'+imageEntries.join('')+'</urlset>');
