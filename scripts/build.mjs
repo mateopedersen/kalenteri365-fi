@@ -119,6 +119,14 @@ await page('/juhlapyhat/eduskuntavaalit/','Eduskuntavaalit 2027','Eduskuntavaali
 await extraPages({page,section,table,notice,toolCards,link,art});
 await page('/haku/','Hae sivustolta','Etsi kalenteria, juhlapäivää, paikkakuntaa tai suunnittelutyökalua.',`<form id="page-search-form" class="panel"><label>Hakusana<input id="page-search" name="q" placeholder="Esimerkiksi tammikuu 2028" required></label><button class="btn" style="margin-top:15px">Hae</button></form><div id="page-search-results" class="panel search-page-results" style="margin-top:20px" aria-live="polite"></div>`,'search');
 await page('/sivukartta/','Sivukartta','Kaikki kalenterit ja työkalut aiheittain.',`<div class="sitemap-groups">${[...new Set(pages.map(p=>p.group))].map(g=>`<section><h2>${tools.find(t=>t[0]===g)?.[1]||cap(g)}</h2>${pages.filter(p=>p.group===g).map(p=>link(p.path,esc(p.title))).join('')}</section>`).join('')}</div>`);
+// Incremental builds must not retain an obsolete page with an old canonical URL.
+const expectedHtml=new Set(pages.map(p=>path.join(OUT,p.path,'index.html')));
+for(const entry of await fs.readdir(OUT,{recursive:true,withFileTypes:true})){
+ if(entry.isFile()&&entry.name==='index.html'){
+  const file=path.join(entry.parentPath,entry.name);
+  if(!expectedHtml.has(file))await fs.unlink(file);
+ }
+}
 await fs.writeFile(path.join(ASSET,'search.json'),JSON.stringify(pages));
 await fs.writeFile(path.join(OUT,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+pages.map(p=>`<url><loc>https://kalenteri365.fi${esc(p.path)}</loc></url>`).join('')+'</urlset>');
 await fs.writeFile(path.join(OUT,'robots.txt'),'User-agent: *\nAllow: /\nSitemap: https://kalenteri365.fi/sitemap.xml\n');
