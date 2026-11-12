@@ -1,6 +1,6 @@
 # Finland localization of the existing sites
 
-Reference sitemaps inspected on 2026-11-12: Koledar365.si (391 canonical URLs), Kalendars365.lv (887 canonical URLs). Calendar ranges are 2027–2030. The Finnish implementation generates 1,117 canonical HTML pages, including 208 dated week planners and 375 city/year astronomy pages.
+Reference sitemaps inspected on 2026-11-12: Koledar365.si (391 canonical URLs), Kalendars365.lv (887 canonical URLs). Calendar ranges are 2027–2030. The Finnish implementation generates 1,154 canonical HTML pages, including 208 dated week planners and 375 city/year astronomy pages.
 
 | Latvian route family | Finnish route family |
 |---|---|
@@ -39,3 +39,5 @@ Reference sitemaps inspected on 2026-11-12: Koledar365.si (391 canonical URLs), 
 | privatuma-politika / sikdatnu-politika / pieklustamiba | tietosuoja / evasteet / saavutettavuus |
 
 Design preserves the Latvian three-column planning arrangement while replacing its burgundy palette with navy, Finnish blue, muted forest green and white. Lato is locally served. Calendar illustrations are original SVG; no unlicensed images or translated Latvian national data are reused. Informational facts have Finland-specific sources. Unpublished dates, licensed databases and authenticated financial records are not fabricated.
+
+Added Finnish guide articles, an astronomy hub, month-by-month observances and twelve plant-specific growing guides. The published school dates explicitly identify Helsinki and the academic year. The current almanac licensor source is linked for name-day lookup; no licensed name database is copied.
