@@ -53,14 +53,15 @@ export function localDashboard(helsinkiImage) {
       </div>
     </div>
     <p class="local-place-note" id="place-choice-note">Paikalliset tiedot Suomesta</p>
-    <div class="weather-stage" id="weather-stage" data-weather="loading" data-period="day" aria-busy="true">
+    <div class="weather-stage" id="weather-stage" data-weather="loading" data-state="loading" data-period="day" aria-busy="true">
       ${weatherLandscape()}
       <canvas id="weather-particles" aria-hidden="true"></canvas>
-      <div class="weather-stage-top"><span class="weather-badge">Sää nyt</span></div>
-      <div id="weather" class="weather-readout"><strong class="weather-temp">—<sup>°C</sup></strong><span class="weather-condition">Haetaan säätietoja…</span></div>
+      <div class="weather-stage-top"><span class="weather-badge" id="weather-badge">Helsinki</span></div>
+      <div id="weather" class="weather-readout"><span class="weather-loading-mark" aria-hidden="true"></span><span class="weather-message"><strong>Haetaan säätä</strong><span>Paikallinen ennuste latautuu…</span></span></div>
     </div>
+    <noscript><p class="local-place-note">Sääennusteen näyttäminen edellyttää JavaScriptiä.</p></noscript>
     <p id="weather-status" class="sr-only" role="status"></p>
-    <div class="local-weather-details"><div><span>${icon('wind')} Tuuli</span><strong id="weather-wind">—</strong></div><div><span>${icon('rain')} Sade 1 h</span><strong id="weather-rain">—</strong></div></div>
+    <div class="local-weather-details" id="weather-metrics" hidden><div><span>${icon('wind')} Tuuli</span><strong id="weather-wind"></strong></div><div><span>${icon('rain')} Sade 1 h</span><strong id="weather-rain"></strong></div></div>
     <div class="local-weather-source"><div id="weather-note">Ennuste · MET Norway</div><button type="button" id="weather-refresh" aria-label="Päivitä sääennuste"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M16 7a6.5 6.5 0 1 0 .2 5M16 3v4h-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
     <section class="local-daylight" id="local-sun"><h3>Päivän valo</h3><div class="local-sun-times"><div>${art('sunrise')}<span>Auringonnousu</span><strong id="local-rise">—</strong></div><div>${art('sun')}<span>Auringonlasku</span><strong id="local-set">—</strong></div></div><div class="local-day-track" aria-hidden="true"><i></i></div><p id="local-daylength">Lasketaan päivän pituutta…</p><a id="local-sun-link" href="/auringonnousu-ja-lasku/">Auringon kulku ${icon('arrow')}</a></section>
     <a class="local-moon-link" href="/kuukalenteri/"><span id="local-moon-disc">${art('moon')}</span><span><strong id="local-moon-phase">Kuu tänään</strong><small id="local-moon-light">Päivän valaistus</small></span>${icon('arrow')}</a>

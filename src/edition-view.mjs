@@ -4,14 +4,15 @@ import {YEARS,MONTHS,SLUGS,cap} from './calendar.mjs';
 
 export function homeSections() {
  const topics = [
-  ['koulujen-lomat','school','Koulu ja opiskelu','Loma-ajat kunnittain, opintoperiodit ja oma lukujärjestys.','Katso koulujen lomat',[['yliopistojen-kalenterit','Yliopistot'],['lukujarjestys','Lukujärjestys']]],
+  ['koulujen-lomat','education-cap','Koulu ja opiskelu','Loma-ajat kunnittain, opintoperiodit ja oma lukujärjestys.','Katso koulujen lomat',[['yliopistojen-kalenterit','Yliopistot'],['lukujarjestys','Lukujärjestys']]],
   ['juhlapyhat','celebrations','Suomen juhlat','Pyhäpäivät, aatot ja perinteet. Löydä päivämäärä ja sen tarina.','Tutustu juhlapäiviin',[['liputuspaivat','Liputuspäivät'],['pitkat-viikonloput','Pitkät viikonloput']]],
   ['kylvokalenteri','garden','Puutarhan vuosi','Esikasvatus, kylvöt ja istutukset Suomen kasvukaudessa.','Avaa kylvökalenteri',[['kylvokalenteri/tomaatti','Tomaatit'],['kylvokalenteri/peruna','Perunat']]],
   ['tahtitieteellinen-kalenteri','astronomy','Taivas Suomen yllä','Kuun vaiheet, pimennykset ja taivaan tapahtumat paikallisine aikoineen.','Tutki taivasta',[['kuun-vaiheet','Kuun vaiheet'],['vuodenajat','Vuodenajat']]],
   ['perhekalenteri','family','Yhteinen arki','Kokoa perheen menot, viikon ruoat ja ostokset samaan suunnitelmaan.','Suunnittele perheen viikko',[['viikkokalenteri','Viikkopohjat'],['tyhja-kalenteri','Tyhjät pohjat']]],
   ['lomasuunnittelija','vacation','Työstä vapaalle','Vertaa lomajaksoja ja sovita vapaat omaan työrytmiisi.','Suunnittele loma',[['tyopaivalaskuri','Työpäivälaskuri'],['tyovuorosuunnittelija','Työvuorot']]],
  ];
- return `<section class="home-discover"><div class="section-heading"><div><p class="eyebrow">SUUNNITTELE SEURAAVAKSI</p><h2>Omaan arkeen sopiva kalenteri</h2></div>${link('/tyokalut/','Kaikki työkalut '+icon('arrow'),'section-link')}</div><div class="home-topic-grid">${topics.map(([slug,illustration,title,copy,cta,more])=>`<article class="home-topic"><a class="home-topic-main" href="/${slug}/"><span class="home-topic-art">${art(illustration)}</span><h3>${title}</h3><p>${copy}</p><span class="topic-open">${cta} ${icon('arrow')}</span></a><div class="home-topic-more">${more.map(([route,label])=>link('/'+route+'/','<span>'+label+'</span>'+icon('chevron'))).join('')}</div></article>`).join('')}</div></section>`;
+ const relatedArt={'yliopistojen-kalenterit':'education-cap','lukujarjestys':'timetable','liputuspaivat':'flag','pitkat-viikonloput':'vacation','kylvokalenteri/tomaatti':'crop-tomaatti','kylvokalenteri/peruna':'crop-peruna','kuun-vaiheet':'phases','vuodenajat':'seasons','viikkokalenteri':'week','tyhja-kalenteri':'blank','tyopaivalaskuri':'calculator','tyovuorosuunnittelija':'shift'};
+ return `<section class="home-discover"><div class="section-heading"><div><p class="eyebrow">SUUNNITTELE SEURAAVAKSI</p><h2>Omaan arkeen sopiva kalenteri</h2></div>${link('/tyokalut/','Kaikki työkalut '+icon('arrow'),'section-link')}</div><div class="home-topic-grid">${topics.map(([slug,illustration,title,copy,cta,more])=>`<article class="home-topic"><a class="home-topic-main" href="/${slug}/"><span class="home-topic-art">${art(illustration)}</span><h3>${title}</h3><p>${copy}</p><span class="topic-open">${cta} ${icon('arrow')}</span></a><div class="home-topic-more">${more.map(([route,label])=>link('/'+route+'/',art(relatedArt[route]||'calendar')+'<span>'+label+'</span>'+icon('chevron'))).join('')}</div></article>`).join('')}</div></section>`;
 }
 
 export function homeDownloads() {

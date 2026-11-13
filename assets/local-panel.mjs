@@ -1,6 +1,7 @@
 import {CITIES, cap} from './calendar.mjs';
 import {esc} from './ui.mjs';
 import {connectWeatherScene} from './weather-scene.mjs';
+import {fetchWeather, usableWeather} from './weather-client.mjs';
 
 export function connectLocalPanel({state, onCityChange, onOpen}) {
   const $ = selector => document.querySelector(selector);
@@ -12,10 +13,10 @@ export function connectLocalPanel({state, onCityChange, onOpen}) {
   const dateFormat = new Intl.DateTimeFormat('fi-FI', {timeZone: 'Europe/Helsinki', weekday: 'long', day: 'numeric', month: 'long'});
   const forecastTime = new Intl.DateTimeFormat('fi-FI', {timeZone: 'Europe/Helsinki', hour: '2-digit', minute: '2-digit'});
   let sequence = 0, controller, refreshTimer, manualSelection = false;
-  let nextRefresh = 0, astronomicalPeriod;
+  let nextRefresh = 0, astronomicalPeriod, requestedCity;
   const normalize = value => value.toLocaleLowerCase('fi').normalize('NFD').replace(/\p{Diacritic}/gu, '');
   const city = () => CITIES.find(c => c[0] === state.city) || CITIES[0];
-  const number = value => Number.isFinite(value) ? value.toLocaleString('fi-FI', {maximumFractionDigits: 1}) : '—';
+  const number = value => Number.isFinite(value) ? value.toLocaleString('fi-FI', {maximumFractionDigits: 1}) : 'Ei tietoa';
 
   function clock() {
     if (document.hidden) return;
@@ -84,6 +85,9 @@ export function connectLocalPanel({state, onCityChange, onOpen}) {
 
   function paint(data, stale = false) {
     const selected = city();
+    stage.dataset.state = stale ? 'stale' : 'ready';
+    $('#weather-metrics').hidden = false;
+    $('#weather-badge').textContent = stale ? 'Aiempi ennuste' : 'Sää nyt';
     $('#weather').innerHTML = `<strong class="weather-temp">${Math.round(data.temperature)}<sup>°C</sup></strong><span class="weather-condition">${esc(data.name)}</span>`;
     $('#weather-wind').textContent = number(data.wind) + (Number.isFinite(data.wind) ? ' m/s' : '');
     $('#weather-rain').textContent = number(data.precipitation) + (Number.isFinite(data.precipitation) ? ' mm' : '');
@@ -91,6 +95,16 @@ export function connectLocalPanel({state, onCityChange, onOpen}) {
     $('#weather-status').textContent = `${selected[1]}: ${data.name}, ${Math.round(data.temperature)} astetta. ${stale ? 'Aiemmin haettu ennuste.' : ''}`;
     stage.setAttribute('aria-busy', 'false');
     scene.set(data.symbol, astronomicalPeriod);
+  }
+
+  function waiting(selected) {
+    scene.clear();
+    stage.dataset.state = 'loading';
+    $('#weather-metrics').hidden = true;
+    $('#weather-badge').textContent = selected[1];
+    $('#weather').innerHTML = '<span class="weather-loading-mark" aria-hidden="true"></span><span class="weather-message"><strong>Haetaan säätä</strong><span>Paikallinen ennuste latautuu…</span></span>';
+    $('#weather-note').textContent = 'Sääennuste · MET Norway';
+    $('#weather-status').textContent = selected[1] + ': sääennuste latautuu.';
   }
 
   function schedule(at) {
@@ -101,13 +115,14 @@ export function connectLocalPanel({state, onCityChange, onOpen}) {
 
   async function weather(force = false) {
     const requestSequence = ++sequence, selected = city();
+    requestedCity = selected[0];
     clearTimeout(refreshTimer);
     controller?.abort();
     controller = new AbortController();
     const requestController = controller;
     let cached = memory.get(selected[0]);
     try { cached ??= JSON.parse(sessionStorage.getItem('fi-met-weather-v2-' + selected[0]) || 'null'); } catch {}
-    const usable = cached?.data?.city === selected[0] && Number.isFinite(cached.data.temperature) && Math.abs(Date.now() - Date.parse(cached.data.time)) <= 4 * 3600000;
+    const usable = usableWeather(cached?.data, selected[0]);
     if (!force && usable && Date.parse(cached.data.expiresAt) > Date.now()) {
       $('#weather-refresh').disabled = false;
       paint(cached.data);
@@ -115,21 +130,11 @@ export function connectLocalPanel({state, onCityChange, onOpen}) {
       return;
     }
     if (usable) paint(cached.data, true);
-    else {
-      scene.clear();
-      $('#weather').innerHTML = '<strong class="weather-temp">—<sup>°C</sup></strong><span class="weather-condition">Haetaan säätietoja…</span>';
-      $('#weather-wind').textContent = '—';
-      $('#weather-rain').textContent = '—';
-      $('#weather-note').textContent = 'Ennuste päivittyy';
-    }
+    else waiting(selected);
     stage.setAttribute('aria-busy', 'true');
     $('#weather-refresh').disabled = true;
-    const timeout = setTimeout(() => requestController.abort(), 9000);
     try {
-      const response = await fetch('/api/weather?place=' + encodeURIComponent(selected[0]), {signal: requestController.signal});
-      if (!response.ok) throw Error('Weather unavailable');
-      const data = await response.json();
-      if (data.city !== selected[0] || !Number.isFinite(data.temperature) || !Number.isFinite(Date.parse(data.time)) || Math.abs(Date.now() - Date.parse(data.time)) > 4 * 3600000) throw Error('Invalid weather');
+      const data = await fetchWeather(selected[0], {signal: requestController.signal});
       if (requestSequence !== sequence) return;
       const entry = {data};
       memory.set(selected[0], entry);
@@ -138,17 +143,20 @@ export function connectLocalPanel({state, onCityChange, onOpen}) {
       schedule(Date.parse(data.expiresAt) || Date.now() + 600000);
     } catch {
       if (requestSequence !== sequence) return;
-      if (usable && Math.abs(Date.now() - Date.parse(cached.data.time)) <= 4 * 3600000) paint(cached.data, true);
+      if (usableWeather(cached?.data, selected[0])) paint(cached.data, true);
       else {
         scene.clear('unavailable');
-        $('#weather').innerHTML = '<span class="weather-unavailable">Säätietoja ei juuri nyt saada.</span>';
-        $('#weather-note').textContent = 'Kokeile päivitystä hetken kuluttua.';
+        stage.dataset.state = 'unavailable';
+        $('#weather-metrics').hidden = true;
+        $('#weather-badge').textContent = selected[1];
+        $('#weather').innerHTML = '<span class="weather-message"><strong>Ennuste ei latautunut</strong><span>Säätietoja ei saatu tällä kertaa.</span></span><button type="button" class="weather-retry">Yritä uudelleen <span aria-hidden="true">↻</span></button>';
+        $('#weather').querySelector('.weather-retry').addEventListener('click', () => weather(true));
+        $('#weather-note').textContent = 'Yritämme automaattisesti uudelleen hetken kuluttua.';
         $('#weather-status').textContent = selected[1] + ': sääennuste ei ole saatavilla.';
         stage.setAttribute('aria-busy', 'false');
       }
       schedule(Date.now() + 60000);
     } finally {
-      clearTimeout(timeout);
       if (requestSequence === sequence) $('#weather-refresh').disabled = false;
     }
   }
@@ -164,7 +172,7 @@ export function connectLocalPanel({state, onCityChange, onOpen}) {
     for (const option of options) option.setAttribute('aria-pressed', String(option.dataset.cityOption === id));
     $('#place-choice-note').textContent = source === 'ip' ? 'IP-sijainnin arvio' : source === 'default' ? 'Suomen sää · oletuspaikkakunta' : 'Valitsemasi paikkakunta';
     closePicker(source === 'manual');
-    weather();
+    if (requestedCity !== id) weather();
   }
 
   for (const option of options) option.addEventListener('click', () => setCity(option.dataset.cityOption));
