@@ -41,6 +41,9 @@
 .local-dashboard .weather-stage[data-period=twilight]{background:linear-gradient(160deg,#364562,#9c8195 58%,#3b5874 61%,#0c2643)}
 .local-dashboard .weather-stage:is([data-weather=rain],[data-weather=sleet],[data-weather=storm],[data-weather=cloud]){background:linear-gradient(160deg,#34506d,#8aabba 59%,#425f78 61%,#112d4b)}
 .local-dashboard .weather-stage:is([data-weather=rain],[data-weather=sleet],[data-weather=storm],[data-weather=cloud])[data-period=night]{background:linear-gradient(160deg,#111e34,#3a4c65 59%,#233a52 61%,#0b2039)}
+.local-dashboard .weather-stage:is([data-weather=rain],[data-weather=sleet],[data-weather=storm],[data-weather=cloud],[data-weather=snow],[data-weather=fog])[data-period=twilight]{background:linear-gradient(160deg,#273952,#677088 59%,#354c66 61%,#122a44)}
+.local-dashboard [data-period=twilight] .weather-clouds-front{filter:brightness(.8)}
+.local-dashboard [data-period=twilight] .weather-clouds-back{filter:brightness(.74)}
 .local-dashboard .weather-stage[data-weather=snow]{background:linear-gradient(160deg,#7893ad,#b9cdd9 59%,#5a7a91 61%,#163750)}
 .local-dashboard .weather-stage[data-weather=snow][data-period=night]{background:linear-gradient(160deg,#1c2c48,#5c7490 59%,#3b576e 61%,#122e47)}
 .local-dashboard .weather-stage[data-weather=fog]{background:linear-gradient(160deg,#657f94,#b6c9d0 59%,#637e91 61%,#234256)}
