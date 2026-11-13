@@ -79,6 +79,7 @@ export function connectLocalPanel({state, onCityChange, onOpen}) {
     if (event.detail.city !== state.city) return;
     astronomicalPeriod = event.detail.period;
     scene.setPeriod(astronomicalPeriod);
+    scene.setSolar(event.detail.altitude);
   });
 
   function paint(data, stale = false) {
@@ -155,7 +156,7 @@ export function connectLocalPanel({state, onCityChange, onOpen}) {
   function setCity(id, source = 'manual') {
     if (!CITIES.some(c => c[0] === id)) return;
     if (source === 'manual') manualSelection = true;
-    if (state.city !== id) astronomicalPeriod = undefined;
+    if (state.city !== id) { astronomicalPeriod = undefined; scene.setSolar(null); }
     onCityChange(id, source);
     $('#city-select').value = id;
     $('#city-caption').textContent = city()[1];

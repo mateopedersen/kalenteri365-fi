@@ -16,7 +16,6 @@ export function weatherAppearance(symbol = '') {
 export function connectWeatherScene(stage) {
   const canvas = stage.querySelector('canvas');
   const context = canvas.getContext('2d');
-  const motion = stage.querySelector('#weather-motion');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let appearance = {condition: 'loading', period: 'day', heavy: false};
   let width = 0, height = 0, particles = [], frame = 0, lastTime = 0;
@@ -72,8 +71,6 @@ export function connectWeatherScene(stage) {
     frame = 0;
     const stopped = paused || document.hidden || !visible;
     stage.dataset.motion = stopped ? 'paused' : 'playing';
-    motion.setAttribute('aria-pressed', String(paused));
-    motion.setAttribute('aria-label', paused ? 'Käynnistä sääanimaatio' : 'Pysäytä sääanimaatio');
     paint();
     if (!stopped && particles.length && context) {
       lastTime = performance.now();
@@ -94,7 +91,6 @@ export function connectWeatherScene(stage) {
     sync();
   }
 
-  motion.addEventListener('click', () => { paused = !paused; sync(); });
   reduced.addEventListener('change', () => { paused = reduced.matches; sync(); });
   document.addEventListener('visibilitychange', sync);
   new ResizeObserver(resize).observe(stage);
@@ -114,6 +110,12 @@ export function connectWeatherScene(stage) {
     setPeriod(period) {
       appearance.period = period;
       stage.dataset.period = period;
+    },
+    setSolar(altitude) {
+      const valid = Number.isFinite(altitude);
+      const height = valid ? Math.max(0, Math.min(1, altitude / 45)) : .8;
+      stage.style.setProperty('--weather-sun-y', (72 - height * 88).toFixed(1) + 'px');
+      stage.dataset.sunHeight = valid && altitude < 8 ? 'low' : 'high';
     },
     clear(condition = 'loading') {
       appearance = {condition, period: appearance.period, heavy: false};

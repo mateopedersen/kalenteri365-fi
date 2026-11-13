@@ -13,7 +13,7 @@ function weatherLandscape() {
       <linearGradient id="weather-reflection" x2="0" y2="1"><stop stop-color="#ffedbe" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
     </defs>
     <g class="weather-stars" fill="#fff7db"><circle cx="58" cy="57" r="1.2"/><circle cx="151" cy="30" r="1"/><circle cx="211" cy="67" r="1.2"/><circle cx="304" cy="39" r="1.4"/><circle cx="323" cy="100" r=".9"/><circle cx="88" cy="107" r=".8"/><circle cx="181" cy="102" r=".7"/></g>
-    <g class="weather-orb"><circle cx="265" cy="73" r="82" fill="url(#weather-halo)"/><circle cx="265" cy="73" r="29" fill="url(#weather-sun)"/><path d="M247 57a23 23 0 0 1 30-4" stroke="#fff" stroke-opacity=".7" stroke-width="2" stroke-linecap="round"/></g>
+    <g class="weather-orb"><g class="weather-sun-glow"><circle cx="265" cy="73" r="82" fill="url(#weather-halo)"/></g><g class="weather-sun-disc"><circle cx="265" cy="73" r="29" fill="url(#weather-sun)"/><path d="M247 57a23 23 0 0 1 30-4" stroke="#fff" stroke-opacity=".7" stroke-width="2" stroke-linecap="round"/></g></g>
     <g class="weather-moon"><circle cx="272" cy="61" r="25" fill="#dce9f1"/><circle cx="282" cy="51" r="25" fill="#173653"/><circle cx="255" cy="67" r="3" fill="#9db4c7" opacity=".5"/><circle cx="262" cy="78" r="2" fill="#9db4c7" opacity=".45"/></g>
     <path d="M0 164c43-14 71-6 111-16 36-9 77-6 106 2 44 12 84-6 143 0v110H0Z" fill="#8baabd" opacity=".3"/>
     <path d="M0 181c66-14 97 5 151-9 67-16 109-11 209-4v92H0Z" fill="url(#weather-water)"/>
@@ -56,7 +56,7 @@ export function localDashboard(helsinkiImage) {
     <div class="weather-stage" id="weather-stage" data-weather="loading" data-period="day" aria-busy="true">
       ${weatherLandscape()}
       <canvas id="weather-particles" aria-hidden="true"></canvas>
-      <div class="weather-stage-top"><span class="weather-badge">Sää nyt</span><button type="button" id="weather-motion" aria-label="Pysäytä sääanimaatio" aria-pressed="false"><svg viewBox="0 0 20 20" aria-hidden="true"><path class="weather-pause-icon" d="M6 5v10m8-10v10"/><path class="weather-play-icon" d="m7 5 7 5-7 5Z"/></svg></button></div>
+      <div class="weather-stage-top"><span class="weather-badge">Sää nyt</span></div>
       <div id="weather" class="weather-readout"><strong class="weather-temp">—<sup>°C</sup></strong><span class="weather-condition">Haetaan säätietoja…</span></div>
     </div>
     <p id="weather-status" class="sr-only" role="status"></p>

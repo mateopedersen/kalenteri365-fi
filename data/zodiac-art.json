@@ -1,0 +1,78 @@
+{
+  "version": "fi-porcelain-1",
+  "scope": "Original resolution-independent vector illustrations with layered modeled depth and material lighting. No raster or icon-font substitution.",
+  "artifacts": {
+    "oinas": {
+      "name": "Oinas",
+      "filename": "assets/art-source/zodiac-oinas.svg",
+      "sha256": "882021844288e05ab95e54e23ec16f2efe754b83f92f2c0b87ae4a4dda3bcb3a",
+      "bytes": 8575
+    },
+    "harka": {
+      "name": "Härkä",
+      "filename": "assets/art-source/zodiac-harka.svg",
+      "sha256": "a77792a6d7270c019b02bbbbc8b9cb497181386e3dc141ba78e498dae4c7f999",
+      "bytes": 5173
+    },
+    "kaksoset": {
+      "name": "Kaksoset",
+      "filename": "assets/art-source/zodiac-kaksoset.svg",
+      "sha256": "9f0760f01aa26f19c0e5d26b21b4f14348d3fd9b2d665f67adbf18749b963182",
+      "bytes": 7230
+    },
+    "rapu": {
+      "name": "Rapu",
+      "filename": "assets/art-source/zodiac-rapu.svg",
+      "sha256": "4268c28266571e58ccbd7f9b3bda7a8c523098edbbd6c5e269b9c11ec8b6d9a4",
+      "bytes": 7158
+    },
+    "leijona": {
+      "name": "Leijona",
+      "filename": "assets/art-source/zodiac-leijona.svg",
+      "sha256": "1911be0e44f54ddc038bc7b6c0942a4b41173645f1dfa69883a7901c12f85b2e",
+      "bytes": 13199
+    },
+    "neitsyt": {
+      "name": "Neitsyt",
+      "filename": "assets/art-source/zodiac-neitsyt.svg",
+      "sha256": "4451b9ebbd6f0663f7627a04d59fdb767214f61768ea558244cdd1dc08f49924",
+      "bytes": 7744
+    },
+    "vaaka": {
+      "name": "Vaaka",
+      "filename": "assets/art-source/zodiac-vaaka.svg",
+      "sha256": "dfc050811740a418a886f5f2fcf26656ef15339c29bb65d6690bd99e76d5e85d",
+      "bytes": 4562
+    },
+    "skorpioni": {
+      "name": "Skorpioni",
+      "filename": "assets/art-source/zodiac-skorpioni.svg",
+      "sha256": "36ad9a2d15aa2f2e805274ffc8b7d318f4f1ebc4d0d3dd01f3ebeecc5a2e4bb5",
+      "bytes": 8706
+    },
+    "jousimies": {
+      "name": "Jousimies",
+      "filename": "assets/art-source/zodiac-jousimies.svg",
+      "sha256": "7889e29ecb79efb1b85e739161b0adea870ea15b7eeaaa7a8b2c61651d92291c",
+      "bytes": 5806
+    },
+    "kauris": {
+      "name": "Kauris",
+      "filename": "assets/art-source/zodiac-kauris.svg",
+      "sha256": "4a1b490c95b24f981dc6f6734d84783e8f463d5cf7a79601b455a1be02904c39",
+      "bytes": 5848
+    },
+    "vesimies": {
+      "name": "Vesimies",
+      "filename": "assets/art-source/zodiac-vesimies.svg",
+      "sha256": "9aed38f7437f3d68a08ab88243b42272c749eaeb2d04f526bf0ce48c9ca422bd",
+      "bytes": 4478
+    },
+    "kalat": {
+      "name": "Kalat",
+      "filename": "assets/art-source/zodiac-kalat.svg",
+      "sha256": "6635662f84140107053a2ada3a8bbf57ca3ab5282dbd32b65b017599908543cf",
+      "bytes": 8413
+    }
+  }
+}

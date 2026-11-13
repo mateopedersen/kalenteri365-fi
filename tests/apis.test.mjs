@@ -10,7 +10,7 @@ test('all 12 Finnish horoscope editions advance at Helsinki midnight, vary by si
 test('collection and detail HTML refresh from the same Finnish day edition without JavaScript',async()=>{
  const{refreshHoroscopeHTML,edition}=await import('../lib/horoscope.mjs');const now=new Date('2026-11-12T12:00:00Z'),e=edition('2026-11-12',now);
  const html='<!-- COLLECTION:START --><time datetime="2020-01-01">vanha</time><h3 data-daily-title="rapu">vanha</h3><p data-daily-text="rapu">vanha</p><!-- COLLECTION:END -->';
- const updated=refreshHoroscopeHTML(html,'/horoskooppi/',now);assert(updated.includes(e.entries.rapu.title));assert(updated.includes(e.entries.rapu.overview));assert(updated.includes('datetime="2026-11-12"'));assert(!updated.includes('vanha'));
+ const updated=refreshHoroscopeHTML(html,'/horoskooppi/',now);assert(updated.includes(e.entries.rapu.title));assert(updated.includes(e.entries.rapu.summary));assert(updated.includes('datetime="2026-11-12"'));assert(!updated.includes('vanha'));
  const detail=refreshHoroscopeHTML('<!-- DAILY:START -->old<!-- DAILY:END -->','/horoskooppi/rapu/',now);assert(detail.includes(e.entries.rapu.title));
 });
 

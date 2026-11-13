@@ -42,7 +42,7 @@ export function connectEdition({state,persist}){
     const observer = new A.Observer(city[2], city[3], 0);
     const position = A.Equator('Sun', now, observer, true, true);
     const altitude = A.Horizon(now, observer, position.ra, position.dec).altitude;
-    window.dispatchEvent(new CustomEvent('fi-local-sky', {detail: {city: city[0], period: altitude >= -.833 ? 'day' : altitude >= -6 ? 'twilight' : 'night'}}));
+    window.dispatchEvent(new CustomEvent('fi-local-sky', {detail: {city: city[0], altitude, period: altitude >= -.833 ? 'day' : altitude >= -6 ? 'twilight' : 'night'}}));
     const fmt = value => value ? new Intl.DateTimeFormat('fi-FI', {timeZone: 'Europe/Helsinki', hour: '2-digit', minute: '2-digit'}).format(value) : '—';
     const progress = sun.polar === 'up' ? 50 : sun.rise && sun.set ? Math.max(0, Math.min(100, (now - sun.rise) / (sun.set - sun.rise) * 100)) : 0;
     $('#local-sun').style.setProperty('--day-progress', progress + '%');
