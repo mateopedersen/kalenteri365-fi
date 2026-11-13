@@ -1,0 +1,32 @@
+.holiday-details{align-items:start;gap:24px}
+.holiday-calendar{min-width:0;border:1px solid #c4d9eb;border-radius:24px;background:linear-gradient(145deg,#f4f9ff,#fff 55%,#f4f8fb);padding:24px;box-shadow:0 10px 30px #163a6409;scroll-margin-top:24px}
+.holiday-calendar>header{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.holiday-calendar-art{display:grid;place-items:center;width:70px;height:70px;flex-shrink:0;border:1px solid #d7e5f0;border-radius:20px;background:linear-gradient(135deg,#fff,#e7f0f8);box-shadow:0 4px 9px #1939580d}
+.holiday-calendar-art .art{width:64px;height:58px;object-fit:contain}
+.holiday-calendar h2{font-size:23px;line-height:1.3;margin:0;color:#153e6b;letter-spacing:-.025em}
+.holiday-calendar .eyebrow{font-size:10px;letter-spacing:.12em;margin:0 0 5px;color:#4c6b88}
+.holiday-date-preview{display:flex;align-items:center;gap:18px;padding:0 0 22px;border-bottom:1px solid #d6e2ec;margin-bottom:20px}
+.holiday-date-leaf{width:98px;flex:0 0 98px;text-align:center;background:#fff;border:1px solid #c2d4e6;border-radius:13px;overflow:hidden;box-shadow:0 3px 0 #d9e5ee,0 6px 13px #254a6b12}
+.holiday-date-leaf>span{display:block;background:#174e85;color:#fff;padding:6px 2px;font-size:11px;font-weight:700}
+.holiday-date-leaf>strong{display:block;font-size:42px;line-height:1.05;letter-spacing:-.05em;padding-top:8px;color:#123d6c}
+.holiday-date-leaf>small{display:block;font-size:10px;padding:6px 2px 10px;color:#42637e}
+.holiday-date-preview>div:last-child{min-width:0}.holiday-date-preview h3{font-size:20px;line-height:1.3;margin:0 0 8px;overflow-wrap:break-word}.holiday-date-preview time{display:block;font-size:18px;color:#154a7b;font-weight:700}.holiday-date-preview>div:last-child>span{font-size:13px;color:#47657c}
+.holiday-calendar-fields{display:grid;grid-template-columns:minmax(70px,.65fr) minmax(0,1.6fr);gap:10px;margin:0 0 18px}
+.holiday-calendar-fields label{display:grid;gap:6px;font-size:13px;font-weight:700;color:#385876;min-width:0}
+.holiday-calendar-fields select{width:100%;min-width:0;font-size:13px;min-height:48px;margin:0;padding:10px 30px 10px 10px;border-radius:11px;background-color:#fff}
+.holiday-calendar-services{display:grid;gap:10px}
+.holiday-service{display:grid!important;grid-template-columns:44px minmax(0,1fr) 20px;align-items:center;gap:12px;border:1px solid #bacee0;border-radius:14px;padding:13px 14px;min-height:78px;width:100%;text-align:left;background:#fff;color:#143c64;text-decoration:none!important;box-shadow:0 3px 5px #143e6305;font-family:inherit;cursor:pointer}
+.holiday-service:hover{background:#edf5fd;border-color:#6e9bc4}.holiday-service.is-primary{color:#fff;background:linear-gradient(125deg,#174d86,#0c345e);border-color:#103c69;box-shadow:0 5px 11px #153c6721}.holiday-service.is-primary:hover{background:#103f72}
+.holiday-service>.art{width:44px;height:44px;object-fit:contain}.holiday-service>svg{width:20px;height:20px;flex-shrink:0}.holiday-service>span{display:grid;gap:3px;min-width:0}.holiday-service strong{font-size:17px;line-height:1.3;overflow-wrap:break-word}.holiday-service small{font-size:12px;line-height:1.4;color:#496680}.holiday-service.is-primary small{color:#deebf7}
+.holiday-calendar-help,.holiday-calendar-status{font-size:12px;line-height:1.6;color:#466079;margin:15px 0 0}.holiday-calendar-status:empty{display:none}
+.holiday-calendar-footer{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:20px;padding-top:17px;border-top:1px solid #d6e2ec}
+.holiday-calendar-footer button{display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid #cbdce9;border-radius:11px;min-height:50px;padding:8px;color:#163e65;background:#fff;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer}.holiday-calendar-footer .art{width:28px;height:28px;object-fit:contain}
+.page-heading .heading-tools .btn{display:flex;justify-content:center;align-items:center;gap:10px;font-size:15px;padding:11px 15px;border-radius:13px;min-height:54px;background:#fff;border:1px solid #c5d9e9;box-shadow:0 3px 7px #183d6310}.page-heading .heading-tools .art{width:34px;height:32px;object-fit:contain;flex-shrink:0}
+@media(min-width:1001px){.holiday-details{grid-template-columns:minmax(0,1.65fr) minmax(330px,1fr)}.holiday-calendar{position:sticky;top:20px}}
+@media(max-width:1000px){.holiday-details{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){.holiday-calendar{padding:20px 16px;border-radius:20px}.holiday-calendar h2{font-size:22px}.holiday-calendar-fields{grid-template-columns:minmax(0,1fr)}.holiday-calendar-fields select{font-size:15px}.holiday-calendar-services{gap:12px}.holiday-service{padding:13px;grid-template-columns:44px minmax(0,1fr) 20px}.holiday-service strong{font-size:17px}.holiday-service small{font-size:13px}.holiday-date-preview h3{font-size:19px}}
+
+.page-heading>.heading-tools{flex:0 0 310px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:310px;max-width:100%;margin:0;align-self:center}
+.page-heading>.heading-tools>a[href="#lisaa-kalenteriin"]{grid-column:1/-1}
+.page-heading>.heading-tools .btn{min-width:0;font-size:14px;padding:10px;gap:8px;white-space:normal}
+@media(max-width:750px){.page-heading>.heading-tools{grid-column:1/-1;width:100%;max-width:none;flex:auto;margin-top:6px}.page-heading>.heading-tools .art{width:30px;height:30px}}

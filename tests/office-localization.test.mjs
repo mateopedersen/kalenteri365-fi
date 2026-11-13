@@ -9,7 +9,7 @@ import {pathToFileURL} from 'node:url';
 // use an isolated empty lookup; calendar arithmetic is tested independently.
 const dir = await mkdtemp(join(tmpdir(), 'kalenteri365-office-'));
 after(() => rm(dir, {recursive: true, force: true}));
-for (const file of ['engine.mjs', 'office-exports.mjs', 'binary-exports.mjs']) {
+for (const file of ['engine.mjs', 'office-exports.mjs', 'binary-exports.mjs', 'templates.mjs']) {
   await writeFile(join(dir, file), await readFile(new URL('../assets/studio/' + file, import.meta.url)));
 }
 await writeFile(join(dir, 'finland-data.mjs'), 'export const FINLAND_HOLIDAYS={};export const STUDIO_PHOTOS=[];');

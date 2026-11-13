@@ -352,6 +352,99 @@
       "publisher": "Maanpuolustuskorkeakoulu",
       "scope": "Yliopiston julkaisemat opetusperiodit ja opetustauot",
       "checkedAt": "2026-11-12"
+    },
+    {
+      "id": "tampere-schools",
+      "title_fi": "Julkaistut koulujen työ- ja loma-ajat",
+      "url": "https://www.tampere.fi/koulutus/perusopetus/koulujen-loma-ajat",
+      "publisher": "Tampereen kaupunki",
+      "scope": "Nimetyn lukuvuoden perusopetus",
+      "checkedAt": "2026-11-13"
+    },
+    {
+      "id": "turku-schools",
+      "title_fi": "Julkaistut koulujen työ- ja loma-ajat",
+      "url": "https://www.turku.fi/perusopetus/tyo-ja-loma-ajat-koulussa",
+      "publisher": "Turun kaupunki",
+      "scope": "Nimetyn lukuvuoden perusopetus",
+      "checkedAt": "2026-11-13"
+    },
+    {
+      "id": "jyvaskyla-schools",
+      "title_fi": "Julkaistut koulujen työ- ja loma-ajat",
+      "url": "https://www.jyvaskyla.fi/opetus/perusopetus-jyvaskylassa/koulujen-tyo-ja-loma-ajat",
+      "publisher": "Jyväskylän kaupunki",
+      "scope": "Nimetyn lukuvuoden perusopetus",
+      "checkedAt": "2026-11-13"
+    },
+    {
+      "id": "kuopio-schools",
+      "title_fi": "Julkaistut koulujen työ- ja loma-ajat",
+      "url": "https://www.kuopio.fi/app/uploads/2025/11/tyo-ja-vapaapaivat-2026_2027.pdf",
+      "publisher": "Kuopion kaupunki",
+      "scope": "Nimetyn lukuvuoden perusopetus",
+      "checkedAt": "2026-11-13"
+    },
+    {
+      "id": "lahti-schools",
+      "title_fi": "Julkaistut koulujen työ- ja loma-ajat",
+      "url": "https://www.lahti.fi/kasvatus-ja-koulutus/koulujen-tyo-ja-loma-ajat/",
+      "publisher": "Lahden kaupunki",
+      "scope": "Nimetyn lukuvuoden perusopetus",
+      "checkedAt": "2026-11-13"
+    },
+    {
+      "id": "pori-schools",
+      "title_fi": "Julkaistut koulujen työ- ja loma-ajat",
+      "url": "https://www.pori.fi/kasvatus-ja-koulutus/perusopetus/koulut-ja-palvelut/tyo-ja-loma-ajat/",
+      "publisher": "Porin kaupunki",
+      "scope": "Nimetyn lukuvuoden perusopetus",
+      "checkedAt": "2026-11-13"
+    },
+    {
+      "id": "rovaniemi-schools",
+      "title_fi": "Julkaistut koulujen työ- ja loma-ajat",
+      "url": "https://www.rovaniemi.fi/Koulutus-ja-varhaiskasvatus/Lukio-ja-ammatillinen-koulutus",
+      "publisher": "Rovaniemen kaupunki",
+      "scope": "Nimetyn lukuvuoden perusopetus",
+      "checkedAt": "2026-11-13"
+    },
+    {
+      "id": "vaasa-schools",
+      "title_fi": "Julkaistut koulujen työ- ja loma-ajat",
+      "url": "https://www.vaasa.fi/asu-ja-ela/varhaiskasvatus-ja-koulut/perusopetus/perusopetuksen-lukuvuosi-ja-loma-ajat/",
+      "publisher": "Vaasan kaupunki",
+      "scope": "Nimetyn lukuvuoden perusopetus",
+      "checkedAt": "2026-11-13"
+    },
+    {
+      "id": "helsinki-schools-sv",
+      "title_fi": "Svenskspråkiga grundskolor och gymnasier, beslut §43",
+      "url": "https://paatokset.hel.fi/sv/arende/hel-2025-016789/abdd01ba-d960-4194-8ee6-330aaedff9db",
+      "publisher": "Helsingfors stad",
+      "scope": "Ruotsinkieliset koulut, lukuvuodet 2026/2027 ja 2027/2028",
+      "checkedAt": "2026-11-13"
+    },
+    {
+      "id": "helsinki-upper-secondary",
+      "publisher": "Helsingin kaupunki",
+      "title_fi": "Suomenkielisten lukioiden työ- ja loma-ajat 2026–2028",
+      "url": "https://paatokset.hel.fi/fi/asia/hel-2025-015951",
+      "checkedAt": "2026-11-13"
+    },
+    {
+      "id": "omnia-vocational",
+      "publisher": "Omnia",
+      "title_fi": "Ammatillisen koulutuksen lukuvuoden aikataulut 2026–2027",
+      "url": "https://www.omnia.fi/opiskelijan-sivut/omnian-lukuvuoden-aikataulut/ammatillisen-koulutuksen-lukuvuoden-aikataulut/",
+      "checkedAt": "2026-11-13"
+    },
+    {
+      "id": "haaga-helia-academic",
+      "publisher": "Haaga-Helia ammattikorkeakoulu",
+      "title_fi": "Lukuvuoden päivämäärät 2026–2027",
+      "url": "https://www.haaga-helia.fi/fi/opiskelu/lukuvuoden-paivamaarat",
+      "checkedAt": "2026-11-13"
     }
   ],
   "schoolCalendars": [
@@ -594,6 +687,286 @@
       ],
       "lastSchoolDay": "2028-06-03",
       "notes_fi": "Lähteen lomavälit sisältävät viikonloput."
+    },
+    {
+      "municipality": "Tampere",
+      "academicYear": "2026/2027",
+      "schoolType": "perusopetus",
+      "language": "fi",
+      "status": "published_by_provider",
+      "sourceId": "tampere-schools",
+      "autumnStart": "2026-08-06",
+      "autumnBreak": [
+        "2026-10-12",
+        "2026-10-16"
+      ],
+      "christmasBreak": [
+        "2026-12-19",
+        "2027-01-10"
+      ],
+      "springStart": "2027-01-11",
+      "winterBreak": [
+        "2027-03-01",
+        "2027-03-05"
+      ],
+      "lastSchoolDay": "2027-06-05",
+      "notes_fi": "Kiirastorstai on vapaa. Julkaistut lomavälit voivat sisältää viikonlopun.",
+      "additionalBreaks": [
+        {
+          "label": "Pääsiäisloma",
+          "start": "2027-03-25",
+          "end": "2027-03-29"
+        }
+      ]
+    },
+    {
+      "municipality": "Tampere",
+      "academicYear": "2027/2028",
+      "schoolType": "perusopetus",
+      "language": "fi",
+      "status": "published_by_provider",
+      "sourceId": "tampere-schools",
+      "autumnStart": "2027-08-11",
+      "autumnBreak": [
+        "2027-10-18",
+        "2027-10-22"
+      ],
+      "christmasBreak": [
+        "2027-12-23",
+        "2028-01-09"
+      ],
+      "springStart": "2028-01-10",
+      "winterBreak": [
+        "2028-02-28",
+        "2028-03-03"
+      ],
+      "lastSchoolDay": "2028-06-03",
+      "notes_fi": "Päivitetty päätös 27.10.2026 korvaa aiemman vuoden 2027–2028 aloitusajan.",
+      "additionalBreaks": [
+        {
+          "label": "Pääsiäisloma",
+          "start": "2028-04-14",
+          "end": "2028-04-17"
+        }
+      ]
+    },
+    {
+      "municipality": "Turku",
+      "academicYear": "2026/2027",
+      "schoolType": "perusopetus",
+      "language": "fi",
+      "status": "published_by_provider",
+      "sourceId": "turku-schools",
+      "autumnStart": "2026-08-11",
+      "autumnBreak": [
+        "2026-10-12",
+        "2026-10-16"
+      ],
+      "christmasBreak": [
+        "2026-12-19",
+        "2027-01-06"
+      ],
+      "springStart": "2027-01-07",
+      "winterBreak": [
+        "2027-02-22",
+        "2027-02-26"
+      ],
+      "lastSchoolDay": "2027-06-05",
+      "notes_fi": "Koulujen ensimmäisen päivän kellonajat tarkistetaan omasta koulusta.",
+      "additionalBreaks": []
+    },
+    {
+      "municipality": "Turku",
+      "academicYear": "2027/2028",
+      "schoolType": "perusopetus",
+      "language": "fi",
+      "status": "published_by_provider",
+      "sourceId": "turku-schools",
+      "autumnStart": "2027-08-11",
+      "autumnBreak": [
+        "2027-10-18",
+        "2027-10-24"
+      ],
+      "christmasBreak": [
+        "2027-12-23",
+        "2028-01-09"
+      ],
+      "springStart": "2028-01-10",
+      "winterBreak": [
+        "2028-02-21",
+        "2028-02-27"
+      ],
+      "lastSchoolDay": "2028-06-03",
+      "notes_fi": "Lähteen lomavälit sisältävät viikonloput.",
+      "additionalBreaks": []
+    },
+    {
+      "municipality": "Jyväskylä",
+      "academicYear": "2026/2027",
+      "schoolType": "perusopetus",
+      "language": "fi",
+      "status": "published_by_provider",
+      "sourceId": "jyvaskyla-schools",
+      "autumnStart": "2026-08-12",
+      "autumnBreak": [
+        "2026-10-12",
+        "2026-10-16"
+      ],
+      "christmasBreak": [
+        "2026-12-21",
+        "2027-01-06"
+      ],
+      "springStart": "2027-01-07",
+      "winterBreak": [
+        "2027-03-01",
+        "2027-03-05"
+      ],
+      "lastSchoolDay": "2027-06-05",
+      "notes_fi": "Tarkista mahdolliset koulukohtaiset työpäivät oman koulun tiedotteesta.",
+      "additionalBreaks": []
+    },
+    {
+      "municipality": "Kuopio",
+      "academicYear": "2026/2027",
+      "schoolType": "perusopetus",
+      "language": "fi",
+      "status": "published_by_provider",
+      "sourceId": "kuopio-schools",
+      "autumnStart": "2026-08-12",
+      "autumnBreak": [
+        "2026-10-12",
+        "2026-10-16"
+      ],
+      "christmasBreak": [
+        "2026-12-23",
+        "2027-01-06"
+      ],
+      "springStart": "2027-01-07",
+      "winterBreak": [
+        "2027-03-08",
+        "2027-03-12"
+      ],
+      "lastSchoolDay": "2027-06-05",
+      "notes_fi": "Kaupungin kalenterissa myös 7.5.2027 on vapaapäivä.",
+      "additionalBreaks": [
+        {
+          "label": "Vapaapäivä helatorstain jälkeen",
+          "start": "2027-05-07",
+          "end": "2027-05-07"
+        }
+      ]
+    },
+    {
+      "municipality": "Lahti",
+      "academicYear": "2026/2027",
+      "schoolType": "perusopetus",
+      "language": "fi",
+      "status": "published_by_provider",
+      "sourceId": "lahti-schools",
+      "autumnStart": "2026-08-12",
+      "autumnBreak": [
+        "2026-10-19",
+        "2026-10-25"
+      ],
+      "christmasBreak": [
+        "2026-12-19",
+        "2027-01-03"
+      ],
+      "springStart": "2027-01-04",
+      "winterBreak": [
+        "2027-03-01",
+        "2027-03-07"
+      ],
+      "lastSchoolDay": "2027-06-05",
+      "notes_fi": "Perusopetus. Lukioiden joululoma ja esiopetuksen aloitus poikkeavat tästä. 7.5.2027 on vapaa.",
+      "additionalBreaks": [
+        {
+          "label": "Vapaapäivä helatorstain jälkeen",
+          "start": "2027-05-07",
+          "end": "2027-05-07"
+        }
+      ]
+    },
+    {
+      "municipality": "Pori",
+      "academicYear": "2026/2027",
+      "schoolType": "perusopetus",
+      "language": "fi",
+      "status": "published_by_provider",
+      "sourceId": "pori-schools",
+      "autumnStart": "2026-08-11",
+      "autumnBreak": [
+        "2026-10-19",
+        "2026-10-23"
+      ],
+      "christmasBreak": [
+        "2026-12-19",
+        "2027-01-06"
+      ],
+      "springStart": "2027-01-07",
+      "winterBreak": [
+        "2027-02-22",
+        "2027-02-26"
+      ],
+      "lastSchoolDay": "2027-06-05",
+      "notes_fi": "Joululoma on kaupungin verkkosivun mukaan 19.12.–6.1.; vanhassa PDF:ssä alku on 21.12. Viikonlopun ero ei muuta koulupäiviä.",
+      "additionalBreaks": []
+    },
+    {
+      "municipality": "Rovaniemi",
+      "academicYear": "2026/2027",
+      "schoolType": "perusopetus",
+      "language": "fi",
+      "status": "published_by_provider",
+      "sourceId": "rovaniemi-schools",
+      "autumnStart": "2026-08-12",
+      "autumnBreak": [
+        "2026-10-12",
+        "2026-10-16"
+      ],
+      "christmasBreak": [
+        "2026-12-23",
+        "2027-01-06"
+      ],
+      "springStart": "2027-01-07",
+      "winterBreak": [
+        "2027-03-08",
+        "2027-03-12"
+      ],
+      "lastSchoolDay": "2027-06-05",
+      "notes_fi": "Kaupungin julkaisu kattaa peruskoulut ja lukiot. 7.5.2027 on lisäksi vapaapäivä.",
+      "additionalBreaks": [
+        {
+          "label": "Vapaapäivä helatorstain jälkeen",
+          "start": "2027-05-07",
+          "end": "2027-05-07"
+        }
+      ]
+    },
+    {
+      "municipality": "Vaasa",
+      "academicYear": "2026/2027",
+      "schoolType": "perusopetus",
+      "language": "fi",
+      "status": "published_by_provider",
+      "sourceId": "vaasa-schools",
+      "autumnStart": "2026-08-12",
+      "autumnBreak": [
+        "2026-10-12",
+        "2026-10-16"
+      ],
+      "christmasBreak": [
+        "2026-12-22",
+        "2027-01-06"
+      ],
+      "springStart": "2027-01-07",
+      "winterBreak": [
+        "2027-03-01",
+        "2027-03-05"
+      ],
+      "lastSchoolDay": "2027-06-05",
+      "notes_fi": "Suomen- ja ruotsinkielinen perusopetus. Koulu voi vaihtaa 7.5. koulupäivän lauantaiksi 22.5.2027; tarkista oman koulun päätös.",
+      "additionalBreaks": []
     }
   ],
   "universityCalendars": [
@@ -2001,5 +2374,80 @@
       }
     ],
     "additionalNotes_fi": "Vaalipäivät ja presidentin virkaanastuminen ovat erillisiä virallisia liputuspäiviä. Ahvenanmaalla ja saamelaisilla on omat liputuspäivät. Tove Janssonin 9.8. on hyödyllinen merkkipäivä, mutta tulevien vuosien liputussuositus on tarkistettava vuosikohtaisesti. Suomen luonnon päivä on ministeriön tässä lähteessä vakiintunut, ei asetuksen virallinen päivä."
-  }
+  },
+  "schoolVariants": [
+    {
+      "municipality": "Helsinki",
+      "academicYear": "2026/2027",
+      "schoolType": "perusopetus",
+      "language": "sv",
+      "status": "published_by_provider",
+      "sourceId": "helsinki-schools-sv",
+      "autumnStart": "2026-08-12",
+      "autumnBreak": [
+        "2026-10-12",
+        "2026-10-16"
+      ],
+      "christmasBreak": [
+        "2026-12-21",
+        "2027-01-06"
+      ],
+      "springStart": "2027-01-07",
+      "winterBreak": [
+        "2027-02-22",
+        "2027-02-26"
+      ],
+      "lastSchoolDay": "2027-06-05",
+      "notes_fi": "Ruotsinkielinen perusopetus. Koulukohtaiset poikkeukset tarkistetaan koulun tiedotteesta."
+    },
+    {
+      "municipality": "Helsinki",
+      "academicYear": "2027/2028",
+      "schoolType": "perusopetus",
+      "language": "sv",
+      "status": "published_by_provider",
+      "sourceId": "helsinki-schools-sv",
+      "autumnStart": "2027-08-11",
+      "autumnBreak": [
+        "2027-10-18",
+        "2027-10-22"
+      ],
+      "christmasBreak": [
+        "2027-12-23",
+        "2028-01-07"
+      ],
+      "springStart": "2028-01-10",
+      "winterBreak": [
+        "2028-02-21",
+        "2028-02-25"
+      ],
+      "lastSchoolDay": "2028-06-03",
+      "notes_fi": "Ruotsinkielinen perusopetus. Esiopetus päättyy jo 2.6.2028."
+    },
+    {
+      "municipality": "Vaasa",
+      "academicYear": "2026/2027",
+      "schoolType": "perusopetus",
+      "language": "sv",
+      "status": "published_by_provider",
+      "sourceId": "vaasa-schools",
+      "autumnStart": "2026-08-12",
+      "autumnBreak": [
+        "2026-10-12",
+        "2026-10-16"
+      ],
+      "christmasBreak": [
+        "2026-12-22",
+        "2027-01-06"
+      ],
+      "springStart": "2027-01-07",
+      "winterBreak": [
+        "2027-03-01",
+        "2027-03-05"
+      ],
+      "lastSchoolDay": "2027-06-05",
+      "notes_fi": "Ruotsinkielinen perusopetus. Suomen- ja ruotsinkielinen perusopetus. Koulu voi vaihtaa 7.5. koulupäivän lauantaiksi 22.5.2027; tarkista oman koulun päätös.",
+      "additionalBreaks": []
+    }
+  ]
 }

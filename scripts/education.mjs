@@ -1,3 +1,6 @@
+import {educationHub,writeEducationFeeds} from '../src/education-hub.mjs';
+import {schoolPeriods} from '../assets/community-core.mjs';
+import {schoolWorkspace} from '../src/community-view.mjs';
 import { photo, placeCover } from "../src/photos.mjs";
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -14,7 +17,7 @@ const slug = (value) =>
     .replace(/^-|-$/g, "");
 const range = (dates) => dates.map((d) => fi(parse(d))).join("–");
 const source = (id) =>
-  `<p class="small">${link(sources[id].url, sources[id].publisher + " · " + sources[id].title_fi)} · Tarkistettu ${fi(parse(data.checkedAt))}</p>`;
+  `<p class="small">${link(sources[id].url, sources[id].publisher + " · " + sources[id].title_fi)} · Tarkistettu ${fi(parse(sources[id].checkedAt || data.checkedAt))}</p>`;
 function periodICS(periods, title) {
   const x = (s) =>
     s
@@ -58,20 +61,13 @@ function periodICS(periods, title) {
   );
 }
 export async function educationPages({ page, OUT }) {
+  await writeEducationFeeds(OUT,fs,path);
   const cities = [...new Set(data.schoolCalendars.map((c) => c.municipality))],
     institutions = [
       ...new Set(data.universityCalendars.map((c) => c.institution)),
     ];
-  const schoolPeriods = (r) =>
-    [
-      ["Syysloma", r.autumnBreak],
-      ["Joululoma", r.christmasBreak],
-      ["Talviloma", r.winterBreak],
-    ]
-      .filter(([, d]) => d?.length === 2)
-      .map(([label, d]) => ({ label, start: d[0], end: d[1] }));
   const row = (r) =>
-    `<article class="school-year panel" data-school-year="${r.academicYear}"><p class="eyebrow">LUKUVUOSI ${r.academicYear.replace("/", "–")}</p><h3>${r.municipality}</h3>${table(["Loma tai koulupäivä", "Ajankohta"], [["Koulu alkaa", fi(parse(r.autumnStart))], ...schoolPeriods(r).map((p) => [p.label, range([p.start, p.end])]), ["Kevätlukukausi alkaa", fi(parse(r.springStart))], ["Lukuvuosi päättyy", fi(parse(r.lastSchoolDay))]])}<p>${esc(r.notes_fi || "")}</p><div class="actions">${link("/lataukset/koululomat-" + slug(r.municipality) + "-" + r.academicYear.replace("/", "-") + ".ics", art("ics") + " Lisää lomakalenteri " + icon("download"), "btn secondary")}</div>${source(r.sourceId)}</article>`;
+    `<article class="school-year panel" data-school-year="${r.academicYear}"><p class="eyebrow">LUKUVUOSI ${r.academicYear.replace("/", "–")}</p><h3>${r.municipality}</h3><p class="community-scope">Kunnan suomenkielinen perusopetus</p>${table(["Loma tai koulupäivä", "Ajankohta"], [["Koulu alkaa", fi(parse(r.autumnStart))], ...schoolPeriods(r).map((p) => [p.label, range([p.start, p.end])]), ["Kevätlukukausi alkaa", fi(parse(r.springStart))], ["Lukuvuosi päättyy", fi(parse(r.lastSchoolDay))]])}<p>${esc(r.notes_fi || "")}</p><div class="actions">${link("/lataukset/koululomat-" + slug(r.municipality) + "-" + r.academicYear.replace("/", "-") + ".ics", art("ics") + " Lisää lomakalenteri " + icon("download"), "btn secondary")}</div>${source(r.sourceId)}</article>`;
   function universityCard(name) {
     const records = data.universityCalendars.filter(
       (r) => r.institution === name,
@@ -87,7 +83,7 @@ export async function educationPages({ page, OUT }) {
       const id = CITIES.find((c) => c[1] === name)?.[0] || slug(name);
       return link(
         "/koulujen-lomat/" + id + "/",
-        `<div class="education-photo">${photo(id) || art("school")}</div><div class="education-card-copy"><h3>${name}</h3><p>Julkaistut loma-ajat 2026–2028</p></div>`,
+        `<div class="education-photo">${photo(id) || art("school")}</div><div class="education-card-copy"><h3>${name}</h3><p>${data.schoolCalendars.filter(r=>r.municipality===name).map(r=>r.academicYear.replace("/","–")).join(", ")}</p></div>`,
         "tool-card",
       );
     })
@@ -95,8 +91,8 @@ export async function educationPages({ page, OUT }) {
   await page(
     "/koulujen-lomat/",
     "Koulujen lomat Suomessa",
-    "Paikkakuntakohtaiset syys-, joulu- ja talvilomat sekä lukuvuoden aloitus ja päättyminen.",
-    `<div class="education-intro"><p>${data.copy_fi.schoolIntro}</p><div class="actions">${link("#koululomat", "Koulujen lomat " + icon("chevron"), "btn")}${link("/yliopistojen-kalenterit/", "Yliopistojen kalenterit " + icon("arrow"), "btn secondary")}</div></div><section id="koululomat"><h2>Valitse paikkakunta</h2><div class="cards education-cards">${cards}</div></section><section class="panel topic-guide"><h2>Jokaisella koululla on oma aikataulunsa</h2><p>Alla olevat tiedot koskevat nimettyjen kuntien suomenkielistä perusopetusta. Lukioiden, esiopetuksen ja ammatillisen koulutuksen ajat voivat poiketa. Myöhempien lukuvuosien tietoja ei johdeta aiemmista vuosista.</p><p>Tarkista koulukohtaiset poikkeukset opetuksen järjestäjältä. Yliopistojen opetusperiodit ja tenttiviikot löytyvät omasta korkeakoulukalenteristaan.</p></section><section class="content-section"><h2>Yliopistojen opetusperiodit</h2><p>${data.copy_fi.universityIntro}</p><div class="cards education-cards">${institutions.map(universityCard).join("")}</div>${link("/yliopistojen-kalenterit/", "Vertaa korkeakouluja " + icon("arrow"), "btn")}</section>`,
+    "Alakoulu, yläkoulu, lukio, ammatillinen koulutus ja korkeakoulut. Vertaa julkaistuja loma-aikoja ja opetusperiodeja sekä lisää valitut päivät kalenteriin.",
+    educationHub({cityCards:cards}),
   );
   for (const name of cities) {
     const id = CITIES.find((c) => c[1] === name)?.[0] || slug(name),
@@ -104,16 +100,8 @@ export async function educationPages({ page, OUT }) {
     await page(
       "/koulujen-lomat/" + id + "/",
       name + " | Koulujen lomat",
-      {
-        Helsinki: "Helsingin",
-        Espoo: "Espoon",
-        Vantaa: "Vantaan",
-        Tampere: "Tampereen",
-        Oulu: "Oulun",
-        Tuusula: "Tuusulan",
-      }[name] +
-        " julkaistut koulujen loma-ajat lukuvuosina 2026–2027 ja 2027–2028.",
-      `${placeCover(id, name)}<div class="cards school-records">${records.map(row).join("")}</div>`,
+      `${name}: suomenkielisen perusopetuksen vahvistetut syyslomat, talvilomat ja joululomat. Vertaa paikkakuntia ja tallenna kalenteri.`,
+      `${placeCover(id, name)}${schoolWorkspace(name)}<div class="cards school-records">${records.map(row).join("")}</div>`,
     );
     for (const r of records) {
       const file =
@@ -134,7 +122,7 @@ export async function educationPages({ page, OUT }) {
           " " +
           r.academicYear.replace("/", "–") +
           ".",
-        row(r),
+        schoolWorkspace(name)+row(r),
       );
     }
   }

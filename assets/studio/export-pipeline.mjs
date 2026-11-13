@@ -10,7 +10,7 @@ export function physicalSVG(svg,s){const d=dimensions(s);return svg.replace(/wid
 export function exportName(s,scope='current'){
  const stem=(s.title||'kalenteri').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/gi,'-').replace(/^-|-$/g,'').slice(0,50)||'kalenteri';
  const yearStem=new RegExp('(^|-)'+s.year+'($|-)').test(stem)?stem:`${stem}-${s.year}`;
- return `${yearStem}${s.view==='month'&&scope!=='all'?'-'+String(s.month).padStart(2,'0'):''}`;
+ return `${yearStem}${s.view==='week'?'-viikko-'+s.weekDate:s.view==='blank'?'-pohja':''}${s.view==='month'&&scope!=='all'?'-'+String(s.month).padStart(2,'0'):''}`;
 }
 export async function rasterize(svg,s,mime='image/png',signal){
  check(signal);const size=rasterDimensions(s),canvas=document.createElement('canvas');

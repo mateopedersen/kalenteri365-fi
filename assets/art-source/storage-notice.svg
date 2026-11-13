@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160" fill="none">
+<defs>
+ <linearGradient id="paper" x1="48" y1="27" x2="111" y2="128" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#dbeaf4"/></linearGradient>
+ <linearGradient id="blue" x1="50" y1="23" x2="99" y2="65" gradientUnits="userSpaceOnUse"><stop stop-color="#4e95c9"/><stop offset=".5" stop-color="#185788"/><stop offset="1" stop-color="#073467"/></linearGradient>
+ <linearGradient id="shield" x1="94" y1="85" x2="124" y2="134" gradientUnits="userSpaceOnUse"><stop stop-color="#5889a2"/><stop offset=".5" stop-color="#28556e"/><stop offset="1" stop-color="#183852"/></linearGradient>
+ <linearGradient id="edge" x1="37" y1="42" x2="123" y2="124" gradientUnits="userSpaceOnUse"><stop stop-color="#a9c7dc"/><stop offset="1" stop-color="#557c99"/></linearGradient>
+ <filter id="shadow" x="5" y="5" width="150" height="155" filterUnits="userSpaceOnUse"><feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#23486a" flood-opacity=".2"/></filter>
+ <filter id="ground"><feGaussianBlur stdDeviation="3"/></filter>
+</defs>
+<ellipse cx="81" cy="137" rx="48" ry="6" fill="#214d70" opacity=".17" filter="url(#ground)"/>
+<g filter="url(#shadow)">
+ <path d="M37 37q0-8 9-8h62q9 0 10 9l4 80q0 8-8 10l-65 5q-9 0-10-9z" fill="url(#edge)"/>
+ <path d="M35 34q0-8 9-8h63q8 0 9 9l2 80q0 8-8 9l-64 4q-8 0-9-8z" fill="url(#paper)" stroke="#c1d5e2"/>
+ <path d="M35 35q0-9 9-9h63q9 0 9 9v23l-80 4z" fill="url(#blue)"/>
+ <path d="M37 59l77-4" stroke="#fff" stroke-opacity=".5"/>
+ <g stroke="#e3edf4" stroke-width="5" stroke-linecap="round"><path d="M52 23v15M98 23v15"/></g>
+ <g stroke="#65859d" stroke-width="2" stroke-linecap="round"><path d="M53 23v13M99 23v13"/></g>
+ <g fill="#acc8da"><rect x="50" y="73" width="11" height="10" rx="2"/><rect x="70" y="72" width="11" height="10" rx="2"/><rect x="90" y="71" width="11" height="10" rx="2"/><rect x="50" y="91" width="11" height="10" rx="2"/><rect x="50" y="109" width="11" height="10" rx="2"/></g>
+ <rect x="70" y="90" width="12" height="12" rx="3" fill="#1d6397"/>
+ <path d="m92 91 18-7 20 7v20q-1 16-20 27-19-11-20-27V93z" fill="#bad1da"/>
+ <path d="m93 94 17-6 17 6v17q0 14-17 24-17-10-17-24z" fill="url(#shield)" stroke="#e0edf3"/>
+ <path d="m101 109 6 6 12-14" stroke="#f5fbfe" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+ <path d="m96 95 14-5 13 5" stroke="#b7d7df" stroke-opacity=".6" stroke-linecap="round"/>
+</g></svg>

@@ -545,7 +545,6 @@
     "width": 1200,
     "height": 800,
     "applicableSlugs": [
-      "juhannuspaiva",
       "juhannusaatto"
     ],
     "reviewedAt": "2026-11-12"
@@ -606,9 +605,7 @@
     "width": 1200,
     "height": 781,
     "applicableSlugs": [
-      "jouluaatto",
-      "joulupaiva",
-      "tapaninpaiva"
+      "joulupaiva"
     ],
     "reviewedAt": "2026-11-12"
   },
@@ -688,8 +685,6 @@
     "width": 800,
     "height": 1200,
     "applicableSlugs": [
-      "paasiaispaiva",
-      "toinen-paasiaispaiva",
       "palmusunnuntai",
       "virpominen"
     ],
@@ -766,7 +761,7 @@
     "source": "https://commons.wikimedia.org/wiki/File:The_world%E2%80%99s_largest_flag_of_Finland_in_Hamina.jpg",
     "original": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/The_world%E2%80%99s_largest_flag_of_Finland_in_Hamina.jpg/1280px-The_world%E2%80%99s_largest_flag_of_Finland_in_Hamina.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "alt": "Suomen lippu korkeassa lipputangossa Haminassa",
-    "caption": "Suomen lippu Haminassa. Isänpäivä on Suomessa virallinen liputuspäivä.",
+    "caption": "Suomen lippu Haminassa. Valokuva havainnollistaa veteraanipäivän liputusta.",
     "changes": "Pienennys ja WebP-muunnos.",
     "sha256": "1757c701cee28f900b104fef6dbee53edc77443cae6a443ded79304360d3f46c",
     "width": 798,
@@ -992,9 +987,6 @@
     "width": 1200,
     "height": 956,
     "applicableSlugs": [
-      "loppiainen",
-      "pitkaperjantai",
-      "helatorstai",
       "helluntaipaiva"
     ]
   },
@@ -1128,7 +1120,6 @@
     "caption": "Vuodenvaihteen ilotulitus Helsingin tuomiokirkon edustalla.",
     "changes": "Pienennys ja WebP-muunnos.",
     "applicableSlugs": [
-      "uudenvuodenpaiva",
       "uudenvuodenaatto"
     ]
   },
@@ -2486,5 +2477,203 @@
     "width": 1200,
     "height": 675,
     "reviewedAt": "2026-11-12"
+  },
+  {
+    "id": "holiday-topic-jouluaatto",
+    "kind": "holiday",
+    "name": "Riisipuuroannos lautasella",
+    "src": "/assets/photos/holiday-topic-jouluaatto.webp",
+    "author": "underthesun",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+    "source": "https://www.flickr.com/photos/84926615@N00/16080680712/",
+    "downloadUrl": "https://live.staticflickr.com/7491/16080680712_722453d531_b.jpg",
+    "alt": "Riisipuuroannos lautasella",
+    "caption": "Riisipuuroannos lautasella. Valokuva havainnollistaa jouluaaton ruokaperinnettä.",
+    "changes": "Kuvaa pienennetty ja tallennettu WebP-muodossa. Koko kuva näkyy kortissa.",
+    "sha256": "8a3c5b545e50a383d85039d7fa56a8ec09a60eca8fb241788716510205340266",
+    "sourceSha256": "9270b4a0f47317686102076991fe067ad446032f86422bbd2f6dc9c58223b9d4",
+    "width": 1024,
+    "height": 683,
+    "applicableSlugs": [
+      "jouluaatto"
+    ],
+    "reviewedAt": "2026-11-13"
+  },
+  {
+    "id": "holiday-topic-tapaninpaiva",
+    "kind": "holiday",
+    "name": "Ratsastaja suomenhevosen selässä lumisella pihalla ja koira rinnalla",
+    "src": "/assets/photos/holiday-topic-tapaninpaiva.webp",
+    "author": "smerikal",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "source": "https://www.flickr.com/photos/60256070@N05/5610406453/",
+    "downloadUrl": "https://live.staticflickr.com/5145/5610406453_9a6615a9e0_b.jpg",
+    "alt": "Ratsastaja suomenhevosen selässä lumisella pihalla ja koira rinnalla",
+    "caption": "Talviratsastusta suomenhevosella. Kuva havainnollistaa tapaninajelun ja ulkoilun perinnettä.",
+    "changes": "Kuvaa pienennetty ja tallennettu WebP-muodossa. Koko kuva näkyy kortissa.",
+    "sha256": "2909ed457bf4c800aefcf3bb72a589257722dce3d1f4c65ed0559a274e6f7154",
+    "sourceSha256": "eea10bca9f769c401ffbc0c753f96bb25e42e08b6c89588d0533d6d39bfad38e",
+    "width": 1024,
+    "height": 915,
+    "applicableSlugs": [
+      "tapaninpaiva"
+    ],
+    "reviewedAt": "2026-11-13"
+  },
+  {
+    "id": "holiday-topic-paasiaispaiva",
+    "kind": "holiday",
+    "name": "Värikkäiksi maalattuja pääsiäismunia laseissa",
+    "src": "/assets/photos/holiday-topic-paasiaispaiva.webp",
+    "author": "Henri Bergius",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "source": "https://www.flickr.com/photos/15087210@N00/4484661114/",
+    "downloadUrl": "https://live.staticflickr.com/4068/4484661114_917aacbc86_b.jpg",
+    "alt": "Värikkäiksi maalattuja pääsiäismunia laseissa",
+    "caption": "Maalattuja pääsiäismunia laseissa. Pääsiäisen koristeluperinnettä havainnollistava kuva.",
+    "changes": "Kuvaa pienennetty ja tallennettu WebP-muodossa. Koko kuva näkyy kortissa.",
+    "sha256": "7aa7152784b621f76390f5330bb909486d4c8641d494d7ade3f531cca662619d",
+    "sourceSha256": "262fb9efa44ae05238aedadef9824c82b21a0cd8b18d2d5307a2dd26f6b919a7",
+    "width": 1024,
+    "height": 576,
+    "applicableSlugs": [
+      "paasiaispaiva"
+    ],
+    "reviewedAt": "2026-11-13"
+  },
+  {
+    "id": "holiday-topic-toinen-paasiaispaiva",
+    "kind": "holiday",
+    "name": "Keltaisia narsisseja ja pieniä pääsiäistipuja lipaston päällä",
+    "src": "/assets/photos/holiday-topic-toinen-paasiaispaiva.webp",
+    "author": "VirtuaaliAnu",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "source": "https://www.flickr.com/photos/16428897@N00/2351126039/",
+    "downloadUrl": "https://live.staticflickr.com/2005/2351126039_fb645322a3_b.jpg",
+    "alt": "Keltaisia narsisseja ja pieniä pääsiäistipuja lipaston päällä",
+    "caption": "Pääsiäiskoristeluja kotona keväällä 2008. Kuva havainnollistaa pääsiäisajan kodin tunnelmaa.",
+    "changes": "Kuvaa pienennetty ja tallennettu WebP-muodossa. Koko kuva näkyy kortissa.",
+    "sha256": "9f186a5b04e6484f73ec513627761706f550bb77650259183298f6dd84621b1d",
+    "sourceSha256": "ec6e0219e3b72fdcd9a5867f5f0fa82372c5481530799c21a646c13cd1dede66",
+    "width": 1024,
+    "height": 768,
+    "applicableSlugs": [
+      "toinen-paasiaispaiva"
+    ],
+    "reviewedAt": "2026-11-13"
+  },
+  {
+    "id": "holiday-topic-loppiainen",
+    "kind": "holiday",
+    "name": "Kerimäen puukirkko ja kellotapuli talvella",
+    "src": "/assets/photos/holiday-topic-loppiainen.webp",
+    "author": "Andrey Korchagin",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "source": "https://www.flickr.com/photos/25554263@N04/2518713349/",
+    "downloadUrl": "https://live.staticflickr.com/2032/2518713349_806194c492_b.jpg",
+    "alt": "Kerimäen puukirkko ja kellotapuli talvella",
+    "caption": "Kerimäen kirkko ja kellotapuli talvimaisemassa. Kuva havainnollistaa loppiaisen kirkollista taustaa.",
+    "changes": "Kuvaa pienennetty ja tallennettu WebP-muodossa. Koko kuva näkyy kortissa.",
+    "sha256": "72eed2609ca66c66442824298c18ad1e44a5f900152c2137cfbb1b72bdd8557a",
+    "sourceSha256": "d866241886a4e4f20ede5c6530fc85ced67857d95a859429e5f8e985a6f2998e",
+    "width": 1024,
+    "height": 768,
+    "applicableSlugs": [
+      "loppiainen"
+    ],
+    "reviewedAt": "2026-11-13"
+  },
+  {
+    "id": "holiday-topic-pitkaperjantai",
+    "kind": "holiday",
+    "name": "Via Crucis -pääsiäisnäytelmän esiintyjiä ja yleisöä Helsingissä",
+    "src": "/assets/photos/holiday-topic-pitkaperjantai.webp",
+    "author": "Ninara",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://www.flickr.com/photos/37583176@N00/32830288237/",
+    "downloadUrl": "https://live.staticflickr.com/65535/32830288237_57d29349a8_b.jpg",
+    "alt": "Via Crucis -pääsiäisnäytelmän esiintyjiä ja yleisöä Helsingissä",
+    "caption": "Via Crucis -pääsiäisnäytelmä Helsingissä. Arkistokuva pitkänperjantain kärsimysnäytelmän perinteestä.",
+    "changes": "Kuvaa pienennetty ja tallennettu WebP-muodossa. Koko kuva näkyy kortissa.",
+    "sha256": "e5b79d3b1a698803a7dd6febcd53edc2c46c7a3458116f308afd54bfa2a5cce5",
+    "sourceSha256": "59ac21312a11455b744440fbe9b2dfaefb786322acb274a72880084f8ac30974",
+    "width": 1024,
+    "height": 683,
+    "applicableSlugs": [
+      "pitkaperjantai"
+    ],
+    "reviewedAt": "2026-11-13"
+  },
+  {
+    "id": "holiday-topic-helatorstai",
+    "kind": "holiday",
+    "name": "Seurue viettämässä helatorstaita ulkona vuonna 1931",
+    "src": "/assets/photos/holiday-topic-helatorstai.webp",
+    "author": "Kymenlaakson museo",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "https://www.flickr.com/photos/141473267@N05/48863966602/",
+    "downloadUrl": "https://live.staticflickr.com/65535/48863966602_307647e453_b.jpg",
+    "alt": "Seurue viettämässä helatorstaita ulkona vuonna 1931",
+    "caption": "Helatorstai 14.5.1931. Kymenlaakson museon historiallinen valokuva, kokoelmatunnus YLEV40281.",
+    "changes": "Kuvaa pienennetty ja tallennettu WebP-muodossa. Koko kuva näkyy kortissa.",
+    "sha256": "3376152d7a8ee718ba856f41d1a7a489df029dd66b6e6f481a0698d15519a763",
+    "sourceSha256": "d4335009d5d6b9170562eb84e405ef9304cc71447fc1180d709ffca124fe8e90",
+    "width": 1024,
+    "height": 618,
+    "applicableSlugs": [
+      "helatorstai"
+    ],
+    "reviewedAt": "2026-11-13"
+  },
+  {
+    "id": "holiday-topic-uudenvuodenpaiva",
+    "kind": "holiday",
+    "name": "Lumisia rakennuksia ja rantapolku Helsingin Seurasaaressa talviaamuna",
+    "src": "/assets/photos/holiday-topic-uudenvuodenpaiva.webp",
+    "author": "Ari Helminen",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+    "source": "https://www.flickr.com/photos/36093266@N06/5314526415/",
+    "downloadUrl": "https://live.staticflickr.com/5165/5314526415_7d5daa13cf_b.jpg",
+    "alt": "Lumisia rakennuksia ja rantapolku Helsingin Seurasaaressa talviaamuna",
+    "caption": "Talviaamun valoa Helsingin Seurasaaressa. Kuva havainnollistaa vuoden alun talvista maisemaa.",
+    "changes": "Kuvaa pienennetty ja tallennettu WebP-muodossa. Koko kuva näkyy kortissa.",
+    "sha256": "bce62cbfebbe4595eef576c3a482ecd8a490ae3627a7da34a13093e2d38fefb8",
+    "sourceSha256": "d3a144b7c15dc9208b0fcb0b1fad1e82d6eed6283c17e7e0d49aaa8bed172c8c",
+    "width": 1024,
+    "height": 680,
+    "applicableSlugs": [
+      "uudenvuodenpaiva"
+    ],
+    "reviewedAt": "2026-11-13"
+  },
+  {
+    "id": "holiday-topic-juhannuspaiva",
+    "kind": "holiday",
+    "name": "Suomen siniristilippu liehumassa sinistä taivasta vasten juhannuksena",
+    "src": "/assets/photos/holiday-topic-juhannuspaiva.webp",
+    "author": "Matti Mattila",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+    "source": "https://www.flickr.com/photos/65448940@N00/7419466288/",
+    "downloadUrl": "https://live.staticflickr.com/7269/7419466288_5c70d0cff3_b.jpg",
+    "alt": "Suomen siniristilippu liehumassa sinistä taivasta vasten juhannuksena",
+    "caption": "Suomen lippu juhannuksena. Juhannuspäivä on Suomen lipun päivä.",
+    "changes": "Kuvaa pienennetty ja tallennettu WebP-muodossa. Koko kuva näkyy kortissa.",
+    "sha256": "90e5e68f520ed801a3db0030f2a65fbd47235e30066ec904bcc77b643220f1c2",
+    "sourceSha256": "e74aeaa8efca0f85ab721b231ef093696e475442734d31e742d8a4a632728e2b",
+    "width": 1024,
+    "height": 768,
+    "applicableSlugs": [
+      "juhannuspaiva"
+    ],
+    "reviewedAt": "2026-11-13"
   }
 ]

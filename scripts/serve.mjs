@@ -1,3 +1,4 @@
+import {namedaysResponse} from '../lib/namedays.mjs';
 import {onRequestGet as placeResponse} from '../functions/api/place.js';
 import {horoscopeResponse} from '../lib/horoscope.mjs';
 import {weatherResponse} from '../lib/met-forecast.mjs';
@@ -27,6 +28,7 @@ http.createServer(async(req,res)=>{
   const url=new URL(req.url,'http://localhost');let result;
   if(url.pathname==='/api/place')result=placeResponse({request:new Request(url)});
   if(url.pathname==='/api/horoscope')result=horoscopeResponse(new Request(url));
+  if(url.pathname==='/api/namedays')result=await namedaysResponse({env:process.env});
   if(url.pathname==='/api/weather')result=await weatherResponse(new Request(url));
   if(result){res.writeHead(result.status,{...security,...Object.fromEntries(result.headers)});res.end(await result.text());return;}
   const p=path.resolve(root,'.'+decodeURIComponent(url.pathname));if(!p.startsWith(root+path.sep)&&p!==root){res.writeHead(403,security);res.end();return;}

@@ -1,4 +1,4 @@
-import {dimensions,eventsFor,monthGrid,isoWeek,LOCALES,FONTS} from './engine.mjs?';
+import {dimensions,eventsFor,monthGrid,isoWeek,LOCALES,FONTS,weekDates} from './engine.mjs?';
 import {zipStore,bytesOf} from './binary-exports.mjs?';
 
 const XML='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
@@ -9,7 +9,7 @@ const titleCase=value=>value[0].toLocaleUpperCase('fi')+value.slice(1);
 const hex=value=>value.replace('#','').toUpperCase();
 const mmToEmu=mm=>Math.round(mm*36000),mmToTwip=mm=>Math.round(mm*1440/25.4);
 const relationships=rows=>XML+'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'+rows.map(r=>`<Relationship Id="${r.id}" Type="${r.type.startsWith('http')?r.type:REL+r.type}" Target="${X(r.target)}"/>`).join('')+'</Relationships>';
-export function calendarMonths(s,scope='current'){return s.view==='year'||scope==='all'?Array.from({length:12},(_,i)=>i+1):[s.month];}
+export function calendarMonths(s,scope='current'){return ['week','blank'].includes(s.view)?[]:s.view==='year'||scope==='all'?Array.from({length:12},(_,i)=>i+1):[s.month];}
 export function selectedEvents(s,scope='current',withHolidays=true){return eventsFor(s,s.view==='month'&&scope!=='all'?s.month:null,withHolidays);}
 export function excelDate(date){return (Date.parse(date+'T00:00:00Z')-Date.UTC(1899,11,30))/86400000;}
 function basePackage(title,target){
@@ -79,6 +79,13 @@ function calendarSheet(s,month=null){
  const footer=m.maxRow+2;merge(m,footer,0,cols-1,s.footer,2);m.heights.set(footer,23);merge(m,footer+1,0,cols-1,'Kalenteri365 · kalenteri365.fi',14);
  return m;
 }
+function planningSheet(s){
+ const blank=s.view==='blank',m=sheetModel(blank?'Tyhjä pohja':'Viikkosuunnitelma');m.cols=blank?7:4;m.widths=blank?Array(7).fill(18):[18,18,52,52];
+ merge(m,1,0,m.cols-1,s.title,1);m.heights.set(1,34);m.freeze=3;
+ if(blank){LOCALES.fi.days.forEach((_,i)=>put(m,3,i,LOCALES.fi.days[(i+s.weekStart)%7],4));for(let row=4;row<9;row++){m.heights.set(row,70);for(let col=0;col<7;col++)put(m,row,col,'',11);}}
+ else{['Päivämäärä','Päivä','Tapahtumat','Omat muistiinpanot'].forEach((x,i)=>put(m,3,i,x,12));const events=eventsFor(s);weekDates(s).forEach((d,i)=>{put(m,i+4,0,excelDate(d.date),10,true);put(m,i+4,1,LOCALES.fi.days[d.weekday],13);put(m,i+4,2,events.filter(e=>e.date===d.date).map(e=>e.title).join('\n'),11);put(m,i+4,3,'',11);m.heights.set(i+4,Math.max(60,events.filter(e=>e.date===d.date).length*18+20));});}
+ merge(m,m.maxRow+2,0,m.cols-1,'Kalenteri365 · kalenteri365.fi',14);return m;
+}
 function eventSheet(s,scope){const m=sheetModel('Tapahtumat'),head=['Päivämäärä','Tapahtuma','Tyyppi','Toistuvuus'];m.widths=[17,66,24,22];m.freeze=1;head.forEach((v,i)=>put(m,1,i,v,12));m.heights.set(1,26);selectedEvents(s,scope).forEach((event,i)=>{put(m,i+2,0,excelDate(event.date),10,true);put(m,i+2,1,event.title,0);put(m,i+2,2,event.holiday?'Pyhäpäivä':'Oma tapahtuma',0);put(m,i+2,3,event.annual?'Joka vuosi':'',0);m.heights.set(i+2,Math.max(32,wrappedLines(event.title,60)*17));});m.filter=`A1:D${m.maxRow}`;return m;}
 function notesSheet(s){const m=sheetModel('Muistiinpanot');m.widths=[26,90];m.freeze=1;const data=[['Tieto','Oma merkintä'],['Otsikko',s.title],['Nimi tai yritys',s.name],['Alaotsikko',s.subtitle],['Sivun alatunniste',s.footer],['Omat muistiinpanot',s.notes],...s.layers.filter(l=>l.type==='text').map((l,i)=>[`Lisäteksti ${i+1}`,l.text]),...(s.photoCredit?[['Valokuvan lähde',s.photoCredit]]:[]),['Luotu palvelussa','Kalenteri365 · kalenteri365.fi']];data.forEach((row,i)=>{row.forEach((v,j)=>put(m,i+1,j,v,i===0?12:j===0?13:0));m.heights.set(i+1,i===0?26:Math.max(30,Math.min(400,wrappedLines(row[1],80)*18+12)));});return m;}
 function styles(s){
@@ -106,7 +113,7 @@ function designSheet(s,images){
 function drawingXML(s,images){const d=dimensions(s),width=mmToEmu(d.mmWidth),height=mmToEmu(d.mmHeight);return XML+'<xdr:wsDr xmlns:xdr="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="'+REL.slice(0,-1)+'">'+images.map((image,i)=>`<xdr:absoluteAnchor><xdr:pos x="0" y="${i*height}"/><xdr:ext cx="${width}" cy="${height}"/><xdr:pic><xdr:nvPicPr><xdr:cNvPr id="${i+1}" name="Kalenterin ulkoasu ${i+1}" descr="${X(s.title+' · '+s.year)}"/><xdr:cNvPicPr><a:picLocks noChangeAspect="1"/></xdr:cNvPicPr></xdr:nvPicPr><xdr:blipFill><a:blip r:embed="rIdImage${i+1}" cstate="print"/><a:stretch><a:fillRect/></a:stretch></xdr:blipFill><xdr:spPr><a:xfrm><a:off x="0" y="${i*height}"/><a:ext cx="${width}" cy="${height}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></xdr:spPr></xdr:pic><xdr:clientData/></xdr:absoluteAnchor>`).join('')+'</xdr:wsDr>';}
 export function createXlsx(s,images,{scope='current'}={}){
  checkedImages(images);const files=basePackage(s.title||`Kalenteri ${s.year}`,'xl/workbook.xml');
- const sheets=[...(s.view==='year'?[calendarSheet(s)]:calendarMonths(s,scope).map(month=>calendarSheet(s,month))),eventSheet(s,scope),notesSheet(s),designSheet(s,images)],relations=[];
+ const sheets=[...(['week','blank'].includes(s.view)?[planningSheet(s)]:s.view==='year'?[calendarSheet(s)]:calendarMonths(s,scope).map(month=>calendarSheet(s,month))),eventSheet(s,scope),notesSheet(s),designSheet(s,images)],relations=[];
  const types={'xl/workbook.xml':'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml','xl/styles.xml':'application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml','xl/drawings/drawing1.xml':'application/vnd.openxmlformats-officedocument.drawing+xml'};
  sheets.forEach((sheet,i)=>{
   const path=`xl/worksheets/sheet${i+1}.xml`;files[path]=sheetXML(sheet,s);types[path]='application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml';relations.push({id:`rIdSheet${i+1}`,type:'worksheet',target:`worksheets/sheet${i+1}.xml`});

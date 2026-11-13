@@ -2,7 +2,6 @@ import {CALENDAR_LAYERS, calendarFilterIds, upcomingItems} from './dashboard.mjs
 import {cityPhotoState, cityPhotoPeriod, cityPhotoVariant} from './city-light.mjs';
 import { dayEvents } from "./solar-day.mjs";
 import { moonSVG } from "./lunar.mjs";
-import { searchPages } from "./search.mjs";
 import { homeView, cleanHomeURL, loadCalendarState } from "./home-view.mjs";
 import {
   MONTHS,
@@ -34,7 +33,8 @@ const config = JSON.parse($("#page-config").textContent),
     month: "2-digit",
     day: "2-digit",
   }).format(new Date());
-let state=loadCalendarState(localStorage,CITIES);
+let state;
+try{state=loadCalendarState(localStorage,CITIES);}catch{state=loadCalendarState({getItem:()=>null},CITIES);}
 let selected = today,
   y = config.year || 2027,
   m = config.month || 1,
@@ -800,7 +800,7 @@ const bindForm = (id, fn) =>
 const result = (s, id = "#calc-result") => {
   $(id).innerHTML = s;
 };
-bindForm("#date-diff", (f) => {
+if(!document.querySelector("[data-date-workspace]"))bindForm("#date-diff", (f) => {
   let diff = Math.round(
       (parse(f.get("end")) - parse(f.get("start"))) / 86400000,
     ),
@@ -809,13 +809,13 @@ bindForm("#date-diff", (f) => {
     `<strong>${Math.abs(diff) + (inc ? 1 : 0)} päivää</strong><p>${diff < 0 ? "Loppupäivä on ennen alkupäivää. " : ""}${inc ? "Molemmat rajapäivät mukana." : "Loppupäivä ei sisälly määrään."}</p>`,
   );
 });
-bindForm("#date-add", (f) =>
+if(!document.querySelector("[data-date-workspace]"))bindForm("#date-add", (f) =>
   result(
     `<strong>${fi(add(parse(f.get("start")), +f.get("amount")))}</strong><p>${cap(DAYS[day(add(parse(f.get("start")), +f.get("amount")))])}</p>`,
     "#add-result",
   ),
 );
-bindForm("#work-calc", (f) => {
+if(!document.querySelector("[data-workday-workspace]"))bindForm("#work-calc", (f) => {
   let a = parse(f.get("start")),
     b = parse(f.get("end"));
   if (b < a) throw Error("Loppupäivän on oltava alkupäivän jälkeen.");
@@ -892,6 +892,11 @@ bindForm("#vacation-form", (f) => {
       if (l >= 3 && free(b))
         found.push({ a: iso(a), b: iso(b), n: l, needed: [...needed] });
     }
+  }
+  if(f.get("schoolOnly")){
+    const periods=state.plans?.schoolHolidayPeriods||[];
+    const matching=found.filter(o=>periods.some(p=>o.a>=p.start&&o.b<=p.end));
+    found.splice(0,found.length,...matching);
   }
   found.sort(
     (a, b) =>
@@ -1130,78 +1135,7 @@ async function editorWebP() {
     0.92,
   );
 }
-let searchIndexPromise;
-function getIndex() {
-  return (searchIndexPromise ??= fetch("/assets/search.json")
-    .then((r) => {
-      if (!r.ok) throw Error("Haku ei ole saatavilla.");
-      return r.json();
-    })
-    .catch((e) => {
-      searchIndexPromise = null;
-      throw e;
-    }));
-}
-let searchSequence = 0;
-async function search(q, target, max = 8) {
-  const token = ++searchSequence;
-  if (!q.trim()) {
-    target.innerHTML = "";
-    return;
-  }
-  try {
-    const found = searchPages(await getIndex(), q, max);
-    if (token !== searchSequence) return;
-    target.innerHTML = found.length
-      ? '<div class="search-count">' +
-        found.length +
-        " ehdotusta</div>" +
-        found
-          .map((p) =>
-            link(
-              p.path,
-              "<strong>" +
-                esc(p.title) +
-                "</strong><small>" +
-                esc(p.description) +
-                "</small>",
-            ),
-          )
-          .join("")
-      : '<p class="search-empty">Ei osumia. Kokeile esimerkiksi vuotta, paikkakuntaa tai hakua ”talviloma”.</p>';
-  } catch (e) {
-    target.textContent = e.message;
-  }
-}
-$("#site-search")?.addEventListener(
-  "focus",
-  () => {
-    getIndex().catch(() => {});
-  },
-  { once: true },
-);
-$("#site-search")?.addEventListener("input", async (e) => {
-  const box = $("#search-results");
-  box.hidden = !e.target.value.trim();
-  if (!box.hidden) await search(e.target.value, box);
-});
-$("#site-search")?.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") $("#search-results").hidden = true;
-  if (e.key === "ArrowDown") $("#search-results a")?.focus();
-});
-document.addEventListener("click", (e) => {
-  if (!e.target.closest(".search-wrap")) $("#search-results").hidden = true;
-});
-bindForm("#page-search-form", (f) =>
-  search(f.get("q"), $("#page-search-results"), 60),
-);
-if ($("#page-search")) {
-  const q = new URL(location.href).searchParams.get("q");
-  if (q) {
-    $("#page-search").value = q;
-    search(q, $("#page-search-results"), 60);
-  }
-}
+import("./site-search.mjs").then(({connectSiteSearch})=>connectSiteSearch());
 let astronomyPromise;
 async function astronomy() {
   if (window.Astronomy) return window.Astronomy;
@@ -1278,29 +1212,6 @@ $("#season-year")?.addEventListener("change", (e) => {
   );
 });
 
-$(".search-wrap form")?.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const box = $("#search-results");
-  box.hidden = false;
-  search($("#site-search").value, box, 12);
-});
-$("#search-results")?.addEventListener("keydown", (e) => {
-  const links = $$("#search-results a"),
-    at = links.indexOf(document.activeElement);
-  if (e.key === "ArrowDown") {
-    e.preventDefault();
-    links[(at + 1) % links.length]?.focus();
-  }
-  if (e.key === "ArrowUp") {
-    e.preventDefault();
-    if (at <= 0) $("#site-search").focus();
-    else links[at - 1]?.focus();
-  }
-  if (e.key === "Escape") {
-    $("#search-results").hidden = true;
-    $("#site-search").focus();
-  }
-});
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape")
     $$(".tools-menu[open]").forEach((d) => (d.open = false));
@@ -1397,7 +1308,7 @@ if ($("#city-photo") && $(".local-dashboard")?.getClientRects().length) {
       onCityChange(id, source) {
         state.city = id;
         state.citySource = source;
-        persist();
+        if(source === "manual") persist();
         updateCityPhoto(id);
       },
       onOpen() {
@@ -1448,9 +1359,22 @@ $('#exam-filter')?.addEventListener('input',e=>{const q=e.target.value.toLocaleL
 
 if(document.querySelector("#blog-search,#tool-filter,[data-family-planner],#local-sun"))import("./edition-ui.mjs").then(({connectEdition})=>connectEdition({state,persist}));
 
-// Anchor the tools menu to the visible trigger, with its own vertical scroll.
-const toolsMenu=document.querySelector('.tools-menu');
-if(toolsMenu){
- const positionToolsMenu=()=>{if(!toolsMenu.open)return;const menu=toolsMenu.querySelector('.mega-menu'),trigger=toolsMenu.querySelector('summary'),top=Math.max(8,Math.min(trigger.getBoundingClientRect().bottom+3,innerHeight-120));menu.style.top=top+'px';menu.style.maxHeight=Math.max(110,innerHeight-top-12)+'px';};
- toolsMenu.addEventListener('toggle',positionToolsMenu);window.addEventListener('resize',positionToolsMenu,{passive:true});window.addEventListener('scroll',positionToolsMenu,{passive:true});
-}
+import './tools-menu.mjs';
+
+if(document.querySelector('[data-holiday-calendar]'))import('./holiday-calendar.mjs');
+
+if(document.querySelector('[data-services],#personal-tax-form'))import('./finland-services.mjs');
+
+if(document.querySelector('[data-community]'))import('./community.mjs').then(({connectCommunity})=>connectCommunity({state,persist,onUpdate(){renderCalendar();window.dispatchEvent(new Event('community:updated'));}}));
+
+if(document.querySelector("[data-date-workspace]"))import("./date-tools.mjs");
+
+if(document.querySelector("[data-workday-workspace]"))import("./workday-tools.mjs");
+
+if(document.querySelector("[data-work-overview]"))import("./work-overview-ui.mjs");
+
+if(document.querySelector('[data-education-hub]'))import('./education-levels.mjs');
+
+if(document.querySelector('[data-print-catalog]'))import('./print-catalog-ui.mjs');
+
+if(document.querySelector("[data-privacy-tools]"))import("./privacy-tools.mjs");

@@ -26,3 +26,21 @@ test('daily horoscope middleware bypasses static validators and removes stale bo
  for(const name of ['Content-Encoding','Content-Length','ETag','Last-Modified'])assert.equal(result.headers.get(name),null);
  assert.match(result.headers.get('Cache-Control'),/s-maxage=60/);assert(!((await result.text()).includes('vanha')));
 });
+
+test('all twelve refreshed detail pages retain the artwork of the current release',async()=>{
+ const {onRequest}=await import('../functions/horoskooppi/_middleware.js');
+ const {PROFILES}=await import('../lib/horoscope.mjs');
+ // Old unversioned images can remain in browser caches after publication.
+ // The static page already has the new immutable artwork URL; daily refresh
+ // must keep that URL, including when the previous daily block is outdated.
+ for(const prefix of ['/assets/art-1234567890abcdef/','/assets/art-fedcba0987654321/']){
+  for(const [slug] of PROFILES){
+   const html=`<header><img src="${prefix}zodiac-${slug}.svg"></header><!-- DAILY:START --><img src="/assets/art/zodiac-${slug}.svg"><p>vanha</p><!-- DAILY:END -->`;
+   const response=await onRequest({request:new Request(`https://kalenteri365.fi/horoskooppi/${slug}/`),next:async()=>new Response(html,{headers:{'Content-Type':'text/html'}})});
+   const updated=await response.text(),daily=updated.split('<!-- DAILY:START -->')[1].split('<!-- DAILY:END -->')[0];
+   assert(daily.includes(`src="${prefix}zodiac-${slug}.svg"`),slug);
+   assert(!daily.includes('/assets/art/'),slug);
+   assert(!daily.includes('<p>vanha</p>'),slug);
+  }
+ }
+});
