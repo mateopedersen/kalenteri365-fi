@@ -1,0 +1,180 @@
+/* A single visual action inside each existing link: no nested buttons or links. */
+.blog-card .topic-open,
+.home-discover .home-topic-main .topic-open,
+.home-discover .home-topic-more>a,
+.home-topic .topic-open,
+.home-shortcut-grid .topic-open,
+.directory-tool .topic-open,
+.tool-card .topic-open,
+.guide-directory .topic-open,
+.holiday-topic .topic-open,
+.crop-card .crop-link,
+a.section-link,
+a.document-text-link,
+.about-feature-grid>section>a,
+.article-inline-links>a,
+.service-event .service-source,
+a.tool-card>.card-arrow{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  align-self:flex-start;
+  justify-self:start;
+  flex:0 1 auto;
+  gap:8px;
+  width:fit-content;
+  max-width:100%;
+  min-width:0;
+  min-height:44px;
+  padding:10px 13px;
+  border:1px solid #718fac;
+  border-radius:6px;
+  background:#fff;
+  color:#073a75;
+  box-shadow:none;
+  font-family:inherit;
+  font-size:14px;
+  font-weight:700;
+  line-height:1.35;
+  letter-spacing:normal;
+  text-align:left;
+  text-decoration:none;
+  text-transform:none;
+  white-space:normal;
+  overflow-wrap:break-word;
+}
+
+.blog-card .topic-open,
+.home-shortcut-grid .topic-open,
+.tool-card .topic-open,
+.guide-directory .topic-open{margin-top:auto}
+.home-discover .home-topic-main .topic-open,
+.home-topic .topic-open,
+.directory-tool .topic-open,
+.holiday-topic .topic-open,
+.crop-card .crop-link{margin-top:14px}
+.home-discover .home-topic-main .topic-open{grid-column:1/-1}
+.home-discover .home-topic-more{display:flex;flex-wrap:wrap;justify-content:flex-start;align-items:flex-start;gap:8px;min-height:0}
+.home-discover .home-topic-more>a{margin:0}
+.home-discover .home-topic-more>a+a{border-left-color:#718fac}
+.home-discover .home-topic-more>a>span{overflow-wrap:normal;word-break:normal;hyphens:none}
+.about-feature-grid>section>a{margin-top:auto}
+.article-inline-links{display:flex;flex-wrap:wrap;gap:9px}
+a.section-link{flex-shrink:1}
+
+/* These cards already link their title and description together. Keep that
+   one destination, and replace the detached arrow with a compact visual CTA. */
+a.tool-card>.card-arrow{
+  position:static;
+  inset:auto;
+  margin-top:14px;
+}
+a.tool-card>.card-arrow::before{content:"Avaa"}
+html[lang="sv"] a.tool-card>.card-arrow::before{content:"Öppna"}
+.related-content a.tool-card>.card-arrow{
+  grid-column:2;
+  grid-row:2;
+  margin-top:0;
+  align-self:start;
+}
+a.tool-card:has(.topic-open)>.card-arrow{display:none}
+
+.blog-card .topic-open>.icon,
+.home-discover .home-topic-main .topic-open>.icon,
+.home-discover .home-topic-more>a>.icon,
+.home-topic .topic-open>.icon,
+.home-shortcut-grid .topic-open>.icon,
+.directory-tool .topic-open>.icon,
+.tool-card .topic-open>.icon,
+.guide-directory .topic-open>.icon,
+.holiday-topic .topic-open>.icon,
+.crop-card .crop-link>.icon,
+a.section-link>.icon,
+a.document-text-link>.icon,
+.about-feature-grid>section>a>.icon,
+.article-inline-links>a>.icon,
+.service-event .service-source>.icon,
+a.tool-card>.card-arrow>.icon{
+  flex:0 0 17px;
+  width:17px;
+  height:17px;
+  margin:0;
+  color:currentColor;
+  stroke-width:1.8;
+  transform:none;
+}
+
+.blog-card-link:is(:hover,:focus-visible) .topic-open,
+.home-topic-main:is(:hover,:focus-visible) .topic-open,
+.home-discover .home-topic-more>a:is(:hover,:focus-visible),
+.home-topic:is(:hover,:focus-visible) .topic-open,
+.home-shortcut-grid a:is(:hover,:focus-visible) .topic-open,
+.directory-tool>a:is(:hover,:focus-visible) .topic-open,
+a.tool-card:is(:hover,:focus-visible)>.card-arrow,
+a.tool-card:is(:hover,:focus-visible) .topic-open,
+.guide-directory a:is(:hover,:focus-visible) .topic-open,
+a:is(.section-link,.document-text-link,.crop-link,.service-source):is(:hover,:focus-visible),
+.holiday-topic a.topic-open:is(:hover,:focus-visible),
+.about-feature-grid>section>a:is(:hover,:focus-visible),
+.article-inline-links>a:is(:hover,:focus-visible){
+  border-color:#073a75;
+  background:#073a75;
+  color:#fff;
+  box-shadow:none;
+  text-decoration:none;
+}
+
+.blog-card-link:focus-visible,
+.home-topic-main:focus-visible,
+.home-topic:focus-visible,
+.directory-tool>a:focus-visible,
+a.tool-card:focus-visible{
+  outline:3px solid #2166a6;
+  outline-offset:-3px;
+}
+a:is(.section-link,.document-text-link,.crop-link,.service-source):focus-visible,
+.home-discover .home-topic-more>a:focus-visible,
+.holiday-topic a.topic-open:focus-visible,
+.about-feature-grid>section>a:focus-visible,
+.article-inline-links>a:focus-visible{
+  outline:3px solid #2166a6;
+  outline-offset:3px;
+}
+
+@media(max-width:440px){
+  .blog-card .topic-open,
+  .home-discover .home-topic-main .topic-open,
+  .home-discover .home-topic-more>a,
+  .directory-tool .topic-open,
+  a.section-link,
+  a.document-text-link,
+  a.tool-card>.card-arrow{font-size:14px;padding-inline:12px}
+  .related-content a.tool-card>.card-arrow{grid-column:1/-1}
+}
+
+@media print{
+  .blog-card .topic-open,
+  .home-discover .home-topic-main .topic-open,
+  .home-discover .home-topic-more>a,
+  .home-topic .topic-open,
+  .home-shortcut-grid .topic-open,
+  .directory-tool .topic-open,
+  .tool-card .topic-open,
+  .guide-directory .topic-open,
+  .holiday-topic .topic-open,
+  .crop-card .crop-link,
+  a.section-link,
+  a.document-text-link,
+  .about-feature-grid>section>a,
+  .article-inline-links>a,
+  .service-event .service-source,
+  a.tool-card>.card-arrow{
+    min-height:0;
+    padding:0;
+    border:0!important;
+    border-radius:0;
+    background:transparent!important;
+    color:#203344!important;
+    box-shadow:none!important;
+  }
+}

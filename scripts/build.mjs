@@ -107,6 +107,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".."),
   OUT = path.join(ROOT, "dist"),
   ASSET = path.join(OUT, "assets");
 await fs.mkdir(OUT, { recursive: true });
+await fs.mkdir(path.join(ROOT, "reports"), { recursive: true });
 await fs.mkdir(ASSET, { recursive: true });
 await fs.mkdir(path.join(OUT, "lataukset"), { recursive: true });
 const indexnow=JSON.parse(await fs.readFile(path.join(ROOT,'data/indexnow.json'),'utf8'));

@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import pages from '../reports/pages.json' with {type:'json'};
-import overrides from '../data/seo-pages.json' with {type:'json'};
-import {pageMetadata,brandedTitle,assertUniqueMetadata} from '../src/metadata.mjs';
-import {layout} from '../src/ui.mjs';
-import {swedishLayout} from '../src/swedish.mjs';
-import {parseHead} from '../scripts/audit-social.mjs';
-import {PAYMENT_PLANS} from '../assets/payment-data.mjs';
+import pages from '../../reports/pages.json' with {type:'json'};
+import overrides from '../../data/seo-pages.json' with {type:'json'};
+import {pageMetadata,brandedTitle,assertUniqueMetadata} from '../../src/metadata.mjs';
+import {layout} from '../../src/ui.mjs';
+import {swedishLayout} from '../../src/swedish.mjs';
+import {parseHead} from '../../scripts/audit-social.mjs';
+import {PAYMENT_PLANS} from '../../assets/payment-data.mjs';
 
 test('SEO branding replaces separators, preserves Finnish hyphens and is idempotent',()=>{
   for(const raw of ['Auringonnousu ja -lasku – Helsinki','Kalenteri 2027–2030','Kesä- ja normaaliaika: kellonsiirto','PDF-kalenteri 2028']){

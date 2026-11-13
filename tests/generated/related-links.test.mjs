@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { relatedRoutes } from '../src/related-links.mjs';
+import { relatedRoutes } from '../../src/related-links.mjs';
 
-const records = JSON.parse(readFileSync(new URL('../reports/pages.json', import.meta.url), 'utf8'));
+const records = JSON.parse(readFileSync(new URL('../../reports/pages.json', import.meta.url), 'utf8'));
 const catalog = new Set(records.map(page => page.path));
 const related = path => relatedRoutes(path, { catalog });
 
@@ -69,7 +69,7 @@ test('garden, family and trust topics get relevant next steps', () => {
 
 
 test('Rendered recommendation cards keep the real destination and readable specific labels', async () => {
- const {relatedCard,relatedTopics} = await import('../src/related-view.mjs');
+ const {relatedCard,relatedTopics} = await import('../../src/related-view.mjs');
  for(const {path} of records){
   for(const target of relatedRoutes(path)){
    const card=relatedCard(target);
@@ -87,7 +87,7 @@ test('Rendered recommendation cards keep the real destination and readable speci
 
 
 test('Recommendation summaries preserve date ranges and correct selection terminology', async () => {
- const {relatedCard} = await import('../src/related-view.mjs');
+ const {relatedCard} = await import('../../src/related-view.mjs');
  assert.match(relatedCard('/juhlapyhat/juhannuspaiva/')[2],/26\./);
  assert.match(relatedCard('/viikkokalenteri/2028/')[2],/ISO-viikko/);
  assert.equal(relatedCard('/oma-arki/')[1],'Oma arki');
@@ -96,7 +96,7 @@ test('Recommendation summaries preserve date ranges and correct selection termin
 
 
 test('Related cards describe distinct next steps within the same page', async () => {
- const {relatedCard} = await import('../src/related-view.mjs');
+ const {relatedCard} = await import('../../src/related-view.mjs');
  for(const {path} of records){
   const descriptions=relatedRoutes(path).map(target=>relatedCard(target)[2]);
   assert.equal(new Set(descriptions).size,descriptions.length,path);

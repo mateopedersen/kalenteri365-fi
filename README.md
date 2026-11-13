@@ -42,7 +42,7 @@ Connect `kalenteri365.fi` and `www.kalenteri365.fi` as custom domains. `_redirec
 
 ## Verification
 
-`pnpm test` covers all 48 month grids and 1,461 civil dates, ISO boundaries, Finnish movable holidays, business-day conventions, UTF-8 ICS folding, lunar phases, polar days and DST boundary rise/set calculations. `pnpm check` checks all generated HTML links, language, H1/canonical/structured data, single-page PDFs, A4 raster dimensions and actual EXIF 600 ppi metadata. Reports are in `reports/`.
+`pnpm test` covers all 48 month grids and 1,461 civil dates, ISO boundaries, Finnish movable holidays, business-day conventions, UTF-8 ICS folding, lunar phases, polar days and DST boundary rise/set calculations. `pnpm check` checks all generated HTML links, language, H1/canonical/structured data, single-page PDFs, A4 raster dimensions and actual EXIF 600 ppi metadata. The source tests run without generated files. `pnpm build` then runs `pnpm test:generated` against the fresh page inventory before the output audit, covering unique metadata and contextual links across the complete catalog. Reports are in `reports/`.
 
 Source and editorial limitations appear on `/lahteet/`. Horoscopes are explicitly dated entertainment reflections, not predictions. The name-day service links to the licensor rather than republishing its protected database.
 
