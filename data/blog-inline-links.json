@@ -1,0 +1,711 @@
+[
+  {
+    "slug": "viikkonumerot",
+    "links": [
+      {
+        "section": 1,
+        "paragraph": 1,
+        "text": "viikkonumerotaulukko",
+        "href": "/viikkonumerot/",
+        "sha256": "7cd9da2deced264bb057261005955eb4d21b215457be56fac1ef1e3f07574672"
+      },
+      {
+        "section": 1,
+        "paragraph": 1,
+        "text": "Viikkosuunnitelma",
+        "href": "/viikkokalenteri/",
+        "sha256": "7cd9da2deced264bb057261005955eb4d21b215457be56fac1ef1e3f07574672"
+      },
+      {
+        "section": 0,
+        "paragraph": 0,
+        "text": "ensimmäisen torstain",
+        "href": "https://almanakka.helsinki.fi/fi/usein-kysytty%C3%A4",
+        "sha256": "7e9b027cf4aec1f4c4d79b17021a7f4aee977487e750aecf2bb4470465af9dce"
+      },
+      {
+        "section": 5,
+        "paragraph": 0,
+        "text": "koulujen talvilomat",
+        "href": "/blogi/koulujen-lomat/",
+        "sha256": "7072ccfb67d94c4534dc7fbeeb4bcc09effbdbc5c9d7972dd44516fc5092663b"
+      }
+    ]
+  },
+  {
+    "slug": "juhannus-suomessa",
+    "links": [
+      {
+        "section": 0,
+        "paragraph": 0,
+        "text": "kesäpäivänseisaus",
+        "href": "/vuodenajat/",
+        "sha256": "6d637a62193e62a68015fd532a704f041c788671b9dfd465f0d6c9231fcafc27"
+      },
+      {
+        "section": 1,
+        "paragraph": 1,
+        "text": "Lomasuunnittelijassa",
+        "href": "/lomasuunnittelija/",
+        "sha256": "21c46a07770400b9592b5623e97b6304cb89f77b2a651575043f7a10a01721bf"
+      },
+      {
+        "section": 4,
+        "paragraph": 0,
+        "text": "Suomen lipun päivän liputus",
+        "href": "https://intermin.fi/suomen-lippu/liputuspaivat",
+        "sha256": "8fc26c1415626de74294aff24073cc5a46461fd30c322ab425a39e0859a2974b"
+      },
+      {
+        "section": 2,
+        "paragraph": 0,
+        "text": "Auringonlaskun laskurista",
+        "href": "/auringonnousu-ja-lasku/",
+        "sha256": "0b3e7dc275cdf20b9fe48e7b667ba25132184286ffd1273b40b79697ee390b3d"
+      },
+      {
+        "section": 4,
+        "paragraph": 1,
+        "text": "Liputuspäivä ja vapaan saamisen ehdot",
+        "href": "/blogi/liputuspaiva-vai-pyhapaiva/",
+        "sha256": "b538957bebef2ae3912b61fe09ff75e59912d03d71b2c06999c77f852a805f0b"
+      }
+    ]
+  },
+  {
+    "slug": "perheen-viikko",
+    "links": [
+      {
+        "section": 0,
+        "paragraph": 0,
+        "text": "työvuorot",
+        "href": "/tyovuorosuunnittelija/",
+        "sha256": "a02b7add964024198784290a771166d5de1651cf47b9e930fbbdebed95e23f84"
+      },
+      {
+        "section": 2,
+        "paragraph": 0,
+        "text": "tallentuu käyttämääsi selaimeen",
+        "href": "/blogi/kalenterin-varmuuskopio/",
+        "sha256": "4da4f53adc5a3c6c01934b3a23a7aebbed354fb64c6be34ef3a69a6fb3a139b0"
+      },
+      {
+        "section": 3,
+        "paragraph": 1,
+        "text": "Toimiva perhekalenteri",
+        "href": "/perhekalenteri/",
+        "sha256": "988f38a9e4a50a3ac441411d35b31160297bb1d9af04997c7eb0695891eed258"
+      },
+      {
+        "section": 4,
+        "paragraph": 0,
+        "text": "Mustavalkoisessa tulosteessa",
+        "href": "/blogi/kalenterin-tulostus/",
+        "sha256": "e0630bb6b22c40c6432edcbead0abd0ffecbb587ba0802f4d1cc7668d4ca8486"
+      },
+      {
+        "section": 0,
+        "paragraph": 0,
+        "text": "koulupäivät",
+        "href": "https://www.oph.fi/fi/uutiset/2026/koulujen-tyo-ja-loma-ajat-lukuvuonna-2026-2027",
+        "sha256": "a02b7add964024198784290a771166d5de1651cf47b9e930fbbdebed95e23f84"
+      }
+    ]
+  },
+  {
+    "slug": "tyopaivat-ja-aatot",
+    "links": [
+      {
+        "section": 1,
+        "paragraph": 0,
+        "text": "lasketaanko alku- ja loppupäivä mukaan",
+        "href": "/paivamaaralaskuri/",
+        "sha256": "10e359bad24320ffa2636351a9de341ad2b7b32398469844c18249b84c00dda7"
+      },
+      {
+        "section": 2,
+        "paragraph": 0,
+        "text": "työvuorosuunnittelijaa",
+        "href": "/tyovuorosuunnittelija/",
+        "sha256": "a9af2eb915b1da2c1e688a3950495969a20d3ef980cbec80d75a04fc339064af"
+      },
+      {
+        "section": 4,
+        "paragraph": 0,
+        "text": "juhannusaatto 25.6. ja jouluaatto 24.12.",
+        "href": "https://almanakka.helsinki.fi/ajankohtaista/arkivapaat-2027",
+        "sha256": "a802b7df85d05cc70107466887a5bc93e5371aaf52580badc2c11e2429eb6071"
+      },
+      {
+        "section": 5,
+        "paragraph": 1,
+        "text": "työvuorojen lepoaikoihin",
+        "href": "https://www.finlex.fi/fi/lainsaadanto/2019/872",
+        "sha256": "47bb501b95712a77929e9fbc03731baedacc1dd6ccf3b09e2d0b36726ae62ea1"
+      }
+    ]
+  },
+  {
+    "slug": "koulujen-lomat",
+    "links": [
+      {
+        "section": 1,
+        "paragraph": 1,
+        "text": "lukujärjestykseen",
+        "href": "/lukujarjestys/",
+        "sha256": "0ff6c44db2dd5a1fe0a2a15c6cb7d53d10aafe3d9518303a76fbe12804026ed7"
+      },
+      {
+        "section": 2,
+        "paragraph": 0,
+        "text": "Lomasuunnittelija",
+        "href": "/lomasuunnittelija/",
+        "sha256": "ff0affe2f805c4d1f496954ae8cb748515eb787e9814fb722991ce789814c02d"
+      },
+      {
+        "section": 3,
+        "paragraph": 0,
+        "text": "Opetushallituksen lukuvuoden 2026–2027 koosteessa",
+        "href": "https://www.oph.fi/fi/uutiset/2026/koulujen-tyo-ja-loma-ajat-lukuvuonna-2026-2027",
+        "sha256": "ea908350ea3ecea355c31a8ded7e7c9048454095606c2f38e11ec3f868639052"
+      },
+      {
+        "section": 5,
+        "paragraph": 1,
+        "text": "Perhekalenterissa",
+        "href": "/perhekalenteri/",
+        "sha256": "0d12b93cbeeabc75efc82efac84062cf08813628225b2c03530a0c443c96b134"
+      }
+    ]
+  },
+  {
+    "slug": "auringon-ajat",
+    "links": [
+      {
+        "section": 0,
+        "paragraph": 1,
+        "text": "Kesä- ja talviaika",
+        "href": "/blogi/kesaaika-ja-talviaika/",
+        "sha256": "eb9a14f9c45a97cae70737bcc156f35e616fcd222d8b40d80eec7d7dd2e061f3"
+      },
+      {
+        "section": 0,
+        "paragraph": 2,
+        "text": "päivän pituutta",
+        "href": "/paivan-pituus/",
+        "sha256": "a9a6ca7ca97b1c84eb0172a0a06ecfc8995006a0380ce23f510aff71c98ade69"
+      },
+      {
+        "section": 2,
+        "paragraph": 0,
+        "text": "Simulaation pikavalinnoilla",
+        "href": "/auringonnousu-ja-lasku/",
+        "sha256": "0fb116f9448d181bdcf4e9fe10f24d63a129f14783b20fadabc9d43f6740a56e"
+      },
+      {
+        "section": 3,
+        "paragraph": 0,
+        "text": "Porvarillinen hämärä",
+        "href": "https://www.ilmatieteenlaitos.fi/aurinko-ja-kuu-kysymyksia-ja-vastauksia",
+        "sha256": "70f663a3abb0e69975cdd408443adf35a0d27979f5e420578a236895a99ac57f"
+      }
+    ]
+  },
+  {
+    "slug": "kuun-vaiheet",
+    "links": [
+      {
+        "section": 0,
+        "paragraph": 1,
+        "text": "päivittäinen Kuun kuva",
+        "href": "/kuukalenteri/",
+        "sha256": "1af0d1819d3d1ed11ac2fda98abf347702eb35ebade87a011b8c9a2f0056c680"
+      },
+      {
+        "section": 1,
+        "paragraph": 1,
+        "text": "paikallisiin nousu- ja laskuaikoihin",
+        "href": "/kuun-nousu-ja-lasku/",
+        "sha256": "d0c437b79cf83eacfd72477649d908abbf8625e9cadef9a3b36ae927b6f1e186"
+      },
+      {
+        "section": 3,
+        "paragraph": 0,
+        "text": "noin puolet Kuun näkyvästä kiekosta valaistuna",
+        "href": "https://aa.usno.navy.mil/faq/moon_phases",
+        "sha256": "46eb152d00f4a9f76270a8c696c1333b4b76335d495605d75f5335436d9e4d88"
+      },
+      {
+        "section": 5,
+        "paragraph": 1,
+        "text": "puutarhan kasvutulosta",
+        "href": "/blogi/kylvot-suomen-kevaassa/",
+        "sha256": "8663bb5fc321f952ad785176793a947c3b785520a2328c7fe542fb9751ddabd1"
+      }
+    ]
+  },
+  {
+    "slug": "kalenterin-tulostus",
+    "links": [
+      {
+        "section": 0,
+        "paragraph": 2,
+        "text": "ladattava alkuperäinen tiedosto",
+        "href": "/pdf-kalenteri/",
+        "sha256": "01cf39d704336e717013469ae9611150cff3f7929bd46f3c2f103f80f63fbed9"
+      },
+      {
+        "section": 1,
+        "paragraph": 2,
+        "text": "sivulle sovittamista ja todellista kokoa",
+        "href": "https://helpx.adobe.com/acrobat/desktop/print-documents/set-up-and-print-pdfs/page-size.html",
+        "sha256": "e14eb71556047ff470c830aa6ae51956855d6f511a022bdab132f6109c2fd854"
+      },
+      {
+        "section": 5,
+        "paragraph": 0,
+        "text": "Perheen viikko",
+        "href": "/perhekalenteri/",
+        "sha256": "8e1b16746a7bbc1f807b662b5538cc91ad78e45903c5ea74232ad9145e2fe01c"
+      },
+      {
+        "section": 3,
+        "paragraph": 1,
+        "text": "alkuperäinen kuva",
+        "href": "/blogi/oman-kalenterin-suunnittelu/",
+        "sha256": "e398baf2824310855b528301a09e1fa310e7d6ba16b28834228ff06223fdcf5e"
+      }
+    ]
+  },
+  {
+    "slug": "kalenterin-varmuuskopio",
+    "links": [
+      {
+        "section": 0,
+        "paragraph": 0,
+        "text": "Sivustotietojen poistaminen",
+        "href": "https://support.google.com/chrome/answer/2392709?hl=fi",
+        "sha256": "c2d379ddbf4bf3fdd6252ed6c447e59a60c66fd38ae07128edd2852f79e8a9a0"
+      },
+      {
+        "section": 1,
+        "paragraph": 0,
+        "text": "JSON-varmuuskopio",
+        "href": "/",
+        "sha256": "48ff246fe6a1615c79e2340b01c5aaecb9d2509f1754357ce16e8726a3548d63"
+      },
+      {
+        "section": 2,
+        "paragraph": 0,
+        "text": "Viikko- tai perhesuunnitelman tuloste",
+        "href": "/blogi/kalenterin-tulostus/",
+        "sha256": "0e561207657a8c56de56bd16940d9401bb75a85dc683263fafff225679d7c140"
+      },
+      {
+        "section": 5,
+        "paragraph": 0,
+        "text": "Paikallinen tallennus",
+        "href": "https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage",
+        "sha256": "1913d3fa2245b8f7d58a256fd7af1cbef1afa2ba43a5917bfbd96a321c601eef"
+      },
+      {
+        "section": 5,
+        "paragraph": 1,
+        "text": "vanhat henkilötiedot",
+        "href": "/tietosuoja/",
+        "sha256": "09480f72ea6c5c7ecafd4cb751438a20a4f499a7de29200590cddf868107193d"
+      }
+    ]
+  },
+  {
+    "slug": "syksyn-suunnittelu",
+    "links": [
+      {
+        "section": 0,
+        "paragraph": 0,
+        "text": "kuukausinäkymään",
+        "href": "/kuukausikalenteri/",
+        "sha256": "d7718d68141317cd1977168345cc54189386dfe1d08bbe95ba197bb9d9fa060b"
+      },
+      {
+        "section": 1,
+        "paragraph": 0,
+        "text": "Päiväsuunnittelijassa",
+        "href": "/paivasuunnittelija/",
+        "sha256": "15562d4130e0062ed0527b5a35e60732b49f7ebf502be84f6c49000dc227c0af"
+      },
+      {
+        "section": 2,
+        "paragraph": 1,
+        "text": "Koulun syysloma",
+        "href": "/blogi/koulujen-lomat/",
+        "sha256": "87ed3c8fc4382cb07fbece69fd3b83e6fdb80edebc873ca084f6bcb3f82bb4ed"
+      },
+      {
+        "section": 5,
+        "paragraph": 0,
+        "text": "Ilmatieteen laitos määrittelee termiset vuodenajat",
+        "href": "https://www.ilmatieteenlaitos.fi/termiset-vuodenajat",
+        "sha256": "c7e3140b002309c7cb1997321e0033f2f6bf219a5f0e6da5fa2aff7f887fb6bd"
+      }
+    ]
+  },
+  {
+    "slug": "karkausvuosi-2028",
+    "links": [
+      {
+        "section": 1,
+        "paragraph": 0,
+        "text": "päivämäärälaskuria",
+        "href": "/paivamaaralaskuri/",
+        "sha256": "a1f30a5356370dd01ecb34bca91d2c1badca3076e06db0e1bde3cec572729dd9"
+      },
+      {
+        "section": 1,
+        "paragraph": 1,
+        "text": "pääsiäisen päivää",
+        "href": "/blogi/paasiaisen-paivamaara/",
+        "sha256": "34ea26cc8f6796356e8e3d7c9e2ce80dcd94e8edd5d9640f7472aa7578dd1e41"
+      },
+      {
+        "section": 5,
+        "paragraph": 0,
+        "text": "vuosi 2100",
+        "href": "https://aa.usno.navy.mil/faq/leap_years",
+        "sha256": "85851919381925ecd6ef944c5034056181656cb57e0f8dd1506bb425ce1a7e67"
+      },
+      {
+        "section": 5,
+        "paragraph": 1,
+        "text": "Karkausvuosilaskurissa",
+        "href": "/karkausvuosi/",
+        "sha256": "f02197e049f62edcde6a0bd070b6ba1b10dc8016c68ec931293a899aedcaf40a"
+      }
+    ]
+  },
+  {
+    "slug": "kesaaika-ja-talviaika",
+    "links": [
+      {
+        "section": 0,
+        "paragraph": 1,
+        "text": "nousevan merkin laskuri",
+        "href": "/horoskooppi/#nouseva-merkki",
+        "sha256": "e006c309d125450357d1f4a566bef5e5ea00f808f655304ec0367afe05f419d7"
+      },
+      {
+        "section": 2,
+        "paragraph": 0,
+        "text": "kesäaika alkaa maaliskuun ja päättyy lokakuun viimeisenä sunnuntaina",
+        "href": "https://valtioneuvosto.fi/-/1410829/kellot-talviaikaan-ensi-sunnuntaina-25.-lokakuuta-",
+        "sha256": "8134041e440f4b82d39d26deee06c353702196664f61dbed62c80c6f5f047454"
+      },
+      {
+        "section": 3,
+        "paragraph": 1,
+        "text": "likimääräinen syntymäaika",
+        "href": "/blogi/nousevan-merkin-syntymaaika/",
+        "sha256": "5609985bf604b643d3658a5fa974c869320d10060b8a229c8a8b4b8889b3a05e"
+      },
+      {
+        "section": 4,
+        "paragraph": 1,
+        "text": "yövuoroissa",
+        "href": "/blogi/yovuoron-kalenteri/",
+        "sha256": "be3e987dea5c63f7f98687cf93716017676d9bb19cbc97253b76a27ee0c03d46"
+      },
+      {
+        "section": 5,
+        "paragraph": 2,
+        "text": "Merkintä ”kellot eteenpäin” tai ”kellot taaksepäin”",
+        "href": "/kellonsiirto/",
+        "sha256": "40c423b4a2034fafac776c44b2bcfb3202fe29dc013a8487ab7e8cb663ba6e82"
+      }
+    ]
+  },
+  {
+    "slug": "paasiaisen-paivamaara",
+    "links": [
+      {
+        "section": 0,
+        "paragraph": 0,
+        "text": "Pitkäperjantai",
+        "href": "/juhlapyhat/pitkaperjantai/",
+        "sha256": "41d71d53bfc2519ef3bfc2614464660a3038a58cf9cee084f837951e1b17e915"
+      },
+      {
+        "section": 2,
+        "paragraph": 1,
+        "text": "kesäaikaan siirtymisen sunnuntaihin",
+        "href": "/blogi/kesaaika-ja-talviaika/",
+        "sha256": "0886fcfe36497887fbe13dd28e58bb7f6bd328d698d381e2b1d7d6712defb588"
+      },
+      {
+        "section": 3,
+        "paragraph": 0,
+        "text": "Helatorstai",
+        "href": "/juhlapyhat/helatorstai/",
+        "sha256": "13fc968493f3ca93897e160908d2c542280e060b761a134dcc859d3cafcfb015"
+      },
+      {
+        "section": 3,
+        "paragraph": 1,
+        "text": "kirkkovuoden rytmiin",
+        "href": "https://evl.fi/selkokieli/kirkkovuosi-ja-jumalanpalvelus/",
+        "sha256": "b22fbac39d0f245aedd11765eaa9f0a4aca8d6e0f1b22e5429fd65c104479fe2"
+      }
+    ]
+  },
+  {
+    "slug": "liputuspaiva-vai-pyhapaiva",
+    "links": [
+      {
+        "section": 0,
+        "paragraph": 0,
+        "text": "Työpäivälaskuri",
+        "href": "/tyopaivalaskuri/",
+        "sha256": "be43a915004d4ad342a1c2040b0606b05d324947a1e684eb7d88de052cfe38a9"
+      },
+      {
+        "section": 1,
+        "paragraph": 1,
+        "text": "sisäministeriön ohjeista",
+        "href": "https://intermin.fi/suomen-lippu/liputuspaivat",
+        "sha256": "25c1d5fbc1f91e9f1a9cac9c23ebd04c5934bdc3ad769f093fe9f6861e88cf3a"
+      },
+      {
+        "section": 3,
+        "paragraph": 0,
+        "text": "Virallisista liputuspäivistä säädetään asetuksessa",
+        "href": "https://finlex.fi/fi/lainsaadanto/1978/383",
+        "sha256": "1fab46e8a919ea80ec1f9bb4b512f630baafbc762e48b017bb545fe773ec4190"
+      },
+      {
+        "section": 3,
+        "paragraph": 1,
+        "text": "juhannuksen",
+        "href": "/blogi/juhannus-suomessa/",
+        "sha256": "b0086319e21c3cf9df37281ac2005c29e796b53f70acd9374688e3cd0d2b8d42"
+      }
+    ]
+  },
+  {
+    "slug": "oman-kalenterin-suunnittelu",
+    "links": [
+      {
+        "section": 0,
+        "paragraph": 1,
+        "text": "luomistyökalun valmista mallia",
+        "href": "/luo-kalenteri/",
+        "sha256": "044082b7a256ffb8d7e791eeda293ff78b18a3fa38a80cf411674f3a7d01d8e3"
+      },
+      {
+        "section": 1,
+        "paragraph": 0,
+        "text": "riittävän tumma teksti vaalealle taustalle",
+        "href": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html",
+        "sha256": "17f0000fc745346a9095bc1da2c1ad8467b41035f9d60db4f9267723fd6510fc"
+      },
+      {
+        "section": 5,
+        "paragraph": 0,
+        "text": "Tulosta tarvittaessa yksi arkki",
+        "href": "/blogi/kalenterin-tulostus/",
+        "sha256": "189f70b59acd6768b8d6d2829a4c11b62d7e7bade9940bc5ead267fa0baf4087"
+      },
+      {
+        "section": 5,
+        "paragraph": 1,
+        "text": "Säilytä myös oma valokuva ja tapahtumat erikseen",
+        "href": "/blogi/kalenterin-varmuuskopio/",
+        "sha256": "08a3d5b61a8052c208004a71eb4204e480415f7ad4b8d348fa60ebf323e83ccd"
+      }
+    ]
+  },
+  {
+    "slug": "kylvot-suomen-kevaassa",
+    "links": [
+      {
+        "section": 0,
+        "paragraph": 1,
+        "text": "Kylvökalenterin",
+        "href": "/kylvokalenteri/",
+        "sha256": "b598299d23a502d75acb00a8467764cdb174d315570317d0a47183dc75677d27"
+      },
+      {
+        "section": 1,
+        "paragraph": 2,
+        "text": "kuusi viikkoa taaksepäin",
+        "href": "/paivamaaralaskuri/",
+        "sha256": "045896634756343ae70fa6aba6266291662acc90d7c3a54065402648b269b112"
+      },
+      {
+        "section": 3,
+        "paragraph": 1,
+        "text": "Marttojen taimikasvatusohjeissa",
+        "href": "https://www.martat.fi/puutarha/puutarhan-tyot/taimikasvatus/",
+        "sha256": "8add6599a9e1ab0c45bbbc613d67fa43ecc2098b3de406e1876037b9096b1ec1"
+      },
+      {
+        "section": 4,
+        "paragraph": 0,
+        "text": "Tomaatti",
+        "href": "/kylvokalenteri/tomaatti/",
+        "sha256": "0f8489443ebfcd7f42b8fdf44d9a3368b03a2ee41083fda12b2b5ccc94b9ef3f"
+      },
+      {
+        "section": 5,
+        "paragraph": 1,
+        "text": "Kuun vaiheita",
+        "href": "/blogi/kuun-vaiheet/",
+        "sha256": "4fae6c6d58410968a2cd6ece5f250572759ee530c6fa55cb808e36bc7e5ecc21"
+      }
+    ]
+  },
+  {
+    "slug": "nousevan-merkin-syntymaaika",
+    "links": [
+      {
+        "section": 0,
+        "paragraph": 1,
+        "text": "epävarmuutta kuvaavaa valintaa",
+        "href": "/horoskooppi/#nouseva-merkki",
+        "sha256": "1735b3347baef2753b7e65c80e259976e937cad99bb37a83ae67110b6e90f102"
+      },
+      {
+        "section": 1,
+        "paragraph": 1,
+        "text": "Kellonsiirtopäivän puuttuva tai kahdentuva tunti",
+        "href": "/blogi/kesaaika-ja-talviaika/",
+        "sha256": "3d7e391f8e3328560f3d52843a2a74d70778407c79ca27da5ae6c172f1916926"
+      },
+      {
+        "section": 3,
+        "paragraph": 1,
+        "text": "trooppista eläinrataa",
+        "href": "https://www.astro.com/swisseph/swisseph.htm",
+        "sha256": "f46d6587027aa3c7296924de16ad92615e5c762b37bfcc6bd7d0d4b059f41166"
+      },
+      {
+        "section": 5,
+        "paragraph": 1,
+        "text": "päivittäinen horoskooppi",
+        "href": "/horoskooppi/",
+        "sha256": "760b2d40d7ee5027efb9ea06b33c327722b97f25ef06cbc8012461eba77f812c"
+      },
+      {
+        "section": 5,
+        "paragraph": 0,
+        "text": "toisen ihmisen tarkkaa syntymäaikaa ja paikkaa",
+        "href": "/tietosuoja/",
+        "sha256": "697299eccdf17524af1e03ad947f16c690583e99f91414b2b9a1ad14c3ccee92"
+      }
+    ]
+  },
+  {
+    "slug": "opintoperiodit-ja-tentit",
+    "links": [
+      {
+        "section": 1,
+        "paragraph": 0,
+        "text": "yliopistojen julkaisemia opetusperiodeja",
+        "href": "/yliopistojen-kalenterit/",
+        "sha256": "ad358d645a79e72218bab922bf8cf0cb5ab34720f462f66c5442dbc0b8945269"
+      },
+      {
+        "section": 1,
+        "paragraph": 1,
+        "text": "Lukujärjestyksessä",
+        "href": "/lukujarjestys/",
+        "sha256": "ba9807130ed7eabff0e43ebcf6fe83088646aa95c41fe1b312c9103f0d135f9e"
+      },
+      {
+        "section": 3,
+        "paragraph": 0,
+        "text": "Itä-Suomen yliopiston julkaistussa lukuvuoden 2026–2027 kalenterissa",
+        "href": "https://kamu.uef.fi/tietopankki/perustutkinto-opiskelija/opiskelu/opintojen-suunnittelu/lukuvuoden-ajankohtia/",
+        "sha256": "cf194cd6f1e333f2ef680fd4fa71876028e6b3cee1b0dd0bf0ae32a9baab7c4d"
+      },
+      {
+        "section": 5,
+        "paragraph": 0,
+        "text": "kertaus ennen viimeistä viikkoa",
+        "href": "/blogi/syksyn-suunnittelu/",
+        "sha256": "1064b9604ebd53bef37721e387618e763ccca24137d182a1732f1f800695eaa8"
+      }
+    ]
+  },
+  {
+    "slug": "yovuoron-kalenteri",
+    "links": [
+      {
+        "section": 0,
+        "paragraph": 0,
+        "text": "työvuorosuunnittelijassa",
+        "href": "/tyovuorosuunnittelija/",
+        "sha256": "a6b7eebca3655707012d7173e9cc0ee7ba4744e03541a2ca8d5924973e45f9bf"
+      },
+      {
+        "section": 2,
+        "paragraph": 0,
+        "text": "kesäaikasiirtymän yönä",
+        "href": "/blogi/kesaaika-ja-talviaika/",
+        "sha256": "2da52c09bface927d6f2d900f5dabbf2601e154d8caec575ea483f19304c7236"
+      },
+      {
+        "section": 4,
+        "paragraph": 0,
+        "text": "Yhteiseen perhekalenteriin",
+        "href": "/perhekalenteri/",
+        "sha256": "988957859504f75a1a4e7f003752a67f6f06ff5739e84a6c7ef839a4ade5cc42"
+      },
+      {
+        "section": 5,
+        "paragraph": 1,
+        "text": "Työaikalain",
+        "href": "https://www.finlex.fi/fi/lainsaadanto/2019/872",
+        "sha256": "00df54a8a418054ad4b9ca76a7c34ac55f0a83b7c6d82395151f61df0e4a29ef"
+      }
+    ]
+  },
+  {
+    "slug": "pitkan-vapaan-suunnittelu",
+    "links": [
+      {
+        "section": 1,
+        "paragraph": 0,
+        "text": "lomasuunnittelijaa",
+        "href": "/lomasuunnittelija/",
+        "sha256": "f2362c8c7caf87ad7e0f11445863db60760e94653d8f7c0d2ae748856e0063e3"
+      },
+      {
+        "section": 1,
+        "paragraph": 1,
+        "text": "aattojen käsittely",
+        "href": "/blogi/tyopaivat-ja-aatot/",
+        "sha256": "2b5e844fd8280f8ae704ecefde82da95aea06b0bd075b8c4ca13a6df23f2848f"
+      },
+      {
+        "section": 3,
+        "paragraph": 0,
+        "text": "Helatorstai on torstaina 6.5.2027",
+        "href": "https://almanakka.helsinki.fi/ajankohtaista/arkivapaat-2027",
+        "sha256": "d4abb54ecdd25fddfbeeff5c889a043ca555c306239ae831a5b4fd51d171d71b"
+      },
+      {
+        "section": 5,
+        "paragraph": 1,
+        "text": "koululaisten loma",
+        "href": "/koulujen-lomat/",
+        "sha256": "915d102840799e97045a9698ad4c12cee9e2d00cd0ded9293916448ba625c0e5"
+      },
+      {
+        "section": 5,
+        "paragraph": 1,
+        "text": "opiskelijoiden tentit",
+        "href": "/blogi/opintoperiodit-ja-tentit/",
+        "sha256": "915d102840799e97045a9698ad4c12cee9e2d00cd0ded9293916448ba625c0e5"
+      }
+    ]
+  }
+]

@@ -1,0 +1,10 @@
+.period-guide{margin-block:24px;padding:clamp(20px,3vw,32px);border-inline-start:4px solid #236f94}
+.period-guide h2{margin:0 0 14px;font-size:clamp(21px,2vw,27px);line-height:1.25;overflow-wrap:anywhere;hyphens:auto}
+.period-guide p{max-width:90ch;margin:12px 0 0;font-size:17px;line-height:1.75;color:#26445c;overflow-wrap:anywhere}
+main :is(h1,h2,h3,summary){min-width:0;overflow-wrap:anywhere;hyphens:auto}
+main p a:not(.btn){text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+a.editorial-link{color:#064a86;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;font-weight:700}
+a.editorial-link:hover{color:#002f6c;text-decoration-thickness:2px;background:#e7f1fc}
+a.editorial-link:focus-visible{outline:3px solid #1b6fa8;outline-offset:3px;border-radius:2px}
+@media(max-width:480px){.period-guide{margin-block:18px;padding:20px}.period-guide p{font-size:16px;line-height:1.7}}
+@media print{.period-guide{display:none!important}}

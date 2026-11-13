@@ -39,17 +39,11 @@ export function localDashboard(helsinkiImage) {
     </div>
 </figcaption></figure>
     <div class="local-place">
-      <button type="button" class="local-place-trigger" id="city-trigger" aria-haspopup="dialog" aria-expanded="false" aria-controls="city-picker" aria-labelledby="city-place-label city-caption">
-        <span class="local-place-pin">${art('location')}</span>
-        <span class="local-place-name"><span id="city-place-label">Paikkakunta</span> <strong id="city-caption">Helsinki</strong></span>
-        <span class="local-place-chevron">${icon('chevron')}</span>
-      </button>
-      <select id="city-select" hidden aria-label="Valitse paikkakunta">${CITIES.map(c => `<option value="${c[0]}">${c[1]}</option>`).join('')}</select>
-      <div class="local-place-picker" id="city-picker" role="dialog" aria-label="Valitse paikkakunta" hidden>
-        <div class="local-picker-top"><label for="city-search">Etsi paikkakunta</label><button type="button" id="city-picker-close" aria-label="Sulje paikkakuntavalikko">×</button></div>
-        <div class="local-place-search">${icon('search')}<input id="city-search" type="search" placeholder="Esimerkiksi Joensuu" autocomplete="off" spellcheck="false" aria-controls="city-options"></div>
-        <div class="local-city-options" id="city-options">${CITIES.map(c => `<button type="button" data-city-option="${c[0]}" aria-pressed="${c[0] === 'helsinki'}"><span>${c[1]}</span><svg class="local-city-check" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m4 10 4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`).join('')}</div>
-        <p id="city-empty" hidden>Paikkakuntaa ei löytynyt. Kokeile toista nimeä.</p>
+      <label for="city-select" class="local-place-label">Paikkakunta</label>
+      <div class="local-select-wrap">
+        <span class="local-place-pin" aria-hidden="true">${art('location')}</span>
+        <select id="city-select" aria-describedby="place-choice-note">${CITIES.map(c => `<option value="${c[0]}">${c[1]}</option>`).join('')}</select>
+        <span class="local-place-chevron" aria-hidden="true">${icon('chevron')}</span>
       </div>
     </div>
     <p class="local-place-note" id="place-choice-note">Paikalliset tiedot Suomesta</p>

@@ -1,0 +1,24 @@
+[
+  {
+    "id": "teams",
+    "source": "https://www.microsoft.com/en-us/microsoft-teams/group-chat-software",
+    "original": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Teams-Icon-FY26?op_usm=1.5%2C0.65%2C15%2C0&qlt=100&resMode=sharp2",
+    "src": "/assets/share-brands/teams.svg",
+    "bytes": 6359,
+    "sha256": "6a33d49f19d1be2bcdf86921935a2171e5c18c3b11abe297ca03d5f4f302ba3a",
+    "checkedAt": "2026-11-13",
+    "changes": "None",
+    "rights": "Microsoft product icon and trademark; used to identify the linked service. Not a CC0 asset."
+  },
+  {
+    "id": "onenote",
+    "source": "https://www.microsoft.com/en-us/microsoft-365/onenote/digital-note-taking-app",
+    "original": "https://www.microsoft.com/content/dam/microsoft/bade/images/icons/en-us/m365-app-icons-fy26/OneNote-Icon-FY26.svg",
+    "src": "/assets/share-brands/onenote.svg",
+    "bytes": 3472,
+    "sha256": "81b19719c18dd2889f19aacc2238139d819f97653d0582a9638f107cf7a2e491",
+    "checkedAt": "2026-11-13",
+    "changes": "None",
+    "rights": "Microsoft product icon and trademark; used to identify the linked service. Not a CC0 asset."
+  }
+]

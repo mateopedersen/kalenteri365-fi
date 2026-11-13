@@ -4,6 +4,7 @@ export const LOCAL_RECORDS = [
   {key:'kalenteri365-v1', name:'Aiemman version kalenteri', detail:'Mahdollinen vanha paikallinen kalenteritallennus', group:'plans'},
   {key:'kalenteri365-studio-project-v1', name:'Kalenterin muokkain', detail:'Projektin asetukset, tekstit, kuvat ja omat tapahtumat', group:'plans'},
   {key:'kalenteri365-shifts-fi-v1', name:'Työvuorosuunnitelma', detail:'Vuorokierto, poikkeukset ja muistiinpanot', group:'plans'},
+  {key:'kalenteri365-vacation-plan-v1', name:'Lomasuunnitelma', detail:'Itse tallennettu vapaa, työviikon valinnat ja vientiasetukset', group:'plans'},
   {key:'kalenteri365-print-favs-v1', name:'Suosikkipohjat', detail:'Itse suosikeiksi merkityt tulostuspohjat', group:'preferences'},
   {key:'fi-storage-notice-until', name:'Tallennusilmoituksen kuittaus', detail:'Ajankohta, johon asti ilmoitus pidetään suljettuna', group:'preferences'},
 ];

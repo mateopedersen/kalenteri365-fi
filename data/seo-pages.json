@@ -1,0 +1,565 @@
+{
+  "/": {
+    "title": "Kalenteri 2027–2030 ja Suomen juhlapyhät",
+    "description": "Suomen kalenteri, juhlapyhät ja ISO-viikot vuosille 2027–2030. Suunnittele omat tapahtumat, tarkista paikkakunnan sää ja valitse tulostettava pohja."
+  },
+  "/kalenteri/": {
+    "description": "Selaa vuosien 2027–2030 kalentereita kuukausittain. Tarkista Suomen pyhäpäivät, viikonpäivät ja ISO-viikkonumerot sekä avaa päivän merkinnät."
+  },
+  "/tyokalut/": {
+    "description": "Löydä sopiva kalenteri, päivämäärälaskuri tai suunnittelija työhön, opiskeluun ja perhearkeen. Selaa myös Suomen pyhiä ja taivaan tapahtumia."
+  },
+  "/kuukausikalenteri/": {
+    "description": "Valitse tulostettava kuukausikalenteri vuosille 2027–2030. Selaa kuukausikohtaisia ulkoasuja ja lataa PDF tai 600 dpi:n kuva omia suunnitelmia varten."
+  },
+  "/viikkokalenteri/": {
+    "description": "Täytä viikon menot ja tehtävät viikkokalenteriin. Selaa vuosien 2027–2030 ISO-viikkoja tai lataa tulostettava pohja PDF- ja kuvamuodossa."
+  },
+  "/kuukalenteri/": {
+    "description": "Katso Kuun päivittäinen valaistus ja päävaiheiden ajat Suomessa vuosina 2027–2030. Valitse kuukausi, tutki päivää ja lataa oma kuukalenteri."
+  },
+  "/juhlapyhat/": {
+    "description": "Suomen juhlapyhät ja aatot vuosina 2027–2030. Tarkista päivämäärät ja viikonpäivät, tutustu juhlan taustaan ja lisää tärkeä päivä kalenteriin."
+  },
+  "/liputuspaivat/": {
+    "description": "Tarkista Suomen viralliset ja vakiintuneet liputuspäivät 2027–2030. Katso päivämäärät, päivän merkitys ja liputuksen ohjeet."
+  },
+  "/merkkipaivat/": {
+    "description": "Suomen juhlat, perinteet ja merkkipäivät 2027–2030 kuukausittain. Tutustu päivän taustaan ja erota pyhäpäivä, aatto ja liputuspäivä toisistaan."
+  },
+  "/pitkat-viikonloput/": {
+    "description": "Vertaa vuosien 2027–2030 pitkiä vapaita. Katso, miten viikonloput ja Suomen pyhät yhdistyvät ja kuinka monta lomapäivää eri vaihtoehdot vaativat."
+  },
+  "/tyhja-kalenteri/": {
+    "title": "Tyhjä kalenteri | Tulostettavat pohjat",
+    "description": "Lataa ajaton kalenteripohja omille päivämäärille, menoille ja muistiinpanoille. Valitse käyttöösi sopiva malli ja tulosta PDF tai kuva."
+  },
+  "/luo-kalenteri/": {
+    "description": "Tee oma vuosi-, kuukausi- tai viikkokalenteri. Lisää kuva, värit ja tapahtumat, valitse valmis malli ja lataa kalenteri PDF-, kuva- tai taulukkomuodossa."
+  },
+  "/koulukalenteri/": {
+    "title": "Koulukalenteri viikon suunnitteluun",
+    "description": "Suunnittele koulun viikko maanantaista perjantaihin. Lisää menot päivän kenttiin, siirry viikosta toiseen ja tulosta valmis viikkosuunnitelma."
+  },
+  "/lukujarjestys/": {
+    "description": "Tee oma lukujärjestys oppitunneille ja harrastuksille. Muokkaa viikon sisältöä ja lataa tulostettava pohja PDF- tai kuvamuodossa."
+  },
+  "/yliopistojen-kalenterit/": {
+    "description": "Vertaa Suomen yliopistojen opetusperiodeja ja opetustaukoja. Tarkista lukuvuoden lähde, laskentatapa ja oman koulutusohjelman poikkeukset."
+  },
+  "/ylioppilaskirjoitukset/": {
+    "description": "Tarkista julkaistut ylioppilaskokeiden päivät ja alkuperäiset tiedot. Kokoa oma lukusuunnitelma ja erota koepäivä valmistautumisen määräajoista."
+  },
+  "/opiskelukalenteri/": {
+    "title": "Opiskelukalenteri ja viikon tehtävät",
+    "description": "Tee opiskelusuunnitelma maanantaista perjantaihin. Kirjaa tentit ja tehtävät viikon kenttiin, selaa viikkoja ja tulosta oma opiskelukalenteri."
+  },
+  "/paivalaskuri/": {
+    "title": "Päiviä päivämäärään | Päivälaskuri",
+    "description": "Laske kalenteripäivät tästä päivästä valitsemaasi päivämäärään. Anna tapahtumalle nimi ja tarkista, paljonko aikaa on jäljellä tai kulunut."
+  },
+  "/viikkonumerot/": {
+    "description": "Tarkista päivämäärän ISO-viikkonumero sekä viikon alku- ja loppupäivä. Katso myös, mihin viikkovuoteen vuodenvaihteen päivät kuuluvat."
+  },
+  "/vuoden-paiva/": {
+    "description": "Katso päivämäärän järjestysnumero vuodessa ja jäljellä olevien päivien määrä. Vertaa tavallista vuotta ja karkausvuoden 366 päivää."
+  },
+  "/karkausvuosi/": {
+    "description": "Tarkista laskurilla, onko vuosi karkausvuosi. Tutustu gregoriaanisen kalenterin neljän, sadan ja neljänsadan vuoden jakosääntöihin."
+  },
+  "/lomasuunnittelija/": {
+    "description": "Suunnittele lomasi ma–pe-työviikon ja lomabudjetin mukaan. Vertaa Suomen pyhiin liittyviä vapaita ja tarkista suunnitelman tarvitsemat lomapäivät."
+  },
+  "/perhekalenteri/": {
+    "description": "Kokoa perheen viikon menot henkilöittäin samaan suunnitelmaan. Lisää ruokasuunnitelma ja ostokset sekä lataa tulostettava perhekalenteri."
+  },
+  "/paivasuunnittelija/": {
+    "description": "Järjestä yhden päivän tavoitteet, tehtävät ja kellonajat omaan suunnitelmaan. Varaa aikaa tärkeille menoille ja pidä päivän muistiinpanot tallessa."
+  },
+  "/syntymapaivakalenteri/": {
+    "description": "Tallenna läheisten syntymäpäivät omaan kalenteriin ja seuraa niitä vuodesta toiseen. Pidä tärkeät päivät erillään muista arjen tapahtumista."
+  },
+  "/nimipaivat/": {
+    "description": "Tarkista suomen- ja ruotsinkieliset nimipäivät Yliopiston almanakkatoimiston palvelusta. Lisää tarkistamasi nimipäivä omaksi kalenterimuistutukseksi."
+  },
+  "/kuun-vaiheet/": {
+    "title": "Kuun vaiheet 2027–2030 | Ajat Suomessa",
+    "description": "Tarkista uusikuun, täysikuun ja neljännesten ajankohdat vuosina 2027–2030 Suomen ajassa. Tutki vaiheiden eroja ja vie ajat kalenteriin."
+  },
+  "/taysikuu/": {
+    "title": "Täysikuu 2027–2030 | Päivämäärät ja ajat",
+    "description": "Milloin on seuraava täysikuu? Katso vuosien 2027–2030 täysikuiden päivämäärät ja kellonajat Suomen ajassa sekä lataa kalenterimerkinnät."
+  },
+  "/uusikuu/": {
+    "title": "Uusikuu 2027–2030 | Päivämäärät ja ajat",
+    "description": "Katso uusikuiden tarkat ajankohdat Suomen ajassa vuosina 2027–2030. Tutustu pimeän Kuun vaiheeseen ja tallenna ajat kalenteriin."
+  },
+  "/auringonnousu-ja-lasku/": {
+    "description": "Tarkista auringonnousu, auringonlasku ja hämärän ajat omalle paikkakunnallesi. Seuraa Auringon kulkua päivän simulaatiossa Suomen ajassa."
+  },
+  "/kuun-nousu-ja-lasku/": {
+    "description": "Valitse paikkakunta ja päivämäärä, katso Kuun nousu- ja laskuajat sekä seuraa Kuun kulkua. Vertaa paikallista näkyvyyttä Kuun vaiheeseen."
+  },
+  "/paivan-pituus/": {
+    "description": "Laske valoisan ajan kesto omalla paikkakunnallasi. Vertaa auringonnousua, auringonlaskua ja päivän pituuden vaihtelua Suomen eri kaupungeissa."
+  },
+  "/vuodenajat/": {
+    "title": "Vuodenajat 2027–2030 | Päiväntasaukset ja -seisaukset",
+    "description": "Milloin kevät, kesä, syksy ja talvi alkavat? Katso päiväntasausten ja -seisausten ajat 2027–2030 sekä kalenterivuodenaikojen erot Suomessa."
+  },
+  "/kellonsiirto/": {
+    "title": "Kellonsiirto 2027–2030 | Kesä- ja normaaliaika",
+    "description": "Tarkista Suomen kellonsiirrot vuosille 2027–2030 nykyisten EU-sääntöjen mukaan. Katso, milloin kelloa siirretään eteen- tai taaksepäin."
+  },
+  "/auringonpimennys/": {
+    "title": "Auringonpimennykset 2027–2030 | Helsinki",
+    "description": "Katso Helsingin auringonpimennysten laskennalliset ajat ja näkyvyys vuosina 2027–2030. Tarkista huippuhetki ja lue turvallisen havainnoinnin ohje."
+  },
+  "/kuunpimennys/": {
+    "title": "Kuunpimennykset 2027–2030 | Helsinki",
+    "description": "Katso Helsingissä horisontin yläpuolelle osuvien kuunpimennysten huippuajat 2027–2030. Tarkista pimennyksen tyyppi ja Kuun korkeus."
+  },
+  "/perseidit/": {
+    "description": "Suunnittele perseidien havainnointi Suomessa. Valitse pimeä havaintopaikka, tarkista Kuun vaihe ja huomioi pohjoisen vaaleat kesäyöt."
+  },
+  "/kylvokalenteri/": {
+    "description": "Suunnittele kasvien esikasvatus, kylvö ja istutus Suomen oloissa. Vertaa kasvikohtaisia ajankohtia ja laske kylvöväli omasta istutuspäivästäsi."
+  },
+  "/elakkeiden-maksupaivat/": {
+    "title": "Eläkkeiden maksupäivät 2027",
+    "description": "Katso Kevan ja Ilmarisen julkaistut eläkkeiden maksupäivät vuodelle 2027. Valitse eläkelaji ja lisää maksupäivät omaan kalenteriin."
+  },
+  "/etuuksien-maksupaivat/": {
+    "title": "Lapsilisän maksupäivät 2027",
+    "description": "Tarkista Kelan lapsilisän maksupäivät vuodelle 2027. Lataa maksukalenteri tai lisää päivät omaan kalenteriin. Muilla etuuksilla on omat aikataulunsa."
+  },
+  "/horoskooppi/": {
+    "title": "Horoskooppi | Päivän tulkinnat ja nouseva merkki",
+    "description": "Valitse horoskooppimerkkisi ja lue päivän pohdinta viihteenä. Selvitä myös syntymäpäivän horoskooppimerkki ja laske nouseva merkkisi."
+  },
+  "/horoskooppimerkki/": {
+    "description": "Etsi syntymäpäivän mukainen länsimainen horoskooppimerkki. Tarkista merkkien päivämäärärajat ja siirry oman merkkisi päivän horoskooppiin."
+  },
+  "/verokalenteri/": {
+    "description": "Seuraa julkaistuja verotuksen määräpäiviä ja tee omat veromuistutukset. Tarkista velvollisuutesi Verohallinnon tiedoista ennen kalenteriin lisäämistä."
+  },
+  "/hakukalenteri/": {
+    "description": "Kokoa opiskelun hakuajat, valintatulokset ja paikan vastaanottamisen määräajat. Tarkista vahvistetut tiedot ja lisää oma hakumuistutus."
+  },
+  "/kausimuistutukset/": {
+    "description": "Tee omat muistutukset kodin, puutarhan ja arjen kausitöille. Sovita tehtävät paikallisiin oloihin ja tallenna sopiva päivä kalenteriin."
+  },
+  "/sivukartta/": {
+    "description": "Löydä Kalenteri365:n vuosi- ja kuukausikalenterit, Suomen juhlapäivät, suunnittelutyökalut ja oppaat aiheittain järjestetystä sivukartasta."
+  },
+  "/kylvokalenteri/tomaatti/": {
+    "description": "Tomaatti: aloita esikasvatus maaliskuusta huhtikuun alkuun. Tarkista taimikasvatuksen kesto sekä lämmön ja hallan vaikutus ulos siirtämiseen."
+  },
+  "/kylvokalenteri/paprika/": {
+    "description": "Paprika: esikasvatus maaliskuussa, lisävalolla jo helmikuussa. Suunnittele kasvatusaika ja tarkista lämpimän kasvupaikan vaatimukset."
+  },
+  "/kylvokalenteri/kurkku/": {
+    "description": "Kasvihuonekurkun esikasvatus ajoittuu huhti–toukokuulle. Tarkista kasvupaikan lämpö ja huomaa ero avomaankurkun kasvatukseen."
+  },
+  "/kylvokalenteri/avomaankurkku/": {
+    "description": "Avomaankurkku: esikasvatus toukokuun alussa, istutus vasta lämpimään ja hallattomaan kasvupaikkaan. Katso taimikasvatuksen ja ulos siirron ohje."
+  },
+  "/kylvokalenteri/herne/": {
+    "description": "Herneen suorakylvö ajoittuu touko–kesäkuulle. Tarkista kasvupaikan ja maan lämpötilan ehdot sekä merkitse oma kylvöpäivä kalenteriin."
+  },
+  "/kylvokalenteri/peruna/": {
+    "description": "Peruna istutetaan maan lämmettyä vähintään 8 asteeseen. Tarkista kasvupaikan olosuhteet; koko Suomelle ei ole yhtä varmaa istutuspäivää."
+  },
+  "/kylvokalenteri/porkkana/": {
+    "description": "Porkkanan suorakylvö alkaa keväällä olosuhteiden mukaan. Erota astiaviljelyn huhti–toukokuu avomaan kylvöstä ja tarkista kasvatusohje."
+  },
+  "/kylvokalenteri/basilika/": {
+    "description": "Basilikan ruukkukylvö ajoittuu maalis–huhtikuulle. Tarkista taimikasvatuksen ohje sekä lämpimien öiden merkitys ennen ulos istuttamista."
+  },
+  "/kylvokalenteri/persilja/": {
+    "description": "Persilja kylvetään ruukkuun maalis–huhtikuussa. Varaudu hitaaseen itämiseen ja kirjaa kylvön, taimettumisen ja ulos siirron ajankohdat."
+  },
+  "/kylvokalenteri/salaatti/": {
+    "description": "Salaatti: keräsalaatin esikasvatus huhtikuussa, lehtisalaatin kylvö pienissä erissä viileään kasvupaikkaan. Tarkista kasvatustapojen erot."
+  },
+  "/kylvokalenteri/retiisi/": {
+    "description": "Retiisi kylvetään varhain keväällä viileään kasvupaikkaan. Valitse ajankohta paikallisten olojen mukaan ja vältä koko maan yhtä kuukausirajaa."
+  },
+  "/kylvokalenteri/kesakurpitsa/": {
+    "description": "Kesäkurpitsan esikasvatus alkaa toukokuun alussa. Siirrä taimet ulos hallanvaaran jälkeen ja laske kylvöväli omasta istutuspäivästäsi."
+  },
+  "/kylvokalenteri/sipuli/": {
+    "description": "Sipulin kasvatus riippuu sipulityypistä. Erota istukassipuli, siemenestä kasvatettava sipuli ja monivuotiset sipulit ennen kylvöajan valintaa."
+  },
+  "/yliopistojen-kalenterit/maanpuolustuskorkeakoulu/": {
+    "description": "Maanpuolustuskorkeakoulun yhteistä periodi- tai lomataulukkoa ei ole vahvistettu sivun lähteissä. Tarkista koulutusohjelmasi aikataulu korkeakoululta."
+  },
+  "/yliopistojen-kalenterit/maanpuolustuskorkeakoulu/2026-2027/": {
+    "description": "Maanpuolustuskorkeakoulu 2026–2027: yhteistä loma-aikataulua ei löytynyt tarkistetuista lähteistä. Varmista oman opintosuuntasi ajat korkeakoululta."
+  },
+  "/yliopistojen-kalenterit/abo-akademi/": {
+    "description": "Åbo Akademin opetusperiodit on laskettu yliopiston julkaisemista ISO-viikkorajoista. Tarkista lukuvuosi ja kurssien mahdolliset poikkeukset."
+  },
+  "/blogi/viikkonumerot/": {
+    "title": "ISO-viikkonumero ja vuodenvaihteen viikkovuosi",
+    "description": "Näin luet ISO-viikkonumeroita ja viikkovuotta. Tarkista viikon alku- ja loppupäivät sekä vuodenvaihteen poikkeavat viikkonumerot."
+  },
+  "/blogi/juhannus-suomessa/": {
+    "title": "Juhannuksen ajankohta ja kesän vapaat",
+    "description": "Miten juhannuksen ajankohta määräytyy Suomessa? Erota juhannusaatto ja juhannuspäivä sekä suunnittele kesän vapaat oikeille päiville."
+  },
+  "/blogi/perheen-viikko/": {
+    "title": "Perheen viikon suunnittelu kalenterissa",
+    "description": "Tee perheen viikosta selkeä: kokoa yhteiset menot, jaa tapahtumat henkilöittäin ja jätä kalenteriin tilaa siirtymille ja muutoksille."
+  },
+  "/blogi/tyopaivat-ja-aatot/": {
+    "title": "Työpäivien laskenta, arkipyhät ja aatot",
+    "description": "Erota työpäivät, arkipyhät ja aatot kalenterissa. Katso, mitä ma–pe-laskelma kertoo ja mitkä vapaat määräytyvät oman työn sopimuksesta."
+  },
+  "/blogi/koulujen-lomat/": {
+    "title": "Miksi koulujen loma-ajat vaihtelevat?",
+    "description": "Koulujen loma-ajat päätetään paikallisesti. Etsi oikean kunnan, koulumuodon ja lukuvuoden julkaisu ennen perheen lomasuunnitelmia."
+  },
+  "/blogi/auringon-ajat/": {
+    "title": "Auringonnousu, auringonlasku ja hämärä Suomessa",
+    "description": "Näin luet auringonnousun, auringonlaskun ja hämärän aikoja Suomessa. Tarkista oikea paikkakunta ja Suomen aikavyöhyke."
+  },
+  "/blogi/kuun-vaiheet/": {
+    "title": "Kuun vaiheet ja Kuun paikallinen näkyvyys",
+    "description": "Mitä uusikuu, täysikuu ja neljännekset kertovat? Erota Kuun vaihe paikallisesta näkyvyydestä ja vertaa nousu- ja laskuaikoja."
+  },
+  "/blogi/kalenterin-tulostus/": {
+    "title": "Kalenterin tulostus: koko, suunta ja tiedostomuoto",
+    "description": "Valitse käyttöösi sopiva tulostettava kalenteri. Tarkista paperikoko, suunta, mittakaava ja marginaalit ennen PDF-kalenterin tulostusta."
+  },
+  "/blogi/kalenterin-varmuuskopio/": {
+    "title": "Kalenterimerkintöjen varmuuskopiointi",
+    "description": "Varmuuskopioi selaimeen tallentamasi kalenterimerkinnät. Lue JSON-varmuuskopion ja ICS-viennin erot sekä kokeile tietojen palautusta."
+  },
+  "/blogi/syksyn-suunnittelu/": {
+    "title": "Syksyn aikataulujen suunnittelu kalenterissa",
+    "description": "Kokoa koulun, harrastusten ja työn aikataulut syksyn suunnitelmaan. Erota kokonaisuus, määräajat ja yksittäisen päivän tehtävät."
+  },
+  "/blogi/karkausvuosi-2028/": {
+    "title": "Karkausvuosi 2028 ja helmikuun lisäpäivä",
+    "description": "Vuonna 2028 on 366 päivää ja helmikuussa 29 päivää. Katso, miten karkauspäivä vaikuttaa kalenteriin, viikonpäiviin ja päivämääräväleihin."
+  },
+  "/blogi/kesaaika-ja-talviaika/": {
+    "title": "Kellonsiirto ja kalenterimerkintöjen aikavyöhyke",
+    "description": "Miten kesä- ja normaaliaika vaikuttavat kalenterimerkintöihin? Huomioi Suomen aikavyöhyke ja kellonsiirto tarkkaa ajankohtaa tallentaessa."
+  },
+  "/blogi/paasiaisen-paivamaara/": {
+    "title": "Miksi pääsiäisen päivämäärä vaihtuu?",
+    "description": "Miksi pääsiäisen päivämäärä vaihtuu vuosittain? Tutustu liikkuvan juhlan kalenterisääntöön ja tarkista oikean vuoden pääsiäispäivät."
+  },
+  "/blogi/liputuspaiva-vai-pyhapaiva/": {
+    "title": "Onko liputuspäivä myös vapaapäivä?",
+    "description": "Liputuspäivä, pyhäpäivä ja aatto ovat eri asioita. Opi lukemaan kalenterin luokituksia ja tarkista, mitä ne kertovat omasta vapaastasi."
+  },
+  "/blogi/oman-kalenterin-suunnittelu/": {
+    "title": "Oman kalenterin suunnittelu ja kuvan valinta",
+    "description": "Suunnittele oma kuva- tai muistiinpanokalenteri. Valitse vuosi- tai kuukausinäkymä ja sovita kuva, tekstit ja merkinnät käyttöösi."
+  },
+  "/blogi/kylvot-suomen-kevaassa/": {
+    "title": "Kevään kylvöt: esikasvatus, lämpö ja hallariski",
+    "description": "Suunnittele kevään kylvöt valon, lämmön ja paikallisen hallariskin mukaan. Pelkkä kuukausi ei ratkaise taimien turvallista istutusaikaa."
+  },
+  "/blogi/nousevan-merkin-syntymaaika/": {
+    "title": "Nouseva merkki ja tarkan syntymäajan merkitys",
+    "description": "Miksi nousevan merkin laskuri kysyy syntymäajan ja -paikan? Lue, miten tarkat lähtötiedot ja aikavyöhyke vaikuttavat laskentaan."
+  },
+  "/blogi/opintoperiodit-ja-tentit/": {
+    "title": "Yliopiston opetusperiodit, tentit ja lomat",
+    "description": "Erota opetusperiodi, tenttiviikko ja loma opiskelukalenterissa. Tarkista yliopiston yhteiset ajat ja kurssien omat palautus- ja koepäivät."
+  },
+  "/blogi/yovuoron-kalenteri/": {
+    "title": "Yövuoron alku ja loppu kalenterissa",
+    "description": "Kirjaa yön yli jatkuva työvuoro oikeille päivämäärille. Säilytä vuoron todellinen alku ja loppu myös kuukautta tai vuotta vaihtaessa."
+  },
+  "/blogi/pitkan-vapaan-suunnittelu/": {
+    "title": "Pitkän vapaan suunnittelu ja lomapäivien vertailu",
+    "description": "Vertaa pitkiä vapaita pyhien, viikonloppujen ja omien lomapäivien avulla. Laske tarvittava loma ja erota alustava suunnitelma hyväksytystä vapaasta."
+  },
+  "/juhlapyhat/uudenvuodenpaiva/": {
+    "description": "Uudenvuodenpäivä 1. tammikuuta aloittaa vuoden ja on Suomessa kirkollinen pyhä. Katso viikonpäivät 2027–2030 ja vuodenvaihteen ISO-viikot."
+  },
+  "/juhlapyhat/loppiainen/": {
+    "description": "Loppiainen 6. tammikuuta päättää joulun juhla-ajan. Tutustu juhlan kristilliseen taustaan ja katso, mille viikonpäivälle se osuu."
+  },
+  "/juhlapyhat/holokaustin-uhrien-muistopaiva/": {
+    "description": "Holokaustin uhrien muistopäivä on 27. tammikuuta. Lue päivän historiallisesta taustasta, uhrien muistamisesta ja opetukseen sopivista lähteistä."
+  },
+  "/juhlapyhat/runebergin-paiva/": {
+    "description": "J. L. Runebergin päivä 5. helmikuuta kunnioittaa Suomen kansallisrunoilijaa. Päivän taustaan kuuluvat ruotsinkielinen runous ja liputusperinne."
+  },
+  "/juhlapyhat/saamelaisten-kansallispaiva/": {
+    "description": "Saamelaisten kansallispäivä 6. helmikuuta on saamelaisten yhteinen juhla yli valtiorajojen. Tutustu päivän historiaan sekä saamen kieliin."
+  },
+  "/juhlapyhat/laskiaistiistai/": {
+    "description": "Laskiaistiistain päivämäärä vaihtuu pääsiäisen mukana. Tutustu paastonajan taustaan, mäenlaskuun ja laskiaisen ruokaperinteisiin."
+  },
+  "/juhlapyhat/ystavanpaiva/": {
+    "description": "Ystävänpäivä 14. helmikuuta huomioi Suomessa myös ystävät ja muut läheiset. Löydä arkeen sopiva tapa muistaa toista tai sopia yhteinen hetki."
+  },
+  "/juhlapyhat/kalevalan-paiva/": {
+    "description": "Kalevalan ja suomalaisen kulttuurin päivää vietetään 28. helmikuuta. Lue eepoksen taustasta ja virallisen liputuspäivän merkityksestä."
+  },
+  "/juhlapyhat/naistenpaiva/": {
+    "description": "Kansainvälinen naistenpäivä 8. maaliskuuta nostaa esiin naisten oikeudet, tasa-arvon ja osallistumisen. Lue päivän yhteiskunnallisesta taustasta."
+  },
+  "/juhlapyhat/minna-canthin-paiva/": {
+    "description": "Minna Canthin ja tasa-arvon päivä on 19. maaliskuuta. Tutustu kirjailijan yhteiskunnalliseen työhön ja päivän asemaan liputuspäivänä."
+  },
+  "/juhlapyhat/palmusunnuntai/": {
+    "description": "Palmusunnuntai aloittaa hiljaisen viikon ennen pääsiäistä. Lue Jerusalemiin saapumisen kristillisestä taustasta ja suomalaisesta virpomisperinteestä."
+  },
+  "/juhlapyhat/pitkaperjantai/": {
+    "description": "Pitkäperjantai on kaksi päivää ennen pääsiäissunnuntaita vietettävä kirkollinen pyhä. Sen aiheena on Jeesuksen ristiinnaulitsemisen muistaminen."
+  },
+  "/juhlapyhat/paasiaispaiva/": {
+    "description": "Pääsiäispäivä on kristillinen ylösnousemuksen juhla, jonka päivämäärä vaihtuu vuosittain. Katso pääsiäissunnuntain ajankohdat 2027–2030."
+  },
+  "/juhlapyhat/toinen-paasiaispaiva/": {
+    "description": "Toinen pääsiäispäivä eli pääsiäismaanantai jatkaa juhlaa sunnuntain jälkeen. Katso tämän liikkuvan kirkollisen pyhän päivämäärät ja lisää päivä kalenteriin."
+  },
+  "/juhlapyhat/kansainvalinen-romanipaiva/": {
+    "description": "Kansainvälinen romanipäivä 8. huhtikuuta tuo esiin romanien historian, kielen ja oikeudet. Päivän tausta ulottuu vuoden 1971 romanikongressiin."
+  },
+  "/juhlapyhat/agricolan-paiva/": {
+    "description": "Mikael Agricolan ja suomen kielen päivä on 9. huhtikuuta. Lue suomen kirjakielen kehityksestä ja päivän yhteydestä myös Elias Lönnrotiin."
+  },
+  "/juhlapyhat/veteraanipaiva/": {
+    "description": "Kansallinen veteraanipäivä 27. huhtikuuta kunnioittaa Suomen sotiin osallistuneita veteraaneja ja heidän perintöään. Tutustu päivän muistamisen tapoihin."
+  },
+  "/juhlapyhat/vappu/": {
+    "description": "Vappu 1. toukokuuta on suomalaisen työn, kevään ja opiskelijoiden juhla. Lue virallisen liputuspäivän perinteistä ja erosta vappuaattoon."
+  },
+  "/juhlapyhat/helatorstai/": {
+    "description": "Helatorstai on Jeesuksen taivaaseenastumisen juhla 39 päivää pääsiäissunnuntaista. Vertaa vuosien 2027–2030 ajankohtia pitkän viikonlopun suunnittelussa."
+  },
+  "/juhlapyhat/eurooppa-paiva/": {
+    "description": "Eurooppa-päivä 9. toukokuuta muistuttaa rauhasta ja eurooppalaisesta yhteistyöstä. Tutustu Schumanin julistukseen liittyvään historiaan ja liputukseen."
+  },
+  "/juhlapyhat/aitienpaiva/": {
+    "description": "Äitienpäivä on Suomessa toukokuun toinen sunnuntai ja virallinen liputuspäivä. Katso vuosittain vaihtuva päivämäärä ja sovi läheiselle sopiva juhlahetki."
+  },
+  "/juhlapyhat/snellmanin-paiva/": {
+    "description": "J. V. Snellmanin ja suomalaisuuden päivää vietetään 12. toukokuuta. Lue filosofin ja valtiomiehen työstä suomen kielen ja sivistyksen hyväksi."
+  },
+  "/juhlapyhat/helluntaipaiva/": {
+    "description": "Helluntai on seitsemän viikkoa pääsiäisestä vietettävä sunnuntai. Kristillisessä perinteessä juhla muistuttaa Pyhän Hengen vuodattamisesta ja kirkon synnystä."
+  },
+  "/juhlapyhat/kaatuneitten-muistopaiva/": {
+    "description": "Kaatuneitten muistopäivä on toukokuun kolmas sunnuntai. Tutustu sodissa ja niiden seurauksena menehtyneiden muistamiseen sekä päivän liputukseen."
+  },
+  "/juhlapyhat/lippujuhlan-paiva/": {
+    "description": "Puolustusvoimain lippujuhlan päivää vietetään 4.6., Mannerheimin syntymäpäivänä. Lue päivän taustasta ja sen erosta juhannuksen Suomen lipun päivään."
+  },
+  "/juhlapyhat/ahvenanmaan-itsehallintopaiva/": {
+    "description": "Ahvenanmaan itsehallintopäivä 9.6. liittyy maakuntapäivien ensimmäiseen täysistuntoon. Lue itsehallinnon historiasta ja alueen omista juhlatavoista."
+  },
+  "/juhlapyhat/juhannusaatto/": {
+    "description": "Juhannusaatto on juhannuspäivää edeltävä perjantai. Katso vuosien 2027–2030 aatot, yön yli jatkuva liputus ja aaton asema kalenterissa."
+  },
+  "/juhlapyhat/juhannuspaiva/": {
+    "description": "Juhannuspäivä on myös Suomen lipun päivä ja osuu lauantaille 20.–26.6. Lue juhlan tausta sekä sen ero tähtitieteelliseen kesäpäivänseisaukseen."
+  },
+  "/juhlapyhat/eino-leinon-paiva/": {
+    "description": "Runous ja kesä kohtaavat Eino Leinon päivänä 6.7. Tutustu runon ja suven päivään ja varaa kalenterista hetki lukemiselle tai kuuntelemiselle."
+  },
+  "/juhlapyhat/tove-janssonin-paiva/": {
+    "description": "Tove Janssonin ja suomalaisen taiteen päivä on 9.8. Tutustu kirjailijan ja kuvataiteilijan työhön, joka ulottuu Muumeista proosaan ja maalauksiin."
+  },
+  "/juhlapyhat/suomen-luonnon-paiva/": {
+    "description": "Elokuun viimeinen lauantai on Suomen luonnon päivä. Päivän taustan rinnalla saat ajatuksia lähimetsän tai rannan luonnon havainnointiin."
+  },
+  "/juhlapyhat/yrittajan-paiva/": {
+    "description": "Yrittäjän päivä 5.9. nostaa esiin yrittäjyyden ja työn arjen. Varaa kalenterissa tilaa asiakastyölle, taustatehtäville ja palautumiselle."
+  },
+  "/juhlapyhat/miina-sillanpaan-paiva/": {
+    "description": "Miina Sillanpään päivä 1.10. on myös kansalaisvaikuttamisen päivä. Tutustu Suomen ensimmäisen naisministerin taustaan ja osallistumisen teemaan."
+  },
+  "/juhlapyhat/aleksis-kiven-paiva/": {
+    "description": "Aleksis Kiven ja suomalaisen kirjallisuuden päivä on 10.10. Tutustu kirjailijan taustaan ja löydä oma tapa viettää päivää lukien tai kuunnellen."
+  },
+  "/juhlapyhat/ykn-paiva/": {
+    "description": "YK:n päivä 24.10. muistuttaa Yhdistyneiden kansakuntien peruskirjan voimaantulosta. Päivän aiheita ovat kansainvälinen yhteistyö, rauha ja ihmisoikeudet."
+  },
+  "/juhlapyhat/halloween/": {
+    "description": "Halloweenia vietetään 31.10., mutta naamiaiset sovitaan omalle päivälleen. Lue halloweenin, kekrin ja liikkuvan pyhäinpäivän eroista."
+  },
+  "/juhlapyhat/pyhainpaiva/": {
+    "description": "Pyhäinpäivä osuu Suomessa lauantaille 31.10.–6.11. Tutustu pyhien ja vainajien muistamisen perinteeseen sekä eroon halloweenin päivämäärästä."
+  },
+  "/juhlapyhat/ruotsalaisuuden-paiva/": {
+    "description": "Ruotsalaisuuden päivä eli svenska dagen 6.11. juhlistaa ruotsin kieltä ja suomenruotsalaista kulttuuria Suomessa. Lue päivän taustasta ja liputuksesta."
+  },
+  "/juhlapyhat/isanpaiva/": {
+    "description": "Suomessa isänpäivä on marraskuun toinen sunnuntai ja virallinen liputuspäivä. Tarkista ajankohdat 2027–2030 ja suunnittele perheellesi sopiva muistaminen."
+  },
+  "/juhlapyhat/lapsen-oikeuksien-paiva/": {
+    "description": "Lapsen oikeuksien päivä 20.11. liittyy YK:n lapsen oikeuksien sopimukseen. Tutustu päivän taustaan ja lapsen kuulemiseen arjen yhteisissä valinnoissa."
+  },
+  "/juhlapyhat/itsenaisyyspaiva/": {
+    "description": "Suomen itsenäisyyspäivä 6.12. on yleinen juhlapäivä ja virallinen liputuspäivä. Lue vuoden 1917 tapahtumista ja katso, mille viikonpäivälle juhla osuu."
+  },
+  "/juhlapyhat/sibeliuksen-paiva/": {
+    "description": "Jean Sibeliuksen ja suomalaisen musiikin päivää vietetään 8.12. Säveltäjän syntymäpäivä kutsuu tutustumaan hänen elämäntyöhönsä ja kuuntelemaan musiikkia."
+  },
+  "/juhlapyhat/jouluaatto/": {
+    "description": "Jouluaatto 24.12. kokoaa monia suomalaisia joulutapoja. Erota aatto joulun pyhäpäivistä ja varaa yhteiseen ruokailuun, vierailuihin ja matkoihin aikaa."
+  },
+  "/juhlapyhat/joulupaiva/": {
+    "description": "Joulupäivä 25.12. on kristillinen Jeesuksen syntymän juhla ja yleinen juhlapäivä Suomessa. Lue, miten se eroaa jouluaatosta ja tapaninpäivästä."
+  },
+  "/juhlapyhat/tapaninpaiva/": {
+    "description": "Tapaninpäivä 26.12. on toinen joulupäivä ja Stefanoksen muistopäivä. Tutustu tapaninajelujen perinteeseen ja päivän viettoon vierailujen tai ulkoilun parissa."
+  },
+  "/juhlapyhat/uudenvuodenaatto/": {
+    "description": "Uudenvuodenaatto 31.12. päättää kalenterivuoden. Lue aaton ja uudenvuodenpäivän eroista sekä merkitse yön yli jatkuvan juhlan molemmat päivämäärät."
+  },
+  "/juhlapyhat/eduskuntavaalit/": {
+    "description": "Vuoden 2027 eduskuntavaalien vaalipäivä on 18. huhtikuuta. Löydä viralliset vaaliohjeet ja erota yhteinen vaalipäivä omasta äänestysmuistutuksestasi."
+  },
+  "/koulujen-lomat/helsinki/": {
+    "description": "Helsinki: suomenkielisen perusopetuksen julkaistut työ- ja loma-ajat. Valitse lukuvuosi, tarkista koulukohtaiset poikkeukset ja lisää lomat kalenteriin."
+  },
+  "/koulujen-lomat/helsinki/2026-2027/": {
+    "title": "Helsinki | Peruskoulun lomat 2026–2027",
+    "description": "Helsinki 2026–2027: suomenkielisen perusopetuksen aloitus, syys-, joulu- ja talviloma sekä viimeinen koulupäivä. Tarkista oman koulun poikkeukset."
+  },
+  "/koulujen-lomat/helsinki/2027-2028/": {
+    "title": "Helsinki | Peruskoulun lomat 2027–2028",
+    "description": "Helsinki 2027–2028: suomenkielisen perusopetuksen aloitus, syys-, joulu- ja talviloma sekä viimeinen koulupäivä. Tarkista oman koulun poikkeukset."
+  },
+  "/koulujen-lomat/espoo/": {
+    "description": "Espoo: suomenkielisen perusopetuksen julkaistut työ- ja loma-ajat. Valitse lukuvuosi, tarkista koulukohtaiset poikkeukset ja lisää lomat kalenteriin."
+  },
+  "/koulujen-lomat/espoo/2026-2027/": {
+    "title": "Espoo | Peruskoulun lomat 2026–2027",
+    "description": "Espoo 2026–2027: suomenkielisen perusopetuksen aloitus, syys-, joulu- ja talviloma sekä viimeinen koulupäivä. Tarkista oman koulun poikkeukset."
+  },
+  "/koulujen-lomat/espoo/2027-2028/": {
+    "title": "Espoo | Peruskoulun lomat 2027–2028",
+    "description": "Espoo 2027–2028: suomenkielisen perusopetuksen aloitus, syys-, joulu- ja talviloma sekä viimeinen koulupäivä. Tarkista oman koulun poikkeukset."
+  },
+  "/koulujen-lomat/vantaa/": {
+    "description": "Vantaa: suomenkielisen perusopetuksen julkaistut työ- ja loma-ajat. Valitse lukuvuosi, tarkista koulukohtaiset poikkeukset ja lisää lomat kalenteriin."
+  },
+  "/koulujen-lomat/vantaa/2026-2027/": {
+    "title": "Vantaa | Peruskoulun lomat 2026–2027",
+    "description": "Vantaa 2026–2027: suomenkielisen perusopetuksen aloitus, syys-, joulu- ja talviloma sekä viimeinen koulupäivä. Tarkista oman koulun poikkeukset."
+  },
+  "/koulujen-lomat/vantaa/2027-2028/": {
+    "title": "Vantaa | Peruskoulun lomat 2027–2028",
+    "description": "Vantaa 2027–2028: suomenkielisen perusopetuksen aloitus, syys-, joulu- ja talviloma sekä viimeinen koulupäivä. Tarkista oman koulun poikkeukset."
+  },
+  "/koulujen-lomat/oulu/": {
+    "description": "Oulu: suomenkielisen perusopetuksen julkaistut työ- ja loma-ajat. Valitse lukuvuosi, tarkista koulukohtaiset poikkeukset ja lisää lomat kalenteriin."
+  },
+  "/koulujen-lomat/oulu/2026-2027/": {
+    "title": "Oulu | Peruskoulun lomat 2026–2027",
+    "description": "Oulu 2026–2027: suomenkielisen perusopetuksen aloitus, syys-, joulu- ja talviloma sekä viimeinen koulupäivä. Tarkista oman koulun poikkeukset."
+  },
+  "/koulujen-lomat/oulu/2027-2028/": {
+    "title": "Oulu | Peruskoulun lomat 2027–2028",
+    "description": "Oulu 2027–2028: suomenkielisen perusopetuksen aloitus, syys-, joulu- ja talviloma sekä viimeinen koulupäivä. Tarkista oman koulun poikkeukset."
+  },
+  "/koulujen-lomat/tuusula/": {
+    "description": "Tuusula: suomenkielisen perusopetuksen julkaistut työ- ja loma-ajat. Valitse lukuvuosi, tarkista koulukohtaiset poikkeukset ja lisää lomat kalenteriin."
+  },
+  "/koulujen-lomat/tuusula/2026-2027/": {
+    "title": "Tuusula | Peruskoulun lomat 2026–2027",
+    "description": "Tuusula 2026–2027: suomenkielisen perusopetuksen aloitus, syys-, joulu- ja talviloma sekä viimeinen koulupäivä. Tarkista oman koulun poikkeukset."
+  },
+  "/koulujen-lomat/tuusula/2027-2028/": {
+    "title": "Tuusula | Peruskoulun lomat 2027–2028",
+    "description": "Tuusula 2027–2028: suomenkielisen perusopetuksen aloitus, syys-, joulu- ja talviloma sekä viimeinen koulupäivä. Tarkista oman koulun poikkeukset."
+  },
+  "/koulujen-lomat/tampere/": {
+    "description": "Tampere: suomenkielisen perusopetuksen julkaistut työ- ja loma-ajat. Valitse lukuvuosi, tarkista koulukohtaiset poikkeukset ja lisää lomat kalenteriin."
+  },
+  "/koulujen-lomat/tampere/2026-2027/": {
+    "title": "Tampere | Peruskoulun lomat 2026–2027",
+    "description": "Tampere 2026–2027: suomenkielisen perusopetuksen aloitus, syys-, joulu- ja talviloma sekä viimeinen koulupäivä. Tarkista oman koulun poikkeukset."
+  },
+  "/koulujen-lomat/tampere/2027-2028/": {
+    "title": "Tampere | Peruskoulun lomat 2027–2028",
+    "description": "Tampere 2027–2028: suomenkielisen perusopetuksen aloitus, syys-, joulu- ja talviloma sekä viimeinen koulupäivä. Tarkista oman koulun poikkeukset."
+  },
+  "/koulujen-lomat/turku/": {
+    "description": "Turku: suomenkielisen perusopetuksen julkaistut työ- ja loma-ajat. Valitse lukuvuosi, tarkista koulukohtaiset poikkeukset ja lisää lomat kalenteriin."
+  },
+  "/koulujen-lomat/turku/2026-2027/": {
+    "title": "Turku | Peruskoulun lomat 2026–2027",
+    "description": "Turku 2026–2027: suomenkielisen perusopetuksen aloitus, syys-, joulu- ja talviloma sekä viimeinen koulupäivä. Tarkista oman koulun poikkeukset."
+  },
+  "/koulujen-lomat/turku/2027-2028/": {
+    "title": "Turku | Peruskoulun lomat 2027–2028",
+    "description": "Turku 2027–2028: suomenkielisen perusopetuksen aloitus, syys-, joulu- ja talviloma sekä viimeinen koulupäivä. Tarkista oman koulun poikkeukset."
+  },
+  "/koulujen-lomat/jyvaskyla/": {
+    "description": "Jyväskylä: suomenkielisen perusopetuksen julkaistut työ- ja loma-ajat. Valitse lukuvuosi, tarkista koulukohtaiset poikkeukset ja lisää lomat kalenteriin."
+  },
+  "/koulujen-lomat/jyvaskyla/2026-2027/": {
+    "title": "Jyväskylä | Peruskoulun lomat 2026–2027",
+    "description": "Jyväskylä 2026–2027: suomenkielisen perusopetuksen aloitus, syys-, joulu- ja talviloma sekä viimeinen koulupäivä. Tarkista oman koulun poikkeukset."
+  },
+  "/koulujen-lomat/kuopio/": {
+    "description": "Kuopio: suomenkielisen perusopetuksen julkaistut työ- ja loma-ajat. Valitse lukuvuosi, tarkista koulukohtaiset poikkeukset ja lisää lomat kalenteriin."
+  },
+  "/koulujen-lomat/kuopio/2026-2027/": {
+    "title": "Kuopio | Peruskoulun lomat 2026–2027",
+    "description": "Kuopio 2026–2027: suomenkielisen perusopetuksen aloitus, syys-, joulu- ja talviloma sekä viimeinen koulupäivä. Tarkista oman koulun poikkeukset."
+  },
+  "/koulujen-lomat/lahti/": {
+    "description": "Lahti: suomenkielisen perusopetuksen julkaistut työ- ja loma-ajat. Valitse lukuvuosi, tarkista koulukohtaiset poikkeukset ja lisää lomat kalenteriin."
+  },
+  "/koulujen-lomat/lahti/2026-2027/": {
+    "title": "Lahti | Peruskoulun lomat 2026–2027",
+    "description": "Lahti 2026–2027: suomenkielisen perusopetuksen aloitus, syys-, joulu- ja talviloma sekä viimeinen koulupäivä. Tarkista oman koulun poikkeukset."
+  },
+  "/koulujen-lomat/pori/": {
+    "description": "Pori: suomenkielisen perusopetuksen julkaistut työ- ja loma-ajat. Valitse lukuvuosi, tarkista koulukohtaiset poikkeukset ja lisää lomat kalenteriin."
+  },
+  "/koulujen-lomat/pori/2026-2027/": {
+    "title": "Pori | Peruskoulun lomat 2026–2027",
+    "description": "Pori 2026–2027: suomenkielisen perusopetuksen aloitus, syys-, joulu- ja talviloma sekä viimeinen koulupäivä. Tarkista oman koulun poikkeukset."
+  },
+  "/koulujen-lomat/rovaniemi/": {
+    "description": "Rovaniemi: suomenkielisen perusopetuksen julkaistut työ- ja loma-ajat. Valitse lukuvuosi, tarkista koulukohtaiset poikkeukset ja lisää lomat kalenteriin."
+  },
+  "/koulujen-lomat/rovaniemi/2026-2027/": {
+    "title": "Rovaniemi | Peruskoulun lomat 2026–2027",
+    "description": "Rovaniemi 2026–2027: suomenkielisen perusopetuksen aloitus, syys-, joulu- ja talviloma sekä viimeinen koulupäivä. Tarkista oman koulun poikkeukset."
+  },
+  "/koulujen-lomat/vaasa/": {
+    "description": "Vaasa: suomenkielisen perusopetuksen julkaistut työ- ja loma-ajat. Valitse lukuvuosi, tarkista koulukohtaiset poikkeukset ja lisää lomat kalenteriin."
+  },
+  "/koulujen-lomat/vaasa/2026-2027/": {
+    "title": "Vaasa | Peruskoulun lomat 2026–2027",
+    "description": "Vaasa 2026–2027: suomenkielisen perusopetuksen aloitus, syys-, joulu- ja talviloma sekä viimeinen koulupäivä. Tarkista oman koulun poikkeukset."
+  },
+  "/yliopistojen-kalenterit/abo-akademi/2026-2027/": {
+    "description": "Åbo Akademi 2026–2027: opetusperiodien päivämäärät yliopiston julkaisemista ISO-viikkorajoista laskettuina. Tarkista kurssikohtaiset poikkeukset."
+  },
+  "/yliopistojen-kalenterit/abo-akademi/2027-2028/": {
+    "description": "Åbo Akademi 2027–2028: opetusperiodien päivämäärät yliopiston julkaisemista ISO-viikkorajoista laskettuina. Tarkista kurssikohtaiset poikkeukset."
+  },
+  "/yliopistojen-kalenterit/abo-akademi/2028-2029/": {
+    "description": "Åbo Akademi 2028–2029: opetusperiodien päivämäärät yliopiston julkaisemista ISO-viikkorajoista laskettuina. Tarkista kurssikohtaiset poikkeukset."
+  },
+  "/yliopistojen-kalenterit/abo-akademi/2029-2030/": {
+    "description": "Åbo Akademi 2029–2030: opetusperiodien päivämäärät yliopiston julkaisemista ISO-viikkorajoista laskettuina. Tarkista kurssikohtaiset poikkeukset."
+  },
+  "/oma-arki/": {
+    "title": "Oma arki ja viikkosuunnitelma"
+  },
+  "/tahtitieteellinen-kalenteri/": {
+    "description": "Suomen tähtitieteellinen kalenteri: Kuun vaiheet, pimennykset ja vuodenaikojen alkamishetket. Katso tapahtumien ajankohdat Suomen ajassa."
+  },
+  "/usein-kysyttya/": {
+    "title": "Usein kysyttyä kalentereista",
+    "description": "Miten kalenteri tulostetaan tai omat merkinnät varmuuskopioidaan? Lue vastaukset Kalenteri365:n käyttöön, laskureihin ja Suomen juhlapäiviin."
+  }
+}

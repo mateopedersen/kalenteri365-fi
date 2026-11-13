@@ -1,0 +1,32 @@
+.lunar-photo-intro{display:grid;grid-template-columns:minmax(0,1fr) 300px;align-items:center;gap:32px;padding:30px 38px;margin:0 0 28px;border:1px solid #25486e;border-radius:20px;overflow:hidden;background:linear-gradient(115deg,#081b35,#123857);color:#fff}
+.lunar-photo-intro .eyebrow{color:#b9d5ed;font-size:12px;letter-spacing:.14em;font-weight:700;margin:0 0 13px}
+.lunar-photo-intro h2{font-size:34px;line-height:1.2;color:#fff;margin:0 0 14px}
+.lunar-photo-intro p:last-child{color:#d3e1f1;max-width:740px;font-size:16px;line-height:1.65;margin:0}
+.lunar-intro-photo{display:block;width:230px;max-width:100%;aspect-ratio:1;justify-self:center;border-radius:50%;overflow:hidden;min-width:0;background:#081b35;box-shadow:0 0 38px #81a7d41a}
+.lunar-intro-photo img{display:block;width:100%;height:100%;object-fit:cover;transform:scale(1.24)}
+.moon-directory{gap:24px;margin:26px 0}
+.moon-directory-year{border:1px solid #ccdae9;border-radius:19px;box-shadow:0 7px 20px #17395f08;overflow:hidden;min-width:0}
+.moon-year-cover{display:block;position:relative;isolation:isolate;min-height:260px;overflow:hidden;background:#071626;text-decoration:none;color:#fff}
+.moon-year-photo{display:block;position:absolute;z-index:-2;inset:0;width:100%;height:100%}
+.moon-year-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 48%}
+.moon-year-cover.moon-apollo17 .moon-year-photo{left:30%;width:70%}
+.moon-year-cover.moon-apollo17 .moon-year-photo img{object-fit:contain;object-position:right center}
+.moon-year-cover.moon-keeler .moon-year-photo img{object-position:70% 48%}
+.moon-year-cover.moon-artemis-earthrise .moon-year-photo img{object-position:65% 65%}
+.moon-year-cover::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#06172cf2 0%,#07172bd4 28%,#06172c44 67%,#06172c12 100%),linear-gradient(0deg,#06172c8c,transparent 45%)}
+.moon-directory-year .moon-year-copy{position:relative;background:none;padding:28px;min-height:260px;display:flex;align-items:flex-start;flex-direction:column}
+.moon-year-copy .eyebrow{font-size:11px;line-height:1.4;letter-spacing:.17em;color:#d1e4f5;font-weight:700;margin:0 0 15px}
+.moon-directory-year .moon-year-copy h2{font-size:64px;line-height:1;letter-spacing:-2px;margin:0 0 33px;color:#fff;font-weight:900}
+.moon-year-open{display:inline-flex;align-items:center;gap:14px;font-size:14px;line-height:1.5;font-weight:700;padding:8px 0;color:#fff;margin-top:auto;text-decoration:underline;text-underline-offset:5px;text-decoration-color:#a9c7e680}
+.moon-year-open .icon{width:22px;height:22px}
+.moon-photo-credit{position:absolute;right:15px;bottom:18px;max-width:48%;background:#071423d9;border:1px solid #b3c7df70;border-radius:20px;padding:6px 10px;font-size:10px;font-weight:700;color:#fff;line-height:1.4}
+.moon-year-cover:hover{text-decoration:none;color:#fff}
+.moon-year-cover:hover .moon-year-open{text-decoration-color:#fff}
+.moon-year-cover:focus-visible{outline:3px solid #78b9ff;outline-offset:-4px}
+.moon-directory-year nav{padding:20px;gap:10px}
+.moon-directory-year nav a{border-color:#ccdceb;background:#f9fbfe;min-height:49px;padding:11px 10px;font-size:14px;line-height:1.4;color:#163f6b;gap:10px}
+.moon-directory-year nav a:hover{background:#e9f2ff;border-color:#8eafd3;text-decoration:none}
+.moon-directory-year nav span{font-size:11px;color:#526e8b;min-width:26px;text-align:center;padding-right:9px}
+@media(max-width:1000px){.lunar-photo-intro{grid-template-columns:minmax(0,1fr) 220px;padding:28px;gap:22px}.lunar-photo-intro h2{font-size:30px}.moon-directory-year nav{grid-template-columns:repeat(2,minmax(0,1fr))}.moon-directory-year .moon-year-copy{padding:23px;min-height:245px}.moon-year-cover{min-height:245px}}
+@media(max-width:700px){.moon-directory{gap:20px}.lunar-photo-intro{grid-template-columns:minmax(0,1fr);padding:24px;gap:17px}.lunar-intro-photo{width:220px;max-width:100%;justify-self:center;grid-row:1}.lunar-photo-intro h2{font-size:28px}.lunar-photo-intro p:last-child{font-size:15px}.moon-directory-year .moon-year-copy{padding:24px;min-height:240px}.moon-directory-year .moon-year-copy h2{font-size:60px}.moon-year-cover{min-height:240px}.moon-directory-year nav{padding:16px;gap:8px;grid-template-columns:repeat(3,minmax(0,1fr))}.moon-directory-year nav a{font-size:12px;gap:7px;padding:10px 7px}.moon-directory-year nav span{min-width:23px;padding-right:7px;font-size:10px}.moon-photo-credit{right:12px;bottom:20px;font-size:10px}}
+@media(max-width:390px){.moon-directory-year nav{grid-template-columns:repeat(2,minmax(0,1fr))}.moon-directory-year nav a{font-size:13px}.moon-directory-year .moon-year-copy{padding:22px 20px}.moon-directory-year .moon-year-copy h2{font-size:56px}.moon-photo-credit{font-size:9px;padding:6px 7px}.moon-year-open{font-size:13px;gap:8px}}

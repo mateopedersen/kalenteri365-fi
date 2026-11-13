@@ -1,0 +1,70 @@
+.lunar-phase-section { margin: 30px 0; min-width: 0; }
+.lunar-phase-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+.lunar-phase-heading p { margin: 0 0 7px; color: #506d89; font-size: 10px; letter-spacing: .13em; font-weight: 700; }
+.lunar-phase-heading h2 { margin: 0; font-size: 27px; line-height: 1.3; color: #183c5c; }
+.lunar-phase-heading > span { font-size: 13px; color: #496984; white-space: nowrap; }
+.lunar-phase-table-wrap { border: 1px solid #cbdbe8; border-radius: 18px; overflow: hidden; background: #fff; }
+.lunar-phase-table { width: 100%; table-layout: fixed; border-collapse: collapse; margin: 0; color: #1c3851; }
+.lunar-phase-table thead { background: #edf4fa; }
+.lunar-phase-table thead th { text-align: left; padding: 15px 24px; font-size: 13px; font-weight: 700; color: #4a657e; border: 0; }
+.lunar-phase-table thead th:first-child { width: 58%; }
+.lunar-phase-table tbody :is(th,td) { padding: 16px 24px; border: 0; border-top: 1px solid #dee7ef; vertical-align: middle; text-align: left; background: transparent; }
+.lunar-phase-table tbody tr:nth-child(even) { background: #f8fbfe; }
+.lunar-phase-identity { display: flex; align-items: center; gap: 24px; }
+.lunar-phase-identity > div:last-child { min-width: 0; }
+.lunar-phase-visual { flex: 0 0 132px; display: grid; place-items: center; width: 132px; height: 132px; border: 1px solid #18354c; border-radius: 18px; background: radial-gradient(ellipse at 35% 25%,#22435e,#061526 80%); box-shadow: inset 0 1px #ffffff18; }
+.lunar-phase-visual .phase-moon { display: block; width: 128px; height: 128px; max-width: none; filter: drop-shadow(0 5px 6px #0005); }
+.lunar-phase-identity strong { display: block; font-size: 20px; line-height: 1.35; font-weight: 700; color: #153956; }
+.lunar-phase-identity span { display: block; font-size: 14px; line-height: 1.55; font-weight: 400; color: #526d82; margin-top: 8px; }
+.lunar-phase-table time { font-variant-numeric: tabular-nums; white-space: nowrap; font-size: 18px; font-weight: 700; }
+.lunar-phase-table td:last-child time { display: inline-block; color: #0d416e; background: #eaf2fa; border: 1px solid #d5e2ef; border-radius: 9px; padding: 8px 12px; }
+.lunar-phase-caption { margin: 12px 0 0; color: #526d82; font-size: 12px; line-height: 1.6; }
+@media (max-width: 900px) {
+  .lunar-phase-table thead th:first-child { width: 55%; }
+  .lunar-phase-table thead th,.lunar-phase-table tbody :is(th,td) { padding: 14px 16px; }
+  .lunar-phase-identity { gap: 16px; }
+  .lunar-phase-visual { flex-basis: 108px; width: 108px; height: 108px; border-radius: 14px; }
+  .lunar-phase-visual .phase-moon { width: 106px; height: 106px; }
+  .lunar-phase-identity strong { font-size: 17px; }
+  .lunar-phase-identity span { font-size: 13px; }
+  .lunar-phase-table time { font-size: 16px; }
+}
+@media (max-width: 620px) {
+  .lunar-phase-heading { align-items: flex-start; flex-direction: column; gap: 8px; }
+  .lunar-phase-heading h2 { font-size: 25px; }
+  .lunar-phase-heading > span { font-size: 12px; }
+  .lunar-phase-table-wrap { border: 0; background: transparent; overflow: visible; border-radius: 0; }
+  .lunar-phase-table,.lunar-phase-table tbody { display: block; }
+  .lunar-phase-table thead { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+  .lunar-phase-table tbody tr { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 0 14px; margin-bottom: 12px; padding: 16px; background: #fff; border: 1px solid #cfdeea; border-radius: 17px; }
+  .lunar-phase-table tbody th { grid-column: 1 / -1; padding: 0 0 15px; border: 0; }
+  .lunar-phase-identity { gap: 17px; }
+  .lunar-phase-visual { flex-basis: 112px; width: 112px; height: 112px; }
+  .lunar-phase-visual .phase-moon { width: 110px; height: 110px; }
+  .lunar-phase-identity strong { font-size: 18px; }
+  .lunar-phase-identity span { font-size: 13px; margin-top: 6px; }
+  .lunar-phase-table tbody td { display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 7px; padding: 14px 0 0; border-top: 1px solid #dce7ef; }
+  .lunar-phase-table tbody td::before { content: attr(data-label); font-size: 11px; font-weight: 400; color: #526d82; }
+  .lunar-phase-table time { font-size: 18px; }
+  .lunar-phase-table td:last-child time { padding: 3px 8px; }
+}
+@media (max-width: 360px) {
+  .lunar-phase-table tbody tr { padding: 14px; }
+  .lunar-phase-identity { gap: 13px; }
+  .lunar-phase-identity strong { font-size: 16px; }
+  .lunar-phase-visual { flex-basis: 100px; width: 100px; height: 100px; }
+  .lunar-phase-visual .phase-moon { width: 100px; height: 100px; }
+}
+@media print {
+  .lunar-phase-table-wrap { border: 0; }
+  .lunar-phase-table,.lunar-phase-table tbody { display: table; }
+  .lunar-phase-table tbody { display: table-row-group; }
+  .lunar-phase-table thead { position: static; display: table-header-group; width: auto; height: auto; clip: auto; }
+  .lunar-phase-table tbody tr { display: table-row; break-inside: avoid; }
+  .lunar-phase-table tbody :is(th,td) { display: table-cell; padding: 3mm; border-bottom: 1px solid #ddd; }
+  .lunar-phase-table td::before { display: none; }
+  .lunar-phase-visual { flex-basis: 48px; width: 48px; height: 48px; border: 0; border-radius: 0; print-color-adjust: exact; }
+  .lunar-phase-visual .phase-moon { width: 48px; height: 48px; }
+  .lunar-phase-identity strong,.lunar-phase-table time { font-size: 10pt; }
+  .lunar-phase-identity span,.lunar-phase-caption { font-size: 8pt; }
+}

@@ -1,0 +1,114 @@
+.page-heading.solar-page-heading { display:flex;align-items:center;gap:18px;min-height:0;padding:22px 24px;margin:14px 0 20px;background:#fff;border-top:3px solid #063a73; }
+.page-heading.solar-page-heading>.page-art { width:52px;height:52px;flex:0 0 52px; }
+.solar-page-heading h1 { font-size:30px;line-height:1.2;margin:0 0 7px; }
+.solar-page-heading .eyebrow { margin:0 0 7px; }
+.solar-page-heading p:last-child { font-size:15px;line-height:1.5;margin:0; }
+.solar-page-heading .heading-tools { display:none; }
+.solar-workspace { margin:0 0 28px;border:1px solid #c5d8e7;border-radius:20px;overflow:hidden;background:#fff; }
+.solar-settings { display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:14px;padding:17px 20px;border-bottom:1px solid #d1e0eb; }
+.solar-settings .form-grid { display:grid;grid-template-columns:1fr 1fr;gap:14px; }
+.solar-settings label { display:grid;gap:6px;font-size:13px;font-weight:700;min-width:0; }
+.solar-settings :is(input,select) { width:100%;min-width:0;min-height:44px;padding:9px 12px;box-sizing:border-box;font-size:16px;line-height:1.4;background-color:#f8fbfe;color:#173954;border:1px solid #bacfe2;border-radius:10px; }
+.solar-settings select { padding-right:35px; }
+.solar-settings .btn { min-height:44px;padding:10px 15px;font-size:14px;gap:8px; }
+.solar-player { padding:0;margin:0;scroll-margin-top:12px;background:#0b223b;color:#fff;border-radius:0; }
+.solar-player .solar-stage { height:clamp(230px,36vh,340px);border:0;border-radius:0;isolation:isolate;background:linear-gradient(#3c7798,#d7baa1 65%,#14334a); }
+.solar-player .solar-stage::after { content:'';position:absolute;inset:50% 0 0;z-index:0;pointer-events:none;background:linear-gradient(transparent,#071a2b83); }
+.solar-player .solar-overlay { z-index:1;bottom:18px;left:22px; }
+.solar-player .solar-overlay h2 { font-size:26px;line-height:1.1;margin:5px 0 6px;color:#fff; }
+.solar-player .solar-overlay .eyebrow { font-size:11px;line-height:1.3;color:#fff2cb;letter-spacing:.06em; }
+.solar-player .solar-overlay>span:last-child { font-size:12px;color:#e3edf6; }
+.solar-player .solar-stage>time { top:14px;right:63px;z-index:1;min-width:72px;min-height:38px;display:grid;place-items:center;padding:6px 10px;font-size:18px;background:#08233adc;border-color:#b8d3ea6b; }
+.solar-player #solar-expand { position:absolute;top:14px;right:15px;z-index:2;display:grid;place-items:center;width:38px;height:38px;padding:8px;background:#08233adc;color:#fff;border:1px solid #b8d3ea6b;border-radius:9px;cursor:pointer; }
+.solar-player #solar-expand .icon { width:20px;height:20px; }
+.solar-player #solar-render-status { position:absolute;left:22px;top:18px;margin:0;padding:7px 11px;z-index:1;background:#08233adc;color:#fff;border-radius:8px;font-size:13px; }
+.solar-player #solar-render-status[hidden] { display:none; }
+.solar-timeline { display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:24px;align-items:center;padding:18px 22px 12px; }
+.solar-player .solar-time { display:grid;gap:2px;min-width:78px; }
+.solar-player .solar-time label { color:#c0d2e3;font-size:11px; }
+.solar-player .solar-time output { color:#fff;font-size:27px;line-height:1.2;font-weight:700;font-variant-numeric:tabular-nums; }
+.solar-range-wrap { min-width:0; }
+.solar-range-wrap>div { display:flex;justify-content:space-between;font-size:10px;color:#afc5d9; }
+.solar-player input[type=range] { display:block;box-sizing:border-box;width:100%;height:28px;margin:0;padding:0;min-height:28px;border:0;accent-color:#d6e9f8;background:transparent; }
+.solar-play { min-height:46px;min-width:147px;display:flex;align-items:center;justify-content:center;gap:9px;border:1px solid #c3def0;border-radius:10px;background:#e7f3fb;color:#0a335c;padding:11px 14px;font-size:14px;line-height:1.4;font-weight:700; }
+.solar-play .icon { width:20px;height:20px; }
+.solar-play:hover { color:#082846;background:#cce7f8; }
+.solar-player .solar-jumps { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:0;padding:10px 22px 15px; }
+.solar-player .solar-jumps button { display:flex;justify-content:center;align-items:center;gap:12px;min-width:0;min-height:72px;padding:11px 14px;background:#173750;color:#e2edf6;border:1px solid #496b87;border-radius:11px;text-align:left;font-size:12px;line-height:1.45; }
+ .solar-player .solar-jumps button>span { min-width:0;max-width:100%;overflow-wrap:break-word;hyphens:auto; }
+.solar-player .solar-jumps button strong { display:block;font-size:21px;line-height:1.3;margin-top:2px;color:#fff;font-variant-numeric:tabular-nums; }
+.solar-player .solar-jumps .icon { width:27px;height:27px;flex:0 0 27px;color:#c4def0; }
+.solar-player .solar-jumps button:hover:not(:disabled) { background:#234b6b;border-color:#a2c4df; }
+.solar-player .solar-jumps button:disabled { opacity:1;cursor:default;background:#112c43;color:#b0c2d3;border-style:dashed; }
+.solar-player .solar-jumps button:disabled strong { color:#b0c2d3;font-size:16px; }
+.solar-detail-bar { display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 22px 13px; }
+.solar-detail-bar p { margin:0;font-size:13px;color:#d3e1ec; }
+.solar-detail-bar label { display:flex;align-items:center;gap:10px;margin:0;font-size:12px;color:#c4d6e5; }
+.solar-detail-bar select { min-height:38px;min-width:145px;max-width:180px;padding:8px 30px 8px 11px;border:1px solid #567790;background-color:#15384f;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23dceaf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");color:#fff;border-radius:8px;font-size:13px; }
+.solar-explanation { padding:0 22px 18px;margin:0;font-size:11px;line-height:1.6;color:#b7cddd; }
+.solar-player #solar-polar-message { margin:0 22px 13px;padding:10px 13px;border:1px solid #55738b;border-radius:9px;font-size:13px;color:#e0eaf5; }
+.solar-result { padding:14px 20px;font-size:13px;color:#48647b; }
+.solar-result:empty { display:none; }
+.solar-result strong { display:block;font-size:14px;color:#254d6e; }
+.solar-result p { margin:4px 0 0;font-size:13px; }
+.solar-player :is(button,select,input):focus-visible { outline:3px solid #9bd4ff;outline-offset:3px; }
+.solar-fullscreen-dialog { width:calc(100vw - 28px);max-width:none;max-height:calc(100dvh - 28px);padding:0;border:1px solid #7e9bb5;border-radius:16px;background:#0b223b;overflow:auto; }
+.solar-fullscreen-dialog::backdrop { background:#031626c9; }
+.solar-fullscreen-dialog .solar-stage { height:clamp(210px,calc(100dvh - 310px),800px); }
+.page-heading.lunar-page-heading { background:linear-gradient(110deg,#0b223c,#143e62);border-color:#517a9e;color:#fff; }
+.lunar-page-heading h1,.lunar-page-heading p { color:#fff; }
+.page-heading.lunar-page-heading p:last-child { color:#dceaf6; }
+.page-heading.lunar-page-heading>.page-art { border-radius:50%; }
+.lunar-page-heading .eyebrow { color:#b8d9f2; }
+.lunar-player .solar-overlay { max-width:calc(100% - 170px); }
+.lunar-player .solar-overlay h2 { overflow-wrap:anywhere; }
+.lunar-detail { position:absolute;z-index:1;right:22px;top:66px;display:grid;justify-items:center;gap:4px;padding:10px 13px;border:1px solid #8badc74d;border-radius:16px;background:#071729e8;color:#fff; }
+#lunar-detail-disc { width:158px;height:158px; }
+#lunar-detail-disc svg,#lunar-sky-disc svg { display:block;width:100%;height:100%; }
+.lunar-detail strong { font-size:12px;line-height:1.4; }
+.lunar-detail>span { font-size:10px;color:#c7d9e9; }
+#lunar-sky-disc { position:absolute;z-index:1;width:9px;height:9px;transform:translate(-50%,-50%);pointer-events:none;filter:drop-shadow(0 0 5px #d8eaff8c); }
+#lunar-sky-disc[hidden] { display:none; }
+@media(max-width:600px){
+ .page-heading.solar-page-heading { gap:12px;padding:17px 18px;margin:10px 0 16px; }
+ .page-heading.solar-page-heading>.page-art { width:40px;height:40px;flex-basis:40px; }
+ .solar-page-heading h1 { font-size:25px;line-height:1.2; }
+ .solar-page-heading p:last-child { font-size:13px; }
+ .solar-workspace { border-radius:16px; }
+ .solar-settings { padding:13px 12px;gap:8px; }
+ .solar-settings .form-grid { gap:8px; }
+ .solar-settings label { font-size:11px; }
+ .solar-settings :is(input,select) { font-size:16px;padding:8px;min-height:44px; }
+ .solar-settings select { padding-right:25px; }
+ .solar-settings .btn { min-width:38px;width:38px;padding:9px; }
+ .solar-settings .btn span { display:none; }
+ .solar-player .solar-stage { height:250px; }
+ .solar-player .solar-overlay { left:16px;bottom:16px; }
+ .solar-player .solar-overlay h2 { font-size:25px; }
+ .solar-player .solar-overlay>span:last-child { font-size:11px; }
+ .solar-timeline { grid-template-columns:minmax(0,1fr) auto;gap:8px 14px;padding:15px 15px 10px; }
+ .solar-player .solar-time { display:flex;gap:12px;align-items:center; }
+ .solar-player .solar-time output { font-size:26px; }
+ .solar-range-wrap { grid-row:2;grid-column:1/-1; }
+ .solar-play { grid-column:2;grid-row:1;min-width:135px;min-height:43px;font-size:13px;padding:9px 11px; }
+ .solar-player .solar-jumps { gap:7px;padding:6px 13px 14px; }
+ .solar-player .solar-jumps button { display:flex;flex-direction:column;gap:5px;padding:10px 5px;min-height:91px;font-size:11px;text-align:center; }
+ .solar-player .solar-jumps .icon { width:23px;height:23px;flex-basis:23px; }
+ .solar-player .solar-jumps button strong { font-size:18px; }
+ .solar-player .solar-jumps button:disabled strong { font-size:13px; }
+ .solar-detail-bar { gap:10px;padding:0 15px 12px;align-items:flex-start;flex-wrap:wrap; }
+ .solar-detail-bar p { font-size:12px; }
+ .solar-detail-bar label { width:100%;justify-content:space-between; }
+ .solar-detail-bar select { flex:1;max-width:220px; }
+ .solar-explanation { font-size:11px;padding:0 15px 15px; }
+ .solar-player #solar-polar-message { margin-inline:15px; }
+ .solar-fullscreen-dialog .solar-stage { height:clamp(180px,calc(100dvh - 400px),650px); }
+ .lunar-detail { right:14px;top:63px;padding:7px 8px;gap:3px;border-radius:12px; }
+ #lunar-detail-disc { width:86px;height:86px; }
+ .lunar-detail strong { font-size:10px; }
+ .lunar-detail>span { font-size:8px; }
+ .lunar-player .solar-overlay { max-width:calc(100% - 137px); }
+ .lunar-player .solar-overlay .eyebrow { font-size:10px; }
+}
+@media(max-width:370px){.solar-settings .form-grid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}.solar-settings input{padding-inline:3px}.solar-settings{gap:6px}.solar-player .solar-stage{height:225px}.solar-player .solar-time{gap:7px}.solar-play{min-width:118px;font-size:12px}.solar-player .solar-time output{font-size:24px}}
+@media print {.solar-workspace .solar-settings,.solar-workspace .solar-player{display:none!important}}

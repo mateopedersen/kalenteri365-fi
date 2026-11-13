@@ -2,14 +2,16 @@ import {clamp, compass, direction, discAltitude, RAD, wrap} from './sun-scene-co
 
 // Rendering parameters only. Event times and solar coordinates stay in sky-core.
 export function panoramaView(snapshot, {bearing, follow = true, landscape = 'water'} = {}) {
-  const altitude = discAltitude(snapshot.position.altitude);
+  const altitude = Number.isFinite(snapshot.position.renderAltitude)
+    ? snapshot.position.renderAltitude : discAltitude(snapshot.position.altitude);
   const heading = follow || !Number.isFinite(bearing) ? snapshot.position.azimuth : bearing;
   return {
     bearing: wrap(heading),
     elevation: follow ? clamp(altitude * .40 + 3, 5, 29) : 8,
     fov: follow ? clamp(58 + Math.max(0, altitude - 15) * .65, 58, 88) : 64,
-    sun: direction(altitude, snapshot.position.azimuth),
-    altitude,
+    sun: direction(snapshot.solarPosition?.renderAltitude??altitude, snapshot.solarPosition?.azimuth??snapshot.position.azimuth),
+    altitude: snapshot.solarPosition?.renderAltitude??altitude,
+    geometricAltitude: snapshot.solarPosition?.geometricAltitude??snapshot.position.geometricAltitude,
     landscape: landscape === 'meadow' ? 1 : landscape === 'forest' ? 2 : 0,
     seed: (snapshot.city.lat * 17.13 + snapshot.city.lon * 11.71) % 100,
     season: (snapshot.instant.getUTCMonth() + 1),

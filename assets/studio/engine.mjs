@@ -44,6 +44,26 @@ export function initialState(year=2027){
     showWeekends:true,showWeekNumbers:false,showAdjacent:false,showGrid:true,showNotes:false,notes:'',includeAgenda:true,
     photo:'',photoCredit:'',photoRatio:1.5,photoPlacement:'banner',photoPosition:50,photoHeight:25,photoOpacity:18,photoFit:'cover',events:[],layers:[],quality:600};
 }
+export function updatePeriod(input, change={}) {
+  const next=normalize(input), previousView=next.view;
+  if(['month','year','week','blank'].includes(change.view))next.view=change.view;
+  if(Number.isInteger(Number(change.month))&&Number(change.month)>=1&&Number(change.month)<=12)next.month=Number(change.month);
+  if(Number.isInteger(Number(change.year))&&Number(change.year)>=2027&&Number(change.year)<=2030){
+    next.year=Number(change.year);
+  }
+  if(validDate(change.weekDate)&&Number(change.weekDate.slice(0,4))>=2027&&Number(change.weekDate.slice(0,4))<=2030){
+    next.weekDate=change.weekDate;
+    next.year=Number(change.weekDate.slice(0,4));
+    next.month=Number(change.weekDate.slice(5,7));
+  }else if(next.view==='week'){
+    const [,month,day]=next.weekDate.split('-').map(Number);
+    next.weekDate=iso(next.year,month,Math.min(day,new Date(Date.UTC(next.year,month,0)).getUTCDate()));
+  }
+  if(next.view!==previousView&&STARTERS.some(p=>p.view===previousView&&p.title===next.title)){
+    next.title=STARTERS.find(p=>p.view===next.view).title;
+  }
+  return next;
+}
 export function validDate(value){
   if(!/^\d{4}-\d{2}-\d{2}$/.test(String(value)))return false;
   const [y,m,d]=value.split('-').map(Number),dt=new Date(Date.UTC(y,m-1,d));
@@ -95,7 +115,7 @@ export function weekDates(s){
 export function starterState(id,current=initialState()){
   const starter=STARTERS.find(x=>x.id===id);if(!starter)return current;
   const next=applyPreset(current,starter.preset);
-  return normalize({...next,view:starter.view,orientation:starter.orientation,title:starter.title,showNotes:!!starter.notes,showGrid:starter.grid!==false,showWeekNumbers:starter.view==='month',showHolidays:starter.view!=='blank'});
+  return updatePeriod({...next,view:starter.view,orientation:starter.orientation,title:starter.title,showNotes:!!starter.notes,showGrid:starter.grid!==false,showWeekNumbers:starter.view==='month',showHolidays:starter.view!=='blank'});
 }
 export function eventsFor(s,month=null,includeHolidays=true){
   if(s.view==='blank')return [];

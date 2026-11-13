@@ -5,8 +5,7 @@ import {fetchWeather, usableWeather} from './weather-client.mjs';
 
 export function connectLocalPanel({state, onCityChange, onOpen}) {
   const $ = selector => document.querySelector(selector);
-  const trigger = $('#city-trigger'), picker = $('#city-picker'), search = $('#city-search');
-  const options = [...picker.querySelectorAll('[data-city-option]')];
+  const select = $('#city-select');
   const stage = $('#weather-stage'), scene = connectWeatherScene(stage);
   const memory = new Map();
   const timeFormat = new Intl.DateTimeFormat('en-GB', {timeZone: 'Europe/Helsinki', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false});
@@ -14,7 +13,6 @@ export function connectLocalPanel({state, onCityChange, onOpen}) {
   const forecastTime = new Intl.DateTimeFormat('fi-FI', {timeZone: 'Europe/Helsinki', hour: '2-digit', minute: '2-digit'});
   let sequence = 0, controller, refreshTimer, manualSelection = false;
   let nextRefresh = 0, astronomicalPeriod, requestedCity;
-  const normalize = value => value.toLocaleLowerCase('fi').normalize('NFD').replace(/\p{Diacritic}/gu, '');
   const city = () => CITIES.find(c => c[0] === state.city) || CITIES[0];
   const number = value => Number.isFinite(value) ? value.toLocaleString('fi-FI', {maximumFractionDigits: 1}) : 'Ei tietoa';
 
@@ -28,54 +26,14 @@ export function connectLocalPanel({state, onCityChange, onOpen}) {
     $('#today-date').dateTime = new Intl.DateTimeFormat('sv-SE', {timeZone: 'Europe/Helsinki'}).format(now);
   }
 
-  function closePicker(restoreFocus = false) {
-    picker.hidden = true;
-    trigger.setAttribute('aria-expanded', 'false');
-    if (restoreFocus) trigger.focus({preventScroll: true});
-  }
-
-  function filterCities() {
-    const query = normalize(search.value.trim());
-    for (const option of options) option.hidden = !normalize(option.textContent).includes(query);
-    $('#city-empty').hidden = options.some(option => !option.hidden);
-  }
-
-  function positionPicker() {
-    if (picker.hidden) return;
-    const bounds = trigger.getBoundingClientRect(), viewport = window.visualViewport;
-    const top = viewport?.offsetTop || 0, bottom = top + (viewport?.height || innerHeight);
-    const below = bottom - bounds.bottom - 12, above = bounds.top - top - 12;
-    const openAbove = below < 240 && above > below;
-    picker.style.top = openAbove ? 'auto' : 'calc(100% + 8px)';
-    picker.style.bottom = openAbove ? 'calc(100% + 8px)' : 'auto';
-    picker.style.maxHeight = Math.max(140, Math.min(370, openAbove ? above : below)) + 'px';
-  }
-
-  trigger.addEventListener('click', () => {
-    if (!picker.hidden) { closePicker(); return; }
-    picker.hidden = false;
-    trigger.setAttribute('aria-expanded', 'true');
-    search.value = '';
-    filterCities();
-    positionPicker();
-    search.focus({preventScroll: true});
+  let photosPrepared = false;
+  const preparePhotos = () => {
+    if (photosPrepared) return;
+    photosPrepared = true;
     onOpen();
-  });
-  $('#city-picker-close').addEventListener('click', () => closePicker(true));
-  search.addEventListener('input', filterCities);
-  picker.addEventListener('keydown', event => {
-    if (event.key === 'Escape') { event.preventDefault(); closePicker(true); return; }
-    const visible = options.filter(option => !option.hidden);
-    const index = visible.indexOf(document.activeElement);
-    if (event.key === 'ArrowDown') { event.preventDefault(); visible[Math.min(index + 1, visible.length - 1)]?.focus(); }
-    if (event.key === 'ArrowUp') { event.preventDefault(); index <= 0 ? search.focus() : visible[index - 1]?.focus(); }
-    if (event.key === 'Enter' && event.target === search && visible.length) { event.preventDefault(); visible[0].click(); }
-  });
-  document.addEventListener('pointerdown', event => { if (!event.target.closest('.local-place')) closePicker(); });
-  document.addEventListener('focusin', event => { if (!event.target.closest('.local-place')) closePicker(); });
-  window.addEventListener('resize', positionPicker);
-  window.visualViewport?.addEventListener('resize', positionPicker);
-  window.addEventListener('scroll', positionPicker, {passive: true});
+  };
+  select.addEventListener('pointerdown', preparePhotos);
+  select.addEventListener('focus', preparePhotos);
   window.addEventListener('fi-local-sky', event => {
     if (event.detail.city !== state.city) return;
     astronomicalPeriod = event.detail.period;
@@ -92,7 +50,7 @@ export function connectLocalPanel({state, onCityChange, onOpen}) {
     $('#weather-wind').textContent = number(data.wind) + (Number.isFinite(data.wind) ? ' m/s' : '');
     $('#weather-rain').textContent = number(data.precipitation) + (Number.isFinite(data.precipitation) ? ' mm' : '');
     $('#weather-note').innerHTML = `${stale ? 'Aiempi ennuste' : 'Ennuste'} klo ${forecastTime.format(new Date(data.time))}<br><a href="https://www.met.no/" target="_blank" rel="noopener">MET Norway</a> · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>`;
-    $('#weather-status').textContent = `${selected[1]}: ${data.name}, ${Math.round(data.temperature)} astetta. ${stale ? 'Aiemmin haettu ennuste.' : ''}`;
+    $('#weather-status').textContent = `${selected[1]}: ${data.name}, ${Math.round(data.temperature)} ${Math.abs(Math.round(data.temperature))===1?'aste':'astetta'}. ${stale ? 'Aiemmin haettu ennuste.' : ''}`;
     stage.setAttribute('aria-busy', 'false');
     scene.set(data.symbol, astronomicalPeriod);
   }
@@ -166,21 +124,18 @@ export function connectLocalPanel({state, onCityChange, onOpen}) {
     if (source === 'manual') manualSelection = true;
     if (state.city !== id) { astronomicalPeriod = undefined; scene.setSolar(null); }
     onCityChange(id, source);
-    $('#city-select').value = id;
-    $('#city-caption').textContent = city()[1];
-    for (const option of options) option.setAttribute('aria-pressed', String(option.dataset.cityOption === id));
+    select.value = id;
     $('#place-choice-note').textContent = source === 'ip' ? 'IP-sijainnin arvio' : source === 'default' ? 'Suomen sää · oletuspaikkakunta' : 'Valitsemasi paikkakunta';
-    closePicker(source === 'manual');
     if (requestedCity !== id) weather();
   }
 
-  for (const option of options) option.addEventListener('click', () => setCity(option.dataset.cityOption));
-  $('#city-select').addEventListener('change', event => setCity(event.target.value));
+  select.addEventListener('change', event => setCity(event.target.value));
   $('#weather-refresh').addEventListener('click', () => weather(true));
   document.addEventListener('visibilitychange', () => { clock(); if (!document.hidden && Date.now() >= nextRefresh) weather(); });
   clock();
   setInterval(clock, 1000);
-  setCity('helsinki', 'default');
+  const savedCity = state.citySource === 'manual' && CITIES.some(c => c[0] === state.city) ? state.city : null;
+  setCity(savedCity || 'helsinki', savedCity ? 'manual' : 'default');
   fetch('/api/place').then(response => response.ok ? response.json() : null).then(place => {
     if (manualSelection || !place) return;
     setCity(place.id || 'helsinki', place.detected ? 'ip' : 'default');

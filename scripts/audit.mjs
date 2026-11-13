@@ -30,7 +30,7 @@ for(const p of pages){
  }
  if(!/<title>[^<]+ \| Kalenteri365<\/title>/.test(html))failures.push([p.path,'branded title']);
  if(p.indexable&&/<meta name="robots" content="[^"]*noindex/.test(html))failures.push([p.path,'unexpected noindex']);
- if(!p.indexable&&!/<meta name="robots" content="noindex,follow"/.test(html))failures.push([p.path,'license noindex missing']);
+ if(!p.indexable&&!/<meta name="robots" content="noindex,follow(?:,[^"]*)?"/.test(html))failures.push([p.path,'license noindex missing']);
  for(const img of html.matchAll(/<img\b[^>]*>/g))if(!/\balt="[^"]*"/.test(img[0]))failures.push([p.path,'image missing alt']);
  const og=html.match(/property="og:image" content="https:\/\/kalenteri365.fi([^"]+)"/);if(!og)failures.push([p.path,'OG missing']);else{const m=await sharp(path.join(OUT,og[1])).metadata();if(m.width!==1200||m.height!==630)failures.push([p.path,'OG dimensions']);}
 }

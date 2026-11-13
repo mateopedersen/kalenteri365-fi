@@ -202,6 +202,14 @@
       "checkedAt": "2026-11-12"
     },
     {
+      "id": "onion-food",
+      "title_fi": "Ruokasipulin kasvatus",
+      "url": "https://www.martat.fi/puutarha/hyotykasvit/sipulien-kasvatus/ruokasipulin-kasvatus/",
+      "publisher": "Martat",
+      "scope": "Siemenestä kasvatettavan ruokasipulin esikasvatus maaliskuussa; istukassipulien istutus toukokuun lopussa–kesäkuun alussa, kylmät yöt huomioiden",
+      "checkedAt": "2026-11-13"
+    },
+    {
       "id": "carrot",
       "title_fi": "Porkkanan kasvatus",
       "url": "https://www.martat.fi/puutarha/hyotykasvit/porkkanan-kasvatus/",
@@ -404,7 +412,7 @@
     {
       "id": "rovaniemi-schools",
       "title_fi": "Julkaistut koulujen työ- ja loma-ajat",
-      "url": "https://www.rovaniemi.fi/Koulutus-ja-varhaiskasvatus/Lukio-ja-ammatillinen-koulutus",
+      "url": "https://www.rovaniemi.fi/Koulutus-ja-varhaiskasvatus/Perusopetus",
       "publisher": "Rovaniemen kaupunki",
       "scope": "Nimetyn lukuvuoden perusopetus",
       "checkedAt": "2026-11-13"
@@ -1835,7 +1843,7 @@
         }
       ],
       "teachingBreaks": [],
-      "notes_fi": "Ensimmäinen periodi alkaa hallinnollisesti 1.8., mutta pääsääntöinen opetus alkaa vasta elokuun lopussa. Lääketieteen ja matemaattis-luonnontieteellisten opintojen poikkeukset tarkistetaan tiedekunnasta."
+      "notes_fi": "Ensimmäinen periodi alkaa hallinnollisesti 1.8., mutta opetus alkaa pääsääntöisesti vasta elokuun lopussa. Lääketieteen ja matemaattis-luonnontieteellisten opintojen poikkeukset tarkistetaan tiedekunnasta."
     },
     {
       "institution": "Turun yliopisto",
@@ -1865,7 +1873,7 @@
         }
       ],
       "teachingBreaks": [],
-      "notes_fi": "Ensimmäinen periodi alkaa hallinnollisesti 1.8., mutta pääsääntöinen opetus alkaa vasta elokuun lopussa. Lääketieteen ja matemaattis-luonnontieteellisten opintojen poikkeukset tarkistetaan tiedekunnasta."
+      "notes_fi": "Ensimmäinen periodi alkaa hallinnollisesti 1.8., mutta opetus alkaa pääsääntöisesti vasta elokuun lopussa. Lääketieteen ja matemaattis-luonnontieteellisten opintojen poikkeukset tarkistetaan tiedekunnasta."
     },
     {
       "institution": "Turun yliopisto",
@@ -1895,7 +1903,7 @@
         }
       ],
       "teachingBreaks": [],
-      "notes_fi": "Ensimmäinen periodi alkaa hallinnollisesti 1.8., mutta pääsääntöinen opetus alkaa vasta elokuun lopussa. Lääketieteen ja matemaattis-luonnontieteellisten opintojen poikkeukset tarkistetaan tiedekunnasta."
+      "notes_fi": "Ensimmäinen periodi alkaa hallinnollisesti 1.8., mutta opetus alkaa pääsääntöisesti vasta elokuun lopussa. Lääketieteen ja matemaattis-luonnontieteellisten opintojen poikkeukset tarkistetaan tiedekunnasta."
     },
     {
       "institution": "Vaasan yliopisto",
@@ -2227,9 +2235,19 @@
     {
       "slug": "sipuli",
       "name": "Sipuli",
-      "sourceIds": [],
-      "status": "needs_specific_variety_and_source",
-      "window_fi": "Erota istukassipuli, siemenestä kasvatettava sipuli ja monivuotiset sipulit. Yhteistä täsmällistä kuukausiväliä ei vahvistettu."
+      "sourceIds": [
+        "onion-food"
+      ],
+      "indoorMonths": [
+        3
+      ],
+      "outdoorMonths": [
+        5,
+        6
+      ],
+      "status": "source_supported_guidance_not_guaranteed_date",
+      "window_fi": "Siemenestä kasvatettavan ruokasipulin esikasvatus maaliskuussa. Istukassipulit istutetaan toukokuun lopussa–kesäkuun alussa; nämä ovat eri kasvatusmenetelmiä.",
+      "outdoorRule_fi": "Istukassipulin liian aikainen istutus ja kylmät yöt voivat edistää kukintaan virittymistä. Sovita ajankohta omaan kasvupaikkaan. Siementen suorakylvöstä saatava sato koskee lähteen mukaan vain aivan eteläisintä Suomea; monivuotisille sipuleille tarvitaan oma ohje."
     }
   ],
   "copy_fi": {
@@ -2241,7 +2259,7 @@
     "placeLabel": "Paikkakunta",
     "polarNight": "Aurinko ei nouse tänä päivänä.",
     "midnightSun": "Aurinko ei laske tänä päivänä.",
-    "workdayIntro": "Laske maanantaista perjantaihin osuvat työpäivät ja valitse aattojen käsittely erikseen. Tulos on yleinen suunnitteluarvio. Oma työvuoro- tai työehtosopimus voi muuttaa työpäiviä.",
+    "workdayIntro": "Laske maanantaista perjantaihin osuvat työpäivät ja valitse aattojen käsittely erikseen. Tulos on yleinen suunnitteluarvio. Omat työvuorot tai työehtosopimus voivat muuttaa työpäiviä.",
     "holidayLegend": [
       "Pyhäpäivä",
       "Virallinen liputuspäivä",
@@ -2347,7 +2365,7 @@
       {
         "month": 10,
         "day": 24,
-        "name": "Yhdistyneiden Kansakuntien päivä"
+        "name": "Yhdistyneiden kansakuntien päivä"
       },
       {
         "month": 11,
@@ -2373,7 +2391,7 @@
         "rule": "Elokuun viimeinen lauantai"
       }
     ],
-    "additionalNotes_fi": "Vaalipäivät ja presidentin virkaanastuminen ovat erillisiä virallisia liputuspäiviä. Ahvenanmaalla ja saamelaisilla on omat liputuspäivät. Tove Janssonin 9.8. on hyödyllinen merkkipäivä, mutta tulevien vuosien liputussuositus on tarkistettava vuosikohtaisesti. Suomen luonnon päivä on ministeriön tässä lähteessä vakiintunut, ei asetuksen virallinen päivä."
+    "additionalNotes_fi": "Vaalipäivät ja presidentin virkaanastuminen ovat erillisiä virallisia liputuspäiviä. Ahvenanmaalla ja saamelaisilla on omat liputuspäivät. Tove Janssonin päivä 9.8. on hyödyllinen merkkipäivä, mutta tulevien vuosien liputussuositus on tarkistettava vuosikohtaisesti. Suomen luonnon päivä on ministeriön tässä lähteessä vakiintunut, ei asetuksen virallinen päivä."
   },
   "schoolVariants": [
     {

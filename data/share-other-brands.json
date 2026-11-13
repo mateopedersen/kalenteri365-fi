@@ -1,0 +1,49 @@
+[
+  {
+    "id": "linkedin",
+    "src": "/assets/share-brands/linkedin.svg",
+    "source": "https://brand.linkedin.com/in-logo",
+    "original": "https://delivery-p143253-e1476319.adobeaemcloud.com/adobe/assets/urn:aaid:aem:cdd21f1b-fa7e-4cb1-951b-310afb840af2/original/as/icons.svg#app-linkedin-bug-color-icon",
+    "sha256": "4e30ff0191986f91569bc9a7d555a9473776a7a881c717173432cac76c72b9db",
+    "sourceSha256": "8b5a1c8889d8e0d7458ea72824ce8a0a22ac0183e716915d2ccdf2f465edc7c0",
+    "changes": "Extracted official colored [in] icon from LinkedIn’s official UI sprite; paths and approved colors unchanged.",
+    "checkedAt": "2026-11-13",
+    "license": "Brand asset; trademark and copyright remain with the respective owner."
+  },
+  {
+    "id": "slack",
+    "src": "/assets/share-brands/slack.svg",
+    "source": "https://slack.com/media-kit",
+    "original": "https://a.slack-edge.com/1f40066/marketing/img/nav/logo.svg",
+    "sha256": "1f40066b694020057218c46eb2a11982b278d89b2dc8f96a21e4ea04e2b9db3b",
+    "sourceSha256": "1f40066b694020057218c46eb2a11982b278d89b2dc8f96a21e4ea04e2b9db3b",
+    "changes": "None; current full-color octothorpe supplied by Slack website.",
+    "checkedAt": "2026-11-13",
+    "license": "Brand asset; trademark and copyright remain with the respective owner."
+  },
+  {
+    "id": "yahoo",
+    "src": "/assets/share-brands/yahoo.svg",
+    "source": "https://www.yahooinc.com/",
+    "original": "https://cdn.prod.website-files.com/6721939c8726e5c8dc6b9f96/6734d1b6de8c3ac2a443fe9b_yahoo-logo.svg",
+    "sha256": "4482431e181ada39852847bc4f19d9d8546d19af63f383b5b87c14e49937dd66",
+    "sourceSha256": "66743a3f401febc8fe88adf84d4c3c8f2aa8dee125169de9f23d0fff6e1c85fc",
+    "changes": "Extracted the official slanted exclamation symbol (last two SVG paths) from Yahoo’s official wordmark without changing geometry or color. Compact mark verified against Yahoo’s own apple-touch icon.",
+    "checkedAt": "2026-11-13",
+    "license": "Brand asset; trademark and copyright remain with the respective owner.",
+    "identityVerificationURL": "https://cdn.prod.website-files.com/6721939c8726e5c8dc6b9f96/67367de4b98df909095dd7ad_yahoo_webclip.png",
+    "identityVerificationSha256": "be5c878d408e61ce4be576aea9fd7a34f1fc54d94d3c1c10eedb2c4c1f371937",
+    "visualReview": "Rendered local SVG and compared official symbol pixels on 2026-11-13."
+  },
+  {
+    "id": "qq",
+    "src": "/assets/share-brands/qq.svg",
+    "source": "https://im.qq.com/index/",
+    "original": "https://qq-web.cdn-go.cn/im.qq.com/c2de0837/assets/index.js (embedded un data:image/svg+xml logo)",
+    "sha256": "3edd74f2ebf0fa97f234ca29e56bffd8b4eed99f7879ce5d3a8c084e3739575d",
+    "sourceSha256": "bc375e81aaec798ec70602b38fc7125049fc5c027f1082c1476aeb66efe2d630",
+    "changes": "Decoded official header SVG and isolated its penguin mark by viewBox; original path data and colors retained.",
+    "checkedAt": "2026-11-13",
+    "license": "Brand asset; trademark and copyright remain with the respective owner."
+  }
+]

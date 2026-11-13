@@ -1,114 +1,99 @@
-import { localDayBounds } from "./solar-day.mjs";
-import { createSolarPanorama } from "./solar-panorama.mjs";
-import { panoramaView } from "./solar-panorama-core.mjs";
-import { atmosphere } from "./sun-scene-core.mjs";
-import { CITIES } from "./calendar.mjs";
-const canvas = document.querySelector("#solar-canvas");
-export function connectSolar(A, form, events = {}) {
-  if (!canvas) return;
+import {localDayBounds} from './solar-day.mjs';
+import {solarSnapshot} from './solar-scene-model.mjs';
+import {createSolarPanorama} from './solar-panorama.mjs';
+import {panoramaView,projectPanorama} from './solar-panorama-core.mjs';
+import {atmosphere} from './sun-scene-core.mjs';
+import {CITIES} from './calendar.mjs';
+import {lunarSceneDisc} from './lunar-scene-disc.mjs';
+
+export function connectSolar(A,form,events={}){
+  const canvas=document.querySelector('#solar-canvas');
+  if(!canvas)return;
+  if(window.fiSolar?.canvas===canvas){window.fiSolar.update(A,form,events);return;}
   window.fiSolar?.destroy?.();
-  let minute = Number(document.querySelector("#solar-minute").value),
-    playing = false,
-    frame = 0,
-    last = 0;
-  const painter = createSolarPanorama(canvas),
-    range = document.querySelector("#solar-minute"),
-    place = document.querySelector("#solar-place"),
-    reduced = matchMedia("(prefers-reduced-motion: reduce)"),
-    landscape = document.querySelector("#solar-landscape");
-  const bounds = () => localDayBounds(form.elements.date.value);
-  range.max = Math.round((bounds().end - bounds().start) / 60000) - 1;
-  minute = Math.min(minute, Number(range.max));
-  function draw() {
-    const city =
-        CITIES.find((c) => c[0] === form.elements.city.value) || CITIES[0],
-      instant = new Date(+bounds().start + minute * 60000),
-      observer = new A.Observer(city[2], city[3], 0),
-      eq = A.Equator("Sun", instant, observer, true, true),
-      position = A.Horizon(instant, observer, eq.ra, eq.dec, "normal"),
-      snapshot = {
-        position,
-        instant,
-        city: { lat: city[2], lon: city[3], name: city[1] },
-      };
-    painter.draw(
-      panoramaView(snapshot, { follow: true, landscape: landscape.value }),
-      0,
-    );
-    place.textContent = city[1];
-    document.querySelector("#solar-coordinates").textContent =
-      city[2].toFixed(3) + "° N · " + city[3].toFixed(3) + "° E";
-    document.querySelector("#solar-light").textContent = atmosphere(
-      position.altitude,
-    ).label;
-    const label = new Intl.DateTimeFormat("en-GB", {
-      timeZone: "Europe/Helsinki",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-    }).format(instant);
-    document.querySelector("#solar-time-label").textContent = label;
-    document.querySelector("#solar-clock").textContent = label;
+  const player=document.querySelector('#solar-player'),range=document.querySelector('#solar-minute');
+  const landscape=document.querySelector('#solar-landscape'),play=document.querySelector('#solar-play');
+  const expand=document.querySelector('#solar-expand'),status=document.querySelector('#solar-render-status');
+  const body=player.dataset.body||'Sun',isMoon=body==='Moon';
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+  const clock=new Intl.DateTimeFormat('fi-FI',{timeZone:'Europe/Helsinki',hour:'2-digit',minute:'2-digit',hour12:false});
+  let painter;
+  try{painter=createSolarPanorama(canvas);}catch{
+    status.textContent='Simulaatio ei avaudu tässä selaimessa. Lasketut ajat näkyvät alla.';
+    player.querySelectorAll('button,input,select').forEach(el=>el.disabled=true);
+    return;
   }
-  function tick(now) {
-    if (!playing) return;
-    if (now - last > 100) {
-      minute = (minute + 4) % (Number(range.max) + 1);
-      range.value = minute;
-      draw();
-      last = now;
+  let selection,minute=Number(range.value),playing=false,frame=0,last=0,destroyed=false,dialog,placeholder;
+  const labels=isMoon?{rise:'Kuun nousu',noon:'Kuun yläkulminaatio',set:'Kuun lasku'}:{rise:'Auringonnousu',noon:'Aurinkokeskipäivä',set:'Auringonlasku'};
+  const format=date=>clock.format(new Date(date)).replace('.',':');
+  function stop(){playing=false;cancelAnimationFrame(frame);frame=0;play.setAttribute('aria-pressed','false');play.querySelector('svg path').setAttribute('d','m8 4 12 8-12 8Z');play.querySelector('span').textContent=reduced.matches?'Seuraava tunti':'Toista päivä';}
+  function reveal(){const rect=player.getBoundingClientRect();if(rect.top<0||rect.bottom>innerHeight)player.scrollIntoView({block:'start',behavior:reduced.matches?'instant':'smooth'});}
+  function draw(){
+    if(destroyed||!selection)return;
+    const snapshot=solarSnapshot(selection.A,selection.city,selection.date,minute,body);
+    minute=snapshot.minute;
+    const view=panoramaView(snapshot,{follow:true,landscape:landscape.value});
+    painter.draw(view,performance.now()/1000);
+    const label=format(snapshot.instant);
+    document.querySelector('#solar-time-label').textContent=label;
+    const clockElement=document.querySelector('#solar-clock');clockElement.textContent=label;clockElement.dateTime=snapshot.instant.toISOString();
+    document.querySelector('#solar-light').textContent=isMoon?(snapshot.position.altitude>.5?'Kuu horisontin yläpuolella':snapshot.position.altitude<-.5?'Kuu horisontin alapuolella':'Kuu horisontissa'):atmosphere(snapshot.position.altitude,snapshot.position.geometricAltitude).label;
+    if(isMoon){
+      const percent=new Intl.NumberFormat('fi-FI',{maximumFractionDigits:1}).format(snapshot.moon.fraction*100);
+      const closeup=document.querySelector('#lunar-detail-disc'),skyDisc=document.querySelector('#lunar-sky-disc');
+      closeup.innerHTML=lunarSceneDisc(snapshot.moon.angle);
+      document.querySelector('#lunar-detail-percent').textContent=percent+' % valaistunut';
+      const rect=painter.canvas.getBoundingClientRect(),point=projectPanorama(snapshot.position.renderAltitude,snapshot.position.azimuth,view,rect.width,rect.height);
+      skyDisc.hidden=!point.visible;
+      skyDisc.innerHTML=lunarSceneDisc(snapshot.moon.angle,'lunar-sky');skyDisc.style.left=point.x+'px';skyDisc.style.top=point.y+'px';
+      document.querySelector('#solar-duration').textContent=snapshot.moon.waxing?'Kasvava kuu':'Vähenevä kuu';
+      document.querySelector('#solar-coordinates').textContent='Korkeus '+snapshot.position.altitude.toFixed(1).replace('.',',')+'° · Suunta '+Math.round(snapshot.position.azimuth)+'°';
     }
-    frame = requestAnimationFrame(tick);
+    range.setAttribute('aria-valuetext',label+' Suomen aikaa');
+    Object.assign(painter.canvas.dataset,{city:selection.city[0],date:selection.date,minute:String(minute),altitude:String(snapshot.position.renderAltitude),azimuth:String(snapshot.position.azimuth)});
+    status.hidden=true;
   }
-  range.oninput = () => {
-    minute = Number(range.value);
+  function update(nextA,nextForm,nextEvents){
+    stop();
+    const first=!selection,city=CITIES.find(c=>c[0]===nextForm.elements.city.value)||CITIES[0];
+    selection={A:nextA,city,date:nextForm.elements.date.value,events:{...nextEvents}};
+    const bounds=localDayBounds(selection.date);range.max=String(Math.round((bounds.end-bounds.start)/60000)-1);
+    if(first&&isMoon){const focus=nextEvents.noon||nextEvents.rise;if(focus)minute=(new Date(focus)-bounds.start)/60000+(nextEvents.noon?0:30);}
+    minute=Math.min(minute,Number(range.max));range.value=String(Math.round(minute));
+    document.querySelector('#solar-place').textContent=city[1];
+    document.querySelector('#solar-coordinates').textContent=city[2].toFixed(3)+'° N · '+city[3].toFixed(3)+'° E';
+    for(const button of player.querySelectorAll('[data-solar-jump]')){
+      const key=button.dataset.solarJump,event=selection.events[key];button.disabled=!event;
+      button.querySelector('strong').textContent=event?format(event):key==='rise'?'Ei nousua':key==='set'?'Ei laskua':'Ei tänään';
+      button.setAttribute('aria-label',labels[key]+': '+button.querySelector('strong').textContent);
+    }
+    const duration=nextEvents.duration;document.querySelector('#solar-duration').textContent=duration==null?'':'Päivän pituus '+Math.floor(duration/60)+' h '+duration%60+' min';
+    const subject=isMoon?'Kuu':'Aurinko';
+    const polar=document.querySelector('#solar-polar-message');polar.hidden=!nextEvents.polar;polar.textContent=nextEvents.polar==='up'?subject+' pysyy horisontin yläpuolella koko vuorokauden.':nextEvents.polar==='down'?subject+' pysyy horisontin alapuolella koko vuorokauden.':'';
     draw();
+  }
+  function tick(now){
+    if(!playing||destroyed)return;
+    if(now-last>=100){minute=Math.min(Number(range.max),minute+4);range.value=String(Math.round(minute));draw();last=now;if(minute>=Number(range.max)){stop();return;}}
+    frame=requestAnimationFrame(tick);
+  }
+  range.oninput=()=>{stop();minute=Number(range.value);draw();};
+  landscape.onchange=draw;
+  play.onclick=()=>{if(playing){stop();return;}reveal();if(reduced.matches){minute=(minute+60)%(Number(range.max)+1);range.value=String(Math.round(minute));draw();return;}if(minute>=Number(range.max))minute=0;playing=true;last=0;play.setAttribute('aria-pressed','true');play.querySelector('svg path').setAttribute('d','M6 4h4v16H6zM14 4h4v16h-4z');play.querySelector('span').textContent='Pysäytä';frame=requestAnimationFrame(tick);};
+  for(const button of player.querySelectorAll('[data-solar-jump]'))button.onclick=()=>{const event=selection.events[button.dataset.solarJump];if(!event)return;stop();minute=(new Date(event)-localDayBounds(selection.date).start)/60000;range.value=String(Math.round(minute));draw();reveal();};
+  expand.onclick=()=>{
+    if(dialog?.open){dialog.close();return;}
+    stop();
+    dialog??=Object.assign(document.createElement('dialog'),{className:'solar-fullscreen-dialog'});
+    if(!dialog.isConnected)document.body.append(dialog);
+    placeholder=document.createComment('solar-player-position');player.replaceWith(placeholder);dialog.append(player);
+    dialog.setAttribute('aria-label',(isMoon?'Kuun':'Auringon')+' kulun suuri näkymä');
+    dialog.onclose=()=>{placeholder?.replaceWith(player);expand.setAttribute('aria-label','Suurenna simulaatio');expand.focus({preventScroll:true});draw();};
+    expand.setAttribute('aria-label','Sulje suuri näkymä');dialog.showModal();expand.focus();draw();
   };
-  landscape.onchange = draw;
-  document.querySelector("#solar-play").onclick = () => {
-    playing = !playing;
-    document.querySelector("#solar-play").textContent = playing
-      ? "Pysäytä"
-      : "Toista päivä";
-    if (playing) {
-      const stage=document.querySelector('.solar-stage'),rect=stage.getBoundingClientRect();
-      if(rect.top<0||rect.bottom>innerHeight)stage.scrollIntoView({behavior:reduced.matches?'instant':'smooth',block:'start'});
-      if (reduced.matches) {
-        minute = (minute + 60) % (Number(range.max) + 1);
-        range.value = minute;
-        draw();
-        playing = false;
-        document.querySelector("#solar-play").textContent = "Toista päivä";
-      } else tick(0);
-    } else cancelAnimationFrame(frame);
-  };
-  document.querySelectorAll("[data-solar-jump]").forEach((b) => {
-    const key = b.dataset.solarJump;
-    b.disabled = key !== "noon" && !events[key];
-    b.onclick = () => {
-      const event=key==='noon'?events.noon:events[key];
-      if(!event)return;
-      minute=Math.round((new Date(event)-bounds().start)/60000);
-      range.value = minute;
-      draw();
-      const stage = document.querySelector(".solar-stage"),
-        stageBounds = stage.getBoundingClientRect();
-      if (stageBounds.top < 0 || stageBounds.bottom > innerHeight)
-        stage.scrollIntoView({
-          behavior: reduced.matches ? "instant" : "smooth",
-          block: "start",
-        });
-    };
-  });
-  const resize = new ResizeObserver(draw);
-  resize.observe(painter.canvas);
-  draw();
-  window.fiSolar = {
-    destroy() {
-      playing = false;
-      cancelAnimationFrame(frame);
-      resize.disconnect();
-      painter.destroy();
-    },
-  };
+  const visibility=()=>{if(document.hidden)stop();};document.addEventListener('visibilitychange',visibility);
+  const motion=()=>{stop();draw();};reduced.addEventListener('change',motion);
+  const resize=new ResizeObserver(draw);resize.observe(painter.canvas);
+  window.fiSolar={canvas:painter.canvas,update,getState:()=>({city:selection.city[0],date:selection.date,minute,playing}),destroy(){stop();if(dialog?.open)dialog.close();destroyed=true;resize.disconnect();document.removeEventListener('visibilitychange',visibility);reduced.removeEventListener('change',motion);dialog?.remove();painter.destroy();}};
+  update(A,form,events);
 }

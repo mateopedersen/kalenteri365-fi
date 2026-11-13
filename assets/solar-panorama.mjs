@@ -134,7 +134,7 @@ void main(){
 function webglRenderer(canvas) {
   const gl = canvas.getContext('webgl2', {alpha:false,antialias:false,powerPreference:'low-power',preserveDrawingBuffer:true});
   if (!gl) return null;
-  let program, buffer, uniforms, attribute, lost=false;
+  let program, buffer, uniforms, attribute, lost=false,lastView,lastTime=0;
   function setup() {
     const compile = (type, source) => {
       const shader=gl.createShader(type);gl.shaderSource(shader,source);gl.compileShader(shader);
@@ -154,10 +154,11 @@ function webglRenderer(canvas) {
   }
   setup();
   const onLost=event=>{event.preventDefault();lost=true;};
-  const onRestore=()=>{setup();lost=false;};
+  const onRestore=()=>{setup();lost=false;if(lastView)draw(lastView,lastTime);};
   canvas.addEventListener('webglcontextlost',onLost);
   canvas.addEventListener('webglcontextrestored',onRestore);
-  return {kind:'webgl2',draw(view,time) {
+  function draw(view,time) {
+    lastView=view;lastTime=time;
     if(lost)return;
     gl.viewport(0,0,canvas.width,canvas.height);gl.useProgram(program);
     gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.enableVertexAttribArray(attribute);gl.vertexAttribPointer(attribute,2,gl.FLOAT,false,0,0);
@@ -166,7 +167,8 @@ function webglRenderer(canvas) {
     gl.uniform1f(uniforms.time,time);gl.uniform1f(uniforms.seed,view.seed);gl.uniform1f(uniforms.season,view.season);
     gl.uniform1i(uniforms.landscape,view.landscape);
     gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
-  },destroy(){
+  }
+  return {kind:'webgl2',draw,destroy(){
     canvas.removeEventListener('webglcontextlost',onLost);canvas.removeEventListener('webglcontextrestored',onRestore);
     gl.deleteBuffer(buffer);gl.deleteProgram(program);
   }};
@@ -176,7 +178,7 @@ function webglRenderer(canvas) {
 function canvasRenderer(canvas) {
   const ctx=canvas.getContext('2d',{alpha:false}),random=n=>{const x=Math.sin(n*127.1)*43758.5453;return x-Math.floor(x);};
   return {kind:'canvas2d',draw(view,time=0) {
-    const w=canvas.width,h=canvas.height,c=atmosphere(view.altitude);
+    const w=canvas.width,h=canvas.height,c=atmosphere(view.altitude,view.geometricAltitude);
     const horizon=h*(.5+Math.tan(view.elevation*RAD)/(2*Math.tan(view.fov*RAD/2))),waterline=Math.min(h,horizon);
     const azimuth=Math.atan2(view.sun[0],view.sun[2])/RAD;
     const sun=projectPanorama(view.altitude,azimuth,view,w,h);

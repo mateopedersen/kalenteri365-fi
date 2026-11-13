@@ -11,12 +11,12 @@ if(root){
   root.querySelector('[data-holiday-weekday]').textContent=capitalize(new Intl.DateTimeFormat('fi-FI',{weekday:'long',timeZone:'UTC'}).format(date));
   const time=root.querySelector('[data-holiday-date]');time.dateTime=entry.date;time.textContent=format.format(date);
   root.querySelector('[data-holiday-google]').href=googleCalendarURL(entry);
-  root.querySelector('[data-holiday-ics]').href=eventDownloadPath(entry.slug,year.value,reminder.value);
+  root.querySelectorAll('[data-holiday-ics]').forEach(link=>{link.href=eventDownloadPath(entry.slug,year.value,reminder.value);});
   root.querySelector('[data-holiday-local]').dataset.addDate=entry.date;
   root.querySelector('[data-holiday-status]').textContent='';
  }
  year.addEventListener('change',update);reminder.addEventListener('change',update);
- root.querySelector('[data-holiday-ics]').addEventListener('click',()=>{root.querySelector('[data-holiday-status]').textContent='Avaa tiedosto omassa kalenterisovelluksessasi ja vahvista tuonti. Ilmoitukset vaativat sovelluksen ilmoitusluvan.';});
+ root.querySelectorAll('[data-holiday-ics]').forEach(link=>link.addEventListener('click',()=>{root.querySelector('[data-holiday-status]').textContent='Avaa tiedosto omassa kalenterisovelluksessasi ja vahvista tuonti. Ilmoitukset vaativat sovelluksen ilmoitusluvan.';}));
  root.querySelector('[data-holiday-google]').addEventListener('click',()=>{root.querySelector('[data-holiday-status]').textContent='Tarkista muistutus ja tallenna tapahtuma Google Kalenterissa.';});
  update();
 }

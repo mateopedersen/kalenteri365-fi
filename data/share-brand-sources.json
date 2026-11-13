@@ -1,0 +1,109 @@
+[
+  {
+    "id": "band",
+    "source": "https://promotion.band.us/newband25",
+    "original": "https://ssl.pstatic.net/cmstatic/promotion/newband25/favicon/favicon.svg",
+    "sha256": "2d7e944a63660933dde949e1d028de69eb5f1821aa95acd69f44adc296999eba",
+    "changes": "None",
+    "license": "BAND brand mark, used to identify the sharing destination.",
+    "checkedAt": "2026-11-13",
+    "src": "/assets/share-brands/band.svg",
+    "bytes": 1055
+  },
+  {
+    "id": "linkedin",
+    "src": "/assets/share-brands/linkedin.svg",
+    "source": "https://brand.linkedin.com/in-logo",
+    "original": "https://delivery-p143253-e1476319.adobeaemcloud.com/adobe/assets/urn:aaid:aem:cdd21f1b-fa7e-4cb1-951b-310afb840af2/original/as/icons.svg#app-linkedin-bug-color-icon",
+    "sha256": "4e30ff0191986f91569bc9a7d555a9473776a7a881c717173432cac76c72b9db",
+    "sourceSha256": "8b5a1c8889d8e0d7458ea72824ce8a0a22ac0183e716915d2ccdf2f465edc7c0",
+    "changes": "Extracted official colored [in] icon from LinkedIn’s official UI sprite; paths and approved colors unchanged.",
+    "checkedAt": "2026-11-13",
+    "license": "Brand asset; trademark and copyright remain with the respective owner.",
+    "bytes": 681
+  },
+  {
+    "id": "onenote",
+    "source": "https://www.microsoft.com/en-us/microsoft-365/onenote/digital-note-taking-app",
+    "original": "https://www.microsoft.com/content/dam/microsoft/bade/images/icons/en-us/m365-app-icons-fy26/OneNote-Icon-FY26.svg",
+    "src": "/assets/share-brands/onenote.svg",
+    "bytes": 3472,
+    "sha256": "81b19719c18dd2889f19aacc2238139d819f97653d0582a9638f107cf7a2e491",
+    "checkedAt": "2026-11-13",
+    "changes": "None",
+    "rights": "Microsoft product icon and trademark; used to identify the linked service. Not a CC0 asset."
+  },
+  {
+    "id": "outlook",
+    "source": "https://www.microsoft.com/en-us/microsoft-365/outlook/email-and-calendar-software-microsoft-outlook",
+    "original": "https://www.microsoft.com/content/dam/microsoft/bade/images/icons/en-us/m365-app-icons-fy26/Outlook-Icon-FY26.svg",
+    "sha256": "d67b8bb4bb8d7afe8e71e066112452d5d681ea7991fa1ec7c37df962246b2c31",
+    "changes": "None",
+    "checkedAt": "2026-11-13",
+    "src": "/assets/brands/outlook.svg",
+    "bytes": 8681,
+    "rights": "Microsoft product icon and trademark; used to identify the linked service. Not a CC0 asset."
+  },
+  {
+    "id": "qq",
+    "src": "/assets/share-brands/qq.svg",
+    "source": "https://im.qq.com/index/",
+    "original": "https://qq-web.cdn-go.cn/im.qq.com/c2de0837/assets/index.js (embedded un data:image/svg+xml logo)",
+    "sha256": "3edd74f2ebf0fa97f234ca29e56bffd8b4eed99f7879ce5d3a8c084e3739575d",
+    "sourceSha256": "bc375e81aaec798ec70602b38fc7125049fc5c027f1082c1476aeb66efe2d630",
+    "changes": "Decoded official header SVG and isolated its penguin mark by viewBox; original path data and colors retained.",
+    "checkedAt": "2026-11-13",
+    "license": "Brand asset; trademark and copyright remain with the respective owner.",
+    "bytes": 3410
+  },
+  {
+    "id": "raindrop",
+    "source": "https://raindrop.io/",
+    "original": "Homepage header inline SVG",
+    "sourceSha256": "2eca3556816668386b8f1c60f7f251658c5a723f5d55d1150a3ba024282ce752",
+    "sha256": "9c56a5063ec83cfaec750f9255987975a256f394e7fffa6511c6942cbafb339b",
+    "changes": "Removed wordmark only; original colored icon paths and masks unchanged. Cropped canvas to icon bounds.",
+    "license": "Brand mark belongs to Raindrop.io; used to identify the sharing destination.",
+    "checkedAt": "2026-11-13",
+    "src": "/assets/share-brands/raindrop.svg",
+    "bytes": 2356
+  },
+  {
+    "id": "slack",
+    "src": "/assets/share-brands/slack.svg",
+    "source": "https://slack.com/media-kit",
+    "original": "https://a.slack-edge.com/1f40066/marketing/img/nav/logo.svg",
+    "sha256": "1f40066b694020057218c46eb2a11982b278d89b2dc8f96a21e4ea04e2b9db3b",
+    "sourceSha256": "1f40066b694020057218c46eb2a11982b278d89b2dc8f96a21e4ea04e2b9db3b",
+    "changes": "None; current full-color octothorpe supplied by Slack website.",
+    "checkedAt": "2026-11-13",
+    "license": "Brand asset; trademark and copyright remain with the respective owner.",
+    "bytes": 2101
+  },
+  {
+    "id": "teams",
+    "source": "https://www.microsoft.com/en-us/microsoft-teams/group-chat-software",
+    "original": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Teams-Icon-FY26?op_usm=1.5%2C0.65%2C15%2C0&qlt=100&resMode=sharp2",
+    "src": "/assets/share-brands/teams.svg",
+    "bytes": 6359,
+    "sha256": "6a33d49f19d1be2bcdf86921935a2171e5c18c3b11abe297ca03d5f4f302ba3a",
+    "checkedAt": "2026-11-13",
+    "changes": "None",
+    "rights": "Microsoft product icon and trademark; used to identify the linked service. Not a CC0 asset."
+  },
+  {
+    "id": "yahoo",
+    "src": "/assets/share-brands/yahoo.svg",
+    "source": "https://www.yahooinc.com/",
+    "original": "https://cdn.prod.website-files.com/6721939c8726e5c8dc6b9f96/6734d1b6de8c3ac2a443fe9b_yahoo-logo.svg",
+    "sha256": "4482431e181ada39852847bc4f19d9d8546d19af63f383b5b87c14e49937dd66",
+    "sourceSha256": "66743a3f401febc8fe88adf84d4c3c8f2aa8dee125169de9f23d0fff6e1c85fc",
+    "changes": "Extracted the official slanted exclamation symbol (last two SVG paths) from Yahoo’s official wordmark without changing geometry or color. Compact mark verified against Yahoo’s own apple-touch icon.",
+    "checkedAt": "2026-11-13",
+    "license": "Brand asset; trademark and copyright remain with the respective owner.",
+    "identityVerificationURL": "https://cdn.prod.website-files.com/6721939c8726e5c8dc6b9f96/67367de4b98df909095dd7ad_yahoo_webclip.png",
+    "identityVerificationSha256": "be5c878d408e61ce4be576aea9fd7a34f1fc54d94d3c1c10eedb2c4c1f371937",
+    "visualReview": "Rendered local SVG and compared official symbol pixels on 2026-11-13.",
+    "bytes": 458
+  }
+]

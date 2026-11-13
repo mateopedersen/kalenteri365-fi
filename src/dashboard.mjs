@@ -30,8 +30,8 @@ export function upcomingItems(today, onlyHolidays = false) {
   }).join('');
 }
 
-export function upcomingPanel(today) {
-  return `<section class="panel upcoming-panel"><div class="dashboard-panel-heading">${art('calendar')}<h2>Seuraavat juhlat</h2></div><div class="upcoming-tabs" role="group" aria-label="Tulevien päivien rajaus"><button type="button" data-upcoming="all" aria-pressed="true">Kaikki päivät</button><button type="button" data-upcoming="holidays" aria-pressed="false">Vain pyhät</button></div><div id="upcoming">${upcomingItems(today)}</div>${link('/juhlapyhat/', 'Juhlat ja niiden taustat ' + icon('arrow'), 'dashboard-more')}</section>`;
+export function upcomingPanel(today, { overviewLink = true } = {}) {
+  return `<section class="panel upcoming-panel"><div class="dashboard-panel-heading">${art('calendar')}<h2>Seuraavat juhlat</h2></div><div class="upcoming-tabs" role="group" aria-label="Tulevien päivien rajaus"><button type="button" data-upcoming="all" aria-pressed="true">Kaikki päivät</button><button type="button" data-upcoming="holidays" aria-pressed="false">Vain pyhät</button></div><div id="upcoming">${upcomingItems(today)}</div>${overviewLink ? link('/juhlapyhat/', 'Juhlat ja niiden taustat ' + icon('arrow'), 'dashboard-more') : ''}</section>`;
 }
 
 export function calendarFilters() {

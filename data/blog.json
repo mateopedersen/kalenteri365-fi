@@ -20,7 +20,7 @@
         "paragraphs": [
           "Kirjoita lomailmoitukseen tai projektisuunnitelmaan viikon numeron lisäksi maanantain ja sunnuntain päivämäärät. Tämä auttaa etenkin silloin, kun mukana on eri maissa toimivia ihmisiä tai kalenteriohjelmia, joissa viikon alku on asetettu sunnuntaiksi.",
           "Kalenteri365:n viikkonumerotaulukko näyttää viikon rajat. Viikkosuunnitelma puolestaan sopii tekemisen kirjaamiseen: valitse viikko ja jaa tehtävät päiville. Jos viikon ohjelma muuttuu, muokkaa merkintää sen sijaan, että tekisit saman asian uudelleen toiselle päivälle.",
-          "Erota koko viikon varaus yhden päivän tapaamisesta. Viesti ”palautus viikolla 8” jättää avoimeksi, odotetaanko työtä maanantaiksi vai sunnuntaiksi. Jos määräpäivä on tiedossa, kirjoita se suoraan ja käytä viikkonumeroa vain hahmottamisen apuna. Vastaavasti viikon mittaisen poissaolon yhteyteen kuuluvat ensimmäinen ja viimeinen poissaolopäivä, eivät vain lähdön viikkonumero. Kalenteria lukeva kollega pystyy silloin suunnittelemaan oman työnsä ilman lisäkysymystä. Jos käytät lyhennettä, sopikaa yhteinen kirjoitustapa: ”vk 8” ja ”viikko 8” tarkoittavat samaa, mutta sekalaiset numerot ilman vuotta tai päivämääriä vaikeuttavat vanhojen viestien tulkintaa."
+          "Erota koko viikon varaus yhden päivän tapaamisesta. Viesti ”palautus viikolla 8” jättää avoimeksi, odotetaanko työtä maanantaiksi vai sunnuntaiksi. Jos määräpäivä on tiedossa, kirjoita se suoraan ja käytä viikkonumeroa vain hahmottamisen apuna. Vastaavasti viikon mittaisen poissaolon yhteyteen kuuluvat ensimmäinen ja viimeinen poissaolopäivä, ei vain lähdön viikkonumero. Kalenteria lukeva kollega pystyy silloin suunnittelemaan oman työnsä ilman lisäkysymystä. Jos käytät lyhennettä, sopikaa yhteinen kirjoitustapa: ”vk 8” ja ”viikko 8” tarkoittavat samaa, mutta sekalaiset numerot ilman vuotta tai päivämääriä vaikeuttavat vanhojen viestien tulkintaa."
         ],
         "links": []
       },
@@ -29,7 +29,7 @@
         "paragraphs": [
           "Pitkissä suunnitelmissa toimiva merkintä on esimerkiksi ”2027, viikko 1: 4.–10.1.”. Se on yksiselitteisempi kuin pelkkä numero. Viikkonumero ei myöskään ratkaise sitä, onko jokin päivä työpäivä tai koulupäivä; nämä tiedot tarkistetaan erikseen pyhäpäivistä, työvuoroista ja koulun aikataulusta.",
           "Viikkonumero voi olla hyödyllinen tiedon ryhmittelyssä myös silloin, kun tapahtuma kattaa vain osan viikosta. Esimerkiksi keskiviikosta perjantaihin jatkuva kurssi kuuluu yhteen viikkoon, mutta sen otsikosta täytyy silti näkyä kolmen päivän todellinen jakso. Älä venytä tapahtumaa maanantaista sunnuntaihin vain saadaksesi sen näyttämään kokonaiselta viikkopalkilta. Jos suunnitelma ylittää sunnuntain ja maanantain rajan, kyseessä on puolestaan kaksi numeroitua viikkoa. Tallenna yhtenäisen tapahtuman oikeat rajat ja anna kalenterin sijoittaa se näkymään. Näin päivämäärät säilyvät myös, kun vaihdat kuukausinäkymästä viikkonäkymään tai tulostat vain osan kuukaudesta.",
-          "Kun lajittelet usean vuoden viikkolistaa taulukossa, säilytä vuosi ja viikko erillisinä tietoina tai käytä johdonmukaista yhteistä merkintää. Muuten kaikkien vuosien viikot yksi voivat päätyä peräkkäin, vaikka tarkoitus olisi aikajärjestys. Lisää tarvittaessa myös viikon maanantain päivämäärä. Se antaa helpon tarkistuspisteen, jos lista viedään toiseen ohjelmaan, jossa viikkovuoden käsittely on erilainen. Tulosteessa lukija tarvitsee silti ensisijaisesti ymmärrettävän päivämäärävälin, ei monimutkaista teknistä tunnistetta."
+          "Kun lajittelet usean vuoden viikkolistaa taulukossa, säilytä vuosi ja viikko erillisinä tietoina tai käytä johdonmukaista yhteistä merkintää. Muuten kaikkien vuosien ensimmäiset viikot voivat päätyä peräkkäin, vaikka tarkoitus olisi aikajärjestys. Lisää tarvittaessa myös viikon maanantain päivämäärä. Se antaa helpon tarkistuspisteen, jos lista viedään toiseen ohjelmaan, jossa viikkovuoden käsittely on erilainen. Tulosteessa lukija tarvitsee silti ensisijaisesti ymmärrettävän päivämäärävälin, ei monimutkaista teknistä tunnistetta."
         ],
         "links": []
       },
@@ -53,7 +53,7 @@
       {
         "title": "Parillinen tai pariton viikko ei korvaa toistuvaa tapahtumaa",
         "paragraphs": [
-          "Joka toinen viikko toistuva harrastus merkitään usein parillisille viikoille. Tarkista vuodenvaihde erikseen, sillä 53 viikon vuosi voi muuttaa viikkonumeroon perustuvan tavan ja tasan 14 päivän välein tapahtuvan toiston suhdetta. Jos järjestäjä tarkoittaa kahden viikon väliä, tallenna tapahtuma todellisista päivämääristä sen sijaan, että päättelisit jokaisen kerran numeron parillisuudesta.",
+          "Joka toinen viikko toistuva harrastus merkitään usein parillisille viikoille. Tarkista vuodenvaihde erikseen, sillä 53 viikon vuosi voi muuttaa viikkonumeroon perustuvan tavan ja tasan 14 päivän välein tapahtuvan toiston suhdetta. Jos järjestäjä tarkoittaa kahden viikon väliä, tallenna tapahtuma todellisten päivämäärien mukaan sen sijaan, että päättelisit jokaisen kerran numeron parillisuudesta.",
           "Esimerkiksi vuoden viimeinen tapaaminen ja tammikuun ensimmäinen tapaaminen kannattaa kirjoittaa näkyviin päivämäärinä jo ennen joulutaukoa. Koulujen lukujärjestyksissä voi lisäksi olla jaksoja ja poikkeusviikkoja. Kalenteri ei tiedä, perutaanko tunti loman vuoksi. Säilytä alkuperäinen aikataulu ja tee poikkeus sen mukaan, mitä järjestäjä on ilmoittanut. Näin kalenterimerkintä ei muutu huomaamatta omaksi tulkinnaksi."
         ],
         "links": [
@@ -109,7 +109,7 @@
       "koulujen-lomat",
       "kalenterin-tulostus"
     ],
-    "wordCount": 832,
+    "wordCount": 833,
     "readMinutes": 5,
     "sourceChecks": [
       {
@@ -125,7 +125,7 @@
         "notes": "Facts checked against primary sources. Practical planning examples are original; no copied prose."
       }
     ],
-    "bodyWordCount": 806
+    "bodyWordCount": 807
   },
   {
     "slug": "juhannus-suomessa",
@@ -137,9 +137,9 @@
       {
         "title": "Aatto, juhannuspäivä ja kesäpäivänseisaus",
         "paragraphs": [
-          "Juhannusaatto on juhannuspäivää edeltävä perjantai. Juhannuspäivä on myös Suomen lipun päivä. Tähtitieteellinen kesäpäivänseisaus on eri asia: se määräytyy Auringon vuotuisen liikkeen perusteella, eikä juhannuskalenterin lauantaisäännöstä.",
+          "Juhannusaatto on juhannuspäivää edeltävä perjantai. Juhannuspäivä on myös Suomen lipun päivä. Tähtitieteellinen kesäpäivänseisaus on eri asia: sen ajankohta määräytyy Auringon vuotuisen liikkeen eikä juhannuskalenterin lauantaisäännön perusteella.",
           "Vuonna 2027 juhannusaatto on 25.6. ja juhannuspäivä 26.6. Vuonna 2028 vastaavat päivät ovat 23.6. ja 24.6. Tarkista matkaa tai yhteistä tapaamista sopiessasi molemmat päivät; puhekielinen ”juhannusviikonloppu” voi tarkoittaa eri ihmisille eri lähtö- ja paluuaikoja.",
-          "Juhannuspäivä on kesäkuun 20. ja 26. päivän välille osuva lauantai. Tämä selittää, miksi juhla ei pysy numeropäivältään samana. Kun vertaat kahta kesää, aloita juuri tästä säännöstä ja merkitse aatto edelliselle päivälle. Kesäpäivänseisauksen tarkka hetki kuuluu puolestaan tähtitieteelliseen vuosikalenteriin. Sen ja juhannuksen ei tarvitse osua samalle päivälle, jotta kumpikin olisi oikein. Myös oma juhla voidaan sopia aatolle tai muulle yhteiselle ajalle. Vieraille lähetettävässä kutsussa käytetään silloin sovittua päivämäärää eikä oleteta, että kaikki ymmärtäisivät sanan juhannus samalla tavalla."
+          "Juhannuspäivä on kesäkuun 20. ja 26. päivän välille osuva lauantai. Tämä selittää, miksi juhla ei pysy päivämäärältään samana. Kun vertaat kahta kesää, aloita juuri tästä säännöstä ja merkitse aatto edelliselle päivälle. Kesäpäivänseisauksen tarkka hetki kuuluu puolestaan tähtitieteelliseen vuosikalenteriin. Sen ja juhannuksen ei tarvitse osua samalle päivälle, jotta kumpikin olisi oikein. Myös oma juhla voidaan sopia aatolle tai muulle yhteiselle ajalle. Vieraille lähetettävässä kutsussa käytetään silloin sovittua päivämäärää eikä oleteta, että kaikki ymmärtäisivät sanan juhannus samalla tavalla."
         ],
         "links": []
       },
@@ -147,7 +147,7 @@
         "title": "Varaa vapaat oman työrytmin mukaan",
         "paragraphs": [
           "Yleinen työpäivälaskuri ei tiedä henkilökohtaista työehtosopimustasi tai työvuoroluetteloasi. Aaton työaika käsitellään siksi laskureissa erillisellä valinnalla. Varmista vapaan ehdot omalta työnantajaltasi ennen varausta.",
-          "Lomasuunnittelijassa voit verrata vaihtoehtoja samalla lomapäivämäärällä. Valitse ensin vuosi, katso ehdotettu yhtenäinen vapaa ja tarkista sen sisältämät päivät. Vuorotyössä käytä lisäksi omaa vuorokiertoa, sillä maanantaista perjantaihin tehty laskelma ei kuvaa kaikkia työrytmejä.",
+          "Lomasuunnittelijassa voit verrata vaihtoehtoja samalla lomapäivien määrällä. Valitse ensin vuosi, katso ehdotettu yhtenäinen vapaa ja tarkista sen sisältämät päivät. Vuorotyössä käytä lisäksi omaa vuorokiertoa, sillä maanantaista perjantaihin tehty laskelma ei kuvaa kaikkia työrytmejä.",
           "Tee ennen varaamista lyhyt päiväkohtainen vertailu. Kirjoita näkyviin, milloin viimeinen työvuoro päättyy ja milloin ensimmäinen paluun jälkeinen alkaa. Lisää niiden väliin matkat, jotta huomaat, kuinka pitkä varsinainen yhdessäolo voi olla. Torstai-illan lähtö ja perjantaiaamun lähtö ovat eri vaihtoehtoja, vaikka molemmat mahtuvat puheessa juhannuslomaan. Jos seurueessa on vuorotyötä tekevä, pidä hänen vahvistettu aikataulunsa lähtökohtana yleisen viikonloppumallin sijaan. Tämän vertailun voi tehdä myös ilman matkaa: kotona vietettävä juhannus tarvitsee omat ruoka-, lepo- ja tapaamisaikansa, mutta ei ylimääräistä matkavarausta.",
           "Jos osa seurueesta saapuu julkisilla yhteyksillä ja osa autolla, sovi erikseen viimeisen yhteyden jälkeinen kyyti. Majoituspaikan osoite ja yhteinen tapaamisaika ovat eri tietoja kuin nouto asemalta. Yksi nimetty noutovastuu vähentää sitä, että saapuva vieras jää odottamaan usean ihmisen olettaessa jonkun muun hoitavan asian. Lisää paluumatkan vastaava järjestely samalla kertaa. Käytännön tieto kuuluu omaan kutsuun eikä yleisen juhannuspäivän kalenterimerkintään."
         ],
@@ -157,7 +157,7 @@
         "title": "Suunnittele valon mukaan",
         "paragraphs": [
           "Pohjoisen ja etelän valo-olosuhteet eroavat suuresti. Auringonlaskun laskurista näet oman paikkakuntasi tilanteen: pohjoisessa Aurinko ei välttämättä laske lainkaan. Laskettu aika ei kuitenkaan ole sääennuste tai lupaus esteettömästä horisontista.",
-          "Kun suunnittelet illan ohjelmaa, tarkista valo juuri valitusta paikasta. Kaupungin keskustan laskentapiste auttaa ajan hahmottamisessa, mutta mökkirannan metsänreuna voi peittää Auringon aikaisemmin. Tee omaan kalenteriin ensin retken tai tapaamisen alku ja vasta sen jälkeen mahdollinen auringonlaskun muistutus. Valoisan yön aikana on mahdollista jatkaa ulkona pitkään, mutta yhteinen aikataulu tarvitsee silti selkeän lopun. Jos sama ryhmä aikoo seuraavana aamuna lähteä uudelleen liikkeelle, sopikaa molemmat ajat samalla kertaa. Lyhyt ja toteuttamiskelpoinen ohjelma toimii usein paremmin kuin monta peräkkäistä kohdetta pitkän kesäpäivän varassa."
+          "Kun suunnittelet illan ohjelmaa, tarkista valo juuri valitusta paikasta. Kaupungin keskustan laskentapiste auttaa ajan hahmottamisessa, mutta mökkirannan metsänreuna voi peittää Auringon aikaisemmin. Merkitse omaan kalenteriin ensin retken tai tapaamisen alku ja vasta sen jälkeen mahdollinen auringonlaskun muistutus. Valoisan yön aikana on mahdollista jatkaa ulkona pitkään, mutta yhteinen aikataulu tarvitsee silti selkeän lopun. Jos sama ryhmä aikoo seuraavana aamuna lähteä uudelleen liikkeelle, sopikaa molemmat ajat samalla kertaa. Lyhyt ja toteuttamiskelpoinen ohjelma toimii usein paremmin kuin monta peräkkäistä kohdetta pitkän kesäpäivän varassa."
         ],
         "links": []
       },
@@ -182,7 +182,7 @@
         "title": "Juhannuksen liputus poikkeaa tavallisesta päivästä",
         "paragraphs": [
           "Suomen lipun päivän liputus alkaa juhannusaattona kello 18 ja jatkuu juhannuspäivänä kello 21 asti. Yön yli jatkuva liputus on juuri tähän juhlaan kuuluva poikkeus. Jos vastaat mökin tai taloyhtiön lipusta, lisää nostolle ja laskulle omat muistutukset. Juhannuksen valoisa yö ei yksinään ole yleinen peruste jättää lippua salkoon minä tahansa muuna yönä.",
-          "Liputuspäivä ja vapaan työnteon ehdot ovat eri asioita. Juhannuspäivän nimessä oleva Suomen lipun päivä ei tarkoita, että kaikki juhannukseen liittyvä ohjelma olisi järjestettävä juuri lauantaina. Perheen juhla voi olla aattona, lauantaina tai muuna yhteisesti sopivana aikana. Päivän virallinen asema auttaa lukemaan kalenteria, mutta oma kutsu määrittää vieraille tarkan tapahtuma-ajan."
+          "Liputuspäivä ja vapaan saamisen ehdot ovat eri asioita. Juhannuspäivän nimessä oleva Suomen lipun päivä ei tarkoita, että kaikki juhannukseen liittyvä ohjelma olisi järjestettävä juuri lauantaina. Perheen juhla voi olla aattona, lauantaina tai muuna yhteisesti sopivana aikana. Päivän virallinen asema auttaa lukemaan kalenteria, mutta oma kutsu määrittää vieraille tarkan tapahtuma-ajan."
         ],
         "links": [
           {
@@ -199,7 +199,7 @@
         "title": "Valoisa ilta ei poista säävarauksen tarvetta",
         "paragraphs": [
           "Pitkä päivä houkuttelee sijoittamaan yhteisen retken myöhäiseen iltaan. Arvioi silti, kuinka pitkään lapset, vanhemmat vieraat tai työvuorosta saapuvat osallistujat jaksavat olla mukana. Valon määrä ei ole sama asia kuin ihmisten käytettävissä oleva energia. Pidä ohjelmassa yksi päätapahtuma ja tee muista menoista vapaaehtoisia.",
-          "Valitse säävaraus, jonka voi toteuttaa ilman kokonaan uutta järjestelyä. Ulkopöydän voi siirtää katoksen alle, mutta kaukana sijaitseva retkikohde voi vaatia erillisen päätöksen. Ennusteen lämpötila kuvaa valitun paikan malliarviota, ei mökkipihan tuulensuojaa tai veden lämpötilaa. Tarkista ajantasainen sää ja paikalliset viranomaisohjeet ennen ulkotulta tai veneilyä. Kalenterin tehtävä on auttaa ajoituksessa, ei vahvistaa retken turvallisuutta.",
+          "Valitse varasuunnitelma, jonka voi toteuttaa ilman kokonaan uutta järjestelyä. Ulkopöydän voi siirtää katoksen alle, mutta kaukana sijaitseva retkikohde voi vaatia erillisen päätöksen. Ennusteen lämpötila kuvaa valitun paikan malliarviota, ei mökkipihan tuulensuojaa tai veden lämpötilaa. Tarkista ajantasainen sää ja paikalliset viranomaisohjeet ennen ulkotulta tai veneilyä. Kalenterin tehtävä on auttaa ajoituksessa, ei vahvistaa retken turvallisuutta.",
           "Jos juhannussuunnitelma jaetaan kuvana, varmista, että kuvassa näkyy myös vuosi. Päivämäärätön maisemakuva tai vanha kutsu voi jäädä viestiketjuun ja sekoittua seuraavan kesän suunnitelmaan. Kirjoita näkyviin ainakin 25.–27.6.2027, jos tarkoitat koko aaton ja sunnuntain välistä jaksoa. Tarkempi päiväkohtainen ohjelma voidaan pitää erillisenä. Näin uusi osallistuja pystyy ymmärtämään tärkeimmät rajat lukematta koko keskusteluhistoriaa tai arvaamatta, milloin kutsu on alun perin tehty."
         ],
         "links": [
@@ -241,7 +241,7 @@
       "pitkan-vapaan-suunnittelu",
       "auringon-ajat"
     ],
-    "wordCount": 802,
+    "wordCount": 803,
     "readMinutes": 5,
     "sourceChecks": [
       {
@@ -263,14 +263,14 @@
         "notes": "Facts checked against primary sources. Practical planning examples are original; no copied prose."
       }
     ],
-    "bodyWordCount": 780
+    "bodyWordCount": 781
   },
   {
     "slug": "perheen-viikko",
     "title": "Perheen viikko selkeämmäksi",
     "art": "family",
     "photo": "blog-weekly",
-    "intro": "Perhekalenteri toimii parhaiten, kun siitä näkee nopeasti kuka, missä ja milloin. Kaikkea keskustelua ei tarvitse siirtää kalenteriin: merkitse ensin asiat, jotka vaikuttavat yhteiseen aikaan.",
+    "intro": "Perhekalenteri toimii parhaiten, kun siitä näkee nopeasti, kuka on missä ja milloin. Kaikkea keskustelua ei tarvitse siirtää kalenteriin: merkitse ensin asiat, jotka vaikuttavat yhteiseen aikaan.",
     "sections": [
       {
         "title": "Aloita kiinteistä menoista",
@@ -278,14 +278,14 @@
           "Kirjaa työvuorot, koulupäivät ja harrastukset ennen joustavia tehtäviä. Lisää pitkään menoon myös lähtö- ja paluuaika. Jos yksi vanhempi tarvitsee auton illaksi, tämä tieto voi olla koko perheen kannalta yhtä tärkeä kuin itse tapaamisen otsikko.",
           "Pidä merkinnät lyhyinä mutta tunnistettavina. ”Treenit, Aino, klo 18, halli” kertoo enemmän kuin ”meno”. Arkaluonteisia tietoja ei tarvitse kirjoittaa yhteiseen tulosteeseen. Sopikaa perheessä, mitä tietoja siihen halutaan näkyviin.",
           "Kokeile erottaa toisistaan osallistujan meno ja sen muille aiheuttama tehtävä. Lapsen harrastus voi kestää tunnin, mutta kuljettajan aikaa tarvitaan jo ennen alkua ja vielä tunnin jälkeen. Merkintä ”Ainon harjoitus 18–19” ei siksi yksin kerro, milloin auto on käytettävissä. Lisää kuljetus vain silloin, kun se vaikuttaa yhteiseen suunnitelmaan, ja nimeä vastuuhenkilö. Jos joku muu hakee lapsen poikkeuksellisesti, kirjaa muutos juuri kyseiselle päivälle. Näin toistuvan harrastuksen tavallinen järjestely säilyy eikä yhden illan vaihto muuta huomaamatta seuraavia viikkoja.",
-          "Ota myös kalenteria käyttävä lapsi mukaan sen lukemiseen ikänsä mukaisesti. Yhdessä voidaan katsoa, mikä päivä on tänään ja mikä on seuraava oma meno. Selkeä nimi ja tuttu paikka auttavat enemmän kuin pitkä aikuisten muistilista. Lapsen osallistuminen ei siirrä aikatauluvastuuta hänelle, vaan tekee sovitun viikon helpommin ymmärrettäväksi. Jos lapsi käyttää omaa paperia, varmista että sen tärkeimmät ajat vastaavat yhteisen version tietoja."
+          "Ota myös kalenteria käyttävä lapsi mukaan sen lukemiseen ikänsä mukaisesti. Yhdessä voidaan katsoa, mikä päivä on tänään ja mikä on seuraava oma meno. Selkeä nimi ja tuttu paikka auttavat enemmän kuin pitkä aikuisten muistilista. Lapsen osallistuminen ei siirrä aikatauluvastuuta hänelle, vaan tekee sovitun viikon helpommin ymmärrettäväksi. Jos lapsi käyttää omaa paperia, varmista, että sen tärkeimmät ajat vastaavat yhteisen version tietoja."
         ],
         "links": []
       },
       {
         "title": "Yhdistä ruoka ja asiointi samaan näkymään",
         "paragraphs": [
-          "Viikon aterioita voi suunnitella vasta sen jälkeen, kun tiedät, milloin kaikki ovat kotona. Kiireiselle illalle sopii valmiiksi tehty ateria, kun taas vapaampana päivänä voi varata aikaa yhteiseen ruoanlaittoon. Ostoslistaa helpottaa, kun näet useamman päivän tarpeet kerralla.",
+          "Viikon aterioita voi suunnitella vasta sen jälkeen, kun tiedät, milloin kaikki ovat kotona. Kiireiselle illalle sopii valmiiksi tehty ateria, kun taas vapaampana päivänä voi varata aikaa yhteiseen ruoanlaittoon. Ostoslistan laatimista helpottaa, kun näet useamman päivän tarpeet kerralla.",
           "Jätä kalenteriin myös väljyyttä. Kaikkia vapaita hetkiä ei tarvitse täyttää. Tarkistakaa seuraava viikko yhdessä ja päättäkää, mikä meno on tärkeä ja mikä voidaan siirtää ilman haittaa.",
           "Ateriasuunnitelman ei tarvitse olla tarkka ruokalista jokaiselle välipalalle. Aloita illoista, jolloin aikataulu rajoittaa ruoanlaittoa. Valitse niille etukäteen toteuttamiskelpoinen vaihtoehto ja katso, mitä aineksia tarvitaan. Jos tiistaina on useita menoja, maanantain ruoanlaitossa voidaan valmistaa myös seuraavan illan ateria, jos tämä sopii perheen tapoihin. Ostoslistaan merkitään silloin yhteiset tarpeet vain kerran. Kalenterin ruudussa riittää ruoan nimi tai vastuuhenkilö; resepti ja yksityiskohtainen kauppalista voivat olla muualla. Tämä pitää viikon näkymän luettavana myös sille, joka katsoo sitä nopeasti ennen lähtöä."
         ],
@@ -294,8 +294,8 @@
       {
         "title": "Jaa tuloste ja säilytä oma kopio",
         "paragraphs": [
-          "Kalenteri365:n perhesuunnitelma tallentuu käyttämääsi selaimeen, eikä se päivity automaattisesti perheen muihin puhelimiin. Tulosta valmis viikko yhteiseen käyttöön. Jos merkintöjä muutetaan myöhemmin, sopikaa miten uusi versio korvaa vanhan, jotta jääkaapin ovessa ei ole kahta keskenään erilaista aikataulua.",
-          "Sopikaa yksi yksinkertainen tapa ilmoittaa muutoksista. Jos yhteinen tuloste on pääasiallinen aikataulu, uusi kellonaika merkitään siihen selvästi ja vanha aika poistetaan luettavasta kohdasta. Jos muutoksesta lähetetään viesti, kerro mikä tapahtuma muuttui ja mikä on uusi aika. Pelkkä päivitetty kuva ilman selitystä voi jäädä huomaamatta. Perheessä voidaan myös sopia, kuka päivittää yhteisen version. Vastuu koskee tiedon kirjaamista, ei sitä, että yhden ihmisen pitäisi muistaa muiden kaikki menot. Jokainen ilmoittaa oman muutoksensa, jolloin kalenterin ylläpito jakautuu käytännöllisesti eikä jää yhden henkilön oletetuksi muistitehtäväksi."
+          "Kalenteri365:n perhesuunnitelma tallentuu käyttämääsi selaimeen, eikä se päivity automaattisesti perheen muihin puhelimiin. Tulosta valmis viikko yhteiseen käyttöön. Jos merkintöjä muutetaan myöhemmin, sopikaa, miten uusi versio korvaa vanhan, jotta jääkaapin ovessa ei ole kahta keskenään erilaista aikataulua.",
+          "Sopikaa yksi yksinkertainen tapa ilmoittaa muutoksista. Jos yhteinen tuloste on pääasiallinen aikataulu, uusi kellonaika merkitään siihen selvästi ja vanha aika poistetaan luettavasta kohdasta. Jos muutoksesta lähetetään viesti, kerro, mikä tapahtuma muuttui ja mikä on uusi aika. Pelkkä päivitetty kuva ilman selitystä voi jäädä huomaamatta. Perheessä voidaan myös sopia, kuka päivittää yhteisen version. Vastuu koskee tiedon kirjaamista, ei sitä, että yhden ihmisen pitäisi muistaa muiden kaikki menot. Jokainen ilmoittaa oman muutoksensa, jolloin kalenterin ylläpito jakautuu käytännöllisesti eikä jää yhden henkilön oletetuksi muistitehtäväksi."
         ],
         "links": []
       },
@@ -316,7 +316,7 @@
         "title": "Väri tukee nimeä, mutta ei korvaa sitä",
         "paragraphs": [
           "Yksi väri kullekin perheenjäsenelle auttaa löytämään oman rivin nopeasti. Kirjoita silti nimi tai nimikirjaimet tapahtumaan. Mustavalkoisessa tulosteessa, heikossa valaistuksessa tai värinäön poikkeaman vuoksi kaksi sävyä voi näyttää samalta. Tapahtuman pitää olla ymmärrettävä ilman, että lukija muistaa koko värikoodin.",
-          "Sopikaa myös yksi tapa merkitä epävarma meno. Esimerkiksi sana ”alustava” otsikon alussa kertoo enemmän kuin vaaleampi sävy. Kun varaus vahvistuu, poista sana ja ilmoita muutos muille. Sama koskee peruutuksia: älä jätä vanhaa aikaa näkyviin pelkällä pienellä huomiolla, jos joku saattaa lukea vain otsikon. Tulostetta käyttäessä vanha versio kannattaa korvata heti uudella tai muuttaa päivä selkeästi käsin."
+          "Sopikaa myös yksi tapa merkitä epävarma meno. Esimerkiksi sana ”alustava” otsikon alussa kertoo enemmän kuin vaaleampi sävy. Kun varaus vahvistuu, poista sana ja ilmoita muutos muille. Sama koskee peruutuksia: älä jätä vanhaa aikaa näkyviin pelkällä pienellä huomiolla, jos joku saattaa lukea vain otsikon. Tulostetta käytettäessä vanha versio kannattaa korvata heti uudella tai muuttaa päivä selkeästi käsin."
         ],
         "links": [
           {
@@ -367,7 +367,7 @@
       "syksyn-suunnittelu",
       "kalenterin-varmuuskopio"
     ],
-    "wordCount": 820,
+    "wordCount": 822,
     "readMinutes": 5,
     "sourceChecks": [
       {
@@ -377,7 +377,7 @@
         "notes": "Facts checked against primary sources. Practical planning examples are original; no copied prose."
       }
     ],
-    "bodyWordCount": 796
+    "bodyWordCount": 797
   },
   {
     "slug": "tyopaivat-ja-aatot",
@@ -391,7 +391,7 @@
         "paragraphs": [
           "Tavallinen viisipäiväisen viikon laskelma laskee maanantait, tiistait, keskiviikot, torstait ja perjantait. Näille päiville osuvat yleiset pyhäpäivät vähennetään. Lauantain tai sunnuntain pyhää ei vähennetä uudelleen, sillä päivä ei alun perinkään kuulunut tähän työpäiväjoukkoon.",
           "Aattoja varten on oma valinta. Jouluaaton ja juhannusaaton merkitys riippuu työn ehdoista, joten niiden käsittelyä ei piiloteta tavalliseen pyhäpäivälukuun. Liputuspäivä tai muu merkkipäivä ei puolestaan yksin tarkoita työstä vapaata päivää.",
-          "Työpäivien määrä, työtuntien määrä ja työvuorojen määrä ovat kolme eri lukua. Kaksi henkilöä voi käyttää samaa kuukautta mutta saada eri tuntiarvion, jos päivittäinen työaika eroaa. Myös osa-aikainen työ, jossa työpäivät sijoittuvat vain tiettyihin viikonpäiviin, tarvitsee oman tarkastelunsa. Älä kerro viisipäiväisen viikon yleistä päivälukua työtunneilla, jos käytettävissä ei todellisuudessa ole kaikkia näitä päiviä. Projektin kapasiteettia varten lähtökohtaan kuuluvat lisäksi jo sovitut poissaolot. Ne merkitään henkilökohtaisiksi vähennyksiksi, jotta yleinen kalenterin pyhäpäiväluettelo pysyy erillään oman työryhmän tilanteesta.",
+          "Työpäivien määrä, työtuntien määrä ja työvuorojen määrä ovat kolme eri lukua. Kaksi henkilöä voi tarkastella samaa kuukautta mutta saada eri tuntiarvion, jos päivittäinen työaika eroaa. Myös osa-aikainen työ, jossa työpäivät sijoittuvat vain tiettyihin viikonpäiviin, tarvitsee oman tarkastelunsa. Älä kerro viisipäiväisen viikon yleistä päivälukua työtunneilla, jos käytettävissä ei todellisuudessa ole kaikkia näitä päiviä. Projektin kapasiteettia varten lähtökohtaan kuuluvat lisäksi jo sovitut poissaolot. Ne merkitään henkilökohtaisiksi vähennyksiksi, jotta yleinen kalenterin pyhäpäiväluettelo pysyy erillään oman työryhmän tilanteesta.",
           "Osa-aikaisessa viikossa tarkista ensin omat työviikonpäivät. Jos työ sijoittuu vain maanantaille, tiistaille ja keskiviikolle, torstaille osuva pyhä ei vähennä samoja suunniteltuja työpäiviä kuin kokoaikaisen viisipäiväinen vertailu. Tämä ei ota kantaa työehtojen mukaiseen työajan lyhennykseen tai korvaukseen. Se kertoo vain, miksi yleinen ma–pe-luku ei ole sellaisenaan henkilökohtainen työvuoromäärä. Oman sopimuksen ja todellisen työrytmin erottaminen pitää vertailun läpinäkyvänä."
         ],
         "links": []
@@ -401,7 +401,7 @@
         "paragraphs": [
           "Lue tuloksen yhteydestä, lasketaanko alku- ja loppupäivä mukaan. Päivien erotus voi tarkoittaa kahden hetken väliin jäävien vuorokausien määrää, kun taas työpäiväluettelo voi sisältää molemmat rajapäivät. Sama aloitus- ja lopetuspäivä voi näistä syistä tuottaa eri käsitteissä nollan tai yhden.",
           "Jos käytät tulosta oman määräajan suunnitteluun, tarkista myös se, miten varsinainen määräaika määritellään. Kalenteri365:n yleinen laskuri ei ratkaise viranomaisen tai sopimuksen erillisiä määräaikasääntöjä.",
-          "Kokeile rajapäivien merkitystä tavallisella maanantain ja tiistain välisellä esimerkillä. Päivämäärien erotus on yksi päivä, mutta molemmat päivät mukaan lukeva luettelo sisältää kaksi päivämäärää. Kumpikaan tulos ei ole virheellinen, jos laskennan kysymys on määritelty oikein. Jos tehtävä on esimerkiksi jakaa yksi tarkistus jokaiselle listatulle päivälle, tarvitset päivämääräluettelon. Jos taas mittaat aikaa maanantain alusta tiistain alkuun, tarvitset erotuksen. Tallenna käyttämäsi kysymys tuloksen yhteyteen. Näin myöhemmin samaa laskelmaa katsova henkilö ei joudu päättelemään, miksi numerot eroavat toisesta työkalusta yhdellä."
+          "Kokeile rajapäivien merkitystä tavallisella maanantain ja tiistain välisellä esimerkillä. Päivämäärien erotus on yksi päivä, mutta molemmat päivät mukaan lukeva luettelo sisältää kaksi päivämäärää. Kumpikaan tulos ei ole virheellinen, jos laskennan kysymys on määritelty oikein. Jos tehtävä on esimerkiksi jakaa yksi tarkistus jokaiselle listatulle päivälle, tarvitset päivämääräluettelon. Jos taas mittaat aikaa maanantain alusta tiistain alkuun, tarvitset erotuksen. Tallenna käyttämäsi kysymys tuloksen yhteyteen. Näin myöhemmin samaa laskelmaa katsova henkilö ei joudu päättelemään, miksi numerot eroavat toisen työkalun tuloksista yhdellä."
         ],
         "links": []
       },
@@ -417,7 +417,7 @@
         "title": "Esimerkkilaskelma tammikuulta 2027",
         "paragraphs": [
           "Tammikuussa 2027 on 21 maanantain ja perjantain väliin osuvaa päivää. Uudenvuodenpäivä perjantaina 1.1. ja loppiainen keskiviikkona 6.1. vähentävät tavallisen pyhäpäivät pois jättävän laskelman tuloksen 19 päivään. Tämä on kalenterivertailu: se ei lupaa, että jokaisen työntekijän tammikuun työvuoroluettelossa olisi juuri 19 vuoroa.",
-          "Jos työn tavallinen pituus on 7,5 tuntia, kertolasku 19 × 7,5 antaa suunnittelua varten 142,5 tuntia. Älä kuitenkaan vie tätä suoraan palkkalaskelmaan. Työajan tasoittuminen, osa-aikaisuus, arkipyhäkorvaukset ja sopimuksen mukaiset lyhennykset voivat muuttaa henkilökohtaista tulosta. Kuukausisivun arvo on siinä, että näet laskelman oletukset ja pystyt vertaamaan niitä omaan tilanteeseesi ennen päätöksiä."
+          "Jos työpäivän tavallinen pituus on 7,5 tuntia, kertolasku 19 × 7,5 antaa suunnittelua varten 142,5 tuntia. Älä kuitenkaan vie tätä suoraan palkkalaskelmaan. Työajan tasoittuminen, osa-aikaisuus, arkipyhäkorvaukset ja sopimuksen mukaiset lyhennykset voivat muuttaa henkilökohtaista tulosta. Kuukausisivun arvo on siinä, että näet laskelman oletukset ja pystyt vertaamaan niitä omaan tilanteeseesi ennen päätöksiä."
         ],
         "links": [
           {
@@ -493,7 +493,7 @@
       "yovuoron-kalenteri",
       "kesaaika-ja-talviaika"
     ],
-    "wordCount": 791,
+    "wordCount": 792,
     "readMinutes": 5,
     "sourceChecks": [
       {
@@ -515,7 +515,7 @@
         "notes": "Facts checked against primary sources. Practical planning examples are original; no copied prose."
       }
     ],
-    "bodyWordCount": 769
+    "bodyWordCount": 770
   },
   {
     "slug": "koulujen-lomat",
@@ -527,7 +527,7 @@
       {
         "title": "Valitse oikea kunta ja koulumuoto",
         "paragraphs": [
-          "Saman kaupungin peruskoululla, lukiolla ja ammatillisella oppilaitoksella voi olla erilainen aikataulu. Myös esiopetuksessa tai kieliryhmien välillä voi esiintyä poikkeuksia. Varmista siksi ensin, minkä opetuksen tieto on kyseessä.",
+          "Saman kaupungin peruskoululla, lukiolla ja ammatillisella oppilaitoksella voi olla erilainen aikataulu. Myös esiopetuksessa tai kieliryhmien välillä voi esiintyä poikkeuksia. Varmista siksi ensin, mistä opetuksesta on kyse.",
           "Kalenteri365:n kuntasivuilla näkyy nimetty lukuvuosi ja alkuperäinen julkaisu. Jos myöhemmän vuoden aikataulua ei ole julkaistu, sitä ei päätellä edellisen vuoden lomista. Pelkkä viikon numero ei riitä tiedoksi, jos suunnitelma koskee useampaa lukuvuotta.",
           "Aikataulun hakeminen kannattaa aloittaa koulun tai opetuksen järjestäjän nimestä eikä pelkästä kaupungista. Tarkista julkaisun otsikosta koulumuoto, lukuvuosi ja mahdolliset rajaukset. Jos lapsi vaihtaa koulua kesän aikana, edellisen koulun lomataulukko ei välttämättä kuvaa syksyn tilannetta. Samaan perheeseen kuuluvan lukiolaisen opetus voi puolestaan jaksottua eri tavoin kuin peruskoululaisen päivä. Tallenna jokaiselle oma alkuperäinen lähde, vaikka tiedot lopulta näyttäisivät samoilta. Tämä helpottaa tarkistusta myöhemmin, jos koululta tulee muutos tai kotiin jää epäselvyys siitä, ketä yhteinen lomamerkintä koskee."
         ],
@@ -554,7 +554,7 @@
       {
         "title": "Helsinki ja Oulu näyttävät talvilomien eron",
         "paragraphs": [
-          "Opetushallituksen lukuvuoden 2026–2027 koosteessa Helsingin talviloma on 22.–26.2.2027 ja Oulun 8.–12.3.2027. Samassa perheessä tai sukulaisjoukossa voi siis olla kaksi eri lomaviikkoa. Yhteistä matkaa ei kannata varata pelkän yleisen ”hiihtoloma” -merkinnän perusteella.",
+          "Opetushallituksen lukuvuoden 2026–2027 koosteessa Helsingin talviloma on 22.–26.2.2027 ja Oulun 8.–12.3.2027. Samassa perheessä tai sukulaisjoukossa voi siis olla kaksi eri lomaviikkoa. Yhteistä matkaa ei kannata varata pelkän yleisen ”hiihtoloma”-merkinnän perusteella.",
           "Tarkista kunnan sivulta, onko jakso ilmoitettu vain koulupäivinä vai viikonloput sisältävänä lomana. Viiden koulupäivän loma voi käytännössä liittyä kahteen viikonloppuun, mutta paluupäivä ja mahdollinen lauantaityöpäivä on silti luettava alkuperäisestä aikataulusta. Helsingin lähteessä myös esiopetuksen päättymispäivä eroaa peruskoulun lauantaisesta päättäjäispäivästä. Tällainen ero on pieni taulukossa mutta merkittävä, jos perhe suunnittelee hoitoa tai lähtöä jo perjantaille."
         ],
         "links": [
@@ -572,7 +572,7 @@
         "title": "Lukuvuosi ei ole sama kuin kalenterivuosi",
         "paragraphs": [
           "Kevät 2027 kuuluu lukuvuoteen 2026–2027, mutta syksy 2027 jo lukuvuoteen 2027–2028. Kun etsit koko vuoden lomia, tarvitset usein kaksi eri päätöstä tai julkaisua. Tarkista otsikon molemmat vuosiluvut ennen kuin kopioit päivämäärät omaan kalenteriin.",
-          "Jos tulevan syksyn päätöstä ei ole vielä julkaistu, merkitse suunnitelma alustavaksi ilman keksittyä tarkkaa loma-aikaa. Vahvista se vasta alkuperäisen koulun tai kunnan tiedon perusteella. Työ- ja loma-aikoja voidaan myös muuttaa paikallisella päätöksellä. Kalenteriin tuotu ICS on tiedostoon vientihetkellä tallennettu tieto, eikä jokainen kalenteriohjelma seuraa sen jälkeen lähdesivun muutoksia automaattisesti. Säilytä lähdelinkki, jotta voit tarkistaa päivät uudelleen ennen varausta."
+          "Jos tulevan syksyn päätöstä ei ole vielä julkaistu, merkitse suunnitelma alustavaksi ilman keksittyä tarkkaa loma-aikaa. Vahvista se vasta alkuperäisen koulun tai kunnan tiedon perusteella. Työ- ja loma-aikoja voidaan myös muuttaa paikallisella päätöksellä. Kalenteriin tuotu ICS-tiedosto sisältää vientihetkellä tallennetut tiedot, eikä jokainen kalenteriohjelma seuraa sen jälkeen lähdesivun muutoksia automaattisesti. Säilytä lähdelinkki, jotta voit tarkistaa päivät uudelleen ennen varausta."
         ],
         "links": [
           {
@@ -628,7 +628,7 @@
       "opintoperiodit-ja-tentit",
       "pitkan-vapaan-suunnittelu"
     ],
-    "wordCount": 810,
+    "wordCount": 807,
     "readMinutes": 5,
     "sourceChecks": [
       {
@@ -644,7 +644,7 @@
         "notes": "Facts checked against primary sources. Practical planning examples are original; no copied prose."
       }
     ],
-    "bodyWordCount": 791
+    "bodyWordCount": 788
   },
   {
     "slug": "auringon-ajat",
@@ -714,7 +714,7 @@
         "title": "Pohjoisen poikkeus kuuluu tulokseen",
         "paragraphs": [
           "Yöttömän yön aikana vuorokaudelle ei välttämättä ole auringonlaskua. Kaamoskaudella taas nousu voi puuttua kokonaan. Tällöin päivän tilaa ei pidä korvata arvotulla kellonajalla eikä samaa nousua kopioida edelliseltä päivältä. Sanallinen ilmoitus on oikea osa tulosta.",
-          "Vaikka Aurinko ei nouse, keskipäivällä voi olla hämärää ja taivaan väri muuttua. Aurinkoa seuraava kaavio auttaa näkemään, kuinka lähelle horisonttia se käy. Kun vertailet eri päiviä, pidä paikkakunta samana ja muuta vain päivämäärää. Jos vertailet eri kaupunkeja, pidä puolestaan sama päivä. Näin saat näkyviin todellisen sijainti- tai vuodenaikaeron etkä sekoita samanaikaisesti vaihtuvia asetuksia toisiinsa.",
+          "Vaikka Aurinko ei nouse, keskipäivällä voi olla hämärää ja taivaan väri muuttua. Aurinkoa seuraava kaavio auttaa näkemään, kuinka lähellä horisonttia se käy. Kun vertailet eri päiviä, pidä paikkakunta samana ja muuta vain päivämäärää. Jos vertailet eri kaupunkeja, pidä puolestaan sama päivä. Näin saat näkyviin todellisen sijainti- tai vuodenaikaeron etkä sekoita samanaikaisesti vaihtuvia asetuksia toisiinsa.",
           "Sääkorttia lukiessa kannattaa erottaa ennusteen ajankohta ja mallin ilmoittama tilanne omasta havainnosta. Paikallinen pilvi voi peittää Auringon, vaikka päivän nousu- ja laskuajat ovat oikein. Kaupungin valinta kohdistaa laskennan paikkaan, mutta se ei poista oman havaintopaikan esteitä. Tarkista ennen retkeä paikkakunnan nimi, valittu päivä ja tuore säätilanne yhdessä. Näin kuvitettu taivaan näkymä auttaa ajoittamaan suunnitelmaa ja sääaineisto täydentää sitä omassa tehtävässään.",
           "Jos valitset havaintoon uuden paikan, tarkista luvallinen kulku ja paluureitti ennen pimeää. Tähtitieteellinen laskuri näyttää taivaan ajankohdat, mutta ei kerro maaston esteistä tai paikan käytettävyydestä."
         ],
@@ -808,14 +808,14 @@
           "Uusikuu, ensimmäinen neljännes, täysikuu ja viimeinen neljännes ovat täsmällisiä vaihehetkiä. Päivän kuvassa puolestaan näytetään valaistus valittuna kellonaikana. Siksi samana kalenteripäivänä oleva päävaihe ei tarkoita, että joka hetken kuva vastaisi täsmälleen sen valaistusta.",
           "Kalenteri365:n päivittäinen Kuun kuva lasketaan Suomen paikallisen ajan kello 12 tilanteesta. Päivää napsauttamalla näet sen valaistuksen ja lisätiedot. Päävaiheiden hetket esitetään erillisessä luettelossa, jossa paikallinen aika on muunnettu aikavyöhykkeen sääntöjen mukaan.",
           "Valaistun osuuden prosentti ei kerro, kuinka kirkkaalta Kuu näyttää pihalla. Sama vaihe voi näkyä hyvin erilaisena kirkkaalla taivaalla, ohuen pilven läpi tai matalalla horisontissa. Päivittäisiä kuvia kannattaa käyttää ennen kaikkea muodon vertailuun. Katso muutaman peräkkäisen päivän sarjaa ja huomaa, kummalla puolella valaistu alue kasvaa tai pienenee kuvan esitystavassa. Jos oma kuva näyttää kääntyneeltä, havaintolaitteen tai kuvan kierto voi muuttaa suuntaa. Vaiheen tunnistamisessa olennaista on valaistun ja pimeän osan suhde sekä havaintoaika, ei yksittäisen kuvan asettaminen täsmälleen saman kulman näköiseksi.",
-          "Kuun vaihetta ei pidä sekoittaa tavalliseen pilven tai rakennuksen aiheuttamaan peittymiseen. Jos osa Kuusta katoaa hetkeksi pilven taakse, kuunkierron vaihe ei vaihdu tämän vuoksi. Kalenterin vaihekuva kuvaa Auringon valaisemaa osuutta, kun taas havaintomuistiinpano kertoo myös näkyvyyden esteistä. Molempia tarvitaan, jos haluat myöhemmin ymmärtää miksi oma piirros tai valokuva poikkesi päivän laskennallisesta kuvasta. Kirjaa siis näkyvyys lyhyesti kuvan rinnalle."
+          "Kuun vaihetta ei pidä sekoittaa tavalliseen pilven tai rakennuksen aiheuttamaan peittymiseen. Jos osa Kuusta katoaa hetkeksi pilven taakse, kuunkierron vaihe ei vaihdu tämän vuoksi. Kalenterin vaihekuva kuvaa Auringon valaisemaa osuutta, kun taas havaintomuistiinpano kertoo myös näkyvyyden esteistä. Molempia tarvitaan, jos haluat myöhemmin ymmärtää, miksi oma piirros tai valokuva poikkesi päivän laskennallisesta kuvasta. Kirjaa siis näkyvyys lyhyesti kuvan rinnalle."
         ],
         "links": []
       },
       {
         "title": "Paikallinen horisontti ratkaisee havaintohetken",
         "paragraphs": [
-          "Täysikuuhetki tapahtuu samana maailmanlaajuisena hetkenä, vaikka sen kellonaika ja kalenteripäivä voivat vaihdella aikavyöhykkeittäin. Kuun nousu, lasku ja korkeus taas riippuvat havaintopaikasta. Täysikuuta ei välttämättä näe juuri sen täsmällisellä vaihehetkellä.",
+          "Täysikuun vaihehetki on sama kaikkialla maailmassa, vaikka sen kellonaika ja kalenteripäivä voivat vaihdella aikavyöhykkeittäin. Kuun nousu, lasku ja korkeus taas riippuvat havaintopaikasta. Täysikuuta ei välttämättä näe juuri sen täsmällisellä vaihehetkellä.",
           "Suunnittele havainto yhdistämällä vaihetieto paikallisiin nousu- ja laskuaikoihin sekä sääennusteeseen. Pilvet, valaistu ympäristö ja horisontin esteet vaikuttavat siihen, mitä lopulta näet. Pienelläkin havaintopaikan muutoksella voi saada paremman näkymän.",
           "Havaintosuunnitelman voi tehdä kahdessa vaiheessa. Etsi kuukalenterista ensin kiinnostava päivä ja tarkista sen jälkeen, milloin Kuu on omalta paikalta nähtävissä. Suunnittele sitten lyhyt aikaväli, jona voit todella mennä ulos. Täydenkuun täsmällisen minuutin odottaminen ei ole välttämätöntä, jos tarkoituksena on tunnistaa muoto tai ottaa oma muistikuva. Myös lähellä päävaihetta oleva ilta voi sopia omaan tavoitteeseen. Jos Kuu jää havaintopaikalla katveeseen, kirjaa este muistiin. Tämä tieto auttaa seuraavaa retkeä enemmän kuin oletus, että pelkkä kalenteriin merkitty vaihe takaisi esteettömän näkymän."
         ],
@@ -832,7 +832,7 @@
       {
         "title": "Puolikuu tarkoittaa valaistusta, ei puolikasta Kuuta",
         "paragraphs": [
-          "Ensimmäisessä ja viimeisessä neljänneksessä näemme noin puolet Kuun näkyvästä kiekosta valaistuna. Sana neljännes liittyy kiertokulun vaiheeseen. Itse Kuu ei tietenkään jakaudu eri kokoisiin osiin, vaan tarkastelemme eri määrää Auringon valaisemasta puolesta.",
+          "Ensimmäisessä ja viimeisessä neljänneksessä näemme noin puolet Kuun näkyvästä kiekosta valaistuna. Sana neljännes liittyy kiertokulun vaiheeseen. Itse Kuu ei tietenkään jakaudu erikokoisiin osiin, vaan tarkastelemme eri määrää Auringon valaisemasta puolesta.",
           "Tätä eroa on helppo kokeilla kalenterissa. Valitse ensin täydenkuun lähellä oleva päivä ja siirry sitten muutama päivä eteenpäin. Valaistu osuus pienenee vähitellen, vaikka päävaiheiden nimet esiintyvät vain tiettyinä hetkinä. Päivittäinen prosenttiluku ja päävaiheen täsmällinen aika vastaavat siis eri kysymyksiin. Prosentti kertoo valitun näytehetken ulkonäöstä; vaihehetki kertoo geometrisen päävaiheen ajankohdan. Molemmat voivat olla samassa näkymässä ilman, että niiden pitäisi näyttää keskenään täysin samanlaisilta."
         ],
         "links": [
@@ -847,7 +847,7 @@
         ]
       },
       {
-        "title": "Tee havainto saman paikan ja kellonajan mukaan",
+        "title": "Tee havainnot samassa paikassa samaan kellonaikaan",
         "paragraphs": [
           "Valitse turvallinen, helposti saavutettava havaintopaikka, josta näkyy riittävän laaja osa taivaasta. Katso ensin Kuun nousu- ja laskutieto. Varaa havainnolle aikaväli, jolloin Kuu on jo kunnolla horisontin yläpuolella eikä juuri peittymässä metsän taakse. Kaupungin nimi on laskentapaikan lähtökohta, mutta oma pihanäkymä pitää tarkistaa itse.",
           "Kirjoita havaintomuistiinpanoon päivämäärä, kellonaika, sijainti ja pilvisyys. Lisää lyhyt kuvaus siitä, erottuiko valaistun ja pimeän alueen raja tai jokin tuttu pintakuvio. Kun vertaat eri iltoja, samoilla perusteilla tehdyt merkinnät kertovat enemmän kuin irralliset kuvat ilman aikaa. Pilvinen ilta on myös havainto: merkitse se sellaiseksi sen sijaan, että täyttäisit puuttuvan kohdan toisen yön valokuvalla."
@@ -868,7 +868,7 @@
         "paragraphs": [
           "Sivuston Kuun pintakuva on todellinen historiallinen valokuva, jonka valaistusta muokataan lasketun vaiheen mukaan. Se on selkeä tapa näyttää päivien erot, mutta sitä ei pidä pitää kyseisen tulevan päivän havaintokuvana. Kuun tarkka asento, ilmakehä ja kuvauslaitteisto vaikuttavat oikeaan valokuvaan.",
           "Jos tulostat havaintopäiväkirjan, käytä valmista kuvaa vaiheen tunnistamiseen ja jätä omille huomioille riittävästi tyhjää tilaa. Tavallinen viikkosuunnitelma voi sopia retkien ajoitukseen, kun taas kuukalenteri näyttää koko kuunkierron yhdellä silmäyksellä. Valitse pohja sen perusteella, haluatko seurata illan ohjelmaa vai vertailla Kuun muuttumista. Ulkonäöstä ei voi päätellä luotettavasti terveysvaikutuksia, puutarhan kasvutulosta tai muita tapahtumia; näihin ei rakenneta kalenterin laskennasta tieteellistä lupausta.",
-          "Valitse ensimmäiselle havaintokokeilulle lyhyt tavoite, kuten Kuun sijainnin löytäminen ja valaistun osuuden vertaaminen kalenteriin. Sinun ei tarvitse tunnistaa kaikkia kraattereita tai hankkia kaukoputkea aloittaaksesi. Jos otat kuvan puhelimella, tallenna myös kellonaika ja paikka. Kuva voi olla omaan päiväkirjaan hyödyllinen, vaikka se ei vastaisi ammattilaistason pintakuvaa. Havaintojen arvo syntyy siitä, että tiedät mitä katsoit ja millä ehdoilla, et siitä että jokainen merkintä olisi näyttävä julkaisu."
+          "Valitse ensimmäiselle havaintokokeilulle lyhyt tavoite, kuten Kuun sijainnin löytäminen ja valaistun osuuden vertaaminen kalenteriin. Sinun ei tarvitse tunnistaa kaikkia kraattereita tai hankkia kaukoputkea aloittaaksesi. Jos otat kuvan puhelimella, tallenna myös kellonaika ja paikka. Kuva voi olla omaan päiväkirjaan hyödyllinen, vaikka se ei vastaisi ammattilaistason pintakuvaa. Havaintojen arvo syntyy siitä, että tiedät, mitä katsoit ja millaisissa olosuhteissa, et siitä, että jokainen merkintä olisi näyttävä julkaisu."
         ],
         "links": [
           {
@@ -933,7 +933,7 @@
       {
         "title": "PDF vai kuva?",
         "paragraphs": [
-          "PDF sopii yleensä suoraan tulostukseen. Kalenteri365:n tekstit ja viivat piirretään PDF-tiedostoihin vektoreina, joten ne eivät muutu palikoiksi suurennettaessa. Jos tarvitset tiedoston kuvaohjelmaan, käytä kuva-latausta ja säilytä alkuperäiset pikselimitat.",
+          "PDF sopii yleensä suoraan tulostukseen. Kalenteri365:n tekstit ja viivat piirretään PDF-tiedostoihin vektoreina, joten ne eivät muutu palikoiksi suurennettaessa. Jos tarvitset tiedoston kuvaohjelmaan, käytä kuvalatausta ja säilytä alkuperäiset pikselimitat.",
           "600 dpi tarkoittaa kuvan pikselien suhdetta tulostettavaan mittaan. Pelkkä tiedostoon kirjoitettu tarkkuusmerkintä ei lisää yksityiskohtia. Siksi valmiiden kalentereiden kuvat muodostetaan paperikokoa vastaavaan suureen pikselikokoon.",
           "Erota ladattava alkuperäinen tiedosto selaimen näyttämästä esikatselusta. Pieni ruutukuva on tarkoitettu mallin valintaan eikä yleensä sisällä samaa määrää yksityiskohtia kuin varsinainen kuvalataus. Napsauta siksi valitun mallin omaa latauspainiketta ja tarkista valmistuneen tiedoston nimi sekä tyyppi. PDF:n ja kuvan pitäisi esittää sama valittu jakso, mutta ne palvelevat erilaisia jatkokäyttöjä. Jos haluat vain tulostaa seinälle yhden kalenterin, PDF vähentää tarpeettomia välivaiheita. Jos taas kokoat itse kuvakollaasia, suuri kuvatiedosto sopii siihen paremmin kuin kalenterista otettu kuvakaappaus."
         ],
@@ -944,7 +944,7 @@
         "paragraphs": [
           "Valitse tulostusikkunasta tiedoston mukainen paperikoko. A3-arkin pienentäminen A4:lle pienentää myös tekstiä. Jos tulostimessa on tulostuskelvottomat reunat, käytä sopivaa sovitusta ja katso esikatselusta, etteivät otsikko tai alareunan päivät leikkaudu.",
           "Selaimen tavallinen tulostus voi lisätä osoitteen ja sivunumeron. Nämä ovat tulostusikkunan asetuksia. Valmiista PDF:stä saat ennustettavamman lopputuloksen kuin koko verkkosivun tulostamisesta. Interaktiivisten suunnittelijoiden tulostuspainike puolestaan avaa niille rajatun tulostusnäkymän.",
-          "Paperin koon lisäksi merkitystä on tulostimen käytettävissä olevalla alueella. Kaikki kotitulostimet eivät tulosta aivan arkin reunaan. Jos esikatselu näyttää leikkautumista, vertaa sivulle sovitusta ja todellista kokoa yhden testisivun avulla. Sovitus voi pienentää myös päivämäärien tekstiä, joten tarkista pienin luettava kohta. Älä yritä korjata reunaleikkausta lisäämällä verkkosivun ympärille tyhjää tilaa: ratkaisu kuuluu tiedoston mittoihin ja tulostusasetuksiin. Vaakakalenterin pitäisi näkyä esikatselussa yhdellä vaaka-arkilla. Jos se hajoaa kahdelle sivulle, varmista ensin suunta ja skaalaus ennen varsinaisen sisällön muuttamista."
+          "Paperin koon lisäksi merkitystä on tulostimen käytettävissä olevalla alueella. Kaikki kotitulostimet eivät tulosta aivan arkin reunaan. Jos esikatselu näyttää leikkautumista, vertaa sivulle sovittamista ja todellista kokoa yhden testisivun avulla. Sovitus voi pienentää myös päivämäärien tekstiä, joten tarkista pienin luettava kohta. Älä yritä korjata reunaleikkausta lisäämällä verkkosivun ympärille tyhjää tilaa: ratkaisu kuuluu tiedoston mittoihin ja tulostusasetuksiin. Vaakakalenterin pitäisi näkyä esikatselussa yhdellä vaaka-arkilla. Jos se hajoaa kahdelle sivulle, varmista ensin suunta ja skaalaus ennen varsinaisen sisällön muuttamista."
         ],
         "links": []
       },
@@ -953,7 +953,7 @@
         "paragraphs": [
           "Tulosta ensin yksi arkki ja katso tekstin koko, viivojen näkyvyys ja kirjoitustila. Vaalea malli sopii usein täytettäväksi käsin. Värillinen juliste toimii seinällä, mutta mustavalkotulostimella sen sävyt kannattaa tarkistaa ennen usean kappaleen tilaamista.",
           "Koesivulla kannattaa testata myös käyttöä. Kirjoita tavallisella kynällä yhden päivän ruutuun oma tapahtuma ja katso, jääkö kellonajalle tilaa. Ripusta vuosikalenteri hetkeksi aiottuun paikkaan ja yritä lukea kuukautta normaalilta etäisyydeltä. Jos ruudukko toimii vain läheltä, suurempi paperi tai toinen malli voi olla parempi valinta kuin paksumpi tulostusjälki. Yhteiseen käyttöön tarkoitetussa paperissa väri ei saa olla ainoa merkityksen kantaja. Mustavalkoinen koesivu paljastaa, säilyvätkö viikonloput, tapahtumat ja omat merkinnät erotettavina ilman värisävyjä. Vasta tämän jälkeen kannattaa tulostaa koko sarja tai useita samanlaisia kappaleita.",
-          "Tarkista koesivusta myös suomenkieliset merkit ja numerot, erityisesti ä, ö ja vuosiluku. Jos käytetty sovellus korvaa fontin, rivit voivat järjestyä uudelleen vaikka sanat säilyisivät. Katso silloin pitkän tapahtuman lisäksi viikonpäivien otsikkorivi ja alareunan brändimerkintä. Yksi kokonainen, tavallisessa koossa tulostettu kuukausi on hyvä koe. Sen avulla erotat tiedostossa olevan asetteluongelman tulostimen värijäljestä tai paperin ominaisuuksista ennen koko sarjan tilaamista."
+          "Tarkista koesivusta myös suomenkieliset merkit ja numerot, erityisesti ä, ö ja vuosiluku. Jos käytetty sovellus korvaa fontin, rivit voivat järjestyä uudelleen, vaikka sanat säilyisivät. Katso silloin pitkän tapahtuman lisäksi viikonpäivien otsikkorivi ja alareunan brändimerkintä. Yksi kokonainen, tavallisessa koossa tulostettu kuukausi on hyvä koe. Sen avulla erotat tiedostossa olevan asetteluongelman tulostimen värijäljestä tai paperin ominaisuuksista ennen koko sarjan tilaamista."
         ],
         "links": []
       },
@@ -990,7 +990,7 @@
       {
         "title": "Valitse käyttötarkoitukseen sopiva malli",
         "paragraphs": [
-          "Jos sivulle kirjoitetaan lyijykynällä, vaalea pohja ja selkeä ruudukko auttavat. Seinältä katsottavassa vuosikalenterissa tärkeintä ovat kuukausien erottuminen ja luettavat päivämäärät. Perheen viikko tarvitsee puolestaan tilaa ihmisille ja menoille. Kaikkea ei kannata yrittää mahduttaa yhteen koristeelliseen vuosijulisteeseen.",
+          "Jos sivulle kirjoitetaan lyijykynällä, vaalea pohja ja selkeä ruudukko auttavat. Seinältä katsottavassa vuosikalenterissa tärkeimpiä ovat kuukausien erottuminen ja luettavat päivämäärät. Perheen viikko tarvitsee puolestaan tilaa ihmisille ja menoille. Kaikkea ei kannata yrittää mahduttaa yhteen koristeelliseen vuosijulisteeseen.",
           "Tulosta yksi koesivu ja katso sitä siltä etäisyydeltä, josta sitä käytetään. Kirjoita yhteen ruutuun tavallisen pituinen tapahtuma. Jos tila loppuu, vaihda kuukausi- tai viikkopohjaan ennen kuin pienennät kirjaimia. Toimiva kalenteri tunnistaa myös tyhjän tilan tarpeen: se tarjoaa paikan uudelle merkinnälle. Kalenteri365:n alareunan brändi auttaa tunnistamaan tiedoston lähteen, mutta oma otsikko ja valittu vuosi kertovat käyttäjälle, mihin tarkoitukseen juuri tämä tuloste on tehty.",
           "Arkistoi hyväksytty versio erikseen työversioista. Esimerkiksi tiedoston nimessä oleva vuosi, kuukausi ja paperikoko auttavat tunnistamaan oikean tulosteen myöhemmin. Jos lähetät tiedoston painettavaksi, kerro paperikoko ja toivottu suunta myös viestissä. Painopalvelun omat leikkaus-, marginaali- tai värivaatimukset voivat erota kotitulostimesta, joten ne kannattaa tarkistaa palvelulta ennen tilausta. Suuri tarkkuus parantaa aineiston lähtökohtaa, mutta ei poista paperin, värinhallinnan ja tulostuslaitteen vaikutusta lopputulokseen."
         ],
@@ -1045,7 +1045,7 @@
     "slug": "kalenterin-varmuuskopio",
     "title": "Omat merkinnät turvallisesti talteen",
     "art": "edit",
-    "photo": "blog-burgundy-planner",
+    "photo": "blog-backup-laptop",
     "intro": "Kalenteri365:n henkilökohtaiset merkinnät pysyvät käyttämässäsi selaimessa. Tämä vähentää tilin tarvetta, mutta tarkoittaa myös sitä, että tietojen säilyminen on sidottu oman laitteen selaintietoihin.",
     "sections": [
       {
@@ -1053,7 +1053,7 @@
         "paragraphs": [
           "Sivustotietojen poistaminen, yksityisen selausikkunan sulkeminen tai laitteen vaihtuminen voi hävittää paikalliset merkinnät. Sama sivusto eri selaimessa ei automaattisesti näe aikaisempia tietoja. Yhteiskäyttöisellä laitteella myös toinen saman selainprofiilin käyttäjä voi nähdä tallennetut suunnitelmat.",
           "Jos merkintä on tärkeä, ota siitä erillinen kopio. Tarkista tallennuksen jälkeen sivu uudelleen: näkyykö merkintä oikealla päivällä? Jos selain estää tallennuksen, älä luota siihen, että tieto säilyy sulkemisen jälkeen.",
-          "Paikallinen tallennus on käytännöllinen, koska suunnitelman voi avata uudelleen samassa selaimessa. Se ei kuitenkaan ole sama asia kuin palvelimelle kirjautuva käyttäjätili tai eri laitteiden välinen synkronointi. Puhelimen ja tietokoneen selainmuistit ovat erilliset, vaikka käyttäisit niissä samaa verkkosivua. Selaimen oma tilisynkronointi ei ole peruste olettaa, että sivuston kaikki paikalliset tiedot siirtyisivät mukana. Kun jokin merkintä on tärkeä myös toisella laitteella, siirrä se työkalun tarjoamalla vientitavalla ja tarkista tulos kohteessa. Näin huomaat puuttuvan tiedon ennen kuin vanha laite tai selainprofiili poistetaan käytöstä."
+          "Paikallinen tallennus on käytännöllinen, koska suunnitelman voi avata uudelleen samassa selaimessa. Se ei kuitenkaan tarkoita käyttäjätiliin perustuvaa palvelintallennusta tai eri laitteiden välistä synkronointia. Puhelimen ja tietokoneen selainmuistit ovat erilliset, vaikka käyttäisit niissä samaa verkkosivua. Selaimen oma tilisynkronointi ei ole peruste olettaa, että sivuston kaikki paikalliset tiedot siirtyisivät mukana. Kun jokin merkintä on tärkeä myös toisella laitteella, siirrä se työkalun tarjoamalla vientitavalla ja tarkista tulos kohteessa. Näin huomaat puuttuvan tiedon ennen kuin vanha laite tai selainprofiili poistetaan käytöstä."
         ],
         "links": []
       },
@@ -1062,7 +1062,7 @@
         "paragraphs": [
           "JSON-varmuuskopio siirtää suunnittelijan tukemat tiedot takaisin samaan palveluun. ICS puolestaan on kalenteritapahtumien vaihtomuoto. ICS-tiedostoon eivät välttämättä kuulu vapaamuotoiset muistiinpanot, tehtävälistan valmistumistilat tai työkalujen omat asetukset.",
           "Varmuuskopiota palautettaessa tarkista, korvataanko vai yhdistetäänkö olemassa olevia merkintöjä. Säilytä alkuperäinen kopio, kunnes olet varmistanut palautetun lopputuloksen. Älä lähetä omaa varmuuskopiotasi palautteen liitteenä, jos siinä on muiden ihmisten tai työsi luottamuksellisia tietoja.",
-          "Valitse vientimuoto ensin tavoitteen perusteella. Jos haluat jatkaa saman suunnitelman muokkaamista Kalenteri365:ssä, tarvitset juuri kyseisen työkalun tukeman palautettavan kopion. Jos haluat nähdä tapahtuma-ajat toisessa kalenterissa, ICS voi olla sopiva vaihtoehto. Jos tarkoitus on näyttää viikon ohjelma toiselle ihmiselle, PDF tai kuva voi riittää, mutta se ei palauta muokattavia kenttiä. Nämä eivät ole keskenään kilpailevia ratkaisuja, vaan eri tarkoituksia. Samasta tärkeästä viikosta voi siksi olla sekä palautettava tiedosto että luettava tuloste, kun tiedät kumman avulla tieto on tarkoitus myöhemmin ottaa käyttöön.",
+          "Valitse vientimuoto ensin tavoitteen perusteella. Jos haluat jatkaa saman suunnitelman muokkaamista Kalenteri365:ssä, tarvitset juuri kyseisen työkalun tukeman palautettavan kopion. Jos haluat nähdä tapahtuma-ajat toisessa kalenterissa, ICS voi olla sopiva vaihtoehto. Jos tarkoitus on näyttää viikon ohjelma toiselle ihmiselle, PDF tai kuva voi riittää, mutta se ei palauta muokattavia kenttiä. Nämä ovat eri tarkoituksiin sopivia ratkaisuja. Samasta tärkeästä viikosta voi siksi olla sekä palautettava tiedosto että luettava tuloste, kun tiedät, kumman avulla tieto on tarkoitus myöhemmin ottaa käyttöön.",
           "Muista säilyttää myös ne alkuperäiset tiedostot, joita käytit henkilökohtaisen kalenterin suunnittelussa. Valmis kuva tai PDF ei yleensä korvaa alkuperäistä valokuvaa jatkomuokkausta varten. Pidä palautettava kalenterikopio, ladattu lopputulos ja oma kuva toisistaan tunnistettavina. Voit nimetä ne saman projektin tai ajanjakson mukaan eri tiedostotyypeillä. Näin seuraavan vuoden version tekeminen ei edellytä uuden kuvan leikkaamista vanhan kalenterin sisältä tai tapahtumien kirjoittamista uudelleen paperilta."
         ],
         "links": []
@@ -1071,14 +1071,14 @@
         "title": "Tuloste on käytännöllinen lisäkopio",
         "paragraphs": [
           "Viikko- tai perhesuunnitelman tuloste säilyttää luettavan näkymän, vaikka selain ei olisi käytettävissä. Tuloste ei kuitenkaan ole muokattava varmuuskopio. Merkitse siihen tarvittaessa tulostuspäivä, jotta erotat vanhan viikon suunnitelman uudemmasta versiosta.",
-          "Paperisen lisäkopion hyöty riippuu sen sisällöstä. Rajaa siihen se ajanjakso, jota tarvitset ilman laitetta, ja tarkista että olennaiset kellonajat näkyvät. Esimerkiksi viikon matkaohjelmassa aloituspaikka ja lähtöaika ovat usein tärkeämpiä kuin kaikki menneiden kuukausien merkinnät. Tulosteen alareunaan voi kirjoittaa, milloin se tehtiin, jos aikataulu muuttuu herkästi. Vanha paperi kannattaa poistaa yhteisestä paikasta uuden tullessa tilalle. Jos haluat säilyttää toteutuneen viikon muistona, merkitse se arkistokopioksi. Silloin myöhemmin löytyvä paperi ei sekoitu seuraavan samanlaisen tapahtuman tai matkan ajantasaiseen suunnitelmaan."
+          "Paperisen lisäkopion hyöty riippuu sen sisällöstä. Rajaa siihen se ajanjakso, jota tarvitset ilman laitetta, ja tarkista, että olennaiset kellonajat näkyvät. Esimerkiksi viikon matkaohjelmassa aloituspaikka ja lähtöaika ovat usein tärkeämpiä kuin kaikki menneiden kuukausien merkinnät. Tulosteen alareunaan voi kirjoittaa, milloin se tehtiin, jos aikataulu muuttuu herkästi. Vanha paperi kannattaa poistaa yhteisestä paikasta uuden tullessa tilalle. Jos haluat säilyttää toteutuneen viikon muistona, merkitse se arkistokopioksi. Silloin myöhemmin löytyvä paperi ei sekoitu seuraavan samanlaisen tapahtuman tai matkan ajantasaiseen suunnitelmaan."
         ],
         "links": []
       },
       {
         "title": "Kokeile palautusta ennen laitteen vaihtoa",
         "paragraphs": [
-          "Luo ensin pieni testimerkintä ja lataa sivun tarjoama varmuuskopio. Avaa tiedoston sijainti omalla laitteellasi ja tarkista, että lataus todella valmistui. Pelkkä painikkeen napsautus ei vielä todista, että tiedosto löytyy myöhemmin. Anna kopiolle tunnistettava nimi ja säilytä se paikassa, jota et tyhjennä samalla kuin selaimen tietoja.",
+          "Luo ensin pieni testimerkintä ja lataa sivun tarjoama varmuuskopio. Avaa tiedoston sijainti omalla laitteellasi ja tarkista, että lataus todella valmistui. Pelkkä painikkeen napsautus ei vielä todista, että tiedosto löytyy myöhemmin. Anna kopiolle tunnistettava nimi ja säilytä se paikassa, jota et tyhjennä samalla kun selaimen tietoja.",
           "Ennen vanhan laitteen tyhjentämistä kokeile palautusta uudessa selaimessa. Tarkista ainakin yksi tapahtuma, yksi muistiinpano ja yksi tehtävä. Eri työkaluilla voi olla erilliset tallennukset: esimerkiksi työvuorosuunnittelijan omat asetukset eivät automaattisesti tarkoita samaa tietosisältöä kuin pääkalenterin tapahtumavarmuuskopio. Tarkista käyttämäsi työkalun vientivaihtoehdot erikseen ja säilytä molemmat tiedostot, jos tarvitset molemmat suunnitelmat."
         ],
         "links": [
@@ -1110,7 +1110,7 @@
         "paragraphs": [
           "Selainmuisti kuuluu käytettyyn selainprofiiliin. Samalla tietokoneella oleva toinen henkilö voi nähdä suunnitelman, jos hän käyttää samaa profiilia ja avaa saman sivuston. Paikallinen tallennus ei siksi tarkoita, että tietosisältö olisi salattu muilta laitteen käyttäjiltä. Vältä arkaluonteisia henkilötietoja julkisessa tai yhteisessä selaimessa.",
           "Jos haluat säilyttää paperisen kopion, tarkista myös tulosteen käsittely. Siinä voivat näkyä nimet, poissaolot ja tapaamispaikat. Valitse yhteiseen seinäkalenteriin vain tarpeelliset tiedot ja pidä yksityiskohtaiset muistiinpanot omassa käytössäsi. Selaimen tietojen tyhjentäminen voi poistaa paikallisen suunnitelman, mutta se ei poista jo ladattuja kopioita tai muiden kalentereihin vietyjä tapahtumia. Käy myös nämä kopiot läpi, jos tavoite on poistaa vanhat henkilötiedot.",
-          "Kopioita kannattaa nimetä niin, että viimeisin toimiva versio erottuu. Esimerkiksi päivämäärä ja työkalun nimi kertovat enemmän kuin useat tiedostot nimeltä ”backup”. Pidä ainakin yksi aikaisempi varmistettu kopio, kun kokeilet palautusta tai muokkaat paljon tietoja kerralla. Jos uusi kopio osoittautuu puutteelliseksi, voit palata edelliseen. Tämä ei vaadi monimutkaista arkistoa: tärkeintä on, että tiedät missä kopio on ja että olet joskus avannut tai palauttanut sen onnistuneesti."
+          "Kopioita kannattaa nimetä niin, että viimeisin toimiva versio erottuu. Esimerkiksi päivämäärä ja työkalun nimi kertovat enemmän kuin useat tiedostot nimeltä ”backup”. Pidä ainakin yksi aikaisempi varmistettu kopio, kun kokeilet palautusta tai muokkaat paljon tietoja kerralla. Jos uusi kopio osoittautuu puutteelliseksi, voit palata edelliseen. Tämä ei vaadi monimutkaista arkistoa: tärkeintä on, että tiedät, missä kopio on ja että olet joskus avannut tai palauttanut sen onnistuneesti."
         ],
         "links": [
           {
@@ -1151,7 +1151,7 @@
       "perheen-viikko",
       "kesaaika-ja-talviaika"
     ],
-    "wordCount": 814,
+    "wordCount": 808,
     "readMinutes": 5,
     "sourceChecks": [
       {
@@ -1167,7 +1167,7 @@
         "notes": "Facts checked against primary sources. Practical planning examples are original; no copied prose."
       }
     ],
-    "bodyWordCount": 792
+    "bodyWordCount": 786
   },
   {
     "slug": "syksyn-suunnittelu",
@@ -1191,14 +1191,14 @@
           "Viikkosuunnitelma on lyhyempi työlista, ei koko syksyn tehtävävarasto. Valitse siihen seuraavaksi tehtävät asiat ja jätä muille tavoitteille oma paikka. Päiväsuunnittelijassa voit jakaa pitkän tehtävän lyhyempiin työjaksoihin.",
           "Kalenteriin kannattaa varata myös siirtymät ja valmistautuminen. Jos ilta on jo täynnä harrastusmatkoja, lisää tehtävä toiselle päivälle. Tyhjää kohtaa ei tarvitse täyttää vain siksi, että se näkyy ruudulla.",
           "Viikkolistalle voi valita yhden pääasian kullekin tavalliselle työpäivälle ja jättää pienemmät tehtävät omaksi joustavaksi kokonaisuudekseen. Tämä ei tarkoita, että joka päivä pitäisi saada yksi suuri työ kokonaan valmiiksi. Tarkoitus on nähdä, mikä vie juuri sillä viikolla eniten keskittymistä. Jos aamupäivä tarvitaan lukemiseen tai kirjoittamiseen, älä sijoita sen sisään useita keskenään irrallisia menoja vain siksi, että niiden kellonajat sopivat ruudukkoon. Kalenteri voi olla minuutin tarkka ja silti käytännössä mahdoton. Viikon lopuksi katso, mitkä suunnitellut ajat todella toteutuivat, ja käytä havaintoa seuraavan viikon arvioon.",
-          "Jos viikon päätehtävä jää toistuvasti siirtymään, tarkista sen aloituskynnys eikä vain uutta päivämäärää. Puuttuuko aineisto, päätös tai toisen ihmisen vastaus? Merkitse tällainen edellytys omaksi seuraavaksi tehtäväksi. Silloin kalenteri kertoo todellisen esteen sen sijaan, että sama suuri otsikko siirtyisi viikosta toiseen. Kun edellytys täyttyy, varaa vasta varsinainen työaika. Tämä auttaa erottamaan odottamisen, valmistelun ja tekemisen toisistaan tavallisessa syysarjessa."
+          "Jos viikon päätehtävä jää toistuvasti siirtymään, tarkista sen aloituskynnys äläkä vain vaihda päivämäärää. Puuttuuko aineisto, päätös tai toisen ihmisen vastaus? Merkitse tällainen edellytys omaksi seuraavaksi tehtäväksi. Silloin kalenteri kertoo todellisen esteen sen sijaan, että sama suuri otsikko siirtyisi viikosta toiseen. Kun edellytys täyttyy, varaa vasta varsinainen työaika. Tämä auttaa erottamaan odottamisen, valmistelun ja tekemisen toisistaan tavallisessa syysarjessa."
         ],
         "links": []
       },
       {
         "title": "Luonto ja lukuvuosi ovat eri rytmejä",
         "paragraphs": [
-          "Koulun syyslukukausi, tähtitieteellinen syksy ja meteorologinen syksy alkavat eri perustein. Sään lämpötilaraja ei ole joka vuosi sama kalenteripäivä. Käytä vuodenajantietoa luonnon seuraamiseen ja koulun vahvistettua aikataulua läsnäolon suunnitteluun.",
+          "Koulun syyslukukausi, tähtitieteellinen syksy ja meteorologinen syksy alkavat eri perustein. Sään lämpötilaraja ei ole joka vuosi sama kalenteripäivä. Käytä vuodenaikatietoa luonnon seuraamiseen ja koulun vahvistettua aikataulua läsnäolon suunnitteluun.",
           "Ulkotöille toimiva merkintä voi olla tarkistusaika eikä etukäteen lukittu suorituspäivä. Esimerkiksi parvekkeen tai pihan talvivalmistelu aloitetaan katsomalla, mitä omat kasvit, välineet ja olosuhteet tarvitsevat. Koulun syysloma puolestaan perustuu julkaistuun aikatauluun ja tarvitsee täsmälliset päivämäärät. Kun nämä kaksi asiaa näkyvät eri tavoin, säästä riippuva tehtävä ei näytä samanlaiselta kuin sitova lomajakso. Jos yhteinen ulkoilu joudutaan siirtämään, vaihda tapahtuman oikea aika ja ilmoita muille. Vuodenajan yleinen nimi ei yksin kerro, milloin sama työ onnistuu sekä etelässä että pohjoisessa Suomessa."
         ],
         "links": []
@@ -1236,8 +1236,8 @@
       {
         "title": "Luonnon syksy ei noudata koulun ensimmäistä päivää",
         "paragraphs": [
-          "Kalenterin syyskuukausiin kuuluvat tavallisesti syyskuu, lokakuu ja marraskuu. Tähtitieteellinen syksy alkaa syyspäiväntasauksesta, kun taas termisen syksyn raja perustuu lämpötilakehitykseen. Ilmatieteen laitos määrittelee termiset vuodenajat havaintojen perusteella; yhden viileän illan tai etukäteen valitun viikonumeron perusteella ei voi nimetä koko Suomen syksyn alkua.",
-          "Tämä ero on käytännöllinen ulkotöiden suunnittelussa. Laita kalenteriin tarkistusjakso lehtien keräämiselle tai puutarhan valmistelulle, mutta tee lopullinen työpäätös olosuhteiden mukaan. Harrastuksen sisäkausi ja koulun lukukausi taas määräytyvät järjestäjän aikataulusta. Kun luonnon seuranta ja sitovat menot näkyvät eri tavoin, kalenteri ei anna virheellistä vaikutelmaa siitä, että kaikkia syksyn muutoksia voisi ennustaa täsmälleen samalle päivälle.",
+          "Kalenterin syyskuukausiin kuuluvat tavallisesti syyskuu, lokakuu ja marraskuu. Tähtitieteellinen syksy alkaa syyspäiväntasauksesta, kun taas termisen syksyn raja perustuu lämpötilakehitykseen. Ilmatieteen laitos määrittelee termiset vuodenajat havaintojen perusteella; yhden viileän illan tai etukäteen valitun viikkonumeron perusteella ei voi nimetä koko Suomen syksyn alkua.",
+          "Tämä ero on käytännöllinen ulkotöiden suunnittelussa. Laita kalenteriin tarkistusjakso lehtien keräämiselle tai puutarhan valmistelulle, mutta tee lopullinen työpäätös olosuhteiden mukaan. Harrastuksen sisäkausi ja koulun lukukausi taas määräytyvät järjestäjän aikataulun mukaan. Kun luonnon seuranta ja sitovat menot näkyvät eri tavoin, kalenteri ei anna virheellistä vaikutelmaa siitä, että kaikkia syksyn muutoksia voisi ennustaa täsmälleen samalle päivälle.",
           "Kauden puoliväliin voi lisätä yhden arviointipäivän. Katso silloin, mikä toistuva meno on edelleen hyödyllinen ja mikä vain säilyi kalenterissa vanhasta tottumuksesta. Jos aikataulu on jatkuvasti liian tiukka, älä ratkaise ongelmaa pienentämällä palautumiselle tai siirtymille varattua aikaa. Karsi tai siirrä menoja. Hyvä syyssuunnitelma muuttuu kokemuksen perusteella, mutta sen muutoksista kerrotaan niille, joiden omaan aikaan ne vaikuttavat. Näin kalenteri pysyy arjen tukena koko kauden eikä vain syyskuun alun siistinä tavoitteena."
         ],
         "links": [
@@ -1279,7 +1279,7 @@
       "opintoperiodit-ja-tentit",
       "koulujen-lomat"
     ],
-    "wordCount": 803,
+    "wordCount": 804,
     "readMinutes": 5,
     "sourceChecks": [
       {
@@ -1295,7 +1295,7 @@
         "notes": "Facts checked against primary sources. Practical planning examples are original; no copied prose."
       }
     ],
-    "bodyWordCount": 782
+    "bodyWordCount": 783
   },
   {
     "slug": "karkausvuosi-2028",
@@ -1307,7 +1307,7 @@
       {
         "title": "Tarkista helmikuun viimeinen päivä",
         "paragraphs": [
-          "Karkauspäivä 29.2. on vuoden 2028 kalenterissa tavallinen päivämäärä. Vuonna 2027 tai 2029 sitä ei ole. Kun syötät syntymäpäivää tai muuta vuosittaista tapahtumaa, varmista miten oma kalenteriohjelmasi käsittelee karkauspäivän sellaisena vuonna, jolloin päivämäärä puuttuu.",
+          "Karkauspäivä 29.2. on vuoden 2028 kalenterissa tavallinen päivämäärä. Vuonna 2027 tai 2029 sitä ei ole. Kun syötät syntymäpäivää tai muuta vuosittaista tapahtumaa, varmista, miten oma kalenteriohjelmasi käsittelee karkauspäivän sellaisena vuonna, jolloin päivämäärä puuttuu.",
           "Gregoriaanisessa kalenterissa neljällä jaolliset vuodet ovat yleensä karkausvuosia. Sataluvut muodostavat poikkeuksen, ellei vuosiluku ole myös 400:lla jaollinen. Vuosi 2028 täyttää tavallisen neljän vuoden säännön.",
           "Helmikuun lisäpäivä vaikuttaa myös kuukauden viimeiselle päivälle sovittuihin tehtäviin. Jos tarkoitus on tarkistaa yksi asia aina kuukauden päättyessä, sääntö on eri kuin joka kuukauden 28. päivä. Vuonna 2028 kuukauden viimeinen päivä on 29. helmikuuta, mutta seuraavana vuonna 28. helmikuuta. Valitse merkintään se sääntö, jota todella tarkoitat. Samalla kannattaa erottaa kalenteritehtävä mahdollisesta virallisesta määräajasta: sopimuksessa tai päätöksessä oleva päivä tarkistetaan alkuperäisestä asiakirjasta. Kalenterin oma toistotapa ei muuta ulkopuolisen määräajan ehtoja, vaikka se siirtäisi muistutuksen toiseen ruutuun."
         ],
@@ -1345,7 +1345,7 @@
         "title": "Viikonpäivä siirtyy karkausvuoden kohdalla eri tavoin",
         "paragraphs": [
           "Tavallisessa 365 päivän vuodessa on 52 kokonaista viikkoa ja yksi ylimääräinen päivä. Karkausvuodessa ylimääräisiä päiviä on kaksi. Siksi saman kuukauden ja päivämäärän viikonpäivä ei aina siirry seuraavaan vuoteen vain yhdellä askeleella. Helmikuun lopun lisäpäivän sijainti on huomioitava vertailussa.",
-          "Jos järjestät vuosittain saman tapahtuman tiettynä viikonpäivänä, päätä kumpi on olennaisempi: pysyvä päivämäärä vai esimerkiksi kuukauden ensimmäinen lauantai. Nämä säännöt tuottavat eri päivät. Syntymäpäivä ja työryhmän toistuva tapaaminen eivät välttämättä tarvitse samaa toistotapaa. Tarkista vuoden 2028 jälkeen myös vuoden 2029 ensimmäinen toteutuma, jotta ylimääräinen päivä ei siirrä suunnitelmaa huomaamatta väärälle viikonpäivälle."
+          "Jos järjestät vuosittain saman tapahtuman tiettynä viikonpäivänä, päätä, kumpi on olennaisempi: pysyvä päivämäärä vai esimerkiksi kuukauden ensimmäinen lauantai. Nämä säännöt tuottavat eri päivät. Syntymäpäivä ja työryhmän toistuva tapaaminen eivät välttämättä tarvitse samaa toistotapaa. Tarkista vuoden 2028 jälkeen myös vuoden 2029 ensimmäinen toteutuma, jotta ylimääräinen päivä ei siirrä suunnitelmaa huomaamatta väärälle viikonpäivälle."
         ],
         "links": [
           {
@@ -1442,7 +1442,7 @@
         "title": "Kaikkia kellonaikoja ei ole joka päivä",
         "paragraphs": [
           "Kevään siirtymässä yksi paikallinen tunti jää väliin. Syksyn siirtymässä yksi tunti esiintyy kahdesti. Tällaiselle tunnille kirjoitettu kellonaika ei yksin kerro yksikäsitteistä ajanhetkeä. Syntymäajan tai yövuoron kohdalla ero voi olla olennainen.",
-          "Kalenteri365:n nousevan merkin laskuri tarkistaa puuttuvat ja kahdentuvat paikalliset ajat. Jos aika on epäselvä, tarkista alkuperäisestä merkinnästä kumpaa aikaa tarkoitetaan. Laskurin ei pidä valita tuntia puolestasi.",
+          "Kalenteri365:n nousevan merkin laskuri tarkistaa puuttuvat ja kahdentuvat paikalliset ajat. Jos aika on epäselvä, tarkista alkuperäisestä merkinnästä, kumpaa aikaa tarkoitetaan. Laskurin ei pidä valita tuntia puolestasi.",
           "Kellonsiirto kannattaa lukea tapahtuman päivämäärän kautta eikä vain yleisen vuodenajan nimestä. Keväällä ennen siirtymää alkanut yövuoro ja siirtymän jälkeen päättyvä vuoro kulkevat saman yön läpi, mutta kello jättää yhden tunnin näyttämättä. Syksyllä vastaava tunti näkyy uudelleen. Jos tapahtuman alku tai loppu on juuri vaihtuvan tunnin sisällä, selvitä ensin oikea ajanhetki. Jos molemmat rajat ovat selvästi siirtymän ulkopuolella, niiden välinen todellinen kesto voidaan laskea aikavyöhykkeen sääntöjen avulla. Pelkkä loppukellonajan ja alkukellonajan vähennys ei silloin riitä.",
           "Koko päivän tapahtumaa ei tarvitse muuttaa keinotekoisesti tiettyyn kellonaikaan vain kellonsiirron vuoksi. Loma tai merkkipäivä voi olla kalenterissa päivämäärään sidottu tieto, kun taas etätapaaminen tai yövuoro tarvitsee täsmällisen ajan. Valitse merkinnän tyyppi sen tarkoituksen mukaan. Näin yhden päivän koululoma ei näytä sattumanvaraiselta 24 tunnin kokoukselta ja todellista osallistumisaikaa vaativa tapahtuma säilyttää oikeat alkamis- ja päättymishetkensä myös muussa kalenteriohjelmassa."
         ],
@@ -1462,7 +1462,7 @@
         "paragraphs": [
           "Nykyisten EU:ssa käytettyjen sääntöjen mukaan kesäaika alkaa maaliskuun ja päättyy lokakuun viimeisenä sunnuntaina. Vuonna 2027 nämä päivät ovat 28.3. ja 31.10. Suomessa kevään siirtymä on kello 03.00:sta kello 04.00:aan, ja syksyllä kello 04.00 palautuu kello 03.00:ksi.",
           "Merkitse aamuyön tapahtumiin muutakin kuin pelkkä kellonaika. Keväällä esimerkiksi paikallista aikaa 03.30 ei ole olemassa kyseisenä päivänä. Syksyllä sama kellonaika 03.30 esiintyy kahdesti. Lentolippujen, työvuoron tai muun aikakriittisen tapahtuman alkuperäinen järjestäjä kertoo, mitä hetkeä tarkoitetaan. Jos sääntöjä myöhemmin muutetaan, tulevien vuosien aikataulu pitää päivittää. Ehdotus kellonsiirtojen poistamisesta ei yksin tarkoita, että siirrot olisivat jo päättyneet.",
-          "Vuoden 2027 maaliskuun siirtymää voi kokeilla tavallisella yön yli jatkuvalla aikavälillä: lauantaina 27.3. kello 20 alkava ja sunnuntaina 28.3. kello 08 päättyvä jakso kestää todellisena aikana 11 tuntia. Lokakuun 30. ja 31. päivän vastaava jakso kestää 13 tuntia. Molemmissa kellotaulun nimellinen väli näyttää 12 tunnilta. Esimerkki koskee Europe/Helsinki-aikavyöhykettä nykyisten sääntöjen mukaan eikä sisällä taukojen tai korvausten laskentaa. Se havainnollistaa, miksi päivämäärät ja aikavyöhyke tarvitaan kestoon yhdessä. Toiselle paikkakunnalle tai eri vuodelle samaa tulosta ei pidä kopioida tarkistamatta siirtymäpäivää."
+          "Vuoden 2027 maaliskuun siirtymää voi kokeilla tavallisella yön yli jatkuvalla aikavälillä: lauantaina 27.3. kello 20 alkava ja sunnuntaina 28.3. kello 08 päättyvä jakso kestää todellisena aikana 11 tuntia. Lokakuun 30. ja 31. päivän vastaava jakso kestää 13 tuntia. Molemmissa kellotaulun nimellinen väli näyttää 12 tunnilta. Esimerkki koskee Europe/Helsinki-aikavyöhykettä nykyisten sääntöjen mukaan eikä sisällä taukojen tai korvausten laskentaa. Se havainnollistaa, miksi keston laskemiseen tarvitaan sekä päivämäärät että aikavyöhyke. Toiselle paikkakunnalle tai eri vuodelle samaa tulosta ei pidä kopioida tarkistamatta siirtymäpäivää."
         ],
         "links": [
           {
@@ -1509,8 +1509,8 @@
         "title": "Aikavyöhyke kannattaa kirjoittaa etätapaamisen yhteyteen",
         "paragraphs": [
           "Kun sovit kansainvälisen tapaamisen, käytä nimettyä paikkakunnan aikavyöhykettä ja päivämäärää. ”Kello 10 Suomen aikaa” voi olla selkeä suomalaiselle vastaanottajalle, mutta kansainvälisessä kalenterikutsussa Europe/Helsinki auttaa säilyttämään oikean hetken myös kellonsiirtojen yli.",
-          "Älä kopioi nykyistä aikaeroa koko vuodeksi. Eri maissa siirtymät voivat tapahtua eri viikonloppuina tai niitä ei käytetä lainkaan. Kutsu voi siksi näkyä vastaanottajalle toisena paikallisena kellonaikana kuin odotit. Lähetä tapaamisajan lisäksi lyhyt tekstivahvistus ja tarkista kalenterisovelluksen esikatselu. Jos tapaaminen on joka viikko samassa Suomen kellonajassa, sen paikallinen aika muualla voi vaihtua vuoden aikana. Tämä on usein oikea seuraus aikavyöhykkeistä, ei väärin luotu tapahtuma.",
-          "Tulosteessa kellonsiirto on hyvä nimetä sanoin, jos paperilla näkyy yön ohjelmaa. Merkintä ”kellot eteenpäin” tai ”kellot taaksepäin” estää väärinymmärrystä paremmin kuin pieni kellosymboli. Samaa ei tarvitse toistaa jokaisen päivän yhteydessä. Jos käytät kahta aikavyöhykettä rinnakkain, kirjoita molempien paikkojen nimet näkyviin ja pidä tieto saman päivämäärän yhteydessä. Erityisesti yön yli jatkuvassa viestiketjussa päivämäärä voi muuten jäädä epäselväksi, vaikka kellonaika olisi kirjoitettu oikein."
+          "Älä kopioi nykyistä aikaeroa koko vuodeksi. Eri maissa siirtymät voivat tapahtua eri viikonloppuina tai niitä ei käytetä lainkaan. Kutsu voi siksi näkyä vastaanottajalle toisena paikallisena kellonaikana kuin odotit. Lähetä tapaamisajan lisäksi lyhyt tekstivahvistus ja tarkista kalenterisovelluksen esikatselu. Jos tapaaminen on joka viikko samaan Suomen kellonaikaan, sen paikallinen aika muualla voi vaihtua vuoden aikana. Tämä on usein oikea seuraus aikavyöhykkeistä, ei väärin luotu tapahtuma.",
+          "Tulosteessa kellonsiirto on hyvä nimetä sanoin, jos paperilla näkyy yön ohjelmaa. Merkintä ”kellot eteenpäin” tai ”kellot taaksepäin” ehkäisee väärinymmärryksiä paremmin kuin pieni kellosymboli. Samaa ei tarvitse toistaa jokaisen päivän yhteydessä. Jos käytät kahta aikavyöhykettä rinnakkain, kirjoita molempien paikkojen nimet näkyviin ja pidä tieto saman päivämäärän yhteydessä. Erityisesti yön yli jatkuvassa viestiketjussa päivämäärä voi muuten jäädä epäselväksi, vaikka kellonaika olisi kirjoitettu oikein."
         ],
         "links": [
           {
@@ -1543,7 +1543,7 @@
       "nousevan-merkin-syntymaaika",
       "paasiaisen-paivamaara"
     ],
-    "wordCount": 844,
+    "wordCount": 845,
     "readMinutes": 5,
     "sourceChecks": [
       {
@@ -1553,7 +1553,7 @@
         "notes": "Facts checked against primary sources. Practical planning examples are original; no copied prose."
       }
     ],
-    "bodyWordCount": 825
+    "bodyWordCount": 826
   },
   {
     "slug": "paasiaisen-paivamaara",
@@ -1568,7 +1568,7 @@
           "Matkan ja yhteisen vapaan kannalta pelkkä pääsiäissunnuntai ei riitä. Pitkäperjantai on kaksi päivää aiemmin, ja toinen pääsiäispäivä sitä seuraava maanantai. Nämä rajat auttavat näkemään koko viikonlopun kokonaisuutena.",
           "Vuoden 2027 pääsiäissunnuntai on 28.3. ja vuoden 2028 pääsiäissunnuntai 16.4. Erotus on suuri myös koulun ja harrastusten kevätkauden suunnittelussa. Koulun mahdollinen pidempi pääsiäistauko tarkistetaan kuitenkin opetuksen järjestäjältä.",
           "Kutsu tai matkasuunnitelma kannattaa tehdä ensin päiväkohtaisesti. Kirjoita erikseen lähtö, yhteinen ateria ja paluu sekä tarvittavat valmistelut. Jos joku saapuu jo torstaina ja toinen vasta lauantaina, yleinen pääsiäisviikonlopun otsikko ei riitä kertomaan, mihin ohjelmaan kukin ehtii. Yhteinen jakso löytyy vasta osallistujien todellisista ajoista. Merkitse myös se, mihin aikaan loman jälkeinen arki alkaa. Myöhäinen maanantain paluu voi näyttää hyvältä lomapäivien lukumäärässä, mutta vaatia käytännössä lisäjärjestelyjä seuraavan aamun koulua tai työvuoroa varten. Kalenteri auttaa näkemään tämän ennen varaamista.",
-          "Vuonna 2028 pitkäperjantai on 14. huhtikuuta ja toinen pääsiäispäivä 17. huhtikuuta. Jos käytät vuoden 2027 suunnitelmaa pohjana, vaihda siis koko jakso oikeaan vuoteen eikä vain sunnuntain numeroa. Tarkista samalla päivämäärän sisältävät tiedostonimet, kutsut ja omat valmistelumuistutukset. Vanhan pääsiäiskuvan säilyminen viestiketjussa voi muuten saada uuden suunnitelman näyttämään ristiriitaiselta, vaikka kalenterin varsinainen päivämäärä olisi korjattu. Yksi yhteinen ajantasainen versio vähentää tätä sekaannusta."
+          "Vuonna 2028 pitkäperjantai on 14. huhtikuuta ja toinen pääsiäispäivä 17. huhtikuuta. Jos käytät vuoden 2027 suunnitelmaa pohjana, vaihda siis koko jakso oikeaan vuoteen äläkä vain sunnuntain numeroa. Tarkista samalla päivämäärän sisältävät tiedostonimet, kutsut ja omat valmistelumuistutukset. Vanhan pääsiäiskuvan säilyminen viestiketjussa voi muuten saada uuden suunnitelman näyttämään ristiriitaiselta, vaikka kalenterin varsinainen päivämäärä olisi korjattu. Yksi yhteinen ajantasainen versio vähentää tätä sekaannusta."
         ],
         "links": []
       },
@@ -1576,8 +1576,8 @@
         "title": "Kuun kuva ei määritä juhlapäivää suoraan",
         "paragraphs": [
           "Kirkollisen pääsiäislaskennan sääntö ja havaintopaikalla nähtävä tähtitieteellinen täysikuu ovat eri laskentakäsitteitä. Pääsiäisen päivää ei siksi pidä päätellä vain valokuvasta tai kuukalenterin lähimmästä täysikuuhetkestä.",
-          "Kalenteri365 näyttää suomalaisen gregoriaanisen kalenterin juhlapäivät omana kokonaisuutenaan. Jos tarvitset toisen kirkkokunnan juhlan, tarkista sen oma kalenteri. Suunnittelussa juhlan nimellä ja siihen liittyvällä traditiolla on yhtä paljon merkitystä kuin numeropäivällä.",
-          "Kun etsit juhlapäivää toisesta lähteestä, tarkista minkä kirkon tai kalenteriperinteen päivämäärä on kyseessä. Samalla pääsiäisnimellä voi olla eri ajankohta eri yhteisöissä. Älä yhdistä yhden kalenterin sunnuntaita toisen yhteisön jumalanpalvelusohjelmaan. Jos yhteinen perhetapaaminen halutaan sovittaa useamman perinteen mukaan, merkitse juhlat ensin omilla nimillään ja etsikää sopiva tapaamispäivä erikseen. Kuun vaihekalenteri sopii taivaan seuraamiseen myös pääsiäisen aikana, mutta sen tehtävä on toinen. Juhlapäivän taustan ja havaintohetken erottaminen tekee molemmista tiedoista ymmärrettävämpiä eikä vähennä kummankaan kiinnostavuutta."
+          "Kalenteri365 näyttää suomalaisen gregoriaanisen kalenterin juhlapäivät omana kokonaisuutenaan. Jos tarvitset toisen kirkkokunnan juhlan, tarkista sen oma kalenteri. Suunnittelussa juhlan nimellä ja siihen liittyvällä traditiolla on yhtä paljon merkitystä kuin päivämäärällä.",
+          "Kun etsit juhlapäivää toisesta lähteestä, tarkista, minkä kirkon tai kalenteriperinteen päivämäärä on kyseessä. Samalla pääsiäisnimellä voi olla eri ajankohta eri yhteisöissä. Älä yhdistä yhden kalenterin sunnuntaita toisen yhteisön jumalanpalvelusohjelmaan. Jos yhteinen perhetapaaminen halutaan sovittaa useamman perinteen mukaan, merkitse juhlat ensin omilla nimillään ja etsikää sopiva tapaamispäivä erikseen. Kuun vaihekalenteri sopii taivaan seuraamiseen myös pääsiäisen aikana, mutta sen tehtävä on toinen. Juhlapäivän taustan ja havaintohetken erottaminen tekee molemmista tiedoista ymmärrettävämpiä eikä vähennä kummankaan kiinnostavuutta."
         ],
         "links": []
       },
@@ -1712,8 +1712,8 @@
         "title": "Erota päivän merkitys vapaapäivästä",
         "paragraphs": [
           "Suomalaisessa kalenterissa on virallisia ja vakiintuneita liputuspäiviä sekä muita merkkipäiviä. Työpäivälaskuri käyttää yleisiä pyhäpäiviä omana luokkanaan. Kalenterin värimerkintä on siksi luettava yhdessä selitteen kanssa.",
-          "Esimerkiksi juhannuspäivä on sekä pyhäpäivä että Suomen lipun päivä. Moni kulttuurin merkkipäivä taas voi osua tavalliselle arkipäivälle. Työstä vapaan kannalta ratkaisevaa on päivän luokitus sekä omat työehdot, ei pelkkä lippusymboli.",
-          "Saman symbolin toistuminen ei tarkoita, että kalenterissa olisi vahingossa sama tapahtuma kahteen kertaan. Vuonna 2027 toukokuun 9. päivälle osuvat sekä Eurooppa-päivä että äitienpäivä. Niiden taustat ja luokitukset ovat omat, vaikka päivämäärä on yhteinen. Työpäivien laskennassa yksi kalenteripäivä käsitellään kuitenkin vain kerran. Henkilökohtaisessa ohjelmassa voit puolestaan sopia useita eri tapahtumia samalle päivälle, jos niiden ajat sopivat yhteen. Juhlapäiväluettelo ja oman päivän tapahtumalista vastaavat näin eri kysymyksiin: toinen kertoo päivän yleiset merkitykset, toinen kertoo mitä itse aiot tehdä."
+          "Esimerkiksi juhannuspäivä on sekä pyhäpäivä että Suomen lipun päivä. Moni kulttuurin merkkipäivä taas voi osua tavalliselle arkipäivälle. Työstä vapaan kannalta ratkaisevia ovat päivän luokitus sekä omat työehdot, ei pelkkä lippusymboli.",
+          "Saman symbolin toistuminen ei tarkoita, että kalenterissa olisi vahingossa sama tapahtuma kahteen kertaan. Vuonna 2027 toukokuun 9. päivälle osuvat sekä Eurooppa-päivä että äitienpäivä. Niiden taustat ja luokitukset ovat omat, vaikka päivämäärä on yhteinen. Työpäivien laskennassa yksi kalenteripäivä käsitellään kuitenkin vain kerran. Henkilökohtaisessa ohjelmassa voit puolestaan sopia useita eri tapahtumia samalle päivälle, jos niiden ajat sopivat yhteen. Juhlapäiväluettelo ja oman päivän tapahtumalista vastaavat näin eri kysymyksiin: toinen kertoo päivän yleiset merkitykset, toinen kertoo, mitä itse aiot tehdä."
         ],
         "links": []
       },
@@ -1721,8 +1721,8 @@
         "title": "Tarkista vuosittainen sijoittuminen",
         "paragraphs": [
           "Äitienpäivä ja isänpäivä määräytyvät viikonpäiväsäännön perusteella. Niiden päivämäärä vaihtuu, vaikka juhlan merkitys säilyy. Kalenterista kannattaa tarkistaa kyseisen vuoden päivä ennen kutsujen tai yhteisen tapaamisen sopimista.",
-          "Vaali- ja muut kertaluonteiset liputuspäivät vaativat erillisen vahvistuksen. Sivuston vuosikalenterit erottavat päivien luokat ja linkittävät juhlan omaan selitykseen. Liputuksen käytännöt, kuten ajankohdat ja suruliputus, tarkistetaan Sisäministeriön ohjeista.",
-          "Tee vuosittainen tarkistus erityisesti silloin, kun oma järjestö tai taloyhtiö käyttää edellisen vuoden tehtävälistaa. Kiinteän päivämäärän kulttuuripäivä siirtyy eri viikonpäivälle, mutta esimerkiksi kuukauden toiseen sunnuntaihin perustuva juhla siirtyy myös numeropäivältään. Jos listalla on vain kuukauden päivä ilman vuotta, virhe voi jäädä huomaamatta pitkään. Tarkista päivän nimi ja luokka ajantasaisesta lähteestä ja kirjoita käytettävä vuosi otsikkoon. Vasta sen jälkeen kopioi käytännön järjestelyt, kuten vastuuvuoro. Näin edellisen vuoden toimiva tapa voidaan säilyttää ilman, että vanha päivämäärä muuttuu vahingossa uuden vuoden vahvistetuksi tiedoksi.",
+          "Vaali- ja muut kertaluonteiset liputuspäivät vaativat erillisen vahvistuksen. Sivuston vuosikalenterit erottavat päivien luokat ja linkittävät juhlan omaan selitykseen. Liputuksen käytännöt, kuten ajankohdat ja suruliputus, tarkistetaan sisäministeriön ohjeista.",
+          "Tee vuosittainen tarkistus erityisesti silloin, kun oma järjestö tai taloyhtiö käyttää edellisen vuoden tehtävälistaa. Kiinteän päivämäärän kulttuuripäivä siirtyy eri viikonpäivälle, mutta esimerkiksi kuukauden toiseen sunnuntaihin perustuva juhla siirtyy myös päivämäärältään. Jos listalla on vain kuukauden päivä ilman vuotta, virhe voi jäädä huomaamatta pitkään. Tarkista päivän nimi ja luokka ajantasaisesta lähteestä ja kirjoita käytettävä vuosi otsikkoon. Vasta sen jälkeen kopioi käytännön järjestelyt, kuten vastuuvuoro. Näin edellisen vuoden toimiva tapa voidaan säilyttää ilman, että vanha päivämäärä muuttuu vahingossa uuden vuoden vahvistetuksi tiedoksi.",
           "Liputusvuoroa hoitavalle ihmiselle lähdelinkki kannattaa säilyttää oman tehtävälistan yhteydessä. Sen avulla voi tarkistaa poikkeavan ajan ilman, että jokainen ohje kopioidaan koko vuoden kalenteriin. Jos päivän nimeen tai asemaan tulee virallinen muutos, päivitä myös yhteisen listan otsikko. Älä päättele uutta luokkaa pelkästä uutiskuvasta, jossa näkyy lippuja. Valokuva voi esittää yksittäistä tilaisuutta eikä valtakunnallista kalenterimerkintää tai sen oikeudellista asemaa."
         ],
         "links": []
@@ -1730,8 +1730,8 @@
       {
         "title": "Yksi päivämäärä voi sisältää useita merkityksiä",
         "paragraphs": [
-          "Vappu on hyvä esimerkki päivästä, jolla on sekä juhlapäivän että liputuspäivän asema. Kalevalan päivänä 28. helmikuuta taas lippu kertoo suomalaisen kulttuurin merkkipäivästä, mutta pelkkä liputus ei tee tavallisesta arkipäivästä automaattista työvapaata. Kalenterin luokkien erottaminen auttaa ymmärtämään, miksi kaksi samannäköisellä symbolilla merkittyä päivää voivat vaikuttaa työpäivälaskelmaan eri tavoin.",
-          "Kun lisäät oman tapahtuman samalle päivälle, anna sille oma nimi. ”Kalevalan päivä” voi näkyä yleisenä tietona, mutta koulun juhla tai kirjaston tilaisuus tarvitsee lisäksi kellonajan ja paikan. Valtionkalenterin merkintä ei vahvista paikallista tapahtumaa eikä sen yleisölle avoimuutta. Tarkista ohjelma aina järjestäjältä ennen kutsun jakamista.",
+          "Vappu on hyvä esimerkki päivästä, jolla on sekä juhlapäivän että liputuspäivän asema. Kalevalan päivänä 28. helmikuuta taas lippu kertoo suomalaisen kulttuurin merkkipäivästä, mutta pelkkä liputus ei tee tavallisesta arkipäivästä automaattista työvapaata. Kalenterin luokkien erottaminen auttaa ymmärtämään, miksi kaksi samannäköisellä symbolilla merkittyä päivää voi vaikuttaa työpäivälaskelmaan eri tavoin.",
+          "Kun lisäät oman tapahtuman samalle päivälle, anna sille oma nimi. ”Kalevalan päivä” voi näkyä yleisenä tietona, mutta koulun juhla tai kirjaston tilaisuus tarvitsee lisäksi kellonajan ja paikan. Yleisen kalenterin merkintä ei vahvista paikallista tapahtumaa eikä sitä, että tapahtuma olisi yleisölle avoin. Tarkista ohjelma aina järjestäjältä ennen kutsun jakamista.",
           "Kun rakennat yhteistä kalenteria, selitteeseen kannattaa varata tilaa muutamalle ymmärrettävälle luokalle. Esimerkiksi pyhäpäivä, liputuspäivä ja oma tapahtuma voivat näkyä erillisinä sanoina. Pelkkä punainen väri ei kerro, mitä ominaisuutta se esittää. Jos käytät useita symboleja samassa ruudussa, säilytä myös päivän nimet tai niiden luettava luettelo ruudun yhteydessä. Yleisestä juhlamerkinnästä ei tarvitse tehdä kellonaikaan sidottua henkilökohtaista varausta. Oman koulun juhla tai yhdistyksen kokoontuminen lisätään erikseen todellisen ohjelman mukaan. Tämä auttaa myös jaettaessa kalenteria ihmiselle, joka ei tunne käyttämiäsi lyhenteitä tai värien tarkoitusta ennestään."
         ],
         "links": [
@@ -1748,7 +1748,7 @@
       {
         "title": "Virallinen ja vakiintunut liputuspäivä ovat omia luokkiaan",
         "paragraphs": [
-          "Virallisista liputuspäivistä säädetään asetuksessa. Vakiintuneet liputuspäivät kuuluvat puolestaan suomalaiseen liputuskäytäntöön ja kalenteriperinteeseen. Sisäministeriön luettelo kokoaa nämä eri ryhmät, joten sitä kannattaa käyttää ajantasaisen päivänimen ja aseman tarkistamiseen.",
+          "Virallisista liputuspäivistä säädetään asetuksessa. Vakiintuneet liputuspäivät kuuluvat puolestaan suomalaiseen liputuskäytäntöön ja kalenteriperinteeseen. Sisäministeriön luettelo kokoaa nämä eri ryhmät, joten sitä kannattaa käyttää ajantasaisen päivän nimen ja aseman tarkistamiseen.",
           "Yksityinen ihminen voi liputtaa myös omana juhlapäivänään. Tämä ei tee päivästä valtakunnallista virallista liputuspäivää. Jos suunnittelet yhdistyksen tapahtumaa tai taloyhtiön vuorolistaa, kirjoita kalenteriin myös liputuksen tarkoitus ja siitä vastaava henkilö. Virallinen kalenteri auttaa päivämäärässä, mutta käytännön järjestely tarvitsee jonkun nostamaan ja laskemaan lipun. Muista tarkistaa erikseen juhannuksen ja itsenäisyyspäivän poikkeavat liputusajat sen sijaan, että käyttäisit kaikkina päivinä samaa kellonaikaa."
         ],
         "links": [
@@ -1775,7 +1775,7 @@
         "title": "Liputuksen muistutus on oma pieni tapahtuma",
         "paragraphs": [
           "Jos hoidat liputuksen käytännössä, tee kaksi ajastettua muistutusta: nostaminen ja laskeminen. Merkitse myös salkoon ja lippuun liittyvät tarvittavat valmistelut ennen ensimmäistä omaa vuoroa. Vastuuhenkilön vaihtuminen on hyvä kirjata näkyviin, jotta yleinen juhlamerkintä ei jää kaikkien mutta samalla ei kenenkään hoidettavaksi.",
-          "Poikkeuksellisissa tilanteissa, kuten erikseen suositellussa liputuksessa tai suruliputuksessa, tarkista tuore ohje suoraan ministeriöltä tai tapahtuman järjestäjältä. Ennakkokalenteri ei voi sisältää kaikkia myöhemmin päätettäviä kertaluonteisia päiviä. Pysyvä kulttuurimerkkipäivä, vuosittainen vaalipäivä ja yksittäinen liputussuositus eivät ole sama asia. Kun erotat ne otsikossa ja lähteessä, kalenteri pysyy ymmärrettävänä myös jälkikäteen.",
+          "Poikkeuksellisissa tilanteissa, kuten erikseen suositellussa liputuksessa tai suruliputuksessa, tarkista tuore ohje suoraan ministeriöltä tai tapahtuman järjestäjältä. Ennakkokalenteri ei voi sisältää kaikkia myöhemmin päätettäviä kertaluonteisia päiviä. Pysyvä kulttuurimerkkipäivä, vaalipäivä ja yksittäinen liputussuositus eivät ole sama asia. Kun erotat ne otsikossa ja lähteessä, kalenteri pysyy ymmärrettävänä myös jälkikäteen.",
           "Jaettavassa tapahtumaviestissä päivän luokitus kannattaa kirjoittaa selvästi. Esimerkiksi ”kulttuurin merkkipäivä” antaa oikean taustan ilman vihjettä yleisestä työvapaasta. Jos tapahtumaan liittyy vapaaehtoinen oma liputus, nimeä se tapahtuman järjestelyksi. Vältä koko vuoden juhlaotsikkoon lisättyä oletusta siitä, että kaikki punaisella tai lipulla merkityt päivät olisivat samassa asemassa. Lukija tarvitsee päivän merkityksen sekä oman aikataulun kannalta olennaisen tiedon, ei lisää vaikeasti tulkittavia symboleja."
         ],
         "links": [
@@ -1817,7 +1817,7 @@
       "tyopaivat-ja-aatot",
       "paasiaisen-paivamaara"
     ],
-    "wordCount": 828,
+    "wordCount": 832,
     "readMinutes": 5,
     "sourceChecks": [
       {
@@ -1833,14 +1833,14 @@
         "notes": "Facts checked against primary sources. Practical planning examples are original; no copied prose."
       }
     ],
-    "bodyWordCount": 807
+    "bodyWordCount": 811
   },
   {
     "slug": "oman-kalenterin-suunnittelu",
     "title": "Suunnittele oma kalenteri kuvalle ja merkinnöille",
     "art": "edit",
     "photo": "blog-ring-planner",
-    "intro": "Oma kalenteri voi olla valokuvamuisto tai käytännöllinen työväline. Aloita käyttötarkoituksesta: pitääkö nähdä koko vuosi vai mahtuuko sivulle mieluummin yhden kuukauden muistiinpanot?",
+    "intro": "Oma kalenteri voi olla valokuvamuisto tai käytännöllinen työväline. Aloita käyttötarkoituksesta: pitääkö nähdä koko vuosi vai mahtuvatko sivulle mieluummin yhden kuukauden muistiinpanot?",
     "sections": [
       {
         "title": "Valitse rakenne ennen värejä",
@@ -1848,14 +1848,14 @@
           "Vuosinäkymä sopii vapaiden vertaamiseen ja pitkän suunnitelman hahmottamiseen. Kuukausinäkymässä yksittäiset päivät saavat enemmän tilaa. Paperikoko ja suunta ratkaisevat, paljonko omalle kuvalle ja merkinnöille jää tilaa.",
           "Kokeile luomistyökalun valmista mallia ensin ilman omaa valokuvaa. Tarkista kuukausien ja viikonpäivien luettavuus. Lisää kuva vasta, kun kalenteriosa toimii halutussa paperikoossa. Erittäin leveä kuva voi rajautua pystysuuntaisella sivulla.",
           "Ajattele sivua ensin kalenterin lukijan näkökulmasta. Mikä tieto pitäisi nähdä ensimmäisenä: koko vuosi, valittu kuukausi vai yhden viikon tehtävät? Sijoita tämä tieto rakenteen keskelle ja anna kuvalle sitä tukeva rooli. Jos sivu toimii vasta suuren kuvan poistamisen jälkeen, rakennetta kannattaa vaihtaa ennen koristelua. Voit myös tehdä kaksi eri versiota samaan tarkoitukseen: seinälle katseltavan vuosinäkymän ja mukana pidettävän kuukauden. Niiden ei tarvitse sisältää täsmälleen samoja yksityiskohtia. Yhtenäinen otsikko ja väri yhdistävät sarjan ilman, että jokaista tietoa yritetään mahduttaa kummallekin sivulle.",
-          "Yhtenäinen sarja voi käyttää samaa selkeää ruudukkoa ja vaihtaa kuvan tai korostusvärin kuukausittain. Varmista silti, ettei kuukauden vaihtuva otsikko muuta päivien tarvitsemaa tilaa. Vertaa lyhyttä ja pitkää kuukausinimeä sekä kuukautta, jossa tarvitaan useampia viikkorivejä. Toimiva rakenne mukautuu molempiin. Kun perusratkaisu on testattu, omien kuvien valinta on helpompaa, koska tiedät etukäteen millainen rajaus ja rauhallinen tekstialue kuhunkin malliin tarvitaan."
+          "Yhtenäinen sarja voi käyttää samaa selkeää ruudukkoa ja vaihtaa kuvan tai korostusvärin kuukausittain. Varmista silti, ettei kuukauden vaihtuva otsikko muuta päivien tarvitsemaa tilaa. Vertaa lyhyttä ja pitkää kuukauden nimeä sekä kuukautta, jossa tarvitaan useampia viikkorivejä. Toimiva rakenne mukautuu molempiin. Kun perusratkaisu on testattu, omien kuvien valinta on helpompaa, koska tiedät etukäteen, millainen rajaus ja rauhallinen tekstialue kuhunkin malliin tarvitaan."
         ],
         "links": []
       },
       {
         "title": "Pidä teksti taustasta erottuvana",
         "paragraphs": [
-          "Valitse riittävän tumma teksti vaalealle taustalle tai vaalea teksti tummalle alueelle. Kuvan tärkeä yksityiskohta ei saisi jäädä päivämäärän tai otsikon alle. Pitkä kalenterin nimi kannattaa lyhentää niin, että se mahtuu myös tulosteessa.",
+          "Valitse riittävän tumma teksti vaalealle taustalle tai vaalea teksti tummalle alueelle. Kuvan tärkeä yksityiskohta ei saisi jäädä päivämäärän tai otsikon alle. Pitkä kalenterin nimi kannattaa lyhentää niin, että se mahtuu myös tulosteeseen.",
           "Merkitse omat tärkeät tapahtumat ja katso esikatselusta pisimmät otsikot. Päivän kenttä ei ole pitkä artikkeli: käytä lyhyttä nimeä ja säilytä tarkemmat tiedot omassa kalenteriohjelmassasi.",
           "Testaa tekstin näkyvyys myös pisimmällä todennäköisellä merkinnällä. Lyhyt nimi saattaa näyttää hyvältä, vaikka moniosainen juhlapäivä tai tapahtuma painuisi kuvan kirjavalle reunalle. Kokeile otsikon lyhentämistä, rivinvaihtoa tai rauhallisempaa tekstialuetta ennen koko sivun kirjasinkoon pienentämistä. Päivämäärien luettavuus on tärkeämpi kuin kaikkien koristeiden säilyminen. Jos kalenteri jaetaan myös mustavalkoisena, pidä viikonloput ja omat tapahtumat tunnistettavina tekstin avulla. Värin poistaminen mielessä tai koetulosteessa on nopea tapa huomata, onko jokin olennainen ero rakennettu vain kahden samankaltaisen sävyn varaan."
         ],
@@ -1873,7 +1873,7 @@
         "title": "Aloita yhdestä oikeasta käyttötapauksesta",
         "paragraphs": [
           "Valitse ensin, mihin valmis kalenteri tulee. Työpöydän kuukausi, jääkaapin perheviikko ja seinän vuosijuliste ratkaisevat eri tarpeita. Jos haluat kirjoittaa jokaiseen päivään yhden lyhyen tehtävän, päiväruudun koko on tärkeämpi kuin suuri kansikuva. Jos taas tavoitteena on hahmottaa vuoden vapaita, yhden sivun vuosinäkymä voi olla toimivin.",
-          "Tee ensimmäinen kokeilu valmiilla mallilla ja yhdellä tavallisen pituisella otsikolla. Lisää muutama oma tapahtuma, joista yksi on pidempi nimi. Tarkista, miten sivu toimii näiden todellisten tietojen kanssa. Täysin tyhjä pohja voi näyttää tasapainoiselta, vaikka ensimmäinen moniosainen tapahtuma veisi kaikki rivit. Korjaa silloin otsikkoa tai vaihda rakennetta sen sijaan, että pienentäisit koko kalenterin kirjasinkokoa liian vähäiseksi."
+          "Tee ensimmäinen kokeilu valmiilla mallilla ja yhdellä tavallisen pituisella otsikolla. Lisää muutama oma tapahtuma, joista yhdellä on pidempi nimi. Tarkista, miten sivu toimii näiden todellisten tietojen kanssa. Täysin tyhjä pohja voi näyttää tasapainoiselta, vaikka ensimmäinen moniosainen tapahtuma veisi kaikki rivit. Korjaa silloin otsikkoa tai vaihda rakennetta sen sijaan, että pienentäisit koko kalenterin kirjasinkokoa liian pieneksi."
         ],
         "links": [
           {
@@ -1903,7 +1903,7 @@
         "title": "Valmis tiedosto testataan sen omassa koossa",
         "paragraphs": [
           "Lataa yksi koetiedosto ja avaa se ennen kuin teet monta versiota. Tarkista vuosiluku, kuukausi, paperikoko ja pisimmät tekstit. Tulosta tarvittaessa yksi arkki. Suuren näytön esikatselu ei kerro, miltä pieni teksti näyttää lopullisessa A4-tulosteessa tavalliselta lukuetäisyydeltä.",
-          "PDF sopii suoraan tulostettavaksi, kuvatiedosto jatkokäsittelyyn ja Word tai Excel toimistosovelluksessa avattavaksi. Älä vaihda tiedostopäätettä käsin: se ei muuta kuvatiedostoa muokattavaksi taulukoksi. Säilytä myös oma valokuva ja tapahtumat erikseen, jos haluat myöhemmin tehdä uuden version. Valmiin kalenterin alareunan Kalenteri365-merkintä tunnistaa työkalun lähteen, mutta oman otsikon pitäisi kertoa käyttäjälle sen varsinainen tarkoitus.",
+          "PDF sopii suoraan tulostettavaksi, kuvatiedosto jatkokäsittelyyn ja Word tai Excel toimistosovelluksessa avattavaksi. Älä vaihda tiedostopäätettä käsin: se ei muuta kuvatiedostoa muokattavaksi taulukoksi. Säilytä myös oma valokuva ja tapahtumat erikseen, jos haluat myöhemmin tehdä uuden version. Valmiin kalenterin alareunan Kalenteri365-merkintä kertoo käytetyn työkalun, mutta oman otsikon pitäisi kertoa käyttäjälle sen varsinainen tarkoitus.",
           "Jos annat kalenterin lahjaksi, arvioi vastaanottajan käyttötapa. Suuri seinäkalenteri voi olla näyttävä, mutta työpöydällä pidettävä pieni kuukausi saattaa palvella arkea paremmin. Älä täytä jokaista tilaa omilla juhlapäivämerkinnöillä, jos vastaanottaja tarvitsee paikan omille menoilleen. Tarkista valokuvassa esiintyvien ihmisten suostumus etenkin silloin, kun tiedostoa jaetaan laajalle. Henkilökohtainen ulkoasu voi syntyä yhdestä harkitusta kuvasta ja selkeästä otsikosta ilman, että jokainen kalenterin osa muutetaan koristeeksi.",
           "Yhden kuukauden koetuloste paljastaa yleensä jo rakenteen ongelmat. Vasta sen jälkeen kannattaa valmistaa koko vuoden henkilökohtainen sarja."
         ],
@@ -1942,7 +1942,7 @@
       "kalenterin-varmuuskopio",
       "perheen-viikko"
     ],
-    "wordCount": 802,
+    "wordCount": 803,
     "readMinutes": 5,
     "sourceChecks": [
       {
@@ -1952,7 +1952,7 @@
         "notes": "Facts checked against primary sources. Practical planning examples are original; no copied prose."
       }
     ],
-    "bodyWordCount": 781
+    "bodyWordCount": 782
   },
   {
     "slug": "kylvot-suomen-kevaassa",
@@ -1964,9 +1964,9 @@
       {
         "title": "Esikasvatus ja avomaan kylvö ovat eri vaiheita",
         "paragraphs": [
-          "Esikasvatuksessa siemen kylvetään sisälle ennen ulos istutusta. Avomaalle kylvössä siemen aloittaa kasvunsa suoraan kasvupaikalla. Pitkän kasvatusajan kasvi voi tarvita sisällä valoa ja tilaa jo silloin, kun maa on ulkona vielä jäässä.",
+          "Esikasvatuksessa siemen kylvetään sisälle ennen ulosistutusta. Avomaalle kylvettäessä siemen aloittaa kasvunsa suoraan kasvupaikalla. Pitkän kasvatusajan kasvi voi tarvita sisällä valoa ja tilaa jo silloin, kun maa on ulkona vielä jäässä.",
           "Aloita siemenpussin lajikekohtaisesta ohjeesta. Kylvökalenterin kuukausirajat ovat suunnittelun apu, eivät lupaus turvallisesta istutussäästä. Liian varhain esikasvatettu taimi voi kasvaa pitkäksi ja heikoksi, jos valoa on niukasti.",
-          "Valitse ensimmäiselle kasvatuskaudelle sellainen määrä lajeja, jonka hoitoon sinulla on tilaa ja aikaa. Samalla ikkunalaudalla olevat eri kasvit voivat tarvita eripituisen esikasvatuksen, vaikka siemenet ostetaan samalla kertaa. Kirjoita siemenpussista muistiin lajike, kasvupaikkasuositus ja kylvöä koskeva oma ohje ennen pussin sulkemista. Jos käytössä on vain avomaa, kasvihuoneeseen tarkoitetun aikataulun kopiointi ei ratkaise olosuhteiden eroa. Myös hankitun valmiin taimen istutus on eri työ kuin siemenen kylvö. Kun nämä vaiheet näkyvät kalenterissa omilla nimillään, saat selville mitä juuri seuraavaksi pitäisi tehdä.",
+          "Valitse ensimmäiselle kasvatuskaudelle sellainen määrä lajeja, jonka hoitoon sinulla on tilaa ja aikaa. Samalla ikkunalaudalla olevat eri kasvit voivat tarvita eripituisen esikasvatuksen, vaikka siemenet ostetaan samalla kertaa. Kirjoita siemenpussista muistiin lajike, kasvupaikkasuositus ja kylvöä koskeva oma ohje ennen pussin sulkemista. Jos käytössä on vain avomaa, kasvihuoneeseen tarkoitetun aikataulun kopiointi ei ratkaise olosuhteiden eroa. Myös hankitun valmiin taimen istutus on eri työ kuin siemenen kylvö. Kun nämä vaiheet näkyvät kalenterissa omilla nimillään, saat selville, mitä juuri seuraavaksi pitäisi tehdä.",
           "Voit jakaa kalenterin kasvupaikkojen mukaan, jos sama laji on sekä ruukussa että avomaalla. Anna niille erottuvat nimet, jotta havainto ei siirry vahingossa toisen paikan ohjeeksi. Myös kylvö ja uusintakylvö on hyvä erottaa toisistaan. Jos ensimmäinen erä epäonnistui, uusi päivä ei korvaa vanhaa havaintoa vaan täydentää sitä. Näin seuraavan vuoden suunnittelussa näkyy koko kokeilu eikä vain viimeiseksi onnistunut ajankohta."
         ],
         "links": []
@@ -1976,7 +1976,7 @@
         "paragraphs": [
           "Jos ohje on esimerkiksi esikasvattaa tietty määrä viikkoja, valitse realistinen ulosistutuspäivä ja laske kylvöjakso siitä taaksepäin. Tarkista samalla, onko kasvupaikka lämmin kasvihuone vai avoin penkki.",
           "Kylvökalenterin laskuri näyttää viikkojen perusteella jakson, mutta paikallinen sää ratkaisee lopullisen siirron. Karaise taimet vähitellen ja tarkkaile ennustetta. Yksittäinen lämmin päivä ei vielä kerro yölämpötiloista tai maan lämpenemisestä.",
-          "Laskurin periaatetta voi kokeilla ehdollisella esimerkillä. Jos oman lajikkeen ohjeessa lukee kuuden viikon esikasvatus ja käytät alustavana istutuspäivänä 1.6.2027, kuusi viikkoa taaksepäin vie 20.4.2027 päivään. Tämä on päivämäärälasku, ei yleinen suositus kylvää kaikki kasvit huhtikuussa tai istuttaa ne kesäkuun ensimmäisenä päivänä. Vaihda molemmat lähtötiedot oman kasvin ja paikan mukaan. Jos istutusarvio siirtyy myöhemmäksi, tarkista myös taimien käytettävissä oleva tila. Laskettu kylvöpäivä ei itsessään ratkaise sitä, kuinka pitkään taimi voi odottaa sisällä sopivissa oloissa."
+          "Laskurin periaatetta voi kokeilla ehdollisella esimerkillä. Jos oman lajikkeen ohjeessa lukee kuuden viikon esikasvatus ja käytät alustavana istutuspäivänä 1.6.2027, kuusi viikkoa taaksepäin vie päivään 20.4.2027. Tämä on päivämäärälasku, ei yleinen suositus kylvää kaikki kasvit huhtikuussa tai istuttaa ne kesäkuun ensimmäisenä päivänä. Vaihda molemmat lähtötiedot oman kasvin ja paikan mukaan. Jos istutusarvio siirtyy myöhemmäksi, tarkista myös taimien käytettävissä oleva tila. Laskettu kylvöpäivä ei itsessään ratkaise sitä, kuinka pitkään taimi voi odottaa sisällä sopivissa oloissa."
         ],
         "links": []
       },
@@ -2026,7 +2026,7 @@
         "title": "Pidä kylvöpäiväkirjassa vain vertailukelpoiset tiedot",
         "paragraphs": [
           "Hyödyllinen ensimmäinen päiväkirja sisältää lajin ja lajikkeen, kylvöpäivän, taimettumisen sekä ulos siirtämisen. Lisää kasvupaikka ja yksi lyhyt huomio valosta tai säästä silloin, kun se poikkeaa tavallisesta. Näin seuraavan vuoden vertailussa selviää, oliko kasvi samassa penkissä ja samoissa olosuhteissa vai aivan eri paikassa.",
-          "Kuun vaiheita voi halutessaan seurata perinteisenä lisämerkintänä, mutta niistä ei pidä johtaa varmaa lupausta kasvutulokseen. Kasvin tarpeet, lajike, lämpötila, valo, vesi ja kasvualusta ovat käytännön päätösten perusta. Tarkista myös karaisun tarve ennen ulosistutusta: sisällä kasvatettu taimi totutetaan ulkoilmaan vähitellen. Kun sää muuttuu, muokkaa päiväkirjaan toteutunut ajankohta. Se on myöhemmin arvokkaampi tieto kuin muuttamatta jätetty alkuperäinen arvio.",
+          "Kuun vaiheita voi halutessaan seurata perinteisenä lisämerkintänä, mutta niistä ei pidä johtaa varmaa lupausta kasvutuloksesta. Kasvin tarpeet, lajike, lämpötila, valo, vesi ja kasvualusta ovat käytännön päätösten perusta. Tarkista myös karaisun tarve ennen ulosistutusta: sisällä kasvatettu taimi totutetaan ulkoilmaan vähitellen. Kun sää muuttuu, muokkaa päiväkirjaan toteutunut ajankohta. Se on myöhemmin arvokkaampi tieto kuin muuttamatta jätetty alkuperäinen arvio.",
           "Myös taimien määrä kannattaa päättää ajoissa. Jos käytössä on vain muutama ruukku, kaikkien pussin siementen kylväminen voi johtaa ahtauteen ja turhaan työhön. Kirjaa suunnitelmaan tarvittava taimimäärä ja jätä tilaa mahdollisille varataimille. Kesän aikana merkitse toteutunut hoito ja sadon alkaminen, jotta seuraavan kevään päätökset perustuvat omaan kasvupaikkaan. Sama lajike voi eri vuosina käyttäytyä eri tavoin, joten yksittäisen onnistumisen päivämäärää ei tarvitse muuttaa pysyväksi säännöksi.",
           "Säilytä myös siemenpussin lajikenimi. Pelkkä kasvin nimi ei riitä selittämään, miksi kahden erilaisen lajikkeen taimikasvatusajat poikkesivat toisistaan."
         ],
@@ -2073,7 +2073,7 @@
       "kuun-vaiheet",
       "syksyn-suunnittelu"
     ],
-    "wordCount": 800,
+    "wordCount": 799,
     "readMinutes": 5,
     "sourceChecks": [
       {
@@ -2095,7 +2095,7 @@
         "notes": "Facts checked against primary sources. Practical planning examples are original; no copied prose."
       }
     ],
-    "bodyWordCount": 781
+    "bodyWordCount": 780
   },
   {
     "slug": "nousevan-merkin-syntymaaika",
@@ -2118,16 +2118,16 @@
         "paragraphs": [
           "Syntymäpaikka tarkoittaa syntymän todellista sijaintia, ei nykyistä kotikuntaa. Valitse oikea kaupunki tai syötä koordinaatit ja aikavyöhyke itse, jos ne ovat tiedossa. Samannimisiä paikkoja voi olla useassa maassa.",
           "Kellonsiirtopäivän puuttuva tai kahdentuva tunti vaatii erityistä huomiota. Kalenteri365 tunnistaa nämä tilanteet ja pyytää ratkaisemaan epäselvyyden sen sijaan, että arpoisi ajankohdan.",
-          "Paikan tarkistamiseen riittää usein kaupungin nimen lisäksi maan ja aikavyöhykkeen lukeminen. Automaattisesti ehdotettu nykyinen sijainti ei todista, että sama paikka olisi syntymäkaupunki. Jos syötät koordinaatit käsin, tarkista kumpi luku on leveysaste ja kumpi pituusaste sekä mihin ilmansuuntaan ne viittaavat. Paikkatieto ei parane sillä, että likimääräiseen sijaintiin lisätään tarpeettomasti desimaaleja. Käytä niin tarkkaa ja luotettavaa tietoa kuin lähteessäsi todella on. Merkitse myös, jos kyse on kaupungin keskustasta eikä tarkasta rakennuksesta. Tämän eron säilyttäminen auttaa arvioimaan myöhemmin lähtötiedon laatua."
+          "Paikan tarkistamiseen riittää usein kaupungin nimen lisäksi maan ja aikavyöhykkeen lukeminen. Automaattisesti ehdotettu nykyinen sijainti ei todista, että sama paikka olisi syntymäkaupunki. Jos syötät koordinaatit käsin, tarkista, kumpi luku on leveysaste ja kumpi pituusaste sekä mihin ilmansuuntaan ne viittaavat. Paikkatieto ei parane sillä, että likimääräiseen sijaintiin lisätään tarpeettomasti desimaaleja. Käytä niin tarkkaa ja luotettavaa tietoa kuin lähteessäsi todella on. Merkitse myös, jos kyse on kaupungin keskustasta eikä tarkasta rakennuksesta. Tämän eron säilyttäminen auttaa arvioimaan myöhemmin lähtötiedon laatua."
         ],
         "links": []
       },
       {
         "title": "Laskennan tarkkuus ja tulkinta ovat eri asioita",
         "paragraphs": [
-          "Geometrinen nousukulma voidaan laskea ja verrata toiseen laskentaan. Astrologinen luonnetulkinta ei tästä muutu tieteellisesti osoitetuksi ennusteeksi. Sivuston horoskoopit ovat viihteellisiä pohdintoja, eivät päätöksenteon tai terveyden arvioinnin väline.",
-          "Vertailu kannattaa tehdä ensin samalla syötteellä kahdesti ja tarkistaa, että tulos on toistettavissa. Sen jälkeen muuta vain yhtä lähtötietoa, esimerkiksi kellonaikaa muutamalla minuutilla, ja katso mikä muuttuu. Jos sekä aika, kaupunki että eläinradan asetukset vaihtuvat yhtä aikaa, tulosten eroa ei voi tulkita yhden tekijän vaikutukseksi. Numerollinen herkkyystarkistus on eri asia kuin horoskoopin lukeminen. Ensimmäinen auttaa ymmärtämään laskennan asetuksia, jälkimmäinen tarjoaa viihteellistä tekstiä. Kummassakaan ei tarvitse valita itselle mieluisinta tulosta muuttamalla syntymätietoa ilman perustetta tai esittää arvioitua aikaa tarkaksi alkuperäiseksi merkinnäksi.",
-          "Jos säilytät tuloksen itsellesi, kirjoita sen yhteyteen myös käytetty laskentatapa. Trooppisella ja muulla eläinratajaolla saatuja merkkien nimiä ei tule verrata lähtökohtaisesti samoina. Oma muistiinpano voi olla lyhyt, mutta sen pitäisi kertoa millä syötteellä ja asetuksella tulos syntyi. Tämä tekee myöhemmästä vertailusta ymmärrettävän. Toisen henkilön tulokseen tutustuessa riittää hänen itse jakamansa tieto; tarkkaa syntymäaikaa tai paikkaa ei tarvitse julkaista keskustelun vuoksi."
+          "Geometrinen nousukulma voidaan laskea ja verrata toiseen laskentaan. Astrologinen luonnetulkinta ei tästä muutu tieteellisesti osoitetuksi ennusteeksi. Sivuston horoskoopit ovat viihteellisiä pohdintoja, eivät päätöksenteon tai terveyden arvioinnin välineitä.",
+          "Vertailu kannattaa tehdä ensin samalla syötteellä kahdesti ja tarkistaa, että tulos on toistettavissa. Sen jälkeen muuta vain yhtä lähtötietoa, esimerkiksi kellonaikaa muutamalla minuutilla, ja katso, mikä muuttuu. Jos sekä aika, kaupunki että eläinradan asetukset vaihtuvat yhtä aikaa, tulosten eroa ei voi tulkita yhden tekijän vaikutukseksi. Numerollinen herkkyystarkistus on eri asia kuin horoskoopin lukeminen. Ensimmäinen auttaa ymmärtämään laskennan asetuksia, jälkimmäinen tarjoaa viihteellistä tekstiä. Kummassakaan ei tarvitse valita itselle mieluisinta tulosta muuttamalla syntymätietoa ilman perustetta tai esittää arvioitua aikaa tarkaksi alkuperäiseksi merkinnäksi.",
+          "Jos säilytät tuloksen itsellesi, kirjoita sen yhteyteen myös käytetty laskentatapa. Trooppisella ja muulla eläinratajaolla saatuja merkkien nimiä ei tule verrata lähtökohtaisesti samoina. Oma muistiinpano voi olla lyhyt, mutta sen pitäisi kertoa, millä syötteellä ja asetuksella tulos syntyi. Tämä tekee myöhemmästä vertailusta ymmärrettävän. Toisen henkilön tulokseen tutustuessa riittää hänen itse jakamansa tieto; tarkkaa syntymäaikaa tai paikkaa ei tarvitse julkaista keskustelun vuoksi."
         ],
         "links": []
       },
@@ -2135,7 +2135,7 @@
         "title": "Mitä laskurissa oikeastaan lasketaan?",
         "paragraphs": [
           "Astrologiassa nousevaksi merkiksi kutsutaan sitä eläinradan merkkiä, jonka ekliptikan kohta nousee itäisellä horisontilla syntymähetkellä. Laskenta käyttää Maan pyörimisen vuoksi sekä aikaa että maantieteellistä sijaintia. Syntymäpäivän perusteella tavallisesti annettu aurinkomerkki ja nouseva merkki eivät siis ole saman asian kaksi nimeä.",
-          "Kalenteri365 käyttää trooppista eläinrataa. Se on astrologinen koordinaattijako, eikä tulosta pidä sekoittaa taivaalla näkyvien erikokoisten tähtikuvioiden rajoihin. Kun vertailet kahta laskuria, tarkista ensin että molemmat käyttävät samaa eläinrataa, päivämäärää, paikallisaikaa ja paikkaa. Muuten tulosten ero voi syntyä asetuksista, vaikka molempien laskenta toimisi niiden omilla oletuksilla. Numerollisen laskelman vertailu ei myöskään vahvista astrologisia luonne- tai tulevaisuustulkintoja."
+          "Kalenteri365 käyttää trooppista eläinrataa. Se on astrologinen koordinaattijako, eikä tulosta pidä sekoittaa taivaalla näkyvien erikokoisten tähtikuvioiden rajoihin. Kun vertailet kahta laskuria, tarkista ensin, että molemmat käyttävät samaa eläinrataa, päivämäärää, paikallisaikaa ja paikkaa. Muuten tulosten ero voi syntyä asetuksista, vaikka molempien laskenta toimisi niiden omilla oletuksilla. Numerollisen laskelman vertailu ei myöskään vahvista astrologisia luonne- tai tulevaisuustulkintoja."
         ],
         "links": [
           {
@@ -2167,7 +2167,7 @@
           "Jos haluat verrata laskelmaa myöhemmin, kirjoita muistiin käytetty päivämäärä, paikallisaika, sijainti ja aikavyöhyke sekä se, oliko kellonaika tarkka vai arvioitu. Pelkkä merkin nimi ei kerro, millaisilla tiedoilla se syntyi. Älä jaa toisen ihmisen tarkkaa syntymäaikaa ja paikkaa julkisesti ilman hänen suostumustaan.",
           "Sivuston päivittäinen horoskooppi tarjoaa erillistä viihteellistä luettavaa. Sen päiväkohtainen teksti ei ole laskennallinen todiste siitä, mitä nouseva merkki aiheuttaa, eikä sitä pidä käyttää terveyttä, rahaa tai muita merkittäviä päätöksiä ohjaavana ennusteena. Laskurin hyödyllinen tehtävä on näyttää valitun astrologisen mallin tulos ja syötettyjen tietojen epävarmuus. Voit tutkia eroa eri kellonaikojen välillä tekemättä tuloksesta tieteellistä luonnetestiä.",
           "Jos laskuri näyttää merkin rajan lähellä olevan tuloksen, kokeile pientä aikaeroa molempiin suuntiin ja lue muuttuva tulos. Tämä on herkkyyden tarkastelua, ei tapa valita itselle mieluisinta merkkiä. Syntymäajan lähteen pitäisi edelleen ratkaista käytetty aika. Jos tietoa ei ole saatavissa, voit tutustua useampaan mahdolliseen tulkintaan säilyttäen epävarmuuden näkyvänä. Tarkalta näyttävä aste tai minuutti ei paranna lähtötiedon laatua, jos alkuperäinen kellonaika on vain muistikuva.",
-          "Tarkista lopuksi, ettei syötetty aamu ole vaihtunut illaksi tai päivä ja kuukausi keskenään. Näin vältät tavallisen syöttövirheen ennen tulosten vertaamista."
+          "Tarkista lopuksi, ettei syötetty aamu ole vaihtunut illaksi ja etteivät päivä ja kuukausi ole vaihtuneet keskenään. Näin vältät tavallisen syöttövirheen ennen tulosten vertaamista."
         ],
         "links": [
           {
@@ -2208,7 +2208,7 @@
       "kuun-vaiheet",
       "auringon-ajat"
     ],
-    "wordCount": 802,
+    "wordCount": 805,
     "readMinutes": 5,
     "sourceChecks": [
       {
@@ -2224,7 +2224,7 @@
         "notes": "Facts checked against primary sources. Practical planning examples are original; no copied prose."
       }
     ],
-    "bodyWordCount": 782
+    "bodyWordCount": 785
   },
   {
     "slug": "opintoperiodit-ja-tentit",
@@ -2238,7 +2238,7 @@
         "paragraphs": [
           "Yliopiston yhteinen perioditaulukko antaa rungon, jonka sisään kurssit sijoittuvat. Osa opetuksesta voi jatkua useamman periodin yli. Laboratoriot, projektit, harjoittelut ja yksilöopetus voivat noudattaa erillistä aikataulua.",
           "Tenttiviikolla ei välttämättä järjestetä tavallisia luentoja, mutta tenttiin osallistuminen ja valmistautuminen ovat silti osa opiskelua. Matkaa suunniteltaessa tarkista sekä tenttipäivä että palautettavien töiden määräajat.",
-          "Kurssin omasta toteutuksesta kannattaa erottaa kolme aikataulutasoa: yhteiset luennot, itse valitun harjoitusryhmän tapaamiset ja henkilökohtaisesti varattu suoritus. Jos kopioit kaikki vaihtoehtoiset ryhmät samaan kalenteriin, viikko näyttää täydeltä ennen kuin olet valinnut mihin osallistut. Kirjoita tapahtumaan riittävä tunniste, jotta saman nimiset opetuskerrat erottuvat toisistaan. Myös kampus tai etäosallistumisen tapa on tärkeä tieto, jos luennon ja seuraavan harjoituksen välissä on matka. Kalenteriin merkitty aika ei varaa paikkaa ryhmästä; tarkista ilmoittautumisen tilanne oppilaitoksen omasta järjestelmästä ennen kuin pidät suunnitelmaa valmiina."
+          "Kurssin omasta toteutuksesta kannattaa erottaa kolme aikataulutasoa: yhteiset luennot, itse valitun harjoitusryhmän tapaamiset ja henkilökohtaisesti varattu suoritus. Jos kopioit kaikki vaihtoehtoiset ryhmät samaan kalenteriin, viikko näyttää täydeltä ennen kuin olet valinnut, mihin osallistut. Kirjoita tapahtumaan riittävä tunniste, jotta samannimiset opetuskerrat erottuvat toisistaan. Myös kampus tai etäosallistumisen tapa on tärkeä tieto, jos luennon ja seuraavan harjoituksen välissä on matka. Kalenteriin merkitty aika ei varaa paikkaa ryhmästä; tarkista ilmoittautumisen tilanne oppilaitoksen omasta järjestelmästä ennen kuin pidät suunnitelmaa valmiina."
         ],
         "links": []
       },
@@ -2247,8 +2247,8 @@
         "paragraphs": [
           "Kalenteri365 kokoaa yliopistojen julkaisemia opetusperiodeja ja erikseen nimettyjä opetustaukoja. ICS-tiedosto lisää periodirajat, mutta ei ilmoita sinua kurssille eikä siirrä kaikkia henkilökohtaisia tenttejä.",
           "Lukujärjestyksessä voit merkitä omat viikoittaiset tunnit. Päiväsuunnitelmaan sopivat lukeminen, harjoitustehtävät ja palautukset. Kun jakso vaihtuu, päivitä toistuvat tunnit ja säilytä tärkeät määräajat näkyvissä.",
-          "Jaa itsenäinen työ tehtäviksi, joiden valmistumisen voi tunnistaa. Esimerkiksi aineiston lukeminen, muistiinpanojen tekeminen ja harjoitustehtävien palauttaminen voivat olla eri vaiheita, vaikka ne liittyvät samaan kurssiin. Kirjoita kalenteriin kyseisen työjakson tavoite eikä pelkästään kurssin nimeä. Jos tehtävä tarvitsee yhteisen laitteen, ryhmätilan tai muiden osallistumista, sovita tämä aika ensin. Joustavamman yksin tehtävän työn voi sijoittaa sen ympärille. Lukujärjestys näyttää silloin muutakin kuin opetuksen: siitä huomaa, onko itsenäiselle opiskelulle todella jätetty aikaa vai oletetaanko sen tapahtuvan jokaisen muun menon välissä ilman omaa varausta.",
-          "Suunnitelmaan voi sisällyttää myös lyhyen toteumatarkistuksen. Jos tehtäväsarja vei odotettua enemmän aikaa, säädä seuraavan vastaavan jakson arviota. Tarkoitus ei ole arvostella omaa nopeutta vaan käyttää todellista kokemusta. Samalla huomaat, kasaantuuko itsenäinen työ aina iltoihin tai tenttiä edeltävään päivään. Lukuvuosikalenteri pysyy yhteisenä runkona, mutta henkilökohtaisen kalenterin pitää mukautua oman opiskelun todelliseen työnkulkuun ja niihin opetuksiin, joihin olet osallistumassa."
+          "Jaa itsenäinen työ tehtäviksi, joiden valmistumisen voi tunnistaa. Esimerkiksi aineiston lukeminen, muistiinpanojen tekeminen ja harjoitustehtävien palauttaminen voivat olla eri vaiheita, vaikka ne liittyvät samaan kurssiin. Kirjoita kalenteriin kyseisen työjakson tavoite pelkän kurssin nimen sijaan. Jos tehtävä tarvitsee yhteisen laitteen, ryhmätilan tai muiden osallistumista, sovita tämä aika ensin. Joustavamman yksin tehtävän työn voi sijoittaa sen ympärille. Lukujärjestys näyttää silloin muutakin kuin opetuksen: siitä huomaa, onko itsenäiselle opiskelulle todella jätetty aikaa vai oletetaanko sen tapahtuvan jokaisen muun menon välissä ilman omaa varausta.",
+          "Suunnitelmaan voi sisällyttää myös lyhyen toteumatarkistuksen. Jos tehtäväsarja vei odotettua enemmän aikaa, säädä seuraavan vastaavan jakson arviota. Tarkoitus ei ole arvostella omaa nopeutta vaan käyttää todellista kokemusta. Samalla huomaat, kasaantuuko itsenäinen työ aina iltoihin tai tenttiä edeltävään päivään. Lukuvuosikalenteri pysyy yhteisenä runkona, mutta henkilökohtaisen kalenterin pitää mukautua oman opiskelun todelliseen työnkulkuun ja siihen opetukseen, johon olet osallistumassa."
         ],
         "links": []
       },
@@ -2256,7 +2256,7 @@
         "title": "Julkaisematon aika jätetään avoimeksi",
         "paragraphs": [
           "Jos yliopiston myöhemmän lukuvuoden tiedot puuttuvat, niitä ei kopioida vanhasta vuodesta. Toistuvista viikkosäännöistä laskettu jakso nimetään erikseen lasketuksi. Virallisessa julkaisussa havaittu ristiriita kannattaa tarkistaa opiskelijapalveluista ennen varausta.",
-          "Julkaisemattoman jakson kohdalla voi silti tehdä hyödyllisiä valmisteluja ilman keksittyä päivämäärää. Kerää tieto siitä, mistä vahvistettu lukuvuosikalenteri tulee ja millä tunnisteella oma toteutus löytyy. Kirjoita avoimeksi kysymykseksi esimerkiksi tentin ajankohta tai harjoittelun aloitus, jos se ratkaisee muun suunnitelman. Näin puuttuva tieto saa selkeän paikan eikä huku tyhjään ruutuun. Kun tieto julkaistaan, vaihda kysymys oikeaksi tapahtumaksi ja tarkista siihen liittyvät muut varaukset. Jos matkan päätös riippuu vielä avoimesta tentistä, pidä myös matka alustavana. Kalenterin tarkoitus on näyttää epävarmuus, ei peittää sitä liian varmalta näyttävällä ohjelmalla."
+          "Julkaisemattoman jakson kohdalla voi silti tehdä hyödyllisiä valmisteluja ilman keksittyä päivämäärää. Kerää tieto siitä, mistä vahvistettu lukuvuosikalenteri tulee ja millä tunnisteella oma toteutus löytyy. Kirjoita avoimeksi kysymykseksi esimerkiksi tentin ajankohta tai harjoittelun aloitus, jos se ratkaisee muun suunnitelman. Näin puuttuva tieto saa selkeän paikan eikä huku tyhjään ruutuun. Kun tieto julkaistaan, vaihda kysymys oikeaksi tapahtumaksi ja tarkista siihen liittyvät muut varaukset. Jos päätös matkasta riippuu vielä avoimesta tentistä, pidä myös matka alustavana. Kalenterin tarkoitus on näyttää epävarmuus, ei peittää sitä liian varmalta näyttävällä ohjelmalla."
         ],
         "links": []
       },
@@ -2298,7 +2298,7 @@
         "title": "Varaa lukemiselle aikaa ennen tenttiviikkoa",
         "paragraphs": [
           "Katso kuukauden näkymästä, osuvatko useat tentit tai palautukset samaan jaksoon. Ajoita aineiston kerääminen, harjoitustehtävät ja kertaus ennen viimeistä viikkoa. Yleinen merkintä ”lue tenttiin” muuttuu käyttökelpoisemmaksi, kun siinä lukee tarkka luku, tehtäväjoukko tai seuraava välitavoite.",
-          "Opetustauko ei välttämättä ole kokonaan vapaa opinnoista. Itsenäinen työ, projekti ja harjoittelu voivat jatkua, vaikka yhteisessä periodikalenterissa ei olisi tavallisia luentoja. Suunnittele matka tai työvuorot vasta oman kurssitiedon perusteella. Jos yliopiston tulevan vuoden päivät puuttuvat tai julkaisu sisältää ristiriidan, varmista asia opiskelijapalveluista. Päätelmää ei pidä peittää tarkalta näyttäväksi päivämääräksi vain siksi, että jokainen taulukon kohta haluttaisiin täyttää.",
+          "Opetustauko ei välttämättä ole kokonaan vapaa opinnoista. Itsenäinen työ, projekti ja harjoittelu voivat jatkua, vaikka yhteisessä periodikalenterissa ei olisi tavallisia luentoja. Suunnittele matka tai työvuorot vasta oman kurssitiedon perusteella. Jos yliopiston tulevan vuoden päivät puuttuvat tai julkaisu sisältää ristiriidan, varmista asia opiskelijapalveluista. Päätelmää ei pidä esittää tarkkana päivämääränä vain siksi, että jokainen taulukon kohta haluttaisiin täyttää.",
           "Tulostettuun opiskelukalenteriin kannattaa jättää paikka muuttuneelle opetukselle. Yksi luento voi siirtyä ilman, että koko periodikalenteri vaihtuu. Lisää muutoksen yhteyteen sen alkuperäinen ilmoitus tai riittävä tunniste, jotta et palauta vanhaa aikaa seuraavalla viikkokopioinnilla. Jos sama toteutus näkyy sekä opiskelijahallinnossa että opettajan oppimisympäristössä, tarkista ristiriita opettajalta. Oma kalenteri kokoaa tiedot, mutta ei tee kahdesta eri ajasta automaattisesti yhtä vahvistettua ajankohtaa. Viikon alussa tehty lyhyt tarkistus auttaa huomaamaan tällaiset erot ajoissa.",
           "Ryhmätyölle kannattaa sopia oma välitarkistus ennen virallista palautuspäivää. Merkitse, mitä jokainen tuo siihen mennessä yhteiseen työhön. Tapaaminen ilman valmistelun tavoitetta voi kuluttaa aikaa muuttamatta projektin tilannetta. Kun yhteinen versio on hyväksytty, varatkaa vielä hetki palautukselle ja sen vahvistuksen tarkistamiselle. Näin työn valmistuminen ja sen onnistunut lähettäminen eivät jää yhdeksi epäselväksi merkinnäksi viimeiseen iltaan."
         ],
@@ -2341,7 +2341,7 @@
       "syksyn-suunnittelu",
       "viikkonumerot"
     ],
-    "wordCount": 811,
+    "wordCount": 809,
     "readMinutes": 5,
     "sourceChecks": [
       {
@@ -2357,7 +2357,7 @@
         "notes": "Facts checked against primary sources. Practical planning examples are original; no copied prose."
       }
     ],
-    "bodyWordCount": 795
+    "bodyWordCount": 793
   },
   {
     "slug": "yovuoron-kalenteri",
@@ -2380,7 +2380,7 @@
         "paragraphs": [
           "Määritä toistuva työ- ja vapaapäivien järjestys ensin. Jos yksi päivä muuttuu, tee siihen poikkeus sen sijaan, että muuttaisit koko kierron aloitusta. Näin seuraavien viikkojen rytmi pysyy vakaana.",
           "Tarkista muutoksen jälkeen sekä kyseisen päivän teksti että kuukauden yhteenveto. ICS-viennissä yksittäinen vuoro saa omat alku- ja loppuhetkensä. Vastaanottava kalenteriohjelma näyttää ne oman aikavyöhykeasetuksensa mukaan.",
-          "Valitse kierron aloituspäiväksi päivä, jonka vuorotyypin tiedät varmasti. Selaa sen jälkeen muutama päivä taaksepäin ja eteenpäin, jotta näet jatkuuko malli haluttuun suuntaan. Jos ensimmäinen tiedossa oleva päivä on vapaapäivä keskellä kiertoa, pelkkä kuukauden ensimmäiseen päivään ankkurointi voi tuottaa väärän järjestyksen. Yksittäiset vaihdot kirjataan vasta, kun perusmalli on oikein. Älä käytä poikkeuksia peittämään kierron väärää aloitusta, sillä silloin seuraava kuukausi tarvitsee saman korjaamisen uudelleen. Toisaalta vahvistetun yksittäisen vaihdon vuoksi ei yleensä ole tarkoitus siirtää kaikkia tulevia vuoroja.",
+          "Valitse kierron aloituspäiväksi päivä, jonka vuorotyypin tiedät varmasti. Selaa sen jälkeen muutama päivä taaksepäin ja eteenpäin, jotta näet, jatkuuko malli haluttuun suuntaan. Jos ensimmäinen tiedossa oleva päivä on vapaapäivä keskellä kiertoa, pelkkä kuukauden ensimmäiseen päivään ankkurointi voi tuottaa väärän järjestyksen. Yksittäiset vaihdot kirjataan vasta, kun perusmalli on oikein. Älä käytä poikkeuksia peittämään kierron väärää aloitusta, sillä silloin seuraava kuukausi tarvitsee saman korjaamisen uudelleen. Toisaalta vahvistetun yksittäisen vaihdon vuoksi ei yleensä ole tarkoitus siirtää kaikkia tulevia vuoroja.",
           "Tee itsellesi pieni selite käytetyistä vuorolyhenteistä ennen suunnitelman jakamista. Päivä, yö ja vapaa voivat olla omassa työssä tuttuja yhdellä kirjaimella, mutta muiden lukijoiden ei tarvitse tuntea samaa tapaa. Selitteessä voi näkyä myös se, että yövuoro päättyy seuraavana aamuna. Jos yhden vuoron kellonajat poikkeavat tavallisesta, kirjoita ne kyseiseen tapahtumaan. Älä muuta koko selitettä yhden poikkeuksen mukaiseksi, koska silloin muiden päivien merkitys muuttuisi."
         ],
         "links": []
@@ -2424,7 +2424,7 @@
         "paragraphs": [
           "Vuorokierto toimii mallina, johon yksittäiset muutokset lisätään poikkeuksina. Jos vaihdat yhden yön toisen työntekijän kanssa, tarkista sekä aloituspäivä että seuraavan aamun loppu. Koko kierron siirtäminen yhden vaihdon takia voi muuttaa tulevien viikkojen vuorot vääriksi.",
           "Ennen ICS-vientiä katso pisin vuoro, ensimmäinen vuoro ja yksi muutettu päivä. Avaa ladattu tiedosto vastaanottavassa kalenterissa ja tarkista, ettei yön yli jatkuva tapahtuma pääty samana iltana. Kellonsiirtoviikonlopun kohdalla paikallinen kellonaika voi olla puuttuva tai kahdentuva, joten varmista myös täsmällinen ajanhetki. Työaikalain ja työehtojen lepoaika- tai korvaussäännöt tarkistetaan erikseen: suunnittelijan tuntiyhteenveto ei vahvista työnantajan työaikakirjanpitoa eikä vuoron lainmukaisuutta.",
-          "Tulostettavan kuukausinäkymän pitäisi näyttää vuoron lisäksi sen nimi tai lyhenne selitteessä. Jos käytät värejä päivälle, yölle ja vapaalle, pidä myös teksti mukana. Mustavalkoinen tuloste tai puhelimesta katsottu pieni kuva voi hävittää sävyjen eron. Kun jaat suunnitelman toiselle, tarkista että sekä aloitus- että lopetusajan kaksoispisteet ja numerot erottuvat. Kahdelle riville jaettu ”20.00 / 08.00” on usein helpompi lukea pienestä ruudusta kuin yhteen puristettu pitkä aikaväli."
+          "Tulostettavan kuukausinäkymän pitäisi näyttää vuoron lisäksi sen nimi tai lyhenne selitteessä. Jos käytät värejä päivälle, yölle ja vapaalle, pidä myös teksti mukana. Mustavalkoinen tuloste tai puhelimesta katsottu pieni kuva voi hävittää sävyjen eron. Kun jaat suunnitelman toiselle, tarkista, että sekä aloitus- että lopetusajan kaksoispisteet ja numerot erottuvat. Kahdelle riville jaettu ”20.00 / 08.00” on usein helpompi lukea pienestä ruudusta kuin yhteen puristettu pitkä aikaväli."
         ],
         "links": [
           {
@@ -2484,7 +2484,7 @@
         "title": "Päätä käytettävissä olevat lomapäivät",
         "paragraphs": [
           "Aloita käytettävissä olevien lomapäivien määrästä ja valitse vuosi. Viikonloput ja yleiset pyhäpäivät voivat pidentää vapaan jaksoa, mutta työnantajan hyväksyntää ei voi päätellä laskurin parhaasta ehdotuksesta.",
-          "Katso ehdotuksen koko alku- ja loppuväli. Varmista, ettet tarvitse ylimääräistä työstä vapaata päivää matkan lähtöä tai paluuta varten. Iltaisin tai viikonloppuisin tehtävässä työssä tarkista ensin oma vuoroluettelo.",
+          "Katso ehdotuksen aikaväli alusta loppuun. Varmista, ettet tarvitse ylimääräistä työstä vapaata päivää matkan lähtöä tai paluuta varten. Iltaisin tai viikonloppuisin tehtävässä työssä tarkista ensin oma vuoroluettelo.",
           "Kirjoita ensin, mitä käytettävissä olevien päivien lukumäärä omassa suunnitelmassasi tarkoittaa. Tässä vertailussa kyse voi olla erikseen sovittavista työstä vapaista päivistä, kun taas työnantajan vuosilomakirjanpito voi noudattaa omaa sovellettavaa laskentatapaansa. Älä vaihda näitä käsitteitä kesken vertailun. Jos tavoite on löytää yksi sopiva pitkä viikonloppu, rajaa myös ajanjakso, jolloin sen voi oikeasti pitää. Muuten laskurin pisin ehdotus voi osua kuukauteen, joka ei sovi työn, opiskelun tai perheen tilanteeseen. Todelliset rajaukset tekevät vertailusta hyödyllisen jo ennen kuin tarkastelet yhtään matkavaihtoehtoa."
         ],
         "links": []
@@ -2492,7 +2492,7 @@
       {
         "title": "Vertaa useampaa sopivaa jaksoa",
         "paragraphs": [
-          "Pisin vapaa ei aina ole arjen kannalta paras. Koulujen lomat, perheen muut menot ja matkakohteen sesonki voivat tehdä lyhyemmästä vaihtoehdosta toimivamman. Käytä lomasuunnittelijaa vaihtoehtojen vertailuun, älä ainoaksi valintaperusteeksi.",
+          "Pisin vapaa ei aina ole arjen kannalta paras. Koulujen lomat, perheen muut menot ja matkakohteen sesonki voivat tehdä lyhyemmästä vaihtoehdosta toimivamman. Käytä lomasuunnittelijaa vaihtoehtojen vertailuun, mutta ota valinnassa huomioon myös muut tekijät.",
           "Tarkista aattojen käsittely erillisestä asetuksesta. Saman vuoden ehdotus voi muuttua, jos jouluaatto tai juhannusaatto on omassa työssäsi tavallinen työpäivä. Kalenterin liputuspäiviä ei lasketa automaattisesti vapaapäiviksi.",
           "Tee vaihtoehdoista pieni rinnakkainen lista: tarvittavat lisävapaat, yhtenäisen vapaan alku ja loppu sekä osallistujien tärkeimmät rajoitukset. Esimerkiksi neljän päivän kotijakso ja samanmittainen matka voivat kuluttaa eri määrän käytännön järjestelyaikaa. Jos matkaan tarvitaan aikainen lähtö tai myöhäinen paluu, lisää nämä ensin ja arvioi vapaa vasta sen jälkeen. Yhteistä lomaa suunniteltaessa lyhyin kaikille sopiva jakso voi olla hyödyllisempi kuin yhden henkilön pisin mahdollinen vapaa. Pidä myös vaihtoehto ilman matkaa mukana, jos tavoite on levätä tai viettää aikaa läheisten kanssa eikä nimenomaan saapua tiettyyn kohteeseen."
         ],
@@ -2502,8 +2502,8 @@
         "title": "Vie vahvistettu suunnitelma kalenteriin",
         "paragraphs": [
           "Kun vapaa on hyväksytty, merkitse sen rajat yhteiseen kalenteriin. Pidä alustava ja vahvistettu varaus erillään otsikossa. Näin perhe tai työryhmä ei luule ideavaiheessa olevaa lomajaksoa lopulliseksi sopimukseksi.",
-          "Vahvistetussa merkinnässä pitäisi näkyä, ketä vapaa koskee ja mitkä päivät ovat lopullisesti sovittuja. Matkan lähtö voi olla eri tapahtuma kuin työstä vapaan alkaminen. Jos tarvitset varauksen numeron tai muuta yksityiskohtaista tietoa, säilytä se sopivassa omassa muistiinpanossa eikä laajasti jaettavassa lomakuvassa. Yhteiseen kalenteriin riittää usein vapaan jakso, tärkeä lähtö sekä paluu. Ennen jakson alkua voi lisätä yhden valmistelutehtävän, jossa tarkistetaan varaukset ja käytännön asiat. Näin itse lomaruudut eivät täyty pitkistä tehtäväluetteloista, mutta tarvittavat valmistelut saavat silti todellisen paikan aikataulussa.",
-          "Loman päättymisen rinnalle kannattaa merkitä yksi arkeen palaamisen tarkistus. Onko seuraavan aamun työvuoro, koulun aloitus tai opiskelutehtävä tavallista aikaisempi? Jos tarvittavat tavarat ovat muualla, niiden nouto kuuluu suunnitelmaan jo ennen lähtöä tai paluuta. Tällainen pieni valmistelu ei pidennä laskennallista vapaata, mutta auttaa tekemään valitusta jaksosta toteuttamiskelpoisen. Vertailun onnistumista ei tarvitse mitata vain peräkkäisten päivien määrällä, vaan myös sillä miten hyvin jakso sopii omaan arkeen."
+          "Vahvistetussa merkinnässä pitäisi näkyä, ketä vapaa koskee ja mitkä päivät ovat lopullisesti sovittuja. Matkan lähtö voi olla eri tapahtuma kuin työstä vapaan alkaminen. Jos tarvitset varauksen numeron tai muuta yksityiskohtaista tietoa, säilytä se sopivassa omassa muistiinpanossa äläkä laajasti jaettavassa lomakuvassa. Yhteiseen kalenteriin riittää usein vapaan jakso, tärkeä lähtö sekä paluu. Ennen jakson alkua voi lisätä yhden valmistelutehtävän, jossa tarkistetaan varaukset ja käytännön asiat. Näin itse lomaruudut eivät täyty pitkistä tehtäväluetteloista, mutta tarvittavat valmistelut saavat silti todellisen paikan aikataulussa.",
+          "Loman päättymisen rinnalle kannattaa merkitä yksi arkeen palaamisen tarkistus. Onko seuraavan aamun työvuoro, koulun aloitus tai opiskelutehtävä tavallista aikaisempi? Jos tarvittavat tavarat ovat muualla, niiden nouto kuuluu suunnitelmaan jo ennen lähtöä tai paluuta. Tällainen pieni valmistelu ei pidennä laskennallista vapaata, mutta auttaa tekemään valitusta jaksosta toteuttamiskelpoisen. Vertailun onnistumista ei tarvitse mitata vain peräkkäisten päivien määrällä, vaan myös sillä, miten hyvin jakso sopii omaan arkeen."
         ],
         "links": []
       },
@@ -2546,7 +2546,7 @@
         "paragraphs": [
           "Tallenna kiinnostava jakso ensin alustavana suunnitelmana. Kirjoita otsikkoon, että hyväksyntä puuttuu, ja lisää tehtävä vahvistuksen pyytämisestä. Vasta hyväksynnän jälkeen kannattaa muuttaa jakso yhteisessä kalenterissa vahvistetuksi vapaaksi. Väri yksin ei riitä kertomaan tätä eroa toiselle lukijalle.",
           "Kun suunnitelma on valmis, tee siitä yksi yhteinen versio. Vanha kuva tai tuloste voi jäädä näkyviin ja aiheuttaa eri käsityksen paluupäivästä. Merkitse tarvittaessa tulostuspäivä ja poista vanha versio yhteisestä paikasta. Tarkista myös koululaisten loma ja opiskelijoiden tentit ennen koko perheen varausta. Yhteinen vapaa syntyy vasta, kun kaikki sitovat aikataulut sopivat yhteen; pisin laskennallinen jakso on vain yksi vaihtoehto muiden joukossa.",
-          "Pidä matkan kustannukset ja vapaan pituus erillisinä vertailuina. Kalenteri voi näyttää tehokkaan lomapäiväjakson, mutta se ei tiedä matkan hintaa, liikennettä tai kohteen ruuhkaa. Jos kaksi vaihtoehtoa ovat lähes yhtä pitkiä, rauhallisempi ajankohta voi olla käytännössä miellyttävämpi. Kirjoita päätöksen yhteyteen, miksi valitsit juuri sen jakson. Myöhemmin suunnitelmaa muuttava perheenjäsen tai työtoveri ymmärtää silloin, mitkä päivät ovat joustavia ja mikä osa riippuu vahvistetusta varauksesta.",
+          "Pidä matkan kustannukset ja vapaan pituus erillisinä vertailuina. Kalenteri voi näyttää tehokkaan lomapäiväjakson, mutta se ei tiedä matkan hintaa, liikennettä tai kohteen ruuhkaa. Jos kaksi vaihtoehtoa on lähes yhtä pitkiä, rauhallisempi ajankohta voi olla käytännössä miellyttävämpi. Kirjoita päätöksen yhteyteen, miksi valitsit juuri sen jakson. Myöhemmin suunnitelmaa muuttava perheenjäsen tai työtoveri ymmärtää silloin, mitkä päivät ovat joustavia ja mikä osa riippuu vahvistetusta varauksesta.",
           "Jos varausta pitää muuttaa, päivitä ensin yhteinen kalenteri ja ilmoita sen jälkeen osallistujille. Pelkkä uusi kuvakaappaus ei välttämättä tavoita ihmistä, joka katsoo edelleen aikaisempaa paperista suunnitelmaa."
         ],
         "links": [
@@ -2588,7 +2588,7 @@
       "koulujen-lomat",
       "juhannus-suomessa"
     ],
-    "wordCount": 817,
+    "wordCount": 820,
     "readMinutes": 5,
     "sourceChecks": [
       {
@@ -2604,6 +2604,6 @@
         "notes": "Facts checked against primary sources. Practical planning examples are original; no copied prose."
       }
     ],
-    "bodyWordCount": 798
+    "bodyWordCount": 801
   }
 ]

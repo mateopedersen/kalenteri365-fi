@@ -13,7 +13,7 @@ function rowsUI(){
 function detail(){
  const r=entries.find(e=>e.date===selected);if(!r)return;
  $('#shift-selected-title').textContent=new Intl.DateTimeFormat('fi-FI',{dateStyle:'long',timeZone:'UTC'}).format(parse(selected));
- $('#shift-selected-info').textContent=r.name+(r.type==='work'?' · '+r.start+'–'+r.end+(r.overnight?' (seuraava päivä)':'')+' · '+(r.minutes/60).toLocaleString('fi-FI',{maximumFractionDigits:2})+' suunnittelutuntia':'');
+ $('#shift-selected-info').textContent=r.name+(r.type==='work'?' · '+r.start+'–'+r.end+(r.overnight?' (seuraava päivä)':'')+' · '+(r.minutes/60).toLocaleString('fi-FI',{maximumFractionDigits:2})+(r.minutes===60?' suunnittelutunti':' suunnittelutuntia'):'');
  const hs=holidays(state.year).filter(h=>h.date===selected&&['holiday','eve'].includes(h.type));
  $('#shift-selected-holiday').innerHTML=hs.map(h=>`<a href="/juhlapyhat/${esc(h.slug)}/">${esc(h.name)} ↗</a>`).join(' · ');
  const o=state.overrides[selected];$('#shift-override').value=!o?'':o.type==='work'?'work':o.name==='Loma'?'vacation':o.name==='Sairauspoissaolo'?'sick':'off';
@@ -23,7 +23,7 @@ function detail(){
 function render(){try{
  state=validateShiftPlan(state);valid=true;$('#shift-config-error').textContent='';const first=date(state.year,state.month,1);entries=shiftMonth(state.rows,state.start,state.year,state.month,state.overrides);const sum=shiftTotals(entries);
  $('#shift-plan-name').textContent=state.title;$('#shift-month-title').textContent=cap(MONTHS[state.month-1])+' '+state.year;$('#shift-year').value=state.year;$('#shift-month').value=state.month;$('#shift-prev').disabled=state.year===2027&&state.month===1;$('#shift-next').disabled=state.year===2030&&state.month===12;
- $('#shift-summary').innerHTML=[[sum.shifts,'Työvuoroa'],[(sum.minutes/60).toLocaleString('fi-FI',{maximumFractionDigits:2}),'Suunnittelutuntia'],[sum.nights,'Yöaikaan ulottuvaa'],[sum.off,'Vapaapäivää']].map(([n,l])=>`<div><strong>${n}</strong><span>${l}</span></div>`).join('');
+ $('#shift-summary').innerHTML=[[sum.shifts,sum.shifts===1?'Työvuoro':'Työvuoroa'],[(sum.minutes/60).toLocaleString('fi-FI',{maximumFractionDigits:2}),sum.minutes===60?'Suunnittelutunti':'Suunnittelutuntia'],[sum.nights,sum.nights===1?'Yöaikaan ulottuva':'Yöaikaan ulottuvaa'],[sum.off,sum.off===1?'Vapaapäivä':'Vapaapäivää']].map(([n,l])=>`<div><strong>${n}</strong><span>${l}</span></div>`).join('');
  const hs=holidays(state.year).filter(h=>h.type==='holiday');
  $('#shift-grid').innerHTML=Array.from({length:day(first)},()=>'<span aria-hidden="true"></span>').join('')+entries.map((s,i)=>{
   const label=s.type==='work'?'Työ':s.type==='off'?(s.name==='Loma'?'Loma':'Vapaa'):'';
@@ -53,5 +53,5 @@ function download(text,type,name){const u=URL.createObjectURL(new Blob([text],{t
 $('#shift-export').onclick=()=>{if(!valid)return;try{download(shiftICS(entries,state.title),'text/calendar;charset=utf-8',`kalenteri365-vuorot-${state.year}-${state.month}.ics`);$('#shift-status').textContent='Työvuorot ladattu. Avaa ICS-tiedosto omassa kalenterissasi.';}catch(e){$('#shift-status').textContent=e.message;}};
 $('#shift-csv').onclick=()=>{if(valid){download(shiftCSV(entries),'text/csv;charset=utf-8',`kalenteri365-vuorot-${state.year}-${state.month}.csv`);$('#shift-status').textContent='Kuukauden taulukko ladattu.';}};
 $('#shift-backup').onclick=()=>{if(valid){download(JSON.stringify({format:'kalenteri365-shift-plan',...state},null,2),'application/json','kalenteri365-vuorosuunnitelma.json');$('#shift-status').textContent='Varmuuskopio ladattu.';}};
-$('#shift-import').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>500000)throw Error('Varmuuskopiotiedosto on liian suuri.');const input=JSON.parse(await file.text());if(input.format!=='kalenteri365-shift-plan')throw Error('Valitse Kalenteri365-vuorosuunnitelman JSON-varmuuskopio.');const next=validateShiftPlan(input);state=next;selected=iso(date(state.year,state.month,1));dirty=true;hydrate();$('#shift-status').textContent='Varmuuskopio palautettu ja tallennettu.';}catch(error){$('#shift-status').textContent=error.message;}e.target.value='';};
+$('#shift-import').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>500000)throw Error('Varmuuskopiotiedosto on liian suuri.');const input=JSON.parse(await file.text());if(input.format!=='kalenteri365-shift-plan')throw Error('Valitse Kalenteri365-vuorosuunnitelman JSON-varmuuskopio.');const next=validateShiftPlan(input);state=next;selected=iso(date(state.year,state.month,1));dirty=true;hydrate();$('#shift-status').textContent='Varmuuskopio palautettu ja tallennettu.';}catch(error){$('#shift-status').textContent=error instanceof SyntaxError?'Varmuuskopiota ei voitu lukea. Valitse kelvollinen JSON-tiedosto.':error.message;}e.target.value='';};
 hydrate();if(recovery)$('#shift-status').textContent=recovery;

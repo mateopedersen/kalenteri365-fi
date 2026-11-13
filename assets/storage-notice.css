@@ -1,4 +1,90 @@
-.storage-notice{position:fixed;z-index:110;left:24px;right:24px;bottom:max(18px,env(safe-area-inset-bottom));width:auto;max-width:1160px;margin:0 auto;display:grid;grid-template-columns:80px minmax(0,1fr) auto;align-items:center;gap:22px;padding:22px 26px;border:1px solid #c2d5e4;border-radius:22px;background:#fff;box-shadow:0 18px 55px #082c5126,0 2px 6px #082c5110;isolation:isolate}.storage-notice[hidden]{display:none!important}.storage-notice:before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(112deg,#eaf4fb 0%,#fff 56%);z-index:-1}.storage-notice .storage-mark{width:80px;height:88px;display:grid;place-items:center;background:transparent;border-radius:0;box-shadow:none;align-self:center}.storage-notice .storage-mark .art{width:86px;height:86px;filter:none;max-width:none}.storage-notice .storage-kicker{display:block;font-size:11px;font-weight:700;letter-spacing:.14em;color:#40647f;margin-bottom:6px}.storage-notice .storage-copy h2{font-size:22px;line-height:1.25;font-weight:700;letter-spacing:-.025em;color:#123452;margin:0 0 8px}.storage-notice .storage-copy p{max-width:510px;color:#435d74;font-size:15px;line-height:1.55;margin:0}.storage-notice .storage-copy a{display:inline;color:#164e7c;font-weight:700;text-decoration:underline;text-underline-offset:3px}.storage-notice .storage-actions{display:flex;flex-direction:column;gap:8px;align-items:stretch;min-width:182px;margin:0}.storage-notice .storage-actions .btn{min-height:46px;margin:0;padding:11px 18px;font-size:15px;font-weight:700;line-height:1.3;white-space:normal;gap:10px;border-radius:11px;justify-content:center;box-sizing:border-box;box-shadow:0 4px 12px #002f6c18}.storage-notice .storage-actions .btn .icon{width:20px;height:20px}.storage-notice .storage-actions .storage-policy{font-size:13px;line-height:1.5;color:#335976;text-align:center;padding:3px 8px;text-decoration:underline;text-underline-offset:3px}
-@media(min-width:1100px){.storage-notice .storage-actions{min-width:315px;display:grid;grid-template-columns:1fr 1fr;align-items:center}.storage-notice .storage-actions .storage-policy{grid-row:1;grid-column:1;padding:12px;border:1px solid #bed1e1;border-radius:11px;background:#fbfdff;text-decoration:none;font-weight:700;font-size:14px;min-height:46px;display:flex;align-items:center;justify-content:center}.storage-notice .storage-actions .btn{grid-column:2}}
-@media(max-width:700px){.storage-notice{left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));max-width:460px;grid-template-columns:54px minmax(0,1fr);align-items:start;gap:12px;padding:18px;border-radius:19px}.storage-notice .storage-mark{width:54px;height:62px;align-self:start}.storage-notice .storage-mark .art{width:64px;height:64px}.storage-notice .storage-copy h2{font-size:19px;line-height:1.25;margin-bottom:7px}.storage-notice .storage-kicker{font-size:10px;margin-bottom:5px}.storage-notice .storage-copy p{font-size:14px;line-height:1.5}.storage-notice .storage-actions{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;min-width:0;gap:10px;margin-top:2px}.storage-notice .storage-actions .btn{font-size:14px;min-height:46px}.storage-notice .storage-actions .storage-policy{font-size:13px;display:flex;align-items:center;justify-content:center;border:1px solid #c3d6e5;border-radius:11px;text-decoration:none;font-weight:700;padding:10px;background:#fff}.storage-notice:before{background:linear-gradient(125deg,#eaf4fb,#fff 70%)}}
-@media print{.storage-notice{display:none!important}}
+.storage-notice {
+  position: fixed;
+  z-index: 110;
+  inset: auto 24px max(20px, env(safe-area-inset-bottom));
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr) 330px;
+  align-items: center;
+  gap: 22px;
+  width: auto;
+  max-width: 1180px;
+  max-height: calc(100svh - 32px);
+  margin: 0 auto;
+  padding: 25px 44px 25px 24px;
+  overflow: auto;
+  border: 1px solid #b7cde0;
+  border-radius: 20px;
+  background: linear-gradient(105deg, #eef5fc, #fff 39%);
+  box-shadow: inset 0 2px #fff, 0 16px 48px #12335422, 0 2px 8px #1233540d;
+  isolation: isolate;
+}
+.storage-notice[hidden] { display: none !important; }
+.storage-notice .storage-mark {
+  display: grid; place-items: center;
+  width: 76px; height: 84px;
+  margin: 0; align-self: center;
+  border-radius: 0; background: none; box-shadow: none;
+}
+.storage-notice .storage-art { display: block; width: 88px; height: 88px; max-width: none; }
+.storage-notice .storage-copy { min-width: 0; }
+.storage-notice .storage-kicker {
+  display: block; margin: 0 0 6px;
+  color: #466580; font-size: 11px; font-weight: 700;
+  letter-spacing: .12em; line-height: 1.5;
+}
+.storage-notice .storage-copy h2 {
+  margin: 0 0 8px; color: #173752;
+  font-size: 23px; font-weight: 700;
+  letter-spacing: -.025em; line-height: 1.25;
+}
+.storage-notice .storage-copy p { max-width: 580px; margin: 0; color: #435d74; font-size: 15px; line-height: 1.6; }
+.storage-notice .storage-actions {
+  grid-column: 3; grid-row: 1;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: stretch; gap: 10px; min-width: 0; margin: 0;
+}
+.storage-notice .storage-actions > * {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px; width: 100%; min-width: 0; min-height: 50px;
+  margin: 0; padding: 12px 11px;
+  border: 1px solid #b6cce1; border-radius: 11px;
+  font-family: inherit; font-size: 14px; font-weight: 700;
+  line-height: 1.35; text-align: center; text-decoration: none;
+  white-space: normal; box-shadow: 0 2px 4px #12335408;
+}
+.storage-notice .storage-actions .storage-policy { grid-column: auto; grid-row: auto; color: #164b7c; background: #fff; }
+.storage-notice .storage-actions .storage-policy:hover { color: #073361; background: #eaf2fb; border-color: #7da3c7; }
+.storage-notice .storage-actions .btn { color: #fff; background: #07376e; border-color: #07376e; box-shadow: inset 0 1px #ffffff29, 0 3px 6px #1233541a; }
+.storage-notice .storage-actions .btn:hover { color: #fff; background: #052850; border-color: #052850; }
+.storage-notice .storage-actions .icon { width: 19px; height: 19px; flex: 0 0 19px; }
+.storage-notice .storage-close {
+  position: absolute; top: 8px; right: 8px;
+  display: grid; place-items: center;
+  width: 32px; height: 32px; padding: 7px;
+  color: #496780; border: 0; border-radius: 8px;
+  background: transparent; cursor: pointer;
+}
+.storage-notice .storage-close .icon { width: 18px; height: 18px; }
+.storage-notice .storage-close:hover { color: #07376e; background: #e4eef8; }
+.storage-notice :is(a,button):focus-visible { outline: 3px solid #2178bd; outline-offset: 3px; }
+@media (max-width: 1000px) {
+  .storage-notice { grid-template-columns: 64px minmax(0, 1fr); gap: 14px 20px; padding: 22px 32px 22px 20px; max-width: 760px; }
+  .storage-notice .storage-mark { width: 64px; height: 72px; }
+  .storage-notice .storage-art { width: 76px; height: 76px; }
+  .storage-notice .storage-actions { grid-column: 2; grid-row: auto; max-width: 360px; }
+}
+@media (max-width: 560px) {
+  .storage-notice { inset: auto 12px max(12px, env(safe-area-inset-bottom)); grid-template-columns: 52px minmax(0, 1fr); gap: 12px; max-width: 450px; padding: 20px 18px 18px; border-radius: 18px; }
+  .storage-notice .storage-mark { grid-column: 1; grid-row: 1; width: 52px; height: 65px; align-self: center; }
+  .storage-notice .storage-art { width: 62px; height: 62px; }
+  .storage-notice .storage-copy { display: contents; }
+  .storage-notice .storage-heading { grid-column: 2; grid-row: 1; padding-right: 8px; }
+  .storage-notice .storage-kicker { font-size: 10px; letter-spacing: .09em; margin-bottom: 5px; }
+  .storage-notice .storage-copy h2 { margin-bottom: 0; font-size: 21px; line-height: 1.25; }
+  .storage-notice .storage-copy p { grid-column: 1 / -1; font-size: 14px; line-height: 1.6; }
+  .storage-notice .storage-actions { grid-column: 1 / -1; grid-row: auto; max-width: none; margin-top: 2px; gap: 9px; }
+  .storage-notice .storage-actions > * { min-height: 49px; padding: 11px 9px; font-size: 14px; }
+  .storage-notice .storage-actions .icon { width: 18px; height: 18px; flex-basis: 18px; }
+  .storage-notice .storage-close { top: 5px; right: 5px; }
+}
+@media print { .storage-notice { display: none !important; } }

@@ -17,10 +17,10 @@ export function normalizeFamily(value){
  let week=validDate(source.week)?source.week:'2027-01-04';const d=parse(week);week=iso(add(d,-(d.getUTCDay()+6)%7));
  return {version:1,members,events,meals:entries(source.meals,120),shopping:entries(source.shopping,4000),week};
 }
-export function familyICS(events,members){
- const clean=s=>String(s).replace(/\\/g,'\\\\').replace(/\n/g,'\\n').replace(/[,;]/g,c=>'\\'+c);
+export function familyICS(events,members,{name='Perheen viikko'}={}){
+ const clean=s=>String(s).replace(/\\/g,'\\\\').replace(/\r\n|\r|\n/g,'\\n').replace(/[,;]/g,c=>'\\'+c);
  const stamp=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d+Z/,'Z');
  const timed=(ds,time)=>{const target=ds+'T'+time,probe=Date.parse(target+':00Z'),matches=[];for(const offset of[2,3]){const value=probe-offset*3600000;if(new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Helsinki',dateStyle:'short',timeStyle:'short'}).format(new Date(value)).replace(' ','T')===target)matches.push(value);}if(matches.length!==1)throw Error(`${fi(parse(ds))} klo ${time}: aika ${matches.length?'toistuu kellonsiirrossa':'ei ole olemassa kellonsiirrossa'}. Muuta tapahtuman aikaa ennen vientiä.`);return new Date(matches[0]).toISOString().replace(/[-:]/g,'').replace('.000','');};
- const rows=['BEGIN:VCALENDAR','VERSION:2.0','CALSCALE:GREGORIAN','PRODID:-//Kalenteri365.fi//Perhe//FI','X-WR-CALNAME:Perheen viikko',...events.flatMap(e=>['BEGIN:VEVENT','UID:'+e.id+'@kalenteri365.fi','DTSTAMP:'+stamp,...(e.time?['DTSTART:'+timed(e.date,e.time)]:['DTSTART;VALUE=DATE:'+e.date.replaceAll('-',''),'DTEND;VALUE=DATE:'+iso(add(parse(e.date),1)).replaceAll('-','')]),'SUMMARY:'+clean(e.title),'DESCRIPTION:'+clean((members.find(m=>m.id===e.person)?.name||'Yhteinen')+' · Kalenteri365.fi'),'END:VEVENT']),'END:VCALENDAR'];
+ const rows=['BEGIN:VCALENDAR','VERSION:2.0','CALSCALE:GREGORIAN','PRODID:-//Kalenteri365.fi//Perhe//FI','X-WR-CALNAME:'+clean(name),...events.flatMap(e=>['BEGIN:VEVENT','UID:'+e.id+'@kalenteri365.fi','DTSTAMP:'+stamp,...(e.time?['DTSTART:'+timed(e.date,e.time)]:['DTSTART;VALUE=DATE:'+e.date.replaceAll('-',''),'DTEND;VALUE=DATE:'+iso(add(parse(e.date),1)).replaceAll('-','')]),'SUMMARY:'+clean(e.title),'DESCRIPTION:'+clean((members.find(m=>m.id===e.person)?.name||'Yhteinen')+' · Kalenteri365.fi'),'END:VEVENT']),'END:VCALENDAR'];
  return rows.map(row=>{let out='',n=0;for(const c of row){const bytes=new TextEncoder().encode(c).length;if(n+bytes>74){out+='\r\n ';n=1;}out+=c;n+=bytes;}return out;}).join('\r\n')+'\r\n';
 }

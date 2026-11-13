@@ -6,7 +6,7 @@ import {holidays} from '../src/calendar.mjs';
 const dir=await mkdtemp(join(tmpdir(),'fi-studio-'));after(()=>rm(dir,{recursive:true,force:true}));
 for(const f of ['engine.mjs','templates.mjs','office-exports.mjs','binary-exports.mjs','export-pipeline.mjs'])await writeFile(join(dir,f),await readFile(new URL('../assets/studio/'+f,import.meta.url)));
 await writeFile(join(dir,'finland-data.mjs'),'export const STUDIO_PHOTOS=[];export const FINLAND_HOLIDAYS='+JSON.stringify(Object.fromEntries([2026,2027,2028,2029,2030,2031].map(y=>[y,holidays(y).filter(h=>h.type==='holiday').map(h=>({date:h.date,title:h.name,holiday:true}))])))+';');
-const {initialState,normalize,starterState,STARTERS,renderCalendar,eventsFor,weekDates,exportPages}=await import(pathToFileURL(join(dir,'engine.mjs')));
+const {initialState,normalize,updatePeriod,starterState,STARTERS,renderCalendar,eventsFor,weekDates,exportPages}=await import(pathToFileURL(join(dir,'engine.mjs')));
 const {createXlsx}=await import(pathToFileURL(join(dir,'office-exports.mjs')));
 const {exportName}=await import(pathToFileURL(join(dir,'export-pipeline.mjs')));
 const image={bytes:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aPioAAAAASUVORK5CYII=', 'base64'),width:1,height:1};
@@ -17,3 +17,29 @@ test('blank templates show no dates or holiday events and weekly preview has sev
 test('untrusted imported text is escaped and sticker identifiers are constrained',()=>{const s=normalize({...initialState(),layers:[{id:'x',type:'sticker',symbol:'<script>',width:10,height:10},{id:'y',type:'text',text:'<script>alert(1)</script>'}]});const svg=renderCalendar(s);assert.equal(s.layers[0].symbol,'star');assert(!svg.includes('<script>'));assert(svg.includes('&lt;script&gt;'));});
 test('weekly and blank Excel files export appropriate editable sheets and dates',()=>{for(const id of ['week-work','blank-grid']){const s=starterState(id);const bytes=createXlsx(s,[image]);const text=new TextDecoder().decode(bytes);assert(text.includes(id==='week-work'?'Viikkosuunnitelma':'Tyhjä pohja'));assert(!text.includes('name="Tammikuu"'));assert(text.includes('Tulostusasu'));assert(text.includes('horizontalDpi="600"'));}});
 test('weekly names and output scope do not silently become monthly exports',()=>{const s=starterState('week-work');assert(exportName(s).includes('viikko-2027-01-04'));assert.equal(exportPages(s,'all').length,1);assert(exportName(starterState('blank-grid')).endsWith('-pohja'));});
+test('switching calendar scope updates the starter heading and preserves personal content',()=>{
+  const s=starterState('month-finland',{...initialState(),events:[{id:'own',date:'2027-05-01',title:'Oma meno'}]});
+  const year=updatePeriod(s,{view:'year'});
+  assert.equal(year.title,'Oma vuoteni');assert.equal(year.events[0].title,'Oma meno');assert.deepEqual(year.colors,s.colors);
+  assert.equal(updatePeriod(year,{view:'week'}).title,'Viikkosuunnitelma');
+  assert.match(updatePeriod(updatePeriod(year,{year:2028}),{view:'week'}).weekDate,/^2028-/);
+  assert.equal(updatePeriod({...s,title:'Ainon suunnitelmat'},{view:'year'}).title,'Ainon suunnitelmat');
+});
+test('weekly year changes keep a real date, including leap-day clamping',()=>{
+  const s={...starterState('week-work'),year:2028,weekDate:'2028-02-29'};
+  const next=updatePeriod(s,{year:2029});assert.equal(next.weekDate,'2029-02-28');assert.equal(next.year,2029);
+  assert(weekDates(next).some(d=>d.date==='2029-02-28'));
+  const chosen=updatePeriod(next,{weekDate:'2030-12-30'});assert.equal(chosen.year,2030);assert.equal(chosen.month,12);assert.equal(chosen.weekDate,'2030-12-30');
+  assert.equal(updatePeriod(next,{weekDate:'2029-02-29'}).weekDate,'2029-02-28');
+  assert.equal(updatePeriod(next,{year:2100}).year,2029);
+});
+test('choosing a weekly starter keeps the selected year in its dates and exports',()=>{
+  const current={...starterState('month-finland'),year:2029};
+  for(const preset of STARTERS.filter(p=>p.view==='week')){
+    const chosen=starterState(preset.id,current);
+    assert.equal(chosen.year,2029);
+    assert.match(chosen.weekDate,/^2029-/);
+    assert(weekDates(chosen).every(day=>day.year===2029));
+    assert.match(exportName(chosen),/2029/);
+  }
+});

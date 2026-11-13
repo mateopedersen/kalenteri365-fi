@@ -14,7 +14,7 @@
 .holiday-calendar-fields{display:grid;grid-template-columns:minmax(70px,.65fr) minmax(0,1.6fr);gap:10px;margin:0 0 18px}
 .holiday-calendar-fields label{display:grid;gap:6px;font-size:13px;font-weight:700;color:#385876;min-width:0}
 .holiday-calendar-fields select{width:100%;min-width:0;font-size:13px;min-height:48px;margin:0;padding:10px 30px 10px 10px;border-radius:11px;background-color:#fff}
-.holiday-calendar-services{display:grid;gap:10px}
+.holiday-calendar-services{display:grid;grid-auto-rows:1fr;gap:10px}
 .holiday-service{display:grid!important;grid-template-columns:44px minmax(0,1fr) 20px;align-items:center;gap:12px;border:1px solid #bacee0;border-radius:14px;padding:13px 14px;min-height:78px;width:100%;text-align:left;background:#fff;color:#143c64;text-decoration:none!important;box-shadow:0 3px 5px #143e6305;font-family:inherit;cursor:pointer}
 .holiday-service:hover{background:#edf5fd;border-color:#6e9bc4}.holiday-service.is-primary{color:#fff;background:linear-gradient(125deg,#174d86,#0c345e);border-color:#103c69;box-shadow:0 5px 11px #153c6721}.holiday-service.is-primary:hover{background:#103f72}
 .holiday-service>.art{width:44px;height:44px;object-fit:contain}.holiday-service>svg{width:20px;height:20px;flex-shrink:0}.holiday-service>span{display:grid;gap:3px;min-width:0}.holiday-service strong{font-size:17px;line-height:1.3;overflow-wrap:break-word}.holiday-service small{font-size:12px;line-height:1.4;color:#496680}.holiday-service.is-primary small{color:#deebf7}
@@ -30,3 +30,12 @@
 .page-heading>.heading-tools>a[href="#lisaa-kalenteriin"]{grid-column:1/-1}
 .page-heading>.heading-tools .btn{min-width:0;font-size:14px;padding:10px;gap:8px;white-space:normal}
 @media(max-width:750px){.page-heading>.heading-tools{grid-column:1/-1;width:100%;max-width:none;flex:auto;margin-top:6px}.page-heading>.heading-tools .art{width:30px;height:30px}}
+
+/* Original service marks are kept at their native proportions and colours. */
+.holiday-service .service-logo{display:grid;place-items:center;width:48px;height:48px;border-radius:11px;background:#fff;border:1px solid #d7e1ec;box-shadow:0 2px 5px #0b2d5210}
+.holiday-service .service-logo img{display:block;width:36px;height:36px;object-fit:contain;max-width:100%;max-height:100%}
+.holiday-service{grid-template-columns:48px minmax(0,1fr) 20px;gap:14px;min-height:84px}
+.holiday-service.is-primary .service-logo{border-color:#ffffff80}
+.holiday-service .service-logo img[src$="apple.svg"]{width:28px;height:34px}
+.holiday-service strong{font-size:17px;font-weight:700;line-height:1.35}
+@media(max-width:380px){.holiday-service{grid-template-columns:43px minmax(0,1fr) 18px;gap:10px;padding:12px}.holiday-service .service-logo{width:43px;height:43px}.holiday-service .service-logo img{width:33px;height:33px}.holiday-service strong{font-size:16px}}

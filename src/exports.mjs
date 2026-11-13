@@ -9,7 +9,7 @@ const config=(orientation,layout,theme)=>({orientation,layout,theme,paper:'A4'})
 // The original four identifiers are stable download URLs. The fifth tuple item
 // is public presentation metadata used by previews, audits and print controls.
 export const STYLES=[
- ['suomi','Sinivalkoinen Suomi','Valkoinen arkki, siniristilippu ja selkeä koko kuukauden näkymä.','#002F6C',config('landscape','flag','flag')],
+ ['suomi','Sinivalkoinen Suomi','Valkoinen arkki, siniristilippu ja selkeä kalenterinäkymä.','#002F6C',config('landscape','flag','flag')],
  ['metsä','Metsä ja järvi','Metsäinen sivupalsta, järven sävyt ja rauhallinen kalenteriruudukko.','#28594E',config('landscape','sidebar','forest')],
  ['musta','Puhdas muste','Pelkistetty mustavalkoinen kalenteri, joka säästää värimustetta.','#202B33',config('landscape','minimal','minimal')],
  ['muistiinpanot','Muistiinpanot','Pystyarkki ja oma viivoitettu tila tärkeille muistiinpanoille.','#002F6C',config('portrait','notes','birch')],

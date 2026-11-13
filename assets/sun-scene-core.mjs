@@ -45,8 +45,7 @@ const stops = [
 ];
 const rgb = hex => hex.match(/\w\w/g).map(x => parseInt(x, 16));
 const mix = (a, b, t) => '#' + rgb(a).map((v, i) => Math.round(v + (rgb(b)[i] - v) * t).toString(16).padStart(2, '0')).join('');
-export function atmosphere(altitude) {
-  const geometric = geometricAltitude(altitude);
+export function atmosphere(altitude, geometric = geometricAltitude(altitude)) {
   let lower = stops[0], upper = stops.at(-1);
   for (let i = 1; i < stops.length; i++) if (altitude < stops[i][0]) {lower = stops[i - 1]; upper = stops[i]; break;}
   const t = clamp((altitude - lower[0]) / (upper[0] - lower[0]));

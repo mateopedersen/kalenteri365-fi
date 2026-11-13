@@ -3,7 +3,7 @@ const months=['tammikuu','helmikuu','maaliskuu','huhtikuu','toukokuu','kesakuu',
 export const escapeShare=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const validDate=s=>/^20\d\d-\d\d-\d\d$/.test(s)&&!Number.isNaN(Date.parse(s+'T12:00:00Z'))&&new Date(s+'T12:00:00Z').toISOString().slice(0,10)===s;
 export function safePublicUrl(input,{date,view,year,month}={}){
- const source=new URL(input,ORIGIN);if(source.protocol!=='https:'&&source.protocol!=='http:')throw new TypeError('Unsupported link');
+ const source=new URL(input,ORIGIN);if(source.protocol!=='https:'&&source.protocol!=='http:')throw new TypeError('Linkkiä ei tueta.');
  const url=new URL(ORIGIN);url.pathname=source.pathname;const params=source.searchParams;
  for(const key of ['date','from','to']){const v=params.get(key);if(v&&validDate(v))url.searchParams.set(key,v);}
  if(/^20(?:2[7-9]|30)$/.test(params.get('year')||''))url.searchParams.set('year',params.get('year'));
@@ -32,8 +32,8 @@ export function safePublicUrl(input,{date,view,year,month}={}){
  }
  return url.href;
 }
-export function safeShareImage(input){const u=new URL(input,ORIGIN);if(u.origin!==ORIGIN||!u.pathname.startsWith('/assets/')&&!u.pathname.startsWith('/lataukset/')||!/[.](?:jpe?g|png|webp|svg)$/i.test(u.pathname))throw new TypeError('Unsupported image');u.search='';u.hash='';return u.href;}
-export function safeTemplateUrl(input){const u=new URL(input,ORIGIN);if(u.origin!==ORIGIN||!u.pathname.startsWith('/lataukset/')||!/[.](?:pdf|webp|png|jpg)$/i.test(u.pathname))throw new TypeError('Unsupported calendar file');u.search='';u.hash='';return u.href;}
+export function safeShareImage(input){const u=new URL(input,ORIGIN);if(u.origin!==ORIGIN||!u.pathname.startsWith('/assets/')&&!u.pathname.startsWith('/lataukset/')||!/[.](?:jpe?g|png|webp|svg)$/i.test(u.pathname))throw new TypeError('Kuvaa ei tueta.');u.search='';u.hash='';return u.href;}
+export function safeTemplateUrl(input){const u=new URL(input,ORIGIN);if(u.origin!==ORIGIN||!u.pathname.startsWith('/lataukset/')||!/[.](?:pdf|webp|png|jpg)$/i.test(u.pathname))throw new TypeError('Kalenteritiedostoa ei tueta.');u.search='';u.hash='';return u.href;}
 export function shareText(context){return `${String(context.title||'Kalenteri365').slice(0,240)}\n${context.url}`;}
 export function shareComposer(service,context,instance=''){
  const u=context.url,title=String(context.title||'Kalenteri365').slice(0,240),text=shareText(context),make=(base,params)=>{const x=new URL(base);for(const [k,v] of Object.entries(params))x.searchParams.set(k,v);return x.href;};
@@ -71,5 +71,5 @@ export function copyPayload(kind,context){
  if(kind==='copy-text')return shareText(context);
  if(kind==='markdown')return `[${escapeShare(String(context.title)).replace(/[\[\]\\\r\n]/g,' ')}](${context.url.replace(/\(/g,'%28').replace(/\)/g,'%29')})`;
  if(kind==='embed')return `<a href="${escapeShare(context.url)}" target="_blank" rel="noopener"><img src="${escapeShare(context.image)}" alt="${escapeShare(context.title)}" width="600" style="max-width:100%;height:auto">${escapeShare(context.title)}</a>`;
- throw new TypeError('Unknown copy action');
+ throw new TypeError('Kopiointitapaa ei tunnistettu.');
 }

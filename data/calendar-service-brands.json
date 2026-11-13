@@ -1,0 +1,27 @@
+[
+  {
+    "id": "google-calendar",
+    "source": "https://workspace.google.com/products/calendar/",
+    "original": "https://www.gstatic.com/images/branding/productlogos/calendar_2026/v2/web/192px.svg",
+    "sha256": "7f55cd877b2261948168db3d2e9468c0cf3f07766789489e853a0f9931dff8ea",
+    "changes": "None",
+    "checkedAt": "2026-11-13"
+  },
+  {
+    "id": "outlook",
+    "source": "https://www.microsoft.com/en-us/microsoft-365/outlook/email-and-calendar-software-microsoft-outlook",
+    "original": "https://www.microsoft.com/content/dam/microsoft/bade/images/icons/en-us/m365-app-icons-fy26/Outlook-Icon-FY26.svg",
+    "sha256": "d67b8bb4bb8d7afe8e71e066112452d5d681ea7991fa1ec7c37df962246b2c31",
+    "changes": "None",
+    "checkedAt": "2026-11-13"
+  },
+  {
+    "id": "apple",
+    "source": "https://www.apple.com/",
+    "original": "Apple.com global navigation inline SVG",
+    "sourceSha256": "173a4aceb67e416738f3af19eeda9de484cac388914881915dc94e4f6ce77687",
+    "sha256": "d4e46d220189a2e7e79c031d50e678e1db2512272d16a99ca2e0336319b656af",
+    "changes": "Cropped empty navigation canvas; original logo path unchanged",
+    "checkedAt": "2026-11-13"
+  }
+]

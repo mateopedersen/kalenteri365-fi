@@ -9,6 +9,6 @@ if(root){
   root.querySelector('[data-storage-delete]').onclick=()=>{dialog.querySelectorAll('input').forEach(i=>i.checked=false);dialog.querySelector('[data-delete-confirm]').disabled=true;dialog.showModal();};
   dialog.querySelector('[data-delete-cancel]').onclick=()=>dialog.close();
   dialog.addEventListener('change',()=>dialog.querySelector('[data-delete-confirm]').disabled=!dialog.querySelector('input:checked'));
-  dialog.querySelector('[data-delete-confirm]').onclick=()=>{try{const groups=[...dialog.querySelectorAll('input:checked')].map(i=>i.value);const count=removeLocalData(local,session,groups);dialog.close();refresh();status.textContent=count+' paikallista tallennetta poistettu. Muissa avoimissa Kalenteri365-välilehdissä voi olla tallentamattomia muutoksia. Sulje ne ennen käytön jatkamista.';}catch{status.textContent='Poistaminen ei onnistunut. Voit poistaa sivuston tiedot selaimesi asetuksista.';}};
+  dialog.querySelector('[data-delete-confirm]').onclick=()=>{try{const groups=[...dialog.querySelectorAll('input:checked')].map(i=>i.value);const count=removeLocalData(local,session,groups);dialog.close();refresh();status.textContent=count+(count===1?' paikallinen tallenne':' paikallista tallennetta')+' poistettu. Muissa avoimissa Kalenteri365-välilehdissä voi olla tallentamattomia muutoksia. Sulje ne ennen käytön jatkamista.';}catch{status.textContent='Poistaminen ei onnistunut. Voit poistaa sivuston tiedot selaimesi asetuksista.';}};
   refresh();
 }

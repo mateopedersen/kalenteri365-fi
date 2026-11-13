@@ -14,6 +14,15 @@ test('Privacy tools tolerate blocked storage and only erase selected groups',()=
  const blocked={getItem(){throw Error('blocked')}};assert.equal(localInventory(blocked,null).unavailable,true);
  const l=storage({'kalenteri365-shifts-fi-v1':'{}','fi-storage-notice-until':'17811'});assert.equal(removeLocalData(l,null,[]),0);assert.equal(removeLocalData(l,null,['unrecognised']),0);assert.equal(l.length,2);
 });
+test('An explicitly saved vacation can be exported and deleted with personal plans',()=>{
+ const local=storage({'kalenteri365-vacation-plan-v1':'{"title":"Kesäloma"}','other-app':'keep'});
+ assert.equal(localInventory(local,null).rows[0].name,'Lomasuunnitelma');
+ assert.equal(exportLocalData(local,null).records[0].value,'{"title":"Kesäloma"}');
+ assert.equal(removeLocalData(local,null,['preferences']),0);
+ assert.equal(removeLocalData(local,null,['plans']),1);
+ assert.equal(local.getItem('other-app'),'keep');
+ assert(LEGAL_PAGES.evasteet.render().includes('kalenteri365-vacation-plan-v1'));
+});
 test('Legal pages preserve material distinctions rather than claiming universal consent or compliance',()=>{
  for(const record of Object.values(LEGAL_PAGES)){const html=record.render();assert(!html.includes('undefined'));assert(!html.includes('>null<'));assert(!html.includes('100 %'));}
  const privacy=LEGAL_PAGES.tietosuoja.render(),cookies=LEGAL_PAGES.evasteet.render(),terms=LEGAL_PAGES.kayttoehdot.render();

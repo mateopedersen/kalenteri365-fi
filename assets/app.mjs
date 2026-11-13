@@ -1,3 +1,6 @@
+import {sowingWindow} from './garden-model.mjs';
+import {initStorageNotice} from './storage-notice.mjs';
+import {occurs} from './personal-planner-core.mjs';
 import {CALENDAR_LAYERS, calendarFilterIds, upcomingItems} from './dashboard.mjs';
 import {cityPhotoState, cityPhotoPeriod, cityPhotoVariant} from './city-light.mjs';
 import { dayEvents } from "./solar-day.mjs";
@@ -70,31 +73,6 @@ function download(name, content, type) {
   a.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
-function occurs(e, ds) {
-  if (e.date > ds || e.exdates?.includes(ds)) return false;
-  if (!e.repeat || e.repeat === "none") return e.date === ds;
-  let a = parse(e.date),
-    b = parse(ds),
-    gap = Math.round((b - a) / 86400000),
-    interval = e.interval || 1;
-  if (e.until && ds > e.until) return false;
-  return e.repeat === "daily"
-    ? gap % interval === 0
-    : e.repeat === "weekly"
-      ? gap % (7 * interval) === 0
-      : e.repeat === "monthly"
-        ? b.getUTCDate() === a.getUTCDate() &&
-          ((b.getUTCFullYear() - a.getUTCFullYear()) * 12 +
-            b.getUTCMonth() -
-            a.getUTCMonth()) %
-            interval ===
-            0
-        : e.repeat === "yearly"
-          ? b.getUTCMonth() === a.getUTCMonth() &&
-            b.getUTCDate() === a.getUTCDate() &&
-            (b.getUTCFullYear() - a.getUTCFullYear()) % interval === 0
-          : false;
-}
 const eventAt = (ds) => state.events.filter((e) => occurs(e, ds));
 function listHTML(events, ds) {
   return events
@@ -155,6 +133,7 @@ function selectDate(ds) {
 function renderCalendar() {
   if (!$("#calendar-view")) return;
   const root = $("#calendar-view");
+  root.dataset.calendarMode = view;
   $("#calendar-title").textContent =
     view === "day"
       ? fi(parse(selected))
@@ -191,6 +170,9 @@ function renderCalendar() {
       let ds = td.dataset.date;
       td.classList.toggle("is-today", ds === today);
       td.classList.toggle("is-selected", ds === selected);
+      const dayButton = td.querySelector("[data-select-date]");
+      dayButton.setAttribute("aria-pressed", String(ds === selected));
+      if (ds === today) dayButton.setAttribute("aria-current", "date");
       $$(".cal-event", td).forEach((a) => {
         let typ =
           a.classList.contains("holiday") || a.classList.contains("eve")
@@ -208,7 +190,25 @@ function renderCalendar() {
         b.textContent = (e.time ? e.time + " " : "") + e.title;
         td.append(b);
       }
+      const entries = Array.from(td.querySelectorAll(".cal-event")).filter(entry => !entry.hidden);
+      if (entries.length) {
+        const marker = document.createElement("span");
+        marker.className = "calendar-cell-count";
+        marker.setAttribute("aria-hidden", "true");
+        marker.textContent = entries.length;
+        td.append(marker);
+        dayButton.setAttribute("aria-label", dayButton.getAttribute("aria-label") + ", " + entries.length + (entries.length === 1 ? " merkintä" : " merkintää"));
+      }
     });
+    const monthPrefix = String(y) + "-" + String(m).padStart(2, "0") + "-";
+    const groups = Array.from(root.querySelectorAll("td[data-date]")).filter(td => td.dataset.date.startsWith(monthPrefix)).map(td => ({
+      date: td.dataset.date,
+      entries: Array.from(td.querySelectorAll(".cal-event")).filter(entry => !entry.hidden),
+    })).filter(group => group.entries.length);
+    if (groups.length) {
+      const total = groups.reduce((sum, group) => sum + group.entries.length, 0);
+      root.insertAdjacentHTML("beforeend", `<details class="calendar-month-agenda" open><summary>${icon("calendar")}<span>Kuukauden merkinnät</span><span class="calendar-agenda-total">${total}</span>${icon("chevron")}</summary><ul>${groups.map(group => `<li><button type="button" class="calendar-agenda-date" data-select-date="${group.date}" aria-label="Valitse ${esc(fi(parse(group.date)))}" aria-pressed="${group.date === selected}">${Number(group.date.slice(-2))}<small>${m}.</small></button><div>${group.entries.map(entry => entry.outerHTML).join("")}</div></li>`).join("")}</ul></details>`);
+    }
   } else if (view === "year") {
     root.innerHTML = `<div class="year-grid">${MONTHS.map((mm, i) => `<article class="month-card"><h3><button class="textbtn" data-goto-month="${i + 1}">${cap(mm)}</button></h3>${calTable(y, i + 1, { mini: true })}</article>`).join("")}</div>`;
     $$(".mini .dot", root).forEach(dot => { dot.hidden = !filters.has("holiday"); });
@@ -473,7 +473,7 @@ async function importICS(file) {
   persist();
   renderCalendar();
   toast(
-    `Tuotu ${count} tapahtumaa.${skipped ? " " + skipped + " tapahtumaa ohitettiin: tukematon toistosääntö tai aikavyöhyke." : ""}`,
+    `Tuotu ${count} ${count === 1 ? "tapahtuma" : "tapahtumaa"}.${skipped ? " " + skipped + (skipped === 1 ? " tapahtuma" : " tapahtumaa") + " ohitettiin: tukematon toistosääntö tai aikavyöhyke." : ""}`,
   );
 }
 document.addEventListener("click", (e) => {
@@ -597,16 +597,7 @@ document.addEventListener("click", (e) => {
       );
       toast("Varmuuskopio ladattu.");
       break;
-    case "export-shifts":
-      if (!shiftEvents.length) {
-        toast("Luo ensin vuoroluettelo.");
-        return;
-      }
-      download("tyovuorot.ics", simpleICS(shiftEvents), "text/calendar");
-      break;
-    case "editor-webp":
-      editorWebP();
-      break;
+
   }
 });
 document.addEventListener("change", async (e) => {
@@ -693,7 +684,7 @@ document.addEventListener("change", async (e) => {
       toast("Varmuuskopio palautettu.");
     }
   } catch (err) {
-    toast(err.message);
+    toast(err instanceof SyntaxError ? "Varmuuskopiota ei voitu lukea. Valitse kelvollinen JSON-tiedosto." : err instanceof TypeError ? "Varmuuskopion muotoa ei tunnistettu." : err instanceof DOMException ? "Tiedostoa ei voitu lukea. Valitse tiedosto uudelleen." : err.message);
   }
   if (t.type === "file") t.value = "";
 });
@@ -804,9 +795,10 @@ if(!document.querySelector("[data-date-workspace]"))bindForm("#date-diff", (f) =
   let diff = Math.round(
       (parse(f.get("end")) - parse(f.get("start"))) / 86400000,
     ),
-    inc = f.get("inclusive");
+    inc = f.get("inclusive"),
+    total = Math.abs(diff) + (inc ? 1 : 0);
   result(
-    `<strong>${Math.abs(diff) + (inc ? 1 : 0)} päivää</strong><p>${diff < 0 ? "Loppupäivä on ennen alkupäivää. " : ""}${inc ? "Molemmat rajapäivät mukana." : "Loppupäivä ei sisälly määrään."}</p>`,
+    `<strong>${total} ${total === 1 ? "päivä" : "päivää"}</strong><p>${diff < 0 ? "Loppupäivä on ennen alkupäivää. " : ""}${inc ? "Molemmat rajapäivät mukana." : "Loppupäivä ei sisälly määrään."}</p>`,
   );
 });
 if(!document.querySelector("[data-date-workspace]"))bindForm("#date-add", (f) =>
@@ -840,7 +832,7 @@ if(!document.querySelector("[data-workday-workspace]"))bindForm("#work-calc", (f
     else n++;
   }
   result(
-    `<strong>${n} työpäivää</strong><p>${(n * +f.get("hours")).toLocaleString("fi-FI")} tuntia · ${w} ma–pe-päivää − ${p} valittua pyhä- tai aattopäivää. Rajapäivät mukana.</p>`,
+    `<strong>${n} ${n === 1 ? "työpäivä" : "työpäivää"}</strong><p>${(n * +f.get("hours")).toLocaleString("fi-FI")} ${n * +f.get("hours") === 1 ? "tunti" : "tuntia"} · ${w} ${w === 1 ? "ma–pe-päivä" : "ma–pe-päivää"} − ${p} ${p === 1 ? "valittu pyhä- tai aattopäivä" : "valittua pyhä- tai aattopäivää"}. Rajapäivät mukana.</p>`,
   );
 });
 bindForm("#week-calc", (f) => {
@@ -853,7 +845,7 @@ bindForm("#day-calc", (f) => {
   let d = parse(f.get("date")),
     n = Math.round((d - date(d.getUTCFullYear(), 1, 1)) / 86400000) + 1;
   result(
-    `<strong>Vuoden ${n}. päivä</strong><p>Vuodessa on ${leap(d.getUTCFullYear()) ? 366 : 365} päivää. Päivän jälkeen jäljellä ${(leap(d.getUTCFullYear()) ? 366 : 365) - n} päivää.</p>`,
+    `<strong>Vuoden ${n}. päivä</strong><p>Vuodessa on ${leap(d.getUTCFullYear()) ? 366 : 365} päivää. Päivän jälkeen jäljellä ${(leap(d.getUTCFullYear()) ? 366 : 365) - n} ${(leap(d.getUTCFullYear()) ? 366 : 365) - n === 1 ? "päivä" : "päivää"}.</p>`,
   );
 });
 bindForm("#leap-calc", (f) =>
@@ -864,103 +856,10 @@ bindForm("#leap-calc", (f) =>
 bindForm("#countdown-form", (f) => {
   let n = Math.round((parse(f.get("target")) - parse(today)) / 86400000);
   result(
-    `<strong>${Math.abs(n)} päivää ${n < 0 ? "sitten" : "jäljellä"}</strong><p>${esc(f.get("title"))} · ${fi(parse(f.get("target")))}</p>`,
+    `<strong>${Math.abs(n)} ${Math.abs(n) === 1 ? "päivä" : "päivää"} ${n < 0 ? "sitten" : "jäljellä"}</strong><p>${esc(f.get("title"))} · ${fi(parse(f.get("target")))}</p>`,
     "#countdown-result",
   );
 });
-bindForm("#vacation-form", (f) => {
-  let yy = +f.get("year"),
-    budget = +f.get("budget"),
-    max = +f.get("length"),
-    hs = holidays(yy),
-    free = (d) =>
-      day(d) > 4 ||
-      hs.some(
-        (h) =>
-          h.date === iso(d) &&
-          (h.type === "holiday" || (f.get("eves") && h.type === "eve")),
-      ),
-    found = [];
-  for (let a = date(yy, 1, 1); a <= date(yy, 12, 31); a = add(a, 1)) {
-    if (!free(a)) continue;
-    let needed = [];
-    for (let l = 1; l <= max; l++) {
-      let b = add(a, l - 1);
-      if (b.getUTCFullYear() !== yy) break;
-      if (!free(b)) needed.push(iso(b));
-      if (needed.length > budget) break;
-      if (l >= 3 && free(b))
-        found.push({ a: iso(a), b: iso(b), n: l, needed: [...needed] });
-    }
-  }
-  if(f.get("schoolOnly")){
-    const periods=state.plans?.schoolHolidayPeriods||[];
-    const matching=found.filter(o=>periods.some(p=>o.a>=p.start&&o.b<=p.end));
-    found.splice(0,found.length,...matching);
-  }
-  found.sort(
-    (a, b) =>
-      b.n - a.n || a.needed.length - b.needed.length || a.a.localeCompare(b.a),
-  );
-  let selectedOptions = [];
-  for (let o of found) {
-    if (selectedOptions.some((p) => !(o.b < p.a || o.a > p.b))) continue;
-    selectedOptions.push(o);
-    if (selectedOptions.length >= 10) break;
-  }
-  $("#vacation-result").innerHTML = selectedOptions.length
-    ? table(
-        ["Vapaa", "Päiviä", "Lomapäiviä", "Haettavat päivät"],
-        selectedOptions.map((o) => [
-          `${fi(parse(o.a))}–${fi(parse(o.b))}`,
-          o.n,
-          o.needed.length,
-          o.needed.map((d) => fi(parse(d))).join(", ") || "Ei tarvita",
-        ]),
-      )
-    : "<p>Näillä valinnoilla ei löytynyt vähintään kolmen päivän vapaata.</p>";
-});
-let shiftEvents = [];
-bindForm("#shift-form", (f) => {
-  let cycle = f
-    .get("cycle")
-    .split(",")
-    .map((s) => s.trim())
-    .filter(Boolean);
-  if (!cycle.length || cycle.length > 50) throw Error("Anna 1–50 vuoroa.");
-  shiftEvents = Array.from({ length: +f.get("count") }, (_, i) => ({
-    date: iso(add(parse(f.get("start")), i)),
-    name: cycle[i % cycle.length],
-    slug: "shift-" + i,
-  }));
-  $("#shift-result").innerHTML = table(
-    ["Päivämäärä", "Päivä", "Vuoro"],
-    shiftEvents.map((e) => [
-      fi(parse(e.date)),
-      cap(DAYS[day(parse(e.date))]),
-      esc(e.name),
-    ]),
-  );
-});
-function simpleICS(es) {
-  return (
-    [
-      "BEGIN:VCALENDAR",
-      "VERSION:2.0",
-      "PRODID:-//Kalenteri365.fi//FI",
-      ...es.flatMap((e, i) => [
-        "BEGIN:VEVENT",
-        `UID:${e.date}-${i}@kalenteri365.fi`,
-        "DTSTAMP:20261112T000000Z",
-        "DTSTART;VALUE=DATE:" + e.date.replaceAll("-", ""),
-        "DTEND;VALUE=DATE:" + iso(add(parse(e.date), 1)).replaceAll("-", ""),
-        "SUMMARY:" + e.name.replace(/[;,]/g, (c) => "\\" + c),
-        "END:VEVENT",
-      ]),
-      "END:VCALENDAR",
-    ].join("\r\n") + "\r\n"
-  );
-}
 $$("[data-plan]").forEach((el) => {
   let k = el.dataset.plan;
   if (state.plans[k] !== undefined) el.value = state.plans[k];
@@ -995,146 +894,6 @@ $("#planner-date")?.addEventListener("change", sheetLoad);
 $("#planner-title")?.addEventListener("input", sheetLoad);
 sheetLoad();
 renderBirthdays();
-let photoData = "";
-function renderEditor() {
-  if (!$("#editor-preview")) return;
-  let yy = +$("#editor-year").value,
-    mm = +$("#editor-month").value,
-    blank = $("#editor-blank").checked,
-    title =
-      $("#editor-title").value ||
-      (blank ? "Oma kuukausi" : cap(MONTHS[mm - 1]) + " " + yy),
-    color = $("#editor-color").value;
-  $("#editor-preview").style.setProperty("--accent", color);
-  $("#editor-preview").innerHTML =
-    `<h2 class="editor-title" style="color:${esc(color)}">${esc(title)}</h2>${photoData ? '<img class="editor-photo" src="' + photoData + '" alt="Oma kalenterikuva">' : ""}${calTable(yy, mm)}<footer>www.Kalenteri365.fi</footer>`;
-  if (blank) {
-    $$(".date-num,#editor-preview .weekno", $("#editor-preview")).forEach(
-      (el) => (el.textContent = ""),
-    );
-    $$(".cal-event", $("#editor-preview")).forEach((el) => el.remove());
-  } else {
-    if (!$("#editor-holidays").checked)
-      $$(".cal-event", $("#editor-preview")).forEach((el) => el.remove());
-    $$("td[data-date]", $("#editor-preview")).forEach((td) => {
-      for (let e of eventAt(td.dataset.date)) {
-        let s = document.createElement("span");
-        s.className = "cal-event personal";
-        s.textContent = e.title;
-        td.append(s);
-      }
-    });
-  }
-}
-if ($("#editor-year") && !$("[data-studio]")) {
-  const q = new URL(location.href).searchParams;
-  if (YEARS.includes(+q.get("year"))) $("#editor-year").value = q.get("year");
-  if (+q.get("month") >= 1 && +q.get("month") <= 12)
-    $("#editor-month").value = q.get("month");
-  for (let id of [
-    "editor-year",
-    "editor-month",
-    "editor-title",
-    "editor-color",
-    "editor-holidays",
-    "editor-blank",
-  ])
-    $("#" + id).addEventListener("input", renderEditor);
-  $("#editor-photo").addEventListener("change", async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    if (file.size > 10e6) {
-      toast("Valitse enintään 10 Mt kuva.");
-      return;
-    }
-    const reader = new FileReader();
-    reader.onload = () => {
-      photoData = reader.result;
-      renderEditor();
-    };
-    reader.readAsDataURL(file);
-  });
-  renderEditor();
-}
-async function editorWebP() {
-  await document.fonts.ready;
-  const root = $("#editor-preview");
-  if (!root) return;
-  const W = 2400,
-    H = photoData ? 2200 : 1700,
-    c = document.createElement("canvas");
-  c.width = W;
-  c.height = H;
-  const ctx = c.getContext("2d"),
-    color = $("#editor-color").value;
-  ctx.fillStyle = "white";
-  ctx.fillRect(0, 0, W, H);
-  ctx.fillStyle = color;
-  ctx.font = "700 70px Lato";
-  ctx.fillText($(".editor-title", root).textContent, 80, 120, W - 160);
-  let top = 190;
-  if (photoData) {
-    let img = new Image();
-    img.src = photoData;
-    await img.decode();
-    const scale = Math.min((W - 160) / img.width, 450 / img.height),
-      iw = img.width * scale,
-      ih = img.height * scale;
-    ctx.drawImage(img, (W - iw) / 2, top, iw, ih);
-    top += 490;
-  }
-  let rows = $$("tbody tr", root),
-    cw = (W - 160) / 8,
-    rh = (H - top - 170) / (rows.length + 1);
-  ctx.font = "700 28px Lato";
-  $$("thead th", root).forEach((th, i) => {
-    ctx.fillStyle = color;
-    ctx.fillRect(80 + i * cw, top, cw, rh);
-    ctx.fillStyle = "white";
-    ctx.fillText(th.textContent, 100 + i * cw, top + 40);
-  });
-  top += rh;
-  rows.forEach((tr, ri) => {
-    [...tr.children].forEach((td, i) => {
-      const xx = 80 + i * cw,
-        tt = top + ri * rh;
-      ctx.strokeStyle = "#d6dfe4";
-      ctx.strokeRect(xx, tt, cw, rh);
-      ctx.fillStyle = color;
-      ctx.font = "700 29px Lato";
-      ctx.fillText(
-        $(".date-num", td)?.textContent || td.textContent.trim().slice(0, 3),
-        xx + 13,
-        tt + 38,
-      );
-      ctx.font = "400 17px Lato";
-      $$(".cal-event", td).forEach((e, j) => {
-        let words = e.textContent.split(" "),
-          line = "",
-          yy = tt + 65 + j * 27;
-        for (let w of words) {
-          let n = line ? line + " " + w : w;
-          if (ctx.measureText(n).width > cw - 24 && line) {
-            ctx.fillText(line, xx + 12, yy);
-            yy += 21;
-            line = w;
-          } else line = n;
-        }
-        ctx.fillText(line, xx + 12, yy);
-      });
-    });
-  });
-  ctx.fillStyle = "#687985";
-  ctx.font = "24px Lato";
-  ctx.fillText("www.Kalenteri365.fi", 80, H - 55);
-  c.toBlob(
-    (b) => {
-      if (b) download("oma-kalenteri.webp", b, "image/webp");
-    },
-    "image/webp",
-    0.92,
-  );
-}
 import("./site-search.mjs").then(({connectSiteSearch})=>connectSiteSearch());
 let astronomyPromise;
 async function astronomy() {
@@ -1150,7 +909,11 @@ async function astronomy() {
     });
   return astronomyPromise;
 }
+let astroRequest = 0;
 bindForm("#astro-form", async (f) => {
+  const request = ++astroRequest;
+  const workspace = $(".solar-workspace");
+  workspace?.setAttribute("aria-busy", "true");
   try {
     const A = await astronomy(),
       city = CITIES.find((c) => c[0] === f.get("city")),
@@ -1164,23 +927,48 @@ bindForm("#astro-form", async (f) => {
           minute: "2-digit",
           hour12: false,
         }).format(d);
+    if(request !== astroRequest) return;
     $("#astro-result").innerHTML =
       `<strong>${city[1]} · ${fi(parse(ds))}</strong><p>Nousu: ${r.rise ? fmt(r.rise) : "—"} · Lasku: ${r.set ? fmt(r.set) : "—"}${r.duration !== null ? ` · Päivän pituus: ${Math.floor(r.duration / 60)} h ${r.duration % 60} min` : ""}</p>${r.polar ? `<p>${body === "Sun" ? "Aurinko" : "Kuu"} on koko paikallisen päivän horisontin ${r.polar === "up" ? "yläpuolella" : "alapuolella"}.</p>` : ""}`;
+    const scene = await import("./solar-fi.mjs");
+    if(request !== astroRequest) return;
+    scene.connectSolar(A, $("#astro-form"), r);
     if (body === "Sun") {
-      const scene = await import("./solar-fi.mjs");
-      scene.connectSolar(A, $("#astro-form"), r);
-      const chart=await import('./daylight-chart.mjs'),year=Number(ds.slice(0,4)),rows=Array.from({length:12},(_,i)=>{const day=dayEvents(A,city,`${year}-${String(i+1).padStart(2,'0')}-15`);return {date:`${year}-${String(i+1).padStart(2,'0')}-15`,rise:day.rise?fmt(day.rise):'—',set:day.set?fmt(day.set):'—',duration:day.duration};});
+      const chart=await import('./daylight-chart.mjs');
+      if(request !== astroRequest) return;
+      if($('#daylength-summary')){
+        const metrics=await import('./daylength-metrics.mjs');
+        if(request!==astroRequest)return;
+        const summary=metrics.daylengthMetrics(ds,r,dayEvents(A,city,iso(add(parse(ds),-1))),dayEvents(A,city,iso(add(parse(ds),7))));
+        $('#daylength-summary').innerHTML=metrics.daylengthSummary(summary);
+        $('#daylength-scene-value').textContent=metrics.durationLabel(r.duration);
+        $('#light-city').value=city[0];$('#light-date').value=ds;
+        $('#light-date').dispatchEvent(new Event('change'));
+      }
+      const year=Number(ds.slice(0,4)),rows=Array.from({length:12},(_,i)=>{const day=dayEvents(A,city,`${year}-${String(i+1).padStart(2,'0')}-15`);return {date:`${year}-${String(i+1).padStart(2,'0')}-15`,rise:day.rise?fmt(day.rise):'—',set:day.set?fmt(day.set):'—',duration:day.duration};});
       $('#daylight-title').textContent='Päivän pituus: '+city[1]+' '+year;
-      $('#daylight-chart').innerHTML=chart.daylightChart(city,year,rows);
-      $('#daylight-chart').onclick=e=>{const b=e.target.closest('[data-daylight-index]');if(!b)return;const row=rows[Number(b.dataset.daylightIndex)];$$('[data-daylight-index]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));$('#daylight-selection').textContent=fi(parse(row.date))+': nousu '+row.rise+' · lasku '+row.set+' · päivän pituus '+Math.floor(row.duration/60)+' h '+row.duration%60+' min';};
+      $('#daylight-chart').innerHTML=chart.daylightChart(city,year,rows,Number(ds.slice(5,7))-1);
+      $('#daylight-chart').onclick=e=>{
+        const show=e.target.closest('[data-daylight-open]');
+        if(show){const form=$('#astro-form');form.elements.date.value=show.dataset.daylightOpen;form.requestSubmit();$('#solar-player').scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});return;}
+        const b=e.target.closest('[data-daylight-index]');if(!b)return;
+        const row=rows[Number(b.dataset.daylightIndex)];$$('[data-daylight-index]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));$('#daylight-selection').innerHTML=chart.daylightSelection(row);
+      };
     }
   } catch (err) {
-    toast(err.message);
+    if(request !== astroRequest) return;
+    $("#astro-result").textContent = "Aikojen lataus ei onnistunut. Kokeile Päivitä-painiketta uudelleen.";
+    const status = $("#solar-render-status");
+    if(status){status.hidden=false;status.textContent="Simulaation lataus ei onnistunut. Yritä uudelleen.";}
+    astronomyPromise=undefined;
+  } finally {
+    if(request === astroRequest) workspace?.removeAttribute("aria-busy");
   }
 });
 if ($("#astro-form")) {
   const form = $("#astro-form");
   if (config.city) form.elements.city.value = config.city;
+  form.addEventListener("change", () => {if(form.checkValidity()) form.requestSubmit();});
   form.requestSubmit();
 }
 const signNames = [
@@ -1292,7 +1080,6 @@ async function updateCityPhoto(id, notify = true) {
     target.dataset.city = id;
     target.dataset.period = period;
     displayedPhotoKey = p.id;
-    $("#city-caption").textContent = entry.name;
     if ($("#city-photo-name")) $("#city-photo-name").textContent = entry.name;
     if ($("#city-photo-period")) $("#city-photo-period").textContent = period === 'night' ? 'Yökuva' : 'Päiväkuva';
   } catch {}
@@ -1331,10 +1118,10 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-add-date]'
 
 
 
-$('#garden-month')?.addEventListener('change',e=>{let count=0;document.querySelectorAll('[data-crop-months]').forEach(card=>{card.hidden=Boolean(e.target.value)&&!card.dataset.cropMonths.split(',').includes(e.target.value);if(!card.hidden)count++;});$('#garden-count').textContent=count+' kasvia';});
-bindForm('#sowing-form',f=>{const from=Number(f.get('minWeeks')),to=Number(f.get('maxWeeks'));if(from>to)throw Error('Lyhin kasvatusaika ei voi olla pisintä suurempi.');const d=parse(f.get('planting'));$('#sowing-result').innerHTML='<strong>'+fi(add(d,-to*7))+'–'+fi(add(d,-from*7))+'</strong><p>Esikasvatuksen aloitus annetulla '+from+'–'+to+' viikon kestolla. Istutuspäivä '+fi(d)+' on oma suunnitelmasi, ei paikallinen hallattomuusennuste.</p>';});
+if(document.querySelector('#garden-config')) import('./garden-planner.mjs').then(({initGardenPlanner})=>initGardenPlanner({onAddEvent:entry=>{openEvent();const f=$('#event-form');f.elements.date.value=entry.date;f.elements.title.value=entry.title;f.elements.note.value=entry.description;}}));
+bindForm('#sowing-form',f=>{let w;try{w=sowingWindow(f.get('planting'),f.get('minWeeks'),f.get('maxWeeks'));}catch(error){$('#sowing-result').replaceChildren();throw error;}$('#sowing-result').innerHTML='<strong>'+fi(parse(w.start))+'–'+fi(parse(w.end))+'</strong><p>Esikasvatuksen aloitus annetulla '+f.get('minWeeks')+'–'+f.get('maxWeeks')+' viikon kestolla. Istutuspäivä '+fi(parse(w.planting))+' on oma suunnitelmasi.</p><div class="actions"><button type="button" class="btn secondary" data-add-date="'+w.start+'" data-add-title="Esikasvatuksen aloitus">Lisää aloitus kalenteriin</button><button type="button" class="btn secondary" data-add-date="'+w.planting+'" data-add-title="Suunniteltu istutuspäivä">Lisää istutuspäivä</button></div>';});
 
-const storageNotice=$('#storage-notice');if(storageNotice){let acknowledged=false;try{acknowledged=Number(localStorage.getItem('fi-storage-notice-until'))>Date.now();}catch{}if(!acknowledged)storageNotice.hidden=false;$('#storage-dismiss').onclick=()=>{try{localStorage.setItem('fi-storage-notice-until',String(Date.now()+180*86400000));}catch{}storageNotice.hidden=true;};}
+initStorageNotice();
 
 if(document.querySelector('.shift-app'))import('./shift-fi.mjs');
 
@@ -1355,7 +1142,7 @@ document.addEventListener('click',async event=>{
  finally{button.disabled=false;}
 });
 
-$('#exam-filter')?.addEventListener('input',e=>{const q=e.target.value.toLocaleLowerCase('fi').trim();let n=0;$$('[data-exam-subject]').forEach(row=>{row.hidden=!row.dataset.examSubject.includes(q);if(!row.hidden)n++;});$('#exam-filter-status').textContent=n+' koepäivää';});
+$('#exam-filter')?.addEventListener('input',e=>{const q=e.target.value.toLocaleLowerCase('fi').trim();let n=0;$$('[data-exam-subject]').forEach(row=>{row.hidden=!row.dataset.examSubject.includes(q);if(!row.hidden)n++;});$('#exam-filter-status').textContent=n+(n===1?' koepäivä':' koepäivää');});
 
 if(document.querySelector("#blog-search,#tool-filter,[data-family-planner],#local-sun"))import("./edition-ui.mjs").then(({connectEdition})=>connectEdition({state,persist}));
 
@@ -1366,6 +1153,21 @@ if(document.querySelector('[data-holiday-calendar]'))import('./holiday-calendar.
 if(document.querySelector('[data-services],#personal-tax-form'))import('./finland-services.mjs');
 
 if(document.querySelector('[data-community]'))import('./community.mjs').then(({connectCommunity})=>connectCommunity({state,persist,onUpdate(){renderCalendar();window.dispatchEvent(new Event('community:updated'));}}));
+
+if(document.querySelector('[data-personal-planner]'))import('./personal-planner.mjs').then(({connectPersonalPlanner})=>connectPersonalPlanner({
+  state,persist,
+  openEvent({id,date,title}) {
+    const existing=id&&state.events.find(event=>event.id===id);
+    openEvent(existing?.id);
+    if(!existing){
+      const form=$('#event-form');
+      form.elements.id.value=id||'';
+      form.elements.date.value=date||today;
+      form.elements.title.value=title||'';
+    }
+  },
+  onUpdate(){renderCalendar();}
+}));
 
 if(document.querySelector("[data-date-workspace]"))import("./date-tools.mjs");
 
@@ -1378,3 +1180,5 @@ if(document.querySelector('[data-education-hub]'))import('./education-levels.mjs
 if(document.querySelector('[data-print-catalog]'))import('./print-catalog-ui.mjs');
 
 if(document.querySelector("[data-privacy-tools]"))import("./privacy-tools.mjs");
+
+if(document.querySelector("[data-vacation-planner]"))import("./vacation-planner.mjs");

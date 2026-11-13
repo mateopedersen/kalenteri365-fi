@@ -10,7 +10,7 @@ import {gzip} from 'node:zlib';
 import {promisify} from 'node:util';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../dist'),port=Number(process.env.PORT)||4173;
 const compress=promisify(gzip),cache=new Map();
-const types={'.html':'text/html; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.svg':'image/svg+xml','.jpg':'image/jpeg','.jpeg':'image/jpeg','.ico':'image/x-icon','.png':'image/png','.webp':'image/webp','.avif':'image/avif','.pdf':'application/pdf','.ics':'text/calendar; charset=utf-8','.woff2':'font/woff2','.xml':'application/xml'};
+const types={'.html':'text/html; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.webmanifest':'application/manifest+json; charset=utf-8','.svg':'image/svg+xml','.jpg':'image/jpeg','.jpeg':'image/jpeg','.ico':'image/x-icon','.png':'image/png','.webp':'image/webp','.avif':'image/avif','.pdf':'application/pdf','.ics':'text/calendar; charset=utf-8','.woff2':'font/woff2','.xml':'application/xml'};
 const security={'X-Content-Type-Options':'nosniff','Referrer-Policy':'strict-origin-when-cross-origin','Permissions-Policy':'camera=(), microphone=(), geolocation=()'};
 async function staticResponse(req,res,file,status=200){
  const st=await fs.stat(file),ext=path.extname(file),etag='"'+st.size+'-'+Math.floor(st.mtimeMs)+'"';

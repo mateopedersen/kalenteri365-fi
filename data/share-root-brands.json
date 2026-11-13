@@ -1,0 +1,21 @@
+[
+  {
+    "id": "raindrop",
+    "source": "https://raindrop.io/",
+    "original": "Homepage header inline SVG",
+    "sourceSha256": "2eca3556816668386b8f1c60f7f251658c5a723f5d55d1150a3ba024282ce752",
+    "sha256": "9c56a5063ec83cfaec750f9255987975a256f394e7fffa6511c6942cbafb339b",
+    "changes": "Removed wordmark only; original colored icon paths and masks unchanged. Cropped canvas to icon bounds.",
+    "license": "Brand mark belongs to Raindrop.io; used to identify the sharing destination.",
+    "checkedAt": "2026-11-13"
+  },
+  {
+    "id": "band",
+    "source": "https://promotion.band.us/newband25",
+    "original": "https://ssl.pstatic.net/cmstatic/promotion/newband25/favicon/favicon.svg",
+    "sha256": "2d7e944a63660933dde949e1d028de69eb5f1821aa95acd69f44adc296999eba",
+    "changes": "None",
+    "license": "BAND brand mark, used to identify the sharing destination.",
+    "checkedAt": "2026-11-13"
+  }
+]

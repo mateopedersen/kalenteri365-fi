@@ -1,3 +1,7 @@
+import {siteIconLinks} from './site-icons.mjs';
+import {brandedTitle} from './seo-title.mjs';
+import {lunarPageHeader} from './lunar-header.mjs';
+import {storageNoticeMarkup} from './storage-notice-view.mjs';
 import {
   MONTHS,
   SLUGS,
@@ -150,7 +154,7 @@ export const tools = [
   [
     "lukujarjestys",
     "Lukujärjestys",
-    "Muokattava viikko lukuaineille ja harrastuksille.",
+    "Muokattava viikko oppiaineille ja harrastuksille.",
     "grid",
     "Opiskelu",
   ],
@@ -192,7 +196,7 @@ export const tools = [
   [
     "paivamaaralaskuri",
     "Päivämäärälaskuri",
-    "Laske päivien ja työpäivien erotus. Lisää tai vähennä päiviä, viikkoja ja kuukausia, valitse rajapäivät ja tallenna tulospäivä kalenteriin.",
+    "Laske päivien tai työpäivien määrä päivämäärien välillä. Lisää tai vähennä päiviä, viikkoja ja kuukausia, valitse rajapäivät ja tallenna tulospäivä kalenteriin.",
     "calendar",
     "Laskurit",
   ],
@@ -367,14 +371,14 @@ export const tools = [
   [
     "elakkeiden-maksupaivat",
     "Eläkkeiden maksupäivät",
-    "Kelan ja työeläkelaitosten alkuperäiset tiedot.",
+    "Kevan ja Ilmarisen julkaistut maksupäivät vuodelle 2027.",
     "briefcase",
     "Suomi",
   ],
   [
     "etuuksien-maksupaivat",
     "Etuuksien maksupäivät",
-    "Etuuskohtaiset maksupäivät suoraan Kelasta.",
+    "Kelan lapsilisän maksupäivät vuodelle 2027.",
     "briefcase",
     "Suomi",
   ],
@@ -436,7 +440,7 @@ export const TOOL_ART = {
   uusikuu: "newmoon",
   "auringonnousu-ja-lasku": "sunrise",
   "kuun-nousu-ja-lasku": "moonrise",
-  "paivan-pituus": "daylight",
+  "paivan-pituus": "sun",
   vuodenajat: "seasons",
   kellonsiirto: "clock",
   auringonpimennys: "sun-eclipse",
@@ -450,9 +454,10 @@ export const TOOL_ART = {
   tyokalut: "tools",
   "yliopistojen-kalenterit": "study",
   "tahtitieteellinen-kalenteri": "astronomy",
+  ...Object.fromEntries(tools.map(([slug]) => [slug, "tool-" + slug])),
 };
 export const toolCards = (list = tools) =>
-  `<div class="cards">${list.map(([s, t, d, i]) => link(`/${s}/`, `<span class="tile-icon">${art(TOOL_ART[s] || i)}</span><div class="tool-copy"><h3>${t}</h3><p>${d}</p></div><span class="card-arrow">${icon("arrow")}</span>`, "tool-card")).join("")}</div>`;
+  `<div class="cards">${list.map(([s, t, d, i, _group, href, visual]) => link(href || `/${s}/`, `<span class="tile-icon">${visual || art(TOOL_ART[s] || i)}</span><div class="tool-copy"><h3>${t}</h3><p>${d}</p></div><span class="card-arrow">${icon("arrow")}</span>`, "tool-card")).join("")}</div>`;
 export function calTable(
   y,
   m,
@@ -479,71 +484,75 @@ export function calTable(
 export const art = (name, cls = "") =>
   `<img class="art ${cls}" src="/assets/art/${/^[a-z0-9-]+$/.test(name) ? name : "calendar"}.svg" width="80" height="65" alt="" aria-hidden="true" loading="${cls==='page-art'?'eager':'lazy'}" decoding="async">`;
 export const logo = `<span class="brand-mark">${art("calendar")}</span><span>Kalenteri<span class="brand-number">365</span></span>`;
-export const skyline = `<svg class="skyline" preserveAspectRatio="xMidYMid slice" viewBox="0 0 600 220" role="img" aria-label="Helsingin rantakaupungin kuvitus"><defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#dcecf5"/><stop offset="1" stop-color="#f3f8fa"/></linearGradient></defs><path fill="url(#sky)" d="M0 0h600v220H0z"/><circle fill="#fff6d6" cx="471" cy="47" r="26"/><path fill="#bfd3df" d="m0 136 40-12 30 8 50-19 40 17 35-9 40 19 49-18 40 4 45-12 35 18 56-12 65 18v82H0z"/><g fill="#e8f0f3" stroke="#8ca6b6" stroke-width="2"><path d="M28 124h58v65H28z M20 124l37-25 37 25z M103 134h47v55h-47z M159 118h42v71h-42z M401 128h52v61h-52z M463 119h43v70h-43z M517 136h55v53h-55z"/><path fill="#f9fcfd" d="M226 119h148v70H226z M215 121l85-31 85 31z M282 74h36v26h-36z"/><path fill="#7899a3" d="M278 74q22-43 44 0z"/><path d="M300 35v14 M294 41h12 M251 132v46 M274 132v46 M298 132v46 M322 132v46 M345 132v46"/></g><g fill="#8ca6b6"><path d="M39 140h8v10h-8z M65 140h8v10h-8z M39 161h8v10h-8z M65 161h8v10h-8z M115 148h7v10h-7z M133 148h7v10h-7z M414 142h9v10h-9z M435 142h9v10h-9z M477 132h9v10h-9z M535 151h9v10h-9z M555 151h9v10h-9z"/></g><path fill="#8db3c3" d="M0 185h600v35H0z"/><path fill="none" stroke="#d5e8ed" stroke-width="2" d="M0 199h80m30 0h150m25 0h100m35 0h150M35 211h145m40 0h170m30 0h130"/><path fill="#274958" d="m75 182 12 12h58l14-12z"/><path fill="#fff" d="M115 126v54H88z"/></svg>`;
-export function relatedTopics(path) {
-  if (path === "/" || path === "/sivukartta/" || path === "/haku/") return "";
-  const bits = path.split("/").filter(Boolean),
-    base = bits[0],
-    group = tools.find((t) => t[0] === base)?.[4];
-  const preferred =
-    base === "kuukalenteri" || base.includes("kuun")
-      ? [
-          "kuun-vaiheet",
-          "kuun-nousu-ja-lasku",
-          "auringonnousu-ja-lasku",
-          "tahtitieteellinen-kalenteri",
-        ]
-      : group === "Opiskelu"
-        ? [
-            "koulujen-lomat",
-            "lukujarjestys",
-            "opiskelukalenteri",
-            "paivalaskuri",
-          ]
-        : group === "Työ ja vapaa"
-          ? [
-              "tyopaivalaskuri",
-              "lomasuunnittelija",
-              "tyovuorosuunnittelija",
-              "juhlapyhat",
-            ]
-          : base === "horoskooppi" || base === "horoskooppimerkki"
-            ? [
-                "horoskooppi",
-                "horoskooppimerkki",
-                "paivasuunnittelija",
-                "syntymapaivakalenteri",
-              ]
-            : group === "Luonto ja taivas"
-              ? [
-                  "auringonnousu-ja-lasku",
-                  "kuukalenteri",
-                  "vuodenajat",
-                  "kylvokalenteri",
-                ]
-              : [
-                  "kalenteri",
-                  "juhlapyhat",
-                  "viikkokalenteri",
-                  "paivamaaralaskuri",
-                ];
-  const related = preferred
-    .filter((k) => k !== base)
-    .map((k) => tools.find((t) => t[0] === k))
-    .filter(Boolean)
-    .slice(0, 3);
-  return `<section class="related-content"><div class="section-heading"><h2>Jatka suunnittelua</h2><span>Sinulle hyödyllistä</span></div>${toolCards(related)}</section>`;
+function siteFooter(path) {
+  const groups = [
+    ["Kalenterit", "calendar", [
+      ["/kalenteri/", "Vuosikalenterit"],
+      ["/pdf-kalenteri/", "Tulostettavat kalenterit"],
+      ["/juhlapyhat/", "Juhlapyhät"],
+      ["/kuukalenteri/", "Kuukalenteri"],
+    ]],
+    ["Suunnittelu", "edit", [
+      ["/luo-kalenteri/", "Luo oma kalenteri"],
+      ["/tyokalut/", "Kaikki työkalut"],
+      ["/koulujen-lomat/", "Koulujen lomat"],
+      ["/lomasuunnittelija/", "Lomasuunnittelija"],
+    ]],
+    ["Tutustu", "info", [
+      ["/tietoa/", "Tietoa sivustosta"],
+      ["/blogi/", "Blogi ja oppaat"],
+      ["/usein-kysyttya/", "Usein kysyttyä"],
+      ["/lahteet/", "Lähteet ja laskentatavat"],
+    ]],
+    ["Sivuston tiedot", "check", [
+      ["/tietosuoja/", "Tietosuoja"],
+      ["/saavutettavuus/", "Saavutettavuus"],
+      ["/valokuvat-ja-lisenssit/", "Valokuvat ja lisenssit"],
+      ["/kayttoehdot/", "Käyttöehdot"],
+    ]],
+  ];
+  return `<footer class="site-footer site-footer-redesign" aria-label="Sivuston alatunniste">
+    <div class="wrap footer-shell">
+      <div class="footer-intro">
+        <div class="footer-identity">
+          ${link("/", logo, "brand footer-brand")}
+          <p>Kalenterit näytölle ja paperille.</p>
+        </div>
+        <a class="footer-contact-card" href="/yhteystiedot/">
+          <span class="footer-contact-art">${art("contact")}</span>
+          <span class="footer-contact-copy"><strong>Kysymys tai idea?</strong><span>Kerro palautteesi tai ehdota parannusta.</span><b>Ota yhteyttä</b></span>
+          ${icon("arrow")}
+        </a>
+      </div>
+      <div class="footer-directory">
+        ${groups.map(([title, symbol, links], index) => `<nav class="footer-link-group" aria-labelledby="footer-group-${index}">
+          <h2 id="footer-group-${index}">${icon(symbol)}<span>${title}</span></h2>
+          <ul>${links.map(([href, label]) => `<li><a href="${href}"${path === href ? ' aria-current="page"' : ''}>${label}</a></li>`).join("")}</ul>
+        </nav>`).join("")}
+      </div>
+      <div class="footer-legal">
+        <small>© ${new Date().getUTCFullYear()} Kalenteri365</small>
+        <nav aria-label="Alatunnisteen lisälinkit">
+          ${link("/evasteet/", "Evästeet")}
+          ${link("/sivukartta/", "Sivukartta")}
+          <a href="/sv/" lang="sv">På svenska</a>
+        </nav>
+        <a class="footer-back-top" href="#sisalto"><span>Takaisin ylös</span>${icon("arrow")}</a>
+      </div>
+    </div>
+  </footer>`;
 }
+export const skyline = `<svg class="skyline" preserveAspectRatio="xMidYMid slice" viewBox="0 0 600 220" role="img" aria-label="Helsingin rantakaupungin kuvitus"><defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#dcecf5"/><stop offset="1" stop-color="#f3f8fa"/></linearGradient></defs><path fill="url(#sky)" d="M0 0h600v220H0z"/><circle fill="#fff6d6" cx="471" cy="47" r="26"/><path fill="#bfd3df" d="m0 136 40-12 30 8 50-19 40 17 35-9 40 19 49-18 40 4 45-12 35 18 56-12 65 18v82H0z"/><g fill="#e8f0f3" stroke="#8ca6b6" stroke-width="2"><path d="M28 124h58v65H28z M20 124l37-25 37 25z M103 134h47v55h-47z M159 118h42v71h-42z M401 128h52v61h-52z M463 119h43v70h-43z M517 136h55v53h-55z"/><path fill="#f9fcfd" d="M226 119h148v70H226z M215 121l85-31 85 31z M282 74h36v26h-36z"/><path fill="#7899a3" d="M278 74q22-43 44 0z"/><path d="M300 35v14 M294 41h12 M251 132v46 M274 132v46 M298 132v46 M322 132v46 M345 132v46"/></g><g fill="#8ca6b6"><path d="M39 140h8v10h-8z M65 140h8v10h-8z M39 161h8v10h-8z M65 161h8v10h-8z M115 148h7v10h-7z M133 148h7v10h-7z M414 142h9v10h-9z M435 142h9v10h-9z M477 132h9v10h-9z M535 151h9v10h-9z M555 151h9v10h-9z"/></g><path fill="#8db3c3" d="M0 185h600v35H0z"/><path fill="none" stroke="#d5e8ed" stroke-width="2" d="M0 199h80m30 0h150m25 0h100m35 0h150M35 211h145m40 0h170m30 0h130"/><path fill="#274958" d="m75 182 12 12h58l14-12z"/><path fill="#fff" d="M115 126v54H88z"/></svg>`;
 function toolsMenuMarkup(currentPath){
   const definitions=[
-    ['calendars','Kalenterit','calendar',t=>t[4]==='Kalenterit'],
-    ['celebrations','Juhlat ja merkkipäivät','celebrations',t=>['juhlapyhat','liputuspaivat','merkkipaivat','nimipaivat'].includes(t[0])],
-    ['education','Koulu ja opiskelu','study',t=>t[4]==='Opiskelu'],
-    ['work','Työ ja vapaa-aika','briefcase',t=>t[4]==='Työ ja vapaa'],
-    ['everyday','Arki ja etuudet','family',t=>t[4]==='Oma arki'||['elakkeiden-maksupaivat','etuuksien-maksupaivat'].includes(t[0])],
-    ['calculators','Laskurit','calculator',t=>t[4]==='Laskurit'],
-    ['sky','Aurinko ja Kuu','moon',t=>['kuukalenteri','kuun-vaiheet','taysikuu','uusikuu','auringonnousu-ja-lasku','kuun-nousu-ja-lasku','paivan-pituus'].includes(t[0])],
-    ['nature','Luonto ja vuodenkierto','leaf',t=>t[4]==='Luonto ja taivas'&&!['kuukalenteri','kuun-vaiheet','taysikuu','uusikuu','auringonnousu-ja-lasku','kuun-nousu-ja-lasku','paivan-pituus'].includes(t[0])]
+    ['calendars','Kalenterit','tool-kalenteri',t=>t[4]==='Kalenterit'],
+    ['celebrations','Juhlat ja merkkipäivät','tool-juhlapyhat',t=>['juhlapyhat','liputuspaivat','merkkipaivat','nimipaivat'].includes(t[0])],
+    ['education','Koulu ja opiskelu','tool-opiskelukalenteri',t=>t[4]==='Opiskelu'],
+    ['work','Työ ja vapaa-aika','tool-tyopaivat',t=>t[4]==='Työ ja vapaa'],
+    ['everyday','Arki ja etuudet','tool-perhekalenteri',t=>t[4]==='Oma arki'||['elakkeiden-maksupaivat','etuuksien-maksupaivat'].includes(t[0])],
+    ['calculators','Laskurit','tool-paivamaaralaskuri',t=>t[4]==='Laskurit'],
+    ['sky','Aurinko ja Kuu','tool-kuukalenteri',t=>['kuukalenteri','kuun-vaiheet','taysikuu','uusikuu','auringonnousu-ja-lasku','kuun-nousu-ja-lasku','paivan-pituus'].includes(t[0])],
+    ['nature','Luonto ja vuodenkierto','tool-vuodenajat',t=>t[4]==='Luonto ja taivas'&&!['kuukalenteri','kuun-vaiheet','taysikuu','uusikuu','auringonnousu-ja-lasku','kuun-nousu-ja-lasku','paivan-pituus'].includes(t[0])]
   ];
   const groups=definitions.map(([id,label,illustration,match])=>({id,label,illustration,items:tools.filter(match)}));
   const active=groups.find(g=>g.items.some(t=>currentPath.startsWith('/'+t[0]+'/')))?.id||'calendars';
@@ -561,6 +570,10 @@ export function layout({
   social = {},
   structuredImages = [],
   alternate = null,
+  customHeader = false,
+  relatedContent = "",
+  seoTitle = null,
+  seoDescription = null,
 }) {
   const monthArtIndex=SLUGS.indexOf(path.split("/")[3]);
   const pageArt = art(
@@ -571,12 +584,16 @@ export function layout({
       "calendar",
     "page-art",
   );
-  const titleText = title.replace(/\s[–—-]\s|:\s+/g, " | ") + " | Kalenteri365";
+  const lunarMonth=/^\/kuukalenteri\/(202[7-9]|2030)\/([a-z]+)\/$/.exec(path);
+  const lunarRise=path.startsWith("/kuun-nousu-ja-lasku/");
+  const pageHeader=customHeader ? "" : lunarMonth ? lunarPageHeader({year:Number(lunarMonth[1]),month:monthArtIndex+1,monthName:cap(MONTHS[monthArtIndex]),icon}) : `<div class="page-heading${path.startsWith("/auringonnousu-ja-lasku/")||path.startsWith("/paivan-pituus/")||lunarRise?" solar-page-heading"+(lunarRise?" lunar-page-heading":"")+(path.startsWith("/paivan-pituus/")?" daylength-page-heading":""):""}">${lunarRise?'<img class="page-art" src="/assets/photos/moon-heading.webp" width="72" height="72" alt="" decoding="async">':pageArt}<div><p class="eyebrow">SUOMI · KALENTERI365</p><h1>${esc(title)}</h1><p>${esc(description)}</p></div><div class="heading-tools no-print">${body.includes("data-holiday-calendar")?link("#lisaa-kalenteriin",art("calendar-add")+"<span>Lisää kalenteriin</span>","btn secondary"):""}${button(art("download") + "<span>Tulosta</span>", "print", "btn secondary")}${!['tietoa','lahteet','tietosuoja','evasteet','kayttoehdot','saavutettavuus','yhteystiedot','toimitusperiaatteet','valokuvat-ja-lisenssit','haku','sivukartta','tyokalut','oma-arki','404'].includes(path.split('/')[1])?'<button type="button" class="btn secondary" data-share-open>'+art('share')+'<span>Jaa sivu</span></button>':''}</div></div>`;
+  const titleText = seoTitle || brandedTitle(title);
+  const summary = seoDescription ?? description;
   const schema = {
     "@context": "https://schema.org",
     "@type": path === "/" ? "WebSite" : "WebPage",
     name: titleText,
-    description,
+    description:summary,
     url: "https://kalenteri365.fi" + path,
     inLanguage: "fi",
     isPartOf: {
@@ -591,8 +608,10 @@ export function layout({
     for(let i=0;i<parts.length;i++){const prefix='/'+parts.slice(0,i+1).join('/')+'/';items.push({name:i===parts.length-1?title:(i===0?tools.find(t=>t[0]===parts[0])?.[1]||({blogi:"Blogi",oppaat:"Oppaat"})[parts[0]]:null)||cap(parts[i].replaceAll('-',' ')),url:'https://kalenteri365.fi'+prefix});}
     schema.breadcrumb={'@type':'BreadcrumbList',itemListElement:items.map((item,i)=>({'@type':'ListItem',position:i+1,name:item.name,item:item.url}))};
   }
+  const socialImage=social.src?{"@type":"ImageObject",url:"https://kalenteri365.fi"+social.src,contentUrl:"https://kalenteri365.fi"+social.src,caption:social.alt,width:social.width||1200,height:social.height||630,encodingFormat:social.type||"image/jpeg",creditText:social.creditText||"Kalenteri365",acquireLicensePage:"https://kalenteri365.fi/valokuvat-ja-lisenssit/"}:null;
+  if(socialImage){if(path==="/")schema.mainEntity={"@type":"WebPage","@id":"https://kalenteri365.fi/",primaryImageOfPage:socialImage};else schema.primaryImageOfPage=socialImage;}
   if(structuredImages.length)schema.image=structuredImages;
-  if(kind==='article'&&extra.article){schema.mainEntity={'@type':'BlogPosting',headline:title,description,inLanguage:'fi',mainEntityOfPage:'https://kalenteri365.fi'+path,author:{'@type':'Organization',name:'Kalenteri365',url:'https://kalenteri365.fi/tietoa/'},publisher:{'@type':'Organization',name:'Kalenteri365',url:'https://kalenteri365.fi/'},...extra.article,image:structuredImages[0]?.contentUrl};}
+  if(kind==='article'&&extra.article){schema.mainEntity={'@type':'BlogPosting',headline:title,description:summary,inLanguage:'fi',mainEntityOfPage:'https://kalenteri365.fi'+path,author:{'@type':'Organization',name:'Kalenteri365',url:'https://kalenteri365.fi/tietoa/'},publisher:{'@type':'Organization',name:'Kalenteri365',url:'https://kalenteri365.fi/'},...extra.article,image:socialImage||structuredImages[0]?.contentUrl};}
   if(path==='/blogi/')schema['@type']='CollectionPage';
-  return `<!doctype html><html lang="fi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(titleText)}</title><meta name="description" content="${esc(description)}"><link rel="canonical" href="https://kalenteri365.fi${path}">${path==="/valokuvat-ja-lisenssit/"?'<meta name="robots" content="noindex,follow">':""}${alternate?`<link rel="alternate" hreflang="fi-FI" href="https://kalenteri365.fi${path}"><link rel="alternate" hreflang="sv-FI" href="https://kalenteri365.fi${alternate}">`:""}<meta name="theme-color" content="#002F6C"><meta property="og:type" content="${kind==='article'?'article':'website'}"><meta property="og:locale" content="fi_FI"><meta property="og:title" content="${esc(titleText)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="https://kalenteri365.fi${path}"><meta property="og:site_name" content="Kalenteri365"><meta property="og:image" content="https://kalenteri365.fi${social.src || "/assets/og.png"}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:alt" content="${esc(social.alt || title)}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(titleText)}"><meta name="twitter:description" content="${esc(description)}"><meta name="twitter:image" content="https://kalenteri365.fi${social.src || "/assets/og.png"}"><link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 96x96"><link rel="icon" href="/assets/icon-96.png" type="image/png" sizes="96x96"><link rel="icon" href="/assets/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/assets/icon-180.png" sizes="180x180"><link rel="preload" href="/assets/fonts/lato-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/assets/fonts/lato-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/assets/site.css"><link rel="stylesheet" href="/assets/finland.css"><link rel="stylesheet" href="/assets/edition.css"><script type="application/ld+json">${JSON.stringify(schema).replaceAll("<", "\\u003c")}</script></head><body data-kind="${kind}" data-year="${year}" data-month="${month}"><a class="skip" href="#sisalto">Siirry sisältöön</a><header class="site-header"><div class="topbar wrap">${link("/", logo, "brand")}<nav class="primary" aria-label="Päänavigaatio">${link("/kalenteri/", art("calendar")+"<span>Kalenterit</span>")}${link("/juhlapyhat/", art("celebrations")+"<span>Juhlapyhät</span>")}${link("/koulujen-lomat/", art("school")+"<span>Koulujen lomat</span>")}${link("/horoskooppi/", art("star")+"<span>Horoskooppi</span>")}</nav><div class="header-tools">${link("/oma-arki/", art("dayplan")+"<span>Oma arki</span>","header-personal")}<div class="search-wrap"><form role="search" action="/haku/"><label class="sr-only" for="site-search">Hae sivustolta</label><input id="site-search" name="q" placeholder="Hae kalenteria, päivää tai työkalua…" autocomplete="off"><button aria-label="Hae">${icon("search")}</button></form><div id="search-results" hidden></div></div></div><span class="country"><svg width="27" height="17" viewBox="0 0 18 11" aria-hidden="true"><path fill="#fff" d="M0 0h18v11H0z"/><path fill="#002F6C" d="M5 0h3v11H5z M0 4h18v3H0z"/></svg> Suomi</span><button class="mobile-menu" aria-label="Avaa valikko" aria-expanded="false" data-action="menu">${icon("menu")}</button></div><div class="subbar"><nav class="wrap subnav" aria-label="Kalenterit ja työkalut"><div class="subyears"><span>Kalenterit</span>${YEARS.map((y) => link("/kalenteri/" + y + "/", y, year === y ? "active" : "")).join("")}</div>${link("/pdf-kalenteri/", art("download") + "<span>PDF-kalenterit</span>")}${link("/tyopaivat/", art("briefcase") + "<span>Työpäivät</span>")}${link("/paivamaaralaskuri/", art("calculator") + "<span>Päivämäärälaskuri</span>")}<details class="tools-menu"><summary>${art("tools")}<span>Lisää työkaluja</span><span aria-hidden="true">⌄</span></summary>${toolsMenuMarkup(path)}</details></nav></div></header><main id="sisalto" class="wrap">${path !== "/" ? `<nav class="breadcrumb" aria-label="Murupolku">${link("/", "Etusivu")}<span>/</span>${path.split("/").filter(Boolean).length > 1 ? link("/" + path.split("/")[1] + "/", tools.find((t) => t[0] === path.split("/")[1])?.[1] || ({blogi:"Blogi",oppaat:"Oppaat"})[path.split("/")[1]] || "Kalenteri") + "<span>/</span>" : ""}<span>${esc(title)}</span></nav><div class="page-heading">${pageArt}<div><p class="eyebrow">SUOMI · KALENTERI365</p><h1>${esc(title)}</h1><p>${esc(description)}</p></div><div class="heading-tools no-print">${body.includes("data-holiday-calendar")?link("#lisaa-kalenteriin",art("calendar-add")+"<span>Lisää kalenteriin</span>","btn secondary"):""}${button(art("download") + "<span>Tulosta</span>", "print", "btn secondary")}${!['tietoa','lahteet','tietosuoja','evasteet','kayttoehdot','saavutettavuus','yhteystiedot','toimitusperiaatteet','valokuvat-ja-lisenssit','haku','sivukartta','tyokalut','oma-arki','404'].includes(path.split('/')[1])?'<button type="button" class="btn secondary" data-share-open>'+art('share')+'<span>Jaa sivu</span></button>':''}</div></div>` : ""}${body}${relatedTopics(path)}</main><footer class="site-footer"><div class="footer-topline wrap"><span>${path === "/" ? "Suomen kalenterit, juhlapäivät ja arjen työkalut." : "Vähän enemmän tilaa tärkeille asioille."}</span>${link("/tyokalut/", "Löydä oma työkalusi " + icon("arrow"))}</div><div class="wrap footer-grid"><div>${link("/", logo, "brand")}<p>Suomen päivät, sinun suunnitelmasi.</p><p>Kalenterit, juhlat ja käytännön työkalut selkeämpään arkeen.</p><span class="small">Ajat: Europe/Helsinki · Viikot: ISO 8601</span></div><div><h2>Kalenterit</h2>${link("/kalenteri/", "Vuosikalenterit")}${link("/pdf-kalenteri/", "Tulostettavat kalenterit")}${link("/juhlapyhat/", "Juhlapyhät")}${link("/kuukalenteri/", "Kuukalenteri")}</div><div><h2>Suunnittelu</h2>${link("/luo-kalenteri/", "Luo oma kalenteri")}${link("/tyokalut/", "Kaikki työkalut")}${link("/koulujen-lomat/", "Koulujen lomat")}${link("/lomasuunnittelija/", "Lomasuunnittelija")}</div><div><h2>Tietoa</h2>${link("/tietoa/", "Tietoa sivustosta")}${link("/lahteet/", "Lähteet ja laskentatavat")}${link("/tietosuoja/", "Tietosuoja")}${link("/saavutettavuus/", "Saavutettavuus")}${link("/blogi/", "Blogi ja oppaat")}${link("/usein-kysyttya/", "Usein kysyttyä")}${link("/valokuvat-ja-lisenssit/", "Valokuvat ja lisenssit")}${link("/yhteystiedot/", "Yhteystiedot")}</div>${path === "/" ? `<div class="home-footer-contact">${art("contact")}<h2>Kysymys tai idea?</h2><p>Lähetä palautetta, ehdota työkalua tai kerro havaitsemastasi virheestä.</p>${link("/yhteystiedot/", "Ota yhteyttä " + icon("arrow"), "home-contact-link")}</div>` : ""}</div><div class="wrap footer-bottom"><div class="footer-signature"><small>© ${new Date().getUTCFullYear()} Kalenteri365</small></div><div>${link("/kayttoehdot/", "Käyttöehdot")}${link("/evasteet/", "Evästeet")}${link("/blogi/", "Blogi ja oppaat")}${link("/sivukartta/", "Sivukartta")}${link("/sv/", "På svenska")}</div></div></footer><dialog id="event-dialog"><form id="event-form"><div class="dialog-head"><h2>Tapahtuma</h2><button type="button" data-action="close-dialog" aria-label="Sulje">${icon("close")}</button></div><input name="id" type="hidden"><label>Otsikko<input name="title" required maxlength="160"></label><div class="form-row"><label>Päivämäärä<input name="date" type="date" required></label><label>Kellonaika<input name="time" type="time"></label></div><label>Kalenteri<select name="category"><option value="personal">Oma</option><option value="work">Työ</option><option value="family">Perhe</option><option value="school">Opiskelu</option></select></label><label>Toistuvuus<select name="repeat"><option value="none">Ei toistoa</option><option value="weekly">Joka viikko</option><option value="monthly">Joka kuukausi</option><option value="yearly">Joka vuosi</option></select></label><label>Muistiinpano<textarea name="note" rows="3" maxlength="2000"></textarea></label><div class="actions"><button class="btn" type="submit">Tallenna tapahtuma</button><button class="btn danger" type="button" data-action="delete-event" hidden>Poista</button></div><p class="small">Tallennetaan tämän selaimen muistiin.</p></form></dialog><section class="storage-notice no-print" id="storage-notice" aria-labelledby="storage-title" hidden><div class="storage-mark">${art("storage-notice")}</div><div class="storage-copy"><span class="storage-kicker">OMA KALENTERI, OMA TILA</span><h2 id="storage-title">Sinun suunnitelmasi. Sinun tietosi.</h2><p>Omat merkintäsi ja valintasi säilyvät tässä selaimessa. Voit tallentaa niistä varmuuskopion milloin tahansa.</p></div><div class="storage-actions"><button type="button" class="btn" id="storage-dismiss">${icon("check")} Selvä, jatketaan</button>${link("/evasteet/","Tietoa tallennuksesta","storage-policy")}</div></section><div id="toast" hidden role="status" aria-live="polite"></div><script id="page-config" type="application/json">${JSON.stringify({ kind, year, month, ...extra }).replaceAll("<", "\\u003c")}</script><script type="module" src="/assets/app.mjs"></script></body></html>`;
+  return `<!doctype html><html lang="fi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(titleText)}</title><meta name="description" content="${esc(summary)}"><link rel="canonical" href="https://kalenteri365.fi${path}"><meta name="robots" content="${["/valokuvat-ja-lisenssit/","/404/"].includes(path)?"noindex,follow":"index,follow"},max-image-preview:large">${alternate?`<link rel="alternate" hreflang="fi-FI" href="https://kalenteri365.fi${path}"><link rel="alternate" hreflang="sv-FI" href="https://kalenteri365.fi${alternate}">`:""}<meta name="theme-color" content="#002F6C"><meta property="og:type" content="${kind==='article'?'article':'website'}"><meta property="og:locale" content="fi_FI"><meta property="og:title" content="${esc(titleText)}"><meta property="og:description" content="${esc(summary)}"><meta property="og:url" content="https://kalenteri365.fi${path}"><meta property="og:site_name" content="Kalenteri365"><meta property="og:image" content="https://kalenteri365.fi${social.src || "/assets/og.png"}"><meta property="og:image:secure_url" content="https://kalenteri365.fi${social.src || "/assets/og.png"}"><meta property="og:image:width" content="${social.width||1200}"><meta property="og:image:height" content="${social.height||630}"><meta property="og:image:type" content="${social.type||"image/png"}"><meta property="og:image:alt" content="${esc(social.alt || title)}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(titleText)}"><meta name="twitter:description" content="${esc(summary)}"><meta name="twitter:image" content="https://kalenteri365.fi${social.src || "/assets/og.png"}"><meta name="twitter:image:alt" content="${esc(social.alt||title)}">${siteIconLinks()}<link rel="preload" href="/assets/fonts/lato-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/assets/fonts/lato-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/assets/site.css"><link rel="stylesheet" href="/assets/finland.css"><link rel="stylesheet" href="/assets/edition.css"><script type="application/ld+json">${JSON.stringify(schema).replaceAll("<", "\\u003c")}</script></head><body data-kind="${kind}" data-year="${year}" data-month="${month}"><a class="skip" href="#sisalto">Siirry sisältöön</a><header class="site-header"><div class="topbar wrap">${link("/", logo, "brand")}<nav class="primary" aria-label="Päänavigaatio">${link("/kalenteri/", art("calendar")+"<span>Kalenterit</span>")}${link("/juhlapyhat/", art("celebrations")+"<span>Juhlapyhät</span>")}${link("/koulujen-lomat/", art("school")+"<span>Koulujen lomat</span>")}${link("/horoskooppi/", art("star")+"<span>Horoskooppi</span>")}</nav><div class="header-tools">${link("/oma-arki/", art("dayplan")+"<span>Oma arki</span>","header-personal")}<div class="search-wrap"><form role="search" action="/haku/"><label class="sr-only" for="site-search">Hae sivustolta</label><input id="site-search" name="q" placeholder="Hae kalenteria, päivää tai työkalua…" autocomplete="off"><button aria-label="Hae">${icon("search")}</button></form><div id="search-results" hidden></div></div></div><span class="country"><svg width="27" height="17" viewBox="0 0 18 11" aria-hidden="true"><path fill="#fff" d="M0 0h18v11H0z"/><path fill="#002F6C" d="M5 0h3v11H5z M0 4h18v3H0z"/></svg> Suomi</span><button class="mobile-menu" aria-label="Avaa valikko" aria-expanded="false" data-action="menu">${icon("menu")}</button></div><div class="subbar"><nav class="wrap subnav" aria-label="Kalenterit ja työkalut"><div class="subyears"><span>Kalenterit</span>${YEARS.map((y) => link("/kalenteri/" + y + "/", y, year === y ? "active" : "")).join("")}</div>${link("/pdf-kalenteri/", art("download") + "<span>PDF-kalenterit</span>")}${link("/tyopaivat/", art("briefcase") + "<span>Työpäivät</span>")}${link("/paivamaaralaskuri/", art("calculator") + "<span>Päivämäärälaskuri</span>")}<details class="tools-menu"><summary>${art("tools")}<span>Lisää työkaluja</span><span aria-hidden="true">⌄</span></summary>${toolsMenuMarkup(path)}</details></nav></div></header><main id="sisalto" class="wrap">${path !== "/" && path !== "/404/" ? `<nav class="breadcrumb" aria-label="Murupolku">${link("/", "Etusivu")}<span>/</span>${path.split("/").filter(Boolean).length > 1 ? link("/" + path.split("/")[1] + "/", tools.find((t) => t[0] === path.split("/")[1])?.[1] || ({blogi:"Blogi",oppaat:"Oppaat"})[path.split("/")[1]] || "Kalenteri") + "<span>/</span>" : ""}<span>${esc(title)}</span></nav>${pageHeader}` : ""}${body}${relatedContent}</main>${siteFooter(path)}<dialog id="event-dialog"><form id="event-form"><div class="dialog-head"><h2>Tapahtuma</h2><button type="button" data-action="close-dialog" aria-label="Sulje">${icon("close")}</button></div><input name="id" type="hidden"><label>Otsikko<input name="title" required maxlength="160"></label><div class="form-row"><label>Päivämäärä<input name="date" type="date" required></label><label>Kellonaika<input name="time" type="time"></label></div><label>Kalenteri<select name="category"><option value="personal">Oma</option><option value="work">Työ</option><option value="family">Perhe</option><option value="school">Opiskelu</option></select></label><label>Toistuvuus<select name="repeat"><option value="none">Ei toistoa</option><option value="weekly">Joka viikko</option><option value="monthly">Joka kuukausi</option><option value="yearly">Joka vuosi</option></select></label><label>Muistiinpano<textarea name="note" rows="3" maxlength="2000"></textarea></label><div class="actions"><button class="btn" type="submit">Tallenna tapahtuma</button><button class="btn danger" type="button" data-action="delete-event" hidden>Poista</button></div><p class="small">Tallennetaan tämän selaimen muistiin.</p></form></dialog>${storageNoticeMarkup({icon,link})}<div id="toast" hidden role="status" aria-live="polite"></div><script id="page-config" type="application/json">${JSON.stringify({ kind, year, month, ...extra }).replaceAll("<", "\\u003c")}</script><script type="module" src="/assets/app.mjs"></script></body></html>`;
 }

@@ -8,11 +8,13 @@
 .tools-selector-search{grid-column:1/-1;display:flex;align-items:center;gap:12px;border:1px solid #bfd1e2;border-radius:9px;padding:0 13px;background:white}
 .tools-selector-search>.icon{width:18px;height:18px;flex:0 0 18px;color:#5d7b96}
 .tools-selector-search input{min-width:0;width:100%;height:44px;padding:8px 0!important;border:0;background:transparent;box-shadow:none;font-size:15px;color:#234562}
+.tools-selector-search:focus-within{outline:3px solid #397bbd;outline-offset:2px}
+.tools-selector-search input:focus-visible{outline:0;box-shadow:none}
 .tools-selector .tools-selector-body{display:grid;grid-template-columns:245px minmax(0,1fr);min-height:0;flex:1;overflow:hidden}
 .tools-selector-tabs{display:flex;flex-direction:column;gap:5px;padding:14px;background:#f4f8fc;border-right:1px solid #dae5ef;overflow:auto;overscroll-behavior:contain}
 .tools-selector-tabs button{display:flex;align-items:center;gap:10px;min-height:44px;width:100%;border:1px solid transparent;border-radius:9px;background:transparent;padding:7px 9px;text-align:left;font-size:13px;line-height:1.4;font-weight:700;color:#355c7e;flex-shrink:0}
 .tools-selector-tabs .art{width:26px;height:26px;flex:0 0 26px;object-fit:contain}
-.tools-selector-tabs button>span{flex:1;min-width:0}.tools-selector-tabs small{font-size:10px;opacity:.8}
+.tools-selector-tabs button>span{flex:1;min-width:0}.tools-selector-tabs small{font-size:10px;opacity:1;color:#49637c}
 .tools-selector-tabs button[aria-selected=true]{background:#fff;border-color:#bdd4eb;color:#053a73;box-shadow:0 2px 5px #1739590b}
 .tools-selector .tools-selector-results{min-width:0;min-height:0;padding:22px;overflow:auto;overscroll-behavior:contain}
 .tools-selector-results section{min-width:0}.tools-selector-results h3{font-size:19px;line-height:1.4;color:#204769;margin:0 0 16px}
@@ -34,3 +36,13 @@
 
 .tools-selector .tools-mobile-category{display:none}
 @media(max-width:700px){.tools-selector .tools-selector-tabs{display:none}.tools-selector .tools-mobile-category{display:flex;align-items:center;gap:12px;flex-shrink:0;margin:0;padding:12px 16px;background:#f3f8fc;border-bottom:1px solid #dae5ef;font-size:13px;font-weight:700;color:#3b5a78}.tools-mobile-category select{flex:1;min-width:0;min-height:43px;width:auto;border:1px solid #bbd0e2;border-radius:8px;background-color:white;padding:8px 28px 8px 10px;font-size:15px;color:#163f64}.tools-selector .tools-selector-results{padding-top:16px}}
+
+/* Detailed object illustrations need space, rather than a miniature badge. */
+.tools-selector .tools-selector-links a{gap:14px;padding:12px;min-height:116px}
+.tools-selector .tools-selector-links a>.art{width:72px;height:72px;flex:0 0 72px;filter:none}
+.tools-selector-links strong{font-size:15px;line-height:1.35}
+.tools-selector-links small{font-size:12px;line-height:1.5;color:#455f77}
+.tools-selector-tabs .art{width:36px;height:36px;flex-basis:36px}
+.tools-selector-tabs button{min-height:52px}
+@media(max-width:700px){.tools-selector .tools-selector-links a{gap:11px;min-height:101px;padding:10px}.tools-selector .tools-selector-links a>.art{width:63px;height:63px;flex-basis:63px}.tools-selector-links strong{font-size:15px}.tools-selector-links small{font-size:12px}}
+@media(max-width:360px){.tools-selector .tools-selector-links a>.art{width:54px;height:54px;flex-basis:54px}.tools-selector .tools-selector-links a{gap:9px}}
