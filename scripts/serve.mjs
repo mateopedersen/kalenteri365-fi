@@ -13,7 +13,7 @@ const types={'.html':'text/html; charset=utf-8','.mjs':'text/javascript; charset
 const security={'X-Content-Type-Options':'nosniff','Referrer-Policy':'strict-origin-when-cross-origin','Permissions-Policy':'camera=(), microphone=(), geolocation=()'};
 async function staticResponse(req,res,file,status=200){
  const st=await fs.stat(file),ext=path.extname(file),etag='"'+st.size+'-'+Math.floor(st.mtimeMs)+'"';
- const lifetime=file.includes('/runtime/')||file.includes('/fonts/')||/site-runtime\..+\.css$/.test(file)?'public, max-age=31536000, immutable':ext==='.html'?'public, max-age=0, must-revalidate':file.includes('/assets/photos/')?'public, max-age=604800':file.includes('/assets/')?'public, max-age=86400':'public, max-age=86400';
+ const lifetime=file.includes('/runtime/')||file.includes('/fonts/')||/\/assets\/art-[0-9a-f]{16}\//.test(file)||/site-runtime\..+\.css$/.test(file)?'public, max-age=31536000, immutable':ext==='.html'?'public, max-age=0, must-revalidate':file.includes('/assets/photos/')?'public, max-age=604800':file.includes('/assets/')?'public, max-age=86400':'public, max-age=86400';
  const headers={...security,'Content-Type':types[ext]||'application/octet-stream','Cache-Control':lifetime,'ETag':etag,'Vary':'Accept-Encoding'};
  if(req.headers['if-none-match']===etag){res.writeHead(304,headers);res.end();return;}
  let bytes=await fs.readFile(file);const accepted=/(?:^|,)\s*gzip(?:\s*;\s*q=([\d.]+))?(?:,|$)/.exec(req.headers['accept-encoding']||'');
