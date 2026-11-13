@@ -1,6 +1,8 @@
+import {upcomingPanel,calendarFilters,calendarChips,planningPanels} from '../src/dashboard.mjs';
+import {localDashboard} from '../src/local-dashboard.mjs';
 import {daylightChart} from '../src/daylight-chart.mjs';
 import {contentGuide,aboutPage} from '../src/edition-content.mjs';
-import {homeSections,blogCards,toolDirectory,calendarDownloads,calendarNavigator,familyPlanner} from '../src/edition-view.mjs';
+import {homeSections,homeDownloads,blogCards,toolDirectory,calendarDownloads,calendarNavigator,familyPlanner} from '../src/edition-view.mjs';
 import blog from '../data/blog.json' with {type:'json'};
 import holidayStories from '../data/holiday-stories.json' with {type:'json'};
 import {examCalendar} from './exams.mjs';
@@ -85,7 +87,7 @@ await fs.copyFile(path.join(ROOT,indexnow.key+'.txt'),path.join(OUT,indexnow.key
 await fs.cp(path.join(ROOT, "assets"), ASSET, { recursive: true });
 await makeArt(path.join(ASSET, "art"));
 const cityCards=new Map();
-for(const p of PHOTO_CREDITS.filter(p=>p.kind==='city')){
+for(const p of PHOTO_CREDITS.filter(p=>['city','city-night'].includes(p.kind))){
   const original=await fs.readFile(path.join(ROOT,p.src.slice(1))),key=createHash('sha256').update('city-card-avif-768-q50-e6-v2').update(original).digest('hex').slice(0,12),src=`/assets/photos/${p.id}-card-${key}.avif`;
   try{await fs.access(path.join(OUT,src));}catch{await sharp(original).resize({width:768,withoutEnlargement:true}).avif({quality:50,effort:6}).toFile(path.join(OUT,src));}
   cityCards.set(p.id,src);
@@ -95,13 +97,17 @@ for (const p of PHOTO_CREDITS.filter((p) => p.src.endsWith(".webp"))) {
     await sharp(path.join(ROOT, p.src.slice(1)))
       .resize({ width, withoutEnlargement: true })
       .webp({ quality: 82 })
-      .toFile(path.join(ASSET, "photos", p.id + "-" + width + ".webp"));
+      .toFile(path.join(ASSET, "photos", path.basename(p.src,'.webp') + "-" + width + ".webp"));
 }
 await fs.writeFile(
   path.join(ASSET, "photo-index.json"),
   JSON.stringify(
     PHOTO_CREDITS.filter((p) => ["city", "municipality"].includes(p.kind)).map(
-      ({ id, src, alt, name }) => ({ id, src, alt, name,cardSrc:cityCards.get(id)||null }),
+      ({ id, src, alt, name }) => {
+        const night=PHOTO_CREDITS.find(p=>p.kind==='city-night'&&p.cityId===id);
+        if(!night&&CITIES.some(city=>city[0]===id))throw Error('Missing licensed night photograph: '+id);
+        return {id,src,alt,name,cardSrc:cityCards.get(id)||null,...(night?{night:{id:night.id,src:night.src,alt:night.alt,cardSrc:cityCards.get(night.id)}}:{})};
+      },
     ),
   ),
 );
@@ -122,6 +128,8 @@ await fs.copyFile(
   path.join(ASSET, "calendar.mjs"),
 );
 await fs.copyFile(path.join(ROOT, "src/ui.mjs"), path.join(ASSET, "ui.mjs"));
+await fs.copyFile(path.join(ROOT, "src/dashboard.mjs"), path.join(ASSET, "dashboard.mjs"));
+await fs.copyFile(path.join(ROOT, "src/city-light.mjs"), path.join(ASSET, "city-light.mjs"));
 await fs.copyFile(
   path.join(ROOT, "src/home-view.mjs"),
   path.join(ASSET, "home-view.mjs"),
@@ -204,7 +212,7 @@ async function page(p, title, desc, body, kind = "page", extra = {}) {
   await fs.mkdir(folder, { recursive: true });
   await fs.writeFile(
     path.join(folder, "index.html"),
-    layout({ path: p, title, description: desc, body, kind, social, structuredImages:PHOTO_CREDITS.filter(image=>body.includes(image.src)||body.includes(image.src.replace('.webp','-640.webp'))||body.includes(image.src.replace('.webp','-320.webp'))||(image.id==='moon-full'&&body.includes('moon-surface.jpg'))).map(image=>({'@type':'ImageObject',contentUrl:'https://kalenteri365.fi'+image.src,caption:image.alt,creditText:image.author+' · '+image.license,license:image.licenseUrl||image.source,acquireLicensePage:image.source})), ...extra }),
+    layout({ path: p, title, description: desc, body, kind, social, structuredImages:PHOTO_CREDITS.filter(image=>(p==='/'&&['city','city-night','municipality'].includes(image.kind))||body.includes(image.src)||body.includes(image.src.replace('.webp','-640.webp'))||body.includes(image.src.replace('.webp','-320.webp'))||(image.id==='moon-full'&&body.includes('moon-surface.jpg'))).map(image=>({'@type':'ImageObject',contentUrl:'https://kalenteri365.fi'+image.src,caption:image.alt,creditText:image.author+' · '+image.license,license:image.licenseUrl||image.source,acquireLicensePage:image.source})), ...extra }),
   );
   searchText.set(p,[...new Set(body.replace(/<script[\s\S]*?<\/script>/gi,' ').replace(/<style[\s\S]*?<\/style>/gi,' ').replace(/<[^>]*>/g,' ').replace(/&[^;]+;/g,' ').toLocaleLowerCase('fi').split(/[^\p{L}\p{N}]+/u).filter(w=>w.length>1))].join(' '));
   pages.push({
@@ -246,8 +254,9 @@ function downloadCards(y, m, moon = false) {
     })
     .join("")}</div>`;
 }
-function dashboard(y = 2027, m = 1) {
-  return `<div class="dashboard"><aside class="left-rail" aria-label="Paikalliset tiedot ja juhlapäivät"><section class="panel city-panel"><div class="city-head"><p class="eyebrow">TÄSSÄ JA NYT</p><h2>${art("flag")} Tänään Suomessa</h2></div><figure class="city-photo-wrap"><picture id="city-picture"><source srcset="${cityCards.get('helsinki')}" type="image/avif"><img id="city-photo" src="/assets/photos/helsinki-640.webp" width="1200" height="675" alt="Suomenlinnan linnoitussaari ja rantamuurit Helsingissä" fetchpriority="high"></picture><figcaption id="city-caption">Helsinki</figcaption></figure><div class="city-body"><div class="today-date" id="today-date">Suomen paikallinen aika</div><div class="clock-face"><svg class="clock-dial" viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="dial-metal" x2="1" y2="1"><stop stop-color="#fff"/><stop offset=".5" stop-color="#9cb4c0"/><stop offset="1" stop-color="#28516a"/></linearGradient><radialGradient id="dial-glass" cx=".32" cy=".23"><stop stop-color="#fff"/><stop offset="1" stop-color="#dcebef"/></radialGradient></defs><circle cx="50" cy="51" r="47" fill="#133e53"/><circle cx="49" cy="48" r="46" fill="url(#dial-metal)"/><circle cx="49" cy="48" r="39" fill="url(#dial-glass)"/>${Array.from({length:12},(_,i)=>`<path d="M49 13v${i%3===0?6:3}" transform="rotate(${i*30} 49 48)" stroke="#69838e" stroke-width="${i%3===0?2.5:1.5}" stroke-linecap="round"/>`).join('')}<g id="clock-hour"><path d="M49 50V28" stroke="#193f53" stroke-width="5" stroke-linecap="round"/></g><g id="clock-minute"><path d="M49 52V19" stroke="#557b8b" stroke-width="3" stroke-linecap="round"/></g><g id="clock-second"><path d="M49 57V17" stroke="#bb7948" stroke-width="1.4" stroke-linecap="round"/></g><circle cx="49" cy="48" r="3.5" fill="#bb7948"/><path d="M21 32a32 32 0 0 1 44-12" fill="none" stroke="#fff" stroke-width="3" opacity=".65"/></svg><div class="clock-content"><span class="clock-label">SUOMEN AIKA</span><div class="clock" id="helsinki-clock">—:—</div><small id="clock-zone">EET · Helsinki</small></div></div><label class="place-label" for="city-select">Paikkakunta</label><div class="place-field">${art("location")}<select id="city-select" aria-label="Valitse paikkakunta">${CITIES.map((c) => `<option value="${c[0]}">${c[1]}</option>`).join("")}</select></div><p class="place-choice-note" id="place-choice-note">Valitse paikkakunta ennustetta varten.</p><div class="weather" id="weather">${icon("sun")}<span>Sääennuste</span><strong>—</strong></div><div class="weather-note" id="weather-note">Sääennuste: MET Norway</div><section class="local-sky" id="local-sun"><h3>Valo tänään</h3><div class="local-sun-times"><div>${art('sunrise')}<span>Auringonnousu</span><strong id="local-rise">—</strong></div><div>${art('sun')}<span>Auringonlasku</span><strong id="local-set">—</strong></div></div><p id="local-daylength">Paikalliset ajat lasketaan valitulle paikkakunnalle.</p><a id="local-sun-link" href="/auringonnousu-ja-lasku/">Katso Auringon kulku →</a></section><section class="local-sky"><div class="local-moon"><span id="local-moon-disc">${art('moon')}</span><div><strong id="local-moon-phase">Kuu tänään</strong><small id="local-moon-light">Päivän valaistus</small></div></div><a href="/kuukalenteri/">Avaa kuukalenteri →</a></section></div></section></aside><div class="calendar-main"><div class="statbar"><div>${art("calendar")}<div><strong id="stat-week">${week(date(y, m, 1)).number}</strong><span>ISO-viikko</span></div></div><div>${art("flag")}<div><strong id="stat-day">1</strong><span>Vuoden päivä</span></div></div><div>${art("clock")}<div><strong id="stat-month">${daysInMonth(y, m)}</strong><span>Päiviä kuukaudessa</span></div></div></div><section class="calendar-panel" data-print-title="${cap(MONTHS[m - 1])} ${y}"><div class="calendar-toolbar"><button class="iconbtn prev" data-action="prev-month" aria-label="Edellinen jakso">${icon("chevron")}</button><h2 id="calendar-title">${cap(MONTHS[m - 1])} ${y}</h2><button class="iconbtn" data-action="next-month" aria-label="Seuraava jakso">${icon("chevron")}</button><button class="plainbtn" data-action="today">Tänään</button>${button(icon("plus") + " Lisää tapahtuma", "new-event", "btn")}</div><div class="viewbar"><div class="tabs" role="group" aria-label="Kalenterin näkymä">${[
+function dashboard(y = 2027, m = 1, home = false) {
+  const today = new Intl.DateTimeFormat('sv-SE', {timeZone:'Europe/Helsinki'}).format(new Date());
+  return `<div class="dashboard"><aside class="left-rail" aria-label="Paikalliset tiedot ja juhlapäivät">${localDashboard(cityCards.get('helsinki'))}${upcomingPanel(today)}${calendarFilters()}</aside><div class="dashboard-workspace"><div class="dashboard-top"><div class="calendar-main"><div class="statbar"><div>${art("calendar")}<div><strong id="stat-week">${week(date(y, m, 1)).number}</strong><span>ISO-viikko</span></div></div><div>${art("flag")}<div><strong id="stat-day">1</strong><span>Vuoden päivä</span></div></div><div>${art("clock")}<div><strong id="stat-month">${daysInMonth(y, m)}</strong><span>Päiviä kuukaudessa</span></div></div></div><section class="calendar-panel" data-print-title="${cap(MONTHS[m - 1])} ${y}"><div class="calendar-toolbar"><button class="iconbtn prev" data-action="prev-month" aria-label="Edellinen jakso">${icon("chevron")}</button><h2 id="calendar-title">${cap(MONTHS[m - 1])} ${y}</h2><button class="iconbtn" data-action="next-month" aria-label="Seuraava jakso">${icon("chevron")}</button><button class="plainbtn" data-action="today">Tänään</button>${button(icon("plus") + " Lisää tapahtuma", "new-event", "btn")}</div><div class="viewbar"><div class="tabs" role="group" aria-label="Kalenterin näkymä">${[
     ["month", "Kuukausi"],
     ["week", "Viikko"],
     ["day", "Päivä"],
@@ -260,41 +269,13 @@ function dashboard(y = 2027, m = 1) {
     )
     .join(
       "",
-    )}</div><div class="jump"><select id="jump-year" aria-label="Vuosi">${[2026, ...YEARS, 2031].map((yy) => `<option ${yy === y ? "selected" : ""}>${yy}</option>`).join("")}</select><select id="jump-month" aria-label="Kuukausi">${MONTHS.map((mm, i) => `<option value="${i + 1}" ${i + 1 === m ? "selected" : ""}>${cap(mm)}</option>`).join("")}</select></div></div><div id="calendar-view">${calTable(y, m)}</div><noscript><p class="noscript">Kalenteri on luettavissa ilman JavaScriptiä. Omat merkinnät ja näkymän vaihto tarvitsevat JavaScriptin. ${link("/kalenteri/", "Selaa vuosia ja kuukausia →")}</p></noscript><div class="calendar-footer"><div class="legend"><span><i class="dot today"></i> Tänään</span><span><i class="dot"></i> Pyhäpäivä</span></div><div class="actions">${button(icon("print") + " Tulosta", "print", "btn secondary")}${link(YEARS.includes(y) ? `/pdf-kalenteri/${y}/${SLUGS[m - 1]}/` : "/pdf-kalenteri/", icon("download") + " Lataa", "btn secondary")}${link(`/luo-kalenteri/?year=${y}&month=${m}`, "Muokkaa", "btn secondary")}</div></div></section><section class="panel"><h2>Seuraavat juhlat</h2><div id="upcoming">${holidays(
-    2027,
-  )
-    .filter((h) => h.type === "holiday")
-    .slice(0, 3)
-    .map((h) =>
-      link(
-        "/juhlapyhat/" + h.slug + "/",
-        `<time>${h.date.slice(8)}.${h.date.slice(5, 7)}.</time><div><strong>${h.name}</strong><span>Pyhäpäivä</span></div>`,
-        "upcoming-item",
-      ),
-    )
-    .join(
-      "",
-    )}</div>${link("/juhlapyhat/", "Kaikki juhlapyhät →", "rail-foot")}</section></div><aside class="right-rail" aria-label="Oma päivä ja merkinnät"><section class="panel"><h2>Minun päiväni</h2><p class="selected-date" id="selected-date">${fi(date(y, m, 1))}</p><ul id="day-events" class="event-list"><li class="empty">Tilaa päivän suunnitelmille.</li></ul>${button(icon("plus") + " Lisää tapahtuma", "new-event", "textbtn")}</section><section class="panel"><div class="panel-title"><h2>Muistiinpanot</h2>${button("Tallenna", "save-notes")}</div><label for="day-notes" class="sr-only">Päivän muistiinpanot</label><textarea class="note-area" id="day-notes" placeholder="Mitä haluat muistaa?"></textarea></section><section class="panel"><h2>Tehtävät</h2><form class="task-form" id="task-form"><label for="task-title" class="sr-only">Uusi tehtävä</label><input id="task-title" required maxlength="200" placeholder="Lisää tehtävä…"><button aria-label="Lisää tehtävä">${icon("plus")}</button></form><ul id="tasks" class="task-list"></ul></section><section class="panel"><h2>Oma kalenteri talteen</h2><div class="data-actions"><label class="upload-label">Tuo ICS<input id="import-ics" type="file" accept=".ics,text/calendar"></label>${button("Vie ICS", "export-ics")}${button("Varmuuskopio", "backup")}<label class="upload-label">Palauta kopio<input id="restore-json" type="file" accept=".json,application/json"></label></div><p class="small" style="margin-top:10px">Merkinnät pysyvät tällä laitteella. Ota kopio ennen selaintietojen tyhjentämistä.</p></section><section class="panel filter-list"><h2>Omat kalenterit</h2>${[
-    ["holiday", "Suomen pyhäpäivät"],
-    ["flag", "Liputus- ja merkkipäivät"],
-    ["personal", "Oma"],
-    ["work", "Työ"],
-    ["family", "Perhe"],
-    ["school", "Opiskelu"],
-  ]
-    .map(
-      ([v, n]) =>
-        `<label><input type="checkbox" data-filter="${v}" checked>${n}</label>`,
-    )
-    .join(
-      "",
-    )}<p class="small">Omat merkinnät tallentuvat tähän selaimeen.</p></section></aside></div>`;
+    )}</div><div class="jump"><select id="jump-year" aria-label="Vuosi">${[2026, ...YEARS, 2031].map((yy) => `<option ${yy === y ? "selected" : ""}>${yy}</option>`).join("")}</select><select id="jump-month" aria-label="Kuukausi">${MONTHS.map((mm, i) => `<option value="${i + 1}" ${i + 1 === m ? "selected" : ""}>${cap(mm)}</option>`).join("")}</select></div></div>${calendarChips()}<div id="calendar-view">${calTable(y, m)}</div><noscript><p class="noscript">Kalenteri on luettavissa ilman JavaScriptiä. Omat merkinnät ja näkymän vaihto tarvitsevat JavaScriptin. ${link("/kalenteri/", "Selaa vuosia ja kuukausia →")}</p></noscript><div class="calendar-footer"><div class="legend"><span><i class="dot today"></i> Tänään</span><span><i class="dot"></i> Pyhäpäivä</span></div><div class="actions">${button(icon("print") + " Tulosta", "print", "btn secondary")}${link(YEARS.includes(y) ? `/pdf-kalenteri/${y}/${SLUGS[m - 1]}/` : "/pdf-kalenteri/", icon("download") + " Lataa", "btn secondary")}${link(`/luo-kalenteri/?year=${y}&month=${m}`, "Muokkaa", "btn secondary")}</div></div></section></div>${planningPanels(fi(date(y,m,1)))}</div>${home ? homeSections() : ''}</div></div>`;
 }
 await page(
   "/",
   "Suomalainen kalenteri 2027–2030",
   "Kalenterit, Suomen juhlapyhät ja omat suunnitelmat yhdessä paikassa.",
-  `<section class="home-heading"><div><p class="eyebrow">SUOMI · 2027–2030</p><h1>Suomen kalenteri, sinun suunnitelmasi.</h1><p>Pyhäpäivät, omat menot ja hyödylliset työkalut samaan arkeen.</p></div>${link("/luo-kalenteri/", art("create") + "<span><strong>Luo oma kalenteri</strong><small>Omat kuvat. Omat tärkeät päivät.</small></span>" + icon("arrow"), "create-cta")}</section>${dashboard(new Date().getUTCFullYear(), new Date().getUTCMonth() + 1)}${homeSections()}<section class="home-blog">${blogCards(blog,{limit:3,heading:true})}</section>`,
+  `<section class="home-heading"><div><p class="eyebrow">SUOMI · 2027–2030</p><h1>Suomen kalenteri, sinun suunnitelmasi.</h1><p>Pyhäpäivät, omat menot ja hyödylliset työkalut samaan arkeen.</p></div>${link("/luo-kalenteri/", art("create") + "<span><strong>Luo oma kalenteri</strong><small>Omat kuvat. Omat tärkeät päivät.</small></span>" + icon("arrow"), "create-cta")}</section>${dashboard(new Date().getUTCFullYear(), new Date().getUTCMonth() + 1, true)}${homeDownloads()}<section class="home-blog">${blogCards(['auringon-ajat','pitkan-vapaan-suunnittelu','kalenterin-varmuuskopio'].map(slug=>blog.find(article=>article.slug===slug)),{heading:true})}</section>`,
   "home",
 );
 await page(
@@ -1106,7 +1087,7 @@ await page(
   "/valokuvat-ja-lisenssit/",
   "Valokuvat ja lisenssit",
   "Kalenteri365-palvelun valokuvien, kuvituksen ja kirjasinten lähteet.",
-  `<article class="long-text"><h2>Kalenteriperheen vektorikuvitus</h2><p>Kalenteri-, työkalu- ja horoskooppikuvitus on sivustoperheen omaa vektorigrafiikkaa. Suomen version kuvituksessa käytetään sinisiä, valkoisia ja luonnon sävyjä. Vuodenaikojen maisemat ovat kuvitusta, eivät valokuvia tietystä paikasta.</p><h2>Paikkakunnat ja yliopistot</h2><p>Kuvat ovat kyseisissä paikoissa otettuja historiallisia valokuvia. Ne eivät ole reaaliaikaisia sääkameroita. Kuvaajien nimet, alkuperäiset julkaisut ja lisenssit on lueteltu kuvakohtaisesti. Kuvat säilyttävät alla mainitun lisenssinsä.</p><div class="photo-license-grid">${PHOTO_CREDITS.filter(
+  `<article class="long-text"><h2>Kalenteriperheen vektorikuvitus</h2><p>Kalenteri-, työkalu- ja horoskooppikuvitus on sivustoperheen omaa vektorigrafiikkaa. Suomen version kuvituksessa käytetään sinisiä, valkoisia ja luonnon sävyjä. Vuodenaikojen maisemat ovat kuvitusta, eivät valokuvia tietystä paikasta.</p><h2>Paikkakunnat ja yliopistot</h2><p>Kuvat ovat kyseisissä paikoissa otettuja valokuvia. Etusivun paikkakuntavalitsimen jokaisella 25 paikkakunnalla on erillinen päiväkuva ja yökuva. Kuvan vaihto perustuu paikkakunnan koordinaateista laskettuun Auringon korkeuteen: päiväkuva näkyy Auringon ollessa horisontin yläpuolella ja yökuva sen laskettua. Myös kaamos ja yötön yö huomioidaan. Valokuvat ovat arkistokuvia eivätkä reaaliaikaisia sääkameroita. Kuvausajankohdan vuodenaika ja sää voivat poiketa tämänhetkisistä oloista. Kuvaajien nimet, alkuperäiset julkaisut ja lisenssit on lueteltu kuvakohtaisesti. Kuvat säilyttävät alla mainitun lisenssinsä.</p><div class="photo-license-grid">${PHOTO_CREDITS.filter(
     (p) => p.kind,
   )
     .map(
@@ -1164,6 +1145,7 @@ const imageEntries=[];
 for(const p of pages.filter(p=>p.indexable)){
  const html=await fs.readFile(path.join(OUT,p.path,'index.html'),'utf8'),images=[];
  for(const m of html.matchAll(/<img\b[^>]*>/g)){const src=m[0].match(/src="([^"?]+)(?:[^"\s]*)?"/),alt=m[0].match(/alt="([^"]+)"/);if(src&&alt&&(/\/assets\/photos\//.test(src[1])||/\/lataukset\//.test(src[1]))){const original=PHOTO_CREDITS.find(p=>[p.src,p.src.replace('.webp','-320.webp'),p.src.replace('.webp','-640.webp')].includes(src[1]))?.src||src[1].replace('-preview.webp','.webp');const current=original.startsWith('/lataukset/')?original+'?v='+downloadVersion:original;if(!images.some(x=>x.src===current))images.push({src:current,alt:alt[1]});}}
+ if(p.path==='/')for(const photo of PHOTO_CREDITS.filter(photo=>['city','city-night','municipality'].includes(photo.kind)))if(!images.some(image=>image.src===photo.src))images.push({src:photo.src,alt:photo.alt});
  if(images.length)imageEntries.push(`<url><loc>https://kalenteri365.fi${esc(p.path)}</loc>${images.map(i=>`<image:image><image:loc>https://kalenteri365.fi${esc(i.src)}</image:loc></image:image>`).join('')}</url>`);
 }
 await fs.writeFile(path.join(OUT,'sitemap-images.xml'),'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">'+imageEntries.join('')+'</urlset>');

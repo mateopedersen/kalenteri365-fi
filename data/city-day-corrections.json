@@ -1,0 +1,29 @@
+[
+  {
+    "cityId": "tampere",
+    "beforeSource": "https://commons.wikimedia.org/wiki/File:Tammerkoski_(22286032958).jpg",
+    "afterSource": "https://commons.wikimedia.org/wiki/File:Tampereen_Teatteri_Tammerkoski_Tampere_240725.jpg",
+    "reason": "The previously assigned day image visibly depicted night. Actual downloaded replacement pixels inspected in day-replacements-review.jpg.",
+    "observations": "Tampereen Teatteri ja Tammerkosken rantapuut kesäpäivän valossa.",
+    "assetSha256": "e2e97bf8627248795e04119c456181cca15001e7c549a8f1ff50f8fb0b457a82",
+    "sourceRenditionSha256": "45a9ff7a9b435b59c248637901f1ce8d9a69eaef1d5909b5baddd0890e09ef88"
+  },
+  {
+    "cityId": "joensuu",
+    "beforeSource": "https://commons.wikimedia.org/wiki/File:Joensuun_Tori_Drone.jpg",
+    "afterSource": "https://commons.wikimedia.org/wiki/File:Joensuu_Kauppatori.jpg",
+    "reason": "The previously assigned day image visibly depicted night. Actual downloaded replacement pixels inspected in day-replacements-review.jpg.",
+    "observations": "Joensuun kauppatori, torikojuja ja ympäröiviä keskustarakennuksia päivänvalossa.",
+    "assetSha256": "925f22f3232c073a788011b8c1bfdd9d68eab6110802ec2ac4f2a0647911a80c",
+    "sourceRenditionSha256": "c1480928971c795c5c187114db5c3568f19625773c51381a9502816a5cb802b0"
+  },
+  {
+    "cityId": "salo",
+    "beforeSource": "https://commons.wikimedia.org/wiki/File:Good_night_Salo!.jpg",
+    "afterSource": "https://commons.wikimedia.org/wiki/File:SALO_keskustan.JPG",
+    "reason": "The previously assigned day image visibly depicted night. Actual downloaded replacement pixels inspected in day-replacements-review.jpg.",
+    "observations": "Kävelykatu ja kauppakeskukset Salon keskustassa kirkkaana päivänä.",
+    "assetSha256": "d5f6df187b7ee6ffc685c1c61d51d01b024ac9538b8fe29871ec367ea082a79e",
+    "sourceRenditionSha256": "421654a13e400ab17c39cc51a53f965cbaf460f5c7347ace799e2a99ef7ae117"
+  }
+]

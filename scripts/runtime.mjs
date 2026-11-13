@@ -9,7 +9,7 @@ export async function runtimeAssets(ROOT,ASSET,OUT,pages){
   for(const name of artFiles)artHash.update(name).update(await fs.readFile(path.join(ASSET,'art',name)));
   const artPrefix='/assets/art-'+artHash.digest('hex').slice(0,16)+'/',artFolder=path.join(OUT,artPrefix);
   await fs.mkdir(artFolder,{recursive:true});for(const name of artFiles)await fs.copyFile(path.join(ASSET,'art',name),path.join(artFolder,name));
-  const css=Buffer.concat(await Promise.all(['site.css','finland.css','edition.css'].map(async name=>Buffer.from((await fs.readFile(path.join(ASSET,name),'utf8')).replaceAll('/assets/art/',artPrefix)+'\n'))));
+  const css=Buffer.concat(await Promise.all(['site.css','finland.css','edition.css','local-weather.css','home-dashboard.css'].map(async name=>Buffer.from((await fs.readFile(path.join(ASSET,name),'utf8')).replaceAll('/assets/art/',artPrefix)+'\n'))));
   const packed=transform({filename:'site-runtime.css',code:css,minify:true}).code;
   const styleName='site-runtime.'+createHash('sha256').update(packed).digest('hex').slice(0,16)+'.css';
   await fs.writeFile(path.join(ASSET,styleName),packed);

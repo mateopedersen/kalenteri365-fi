@@ -1,3 +1,5 @@
+import {CALENDAR_LAYERS, calendarFilterIds, upcomingItems} from './dashboard.mjs';
+import {cityPhotoState, cityPhotoPeriod, cityPhotoVariant} from './city-light.mjs';
 import { dayEvents } from "./solar-day.mjs";
 import { moonSVG } from "./lunar.mjs";
 import { searchPages } from "./search.mjs";
@@ -37,14 +39,7 @@ let selected = today,
   y = config.year || 2027,
   m = config.month || 1,
   view = "month",
-  filters = new Set([
-    "holiday",
-    "flag",
-    "personal",
-    "work",
-    "family",
-    "school",
-  ]);
+  filters = new Set(calendarFilterIds(state.plans?.calendarFilters));
 let toastTimer;
 function toast(s) {
   $("#toast").hidden = false;
@@ -134,6 +129,7 @@ function renderDay() {
         ? ""
         : '<li class="empty">Tämä päivä on vielä avoin suunnitelmillesi.</li>');
   $("#day-notes").value = state.notes[selected] || "";
+  if ($("#notes-status")) $("#notes-status").textContent = state.notes[selected] ? "Tallennettu tähän selaimeen" : "Tallentuu kirjoittaessasi";
   $("#stat-week").textContent = week(parse(selected)).number;
   $("#stat-day").textContent =
     Math.floor(
@@ -146,7 +142,8 @@ function renderDay() {
 function saveNotes() {
   if ($("#day-notes")) {
     state.notes[selected] = $("#day-notes").value;
-    persist();
+    const saved = persist();
+    if ($("#notes-status")) $("#notes-status").textContent = saved ? "Tallennettu tähän selaimeen" : "Tallennus ei onnistunut";
   }
 }
 function selectDate(ds) {
@@ -214,6 +211,7 @@ function renderCalendar() {
     });
   } else if (view === "year") {
     root.innerHTML = `<div class="year-grid">${MONTHS.map((mm, i) => `<article class="month-card"><h3><button class="textbtn" data-goto-month="${i + 1}">${cap(mm)}</button></h3>${calTable(y, i + 1, { mini: true })}</article>`).join("")}</div>`;
+    $$(".mini .dot", root).forEach(dot => { dot.hidden = !filters.has("holiday"); });
   } else {
     let ds =
       view === "week"
@@ -251,11 +249,14 @@ function renderCalendar() {
     history.replaceState(null, "", u);
   }
   renderDay();
+  updateCalendarFilters();
 }
 function renderTasks() {
   if (!$("#tasks")) return;
-  $("#tasks").innerHTML = state.tasks
-    .filter((t) => t.date === selected)
+  const tasks = state.tasks.filter(t => t.date === selected);
+  if ($("#task-count")) $("#task-count").textContent = tasks.filter(t => t.done).length + "/" + tasks.length;
+  if ($("#task-empty")) $("#task-empty").hidden = tasks.length > 0;
+  $("#tasks").innerHTML = tasks
     .map(
       (t) =>
         `<li><label><input type="checkbox" data-task-toggle="${esc(t.id)}" ${t.done ? "checked" : ""}><span>${esc(t.title)}</span></label><button type="button" data-task-remove="${esc(t.id)}" aria-label="Poista tehtävä ${esc(t.title)}">×</button></li>`,
@@ -511,6 +512,9 @@ document.addEventListener("click", (e) => {
   }
   if (!action) return;
   switch (action) {
+    case "all-calendars":
+      setCalendarFilters(CALENDAR_LAYERS.map(layer => layer[0]));
+      break;
     case "menu":
       document.body.classList.toggle("menu-open");
       e.target
@@ -614,6 +618,8 @@ document.addEventListener("change", async (e) => {
     $$("[data-filter]")
       .filter((x) => x.dataset.filter === t.dataset.filter)
       .forEach((x) => (x.checked = t.checked));
+    state.plans.calendarFilters = [...filters];
+    persist();
     renderCalendar();
   }
   if (t.id === "jump-year" || t.id === "jump-month") {
@@ -641,7 +647,7 @@ document.addEventListener("change", async (e) => {
         !Array.isArray(obj.events) ||
         !obj.notes ||
         !Array.isArray(obj.tasks) ||
-        !obj.plans ||
+        !obj.plans || typeof obj.plans !== 'object' || Array.isArray(obj.plans) ||
         obj.events.length > 10000 ||
         obj.events.some(
           (e) =>
@@ -673,7 +679,14 @@ document.addEventListener("change", async (e) => {
             )
           : [],
       }));
-      state = { ...state, ...obj };
+      Object.assign(state, obj);
+      filters = new Set(calendarFilterIds(state.plans.calendarFilters));
+      if (state.city === 'mariehamn') state.city = 'maarianhamina';
+      if (!CITIES.some(city => city[0] === state.city)) state.city = 'helsinki';
+      if ($('#city-select')) {
+        $('#city-select').value = state.city;
+        $('#city-select').dispatchEvent(new Event('change', {bubbles: true}));
+      }
       persist();
       renderCalendar();
       renderBirthdays();
@@ -720,29 +733,42 @@ function renderBirthdays() {
         )
         .join("") || '<p class="empty">Ei vielä vuosittaisia muistutuksia.</p>';
 }
+function updateUpcoming() {
+  if (!$('#upcoming')) return;
+  const current = new Intl.DateTimeFormat('sv-SE', {timeZone:'Europe/Helsinki'}).format(new Date());
+  const onlyHolidays = $('[data-upcoming="holidays"]')?.getAttribute('aria-pressed') === 'true';
+  $('#upcoming').innerHTML = upcomingItems(current, onlyHolidays);
+}
+function setCalendarFilters(ids) {
+  filters = new Set(ids);
+  state.plans.calendarFilters = [...filters];
+  persist();
+  renderCalendar();
+}
+function updateCalendarFilters() {
+  if (!$('.calendar-chipbar')) return;
+  $$('[data-filter]').forEach(input => { input.checked = filters.has(input.dataset.filter); });
+  $$('[data-focus-layer]').forEach(control => {
+    const active = control.dataset.focusLayer === 'all' ? filters.size === CALENDAR_LAYERS.length : filters.size === 1 && filters.has(control.dataset.focusLayer);
+    control.setAttribute('aria-pressed', String(active));
+  });
+  const counts = Object.fromEntries(CALENDAR_LAYERS.map(layer => [layer[0], 0]));
+  const month = String(y) + '-' + String(m).padStart(2, '0');
+  for (const item of holidays(y).filter(item => item.date.startsWith(month))) counts[['holiday','eve'].includes(item.type) ? 'holiday' : 'flag']++;
+  for (let d = 1; d <= daysInMonth(y,m); d++) for (const event of eventAt(iso(date(y,m,d)))) counts[event.category || 'personal']++;
+  $$('[data-layer-count]').forEach(element => { element.textContent = counts[element.dataset.layerCount] || 0; });
+}
+document.addEventListener('click', event => {
+  const upcoming = event.target.closest('[data-upcoming]');
+  if (upcoming) {
+    $$('[data-upcoming]').forEach(control => control.setAttribute('aria-pressed', String(control === upcoming)));
+    updateUpcoming();
+  }
+  const layer = event.target.closest('[data-focus-layer]');
+  if (layer) setCalendarFilters(layer.dataset.focusLayer === 'all' ? CALENDAR_LAYERS.map(item => item[0]) : [layer.dataset.focusLayer]);
+});
+document.addEventListener('visibilitychange', () => { if (!document.hidden) updateUpcoming(); });
 if ($("#calendar-view")) {
-  const mobileFilters = document.createElement("details");
-  mobileFilters.className = "mobile-filters no-print";
-  mobileFilters.innerHTML =
-    "<summary>Näytettävät kalenterit</summary>" +
-    [
-      ["holiday", "Suomen pyhäpäivät"],
-      ["flag", "Liputus- ja merkkipäivät"],
-      ["personal", "Oma"],
-      ["work", "Työ"],
-      ["family", "Perhe"],
-      ["school", "Opiskelu"],
-    ]
-      .map(
-        ([v, n]) =>
-          '<label><input type="checkbox" data-filter="' +
-          v +
-          '" checked>' +
-          n +
-          "</label>",
-      )
-      .join("");
-  $(".viewbar").after(mobileFilters);
   const q = new URL(location.href).searchParams;
   if (config.kind === "home") {
     const initial = homeView(location.href, state.homeCalendar, today);
@@ -759,91 +785,8 @@ if ($("#calendar-view")) {
       : "month";
   }
   renderCalendar();
-  let upcoming = [
-    ...holidays(+today.slice(0, 4)),
-    ...holidays(+today.slice(0, 4) + 1),
-  ]
-    .filter((h) => h.type === "holiday" && h.date >= today)
-    .slice(0, 3);
-  $("#upcoming").innerHTML = upcoming
-    .map((h) =>
-      link(
-        "/juhlapyhat/" + h.slug + "/",
-        `<time>${parse(h.date).getUTCDate()}.${parse(h.date).getUTCMonth() + 1}.</time><div><strong>${esc(h.name)}</strong><span>${Math.round((parse(h.date) - parse(today)) / 86400000)} päivän päästä</span></div>`,
-        "upcoming-item",
-      ),
-    )
-    .join("");
-}
-function clock(){if(!$('#helsinki-clock'))return;const now=new Date(),parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Helsinki',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(now).split(':'),h=Number(parts[0]),m=Number(parts[1]),sec=Number(parts[2]);$('#helsinki-clock').innerHTML='<span>'+parts[0]+':'+parts[1]+'</span><sup>'+parts[2]+'</sup>';$('#clock-zone').textContent=(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Helsinki',timeZoneName:'short'}).formatToParts(now).find(p=>p.type==='timeZoneName').value)+' · Helsinki';for(const [id,angle] of [['clock-hour',(h%12)*30+m/2],['clock-minute',m*6+sec/10],['clock-second',sec*6]])$('#'+id)?.setAttribute('transform','rotate('+angle+' 49 48)');$('#today-date').textContent=cap(new Intl.DateTimeFormat('fi-FI',{timeZone:'Europe/Helsinki',weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(now));}
-clock();if($('#helsinki-clock'))setInterval(clock,1000);
-const weatherMemory = new Map();
-let weatherSequence = 0,
-  weatherController;
-function paintWeather(city,d){$('#weather').innerHTML=icon(d.icon)+'<span><strong class="weather-condition">'+esc(d.name)+'</strong><small>'+esc(city[1])+' · tuuli '+Number(d.wind??0).toLocaleString('fi-FI',{maximumFractionDigits:1})+' m/s</small></span><strong class="weather-temp">'+Math.round(d.temperature)+'<sup>°C</sup></strong>';$('#weather-note').innerHTML='<a href="https://www.met.no/" target="_blank" rel="noopener">MET Norway</a> · '+new Intl.DateTimeFormat('fi-FI',{timeZone:'Europe/Helsinki',hour:'2-digit',minute:'2-digit'}).format(new Date(d.time))+' · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>';}
-async function weather() {
-  const seq = ++weatherSequence,
-    city = CITIES.find((c) => c[0] === state.city) || CITIES[0];
-  weatherController?.abort();
-  weatherController = new AbortController();
-  let cached = weatherMemory.get(city[0]);
-  try {
-    cached ??= JSON.parse(
-      sessionStorage.getItem("fi-met-weather-" + city[0]) || "null",
-    );
-  } catch {}
-  if (cached && Date.parse(cached.data.expiresAt)>Date.now()) {
-    paintWeather(city, cached.data);
-    return;
-  }
-  $("#weather").innerHTML =
-    icon("cloud") +
-    "<span>Haetaan säätä<br><small>" +
-    esc(city[1]) +
-    "</small></span><strong>…</strong>";
-  $("#weather-note").textContent = "Sääennuste päivittyy.";
-  const timer = setTimeout(() => {
-    if (seq === weatherSequence) weatherController.abort();
-  }, 7000);
-  try {
-    const r = await fetch('/api/weather?place='+encodeURIComponent(city[0]),{signal:weatherController.signal});
-    if (!r.ok) throw Error();
-    const data = await r.json();
-    if (seq !== weatherSequence) return;
-    const entry = { at: Date.now(), data };
-    weatherMemory.set(city[0], entry);
-    try {
-      sessionStorage.setItem("fi-met-weather-" + city[0], JSON.stringify(entry));
-    } catch {}
-    paintWeather(city, data);
-  } catch {
-    if (seq !== weatherSequence) return;
-    if (cached) {
-      paintWeather(city, cached.data);
-      $("#weather-note").textContent += " · Aiemmin haettu ennuste";
-    } else {
-      $("#weather").innerHTML =
-        icon("cloud") +
-        "<span>Sääennuste ei ole saatavilla<br><small>" +
-        esc(city[1]) +
-        "</small></span>";
-      $("#weather-note").textContent = "Kokeile hetken kuluttua uudelleen.";
-    }
-  } finally {
-    clearTimeout(timer);
-  }
-}
-if ($("#city-select")) {
-  $("#city-select").value = state.city;
-  $("#city-select").addEventListener("change", (e) => {
-    state.city = e.target.value;
-    state.citySource="manual";
-    $("#place-choice-note").textContent="Valitsemasi paikkakunta · sama aikavyöhyke koko Suomessa.";
-    persist();
-    updateCityPhoto(state.city);
-    weather();
-  });
-  weather();
+  updateUpcoming();
+
 }
 const bindForm = (id, fn) =>
   $(id)?.addEventListener("submit", (e) => {
@@ -1392,6 +1335,9 @@ if ($("[data-studio]")) import("./studio-ui.mjs");
 
 // Keep the last fully decoded photo visible until the next selection is ready.
 let photoIndexPromise,
+  photoAstronomyPromise,
+  displayedPhotoKey,
+  photoTransitionTimer,
   photoToken = 0;
 const decodedPhotos = new Map();
 function photoIndex() {
@@ -1414,49 +1360,65 @@ function decodeCityPhoto(p) {
   decodedPhotos.set(p.id, promise);
   return promise;
 }
-async function updateCityPhoto(id) {
-  window.dispatchEvent(new CustomEvent('fi-city-change',{detail:{id}}));
+async function updateCityPhoto(id, notify = true) {
+  if (notify) window.dispatchEvent(new CustomEvent('fi-city-change',{detail:{id}}));
   const token = ++photoToken;
   try {
-    const list = await photoIndex(),
-      p = list.find((p) => p.id === id);
-    if (!p) return;
+    const [list, A] = await Promise.all([photoIndex(), photoAstronomyPromise ??= import('./vendor/astronomy-engine.mjs')]);
+    if (token !== photoToken) return;
+    const city = CITIES.find(c => c[0] === id), entry = list.find(p => p.id === id);
+    if (!city || !entry) return;
+    const light=cityPhotoState(A,city),period=light.period,p=cityPhotoVariant(entry,period);
+    clearTimeout(photoTransitionTimer);
+    photoTransitionTimer=setTimeout(()=>updateCityPhoto(state.city,false),Math.max(25,+light.nextChange-Date.now()+25));
+    if (!p || displayedPhotoKey === p.id) return;
     const image = await decodeCityPhoto(p);
     if (token !== photoToken) return;
     const target = $("#city-photo");
     if (!target) return;
     if(target.currentSrc!==image.src){document.querySelector('#city-picture source')?.remove();target.src=image.src;}
     target.alt = p.alt;
-    $("#city-caption").textContent = p.name;
+    target.dataset.city = id;
+    target.dataset.period = period;
+    displayedPhotoKey = p.id;
+    $("#city-caption").textContent = entry.name;
+    if ($("#city-photo-name")) $("#city-photo-name").textContent = entry.name;
+    if ($("#city-photo-period")) $("#city-photo-period").textContent = period === 'night' ? 'Yökuva' : 'Päiväkuva';
   } catch {}
 }
-$("#city-select")?.addEventListener(
-  "pointerdown",
-  () => {
-    photoIndex()
-      .then((list) => {
-        let n = 0;
-        const next = () => {
-          const p = list[n++];
-          if (!p) return;
-          decodeCityPhoto(p)
-            .catch(() => {})
-            .finally(() => setTimeout(next, 120));
-        };
-        next();
-      })
-      .catch(() => {});
-  },
-  { once: true },
-);
-
-if ($("#city-photo")) updateCityPhoto(state.city);
+if ($("#city-photo") && $(".local-dashboard")?.getClientRects().length) {
+  // Re-evaluate after sunrise/sunset and after a suspended browser resumes.
+  // A clock minute is only a refresh trigger; solar geometry selects the image.
+  setInterval(() => {if(!document.hidden) updateCityPhoto(state.city, false);}, 30000);
+  document.addEventListener('visibilitychange', () => {if(!document.hidden) updateCityPhoto(state.city, false);});
+  import('./local-panel.mjs').then(({connectLocalPanel}) => {
+    connectLocalPanel({
+      state,
+      onCityChange(id, source) {
+        state.city = id;
+        state.citySource = source;
+        persist();
+        updateCityPhoto(id);
+      },
+      onOpen() {
+        Promise.all([photoIndex(), photoAstronomyPromise ??= import('./vendor/astronomy-engine.mjs')]).then(async ([list, A]) => {
+          if(navigator.connection?.saveData) return;
+          for (const photo of list) {
+            const city=CITIES.find(c=>c[0]===photo.id);
+            const variant=city&&cityPhotoVariant(photo,cityPhotoPeriod(A,city));
+            if(variant) await decodeCityPhoto(variant).catch(() => {});
+          }
+        }).catch(() => {});
+      },
+    });
+  });
+}
 
 if(document.querySelector("[data-horoscope-sign], [data-collection-date]"))import("./horoscope-fi.mjs");
 
 document.addEventListener('click',e=>{const b=e.target.closest('[data-add-date]');if(!b)return;openEvent();const f=$('#event-form');f.elements.date.value=b.dataset.addDate;f.elements.title.value=b.dataset.addTitle||'';});
 
-if($('#city-select')&&!state.citySource){fetch('/api/place').then(r=>r.ok?r.json():null).then(p=>{if(!p?.detected||state.citySource==='manual')return;state.city=p.id;state.citySource='ip';persist();$('#city-select').value=p.id;$('#place-choice-note').textContent='IP-sijaintiin perustuva arvio. Voit vaihtaa paikkakunnan.';updateCityPhoto(p.id);weather();}).catch(()=>{});}
+
 
 $('#garden-month')?.addEventListener('change',e=>{let count=0;document.querySelectorAll('[data-crop-months]').forEach(card=>{card.hidden=Boolean(e.target.value)&&!card.dataset.cropMonths.split(',').includes(e.target.value);if(!card.hidden)count++;});$('#garden-count').textContent=count+' kasvia';});
 bindForm('#sowing-form',f=>{const from=Number(f.get('minWeeks')),to=Number(f.get('maxWeeks'));if(from>to)throw Error('Lyhin kasvatusaika ei voi olla pisintä suurempi.');const d=parse(f.get('planting'));$('#sowing-result').innerHTML='<strong>'+fi(add(d,-to*7))+'–'+fi(add(d,-from*7))+'</strong><p>Esikasvatuksen aloitus annetulla '+from+'–'+to+' viikon kestolla. Istutuspäivä '+fi(d)+' on oma suunnitelmasi, ei paikallinen hallattomuusennuste.</p>';});

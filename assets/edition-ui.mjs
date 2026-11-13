@@ -28,8 +28,46 @@ export function connectEdition({state,persist}){
   $('#family-print').onclick=()=>window.print();$('#family-ics').onclick=()=>{try{const end=iso(add(parse(data.week),6)),events=data.events.filter(e=>e.date>=data.week&&e.date<=end);if(!events.length){$('#family-status').textContent='Lisää ensin tapahtuma tähän viikkoon.';return;}download(familyICS(events,data.members),'kalenteri365-perhe-'+data.week+'.ics','text/calendar;charset=utf-8');$('#family-status').textContent=events.length+' tapahtumaa vietiin ICS-tiedostoon.';}catch(e){$('#family-status').textContent=e.message;}};
   render();
  }
- if($('#local-sun')){
-  let sequence=0,library;async function refresh(){const seq=++sequence;try{library??=Promise.all([import('./vendor/astronomy-engine.mjs'),import('./solar-day.mjs'),import('./lunar.mjs')]);const[A,{dayEvents},{moonSVG}]=await library;if(seq!==sequence)return;const city=CITIES.find(c=>c[0]===state.city)||CITIES[0],now=new Date(),ds=new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Helsinki'}).format(now),sun=dayEvents(A,city,ds),fmt=x=>x?new Intl.DateTimeFormat('fi-FI',{timeZone:'Europe/Helsinki',hour:'2-digit',minute:'2-digit'}).format(x):'—';$('#local-rise').textContent=fmt(sun.rise);$('#local-set').textContent=fmt(sun.set);$('#local-daylength').textContent=sun.polar==='up'?'Yötön yö: Aurinko ei laske.':sun.polar==='down'?'Kaamos: Aurinko ei nouse.':`Päivän pituus ${Math.floor(sun.duration/60)} h ${sun.duration%60} min`;$('#local-sun-link').href='/auringonnousu-ja-lasku/'+city[0]+'/';const angle=A.MoonPhase(now),fraction=A.Illumination('Moon',now).phase_fraction;$('#local-moon-disc').innerHTML=moonSVG(angle,'home-moon');$('#local-moon-phase').textContent=angle<22.5||angle>=337.5?'Uusikuu':angle<67.5?'Kasvava sirppi':angle<112.5?'Ensimmäinen neljännes':angle<157.5?'Kasvava kupera kuu':angle<202.5?'Täysikuu':angle<247.5?'Vähenevä kupera kuu':angle<292.5?'Viimeinen neljännes':'Vähenevä sirppi';$('#local-moon-light').textContent=(fraction*100).toLocaleString('fi-FI',{maximumFractionDigits:0})+' % valaistuna';}catch{$('#local-daylength').textContent='Avaa paikkakunnan laskuri tarkempia aikoja varten.';}}
-  window.addEventListener('fi-city-change',refresh);if('IntersectionObserver'in window){const observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){observer.disconnect();refresh();}},{rootMargin:'180px'});observer.observe($('#local-sun'));}else if('requestIdleCallback'in window)requestIdleCallback(refresh,{timeout:2500});else setTimeout(refresh,500);setInterval(()=>{if(library&&document.visibilityState==='visible')refresh();},60000);
+ if ($('#local-sun')) {
+  let sequence = 0, library;
+  async function refresh() {
+   const seq = ++sequence;
+   try {
+    library ??= Promise.all([import('./vendor/astronomy-engine.mjs'), import('./solar-day.mjs'), import('./lunar.mjs')]);
+    const [A, {dayEvents}, {moonSVG}] = await library;
+    if (seq !== sequence) return;
+    const city = CITIES.find(c => c[0] === state.city) || CITIES[0];
+    const now = new Date(), ds = new Intl.DateTimeFormat('sv-SE', {timeZone: 'Europe/Helsinki'}).format(now);
+    const sun = dayEvents(A, city, ds);
+    const observer = new A.Observer(city[2], city[3], 0);
+    const position = A.Equator('Sun', now, observer, true, true);
+    const altitude = A.Horizon(now, observer, position.ra, position.dec).altitude;
+    window.dispatchEvent(new CustomEvent('fi-local-sky', {detail: {city: city[0], period: altitude >= -.833 ? 'day' : altitude >= -6 ? 'twilight' : 'night'}}));
+    const fmt = value => value ? new Intl.DateTimeFormat('fi-FI', {timeZone: 'Europe/Helsinki', hour: '2-digit', minute: '2-digit'}).format(value) : '—';
+    const progress = sun.polar === 'up' ? 50 : sun.rise && sun.set ? Math.max(0, Math.min(100, (now - sun.rise) / (sun.set - sun.rise) * 100)) : 0;
+    $('#local-sun').style.setProperty('--day-progress', progress + '%');
+    $('#local-rise').textContent = fmt(sun.rise);
+    $('#local-set').textContent = fmt(sun.set);
+    $('#local-daylength').textContent = sun.polar === 'up' ? 'Yötön yö: Aurinko ei laske.' : sun.polar === 'down' ? 'Kaamos: Aurinko ei nouse.' : `Päivän pituus ${Math.floor(sun.duration / 60)} h ${sun.duration % 60} min`;
+    $('#local-sun-link').href = '/auringonnousu-ja-lasku/' + city[0] + '/';
+    const angle = A.MoonPhase(now), fraction = A.Illumination('Moon', now).phase_fraction;
+    const phaseNames = ['Uusikuu', 'Kasvava sirppi', 'Ensimmäinen neljännes', 'Kasvava kupera kuu', 'Täysikuu', 'Vähenevä kupera kuu', 'Viimeinen neljännes', 'Vähenevä sirppi'];
+    $('#local-moon-disc').innerHTML = moonSVG(angle, 'home-moon');
+    $('#local-moon-phase').textContent = phaseNames[Math.floor((angle + 22.5) / 45) % 8];
+    $('#local-moon-light').textContent = (fraction * 100).toLocaleString('fi-FI', {maximumFractionDigits: 0}) + ' % valaistuna';
+   } catch {
+    $('#local-daylength').textContent = 'Avaa paikkakunnan laskuri tarkempia aikoja varten.';
+   }
+  }
+  window.addEventListener('fi-city-change', refresh);
+  if ('IntersectionObserver' in window) {
+   const observer = new IntersectionObserver(entries => {
+    if (entries.some(entry => entry.isIntersecting)) { observer.disconnect(); refresh(); }
+   }, {rootMargin: '180px'});
+   observer.observe($('#weather-stage') || $('#local-sun'));
+  } else if ('requestIdleCallback' in window) requestIdleCallback(refresh, {timeout: 2500});
+  else setTimeout(refresh, 500);
+  setInterval(() => { if (library && document.visibilityState === 'visible') refresh(); }, 60000);
+  document.addEventListener('visibilitychange', () => { if (library && !document.hidden) refresh(); });
  }
 }

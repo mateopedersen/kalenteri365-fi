@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 260" fill="none">
+  <defs>
+    <linearGradient id="board" x2=".8" y2="1"><stop stop-color="#6f9fc2"/><stop offset=".45" stop-color="#245d8f"/><stop offset="1" stop-color="#102f50"/></linearGradient>
+    <linearGradient id="paper" x2=".6" y2="1"><stop stop-color="#fff"/><stop offset=".7" stop-color="#f1f6fb"/><stop offset="1" stop-color="#c1d2df"/></linearGradient>
+    <linearGradient id="metal" x2="0" y2="1"><stop stop-color="#f3f8fc"/><stop offset=".3" stop-color="#8eacbd"/><stop offset=".5" stop-color="#dce8ef"/><stop offset="1" stop-color="#456a84"/></linearGradient>
+    <linearGradient id="tick" x2=".8" y2="1"><stop stop-color="#72b2b1"/><stop offset="1" stop-color="#2f6f7d"/></linearGradient>
+    <filter id="shadow" x="-40%" y="-30%" width="180%" height="180%"><feDropShadow dx="1" dy="8" stdDeviation="6" flood-color="#14385b" flood-opacity=".2"/></filter>
+  </defs>
+  <ellipse cx="164" cy="231" rx="81" ry="9" fill="#183b5d" opacity=".08"/>
+  <g filter="url(#shadow)" transform="rotate(-7 160 130)">
+    <rect x="86" y="34" width="157" height="193" rx="13" fill="#153a5c"/>
+    <rect x="78" y="28" width="157" height="193" rx="12" fill="url(#board)"/>
+    <rect x="91" y="43" width="131" height="163" rx="4" fill="url(#paper)"/>
+    <path d="M99 198h115" stroke="#9cb4c5" stroke-opacity=".5"/>
+    <path d="M132 29c0-15 8-22 25-22 16 0 25 7 25 22h11v24h-72V29Z" fill="#496b82"/>
+    <path d="M129 26c0-14 8-21 25-21s25 7 25 21h12v23h-74V26Z" fill="url(#metal)"/>
+    <rect x="143" y="13" width="24" height="11" rx="5.5" fill="#2a536f"/>
+    <path d="M122 31h64" stroke="#f4faff" stroke-opacity=".7" stroke-width="2"/>
+    <g stroke-linecap="round" stroke-linejoin="round">
+      <rect x="106" y="74" width="23" height="23" rx="5" fill="url(#tick)"/>
+      <path d="m111 84 5 6 9-12" stroke="white" stroke-width="3"/>
+      <path d="M141 80h57m-57 11h39" stroke="#8fa9bd" stroke-width="4"/>
+      <rect x="106" y="117" width="23" height="23" rx="5" fill="url(#tick)"/>
+      <path d="m111 127 5 6 9-12" stroke="white" stroke-width="3"/>
+      <path d="M141 123h57m-57 11h44" stroke="#8fa9bd" stroke-width="4"/>
+      <rect x="106" y="160" width="23" height="23" rx="5" stroke="#b7cbd9" stroke-width="2"/>
+      <path d="M141 166h57m-57 11h32" stroke="#b7c9d6" stroke-width="4"/>
+    </g>
+  </g>
+</svg>
