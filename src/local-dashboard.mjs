@@ -39,9 +39,9 @@ export function localDashboard(helsinkiImage) {
     </div>
 </figcaption></figure>
     <div class="local-place">
-      <button type="button" class="local-place-trigger" id="city-trigger" aria-haspopup="dialog" aria-expanded="false" aria-controls="city-picker">
+      <button type="button" class="local-place-trigger" id="city-trigger" aria-haspopup="dialog" aria-expanded="false" aria-controls="city-picker" aria-labelledby="city-place-label city-caption">
         <span class="local-place-pin">${art('location')}</span>
-        <span class="local-place-name"><span>Paikkakunta</span><strong id="city-caption">Helsinki</strong></span>
+        <span class="local-place-name"><span id="city-place-label">Paikkakunta</span> <strong id="city-caption">Helsinki</strong></span>
         <span class="local-place-chevron">${icon('chevron')}</span>
       </button>
       <select id="city-select" hidden aria-label="Valitse paikkakunta">${CITIES.map(c => `<option value="${c[0]}">${c[1]}</option>`).join('')}</select>

@@ -168,7 +168,6 @@ export function connectLocalPanel({state, onCityChange, onOpen}) {
     onCityChange(id, source);
     $('#city-select').value = id;
     $('#city-caption').textContent = city()[1];
-    trigger.setAttribute('aria-label', 'Paikkakunta: ' + city()[1] + ', vaihda paikkakunta');
     for (const option of options) option.setAttribute('aria-pressed', String(option.dataset.cityOption === id));
     $('#place-choice-note').textContent = source === 'ip' ? 'IP-sijainnin arvio' : source === 'default' ? 'Suomen sää · oletuspaikkakunta' : 'Valitsemasi paikkakunta';
     closePicker(source === 'manual');
