@@ -295,8 +295,15 @@ await page(
   "/",
   "Suomalainen kalenteri 2027–2030",
   "Kalenterit, Suomen juhlapyhät ja omat suunnitelmat yhdessä paikassa.",
-  `<section class="home-heading"><div><p class="eyebrow">SUOMI · 2027–2030</p><h1>Suomen kalenteri, sinun suunnitelmasi.</h1><p>Pyhäpäivät, omat menot ja hyödylliset työkalut samaan arkeen.</p></div>${link("/luo-kalenteri/", art("create") + "<span><strong>Luo oma kalenteri</strong><small>Omat kuvat. Omat tärkeät päivät.</small></span>" + icon("arrow"), "create-cta")}</section>${personalStart()}${dashboard(new Date().getUTCFullYear(), new Date().getUTCMonth() + 1, true)}${homeDownloads()}<section class="home-blog">${blogCards(['auringon-ajat','pitkan-vapaan-suunnittelu','kalenterin-varmuuskopio'].map(slug=>blog.find(article=>article.slug===slug)),{heading:true})}</section>`,
+  `<section class="home-heading"><div><p class="eyebrow">SUOMI · 2027–2030</p><h1>Suomen kalenteri, sinun suunnitelmasi.</h1><p>Pyhäpäivät, omat menot ja hyödylliset työkalut samaan arkeen.</p></div>${link("/luo-kalenteri/", art("create") + "<span><strong>Luo oma kalenteri</strong><small>Omat kuvat. Omat tärkeät päivät.</small></span>" + icon("arrow"), "create-cta")}</section>${dashboard(new Date().getUTCFullYear(), new Date().getUTCMonth() + 1, true)}${homeDownloads()}<section class="home-blog">${blogCards(['auringon-ajat','pitkan-vapaan-suunnittelu','kalenterin-varmuuskopio'].map(slug=>blog.find(article=>article.slug===slug)),{heading:true})}</section>`,
   "home",
+);
+await page(
+  "/oma-arki/",
+  "Oma arki",
+  "Koululomat, hakuajat, maksupäivät ja omat merkinnät yhdessä näkymässä. Valitse sinulle tärkeät aiheet.",
+  `<div class="personal-workspace">${personalStart()}<aside class="personal-shortcuts" aria-label="Oman arjen työkalut"><p class="eyebrow">JATKA SUUNNITTELUA</p><h2>Seuraava askel</h2>${[['/','calendar','Avaa oma kalenteri','Omat tapahtumat ja päivän suunnitelma.'],['/perhekalenteri/','family','Perheen yhteiset menot','Yhteinen viikko ja muistettavat asiat.'],['/lomasuunnittelija/','vacation','Suunnittele vapaat','Sovita koululomat ja oma loma yhteen.']].map(([url,a,title,description])=>link(url,art(a)+`<span><strong>${title}</strong><small>${description}</small></span>`+icon('arrow'))).join('')}</aside></div>`,
+  "personal",
 );
 await page(
   "/tyokalut/",
