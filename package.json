@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/prepare.mjs && node scripts/download-cache.mjs && node scripts/build.mjs && node scripts/audit.mjs",
-    "test": "node --test tests/*.test.mjs",
+    "test": "node scripts/prepare.mjs && node --test tests/*.test.mjs",
     "check": "node scripts/audit.mjs",
     "start": "node scripts/serve.mjs"
   },
