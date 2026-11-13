@@ -75,4 +75,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 @media(max-width:600px){:is(.content-guide,.faq-list) summary{padding:16px;font-size:16px;gap:16px}:is(.content-guide,.faq-list) details>p{padding:0 16px 18px}}
 @media(prefers-reduced-motion:reduce){:is(.content-guide,.faq-list) summary::after{transition:none}}
 
+/* Maintain explicit foregrounds when hover and keyboard focus change a fill. */
+.btn:not(.secondary):not(.danger):not(:disabled):is(:hover,:focus-visible){background:#003475;color:#fff;text-decoration:none}
+.btn:not(.secondary):not(.danger):not(:disabled):is(:hover,:focus-visible) :is(span,small){color:inherit}
+.btn.secondary:not(:disabled):is(:hover,:focus-visible){background:#e7f0fc;border-color:#537dad;color:#07366b;text-decoration:none}
+.subnav>a:is(:hover,:focus-visible),.subyears a:is(:hover,:focus-visible),.tools-menu>summary:is(:hover,:focus-visible){background:#e5effc;border-color:#537dad;color:#07366b;text-decoration:none}
+.tools-selector .tools-selector-links a:is(:hover,:focus-visible){background:#e5effc;border-color:#537dad;color:#07366b}
+
 .photo-credit h3{overflow-wrap:anywhere;hyphens:auto}
