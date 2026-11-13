@@ -1615,5 +1615,311 @@
     "caption": "Kolme kypsää punaista tomaattia vaalealla taustalla",
     "changes": "Pienennys ja WebP-muunnos.",
     "reviewedAt": "2026-11-12"
+  },
+  {
+    "id": "tuusula",
+    "kind": "municipality",
+    "name": "Tuusula",
+    "src": "/assets/photos/tuusula-church.webp",
+    "author": "Sinikka Halme",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:Tuusula_Church_from_the_south_2024-06_01.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Tuusula_Church_from_the_south_2024-06_01.jpg",
+    "alt": "Tuusulan harmaa puukirkko hautausmaan ja kesäisten puiden keskellä.",
+    "caption": "Tuusulan kirkko ja hautausmaa kesäkuussa 2024. Kuva: Sinikka Halme.",
+    "changes": "Pienennys ja WebP-muunnos. Alkuperäistä kuvasuhdetta ei muutettu. Kortissa kuvan reunoja voidaan rajata.",
+    "sha256": "50a8f7208b62dde73b44308b58a84b6911257666443e50dfc42f6a8cfad13304",
+    "width": 1200,
+    "height": 690,
+    "reviewedAt": "2026-11-13"
+  },
+  {
+    "id": "blog-ring-planner",
+    "kind": "editorial",
+    "name": "Avoin rengaskansioon sidottu viikkosuunnittelija ja viivoitetut sivut",
+    "src": "/assets/photos/blog-ring-planner.webp",
+    "author": "Old Photo Profile (Horia Andrei Varlan)",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Personal_organizer_with_metallic_ring_binder.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/5/56/Personal_organizer_with_metallic_ring_binder.jpg",
+    "sourceSha256": "15f091c281905262983f2ea473cf220532c34a998f04d587e2550ba9049f57b6",
+    "sha256": "6ec8a7b1a65c03bf85f867bb68180d2dec195a1245bcec01e6ab9ccbdb1de985",
+    "width": 1200,
+    "height": 800,
+    "alt": "Avoin rengaskansioon sidottu viikkosuunnittelija ja viivoitetut sivut.",
+    "caption": "Viikkosuunnittelijan aukeama metallirenkaineen.",
+    "changes": "Pienennys ja WebP-muunnos. Alkuperäinen kuvasuhde on säilytetty; kortissa kuvan reunoja voidaan rajata.",
+    "reviewedAt": "2026-11-13",
+    "licenseVerifiedAt": "2026-11-13",
+    "visualReview": {
+      "sourceSha256": "15f091c281905262983f2ea473cf220532c34a998f04d587e2550ba9049f57b6",
+      "method": "Alkuperäiset pikselit ja valmiit pienennökset tarkastettu. Commonsin alkuperäisen tiedostosivun lisenssikohta luettu.",
+      "observation": "Avoin rengaskansioon sidottu viikkosuunnittelija ja viivoitetut sivut."
+    },
+    "files": [
+      {
+        "src": "/assets/photos/blog-ring-planner.webp",
+        "width": 1200,
+        "height": 800,
+        "bytes": 69546,
+        "sha256": "6ec8a7b1a65c03bf85f867bb68180d2dec195a1245bcec01e6ab9ccbdb1de985"
+      },
+      {
+        "src": "/assets/photos/blog-ring-planner-640.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 26052,
+        "sha256": "708d03a14f995a9454547a429adecd4ccaf833d537a1638b8242e614d3de1132"
+      },
+      {
+        "src": "/assets/photos/blog-ring-planner-320.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 9738,
+        "sha256": "ad88d43d07ffb832334c3945eca6cbad704e7da5b95d2d520409fd3e16fd66ad"
+      }
+    ]
+  },
+  {
+    "id": "blog-burgundy-planner",
+    "kind": "editorial",
+    "name": "Viininpunainen taskukalenteri ja keltainen lyijykynä vaalealla taustalla",
+    "src": "/assets/photos/blog-burgundy-planner.webp",
+    "author": "Philippe Alès",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Agenda_et_crayon.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Agenda_et_crayon.jpg",
+    "sourceSha256": "895e79fa2cab946474f46348cfbc3e28bfb2d416aab2246b65c8768fdfdd893e",
+    "sha256": "d913ac5cd48fcbbafb0f44ba49bd1dbe197aa228efea9d094cd3bd544a9db509",
+    "width": 1200,
+    "height": 797,
+    "alt": "Viininpunainen taskukalenteri ja keltainen lyijykynä vaalealla taustalla.",
+    "caption": "Kynälle ja paperiselle kalenterille oma paikka.",
+    "changes": "Pienennys ja WebP-muunnos. Alkuperäinen kuvasuhde on säilytetty; kortissa kuvan reunoja voidaan rajata.",
+    "reviewedAt": "2026-11-13",
+    "licenseVerifiedAt": "2026-11-13",
+    "visualReview": {
+      "sourceSha256": "895e79fa2cab946474f46348cfbc3e28bfb2d416aab2246b65c8768fdfdd893e",
+      "method": "Alkuperäiset pikselit ja valmiit pienennökset tarkastettu. Commonsin alkuperäisen tiedostosivun lisenssikohta luettu.",
+      "observation": "Viininpunainen taskukalenteri ja keltainen lyijykynä vaalealla taustalla."
+    },
+    "files": [
+      {
+        "src": "/assets/photos/blog-burgundy-planner.webp",
+        "width": 1200,
+        "height": 797,
+        "bytes": 33106,
+        "sha256": "d913ac5cd48fcbbafb0f44ba49bd1dbe197aa228efea9d094cd3bd544a9db509"
+      },
+      {
+        "src": "/assets/photos/blog-burgundy-planner-640.webp",
+        "width": 640,
+        "height": 425,
+        "bytes": 8656,
+        "sha256": "143352d282bb6c8d0138741c277015fe7efaf9c0ea404a04be54a754a0f1e9fe"
+      },
+      {
+        "src": "/assets/photos/blog-burgundy-planner-320.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 3076,
+        "sha256": "ed9c7cebb4b53502de849011f094c05db11ab5dbcbd1a7acfa7105acfb1536c8"
+      }
+    ]
+  },
+  {
+    "id": "blog-clock",
+    "kind": "editorial",
+    "name": "Henkilö pitää mustaa viisarillista herätyskelloa työpöydän ääressä",
+    "src": "/assets/photos/blog-clock.webp",
+    "author": "Nenad Stojković (Shixart1985)",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Close-up_of_a_woman_holding_an_alarm_clock.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/1/11/Close-up_of_a_woman_holding_an_alarm_clock.jpg",
+    "sourceSha256": "5c5586f1a553607d2292d62712bf2cf3fc036f47e3eee4ffa5dd47b76f9370d1",
+    "sha256": "6c8e1fd92bcd34d972137ba01b2b6e7eae14cf236ad039b9573217efd8bc5332",
+    "width": 1200,
+    "height": 1798,
+    "alt": "Henkilö pitää mustaa viisarillista herätyskelloa työpöydän ääressä.",
+    "caption": "Viisarillinen herätyskello käsissä, taustalla työpöytä.",
+    "changes": "Pienennys ja WebP-muunnos. Alkuperäinen kuvasuhde on säilytetty; kortissa kuvan reunoja voidaan rajata.",
+    "reviewedAt": "2026-11-13",
+    "licenseVerifiedAt": "2026-11-13",
+    "visualReview": {
+      "sourceSha256": "5c5586f1a553607d2292d62712bf2cf3fc036f47e3eee4ffa5dd47b76f9370d1",
+      "method": "Alkuperäiset pikselit ja valmiit pienennökset tarkastettu. Commonsin alkuperäisen tiedostosivun lisenssikohta luettu.",
+      "observation": "Henkilö pitää mustaa viisarillista herätyskelloa työpöydän ääressä."
+    },
+    "files": [
+      {
+        "src": "/assets/photos/blog-clock.webp",
+        "width": 1200,
+        "height": 1798,
+        "bytes": 84702,
+        "sha256": "6c8e1fd92bcd34d972137ba01b2b6e7eae14cf236ad039b9573217efd8bc5332"
+      },
+      {
+        "src": "/assets/photos/blog-clock-640.webp",
+        "width": 640,
+        "height": 959,
+        "bytes": 28242,
+        "sha256": "efcd588035e5408cd7c0e3094bd32d9a4e250b39243c8462070fe8776d9f0bc3"
+      },
+      {
+        "src": "/assets/photos/blog-clock-320.webp",
+        "width": 320,
+        "height": 479,
+        "bytes": 12122,
+        "sha256": "be86e929d9ebb19fa9a92badadf40a6dfdbed4275d1071a81d13cc001d16ada9"
+      }
+    ]
+  },
+  {
+    "id": "blog-monthly",
+    "kind": "editorial",
+    "name": "Avoimen paperikalenterin kuukausiruudukko ja käsin kirjoitettuja muistiinpanoja",
+    "src": "/assets/photos/blog-monthly.webp",
+    "author": "Eric Rothermel",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Monthly_schedule_(Unsplash).jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Monthly_schedule_%28Unsplash%29.jpg",
+    "sourceSha256": "594d3c2bcb89b6bc47c342f6914a29ec3fdceb02db4fc56729ad3eaa8c9d376e",
+    "sha256": "4193a716355b7dd09eedcb67e65891b10937aab85025e8fa00f2aa761544c6aa",
+    "width": 1200,
+    "height": 803,
+    "alt": "Avoimen paperikalenterin kuukausiruudukko ja käsin kirjoitettuja muistiinpanoja.",
+    "caption": "Paperikalenterin päivämääräruudukko lähikuvassa.",
+    "changes": "Pienennys ja WebP-muunnos. Alkuperäinen kuvasuhde on säilytetty; kortissa kuvan reunoja voidaan rajata.",
+    "reviewedAt": "2026-11-13",
+    "licenseVerifiedAt": "2026-11-13",
+    "visualReview": {
+      "sourceSha256": "594d3c2bcb89b6bc47c342f6914a29ec3fdceb02db4fc56729ad3eaa8c9d376e",
+      "method": "Alkuperäiset pikselit ja valmiit pienennökset tarkastettu. Commonsin alkuperäisen tiedostosivun lisenssikohta luettu.",
+      "observation": "Avoimen paperikalenterin kuukausiruudukko ja käsin kirjoitettuja muistiinpanoja."
+    },
+    "files": [
+      {
+        "src": "/assets/photos/blog-monthly.webp",
+        "width": 1200,
+        "height": 803,
+        "bytes": 49952,
+        "sha256": "4193a716355b7dd09eedcb67e65891b10937aab85025e8fa00f2aa761544c6aa"
+      },
+      {
+        "src": "/assets/photos/blog-monthly-640.webp",
+        "width": 640,
+        "height": 428,
+        "bytes": 12218,
+        "sha256": "97e233486da0a6652d2736c584277f0df822316bfed2e58874f6902701ab75b0"
+      },
+      {
+        "src": "/assets/photos/blog-monthly-320.webp",
+        "width": 320,
+        "height": 214,
+        "bytes": 4682,
+        "sha256": "b427fe02f21dcd83d38f5cd8c83c93908f1ec9f557a4b73db19089702e45bfde"
+      }
+    ]
+  },
+  {
+    "id": "blog-weekly",
+    "kind": "editorial",
+    "name": "Pöydällä avoin paperikalenteri, valkoinen näppäimistö, lankakeriä ja keskeneräinen neule",
+    "src": "/assets/photos/blog-weekly.webp",
+    "author": "Giulia Bertelli",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Giulia_Bertelli_2016_(Unsplash).jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Giulia_Bertelli_2016_%28Unsplash%29.jpg",
+    "sourceSha256": "7f27cdc6fc789a1b1742b51a8a2bacd836b7214b6a57b4370c6de997ac06214b",
+    "sha256": "ec86fc35b08fa1450f85c23994da3a446f2177706d251b5755b4a67d6af1b0bb",
+    "width": 1200,
+    "height": 800,
+    "alt": "Pöydällä avoin paperikalenteri, valkoinen näppäimistö, lankakeriä ja keskeneräinen neule.",
+    "caption": "Kalenteri ja käsityöt samalla työpöydällä.",
+    "changes": "Pienennys ja WebP-muunnos. Alkuperäinen kuvasuhde on säilytetty; kortissa kuvan reunoja voidaan rajata.",
+    "reviewedAt": "2026-11-13",
+    "licenseVerifiedAt": "2026-11-13",
+    "visualReview": {
+      "sourceSha256": "7f27cdc6fc789a1b1742b51a8a2bacd836b7214b6a57b4370c6de997ac06214b",
+      "method": "Alkuperäiset pikselit ja valmiit pienennökset tarkastettu. Commonsin alkuperäisen tiedostosivun lisenssikohta luettu.",
+      "observation": "Pöydällä avoin paperikalenteri, valkoinen näppäimistö, lankakeriä ja keskeneräinen neule."
+    },
+    "files": [
+      {
+        "src": "/assets/photos/blog-weekly.webp",
+        "width": 1200,
+        "height": 800,
+        "bytes": 186046,
+        "sha256": "ec86fc35b08fa1450f85c23994da3a446f2177706d251b5755b4a67d6af1b0bb"
+      },
+      {
+        "src": "/assets/photos/blog-weekly-640.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 55776,
+        "sha256": "688ee6b45c9ed903b8a7cab5266206d7b1bdb566512ed8f0d04730fd435c1756"
+      },
+      {
+        "src": "/assets/photos/blog-weekly-320.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 15896,
+        "sha256": "68b96676abbae34834a5254adacef4bfd05bbb627dca17cc69cd848703290db7"
+      }
+    ]
+  },
+  {
+    "id": "blog-calculator",
+    "kind": "editorial",
+    "name": "Laskimen numero- ja funktiopainikkeiden lähikuva",
+    "src": "/assets/photos/blog-calculator.webp",
+    "author": "Jorge Franganillo",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Calculator.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/7/77/Calculator.jpg",
+    "sourceSha256": "ca7ed43a107e1d3f7602d35606cc3d36a3aa6d7d018012f252be2c2352bb74c1",
+    "sha256": "1274458ac2c093856308924192bf1b4d35503841748af188d7c6b953431d4fe4",
+    "width": 1200,
+    "height": 800,
+    "alt": "Laskimen numero- ja funktiopainikkeiden lähikuva.",
+    "caption": "Numeroiden ja laskutoimintojen painikkeet lähikuvassa.",
+    "changes": "Pienennys ja WebP-muunnos. Alkuperäinen kuvasuhde on säilytetty; kortissa kuvan reunoja voidaan rajata.",
+    "reviewedAt": "2026-11-13",
+    "licenseVerifiedAt": "2026-11-13",
+    "visualReview": {
+      "sourceSha256": "ca7ed43a107e1d3f7602d35606cc3d36a3aa6d7d018012f252be2c2352bb74c1",
+      "method": "Alkuperäiset pikselit ja valmiit pienennökset tarkastettu. Commonsin alkuperäisen tiedostosivun lisenssikohta luettu.",
+      "observation": "Laskimen numero- ja funktiopainikkeiden lähikuva."
+    },
+    "files": [
+      {
+        "src": "/assets/photos/blog-calculator.webp",
+        "width": 1200,
+        "height": 800,
+        "bytes": 80316,
+        "sha256": "1274458ac2c093856308924192bf1b4d35503841748af188d7c6b953431d4fe4"
+      },
+      {
+        "src": "/assets/photos/blog-calculator-640.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 26602,
+        "sha256": "75c2b185388dcef8e5b526fad33d06fae2cf2457a67cd760172a81fc47de2c34"
+      },
+      {
+        "src": "/assets/photos/blog-calculator-320.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 12368,
+        "sha256": "149eee7a8b7b6d5c5394b996a5c632be73a8d693810f472b847320bc266a00cf"
+      }
+    ]
   }
 ]

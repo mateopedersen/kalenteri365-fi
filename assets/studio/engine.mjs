@@ -11,7 +11,7 @@ export const FONTS = {
  mono:{label:'Tekninen · Courier',family:'Courier New, Courier, monospace'}
 };
 export const PRESETS = [
- {id:'suomi',label:'Sinivalkoinen Suomi',note:'Sininen, valkoinen ja vaalea paperi',colors:{accent:'#205c7d',ink:'#203d4d',paper:'#fffdf8',weekend:'#985361',grid:'#d4e1e7'},font:'sans'},
+ {id:'suomi',label:'Sinivalkoinen Suomi',note:'Sininen, valkoinen ja vaalea paperi',colors:{accent:'#002f6c',ink:'#1d2d43',paper:'#ffffff',weekend:'#985361',grid:'#d4e1e7'},font:'sans'},
  {id:'editorial',label:'Vuoden tarina',note:'Näyttävä vuosi ja kauniit kirjaimet',colors:{accent:'#3f6977',ink:'#203d4d',paper:'#fffcf5',weekend:'#985361',grid:'#e4d6cb'},font:'editorial'},
  {id:'photo',label:'Oma valokuva',note:'Muistosi kalenterin etualalla',colors:{accent:'#42635d',ink:'#2d3b39',paper:'#ffffff',weekend:'#985361',grid:'#dce4de'},font:'sans'},
  {id:'minimal',label:'Puhdas sivu',note:'Rauhalliset viivat ja enemmän tilaa',colors:{accent:'#57535b',ink:'#322f36',paper:'#ffffff',weekend:'#96324d',grid:'#e3dfe3'},font:'clean'},

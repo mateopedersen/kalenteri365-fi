@@ -104,7 +104,7 @@ export const SOURCES = {
   exams:
     "https://www.ylioppilastutkinto.fi/fi/tutkinnon-suorittaminen/koepaivat",
   astro: "https://github.com/cosinekitty/astronomy",
-  names: "https://almanakka.helsinki.fi/fi/nimipaivat/",
+  names: "https://almanakka.helsinki.fi/fi/nimipaivat",
 };
 export function holidays(y) {
   const e = easter(y),

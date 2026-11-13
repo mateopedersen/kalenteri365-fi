@@ -1292,6 +1292,10 @@ bindForm("#astro-form", async (f) => {
     if (body === "Sun") {
       const scene = await import("./solar-fi.mjs");
       scene.connectSolar(A, $("#astro-form"), r);
+      const chart=await import('./daylight-chart.mjs'),year=Number(ds.slice(0,4)),rows=Array.from({length:12},(_,i)=>{const day=dayEvents(A,city,`${year}-${String(i+1).padStart(2,'0')}-15`);return {date:`${year}-${String(i+1).padStart(2,'0')}-15`,rise:day.rise?fmt(day.rise):'—',set:day.set?fmt(day.set):'—',duration:day.duration};});
+      $('#daylight-title').textContent='Päivän pituus: '+city[1]+' '+year;
+      $('#daylight-chart').innerHTML=chart.daylightChart(city,year,rows);
+      $('#daylight-chart').onclick=e=>{const b=e.target.closest('[data-daylight-index]');if(!b)return;const row=rows[Number(b.dataset.daylightIndex)];$$('[data-daylight-index]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));$('#daylight-selection').textContent=fi(parse(row.date))+': nousu '+row.rise+' · lasku '+row.set+' · päivän pituus '+Math.floor(row.duration/60)+' h '+row.duration%60+' min';};
     }
   } catch (err) {
     toast(err.message);
@@ -1363,25 +1367,6 @@ document.addEventListener("click", (e) => {
     $$(".tools-menu[open]").forEach((d) => (d.open = false));
 });
 
-$("#tool-filter")?.addEventListener("input", (e) => {
-  const q = e.target.value
-    .toLocaleLowerCase("fi")
-    .normalize("NFD")
-    .replace(/\p{Diacritic}/gu, "");
-  let visible = 0;
-  $$(".tool-directory .tool-card").forEach((card) => {
-    card.hidden = !card.textContent
-      .toLocaleLowerCase("fi")
-      .normalize("NFD")
-      .replace(/\p{Diacritic}/gu, "")
-      .includes(q);
-    if (!card.hidden) visible++;
-  });
-  $$("[data-tool-group]").forEach(
-    (g) => (g.hidden = !$(".tool-card:not([hidden])", g)),
-  );
-  $("#tool-count").textContent = visible + " työkalua";
-});
 
 document.addEventListener("click", (e) => {
   const b = e.target.closest("[data-moon-date]");
@@ -1417,11 +1402,12 @@ function photoIndex() {
 function decodeCityPhoto(p) {
   if (decodedPhotos.has(p.id)) return decodedPhotos.get(p.id);
   const image = new Image();
-  image.src = p.src.replace(".webp", "-640.webp");
+  image.src = p.cardSrc || p.src.replace(".webp", "-640.webp");
   const promise = image
     .decode()
     .then(() => image)
-    .catch((e) => {
+    .catch(async(e) => {
+      if(p.cardSrc){image.src=p.src.replace(".webp","-640.webp");try{await image.decode();return image;}catch{}}
       decodedPhotos.delete(p.id);
       throw e;
     });
@@ -1429,6 +1415,7 @@ function decodeCityPhoto(p) {
   return promise;
 }
 async function updateCityPhoto(id) {
+  window.dispatchEvent(new CustomEvent('fi-city-change',{detail:{id}}));
   const token = ++photoToken;
   try {
     const list = await photoIndex(),
@@ -1438,7 +1425,7 @@ async function updateCityPhoto(id) {
     if (token !== photoToken) return;
     const target = $("#city-photo");
     if (!target) return;
-    target.src = image.src;
+    if(target.currentSrc!==image.src){document.querySelector('#city-picture source')?.remove();target.src=image.src;}
     target.alt = p.alt;
     $("#city-caption").textContent = p.name;
   } catch {}
@@ -1480,7 +1467,7 @@ if(document.querySelector('.shift-app'))import('./shift-fi.mjs');
 
 window.addEventListener('beforeprint',()=>{
  const calendarPanel=$('.calendar-panel');if(calendarPanel)calendarPanel.dataset.printTitle=$('#calendar-title')?.textContent||'';
-  for(const el of document.querySelectorAll('.sheet-workspace textarea,.weekly-workspace textarea')){
+  for(const el of document.querySelectorAll('.sheet-workspace textarea,.weekly-workspace textarea,.family-shopping textarea,.family-meal input')){
     el.parentElement.querySelector('.print-value')?.remove();
     const value=document.createElement('span');value.className='print-value';value.textContent=el.value||' ';value.setAttribute('aria-hidden','true');el.after(value);
   }
@@ -1496,3 +1483,12 @@ document.addEventListener('click',async event=>{
 });
 
 $('#exam-filter')?.addEventListener('input',e=>{const q=e.target.value.toLocaleLowerCase('fi').trim();let n=0;$$('[data-exam-subject]').forEach(row=>{row.hidden=!row.dataset.examSubject.includes(q);if(!row.hidden)n++;});$('#exam-filter-status').textContent=n+' koepäivää';});
+
+if(document.querySelector("#blog-search,#tool-filter,[data-family-planner],#local-sun"))import("./edition-ui.mjs").then(({connectEdition})=>connectEdition({state,persist}));
+
+// Anchor the tools menu to the visible trigger, with its own vertical scroll.
+const toolsMenu=document.querySelector('.tools-menu');
+if(toolsMenu){
+ const positionToolsMenu=()=>{if(!toolsMenu.open)return;const menu=toolsMenu.querySelector('.mega-menu'),trigger=toolsMenu.querySelector('summary'),top=Math.max(8,Math.min(trigger.getBoundingClientRect().bottom+3,innerHeight-120));menu.style.top=top+'px';menu.style.maxHeight=Math.max(110,innerHeight-top-12)+'px';};
+ toolsMenu.addEventListener('toggle',positionToolsMenu);window.addEventListener('resize',positionToolsMenu,{passive:true});window.addEventListener('scroll',positionToolsMenu,{passive:true});
+}

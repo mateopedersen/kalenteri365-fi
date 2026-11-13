@@ -5,7 +5,7 @@ import {build} from 'esbuild';
 import {transform} from 'lightningcss';
 
 export async function runtimeAssets(ROOT,ASSET,OUT,pages){
-  const css=Buffer.concat(await Promise.all(['site.css','finland.css'].map(async name=>Buffer.concat([await fs.readFile(path.join(ASSET,name)),Buffer.from('\n')]))));
+  const css=Buffer.concat(await Promise.all(['site.css','finland.css','edition.css'].map(async name=>Buffer.concat([await fs.readFile(path.join(ASSET,name)),Buffer.from('\n')]))));
   const packed=transform({filename:'site-runtime.css',code:css,minify:true}).code;
   const styleName='site-runtime.'+createHash('sha256').update(packed).digest('hex').slice(0,16)+'.css';
   await fs.writeFile(path.join(ASSET,styleName),packed);
@@ -25,7 +25,7 @@ export async function runtimeAssets(ROOT,ASSET,OUT,pages){
     const file=p.path==='/404/'?path.join(OUT,'404.html'):path.join(OUT,p.path,'index.html');
     let html=await fs.readFile(file,'utf8');
     html=html.replace('/assets/site.css','/assets/'+styleName)
-      .replace('<link rel="stylesheet" href="/assets/finland.css">','')
+      .replace('<link rel="stylesheet" href="/assets/finland.css">','').replace('<link rel="stylesheet" href="/assets/edition.css">','')
       .replace('/assets/app.mjs',script);
     await fs.writeFile(file,html);
   }

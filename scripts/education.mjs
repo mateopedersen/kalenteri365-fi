@@ -72,6 +72,16 @@ export async function educationPages({ page, OUT }) {
       .map(([label, d]) => ({ label, start: d[0], end: d[1] }));
   const row = (r) =>
     `<article class="school-year panel" data-school-year="${r.academicYear}"><p class="eyebrow">LUKUVUOSI ${r.academicYear.replace("/", "–")}</p><h3>${r.municipality}</h3>${table(["Loma tai koulupäivä", "Ajankohta"], [["Koulu alkaa", fi(parse(r.autumnStart))], ...schoolPeriods(r).map((p) => [p.label, range([p.start, p.end])]), ["Kevätlukukausi alkaa", fi(parse(r.springStart))], ["Lukuvuosi päättyy", fi(parse(r.lastSchoolDay))]])}<p>${esc(r.notes_fi || "")}</p><div class="actions">${link("/lataukset/koululomat-" + slug(r.municipality) + "-" + r.academicYear.replace("/", "-") + ".ics", art("ics") + " Lisää lomakalenteri " + icon("download"), "btn secondary")}</div>${source(r.sourceId)}</article>`;
+  function universityCard(name) {
+    const records = data.universityCalendars.filter(
+      (r) => r.institution === name,
+    );
+    return link(
+      "/yliopistojen-kalenterit/" + slug(name) + "/",
+      `<div class="education-photo">${photo(slug(name))}</div><div class="education-card-copy"><h3>${name}</h3><p>${records.map((r) => r.academicYear.replace("/", "–")).join(", ")}</p></div>`,
+      "tool-card",
+    );
+  }
   const cards = cities
     .map((name) => {
       const id = CITIES.find((c) => c[1] === name)?.[0] || slug(name);
@@ -86,7 +96,7 @@ export async function educationPages({ page, OUT }) {
     "/koulujen-lomat/",
     "Koulujen lomat Suomessa",
     "Paikkakuntakohtaiset syys-, joulu- ja talvilomat sekä lukuvuoden aloitus ja päättyminen.",
-    `<div class="education-intro"><p>${data.copy_fi.schoolIntro}</p><div class="actions">${link("#koululomat", "Koulujen lomat " + icon("chevron"), "btn")}${link("/yliopistojen-kalenterit/", "Yliopistojen kalenterit " + icon("arrow"), "btn secondary")}</div></div><section id="koululomat"><h2>Valitse paikkakunta</h2><div class="cards education-cards">${cards}</div></section><section class="panel topic-guide"><h2>Jokaisella koululla on oma aikataulunsa</h2><p>Alla olevat tiedot koskevat nimettyjen kuntien suomenkielistä perusopetusta. Lukioiden, esiopetuksen ja ammatillisen koulutuksen ajat voivat poiketa. Myöhempien lukuvuosien tietoja ei johdeta aiemmista vuosista.</p><p>Tarkista koulukohtaiset poikkeukset opetuksen järjestäjältä. Yliopistojen opetusperiodit ja tenttiviikot löytyvät omasta korkeakoulukalenteristaan.</p></section><section class="content-section"><h2>Yliopistojen opetusperiodit</h2><p>${data.copy_fi.universityIntro}</p>${link("/yliopistojen-kalenterit/", "Vertaa korkeakouluja " + icon("arrow"), "btn")}</section>`,
+    `<div class="education-intro"><p>${data.copy_fi.schoolIntro}</p><div class="actions">${link("#koululomat", "Koulujen lomat " + icon("chevron"), "btn")}${link("/yliopistojen-kalenterit/", "Yliopistojen kalenterit " + icon("arrow"), "btn secondary")}</div></div><section id="koululomat"><h2>Valitse paikkakunta</h2><div class="cards education-cards">${cards}</div></section><section class="panel topic-guide"><h2>Jokaisella koululla on oma aikataulunsa</h2><p>Alla olevat tiedot koskevat nimettyjen kuntien suomenkielistä perusopetusta. Lukioiden, esiopetuksen ja ammatillisen koulutuksen ajat voivat poiketa. Myöhempien lukuvuosien tietoja ei johdeta aiemmista vuosista.</p><p>Tarkista koulukohtaiset poikkeukset opetuksen järjestäjältä. Yliopistojen opetusperiodit ja tenttiviikot löytyvät omasta korkeakoulukalenteristaan.</p></section><section class="content-section"><h2>Yliopistojen opetusperiodit</h2><p>${data.copy_fi.universityIntro}</p><div class="cards education-cards">${institutions.map(universityCard).join("")}</div>${link("/yliopistojen-kalenterit/", "Vertaa korkeakouluja " + icon("arrow"), "btn")}</section>`,
   );
   for (const name of cities) {
     const id = CITIES.find((c) => c[1] === name)?.[0] || slug(name),
@@ -128,16 +138,6 @@ export async function educationPages({ page, OUT }) {
       );
     }
   }
-  const universityCard = (name) => {
-    const records = data.universityCalendars.filter(
-      (r) => r.institution === name,
-    );
-    return link(
-      "/yliopistojen-kalenterit/" + slug(name) + "/",
-      `<div class="education-photo">${photo(slug(name))}</div><div class="education-card-copy"><h3>${name}</h3><p>${records.map((r) => r.academicYear.replace("/", "–")).join(", ")}</p></div>`,
-      "tool-card",
-    );
-  };
   await page(
     "/yliopistojen-kalenterit/",
     "Yliopistojen kalenterit",

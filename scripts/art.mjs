@@ -41,6 +41,6 @@ const variants={
  pdf:file('#984b50','PDF'),excel:file('#286a52','XLS'),word:file('#286b9a','DOC'),ics:file('#39788d','ICS'),
  flag:frame(`<path d="M77 218V36" stroke="#607d8d" stroke-width="9"/><path d="M74 218V36" stroke="#d5e4eb" stroke-width="4"/><circle cx="76" cy="33" r="7" fill="url(#gold)"/><path d="M82 51Q154 23 252 54V157Q155 126 82 157Z" fill="url(#paper)" stroke="#c4d9e2"/><path d="M132 38v104l30-1V37Z" fill="url(#blue)"/><path d="M82 89Q159 62 252 92v31Q158 93 82 122Z" fill="url(#blue)"/><path d="M51 224h52" stroke="#6e8e9e" stroke-width="8" stroke-linecap="round"/>`),
 };
-for(const [name,svg] of Object.entries(variants))await fs.writeFile(dir+'/'+name+'.svg',svg);
+for(const [name,svg] of Object.entries(variants))if(!source[name])await fs.writeFile(dir+'/'+name+'.svg',svg);
 for(const name of ['spring','summer','autumn','winter'])await fs.writeFile(dir+'/season-'+name+'.svg',season(name));
 }

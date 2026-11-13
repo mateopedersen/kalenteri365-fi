@@ -13,7 +13,7 @@ corepack pnpm build
 corepack pnpm start
 ```
 
-The output is `dist/`. The build verifies Lato TTF checksums, generates 1,154 HTML pages, and creates 208 vector PDFs, 208 A4 WebP downloads at 600 ppi, plus lightweight gallery previews. The first build rasterizes the downloads and takes several minutes. Unchanged local exports are cached by the source hash. The source repository intentionally excludes generated output, local personal records and downloaded fonts. The font license is included; fonts are fetched from Google Fonts and checked against fixed SHA-256 values.
+The output is `dist/`. The build verifies Lato TTF checksums, generates Finnish calendars, tool and editorial pages, and creates 780 vector calendar PDFs and 780 A4 WebP downloads at 600 ppi, plus 208 lunar and 16 planner PDF/Image pairs, plus lightweight gallery previews. The first build rasterizes the downloads and takes several minutes. Unchanged local exports are cached by the source hash. The source repository intentionally excludes generated output, local personal records and downloaded fonts. The font license is included; fonts are fetched from Google Fonts and checked against fixed SHA-256 values.
 
 ## Cloudflare Pages
 
@@ -35,9 +35,10 @@ Connect `kalenteri365.fi` and `www.kalenteri365.fi` as custom domains. `_redirec
 - Month, week, day, list and year views. Events, simple repeat rules, notes and tasks stored in localStorage.
 - ICS import/export and JSON backup/restore. Imports support date-only and Helsinki/UTC timed events, basic daily/weekly/monthly/yearly recurrence, interval, until and excluded dates. Unsupported complex recurrence or foreign TZID events are reported as skipped rather than silently changed. Cross-device sync is not implemented.
 - Date differences, date arithmetic, business days, working hours, day-of-year, leap years, holiday planning and shift cycles.
-- Calendar editor with a local photo, color and title; printable custom calendars and WebP export. Family, daily, school and study planners plus timetables save browser-local fields.
-- Astronomy Engine 2.1.19: lunar phases, local rise/set, polar conditions, seasons and eclipses. 25 Finnish locations, each with 2027–2030 comparisons. Open-Meteo weather for the chosen city.
-- Official source links for copyrighted name-day data, individual benefit dates and examination timetables. Published Helsinki school holidays are scoped to their actual municipality, school type and school year; unpublished future dates are not invented.
+- Calendar editor with a local photo, color and title; PDF, Word, Excel, JPEG and PNG downloads. The family planner adds people, dated events, meals and a weekly shopping list, with Helsinki-aware ICS export. Weekly, daily, school and study planners save browser-local fields.
+- Filterable tool directory with persistent favourites. Twenty Finnish blog articles with contextual links, licensed photography and legacy guide redirects.
+- Astronomy Engine 2.1.19: lunar phases, local rise/set, polar conditions, seasons and eclipses. 25 Finnish locations, each with 2027–2030 comparisons. MET Norway model forecast weather for the chosen city.
+- Official source links for copyrighted name-day data, individual benefit dates and examination timetables. Published municipal school holidays are scoped to their actual municipality, school type and school year; unpublished future dates are not invented.
 
 ## Verification
 
