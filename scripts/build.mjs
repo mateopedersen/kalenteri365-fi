@@ -1054,11 +1054,21 @@ const info = {
     "<h2>Alkuperäiset lähteet ensin</h2><p>Viralliset päivämäärät tarkistetaan julkaisevalta taholta. Paikalliset kouluajat nimetään paikkakunnan ja lukuvuoden mukaan. Puuttuvia julkaisuja ei korvata vahvistetuiksi esitetyillä arvauksilla.</p><h2>Laskelma ja tieto erikseen</h2><p>Astronomiset ajat ja työpäivät lasketaan dokumentoiduilla säännöillä. Horoskoopit erotetaan viihteeksi. Virheistä voi jättää korjauspyynnön sähköpostitse.</p>",
   ],
 };
+const infoDescriptions={
+  tietoa:'Tutustu Kalenteri365-palveluun, Suomen kalentereihin ja arjen suunnittelutyökaluihin. Omat merkinnät säilyvät käyttämässäsi selaimessa.',
+  lahteet:'Kalenteri365:n lähteet Suomen pyhäpäiville, koulujen loma-ajoille, säälle ja tähtitieteellisille laskelmille. Lue myös laskentatapojen rajaukset.',
+  tietosuoja:'Lue, miten Kalenteri365 käsittelee selaimeen tallennettuja suunnitelmia, sijaintivalintaa ja teknisiä tietoja sekä miten poistat omat merkintäsi.',
+  evasteet:'Mitä Kalenteri365 tallentaa selaimeesi? Lue paikallisesta tallennuksesta, välttämättömistä teknisistä toiminnoista ja tietojen poistamisesta.',
+  kayttoehdot:'Kalenteri365:n käyttöehdot: kalentereiden käyttäminen, laskelmien perusteet, tärkeiden päivämäärien tarkistaminen ja omien tietojen varmuuskopiointi.',
+  saavutettavuus:'Tietoa Kalenteri365:n näppäimistökäytöstä, kalenterin listanäkymästä ja liikkeen vähentämisestä. Katso käyttövinkit ja kerro saavutettavuusongelmasta.',
+  yhteystiedot:'Ota yhteyttä Kalenteri365:n ylläpitoon osoitteessa kalendars365@gmail.com. Lähetä kysymys, palaute tai korjauspyyntö ja liitä mukaan sivun osoite.',
+  toimitusperiaatteet:'Näin Kalenteri365 tarkistaa päivämäärät, nimeää paikalliset koulujen loma-ajat ja erottaa laskennalliset arviot vahvistetuista tiedoista.',
+};
 for (const [s, [t, b]] of Object.entries(info))
   await page(
     "/" + s + "/",
     t,
-    `${t} – Kalenteri365.fi.`,
+    infoDescriptions[s],
     s === "tietoa" ? aboutPage() : `<article class="long-text">${b}</article>`,
   );
 await page(
