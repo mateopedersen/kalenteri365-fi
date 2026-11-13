@@ -2,7 +2,7 @@ import {STYLES} from './exports.mjs';
 import {YEARS,MONTHS,SLUGS,cap} from './calendar.mjs';
 import {art,icon,link,esc} from './ui.mjs';
 import {printCard,printStem} from '../assets/print-catalog-core.mjs';
-export const PRINT_STYLES=STYLES.map(([id,name,description,,meta])=>({id,name,description,orientation:meta.orientation,theme:meta.theme}));
+export const PRINT_STYLES=STYLES.map(([id,name,description,,meta])=>({id,name,description:id==='suomi'?'Valkoinen arkki, siniristilippu ja selkeä kalenterinäkymä.':description,orientation:meta.orientation,theme:meta.theme}));
 const route=(year,month=0)=>'/pdf-kalenteri/'+year+'/'+(month?SLUGS[month-1]+'/':'');
 const period=(year,month)=>month?cap(MONTHS[month-1])+' '+year:'Vuosi '+year;
 const months=year=>`<nav class="print-months" aria-label="Vuoden ${year} kuukausipohjat">${MONTHS.map((m,i)=>link(route(year,i+1),`<span>${String(i+1).padStart(2,'0')}</span>${cap(m)}`)).join('')}</nav>`;
