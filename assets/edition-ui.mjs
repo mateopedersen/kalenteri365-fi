@@ -53,7 +53,7 @@ export function connectEdition({state,persist}){
     $('#local-sun-link').href = '/auringonnousu-ja-lasku/' + city[0] + '/';
     const angle = A.MoonPhase(now), fraction = A.Illumination('Moon', now).phase_fraction;
     const phaseNames = ['Uusikuu', 'Kasvava sirppi', 'Ensimmäinen neljännes', 'Kasvava kupera kuu', 'Täysikuu', 'Vähenevä kupera kuu', 'Viimeinen neljännes', 'Vähenevä sirppi'];
-    $('#local-moon-disc').innerHTML = moonSVG(angle, 'home-moon', 'Kuun valaistus', '/assets/photos/moon-phase-texture.webp');
+    $('#local-moon-disc').innerHTML = moonSVG(angle, 'home-moon').replace('href="/assets/photos/moon-surface.jpg"', 'href="/assets/photos/moon-phase-texture.webp"');
     $('#local-moon-phase').textContent = phaseNames[Math.floor((angle + 22.5) / 45) % 8];
     $('#local-moon-light').textContent = (fraction * 100).toLocaleString('fi-FI', {maximumFractionDigits: 0}) + ' % valaistuna';
    } catch {
