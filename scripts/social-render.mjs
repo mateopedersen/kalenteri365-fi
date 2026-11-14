@@ -14,31 +14,31 @@ function image(pic,x,y,w,h){return `<image x="${x}" y="${y}" width="${w}" height
 function paper(x,y,w,h,angle=0,body=''){return `<g transform="rotate(${angle} ${x+w/2} ${y+h/2})"><rect x="${x+4}" y="${y+10}" width="${w}" height="${h}" rx="13" fill="#b8c8d4" opacity=".32"/><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="13" fill="url(#paper)" stroke="#cedbe4" stroke-width="1.3" filter="url(#shadow)"/>${body}</g>`;}
 function background(dark=false){return `<rect width="1200" height="630" fill="${dark?'#081c32':'#e9f0f6'}"/><ellipse cx="930" cy="90" rx="650" ry="410" fill="${dark?'#123953':'#f8fbfe'}"/><path d="M0 448Q380 330 760 480T1200 380V630H0Z" fill="${dark?'#102a42':'#d6e4ee'}"/><path d="M0 470Q490 440 760 570" fill="none" stroke="${dark?'#527b8b':'#adc8d9'}" stroke-width="1" opacity=".5"/>`;}
 function binder(x,y,w){return `<rect x="${x}" y="${y}" width="${w}" height="48" rx="13" fill="#0d4679"/>${[.13,.36,.64,.87].map(n=>`<rect x="${x+w*n-5}" y="${y-8}" width="10" height="24" rx="5" fill="url(#metal)" stroke="#9db6c8"/>`).join('')}`;}
-function calendarGrid(year,month,x,y,w,h,mode='all',compact=false,locale='fi'){
+function calendarGrid(year,month,x,y,w,h,mode='all',compact=false){
  const rows=monthGrid(year,month),cw=w/7,header=compact?14:30,rh=(h-header)/rows.length,font=compact?Math.min(8.5,rh*.72):22;
  const hs=new Map(holidays(year).map(a=>[a.date,a]));
- return (locale==='sv'?['Må','Ti','On','To','Fr','Lö','Sö']:['Ma','Ti','Ke','To','Pe','La','Su']).map((d,i)=>lettering(d,x+cw*(i+.5),y+14,compact?8:15,i>4?'#8d4c57':'#546a7b',true,'middle')).join('')+rows.map((week,r)=>week.map((d,c)=>{const other=d.getUTCMonth()+1!==month,hday=hs.get(iso(d)),hi=hday&&(mode==='all'||mode==='work'?hday.type==='holiday':mode==='flag'?hday.type==='flag':true);const px=x+c*cw,py=y+(compact?14:26)+r*rh;return `<rect x="${px+2}" y="${py+1}" width="${cw-4}" height="${rh-3}" rx="${compact?3:7}" fill="${other?'#f2f5f7':hi?'#ebd8df':c>4?'#eef3f7':mode==='work'?'#e0eee8':'#fff'}"/>`+lettering(d.getUTCDate(),px+cw/2,py+rh*.62,font,other?'#91a0ab':hi?'#912d49':'#24465e',!other,'middle');}).join('')).join('');
+ return ['Ma','Ti','Ke','To','Pe','La','Su'].map((d,i)=>lettering(d,x+cw*(i+.5),y+14,compact?8:15,i>4?'#8d4c57':'#546a7b',true,'middle')).join('')+rows.map((week,r)=>week.map((d,c)=>{const other=d.getUTCMonth()+1!==month,hday=hs.get(iso(d)),hi=hday&&(mode==='all'||mode==='work'?hday.type==='holiday':mode==='flag'?hday.type==='flag':true);const px=x+c*cw,py=y+(compact?14:26)+r*rh;return `<rect x="${px+2}" y="${py+1}" width="${cw-4}" height="${rh-3}" rx="${compact?3:7}" fill="${other?'#f2f5f7':hi?'#ebd8df':c>4?'#eef3f7':mode==='work'?'#e0eee8':'#fff'}"/>`+lettering(d.getUTCDate(),px+cw/2,py+rh*.62,font,other?'#91a0ab':hi?'#912d49':'#24465e',!other,'middle');}).join('')).join('');
 }
-function annual(year,x,y,w,h,mode='all',locale='fi'){
+function annual(year,x,y,w,h,mode='all'){
  const cols=4,cw=w/cols,ch=h/3;
- return MONTHS.map((name,i)=>{const px=x+(i%cols)*cw,py=y+Math.floor(i/cols)*ch;return lettering(locale==='sv'?cap(new Intl.DateTimeFormat('sv-FI',{timeZone:'UTC',month:'long'}).format(date(year,i+1,1))):cap(name),px+6,py+13,12,'#285673')+calendarGrid(year,i+1,px,py+18,cw-14,ch-28,mode,true,locale);}).join('');
+ return MONTHS.map((name,i)=>{const px=x+(i%cols)*cw,py=y+Math.floor(i/cols)*ch;return lettering(cap(name),px+6,py+13,12,'#285673')+calendarGrid(year,i+1,px,py+18,cw-14,ch-28,mode,true);}).join('');
 }
 function pen(x,y,angle=-20){return `<g transform="translate(${x} ${y}) rotate(${angle})"><rect width="14" height="214" rx="7" fill="url(#pen)" filter="url(#smallshadow)"/><path d="M1 205h12l-6 25Z" fill="#c1ccd1"/><path d="m7 230-2-8h4Z" fill="#29495c"/><rect x="2" y="15" width="10" height="4" rx="2" fill="#dce6ea"/></g>`;}
 function calendarScene(m){
  const year=m.year||2027,month=m.month,mode=m.base==='tyopaivat'?'work':m.base==='liputuspaivat'?'flag':m.base==='merkkipaivat'?'observance':'all';
  if(!m.year){
-  const cards=[2027,2028,2029,2030].map((y,i)=>{const x=55+i*290,top=115+(i%2)*18;return paper(x,top,267,340,i%2?3:-3,binder(x,top,267)+lettering(y,x+18,top+87,36,'#194c73')+calendarGrid(y,month||1,x+13,top+107,241,215,mode,false,m.locale));}).join('');
+  const cards=[2027,2028,2029,2030].map((y,i)=>{const x=55+i*290,top=115+(i%2)*18;return paper(x,top,267,340,i%2?3:-3,binder(x,top,267)+lettering(y,x+18,top+87,36,'#194c73')+calendarGrid(y,month||1,x+13,top+107,241,215,mode,false));}).join('');
   return background()+cards;
  }
  const bar=month?`${cap(MONTHS[month-1])} ${year}`:String(year);
  let body;
- if(month)body=binder(245,95,660)+lettering(bar,273,172,29,'#173e60')+calendarGrid(year,month,270,191,610,250,mode,false,m.locale);
- else body=binder(180,75,820)+lettering(bar,206,153,31,'#174666')+annual(year,206,170,772,288,mode,m.locale);
+ if(month)body=binder(245,95,660)+lettering(bar,273,172,29,'#173e60')+calendarGrid(year,month,270,191,610,250,mode,false);
+ else body=binder(180,75,820)+lettering(bar,206,153,31,'#174666')+annual(year,206,170,772,288,mode);
  return background()+paper(month?245:180,month?95:75,month?660:820,month?380:418,month?-3:1.5,body)+pen(1033,153,17)+`<ellipse cx="118" cy="245" rx="62" ry="61" fill="#beccce" opacity=".3"/><circle cx="110" cy="230" r="53" fill="#f9fbfb" stroke="#d6e1e5" stroke-width="9"/><circle cx="110" cy="230" r="39" fill="#a77f57"/><circle cx="110" cy="230" r="35" fill="#634c37"/>`;
 }
 function weeklyScene(m){
  const year=m.year||2027,w=m.week||1,start=weekStart(year,w),hday=new Set([year-1,year,year+1].flatMap(y=>holidays(y)).filter(h=>h.type==='holiday').map(h=>h.date));
- let body=binder(133,83,938)+lettering(m.locale==='sv'?'VECKA':'VIIKKO',163,165,16,'#6a8091')+lettering(w,163,217,48,'#0e497b')+lettering(year,1036,164,26,'#315b7a',true,'end');
+ let body=binder(133,83,938)+lettering('VIIKKO',163,165,16,'#6a8091')+lettering(w,163,217,48,'#0e497b')+lettering(year,1036,164,26,'#315b7a',true,'end');
  for(let i=0;i<7;i++){const d=add(start,i),x=265+i*107;body+=`<rect x="${x}" y="187" width="99" height="262" rx="7" fill="${hday.has(iso(d))?'#f0dfe5':i>4?'#eef3f8':'#fafcfd'}"/>`+lettering(['Ma','Ti','Ke','To','Pe','La','Su'][i],x+14,216,16,'#45627b')+lettering(d.getUTCDate(),x+14,257,29,hday.has(iso(d))?'#8f3e51':'#123c60')+[0,1,2,3,4,5].map(l=>`<path d="M${x+12} ${284+l*27}h75" stroke="#d9e2e7"/>`).join('');}
  return background()+paper(133,83,938,397,-1.5,body)+pen(92,224,-14);
 }
@@ -145,7 +145,15 @@ export async function renderSocial(m,out){
  else if(m.family==='lunar')scene=await lunarScene(m,out);
  else if(['solar','moonrise','daylength'].includes(m.family))scene=await solarScene(m,out);
  else if(m.family==='home')scene=await homeScene(m);
- else if(m.family==='zodiac')scene=zodiacScene(m);
+ else if(m.family==='zodiac'){
+  const sign=m.route.split('/').filter(Boolean)[1];
+  if(zodiacPaths[sign]){
+   const file=path.join(out,'art',`zodiac-${sign}.svg`);
+   const bytes=await sharp(await fs.readFile(file)).resize(650,650,{fit:'inside'}).png().toBuffer();
+   (m.renderAssets??=[]).push({file,role:'zodiac-illustration'});
+   scene=background(true)+`<image href="data:image/png;base64,${bytes.toString('base64')}" x="335" y="30" width="540" height="490" preserveAspectRatio="xMidYMid meet"/>`;
+  }else scene=zodiacScene(m);
+ }
  else if(m.family==='sky')scene=skyScene(m);
  else if(m.family==='seasons')scene=await seasonScene(out,m);
  else if(m.base==='eduskuntavaalit'||m.route.includes('/eduskuntavaalit/'))scene=electionScene();
@@ -153,9 +161,40 @@ export async function renderSocial(m,out){
  else if(m.photos.length)scene=await featurePhoto(m);
  else scene=background()+toolScene({base:m.base,seed:m.seed});
  const dark=['lunar','moonrise','zodiac','sky'].includes(m.family);
- const label=wrapLabel(m.title,1058,35,2),labelY=label.lines.length===1?560:540;
- const credit=m.photos.length?m.photos.map(p=>[(p.author||'').length<=100?p.author:'',p.license].filter(Boolean).join(' · ')).join(' / '):'';
- const creditFit=credit?wrapLabel(credit,850,11,2):null;
- const titleMarkup=label.lines.map((line,i)=>lettering(line,45,labelY+i*(label.size+5),label.size,'#123c63')).join('');
- return {svg:`<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="630" viewBox="0 0 1200 630"><defs><linearGradient id="paper" x1="0" y1="0" x2=".9" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#eef3f5"/></linearGradient><linearGradient id="metal"><stop stop-color="#7e9aaf"/><stop offset=".4" stop-color="#fff"/><stop offset=".7" stop-color="#d6e1e5"/><stop offset="1" stop-color="#7895aa"/></linearGradient><linearGradient id="pen"><stop stop-color="#113b65"/><stop offset=".4" stop-color="#5781a0"/><stop offset=".6" stop-color="#17436d"/><stop offset="1" stop-color="#07243c"/></linearGradient><linearGradient id="sunbar" x1="0" y1="1" x2=".5" y2="0"><stop stop-color="#b68539"/><stop offset="1" stop-color="#edcc85"/></linearGradient><radialGradient id="sunball" cx="35%" cy="25%"><stop stop-color="#fff9cc"/><stop offset=".5" stop-color="#f4ce73"/><stop offset="1" stop-color="#c48c38"/></radialGradient><radialGradient id="sun-halo"><stop stop-color="#f2cb71" stop-opacity=".5"/><stop offset="1" stop-color="#f2cb71" stop-opacity="0"/></radialGradient><radialGradient id="moon-shade" cx="38%" cy="32%" r="65%"><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".35"/></radialGradient><filter id="shadow" x="-30%" y="-30%" width="170%" height="180%"><feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#0b2b46" flood-opacity=".18"/></filter><filter id="smallshadow" x="-50%" y="-30%" width="210%" height="180%"><feDropShadow dx="3" dy="5" stdDeviation="3" flood-color="#123853" flood-opacity=".22"/></filter></defs>${scene}<path d="M0 0h1200v5H0Z" fill="#164d7a"/>${lettering('Kalenteri365',35,37,20,dark?'#d4e8f2':'#23506f')}${lettering(m.category,1165,36,14,dark?'#bad7e6':'#41667e',true,'end')}<rect y="508" width="1200" height="122" fill="#ffffff"/>${titleMarkup}${creditFit?creditFit.lines.map((line,i)=>lettering(line,46,602+i*12,creditFit.size,'#5c7385',false)).join(''):''}${lettering('kalenteri365.fi',1156,611,14,'#43667f',false,'end')}</svg>`,textLayout:{lines:label.lines,size:label.size,area:{x:45,y:508,width:1058,height:90}},family:m.family};
+ const ink=dark?'#f5f9ff':'#102f50',muted=dark?'#bfd3e6':'#47617a';
+ const accent=dark?'#e6c893':'#176d83';
+ const label=wrapLabel(m.title,474,48,3),lineHeight=label.size*1.16;
+ const titleY=218;
+ const summary=String(m.description||'').replace(/\s+/g,' ').trim();
+ const description=summary?wrapLabel(summary,466,19,3):null;
+ const summaryY=titleY+(label.lines.length-1)*lineHeight+42;
+ const credit=m.photos.map(p=>[p.author,p.license].filter(Boolean).join(' · ')).join(' / ');
+ const creditFit=credit?wrapLabel(credit,575,10,2):null;
+ const titleMarkup=label.lines.map((line,i)=>lettering(line,50,titleY+i*lineHeight,label.size,ink)).join('');
+ const isSign=m.family==='zodiac'&&Boolean(zodiacPaths[m.route.split('/').filter(Boolean)[1]]);
+ const sceneView=m.base==='kellonsiirto'?'280 60 660 460':isSign?'290 10 620 530':
+  m.family==='tool'?'140 65 920 430':
+  ['taysikuu','uusikuu','kuunpimennys'].includes(m.base)?'340 40 560 460':
+  m.family==='calendar'&&m.year?'150 65 900 440':'0 40 1200 470';
+ const body=`<rect width="1200" height="630" fill="${dark?'#071d35':'#f3f7fc'}"/>
+ <path d="M574 0h626v630H574Z" fill="${dark?'#0c2b47':'#e2edf7'}"/>
+ <circle cx="1140" cy="75" r="270" fill="${dark?'#123a56':'#f9fcff'}" opacity=".7"/>
+ <rect x="50" y="41" width="38" height="24" rx="3" fill="#fff" stroke="${dark?'#90b4d2':'#c2d3e3'}"/>
+ <path d="M61 41h7v24h-7zM50 49h38v7H50z" fill="#003580"/>
+ ${lettering('Kalenteri365',102,63,26,ink)}
+ ${lettering('SUOMI',1150,59,13,muted,true,'end')}
+ <path d="M50 98h1100" stroke="${dark?'#38516b':'#cfdeeb'}"/>
+ <rect x="50" y="130" width="35" height="4" rx="2" fill="${accent}"/>
+ ${lettering(m.category.toLocaleUpperCase('fi-FI'),50,165,14,accent)}
+ ${titleMarkup}
+ ${description?description.lines.map((line,i)=>lettering(line,50,summaryY+i*27,description.size,muted,false)).join(''):''}
+ <defs><clipPath id="og-scene-clip"><rect x="574" y="126" width="576" height="405" rx="24"/></clipPath></defs>
+ <rect x="578" y="138" width="576" height="405" rx="24" fill="#052b4d" opacity=".12"/>
+ <g clip-path="url(#og-scene-clip)"><rect x="574" y="126" width="576" height="405" fill="${dark?'#102a42':'#e9f0f6'}"/><svg x="574" y="126" width="576" height="405" viewBox="${sceneView}" preserveAspectRatio="xMidYMid meet">${scene}</svg></g>
+ <rect x="574" y="126" width="576" height="405" rx="24" fill="none" stroke="${dark?'#51718b':'#b8cede'}"/>
+ ${creditFit?creditFit.lines.map((line,i)=>lettering(line,580,553+i*12,creditFit.size,muted,false)).join(''):''}
+ <path d="M50 581h1100" stroke="${dark?'#38516b':'#cfdeeb'}"/>
+ ${lettering('KALENTERIT · PYHÄT · ARJEN TYÖKALUT',50,608,12,muted)}
+ ${lettering('kalenteri365.fi',1150,610,19,ink,true,'end')}`;
+ return {svg:`<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="630" viewBox="0 0 1200 630"><defs><linearGradient id="paper" x1="0" y1="0" x2=".9" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#eef3f5"/></linearGradient><linearGradient id="metal"><stop stop-color="#7e9aaf"/><stop offset=".4" stop-color="#fff"/><stop offset=".7" stop-color="#d6e1e5"/><stop offset="1" stop-color="#7895aa"/></linearGradient><linearGradient id="pen"><stop stop-color="#113b65"/><stop offset=".4" stop-color="#5781a0"/><stop offset=".6" stop-color="#17436d"/><stop offset="1" stop-color="#07243c"/></linearGradient><linearGradient id="sunbar" x1="0" y1="1" x2=".5" y2="0"><stop stop-color="#b68539"/><stop offset="1" stop-color="#edcc85"/></linearGradient><radialGradient id="sunball" cx="35%" cy="25%"><stop stop-color="#fff9cc"/><stop offset=".5" stop-color="#f4ce73"/><stop offset="1" stop-color="#c48c38"/></radialGradient><radialGradient id="sun-halo"><stop stop-color="#f2cb71" stop-opacity=".5"/><stop offset="1" stop-color="#f2cb71" stop-opacity="0"/></radialGradient><radialGradient id="moon-shade" cx="38%" cy="32%" r="65%"><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".35"/></radialGradient><filter id="shadow" x="-30%" y="-30%" width="170%" height="180%"><feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#0b2b46" flood-opacity=".18"/></filter><filter id="smallshadow" x="-50%" y="-30%" width="210%" height="180%"><feDropShadow dx="3" dy="5" stdDeviation="3" flood-color="#123853" flood-opacity=".22"/></filter></defs>${body}</svg>`,textLayout:{lines:label.lines,size:label.size,area:{x:50,y:174,width:474,height:206}},family:m.family};
 }

@@ -95,7 +95,7 @@
       "url": "https://studies.helsinki.fi/ohjeet/artikkeli/lukuvuosi-ja-opetusperiodit",
       "publisher": "Helsingin yliopisto",
       "scope": "Opetusperiodit 2026–2028, ohjelmakohtaiset poikkeukset",
-      "checkedAt": "2026-11-12"
+      "checkedAt": "2026-11-14"
     },
     {
       "id": "aalto",
@@ -103,7 +103,7 @@
       "url": "https://www.aalto.fi/fi/opiskelijan-opas/lukuvuosikalenteri",
       "publisher": "Aalto-yliopisto",
       "scope": "Opetusperiodit 2026–2028 ja kevättauot",
-      "checkedAt": "2026-11-12"
+      "checkedAt": "2026-11-14"
     },
     {
       "id": "tampere-university",
@@ -111,7 +111,7 @@
       "url": "https://opiskelijanopas.tuni.fi/fi/tampereen-yliopisto/opintojen-suorittaminen/lukuvuoden-aikataulut",
       "publisher": "Tampereen yliopisto",
       "scope": "Julkaistu aikataulu 2026–2030, päivitetty 2.10.2026",
-      "checkedAt": "2026-11-12"
+      "checkedAt": "2026-11-14"
     },
     {
       "id": "turku-university",
@@ -119,7 +119,7 @@
       "url": "https://www.utu.fi/fi/opiskelijalle/lukuvuosi-ja-opetusperiodit",
       "publisher": "Turun yliopisto",
       "scope": "Opetusperiodit 2026–2030",
-      "checkedAt": "2026-11-12"
+      "checkedAt": "2026-11-14"
     },
     {
       "id": "oulu-university",
@@ -127,7 +127,7 @@
       "url": "https://www.oulu.fi/fi/opiskelijalle/opintojen-suorittaminen/opetusperiodit",
       "publisher": "Oulun yliopisto",
       "scope": "Opetusperiodit 2026–2032",
-      "checkedAt": "2026-11-12"
+      "checkedAt": "2026-11-14"
     },
     {
       "id": "growing-season",
@@ -295,7 +295,7 @@
       "url": "https://www.jyu.fi/fi/opiskelijalle/kandi-ja-maisteriopiskelijan-ohjeet/ilmoittautuminen-ja-opintoaika/lukuvuosi-ja-opetusjaksot",
       "publisher": "Jyväskylän yliopisto",
       "scope": "Yliopiston julkaisemat opetusperiodit ja opetustauot",
-      "checkedAt": "2026-11-12"
+      "checkedAt": "2026-11-14"
     },
     {
       "id": "lut-calendar",
@@ -303,7 +303,7 @@
       "url": "https://elut.lut.fi/fi/opintojen-suorittaminen/opintojen-suunnittelu/opiskelijan-aikataulut",
       "publisher": "LUT-yliopisto",
       "scope": "Yliopiston julkaisemat opetusperiodit ja opetustauot",
-      "checkedAt": "2026-11-12"
+      "checkedAt": "2026-11-14"
     },
     {
       "id": "uef-calendar",
@@ -311,7 +311,7 @@
       "url": "https://kamu.uef.fi/tietopankki/perustutkinto-opiskelija/opiskelu/opintojen-suunnittelu/lukuvuoden-ajankohtia/",
       "publisher": "Itä-Suomen yliopisto",
       "scope": "Yliopiston julkaisemat opetusperiodit ja opetustauot",
-      "checkedAt": "2026-11-12"
+      "checkedAt": "2026-11-14"
     },
     {
       "id": "vaasa-calendar",
@@ -319,7 +319,7 @@
       "url": "https://www.uwasa.fi/fi/opiskelijat/lukuvuoden-opetusajat-ja-ilmoittautuminen",
       "publisher": "Vaasan yliopisto",
       "scope": "Yliopiston julkaisemat opetusperiodit ja opetustauot",
-      "checkedAt": "2026-11-12"
+      "checkedAt": "2026-11-14"
     },
     {
       "id": "lapland-calendar",
@@ -327,7 +327,7 @@
       "url": "https://ulapland.fi/opiskelijalle/lukuvuosi-ilmoittautuminen-ja-opintoaika/",
       "publisher": "Lapin yliopisto",
       "scope": "Yliopiston julkaisemat opetusperiodit ja opetustauot",
-      "checkedAt": "2026-11-12"
+      "checkedAt": "2026-11-14"
     },
     {
       "id": "uniarts-calendar",
@@ -335,7 +335,7 @@
       "url": "https://opiskelija.uniarts.fi/yleistieto/lukuvuoden-yhteiset-aikataulut/",
       "publisher": "Taideyliopisto",
       "scope": "Yliopiston julkaisemat opetusperiodit ja opetustauot",
-      "checkedAt": "2026-11-12"
+      "checkedAt": "2026-11-14"
     },
     {
       "id": "hanken-calendar",
@@ -343,7 +343,7 @@
       "url": "https://www.hanken.fi/en/students/study-practicalities/timetable-academic-year",
       "publisher": "Hanken",
       "scope": "Yliopiston julkaisemat opetusperiodit ja opetustauot",
-      "checkedAt": "2026-11-12"
+      "checkedAt": "2026-11-14"
     },
     {
       "id": "abo-calendar",
@@ -351,7 +351,7 @@
       "url": "https://www.abo.fi/studera-hos-oss/lasaret/",
       "publisher": "Åbo Akademi",
       "scope": "Yliopiston julkaisemat opetusperiodit ja opetustauot",
-      "checkedAt": "2026-11-12"
+      "checkedAt": "2026-11-14"
     },
     {
       "id": "mpkk-calendar",
@@ -1159,7 +1159,13 @@
           "end": "2027-05-09"
         }
       ],
-      "teachingBreaks": [],
+      "teachingBreaks": [
+        {
+          "label": "Pääsiäistauko",
+          "start": "2027-03-25",
+          "end": "2027-03-31"
+        }
+      ],
       "notes_fi": "Lääketieteen, hammaslääketieteen ja eläinlääketieteen ohjelmissa on poikkeuksia. Tentti- ja lukuviikot eivät ole lomaa."
     },
     {
@@ -1189,7 +1195,13 @@
           "end": "2028-05-07"
         }
       ],
-      "teachingBreaks": [],
+      "teachingBreaks": [
+        {
+          "label": "Pääsiäistauko",
+          "start": "2028-04-13",
+          "end": "2028-04-19"
+        }
+      ],
       "notes_fi": "Intensiivijaksot ja tenttiviikot ovat erillisiä; neljäs periodi sisältää opetustauon pääsiäisenä. Oman kurssin ajat tarkistetaan Sisusta."
     },
     {
@@ -1529,6 +1541,46 @@
     {
       "institution": "Oulun yliopisto",
       "sourceId": "oulu-university",
+      "academicYear": "2026/2027",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "0. periodi",
+          "start": "2026-08-01",
+          "end": "2026-08-16"
+        },
+        {
+          "label": "1. opetusperiodi",
+          "start": "2026-08-17",
+          "end": "2026-10-25"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2026-10-26",
+          "end": "2026-12-31"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2027-01-01",
+          "end": "2027-03-14"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2027-03-15",
+          "end": "2027-05-09"
+        },
+        {
+          "label": "5. opetusperiodi",
+          "start": "2027-05-10",
+          "end": "2027-07-31"
+        }
+      ],
+      "teachingBreaks": [],
+      "notes_fi": "Periodien koko aikaväli ei tarkoita jatkuvaa lähiopetusta. Kurssin omat ajat löytyvät opinto-oppaasta."
+    },
+    {
+      "institution": "Oulun yliopisto",
+      "sourceId": "oulu-university",
       "academicYear": "2027/2028",
       "status": "published_by_institution",
       "periods": [
@@ -1695,6 +1747,47 @@
     {
       "institution": "Tampereen yliopisto",
       "sourceId": "tampere-university",
+      "academicYear": "2026/2027",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2026-08-24",
+          "end": "2026-10-11"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2026-10-19",
+          "end": "2026-12-06"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2027-01-11",
+          "end": "2027-02-28"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2027-03-08",
+          "end": "2027-05-31"
+        }
+      ],
+      "teachingBreaks": [
+        {
+          "label": "Joulutauko",
+          "start": "2026-12-21",
+          "end": "2027-01-03"
+        },
+        {
+          "label": "Pääsiäistauko",
+          "start": "2027-03-24",
+          "end": "2027-03-30"
+        }
+      ],
+      "notes_fi": "Neljännen periodin opetus voi päättyä jo huhtikuun lopussa; lähde ilmoittaa toukokuun loppurajan. Tentti- ja kesäopetus esitetään erikseen, ei lomana."
+    },
+    {
+      "institution": "Tampereen yliopisto",
+      "sourceId": "tampere-university",
       "academicYear": "2027/2028",
       "status": "published_by_institution",
       "periods": [
@@ -1818,6 +1911,41 @@
     {
       "institution": "Turun yliopisto",
       "sourceId": "turku-university",
+      "academicYear": "2026/2027",
+      "status": "published_by_institution",
+      "periods": [
+        {
+          "label": "1. opetusperiodi",
+          "start": "2026-08-01",
+          "end": "2026-10-25"
+        },
+        {
+          "label": "2. opetusperiodi",
+          "start": "2026-10-26",
+          "end": "2026-12-20"
+        },
+        {
+          "label": "3. opetusperiodi",
+          "start": "2027-01-11",
+          "end": "2027-03-14"
+        },
+        {
+          "label": "4. opetusperiodi",
+          "start": "2027-03-15",
+          "end": "2027-05-23"
+        },
+        {
+          "label": "Kesäperiodi",
+          "start": "2027-05-24",
+          "end": "2027-07-31"
+        }
+      ],
+      "teachingBreaks": [],
+      "notes_fi": "Ensimmäinen periodi alkaa hallinnollisesti 1.8., mutta opetus alkaa pääsääntöisesti vasta elokuun lopussa. Lääketieteen ja matemaattis-luonnontieteellisten opintojen poikkeukset tarkistetaan tiedekunnasta."
+    },
+    {
+      "institution": "Turun yliopisto",
+      "sourceId": "turku-university",
       "academicYear": "2027/2028",
       "status": "published_by_institution",
       "periods": [
@@ -1840,6 +1968,11 @@
           "label": "4. opetusperiodi",
           "start": "2028-03-13",
           "end": "2028-05-19"
+        },
+        {
+          "label": "Kesäperiodi",
+          "start": "2028-05-22",
+          "end": "2028-07-31"
         }
       ],
       "teachingBreaks": [],
@@ -1870,6 +2003,11 @@
           "label": "4. opetusperiodi",
           "start": "2029-03-12",
           "end": "2029-05-18"
+        },
+        {
+          "label": "Kesäperiodi",
+          "start": "2029-05-21",
+          "end": "2029-07-31"
         }
       ],
       "teachingBreaks": [],
@@ -1900,6 +2038,11 @@
           "label": "4. opetusperiodi",
           "start": "2030-03-11",
           "end": "2030-05-17"
+        },
+        {
+          "label": "Kesäperiodi",
+          "start": "2030-05-20",
+          "end": "2030-07-31"
         }
       ],
       "teachingBreaks": [],
@@ -2217,7 +2360,7 @@
       "sourceIds": [
         "containers"
       ],
-      "window_fi": "Kylvä varhain keväällä viileään kasvupaikkaan. Täsmällistä koko maan kuukausirajaa ei ole varmistettu tässä tutkimuksessa.",
+      "window_fi": "Kylvä varhain keväällä viileään kasvupaikkaan. Sama kylvökuukausi ei sovi koko Suomeen, joten valitse ajankohta paikallisten olojen mukaan.",
       "status": "source_supported_guidance_not_guaranteed_date"
     },
     {

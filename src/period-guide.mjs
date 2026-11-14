@@ -1,4 +1,4 @@
-import {MONTHS,SLUGS,DAYS,YEARS,CITIES,date,day,fi,add,weekStart,weeksInYear,daysInMonth,leap,cap,holidays,workStats,SOURCES} from './calendar.mjs';
+import {MONTHS,SLUGS,DAYS,YEARS,CITIES,date,day,fi,add,weekStart,weeksInYear,daysInMonth,monthGrid,leap,cap,holidays,workStats,SOURCES} from './calendar.mjs';
 import {phases,riseSet} from './astronomy.mjs';
 import {editorialAnchor as a} from './editorial-links.mjs';
 const phaseCache=new Map();
@@ -30,14 +30,13 @@ export function periodGuide(path){
   if(base==='merkkipaivat'&&directoryMonth)return shell(cap(MONTHS[directoryMonth-1])+': juhlat eri vuosina',[
     `Kooste näyttää ${MONTHS[directoryMonth-1]}n päivät erikseen vuosille 2027, 2028, 2029 ja 2030. Liikkuvan juhlan päivämäärä voi vaihtua, joten valitse aina suunnitelmasi oma vuosiluku. Tämän kuukausikoosteen taulukoissa näkyvät sekä pyhäpäivät että muut kalenteriin merkityt päivät.`,
     `Päivän nimestä pääset sen historiaan, luokitukseen ja kalenterimuistutukseen. ${a('/juhlapyhat/','Pyhäpäivien luettelo')} auttaa vapaan suunnittelussa, kun taas ${a('/liputuspaivat/','liputuspäivien ohje')} kertoo liputuksen ajankohdista. Suomen juhlapäivien taustat voit tarkistaa myös ${a(SOURCES.holidays,'Almanakkatoimiston kalenteritiedoista')}.`,
+    `Vertaa saman päivän viikonpäivää eri vuosina ennen toistuvan tilaisuuden sopimista. Kiinteä päivämäärä voi osua yhtenä vuonna viikonloppuun ja toisena tavalliseen arkipäivään. Paikallisen juhlan ohjelma ja aukiolo eivät sisälly yleiseen kalenterimerkintään, joten ne tarkistetaan tapahtuman järjestäjältä.`,
   ]);
   if(!YEARS.includes(y))return '';
   const hs=holidays(y),period=m?cap(MONTHS[m-1])+' '+y:String(y);
   const selected=hs.filter(h=>!m||Number(h.date.slice(5,7))===m);
-  if(base==='pitkat-viikonloput')return shell('Vuoden '+y+' vapaan vertailu',[
-    `Taulukko vertailee yhdeksän kalenteripäivän jaksoja, joissa Suomen pyhäpäivä liittyy viikonloppuihin. Haettavat päivät on lueteltu erikseen: kokonainen vapaa ei tarkoita samaa kuin lomaan tarvittavien työpäivien määrä. Tarkista ${a('/juhlapyhat/'+y+'/','vuoden '+y+' pyhäpäivät')} ennen oman jakson valitsemista.`,
-    `Jos oma työviikkosi, lomabudjettisi tai koulun aikataulu muuttaa suunnitelmaa, vertaa vaihtoehtoja ${a('/lomasuunnittelija/','lomasuunnittelijassa')}. ${a('/blogi/pitkan-vapaan-suunnittelu/','Pitkän vapaan opas')} auttaa huomioimaan myös lähtö- ja paluupäivän sekä muiden perheenjäsenten menot.`,
-  ]);
+  // The weekend workspace supplies its own date-aware explanation.
+  if(base==='pitkat-viikonloput')return '';
   if(base==='viikkokalenteri'){
     const w=Number(bits[2]?.replace('viikko-',''));
     if(w>=1&&w<=weeksInYear(y)){
@@ -45,9 +44,10 @@ export function periodGuide(path){
       return shell('Viikon '+w+' suunnittelu',[
         `Vuoden ${y} ISO-viikko ${w} alkaa maanantaina ${fi(start)} ja päättyy sunnuntaina ${fi(end)}. ${weekHolidays.length?(weekHolidays.length===1?'Viikolle osuu ':'Viikolle osuvat ')+labelList(weekHolidays)+'.':'Viikolle ei osu sivuston Suomen kalenteriin merkittyjä juhla- tai merkkipäiviä.'}`,
         `Kirjoita päivien kenttiin omat menot ja jätä siirtymille sekä tauoille aikaa. ${a('/perhekalenteri/','Perhekalenterissa')} voit jakaa menot henkilöittäin. Jos tarvitset viikon työpäivien määrän omilla valinnoillasi, avaa ${a('/tyopaivalaskuri/','työpäivälaskuri')}.`,
+        `Tämän viikon keskiviikko on ${fi(add(start,2))} ja perjantai ${fi(add(start,4))}. Jos sovit esimerkiksi perjantain palautuksesta, voit varata keskiviikon luonnokselle ja torstain tarkistukselle. Näin viikkonumero muuttuu konkreettisiksi työpäiviksi. Viikon päivämäärät eivät kuitenkaan vahvista henkilökohtaista työvuoroa tai oppilaitoksen läsnäoloa.`,
       ]);
     }
-    return shell('Viikot ja kalenterivuosi '+y,[`Vuodessa ${y} on ${weeksInYear(y)} ISO-viikkoa. Viikko 1 alkaa ${fi(weekStart(y,1))}, ja viimeinen numeroitu viikko päättyy ${fi(add(weekStart(y,weeksInYear(y)),6))}. Kalenterivuoden ensimmäiset tai viimeiset päivät voivat siksi kuulua viereisen vuoden ISO-viikkoon.`,`Tarkista yksittäinen päivä ${a('/viikkonumerot/','viikkonumerolaskurilla')} tai avaa ${a('/kalenteri/'+y+'/','vuoden '+y+' kuukausinäkymät')}, kun haluat nähdä viikon paikan koko vuodessa.`]);
+    return shell('Viikot ja kalenterivuosi '+y,[`Vuoden ${y} viikkovuoteen kuuluu ${weeksInYear(y)} ISO-viikkoa. Viikko 1 alkaa ${fi(weekStart(y,1))}, ja viimeinen numeroitu viikko päättyy ${fi(add(weekStart(y,weeksInYear(y)),6))}. Kalenterivuoden ensimmäiset tai viimeiset päivät voivat siksi kuulua viereisen vuoden ISO-viikkoon.`,`Tarkista yksittäinen päivä ${a('/viikkonumerot/','viikkonumerolaskurilla')} tai avaa ${a('/kalenteri/'+y+'/','vuoden '+y+' kuukausinäkymät')}, kun haluat nähdä viikon paikan koko vuodessa.`,`Avaa haluamasi viikko nähdäksesi sen kaikki seitsemän päivää ja jaksolle osuvat Suomen kalenterimerkinnät. Vuoden ${y} viikkoa valittaessa mukaan voi tulla myös viereisen kalenterivuoden päiviä. Jos suunnitelma koskee vain tammikuun ja joulukuun väliä, tarkista vuodenvaihteen viikon päivämäärät erikseen ennen tulostamista tai jakamista.`]);
   }
   if(base==='tyopaivat'){
     const months=m?[m]:Array.from({length:12},(_,i)=>i+1);
@@ -55,6 +55,7 @@ export function periodGuide(path){
     return shell(period+': mistä työpäivien määrä muodostuu?',[
       `${m?'Kuukaudessa':'Vuodessa'} on ${totals.days} kalenteripäivää. Niistä ${totals.weekdays} osuu maanantain ja perjantain välille. Näille arkipäiville osuvia yleisiä pyhäpäiviä on ${totals.holidays}. Kukin niistä vähennetään kerran, joten vertailuluku on ${totals.workdays} työpäivää. Oletuksella 7,5 tuntia päivässä se vastaa ${totals.hours.toLocaleString('fi-FI')} tuntia.`,
       `Taulukon malli ei vähennä henkilökohtaisia poissaoloja eikä erikseen vapaita aattoja. Valitse omat viikonpäivät, päivittäiset tunnit ja poissaolojaksot ${a('/tyopaivalaskuri/?start='+y+'-'+String(m||1).padStart(2,'0')+'-01&end='+y+'-'+String(m||12).padStart(2,'0')+'-'+daysInMonth(y,m||12),'työpäivälaskurissa')}. Pyhien ajankohdat löydät ${a(monthPath('juhlapyhat',y,m),'saman ajanjakson juhlapäivistä')}. Tulosta ei tule käyttää sellaisenaan palkka- tai vuosilomalaskelmana.`,
+      `Jos vaihdat päivittäisen työajan 7,5 tunnista 8 tuntiin samoilla ${totals.workdays} työpäivällä, tuntisumma on ${(totals.workdays*8).toLocaleString('fi-FI')} tuntia. Päivien määrä ei tässä esimerkissä muutu. Tämä auttaa erottamaan kalenterista johtuvan eron tuntimäärän valinnasta, kun vertailet ${m?'kuukausia':'vuosia'} keskenään.`,
     ]);
   }
   if(!['kalenteri','kuukausikalenteri','pdf-kalenteri','kuukalenteri','juhlapyhat','liputuspaivat','merkkipaivat'].includes(base))return '';
@@ -62,8 +63,9 @@ export function periodGuide(path){
     if(!phaseCache.has(y))phaseCache.set(y,phases(y));
     const ps=phaseCache.get(y).filter(p=>!m||Number(p.date.slice(5,7))===m),full=ps.filter(p=>p.quarter===2),fresh=ps.filter(p=>p.quarter===0);
     return shell((m?period:'Vuosi '+period)+' ja Kuun rytmi',[
-      `${m?period+' sisältää '+daysInMonth(y,m)+' päivää ja ':`Vuoden ${y} taulukossa on `}${ps.length} Kuun päävaihehetkeä. ${fresh.length?'Uusikuu: '+fresh.map(p=>fi(new Date(p.date.slice(0,10)+'T00:00:00Z'))).join(', ')+'. ':''}${full.length?'Täysikuu: '+full.map(p=>fi(new Date(p.date.slice(0,10)+'T00:00:00Z'))).join(', ')+'.':''} Päävaihe on yksi täsmällinen hetki; päivän kuva näyttää valaistuksen klo 12.00 Suomen aikaa.`,
+      `${m?cap(MONTHS[m-1])+'ssa '+y+' on '+daysInMonth(y,m)+' päivää ja ':`Vuoden ${y} taulukossa on `}${ps.length} Kuun päävaihehetkeä. ${fresh.length?'Uusikuu: '+fresh.map(p=>fi(new Date(p.date.slice(0,10)+'T00:00:00Z'))).join(', ')+'. ':''}${full.length?'Täysikuu: '+full.map(p=>fi(new Date(p.date.slice(0,10)+'T00:00:00Z'))).join(', ')+'.':''} Päävaihe on yksi täsmällinen hetki; päivän kuva näyttää valaistuksen klo 12.00 Suomen aikaa.`,
       `Vaihehetket lasketaan ${a(SOURCES.astro,'Astronomy Engine -kirjastolla')}. Vaiheen ja paikallisen näkyvyyden ero selviää ${a('/blogi/kuun-vaiheet/','Kuun vaiheiden oppaasta')}. Kun suunnittelet havaintoiltaa, tarkista lisäksi ${a('/kuun-nousu-ja-lasku/','Kuun nousu- ja laskuajat')} omalle paikkakunnallesi.`,
+      `${m?'Kuukauden':'Vuoden'} ensimmäinen taulukossa oleva päävaihe osuu päivälle ${fi(new Date(ps[0].date.slice(0,10)+'T00:00:00Z'))}. Avaa kyseinen päivä ja vertaa sen kuvaa edeltävään sekä seuraavaan päivään: valaistus muuttuu vähitellen, vaikka vaihehetki ilmoitetaan minuuttina. Kuvan vertailuaika ja päävaiheen kellonaika eivät siksi välttämättä vastaa toisiaan.`,
     ]);
   }
   if(['juhlapyhat','liputuspaivat','merkkipaivat'].includes(base)){
@@ -72,18 +74,22 @@ export function periodGuide(path){
     return shell(period+': päivien merkitys',[
       `${m?'Kuukauden':'Vuoden'} ${type} luettelossa on ${entries.length} ${entries.length===1?'merkintä':'merkintää'}. ${m&&entries.length?(entries.length===1?'Päivä on ':'Näihin päiviin kuuluvat ')+labelList(entries.slice(0,3))+'. ':''}Pyhäpäivä, aatto ja liputuspäivä ovat eri luokituksia. Liputus tai merkkipäivä ei yksin tarkoita vapaapäivää.`,
       `Päivämäärät näkyvät myös ${a(monthPath('kalenteri',y,m),m?'saman kuukauden kalenterissa':'vuoden '+y+' kalenterissa')}. ${base==='liputuspaivat'?'Liputuksen käytännöt ja viralliset liputuspäivät löydät '+a(SOURCES.flags,'Sisäministeriön liputusohjeista'):a(SOURCES.holidays,'Helsingin yliopiston almanakkatoimisto')+' kertoo Suomen liputus- ja juhlapäivistä'}. ${a('/blogi/liputuspaiva-vai-pyhapaiva/','Opas päivän luokituksen lukemiseen')} auttaa erottamaan liputuksen ja työstä vapaan päivän.`,
+      entries.length?`Luettelon ensimmäinen päivä on ${a('/juhlapyhat/'+entries[0].slug+'/',entries[0].name)}, ${fi(new Date(entries[0].date+'T00:00:00Z'))}. Avaa päivän tausta ennen oman tilaisuuden suunnittelua ja valitse muistutukseen juuri vuoden ${y} ajankohta. Kalenterimerkintä ei sisällä paikallisten tilaisuuksien ilmoittautumista tai aukioloaikoja.`:`Tyhjä luettelo tarkoittaa vain, ettei valittuun ryhmään kuulu tähän ajanjaksoon osuvia merkintöjä. Se ei kerro paikallisista tapahtumista, henkilökohtaisista juhlista tai oppilaitoksen lomista. Omia päiviä voit lisätä selaimen kalenteriin erikseen.`,
     ]);
   }
   const count=m?daysInMonth(y,m):(leap(y)?366:365),main=monthPath('kalenteri',y,m),print=monthPath('pdf-kalenteri',y,m);
-  const p1=m?`${period} sisältää ${count} päivää. Kuukauden ensimmäinen päivä on ${DAYS[day(date(y,m,1))]} ja viimeinen ${DAYS[day(date(y,m,count))]}.`:`Vuosi ${y} sisältää ${count} päivää${leap(y)?', ja helmikuussa on 29 päivää':''}. Tammikuun ensimmäinen päivä on ${DAYS[day(date(y,1,1))]}. Kuukausiruudukot alkavat maanantaista ja käyttävät ISO-viikkonumeroita.`;
+  const gridNote=m?`${cap(MONTHS[m-1])}n ${y} ruudukko tarvitsee ${monthGrid(y,m).length} kalenteririviä. Reunoilla näkyvät viereisen kuukauden päivät täydentävät maanantaista sunnuntaihin kulkevat viikot; ne eivät lisää valitun kuukauden ${count} päivään uusia päiviä.`:`Vuoden ${y} kuukausissa on eripituisia jaksoja. Helmikuussa on ${daysInMonth(y,2)} päivää, ja vuoden viimeinen päivä on ${DAYS[day(date(y,12,31))]} 31.12.${y}. Jos suunnitelmasi jatkuu vuodenvaihteen yli, tarkista seuraavan vuoden päivämäärät sen omasta kalenterista.`;
+  const p1=m?`${cap(MONTHS[m-1])}ssa ${y} on ${count} päivää. Kuukauden ensimmäinen päivä on ${DAYS[day(date(y,m,1))]} ja viimeinen ${DAYS[day(date(y,m,count))]}.`:`Vuonna ${y} on ${count} päivää${leap(y)?', ja helmikuussa on 29 päivää':''}. Tammikuun ensimmäinen päivä on ${DAYS[day(date(y,1,1))]}. Kuukausiruudukot alkavat maanantaista ja käyttävät ISO-viikkonumeroita.`;
   if(base==='pdf-kalenteri')return shell('Valitse '+(m?'kuukauden':'vuoden')+' tuloste käyttötarkoituksen mukaan',[
     p1+` ${a(main,m?'Kuukauden verkkokalenterista':'Vuoden verkkokalenterista')} näet päivien tarkemmat merkinnät ennen lataamista.`,
-    `PDF säilyttää viivat ja tekstin vektoreina. Kuva-latauksesta saat pohjan paperikokoa vastaavan kuvatiedoston 600 dpi:n tarkkuudella. Valitse tulostuksessa sama paperikoko ja suunta kuin esikatselussa. ${a('/blogi/kalenterin-tulostus/','Kalenterin tulostusohje')} auttaa koon ja marginaalien valinnassa. Omia tapahtumia varten käytä ${a('/luo-kalenteri/?year='+y+(m?'&month='+m:''),'kalenterin muokkainta')}.`,
+    `PDF säilyttää viivat ja tekstin vektoreina. Kuva-painikkeesta voit ladata pohjan paperikokoa vastaavan kuvatiedoston 600 dpi:n tarkkuudella. Valitse tulostuksessa sama paperikoko ja suunta kuin esikatselussa. ${a('/blogi/kalenterin-tulostus/','Kalenterin tulostusohje')} auttaa koon ja marginaalien valinnassa. Omia tapahtumia varten käytä ${a('/luo-kalenteri/?year='+y+(m?'&month='+m:''),'kalenterin muokkainta')}.`,
+    gridNote+' Tarkista tulostuksen esikatselusta myös viimeinen rivi. Pohjan luettava teksti ja riittävä kirjoitustila ovat tärkeämpiä kuin sivun suurentaminen tulostimen reunojen yli.',
   ]);
   const holidayDays=selected.filter(h=>h.type==='holiday');
   return shell((m?period:'Vuosi '+period)+' suunnitelman pohjana',[
     p1+' '+(m?(holidayDays.length?(holidayDays.length===1?'Kuukauden pyhäpäivä on ':'Kuukauden pyhäpäiviä ovat ')+labelList(holidayDays)+'.':'Kuukaudelle ei osu tässä kalenterissa yleisiä pyhäpäiviä.'):`Vuoden liikkuvat pyhät kannattaa tarkistaa ${a('/juhlapyhat/'+y+'/','vuoden '+y+' juhlapäiväluettelosta')}.`),
     base==='kuukausikalenteri'?`Tämän sivun pohjat on tarkoitettu tulostamiseen. Päiväkohtaiset merkinnät ja viikonpäivät löydät ${a(main,m?'saman kuukauden verkkokalenterista':'vuoden verkkokalenterista')}. ${a('/luo-kalenteri/?year='+y+(m?'&month='+m:''),'Oman kalenterin muokkaimessa')} voit lisätä tapahtumia, kuvan ja otsikon.`:`Kun tarvitset paperiversion, valitse ${a(print,m?'tämän kuukauden tulostettavat pohjat':'vuoden '+y+' tulostettavat pohjat')}. Lyhyemmän jakson tekemiset voit jakaa ${a('/viikkokalenteri/'+y+'/','vuoden '+y+' viikkosuunnitelmaan')}.`,
+    gridNote+' Tallenna sovittu tapaaminen oikealle päivämäärälle kellonaikoineen. Kalenteriruudukon numerot ovat yhteinen aikarakenne, kun taas omat tapahtumat ja tehtävät muodostavat henkilökohtaisen suunnitelman.',
   ]);
 }
 
@@ -110,7 +116,7 @@ export function cityGuide(path){
     const exampleText=`Esimerkiksi 1.1.${year} `+(example.rise&&example.set?`Kuu nousee klo ${example.riseTime} ja laskee klo ${example.setTime}. Lasku voi olla saman paikallisen päivän aikana ennen nousua.`:example.rise?`Kuu nousee klo ${example.riseTime}, mutta samalle päivälle ei osu laskua.`:example.set?`Kuu laskee klo ${example.setTime}, mutta samalle päivälle ei osu nousua.`:example.polar==='up'?'Kuu pysyy koko paikallisen vuorokauden horisontin yläpuolella.':'Kuu pysyy koko paikallisen vuorokauden horisontin alapuolella.');
     return shell(city[1]+': Kuun näkyvyyden suunnittelu',[
       coordinates+' '+controls,
-      exampleText+` Nousu- ja laskuajat eivät kerro valaistun pinnan osuutta. Valitse sopiva vaihe ${a('/kuukalenteri/'+year+'/','vuoden '+year+' kuukalenterista')} ja vertaa sitä ${a('/auringonnousu-ja-lasku'+suffix,'saman paikkakunnan Auringon aikoihin')}.`,
+      exampleText+` Nousu- ja laskuajat eivät kerro valaistun pinnan osuutta. Valitse sopiva vaihe ${a('/kuukalenteri/'+year+'/','vuoden '+year+' kuukalenterista')} ja vertaa sitä ${a('/auringonnousu-ja-lasku'+suffix,'saman paikkakunnan auringonnousu- ja auringonlaskuaikoihin')}.`,
       `Laskenta käyttää ${a(SOURCES.astro,'Astronomy Engine -kirjastoa')} ja esteetöntä horisonttia. Rakennukset, maasto ja pilvet vaikuttavat havaintoon. ${a('/blogi/kuun-vaiheet/','Kuun vaiheiden opas')} auttaa erottamaan päävaiheen, päivittäisen valaistuksen ja paikallisen näkyvyyden.`,
     ]);
   }

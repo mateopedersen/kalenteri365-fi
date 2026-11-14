@@ -32,13 +32,13 @@ vec3 skyBase(vec3 rd){
  return col;
 }
 vec3 sky(vec3 rd,bool disc){
- vec3 col=skyBase(rd);float day=smoothstep(-.15,.15,u_sun.y);
+ vec3 col=skyBase(rd);float day=smoothstep(-.15,.15,u_sun.y),transmission=1.;
  // Multi-scale cloud thickness and directional shading give the sky depth.
  if(rd.y>.018){
   vec2 p=rd.xz/(rd.y+.10)*.60+vec2(u_seed,u_time*.003);
-  float bulk=fbm(p*.80),detail=noise(p*7.5)*.10;
+  float bulk=disc?fbm(p*.80):noise(p*.80)*.65+.22,detail=disc?noise(p*7.5)*.10:0.;
   float density=smoothstep(.48,.71,bulk-detail);
-  float next=fbm(p*.80+normalize(u_sun.xz+vec2(.001))*.19);
+  float next=disc?fbm(p*.80+normalize(u_sun.xz+vec2(.001))*.19):bulk;
   float light=clamp(.44+(bulk-next)*3.8,0.,1.);
   float edge=pow(1.-density,3.)*pow(max(0.,dot(rd,u_sun)),20.);
   vec3 shadow=mix(vec3(.012,.017,.034),vec3(.33,.43,.54),day);
@@ -47,7 +47,8 @@ vec3 sky(vec3 rd,bool disc){
   vec3 cloud=mix(shadow,lit,light)+sunColor()*edge*.85*day;
   float fade=smoothstep(.018,.14,rd.y)*(1.-smoothstep(.80,1.,rd.y));
   col=mix(col,cloud,density*fade*.76);
-  float cirrus=smoothstep(.65,.84,fbm(p*vec2(.36,2.6)+15.));
+  transmission=exp(-density*fade*3.2);
+  float cirrus=disc?smoothstep(.65,.84,fbm(p*vec2(.36,2.6)+15.)):0.;
   col=mix(col,lit,cirrus*.10*fade);
  }
  float night=1.-smoothstep(-.30,-.10,u_sun.y);
@@ -57,7 +58,7 @@ vec3 sky(vec3 rd,bool disc){
  if(disc&&u_sun.y>-.00466){
   float separation=acos(clamp(dot(rd,u_sun),-1.,1.)),edge=max(fwidth(separation),.00013);
   float disk=1.-smoothstep(.004653-edge,.004653+edge,separation);
-  col+=sunColor()*disk*16.;
+  col+=sunColor()*disk*16.*transmission;
  }
  return col;
 }
@@ -132,7 +133,7 @@ void main(){
 }`;
 
 function webglRenderer(canvas) {
-  const gl = canvas.getContext('webgl2', {alpha:false,antialias:false,powerPreference:'low-power',preserveDrawingBuffer:true});
+  const gl = canvas.getContext('webgl2', {alpha:false,antialias:false,powerPreference:'low-power',preserveDrawingBuffer:false});
   if (!gl) return null;
   let program, buffer, uniforms, attribute, lost=false,lastView,lastTime=0;
   function setup() {
@@ -154,12 +155,12 @@ function webglRenderer(canvas) {
   }
   setup();
   const onLost=event=>{event.preventDefault();lost=true;};
-  const onRestore=()=>{setup();lost=false;if(lastView)draw(lastView,lastTime);};
+  const onRestore=()=>{setup();lost=false;if(lastView)draw(lastView,lastTime);canvas.dispatchEvent(new Event('solarcontextrestored'));};
   canvas.addEventListener('webglcontextlost',onLost);
   canvas.addEventListener('webglcontextrestored',onRestore);
   function draw(view,time) {
     lastView=view;lastTime=time;
-    if(lost)return;
+    if(lost)return false;
     gl.viewport(0,0,canvas.width,canvas.height);gl.useProgram(program);
     gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.enableVertexAttribArray(attribute);gl.vertexAttribPointer(attribute,2,gl.FLOAT,false,0,0);
     gl.uniform2f(uniforms.size,canvas.width,canvas.height);gl.uniform3fv(uniforms.sun,view.sun);
@@ -167,6 +168,7 @@ function webglRenderer(canvas) {
     gl.uniform1f(uniforms.time,time);gl.uniform1f(uniforms.seed,view.seed);gl.uniform1f(uniforms.season,view.season);
     gl.uniform1i(uniforms.landscape,view.landscape);
     gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+    return true;
   }
   return {kind:'webgl2',draw,destroy(){
     canvas.removeEventListener('webglcontextlost',onLost);canvas.removeEventListener('webglcontextrestored',onRestore);
@@ -229,10 +231,20 @@ export function createSolarPanorama(element) {
     renderer=canvasRenderer(canvas);
   }
   canvas.dataset.engine=renderer.kind;
-  return {kind:renderer.kind,canvas,draw(view,time=0){
-    const rect=canvas.getBoundingClientRect(),ratio=Math.min(devicePixelRatio||1,1.5,Math.sqrt(850000/Math.max(1,rect.width*rect.height)));
-    const width=Math.max(1,Math.round(rect.width*ratio)),height=Math.max(1,Math.round(rect.height*ratio));
-    if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height;}
-    renderer.draw(view,time);
-  },destroy:()=>renderer.destroy()};
+  let width=1,height=1,area=1;
+  const resize=()=>{
+    const rect=canvas.getBoundingClientRect();
+    width=Math.max(1,rect.width);height=Math.max(1,rect.height);area=width*height;
+  };
+  resize();
+  const observer=new ResizeObserver(resize);observer.observe(canvas);
+  return {kind:renderer.kind,canvas,resize,get size(){return {width,height};},draw(view,time=0,quality=1){
+    // Keep expensive atmosphere shading bounded on retina phones and wide screens.
+    // Static views use a finer image; playback can adapt without changing geometry.
+    const budget=quality===1?650000:650000*quality*quality;
+    const ratio=Math.min(devicePixelRatio||1,1.5,Math.sqrt(budget/area));
+    const w=Math.max(1,Math.round(width*ratio)),h=Math.max(1,Math.round(height*ratio));
+    if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;}
+    return renderer.draw(view,time)!==false;
+  },destroy(){observer.disconnect();renderer.destroy();}};
 }

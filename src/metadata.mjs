@@ -1,4 +1,5 @@
 import overrides from '../data/seo-pages.json' with {type: 'json'};
+import {flagDays} from './flagging-core.mjs';
 import {MONTHS, SLUGS, YEARS, cap, daysInMonth, leap, weeksInYear, holidays, workStats} from './calendar.mjs';
 import {phases} from './astronomy.mjs';
 export {brandedTitle} from './seo-title.mjs';
@@ -8,7 +9,7 @@ const shortDate = value => new Intl.DateTimeFormat('fi-FI', {day:'numeric',month
 const phaseCache = new Map();
 
 function holidayDescription(base,year,month) {
-  const entries=holidays(year).filter(h=>(!month||Number(h.date.slice(5,7))===month)&&(
+  const entries=(base==='liputuspaivat'?flagDays(year).filter(h=>h.scope==='finland').map(h=>({...h,isFlagDay:true})):holidays(year)).filter(h=>(!month||Number(h.date.slice(5,7))===month)&&(
     base==='juhlapyhat'?['holiday','eve'].includes(h.type):base==='liputuspaivat'?h.type==='flag'||h.isFlagDay:h.type!=='holiday'
   ));
   const topic={juhlapyhat:'juhlapyhät ja aatot',liputuspaivat:'liputuspäivät',merkkipaivat:'merkkipäivät'}[base];
@@ -33,9 +34,8 @@ function lunarDescription(year,month) {
   return `${cap(MONTHS[month-1])}n ${year} kuukalenteri. ${events.join(' ')} Päivän valaistus klo 12 Suomen aikaa sekä PDF- ja 600 dpi:n kuvapohjat.`;
 }
 
-export function pageMetadata(path, title, description, {locale = 'fi'} = {}) {
+export function pageMetadata(path, title, description) {
   let result = {title: compact(title), description: compact(description)};
-  if (locale === 'sv') return result;
 
   const [base, period, monthSlug] = path.split('/').filter(Boolean);
   const year = Number(period), month = SLUGS.indexOf(monthSlug) + 1;

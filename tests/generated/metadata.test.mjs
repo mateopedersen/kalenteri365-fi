@@ -4,7 +4,6 @@ import pages from '../../reports/pages.json' with {type:'json'};
 import overrides from '../../data/seo-pages.json' with {type:'json'};
 import {pageMetadata,brandedTitle,assertUniqueMetadata} from '../../src/metadata.mjs';
 import {layout} from '../../src/ui.mjs';
-import {swedishLayout} from '../../src/swedish.mjs';
 import {parseHead} from '../../scripts/audit-social.mjs';
 import {PAYMENT_PLANS} from '../../assets/payment-data.mjs';
 
@@ -85,15 +84,16 @@ test('payment metadata names the actual providers, benefit and year present in t
   assert.deepEqual([...new Set(PAYMENT_PLANS.flatMap(p=>p.dates.map(d=>d.slice(0,4))))],['2027']);
   assert.match(overrides['/elakkeiden-maksupaivat/'].description,/Kevan ja Ilmarisen/);
   assert.doesNotMatch(overrides['/elakkeiden-maksupaivat/'].description,/Kelan/);
-  assert.equal(overrides['/etuuksien-maksupaivat/'].title,'Lapsilisän maksupäivät 2027');
+  assert.equal(overrides['/etuuksien-maksupaivat/'].title,'Etuuksien maksupäivät 2027');
 });
 
 test('metadata distinguishes institution scope and calculated versus published periods',()=>{
   assert.match(overrides['/koulujen-lomat/helsinki/2026-2027/'].description,/suomenkielisen perusopetuksen/);
   assert.match(overrides['/yliopistojen-kalenterit/maanpuolustuskorkeakoulu/'].description,/ei ole vahvistettu/);
   assert.match(overrides['/yliopistojen-kalenterit/abo-akademi/2029-2030/'].description,/ISO-viikkorajoista laskettuina/);
-  assert.match(overrides['/auringonpimennys/'].title,/Helsinki/);
-  assert.match(overrides['/kuunpimennys/'].description,/Helsingissä/);
+  assert.match(overrides['/auringonpimennys/'].title,/Suomessa 2027–2030/);
+  assert.match(overrides['/auringonpimennys/'].description,/Valitse paikkakunta/);
+  assert.match(overrides['/kuunpimennys/'].description,/Valitse paikkakunta/);
 });
 
 test('plant and holiday descriptions identify their actual topic',()=>{
@@ -110,14 +110,13 @@ test('duplicate or missing metadata stops generation with both routes identified
   assert.throws(()=>assertUniqueMetadata({title:'B | Kalenteri365',description:''},'/missing/',inventory),/Missing SEO description/);
 });
 
-test('Swedish pages retain their own language and local astronomy retains city and year',()=>{
-  assert.deepEqual(pageMetadata('/sv/','Finlands kalender på svenska','Årskalendrar.',{locale:'sv'}),{title:'Finlands kalender på svenska',description:'Årskalendrar.'});
+test('local astronomy retains city and year',()=>{
   const title='Auringonnousu ja -lasku 2029 – Utsjoki';
   assert.equal(brandedTitle(pageMetadata('/auringonnousu-ja-lasku/utsjoki/2029/',title,'Local').title),'Auringonnousu ja -lasku 2029 | Utsjoki | Kalenteri365');
 });
 
 test('SEO and social metadata can change without replacing the visible page heading or introduction',()=>{
-  for(const [render,path,title,intro]of [[layout,'/kalenteri/2028/','Kalenteri 2028','Näkyvä johdanto.'],[swedishLayout,'/sv/','Kalender på svenska','Synlig inledning.']]){
+  for(const [render,path,title,intro]of [[layout,'/kalenteri/2028/','Kalenteri 2028','Näkyvä johdanto.']]){
     const html=render({path,title,description:intro,body:'<p>Content</p>',social:{src:'/assets/example.jpg'},seoTitle:'Unique title | Kalenteri365',seoDescription:'Specific description.'});
     const head=parseHead(html);
     assert.equal(head.title,'Unique title | Kalenteri365');

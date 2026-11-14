@@ -28,7 +28,7 @@
     "description": "Suomen juhlat, perinteet ja merkkipäivät 2027–2030 kuukausittain. Tutustu päivän taustaan ja erota pyhäpäivä, aatto ja liputuspäivä toisistaan."
   },
   "/pitkat-viikonloput/": {
-    "description": "Vertaa vuosien 2027–2030 pitkiä vapaita. Katso, miten viikonloput ja Suomen pyhät yhdistyvät ja kuinka monta lomapäivää eri vaihtoehdot vaativat."
+    "description": "Pitkät viikonloput 2027–2030 Suomessa. Valitse vuosi ja haettavien työpäivien määrä, vertaa vapaan pituutta ja tarkista päivät ennen lomatoivetta."
   },
   "/tyhja-kalenteri/": {
     "title": "Tyhjä kalenteri | Tulostettavat pohjat",
@@ -45,27 +45,31 @@
     "description": "Tee oma lukujärjestys oppitunneille ja harrastuksille. Muokkaa viikon sisältöä ja lataa tulostettava pohja PDF- tai kuvamuodossa."
   },
   "/yliopistojen-kalenterit/": {
-    "description": "Vertaa Suomen yliopistojen opetusperiodeja ja opetustaukoja. Tarkista lukuvuoden lähde, laskentatapa ja oman koulutusohjelman poikkeukset."
+    "description": "Katso Suomen yliopistojen lukuvuosikalenterit, opetusperiodit ja julkaistut opetustauot. Valitse yliopisto ja lukuvuosi sekä lataa periodit kalenteriin."
   },
   "/ylioppilaskirjoitukset/": {
-    "description": "Tarkista julkaistut ylioppilaskokeiden päivät ja alkuperäiset tiedot. Kokoa oma lukusuunnitelma ja erota koepäivä valmistautumisen määräajoista."
+    "title": "Ylioppilaskirjoitukset 2027 ja koepäivät",
+    "description": "Katso kevään ja syksyn 2027 ylioppilaskirjoitusten koepäivät. Etsi oppiaine, valitse omat kokeesi ja lataa koepäivät muistutuksineen kalenteriin."
   },
   "/opiskelukalenteri/": {
     "title": "Opiskelukalenteri ja viikon tehtävät",
     "description": "Tee opiskelusuunnitelma maanantaista perjantaihin. Kirjaa tentit ja tehtävät viikon kenttiin, selaa viikkoja ja tulosta oma opiskelukalenteri."
   },
   "/paivalaskuri/": {
-    "title": "Päiviä päivämäärään | Päivälaskuri",
-    "description": "Laske kalenteripäivät tästä päivästä valitsemaasi päivämäärään. Anna tapahtumalle nimi ja tarkista, paljonko aikaa on jäljellä tai kulunut."
+    "title": "Päivälaskuri | Lähtölaskenta päivistä sekunteihin",
+    "description": "Luo oma lähtölaskenta tärkeään päivään. Seuraa päiviä, tunteja, minuutteja ja sekunteja reaaliajassa Suomen kellon mukaan. Valintasi säilyy selaimessa."
   },
   "/viikkonumerot/": {
-    "description": "Tarkista päivämäärän ISO-viikkonumero sekä viikon alku- ja loppupäivä. Katso myös, mihin viikkovuoteen vuodenvaihteen päivät kuuluvat."
+    "title": "Viikkonumerot | ISO-viikko päivämäärästä",
+    "description": "Tarkista päivämäärän viikkonumero ja viikon päivät. Selaa vuoden ISO-viikkoja tai hae viikkonumeron perusteella viikon alku- ja loppupäivä."
   },
   "/vuoden-paiva/": {
-    "description": "Katso päivämäärän järjestysnumero vuodessa ja jäljellä olevien päivien määrä. Vertaa tavallista vuotta ja karkausvuoden 366 päivää."
+    "title": "Vuoden päivä | Järjestysnumero ja vuoden eteneminen",
+    "description": "Katso, monesko päivä vuodessa on ja paljonko päiviä on jäljellä. Tutki vuoden etenemistä, valitse päivä kalenterista tai muunna järjestysnumero päivämääräksi."
   },
   "/karkausvuosi/": {
-    "description": "Tarkista laskurilla, onko vuosi karkausvuosi. Tutustu gregoriaanisen kalenterin neljän, sadan ja neljänsadan vuoden jakosääntöihin."
+    "title": "Karkausvuosilaskuri | 365 vai 366 päivää?",
+    "description": "Tarkista karkausvuosi, vertaa lähivuosia ja näe helmikuun lisäpäivä. Kokeile neljän, sadan ja neljänsadan vuoden sääntöjä esimerkkivuosilla."
   },
   "/lomasuunnittelija/": {
     "description": "Suunnittele lomasi ma–pe-työviikon ja lomabudjetin mukaan. Vertaa Suomen pyhiin liittyviä vapaita ja tarkista suunnitelman tarvitsemat lomapäivät."
@@ -77,22 +81,24 @@
     "description": "Järjestä yhden päivän tavoitteet, tehtävät ja kellonajat omaan suunnitelmaan. Varaa aikaa tärkeille menoille ja pidä päivän muistiinpanot tallessa."
   },
   "/syntymapaivakalenteri/": {
-    "description": "Tallenna läheisten syntymäpäivät omaan kalenteriin ja seuraa niitä vuodesta toiseen. Pidä tärkeät päivät erillään muista arjen tapahtumista."
+    "description": "Tallenna läheisten syntymäpäivät, seuraa tulevia juhlapäiviä ja ikää sekä kirjaa lahjaideat. Vie vuosittaiset muistutukset Apple Kalenteriin tai Outlookiin.",
+    "title": "Syntymäpäiväkalenteri ja vuosittaiset muistutukset"
   },
   "/nimipaivat/": {
-    "description": "Tarkista suomen- ja ruotsinkieliset nimipäivät Yliopiston almanakkatoimiston palvelusta. Lisää tarkistamasi nimipäivä omaksi kalenterimuistutukseksi."
+    "title": "Nimipäivät Suomessa | Haku ja omat muistutukset",
+    "description": "Etsi suomen- ja ruotsinkielinen nimipäivä. Tallenna läheistesi päivät omaan listaan ja vie vuosittaiset muistutukset puhelimen kalenteriin ICS-tiedostona."
   },
   "/kuun-vaiheet/": {
     "title": "Kuun vaiheet 2027–2030 | Ajat Suomessa",
-    "description": "Tarkista uusikuun, täysikuun ja neljännesten ajankohdat vuosina 2027–2030 Suomen ajassa. Tutki vaiheiden eroja ja vie ajat kalenteriin."
+    "description": "Katso Kuun vaiheet 2027–2030 Suomen ajassa. Lue, miten uusikuu, neljännekset ja täysikuu eroavat, seuraa valaistusta ja tallenna ajankohdat kalenteriin."
   },
   "/taysikuu/": {
     "title": "Täysikuu 2027–2030 | Päivämäärät ja ajat",
-    "description": "Milloin on seuraava täysikuu? Katso vuosien 2027–2030 täysikuiden päivämäärät ja kellonajat Suomen ajassa sekä lataa kalenterimerkinnät."
+    "description": "Milloin on täysikuu? Katso täysikuiden päivämäärät ja kellonajat 2027–2030 Suomen ajassa. Lue havaintovinkit ja löydä Kuun paikalliset nousuajat."
   },
   "/uusikuu/": {
     "title": "Uusikuu 2027–2030 | Päivämäärät ja ajat",
-    "description": "Katso uusikuiden tarkat ajankohdat Suomen ajassa vuosina 2027–2030. Tutustu pimeän Kuun vaiheeseen ja tallenna ajat kalenteriin."
+    "description": "Katso uusikuiden päivämäärät ja kellonajat 2027–2030 Suomen ajassa. Lue, mitä uusikuu tarkoittaa, vertaa Kuun vaiheita ja lataa ajankohdat kalenteriin."
   },
   "/auringonnousu-ja-lasku/": {
     "description": "Tarkista auringonnousu, auringonlasku ja hämärän ajat omalle paikkakunnallesi. Seuraa Auringon kulkua päivän simulaatiossa Suomen ajassa."
@@ -112,42 +118,48 @@
     "description": "Tarkista Suomen kellonsiirrot vuosille 2027–2030 nykyisten EU-sääntöjen mukaan. Katso, milloin kelloa siirretään eteen- tai taaksepäin."
   },
   "/auringonpimennys/": {
-    "title": "Auringonpimennykset 2027–2030 | Helsinki",
-    "description": "Katso Helsingin auringonpimennysten laskennalliset ajat ja näkyvyys vuosina 2027–2030. Tarkista huippuhetki ja lue turvallisen havainnoinnin ohje."
+    "title": "Auringonpimennykset Suomessa 2027–2030",
+    "description": "Valitse paikkakunta ja tarkista auringonpimennyksen alku, huippu, loppu sekä peittyvä pinta-ala. Lue turvallisen havainnoinnin ohjeet."
   },
   "/kuunpimennys/": {
-    "title": "Kuunpimennykset 2027–2030 | Helsinki",
-    "description": "Katso Helsingissä horisontin yläpuolelle osuvien kuunpimennysten huippuajat 2027–2030. Tarkista pimennyksen tyyppi ja Kuun korkeus."
+    "title": "Kuunpimennykset Suomessa 2027–2030",
+    "description": "Valitse paikkakunta ja tutki kuunpimennysten vaiheet Suomen ajassa. Tarkista Kuun korkeus, huipun näkyvyys ja vinkit pimennyksen havainnointiin."
   },
   "/perseidit/": {
-    "description": "Suunnittele perseidien havainnointi Suomessa. Valitse pimeä havaintopaikka, tarkista Kuun vaihe ja huomioi pohjoisen vaaleat kesäyöt."
+    "title": "Perseidit Suomessa | Havainto-opas ja yövertailu",
+    "description": "Suunnittele perseidien havaintoilta vuosina 2027–2030. Vertaa 25 paikkakunnan yötaivaan valoisuutta, Kuun korkeutta ja valaistusta sekä tallenna oma havaintoyö."
   },
   "/kylvokalenteri/": {
-    "description": "Suunnittele kasvien esikasvatus, kylvö ja istutus Suomen oloissa. Vertaa kasvikohtaisia ajankohtia ja laske kylvöväli omasta istutuspäivästäsi."
+    "title": "Kylvökalenteri | Kylvöajat ja oma puutarhasuunnitelma",
+    "description": "Vertaa 13 hyötykasvin kylvöaikoja Suomen oloissa. Laske esikasvatuksen aloitus, tee oma puutarhasuunnitelma ja vie työt kalenteriin tai tulosta ne."
   },
   "/elakkeiden-maksupaivat/": {
     "title": "Eläkkeiden maksupäivät 2027",
-    "description": "Katso Kevan ja Ilmarisen julkaistut eläkkeiden maksupäivät vuodelle 2027. Valitse eläkelaji ja lisää maksupäivät omaan kalenteriin."
+    "description": "Katso Kevan ja Ilmarisen eläkkeiden maksupäivät 2027. Valitse eläkelaji, vertaa kuukausia ja vie maksut muistutuksineen Apple Kalenteriin tai Outlookiin."
   },
   "/etuuksien-maksupaivat/": {
-    "title": "Lapsilisän maksupäivät 2027",
-    "description": "Tarkista Kelan lapsilisän maksupäivät vuodelle 2027. Lataa maksukalenteri tai lisää päivät omaan kalenteriin. Muilla etuuksilla on omat aikataulunsa."
+    "title": "Etuuksien maksupäivät 2027",
+    "description": "Katso lapsilisän maksupäivät 2027 ja Kelan etuuksien maksurytmit. Luo omalle maksupäivällesi muistutus Google Kalenteriin, Apple Kalenteriin tai Outlookiin."
   },
   "/horoskooppi/": {
-    "title": "Horoskooppi | Päivän tulkinnat ja nouseva merkki",
-    "description": "Valitse horoskooppimerkkisi ja lue päivän pohdinta viihteenä. Selvitä myös syntymäpäivän horoskooppimerkki ja laske nouseva merkkisi."
+    "title": "Päivän horoskooppi ja horoskooppimerkit",
+    "description": "Lue päivän horoskooppi suomeksi kaikille 12 horoskooppimerkille. Katso merkkien päivämäärät ja piirteet sekä laske nouseva merkkisi syntymäajalla ja -paikalla."
   },
   "/horoskooppimerkki/": {
-    "description": "Etsi syntymäpäivän mukainen länsimainen horoskooppimerkki. Tarkista merkkien päivämäärärajat ja siirry oman merkkisi päivän horoskooppiin."
+    "title": "Horoskooppimerkki syntymäpäivästä",
+    "description": "Etsi syntymäpäiväsi horoskooppimerkki. Katso merkkien ajanjaksot ja elementit, tutustu omaan merkkiisi ja lue, miten aurinkomerkki eroaa nousevasta merkistä."
   },
   "/verokalenteri/": {
-    "description": "Seuraa julkaistuja verotuksen määräpäiviä ja tee omat veromuistutukset. Tarkista velvollisuutesi Verohallinnon tiedoista ennen kalenteriin lisäämistä."
+    "title": "Verokalenteri | Veroilmoitus, veronpalautus ja ALV | Kalenteri365",
+    "description": "Tarkista julkaistut veropäivät, laske ALV:n ja työnantajasuoritusten eräpäivä ja tee oma veromuistutus. Vie päivät Google-, Apple- tai Outlook-kalenteriin."
   },
   "/hakukalenteri/": {
-    "description": "Kokoa opiskelun hakuajat, valintatulokset ja paikan vastaanottamisen määräajat. Tarkista vahvistetut tiedot ja lisää oma hakumuistutus."
+    "title": "Hakukalenteri 2027 | Yhteishaku ja määräajat | Kalenteri365",
+    "description": "Katso vuoden 2027 yhteishakuajat, valintatulosten päivät ja paikan vastaanotto. Valitse hakureitti, lisää oma määräaika ja lataa kalenterimuistutukset."
   },
   "/kausimuistutukset/": {
-    "description": "Tee omat muistutukset kodin, puutarhan ja arjen kausitöille. Sovita tehtävät paikallisiin oloihin ja tallenna sopiva päivä kalenteriin."
+    "title": "Kausimuistutukset | Omat muistutukset vuodenkiertoon",
+    "description": "Tee oma kausimuistutus kevään, kesän, syksyn tai talven töistä. Muokkaa aihetta ja päivää, lataa ICS tai avaa merkintä Google Kalenterissa."
   },
   "/sivukartta/": {
     "description": "Löydä Kalenteri365:n vuosi- ja kuukausikalenterit, Suomen juhlapäivät, suunnittelutyökalut ja oppaat aiheittain järjestetystä sivukartasta."
@@ -246,7 +258,7 @@
   },
   "/blogi/kesaaika-ja-talviaika/": {
     "title": "Kellonsiirto ja kalenterimerkintöjen aikavyöhyke",
-    "description": "Miten kesä- ja normaaliaika vaikuttavat kalenterimerkintöihin? Huomioi Suomen aikavyöhyke ja kellonsiirto tarkkaa ajankohtaa tallentaessa."
+    "description": "Miten kesä- ja normaaliaika vaikuttavat kalenterimerkintöihin? Huomioi Suomen aikavyöhyke ja kellonsiirto, kun tallennat tarkan ajankohdan."
   },
   "/blogi/paasiaisen-paivamaara/": {
     "title": "Miksi pääsiäisen päivämäärä vaihtuu?",
@@ -561,5 +573,9 @@
   "/usein-kysyttya/": {
     "title": "Usein kysyttyä kalentereista",
     "description": "Miten kalenteri tulostetaan tai omat merkinnät varmuuskopioidaan? Lue vastaukset Kalenteri365:n käyttöön, laskureihin ja Suomen juhlapäiviin."
+  },
+  "/koulujen-lomat/": {
+    "title": "Koulujen lomat ja yliopistojen opetusperiodit | Kalenteri365",
+    "description": "Katso koululomat kunnittain sekä lukioiden, ammatillisten oppilaitosten ja korkeakoulujen julkaistut aikataulut. Valitse lukuvuosi ja lataa kalenteri."
   }
 }

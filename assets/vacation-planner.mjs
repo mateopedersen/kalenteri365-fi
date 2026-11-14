@@ -1,3 +1,4 @@
+import {countForm,quantity} from './fi-language.mjs';
 import {buildVacationPlan, findVacationOptions, vacationCalendar, vacationGoogleURL} from './vacation-core.mjs';
 
 const STORAGE = 'kalenteri365-vacation-plan-v1';
@@ -84,7 +85,7 @@ export function initVacationPlanner(root = document.querySelector('[data-vacatio
     $('[data-vacation-range]').innerHTML = `<time datetime="${plan.start}">${esc(label(plan.start))}</time>–<time datetime="${plan.end}">${esc(label(plan.end))}</time>`;
     const rest = plan.days.filter(day => day.reason === 'weekRest').length;
     const holidays = plan.days.filter(day => ['publicHolidays','eves'].includes(day.reason)).length;
-    $('[data-vacation-totals]').innerHTML = [[plan.calendarDays,'Kalenteripäivää vapaalla'],[plan.leaveDays,'Haettavaa työpäivää'],[rest,'Viikkovapaata'],[holidays,'Työviikon pyhää tai aattoa']].map(([count,text]) => `<div><strong>${count}</strong><span>${text}</span></div>`).join('');
+    $('[data-vacation-totals]').innerHTML = [[plan.calendarDays,countForm(plan.calendarDays,'Kalenteripäivä vapaalla','Kalenteripäivää vapaalla')],[plan.leaveDays,countForm(plan.leaveDays,'Haettava työpäivä','Haettavaa työpäivää')],[rest,countForm(rest,'Viikkovapaa','Viikkovapaata')],[holidays,countForm(holidays,'Työviikon pyhä tai aatto','Työviikon pyhää tai aattoa')]].map(([count,text]) => `<div><strong>${count}</strong><span>${text}</span></div>`).join('');
     $('[data-vacation-leave-dates]').textContent = plan.leaveDates.length ? plan.leaveDates.map(label).join(' · ') : 'Jakso ei vaadi valitun työviikon työpäiviä.';
     $('[data-vacation-days]').innerHTML = plan.days.map(day => `<div class="vacation-day is-${day.reason}" role="listitem"><span>${esc(weekday(day.date))}</span><time datetime="${day.date}">${esc(short(day.date))}</time><small>${REASONS[day.reason]}${day.events.length ? ' · '+esc(day.events.map(event=>event.name).join(', ')) : ''}</small></div>`).join('');
     root.querySelectorAll('[data-vacation-option]').forEach(button => button.setAttribute('aria-pressed', String(options[Number(button.dataset.vacationOption)] === plan)));
@@ -93,7 +94,7 @@ export function initVacationPlanner(root = document.querySelector('[data-vacatio
     syncActions();
   }
   function renderOptions() {
-    $('[data-vacation-options]').innerHTML = options.map((plan,index) => `<button type="button" class="vacation-option" data-vacation-option="${index}" aria-pressed="false"><span class="vacation-option-days"><strong>${plan.calendarDays}</strong> päivää</span><span><b>${esc(label(plan.start))}–${esc(label(plan.end))}</b><small>${plan.leaveDays} haettavaa työpäivää · ${plan.freeDays} valmiiksi vapaata päivää</small></span><span class="vacation-option-select">Valitse <span aria-hidden="true">→</span></span></button>`).join('');
+    $('[data-vacation-options]').innerHTML = options.map((plan,index) => `<button type="button" class="vacation-option" data-vacation-option="${index}" aria-pressed="false"><span class="vacation-option-days"><strong>${plan.calendarDays}</strong> ${countForm(plan.calendarDays,'päivä','päivää')}</span><span><b>${esc(label(plan.start))}–${esc(label(plan.end))}</b><small>${quantity(plan.leaveDays,'haettava työpäivä','haettavaa työpäivää')} · ${quantity(plan.freeDays,'valmiiksi vapaa päivä','valmiiksi vapaata päivää')}</small></span><span class="vacation-option-select">Valitse <span aria-hidden="true">→</span></span></button>`).join('');
     if (options.length) renderPlan(options[0]);
     else { current = null; $('[data-vacation-selected]').hidden = true; syncActions(); }
   }
@@ -109,7 +110,7 @@ export function initVacationPlanner(root = document.querySelector('[data-vacatio
       } else options = findVacationOptions(input);
       renderOptions();
       $('[data-vacation-error]').textContent = '';
-      $('[data-vacation-status]').textContent = options.length ? (fields.selection.value === 'period' ? 'Valitsemasi ajanjakson erittely on valmis.' : `${options.length} vaihtoehtoa. Pisin vapaa ensin, samalla pituudella vähiten haettavia työpäiviä.`) : 'Näillä valinnoilla ei löytynyt sopivaa jaksoa. Kokeile lyhyempää vapaata, suurempaa budjettia tai muuta ajanjaksoa.';
+      $('[data-vacation-status]').textContent = options.length ? (fields.selection.value === 'period' ? 'Valitsemasi ajanjakson erittely on valmis.' : `${quantity(options.length,'vaihtoehto','vaihtoehtoa')}. Pisin vapaa ensin, yhtä pitkistä jaksoista vähiten haettavia työpäiviä vaativa ensin.`) : 'Näillä valinnoilla ei löytynyt sopivaa jaksoa. Kokeile lyhyempää vapaata, suurempaa budjettia tai muuta ajanjaksoa.';
     } catch (error) {
       $('[data-vacation-error]').textContent = error.message;
       markStale();
@@ -192,6 +193,17 @@ export function initVacationPlanner(root = document.querySelector('[data-vacatio
   });
   $('[data-vacation-print]').addEventListener('click', () => { preparePrint(); window.print(); });
   try { $('[data-vacation-saved]').hidden = !localStorage.getItem(STORAGE); } catch {}
+  const incoming = new URLSearchParams(location.search);
+  const incomingStart = incoming.get('start'), incomingEnd = incoming.get('end');
+  if (/^20(?:27|28|29|30)-\d{2}-\d{2}$/.test(incomingStart || '') && /^20(?:27|28|29|30)-\d{2}-\d{2}$/.test(incomingEnd || '')) {
+    try {
+      const plan = buildVacationPlan({start:incomingStart,end:incomingEnd});
+      if (plan.calendarDays <= 366) {
+        fields.selection.value = 'period'; fields.selection.dispatchEvent(new Event('change'));
+        fields.start.value = incomingStart; fields.end.value = incomingEnd;
+      }
+    } catch { /* Invalid URL dates leave the default form intact. */ }
+  }
   calculate();
   return {calculate, getPlan:() => current};
 }

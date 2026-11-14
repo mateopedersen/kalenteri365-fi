@@ -1,3 +1,5 @@
+import {quantity} from './fi-language.mjs';
+import {actionIcon} from './action-icons.mjs';
 import {SHIFT_PRESETS,cycleRows,shiftAt,shiftMonth,shiftTotals,shiftICS,shiftCSV,shiftReview,validateShiftPlan,checkedShift} from './shifts.mjs';
 import {MONTHS,cap,date,day,fi,parse,iso,add,holidays} from './calendar.mjs';
 const $=s=>document.querySelector(s),key='kalenteri365-shifts-fi-v1';
@@ -8,14 +10,14 @@ let selected=iso(date(state.year,state.month,1)),entries=[],valid=true,view='cal
 function save(){if(!dirty)return;try{localStorage.setItem(key,JSON.stringify(state));}catch{$('#shift-status').textContent='Suunnitelmaa ei voitu tallentaa selaimeen. Lataa varmuuskopio.';}}
 function hydrate(){$('#shift-start').value=state.start;$('#shift-title').value=state.title;$('#shift-rest').value=state.restTarget;$('#shift-preset').value='custom';rowsUI();render();}
 function rowsUI(){
- $('#shift-cycle').innerHTML=state.rows.map((s,i)=>`<fieldset class="cycle-card"><legend><span class="cycle-index">${i+1}</span> Kiertopäivä</legend><div class="cycle-card-head"><label>Vuoron tyyppi<select data-cycle-index="${i}" data-cycle-field="type"><option value="work" ${s.type==='work'?'selected':''}>Työvuoro</option><option value="off" ${s.type==='off'?'selected':''}>Vapaa</option></select></label><button type="button" data-cycle-remove="${i}" class="cycle-remove" aria-label="Poista kiertopäivä ${i+1}" ${state.rows.length===1?'disabled':''}>×</button></div>${s.type==='work'?`<label>Nimi<input data-cycle-index="${i}" data-cycle-field="name" value="${esc(s.name)}" maxlength="40"></label><div class="cycle-times"><label>Alkaa<input type="time" data-cycle-index="${i}" data-cycle-field="start" value="${s.start}" required></label><label>Päättyy<input type="time" data-cycle-index="${i}" data-cycle-field="end" value="${s.end}" required></label></div><label>Palkaton tauko (min)<input type="number" min="0" max="1439" step="1" data-cycle-index="${i}" data-cycle-field="break" value="${s.break||0}"></label>`:''}<div class="cycle-move"><button type="button" data-cycle-up="${i}" ${i===0?'disabled':''} aria-label="Siirrä kiertopäivä ${i+1} ylemmäs">↑ Ylemmäs</button><button type="button" data-cycle-down="${i}" ${i===state.rows.length-1?'disabled':''} aria-label="Siirrä kiertopäivä ${i+1} alemmas">↓ Alemmas</button></div></fieldset>`).join('');
+ $('#shift-cycle').innerHTML=state.rows.map((s,i)=>`<fieldset class="cycle-card"><legend><span class="cycle-index">${i+1}</span> Kiertopäivä</legend><div class="cycle-card-head"><label>Vuoron tyyppi<select data-cycle-index="${i}" data-cycle-field="type"><option value="work" ${s.type==='work'?'selected':''}>Työvuoro</option><option value="off" ${s.type==='off'?'selected':''}>Vapaa</option></select></label><button type="button" data-cycle-remove="${i}" class="cycle-remove" aria-label="Poista kiertopäivä ${i+1}" ${state.rows.length===1?'disabled':''}>${actionIcon('close')}</button></div>${s.type==='work'?`<label>Nimi<input data-cycle-index="${i}" data-cycle-field="name" value="${esc(s.name)}" maxlength="40"></label><div class="cycle-times"><label>Alkaa<input type="time" data-cycle-index="${i}" data-cycle-field="start" value="${s.start}" required></label><label>Päättyy<input type="time" data-cycle-index="${i}" data-cycle-field="end" value="${s.end}" required></label></div><label>Palkaton tauko (min)<input type="number" min="0" max="1439" step="1" data-cycle-index="${i}" data-cycle-field="break" value="${s.break||0}"></label>`:''}<div class="cycle-move" role="group" aria-label="Kiertopäivän ${i+1} järjestys"><button type="button" data-cycle-up="${i}" ${i===0?'disabled':''} aria-label="Siirrä kiertopäivä ${i+1} ylemmäs"><span class="move-mark">${actionIcon('up')}</span><span class="move-label">Ylemmäs</span></button><button type="button" data-cycle-down="${i}" ${i===state.rows.length-1?'disabled':''} aria-label="Siirrä kiertopäivä ${i+1} alemmas"><span class="move-mark">${actionIcon('down')}</span><span class="move-label">Alemmas</span></button></div></fieldset>`).join('');
 }
 function detail(){
  const r=entries.find(e=>e.date===selected);if(!r)return;
  $('#shift-selected-title').textContent=new Intl.DateTimeFormat('fi-FI',{dateStyle:'long',timeZone:'UTC'}).format(parse(selected));
  $('#shift-selected-info').textContent=r.name+(r.type==='work'?' · '+r.start+'–'+r.end+(r.overnight?' (seuraava päivä)':'')+' · '+(r.minutes/60).toLocaleString('fi-FI',{maximumFractionDigits:2})+(r.minutes===60?' suunnittelutunti':' suunnittelutuntia'):'');
  const hs=holidays(state.year).filter(h=>h.date===selected&&['holiday','eve'].includes(h.type));
- $('#shift-selected-holiday').innerHTML=hs.map(h=>`<a href="/juhlapyhat/${esc(h.slug)}/">${esc(h.name)} ↗</a>`).join(' · ');
+ $('#shift-selected-holiday').innerHTML=hs.map(h=>`<a class="shift-holiday-link" href="/juhlapyhat/${esc(h.slug)}/">${actionIcon('calendar')}<span>${esc(h.name)}</span>${actionIcon('next')}</a>`).join('');
  const o=state.overrides[selected];$('#shift-override').value=!o?'':o.type==='work'?'work':o.name==='Loma'?'vacation':o.name==='Sairauspoissaolo'?'sick':'off';
  const s=r.type==='work'?r:state.rows.find(e=>e.type==='work')||{name:'Työvuoro',start:'08:00',end:'16:00',break:30};
  for(const f of ['name','start','end','break'])$('#shift-override-'+f).value=s[f];$('#shift-note').value=o?.note||'';$('#shift-custom-fields').hidden=$('#shift-override').value!=='work';
@@ -39,7 +41,19 @@ function render(){try{
  for(const id of ['shift-export','shift-csv','shift-backup'])$('#'+id).disabled=!valid;
 }
 $('#shift-cycle').addEventListener('change',e=>{const t=e.target;if(!t.dataset.cycleField)return;const s=state.rows[Number(t.dataset.cycleIndex)],f=t.dataset.cycleField;s[f]=f==='break'?Number(t.value):t.value;if(f==='type'){if(s.type==='work')Object.assign(s,{name:'Työvuoro',start:'08:00',end:'16:00',break:30});rowsUI();}dirty=true;$('#shift-preset').value='custom';render();});
-$('#shift-cycle').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;let i;if(b.hasAttribute('data-cycle-remove')){i=+b.dataset.cycleRemove;if(state.rows.length<2)return;state.rows.splice(i,1);}else if(b.hasAttribute('data-cycle-up')){i=+b.dataset.cycleUp;if(i<1)return;[state.rows[i-1],state.rows[i]]=[state.rows[i],state.rows[i-1]];}else if(b.hasAttribute('data-cycle-down')){i=+b.dataset.cycleDown;if(i>=state.rows.length-1)return;[state.rows[i+1],state.rows[i]]=[state.rows[i],state.rows[i+1]];}else return;dirty=true;rowsUI();render();});
+$('#shift-cycle').addEventListener('click',e=>{
+ const b=e.target.closest('button');if(!b||b.disabled)return;
+ let i,next,action;
+ if(b.hasAttribute('data-cycle-remove')){i=+b.dataset.cycleRemove;if(state.rows.length<2)return;state.rows.splice(i,1);next=Math.min(i,state.rows.length-1);}
+ else if(b.hasAttribute('data-cycle-up')){i=+b.dataset.cycleUp;if(i<1)return;[state.rows[i-1],state.rows[i]]=[state.rows[i],state.rows[i-1]];next=i-1;action='up';}
+ else if(b.hasAttribute('data-cycle-down')){i=+b.dataset.cycleDown;if(i>=state.rows.length-1)return;[state.rows[i+1],state.rows[i]]=[state.rows[i],state.rows[i+1]];next=i+1;action='down';}
+ else return;
+ dirty=true;rowsUI();render();
+ const card=$('#shift-cycle').children[next],same=action&&card.querySelector('[data-cycle-'+action+']');
+ const focus=same&&!same.disabled?same:card.querySelector('.cycle-move button:not(:disabled)')||card.querySelector('select');
+ focus?.focus({preventScroll:true});
+ $('#shift-status').textContent=action?'Kiertopäivä siirretty kohtaan '+(next+1)+'.':'Kiertopäivä poistettu. Kierrossa on '+quantity(state.rows.length,'päivä','päivää')+'.';
+});
 $('#shift-add-day').onclick=()=>{if(state.rows.length>=50){$('#shift-config-error').textContent='Kierrossa voi olla enintään 50 päivää.';return;}state.rows.push({type:'off',name:'Vapaa'});dirty=true;rowsUI();render();};
 $('#shift-preset').onchange=e=>{if(!SHIFT_PRESETS[e.target.value])return;state.rows=structuredClone(SHIFT_PRESETS[e.target.value]);dirty=true;rowsUI();render();};
 $('#shift-start').onchange=e=>{state.start=e.target.value;dirty=true;render();};$('#shift-title').onchange=e=>{state.title=e.target.value;dirty=true;render();};$('#shift-rest').onchange=e=>{state.restTarget=Number(e.target.value);dirty=true;render();};

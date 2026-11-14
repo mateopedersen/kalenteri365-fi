@@ -1,5 +1,5 @@
 // Calendar Studio: UTC calendar arithmetic and a shared SVG source for preview/export.
-import {STARTERS,STICKERS,stickerMarkup} from './templates.mjs';
+import {STARTERS,STICKERS,stickerMarkup,MOTIFS,motifMarkup} from './templates.mjs';
 export {STARTERS,STICKERS,stickerMarkup};
 export const VERSION = 1;
 import {FINLAND_HOLIDAYS,STUDIO_PHOTOS} from './finland-data.mjs?';
@@ -38,7 +38,7 @@ export const clamp=(value,min,max,fallback=min)=>Number.isFinite(Number(value))?
 export const iso=(year,month,day)=>`${year}-${String(month).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
 export const clone=s=>({...s,colors:{...s.colors},events:s.events.map(e=>({...e})),layers:s.layers.map(l=>({...l}))});
 export function initialState(year=2027){
-  return {version:VERSION,year,month:1,weekDate:`${year}-01-04`,view:'year',template:'suomi',weekStart:1,locale:'fi',paper:'a4',orientation:'landscape',margin:12,
+  return {version:VERSION,year,month:1,weekDate:`${year}-01-04`,view:'year',template:'suomi',starterId:'year-finland',motif:'none',weekStart:1,locale:'fi',paper:'a4',orientation:'landscape',margin:12,
     schema:'kalenteri365-studio.v1',title:'Oma vuoteni',subtitle:'Tilaa sinulle tärkeille asioille.',name:'',footer:'Oma aikani. Omat suunnitelmani.',
     font:'sans',titleSize:40,textScale:1,titleAlign:'left',colors:{...PRESETS[0].colors},showHolidays:true,showHolidayNames:true,
     showWeekends:true,showWeekNumbers:false,showAdjacent:false,showGrid:true,showNotes:false,notes:'',includeAgenda:true,
@@ -62,6 +62,7 @@ export function updatePeriod(input, change={}) {
   if(next.view!==previousView&&STARTERS.some(p=>p.view===previousView&&p.title===next.title)){
     next.title=STARTERS.find(p=>p.view===next.view).title;
   }
+  if(next.view!==previousView)next.starterId='';
   return next;
 }
 export function validDate(value){
@@ -80,6 +81,8 @@ export function normalize(input){
     const bounds={year:[2027,2030],month:[1,12],margin:[6,25],titleSize:[20,76],textScale:[.8,1.3],photoPosition:[0,100],photoHeight:[15,40],photoOpacity:[0,65],quality:[150,600]}[k];
     s[k]=clamp(input[k]??s[k],...bounds,s[k]);
   }
+  s.starterId=STARTERS.some(p=>p.id===input.starterId)?input.starterId:'';
+  s.motif=Object.hasOwn(MOTIFS,input.motif)?input.motif:'none';
   s.year=Math.round(s.year);s.month=Math.round(s.month);s.quality=s.quality>=450?600:s.quality>=225?300:150;
   s.weekDate=validDate(input.weekDate)?input.weekDate:`${s.year}-01-04`;
   const options={view:['year','month','week','blank'],template:PRESETS.map(p=>p.id),weekStart:[0,1],locale:['fi'],paper:Object.keys(PAPERS),orientation:['landscape','portrait'],font:Object.keys(FONTS),titleAlign:['left','center','right'],photoPlacement:['banner','background'],photoFit:['cover','contain']};
@@ -115,7 +118,7 @@ export function weekDates(s){
 export function starterState(id,current=initialState()){
   const starter=STARTERS.find(x=>x.id===id);if(!starter)return current;
   const next=applyPreset(current,starter.preset);
-  return updatePeriod({...next,view:starter.view,orientation:starter.orientation,title:starter.title,showNotes:!!starter.notes,showGrid:starter.grid!==false,showWeekNumbers:starter.view==='month',showHolidays:starter.view!=='blank'});
+  return updatePeriod({...next,starterId:starter.id,motif:starter.motif||'none',view:starter.view,orientation:starter.orientation,title:starter.title,showNotes:!!starter.notes,showGrid:starter.grid!==false,showWeekNumbers:starter.view==='month',showHolidays:starter.view!=='blank'});
 }
 export function eventsFor(s,month=null,includeHolidays=true){
   if(s.view==='blank')return [];
@@ -137,29 +140,32 @@ export function renderCalendar(s,{month=s.month,editing=false,selected=null,idPr
   art.push(`<rect width="${w}" height="${h}" fill="${c.paper}"/>`);
   if(s.photo&&s.photoPlacement==='background')art.push(`<image href="${s.photo}" width="${w}" height="${h}" preserveAspectRatio="xMidYMid slice" opacity="${s.photoOpacity/100}"/>`);
   if(hasBanner){const bw=isPeriod?w-m*2:230,bx=isPeriod?m:w-m-bw,bh=photoH,ratio=s.photoRatio||1.5;let iw=bw,ih=bh,ix=bx,iy=m;if(s.photoFit==='cover'){const factor=Math.max(bw/ratio,bh);iw=factor*ratio;ih=factor;ix=bx-(iw-bw)/2;iy=m-(ih-bh)*s.photoPosition/100;}const clipId=`${idPrefix}-photo-clip-${month}`;art.push(`<defs><clipPath id="${clipId}"><rect x="${bx}" y="${m}" width="${bw}" height="${bh}" rx="3"/></clipPath></defs><image href="${s.photo}" x="${ix}" y="${iy}" width="${iw}" height="${ih}" preserveAspectRatio="xMidYMid meet" clip-path="url(#${clipId})"/>`);}
+  const hasMotif=s.motif!=='none'&&!hasBanner;
+  if(hasMotif){const aw=w*.26,ah=Math.min(145,header-m-6);art.push(`<svg x="${w-m-aw}" y="${m-5}" width="${aw}" height="${ah}" viewBox="0 0 300 155" aria-hidden="true">${motifMarkup(s.motif,c.accent,idPrefix+'-motif')}</svg>`);}
   const titleY=hasBanner&&isPeriod?m+photoH+53:m+54;
-  const align=s.titleAlign==='center'?'middle':s.titleAlign==='right'?'end':'start',textEnd=hasBanner&&!isMonth?w-m-255:w-m,tx=align==='middle'?(m+textEnd)/2:align==='end'?textEnd:m;
+  const align=s.titleAlign==='center'?'middle':s.titleAlign==='right'?'end':'start',textEnd=hasMotif?w-m-w*.31:hasBanner&&!isMonth?w-m-255:w-m,tx=align==='middle'?(m+textEnd)/2:align==='end'?textEnd:m;
   const heading=isMonth?`${L.months[month-1][0].toUpperCase()+L.months[month-1].slice(1)} ${s.year}`:s.title||String(s.year);
   if(s.template==='bold')art.push(`<rect x="${m}" y="${titleY-47}" width="8" height="54" fill="${c.accent}"/>`);
-  const titleAvailable=textEnd-m-(!isPeriod&&!hasBanner&&align==='start'?170:0)-(s.template==='bold'?22:0),titleSize=Math.min(s.titleSize,titleAvailable/Math.max(1,heading.length*.58));
+  const titleAvailable=textEnd-m-(!isPeriod&&!hasBanner&&!hasMotif&&align==='start'?170:0)-(s.template==='bold'?22:0),titleSize=Math.min(s.titleSize,titleAvailable/Math.max(1,heading.length*.58));
   art.push(svgText(heading,tx+(s.template==='bold'&&align==='start'?22:0),titleY,Math.max(13,titleSize),c.ink,s.font,`font-weight="700" text-anchor="${align}"`));
   const week=weekDates(s);
   const range=day=>`${day.day}.${day.month}.${day.year}`;
-  const second=[s.name,isWeek?`${range(week[0])} – ${range(week[6])}`:isMonth?s.title:s.subtitle,!isPeriod&&(hasBanner||align!=='start')?s.year:''].filter(Boolean).join(' · ');
+  const second=[s.name,isWeek?`${range(week[0])} – ${range(week[6])}`:isMonth?s.title:s.subtitle,!isPeriod&&(hasBanner||hasMotif||align!=='start')?s.year:''].filter(Boolean).join(' · ');
   art.push(svgText(shorten(second,Math.floor((textEnd-m)/(6.5*scale))),tx,titleY+25,13*scale,c.ink,s.font,`text-anchor="${align}" opacity=".7"`));
-  if(!isPeriod&&align==='start'&&!hasBanner)art.push(svgText(s.year,w-m,titleY,s.template==='editorial'?75:52,c.accent,s.font,'text-anchor="end" font-weight="700"'));
-  if(s.template!=='minimal')art.push(`<path d="M${m} ${titleY+45}H${w-m}" stroke="${c.grid}"/><path d="M${m} ${titleY+45}h${(w-2*m)/3}" stroke="${c.accent}" stroke-width="3"/><path d="M${m+(w-2*m)/3} ${titleY+45}h${(w-2*m)/6}" stroke="${c.weekend}" stroke-width="3"/>`);
+  if(!isPeriod&&align==='start'&&!hasBanner&&!hasMotif)art.push(svgText(s.year,w-m,titleY,s.template==='editorial'?75:52,c.accent,s.font,'text-anchor="end" font-weight="700"'));
+  if(s.template!=='minimal')art.push(`<path d="M${m} ${titleY+45}H${hasMotif?textEnd:w-m}" stroke="${c.grid}"/><path d="M${m} ${titleY+45}h${(w-2*m)/3}" stroke="${c.accent}" stroke-width="3"/><path d="M${m+(w-2*m)/3} ${titleY+45}h${(w-2*m)/6}" stroke="${c.weekend}" stroke-width="3"/>`);
   const top=Math.max(header,titleY+66),bottom=foot-28-notesH;
   const allEvents=eventsFor(s),eventMap=new Map();for(const e of allEvents){if(!eventMap.has(e.date))eventMap.set(e.date,[]);eventMap.get(e.date).push(e);}
   if(isWeek)art.push(drawWeek(m,top,w-2*m,bottom-top));
-  else if(isMonth||isBlank)art.push(drawMonth(month,m,top,w-2*m,bottom-top,true));
-  else{const columns=s.orientation==='landscape'?4:3,rows=12/columns,gap=22,cw=(w-2*m-gap*(columns-1))/columns,ch=(bottom-top-gap*(rows-1))/rows;for(let mo=1;mo<=12;mo++){art.push(drawMonth(mo,m+((mo-1)%columns)*(cw+gap),top+Math.floor((mo-1)/columns)*(ch+gap),cw,ch,false));}}
+  else if(isBlank&&!s.showGrid&&s.showNotes){for(let y=top+22;y<bottom;y+=30)art.push(`<path d="M${m} ${y}H${w-m}" stroke="${c.grid}"/>`);}
+  else if(isMonth||(isBlank&&s.showGrid))art.push(drawMonth(month,m,top,w-2*m,bottom-top,true));
+  else if(!isBlank){const columns=s.orientation==='landscape'?4:3,rows=12/columns,gap=22,cw=(w-2*m-gap*(columns-1))/columns,ch=(bottom-top-gap*(rows-1))/rows;for(let mo=1;mo<=12;mo++){art.push(drawMonth(mo,m+((mo-1)%columns)*(cw+gap),top+Math.floor((mo-1)/columns)*(ch+gap),cw,ch,false));}}
   if(s.showNotes){const y=bottom+20;art.push(svgText(L.notes,m,y,9,c.accent,s.font,'font-weight="700" letter-spacing="1.5"'));lines(s.notes,120).slice(0,3).forEach((t,i)=>art.push(svgText(t,m,y+19+i*16,11,c.ink,s.font)));if(!s.notes)for(let i=1;i<=3;i++)art.push(`<path d="M${m} ${y+19+i*14}H${w-m}" stroke="${c.grid}"/>`);}
   art.push(`<path d="M${m} ${foot-8}H${w-m}" stroke="${c.grid}"/>`);
   art.push(svgText(shorten(s.footer,Math.max(20,Math.floor((w-2*m-165)/5.5))),m,foot+8,9,c.ink,s.font,'opacity=".6"'));
   art.push(svgText('Kalenteri365™ · kalenteri365.fi',w-m,foot+8,10,c.accent,'sans','text-anchor="end" letter-spacing="1.3"'));
   if(s.photo&&s.photoCredit)art.push(svgText(s.photoCredit,m,foot+22,Math.min(6.2,(w-2*m)/Math.max(1,s.photoCredit.length*.6)),c.ink,'sans','opacity=".7"'));
-  for(const layer of s.layers){const x=layer.x/100*w,y=layer.y/100*h,lw=layer.width/100*w,lh=layer.height/100*h;
+  for(const layer of s.layers){const x=layer.x/100*w,y=layer.y/100*h,lw=layer.width/100*w,lh=layer.type==='sticker'?lw:layer.height/100*h;
     let content=layer.type==='sticker'?`<g transform="scale(${lw/80} ${lh/80})">${stickerMarkup(layer.symbol,layer.color,`${idPrefix}-${layer.id}`)}</g>`:layer.type==='image'?`<image href="${layer.src}" x="0" y="0" width="${lw}" height="${lh}" preserveAspectRatio="xMidYMid meet"/>`:layer.text.split('\n').flatMap(t=>lines(t,Math.max(1,Math.floor(lw/(layer.size*.58))))).map((t,i)=>svgText(t,0,i*layer.size*1.2,layer.size,layer.color,layer.font,`font-weight="${layer.bold?'700':'400'}" font-style="${layer.italic?'italic':'normal'}" text-anchor="${layer.align}"`)).join('');
     if(editing&&layer.id===selected){const estimate=layer.type!=='text'?lw:Math.max(45,...layer.text.split('\n').map(t=>t.length*layer.size*.57)),eh=layer.type!=='text'?lh:layer.size*1.2*layer.text.split('\n').length;const bx=layer.type==='text'&&layer.align==='middle'?-estimate/2:layer.type==='text'&&layer.align==='end'?-estimate:0;content+=`<rect x="${bx-7}" y="${layer.type!=='text'?-7:-layer.size-4}" width="${estimate+14}" height="${eh+14}" fill="none" stroke="#205c7d" stroke-width="1.5" stroke-dasharray="5 3" pointer-events="none"/>`;}
     art.push(`<g ${editing?`data-layer="${esc(layer.id)}" tabindex="0" role="button" aria-label="${esc(layer.type==='image'?'Kuva':layer.type==='sticker'?STICKERS[layer.symbol]:layer.text)}" style="cursor:move"`:''} transform="translate(${x} ${y}) rotate(${layer.rotation})" opacity="${layer.opacity/100}">${content}</g>`);

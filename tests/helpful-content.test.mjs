@@ -29,3 +29,23 @@ test('Day-length guidance describes the actual measure and keeps the observation
   assert.doesNotMatch(text,/Simulaation Auringon suunta/);
   assert.equal(cityGuide('/kuun-nousu-ja-lasku/unknown/2028/'),'');
 });
+
+test('Worked week examples use civil dates even across the calendar-year boundary',()=>{
+ const week=periodGuide('/viikkokalenteri/2027/viikko-1/');
+ assert.match(week,/keskiviikko on 6\.1\.2027 ja perjantai 8\.1\.2027/);
+ const boundary=periodGuide('/viikkokalenteri/2026/viikko-53/');
+ // Only published catalog years get explanatory pages.
+ assert.equal(boundary,'');
+ const end=periodGuide('/viikkokalenteri/2027/viikko-52/');
+ assert.match(end,/keskiviikko on 29\.12\.2027 ja perjantai 31\.12\.2027/);
+});
+
+test('Calendar-row and alternate-hours explanations reflect the selected month',()=>{
+ const four=periodGuide('/kalenteri/2027/helmikuu/');
+ assert.match(four,/ruudukko tarvitsee 4 kalenteririviä/);
+ const six=periodGuide('/pdf-kalenteri/2027/toukokuu/');
+ assert.match(six,/ruudukko tarvitsee 6 kalenteririviä/);
+ const work=periodGuide('/tyopaivat/2028/helmikuu/');
+ assert.match(work,/samoilla 21 työpäivällä, tuntisumma on 168 tuntia/);
+ assert.doesNotMatch(work,/NaN|undefined/);
+});

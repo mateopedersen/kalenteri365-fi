@@ -7,12 +7,17 @@ export function solarVisualAltitude(geometric,apparent){
   return apparent+(geometric+34/60-apparent)*weight;
 }
 
-export function solarSnapshot(A,city,date,minute,body='Sun'){
-  const bounds=localDayBounds(date);
+export function createSolarSampler(A,city,date,body='Sun'){
+  const context={bounds:localDayBounds(date),observer:new A.Observer(city[2],city[3],0)};
+  return minute=>solarSnapshot(A,city,date,minute,body,context);
+}
+
+export function solarSnapshot(A,city,date,minute,body='Sun',context){
+  const bounds=context?.bounds||localDayBounds(date);
   const max=Math.round((bounds.end-bounds.start)/60000)-1;
   const elapsed=Math.max(0,Math.min(max,Number(minute)||0));
   const instant=new Date(+bounds.start+elapsed*60000);
-  const observer=new A.Observer(city[2],city[3],0);
+  const observer=context?.observer||new A.Observer(city[2],city[3],0);
   const equatorial=A.Equator(body,instant,observer,true,true);
   const geometric=A.Horizon(instant,observer,equatorial.ra,equatorial.dec);
   const apparent=A.Horizon(instant,observer,equatorial.ra,equatorial.dec,'normal');

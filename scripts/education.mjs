@@ -1,3 +1,5 @@
+import {universityProfile,universityMetadata,universityOverviewIntro,universityYearIntro,universityPlanningGuide,universityYearLinks,universityHubIntro,universityHubGuide} from '../src/university-content.mjs';
+import {institutionLogo} from '../src/institution-identity.mjs';
 import {educationHub,writeEducationFeeds} from '../src/education-hub.mjs';
 import {editorialAnchor as a} from '../src/editorial-links.mjs';
 import {schoolPeriods} from '../assets/community-core.mjs';
@@ -21,11 +23,8 @@ const source = (id) =>
   `<p class="small">${link(sources[id].url, sources[id].publisher + " · " + sources[id].title_fi)} · Tarkistettu ${fi(parse(sources[id].checkedAt || data.checkedAt))}</p>`;
 function schoolGuide(name,records){
  const years=records.map(r=>r.academicYear.replace('/','–')).join(', '),first=records[0];
- return `<section class="period-guide panel" data-editorial-skip><h2>${esc(name)}: oman koulun viikko ja lomat</h2><p>Tämän näkymän tiedot koskevat suomenkielistä perusopetusta ja ${records.length===1?'lukuvuotta':'lukuvuosia'} ${years}. ${a(sources[first.sourceId].url,sources[first.sourceId].publisher+' julkaisee alkuperäiset työ- ja loma-ajat')}. Lukion, ammatillisen oppilaitoksen ja yksittäisen koulun poikkeukset on tarkistettava niiden omista tiedotteista.</p><p>Siirrä vahvistettu lomajakso kalenteriin ja suunnittele muu arki sen ympärille. ${a('/perhekalenteri/','Perhekalenterissa')} voit yhdistää eri lasten menot ja kuljetukset. Säännöllisiä oppitunteja varten avaa ${a('/lukujarjestys/','lukujärjestys')}; loma-ajan ICS-tiedosto ei sisällä oppituntien aikataulua.</p></section>`;
-}
-function universityGuide(name,records){
- const years=records.map(r=>r.academicYear.replace('/','–')).join(', '),first=records[0],hasPeriods=records.some(r=>r.periods.length);
- return `<section class="period-guide panel" data-editorial-skip><h2>${esc(name)}: periodi ja oma opiskelusuunnitelma</h2><p>Näkymä koskee ${records.length===1?'lukuvuotta':'lukuvuosia'} ${years}. ${hasPeriods?'Taulukon opetusperiodi kertoo opetuksen yleisen jakson, ei jokaisen kurssin tenttipäivää.':'Yhteistä periodi- tai lomataulukkoa ei ole vahvistettu tämän näkymän lähteissä.'} Tarkista kurssien palautukset, tentit ja koulutusohjelman poikkeukset ${a(sources[first.sourceId].url,'oppilaitoksen omasta julkaisusta')}.</p><p>${a('/opiskelukalenteri/','Opiskelukalenterissa')} voit jakaa kurssityön omille päiville. ${a('/blogi/opintoperiodit-ja-tentit/','Opintoperiodien ja tenttien opas')} auttaa erottamaan yhteisen opetustauon omasta määräajasta. Kalenteriin vietävä periodi ei muuta oppilaitoksen ilmoittamia kurssiaikoja.</p></section>`;
+ const examples=records.map(r=>{const p=schoolPeriods(r).find(p=>p.label==='Joululoma')||schoolPeriods(r)[0];if(!p)return '';const days=Math.round((parse(p.end)-parse(p.start))/86400000)+1;return `Lukuvuoden ${r.academicYear.replace('/','–')} ${p.label.toLocaleLowerCase('fi')} on ${fi(parse(p.start))}–${fi(parse(p.end))}. Jaksoon kuuluu ${days} kalenteripäivää, kun molemmat rajapäivät lasketaan mukaan.`;}).filter(Boolean).join(' ');
+ return `<section class="period-guide panel" data-editorial-skip><h2>${esc(name)}: oman koulun viikko ja lomat</h2><p>Tämän näkymän tiedot koskevat suomenkielistä perusopetusta ja ${records.length===1?'lukuvuotta':'lukuvuosia'} ${years}. ${a(sources[first.sourceId].url,sources[first.sourceId].publisher+' julkaisee alkuperäiset työ- ja loma-ajat')}. Lukion, ammatillisen oppilaitoksen ja yksittäisen koulun poikkeukset on tarkistettava niiden omista tiedotteista.</p><p>${esc(examples)} Loman viimeinen päivä ei yksin kerro seuraavaa koulupäivää, sillä väliin voi jäädä viikonloppu tai muu koulun ilmoittama vapaa.</p><p>Siirrä vahvistettu lomajakso kalenteriin ja suunnittele muu arki sen ympärille. ${a('/perhekalenteri/','Perhekalenterissa')} voit yhdistää eri lasten menot ja kuljetukset. Säännöllisiä oppitunteja varten avaa ${a('/lukujarjestys/','lukujärjestys')}; loma-ajan ICS-tiedosto ei sisällä oppituntien aikataulua.</p></section>`;
 }
 function periodICS(periods, title) {
   const x = (s) =>
@@ -83,7 +82,7 @@ export async function educationPages({ page, OUT }) {
     );
     return link(
       "/yliopistojen-kalenterit/" + slug(name) + "/",
-      `<div class="education-photo">${photo(slug(name))}</div><div class="education-card-copy"><h3>${name}</h3><p>${records.map((r) => r.academicYear.replace("/", "–")).join(", ")}</p></div>`,
+      `${institutionLogo(name)}<div class="education-card-copy"><h3>${name}</h3><p>${esc(universityProfile(name).focus)}</p><p class="small">${records.map((r) => r.academicYear.replace("/", "–")).join(", ")}</p></div>`,
       "tool-card",
     );
   }
@@ -102,6 +101,7 @@ export async function educationPages({ page, OUT }) {
     "Koulujen lomat Suomessa",
     "Alakoulu, yläkoulu, lukio, ammatillinen koulutus ja korkeakoulut. Vertaa julkaistuja loma-aikoja ja opetusperiodeja sekä lisää valitut päivät kalenteriin.",
     educationHub({cityCards:cards}),
+    "page", {customHeader:true},
   );
   for (const name of cities) {
     const id = CITIES.find((c) => c[1] === name)?.[0] || slug(name),
@@ -137,9 +137,10 @@ export async function educationPages({ page, OUT }) {
   }
   await page(
     "/yliopistojen-kalenterit/",
-    "Yliopistojen kalenterit",
-    "Suomalaisten yliopistojen julkaistut opetusperiodit ja opetustauot lukuvuosina 2026–2030.",
-    `<p class="education-intro">${data.copy_fi.universityIntro}</p><div class="cards education-cards">${institutions.map(universityCard).join("")}</div>`,
+    "Yliopistojen opetusperiodit ja lukuvuodet",
+    "Suomen yliopistojen lukuvuosikalenterit: opetusperiodit, julkaistut opetustauot ja ICS-lataukset. Valitse yliopisto ja lukuvuosi 2026–2030.",
+    `${universityHubIntro(data.universityCalendars)}<section aria-labelledby="university-directory-title"><h2 id="university-directory-title">Yliopistojen kalenterit oppilaitoksittain</h2><div class="cards education-cards">${institutions.map(universityCard).join("")}</div></section>${universityHubGuide()}`,
+    "page", {customGuide:true},
   );
   for (const name of institutions) {
     const id = slug(name),
@@ -167,15 +168,11 @@ export async function educationPages({ page, OUT }) {
             )
           : ""
       }<p class="university-note">${esc(r.notes_fi)}</p><div class="actions">${r.periods.length ? link("/lataukset/yliopisto-" + id + "-" + r.academicYear.replace("/", "-") + ".ics", art("ics") + " Opetusperiodit kalenteriin " + icon("download"), "btn secondary") : link(sources[r.sourceId].url, "Korkeakoulun opiskelijasivut " + icon("external"), "btn secondary")}</div>${source(r.sourceId)}</section>`;
+    const overviewMeta=universityMetadata(name,records);
     await page(
       "/yliopistojen-kalenterit/" + id + "/",
-      name + (records.some(r=>r.periods.length)?" | Opetusperiodit":" | Opintojen aikataulut"),
-      !records.some(r=>r.periods.length)
-        ? name + ": yhteistä periodi- tai lomataulukkoa ei ole vahvistettu tämän näkymän lähteissä. Tarkista oman opintosuuntasi aikataulu korkeakoululta."
-        : id==='abo-akademi'
-          ? name + ": opetusperiodien päivämäärät on laskettu yliopiston julkaisemista ISO-viikkorajoista. Tarkista kurssikohtaiset poikkeukset."
-          : name + ": julkaistut opetusperiodit ja opetustauot. Tarkista oman koulutusohjelmasi mahdolliset poikkeukset.",
-      `${placeCover(id, name)}<div class="stack">${records.map(universityRow).join("")}</div>${universityGuide(name,records)}`,
+      overviewMeta.title, overviewMeta.description,
+      `${institutionLogo(name)?`<div class="education-institution-banner">${institutionLogo(name)}<p>${name}: lukuvuoden julkaisut ja oma opiskelusuunnitelma.</p></div>`:""}${universityOverviewIntro(name,records)}${placeCover(id, name)}<div class="stack">${records.map(r=>universityRow(r)).join("")}</div>${universityPlanningGuide(name,records,sources[records[0].sourceId])}`,
     );
     for (const r of records) {
       await fs.writeFile(
@@ -186,20 +183,11 @@ export async function educationPages({ page, OUT }) {
         ),
         periodICS(r.periods, name + " " + r.academicYear),
       );
+      const yearMeta=universityMetadata(name,[r],{yearPage:true});
       await page(
-        "/yliopistojen-kalenterit/" +
-          id +
-          "/" +
-          r.academicYear.replace("/", "-") +
-          "/",
-        name + " | Lukuvuosi " + r.academicYear.replace("/", "–"),
-        name + " " + r.academicYear.replace("/", "–") +
-          (!r.periods.length
-            ? ": yhteistä periodi- tai lomataulukkoa ei ole vahvistettu tämän näkymän lähteissä. Tarkista oman opintosuuntasi aikataulu korkeakoululta."
-            : id==='abo-akademi'
-              ? ": opetusperiodien päivämäärät yliopiston julkaisemista ISO-viikkorajoista laskettuina. Tarkista oman kurssisi poikkeukset."
-              : ": opetusperiodit ja alkuperäinen julkaisu."),
-        placeCover(id, name) + universityRow(r) + universityGuide(name,[r]),
+        "/yliopistojen-kalenterit/" + id + "/" + r.academicYear.replace("/", "-") + "/",
+        yearMeta.title, yearMeta.description,
+        `<div class="education-institution-banner">${institutionLogo(name)}<p>${name} · Lukuvuosi ${r.academicYear.replace("/","–")}</p></div>` + universityYearIntro(name,r) + placeCover(id, name) + universityRow(r) + universityPlanningGuide(name,[r],sources[r.sourceId]) + universityYearLinks(name,r,records),
       );
     }
   }

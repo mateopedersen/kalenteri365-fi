@@ -3,7 +3,6 @@ import assert from 'node:assert/strict';
 import {ADMISSION_ROUTES,PERSONAL_TAX_DATES,REGIONAL_FLAGS_2027,ELECTION_EVENTS,EXAM_RESULT_EVENTS} from '../assets/finland-services-data.mjs';
 import {serviceCalendar,serviceGoogleURL,helsinkiInstant,flagHours,daylightDifference} from '../assets/finland-services-core.mjs';
 import {TAX_EVENTS,businessTaxDates,ALL_SERVICE_EVENTS} from '../src/services-view.mjs';
-import {swedishCounterpart,SV_NAMES} from '../src/swedish.mjs';
 test('official 2027 admissions preserve school-start year and bounded result dates',()=>{
  assert.equal(ADMISSION_ROUTES.length,4);
  const autumn=ADMISSION_ROUTES.find(r=>r.id==='higher-autumn');assert.equal(autumn.applicationYear,2027);assert.equal(autumn.start,'Tammikuu 2028');
@@ -34,6 +33,6 @@ test('flag hours handle summer, independence, election, polar night and midsumme
  assert.equal(flagHours('2027-05-09',{sunset:'2027-05-09T19:00:00Z'}).end,'21.00');assert.equal(REGIONAL_FLAGS_2027.length,15);
  assert.equal(REGIONAL_FLAGS_2027.find(e=>e.name==='Marian ilmestyspäivä').date,'2027-03-14');
 });
-test('Swedish core points to Finland and correct language alternatives',()=>{
- assert.equal(swedishCounterpart('/kalenteri/2028/'),'/sv/kalender/2028/');assert.equal(swedishCounterpart('/juhlapyhat/2030/'),'/sv/helgdagar/2030/');assert.equal(SV_NAMES.itsenaisyyspaiva,'Självständighetsdagen');assert.equal(daylightDifference(601,600),1);
+test('daylight comparison preserves the one-minute difference',()=>{
+ assert.equal(daylightDifference(601,600),1);
 });

@@ -104,7 +104,6 @@ export function searchCatalog(pages,query,{limit=8}={}){
  score+=primary*12;score-=d.depth*6;if(d.depth===1)score+=15;if(years.length&&d.years.length)score+=30;
  if(tokens.length===1&&years.length&&p.path==='/kalenteri/'+years[0]+'/')score+=300;
  if(tokens.length===1&&tokens[0].length<=3&&POPULAR_SEARCHES.some(s=>s.path===p.path))score+=200;
- if(p.locale==='sv'&&!/\b(svenska|swedish)\b/.test(q))score-=45;
  if(coverage<1)score-=80;if(fuzzy)score-=20;scores.push({p,score,relaxed:coverage<1,fuzzy});
  }
  scores.sort((a,b)=>b.score-a.score||a.p.path.localeCompare(b.p.path,'fi'));

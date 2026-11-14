@@ -1,11 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-const routes=['/merkkipaivat/helmikuu/','/kuukausikalenteri/2028/helmikuu/','/viikkokalenteri/2030/viikko-52/','/sv/kalender/2028/','/kuun-nousu-ja-lasku/tampere/2029/','/auringonnousu-ja-lasku/helsinki/2028/','/koulujen-lomat/tuusula/','/yliopistojen-kalenterit/aalto-yliopisto/','/juhlapyhat/jouluaatto/','/blogi/auringon-ajat/','/juhlapyhat/eduskuntavaalit/','/kylvokalenteri/avomaankurkku/'];
+const routes=['/merkkipaivat/helmikuu/','/kuukausikalenteri/2028/helmikuu/','/viikkokalenteri/2030/viikko-52/','/kuun-nousu-ja-lasku/tampere/2029/','/auringonnousu-ja-lasku/helsinki/2028/','/koulujen-lomat/tuusula/','/yliopistojen-kalenterit/aalto-yliopisto/','/juhlapyhat/jouluaatto/','/blogi/auringon-ajat/','/juhlapyhat/eduskuntavaalit/','/kylvokalenteri/avomaankurkku/'];
 const pages=routes.map(path=>({path,title:'Kalenteri: '+path,description:'Testikuvaus'}));
 import {socialModel} from '../scripts/social-model.mjs';
 import {wrapLabel,measure} from '../scripts/social-type.mjs';
 import {layout} from '../src/ui.mjs';
-import {swedishLayout} from '../src/swedish.mjs';
 import {renderSocial} from '../scripts/social-render.mjs';
 import fs from 'node:fs/promises';
 import fontkit from '@pdf-lib/fontkit';
@@ -19,8 +18,6 @@ test('Month-only, month-year, leap-year and ISO week routes preserve their perio
  assert.equal(model('/merkkipaivat/helmikuu/').year,null);
  assert.equal(model('/kuukausikalenteri/2028/helmikuu/').year,2028);
  assert.equal(model('/viikkokalenteri/2030/viikko-52/').week,52);
- assert.equal(model('/sv/kalender/2028/').base,'kalenteri');
- assert.equal(model('/sv/kalender/2028/').locale,'sv');
 });
 test('City, school and institution covers use the actual mapped place',()=>{
  assert.equal(model('/kuun-nousu-ja-lasku/tampere/2029/').primaryId,'tampere-night');
@@ -34,23 +31,23 @@ test('Holiday photos and article hero photos cannot be replaced by related-card 
  assert.equal(model('/juhlapyhat/eduskuntavaalit/').primaryId,null);
  assert.equal(model('/kylvokalenteri/avomaankurkku/').primaryId,'crop-kurkku');
 });
-test('Finnish and Swedish social metadata contain matching image dimensions, alt and preview permissions',()=>{
+test('Finnish social metadata contain matching image dimensions, alt and preview permissions',()=>{
  const social={src:'/assets/social/example.jpg',alt:'Kalenterin valokuva ja helmikuun päivät.',width:1200,height:630,type:'image/jpeg'};
- for(const html of [layout({title:'Kalenteri',description:'Kalenteri Suomessa',path:'/kalenteri/',body:'',social}),swedishLayout({title:'Kalender',description:'Kalender i Finland',path:'/sv/kalender/',body:'',social})]){
+ for(const html of [layout({title:'Kalenteri',description:'Kalenteri Suomessa',path:'/kalenteri/',body:'',social})]){
   for(const key of ['og:image','og:image:secure_url','og:image:width','og:image:height','og:image:type','og:image:alt','twitter:card','twitter:title','twitter:description','twitter:image','twitter:image:alt'])assert.match(html,new RegExp('(?:property|name)="'+key+'"'));
   assert.match(html,/max-image-preview:large/);assert.match(html,/primaryImageOfPage/);
  }
  const article=layout({title:'Opas',description:'Tietoa kalenterista.',path:'/blogi/opas/',body:'',kind:'article',extra:{article:{}},structuredImages:[{'@type':'ImageObject',contentUrl:'https://kalenteri365.fi/unrelated.jpg'}],social});
  const schema=JSON.parse(article.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
  assert.equal(schema.mainEntity.image.contentUrl,'https://kalenteri365.fi/assets/social/example.jpg');
- assert.match(layout({title:'Lisenssit',description:'Kuvat',path:'/valokuvat-ja-lisenssit/',body:'',social}),/content="noindex,follow,max-image-preview:large"/);
+ assert.match(layout({title:'Lisenssit',description:'Kuvat',path:'/valokuvat-ja-lisenssit/',body:'',social}),/content="noindex,nofollow,max-image-preview:large"/);
 });
 
 test('Annual cover date rows leave visible space between actual glyph lines',async()=>{
  const font=fontkit.create(await fs.readFile(new URL('../assets/fonts/Lato-Bold.ttf',import.meta.url)));
- for(const locale of ['fi','sv'])for(const year of [2027,2028,2029,2030]){
-  const route=locale==='sv'?`/sv/kalender/${year}/`:`/kalenteri/${year}/`;
-  const {svg}=await renderSocial(socialModel(route,'Kalenteri '+year,'',{locale}),'/unused');
+ for(const year of [2027,2028,2029,2030]){
+  const route=`/kalenteri/${year}/`;
+  const {svg}=await renderSocial(socialModel(route,'Kalenteri '+year,''),'/unused');
   const numbers=[...svg.matchAll(/<g fill="(?:#24465e|#912d49|#91a0ab)" transform="translate\(([-\d.]+) ([-\d.]+)\) scale\(([\d.]+) -[\d.]+\)">/g)].map(m=>({x:+m[1],y:+m[2],size:+m[3]*font.unitsPerEm}));
   assert.ok(numbers.length>=365,'Annual cover must contain date glyphs');
   for(let row=0;row<3;row++)for(let col=0;col<4;col++){

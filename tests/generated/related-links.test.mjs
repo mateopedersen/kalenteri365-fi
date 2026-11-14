@@ -17,7 +17,7 @@ test('every catalog page recommends only existing, distinct pages other than its
       assert.ok(catalog.has(target), path + ' → ' + target);
       assert.notEqual(target, path);
     }
-    if (!['/', '/haku/', '/sivukartta/'].includes(path) && !path.startsWith('/sv/')) assert.equal(targets.length, 3, path);
+    if (!['/', '/haku/', '/sivukartta/'].includes(path)) assert.equal(targets.length, 3, path);
     // The build can render cards before its own page inventory is complete.
     for (const target of relatedRoutes(path)) assert.ok(catalog.has(target), 'without catalog: ' + path + ' → ' + target);
   }

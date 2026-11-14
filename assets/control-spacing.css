@@ -1,0 +1,39 @@
+/* Separate explanatory copy from standalone actions without changing toolbars,
+   calendar cells, card grids or the printed calendar layout. */
+@media screen {
+  :is(main, dialog) .btn {
+    min-inline-size: 0;
+    max-inline-size: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  /* Translation tools may insert an extra inline wrapper around a label. */
+  :is(main, dialog) .btn > :is(span, strong, small, font) {
+    min-inline-size: 0;
+    max-inline-size: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  :is(.ascendant-tool, .shift-selected) > form + p,
+  .service-notes > .btn + p,
+  .lab-sign-copy > .lab-result-link + .lab-sign-boundary {
+    margin-block-start: 20px;
+  }
+
+  .planning-panel.tasks-panel > .task-empty {
+    margin-block-start: 16px;
+  }
+
+  /* Standalone actions and their explanatory copy are separate blocks.
+     Include dialogs, which live outside main in the shared page shell. */
+  :is(main, dialog) :is(.btn, .actions, .form-controls, .action-row,
+    .button-row, .download-actions, form) + :is(p, small) {
+    margin-block-start: 16px;
+  }
+
+  :is(main, dialog) :is(.btn, .actions, .form-controls, .action-row,
+    .button-row, .download-actions, form) + small {
+    display: block;
+  }
+}

@@ -10,10 +10,10 @@ import {civil} from '../assets/community-core.mjs';
 test('School levels keep provider calendars separate and never invent national vocational holidays',()=>{
  assert.equal(EDUCATION_LEVELS.length,6);assert.equal(new Set(EDUCATION_LEVELS.map(l=>l.id)).size,6);
  assert.equal(EXTRA_EDUCATION_RECORDS.filter(r=>r.level==='lukio').length,2);
- assert(EXTRA_EDUCATION_RECORDS.every(r=>r.academicYear==='2026/2027'||r.level==='lukio'&&r.academicYear==='2027/2028'));
+ assert(EXTRA_EDUCATION_RECORDS.every(r=>r.academicYear==='2026/2027'||['lukio','amk'].includes(r.level)&&r.academicYear==='2027/2028'));
  assert(VOCATIONAL_INDIVIDUAL.note.includes('HOKS'));
  const hh=EXTRA_EDUCATION_RECORDS.find(r=>r.level==='amk');assert.equal(hh.breaks.some(p=>p.label.includes('Talviloma')),false);assert.equal(hh.periods.length,5);
- const hel=EXTRA_EDUCATION_RECORDS.find(r=>r.level==='lukio'&&r.academicYear==='2027/2028');assert.equal(hel.breaks.find(p=>p.label==='Talviloma').start,'2028-02-21');
+ const hel=EXTRA_EDUCATION_RECORDS.find(r=>['lukio','amk'].includes(r.level)&&r.academicYear==='2027/2028');assert.equal(hel.breaks.find(p=>p.label==='Talviloma').start,'2028-02-21');
  for(const r of EDUCATION_RECORDS){assert(r.source.startsWith('https://'));civil(r.checked);for(const p of [...r.periods,...r.breaks]){civil(p.start);civil(p.end);assert(p.end>=p.start)}}
 });
 test('Education exports preserve inclusive published dates as exclusive ICS ends with provider-specific identities',async()=>{

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="480" viewBox="0 0 680 480" fill="none">
+<defs>
+ <linearGradient id="sky" x1="330" y1="0" x2="330" y2="480" gradientUnits="userSpaceOnUse"><stop stop-color="#c8dfef"/><stop offset=".7" stop-color="#eef6fc"/><stop offset="1" stop-color="#d9e8f2"/></linearGradient>
+ <linearGradient id="cloth" x1="168" y1="205" x2="579" y2="160" gradientUnits="userSpaceOnUse"><stop stop-color="#dce7ed"/><stop offset=".12" stop-color="#fff"/><stop offset=".34" stop-color="#ecf2f8"/><stop offset=".49" stop-color="#c2d3e1"/><stop offset=".64" stop-color="#fff"/><stop offset=".86" stop-color="#f8fbff"/><stop offset="1" stop-color="#bfcedb"/></linearGradient>
+ <linearGradient id="cross" x1="180" y1="200" x2="574" y2="160" gradientUnits="userSpaceOnUse"><stop stop-color="#17467b"/><stop offset=".16" stop-color="#19528e"/><stop offset=".36" stop-color="#063970"/><stop offset=".49" stop-color="#00265b"/><stop offset=".64" stop-color="#1e5b98"/><stop offset=".84" stop-color="#063c79"/><stop offset="1" stop-color="#00234a"/></linearGradient>
+ <linearGradient id="pole" x1="161" y1="210" x2="172" y2="210" gradientUnits="userSpaceOnUse"><stop stop-color="#738fa3"/><stop offset=".28" stop-color="#e5f2fa"/><stop offset=".5" stop-color="#fff"/><stop offset=".75" stop-color="#b2c9da"/><stop offset="1" stop-color="#627f94"/></linearGradient>
+ <radialGradient id="finial"><stop stop-color="#fff"/><stop offset=".45" stop-color="#d0e3f1"/><stop offset="1" stop-color="#7698b0"/></radialGradient>
+ <linearGradient id="haze" y2="1"><stop stop-color="#fff" stop-opacity=".6"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+ <filter id="shadow" x="-30%" y="-30%" width="170%" height="190%"><feGaussianBlur stdDeviation="9"/></filter>
+ <clipPath id="flag"><path d="M174 102C232 112 274 75 344 86C415 97 464 141 563 108L563 293C473 321 413 281 344 271C275 259 229 299 174 286Z"/></clipPath>
+</defs>
+<path fill="url(#sky)" d="M0 0h680v480H0z"/>
+<circle cx="547" cy="73" r="76" fill="#fff" opacity=".2"/><circle cx="547" cy="73" r="46" fill="#fff" opacity=".35"/>
+<path d="M0 353C130 329 174 372 303 351C437 329 524 320 680 348V480H0Z" fill="#c9dce9"/>
+<path d="M0 376C147 353 247 393 355 366C475 340 564 373 680 358V480H0Z" fill="#e3eef5"/>
+<path d="M0 414C154 377 256 427 390 409C512 393 589 389 680 417V480H0Z" fill="#f6fbfe"/>
+<path d="M680 360c-50 4-99 3-149 13M442 401c-30-1-61 1-89 6M544 413c25-3 44-3 66-1" stroke="#a6c4d8" stroke-width="2" opacity=".6"/>
+<ellipse cx="210" cy="422" rx="82" ry="9" fill="#335879" opacity=".12" filter="url(#shadow)"/>
+<path d="M180 120C246 125 285 88 353 100C425 114 479 153 575 124L575 306C479 333 418 293 353 286C286 272 237 315 180 303Z" fill="#2e5372" opacity=".12" filter="url(#shadow)"/>
+<path d="M164 80h8v341h-8z" fill="url(#pole)"/>
+<path d="M163 421h10l6 5h-22z" fill="#a2b9c9"/>
+<path d="M175 107v279" stroke="#f1f7fc" stroke-width="1.4"/>
+<circle cx="168" cy="78" r="9" fill="url(#finial)"/>
+<g clip-path="url(#flag)">
+ <path fill="url(#cloth)" d="M174 73h390v260H174z"/>
+ <path d="M278 90C295 85 317 83 344 86L344 271C316 266 297 269 278 274Z" fill="url(#cross)"/>
+ <path d="M174 169C233 180 277 142 344 153C417 164 467 207 563 175L563 226C473 256 412 214 344 204C277 193 231 231 174 221Z" fill="url(#cross)"/>
+ <path d="M175 105C232 116 279 78 344 90C418 102 473 144 565 111M176 283C235 296 279 255 344 267C418 279 475 318 565 289" stroke="#fff" stroke-opacity=".5" stroke-width="2"/>
+ <path d="M344 86C328 128 331 224 344 271" stroke="#08274e" stroke-opacity=".08" stroke-width="3"/>
+ <path d="M476 127C464 169 468 247 478 297" stroke="#fff" stroke-opacity=".25" stroke-width="1.5"/>
+</g>
+<path d="M174 102C232 112 274 75 344 86C415 97 464 141 563 108L563 293C473 321 413 281 344 271C275 259 229 299 174 286Z" stroke="#6b94b3" stroke-opacity=".28"/>
+<path d="M159 106h15m-15 177h15" stroke="#93abbc" stroke-width="2"/>
+<path d="M30 381l8-20 8 20h-5l10 20H25l10-20zM76 363l6-17 6 17h-4l7 17H71l7-17zM617 368l7-19 7 19h-4l9 20h-25l10-20z" fill="#b1c8d7" opacity=".6"/>
+</svg>

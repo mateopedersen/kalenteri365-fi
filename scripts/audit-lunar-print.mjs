@@ -1,0 +1,9 @@
+import fs from 'node:fs/promises';
+import {fileURLToPath} from 'node:url';
+import {PDFDocument} from 'pdf-lib';
+const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
+const root=fileURLToPath(new URL('../',import.meta.url));
+const base=process.env.AUDIT_BASE_URL||'http://127.0.0.1:4186';
+if(!['localhost','127.0.0.1','[::1]'].includes(new URL(base).hostname))throw Error('Use the local preview.');
+(async()=>{const b=await chromium.launch({channel:'chrome',headless:true}),p=await b.newPage({locale:'fi-FI'}),results=[];
+try{const paths=JSON.parse(await fs.readFile(root+'/reports/pages.json')).filter(r=>/^\/kuukalenteri\/20\d\d\/[a-z]+\/$/.test(r.path)).map(r=>r.path);for(const route of paths){await p.goto(base+route,{waitUntil:'load'});await p.evaluate(()=>document.fonts.ready);await p.emulateMedia({media:'print'});const fit=await p.locator('.lunar-grid').evaluate(grid=>{const days=[...grid.querySelectorAll('.lunar-day')];return {days:days.length,clipped:days.filter(day=>{const b=day.getBoundingClientRect();return [...day.children].some(n=>n.getBoundingClientRect().bottom>b.bottom+1)}).length,daysInMonth:new Date(+document.querySelector('h1 span').textContent, +document.querySelector('[data-moon-date]').dataset.moonDate.slice(5,7),0).getDate()};});const data=await p.pdf({format:'A4',printBackground:true,preferCSSPageSize:true}),pdf=await PDFDocument.load(data);results.push({route,pages:pdf.getPageCount(),...fit});if(pdf.getPageCount()!==1||fit.clipped||fit.days!==fit.daysInMonth)console.log(JSON.stringify(results.at(-1)));}await fs.writeFile(root+'/reports/lunar-print-audit.json',JSON.stringify(results,null,2));const failures=results.filter(r=>r.pages!==1||r.clipped||r.days!==r.daysInMonth);console.log(JSON.stringify({months:results.length,failures}));if(failures.length)process.exitCode=1;}finally{await b.close();}})().catch(e=>{console.error(e);process.exit(1)});

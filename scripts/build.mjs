@@ -1,3 +1,11 @@
+import {writeSitemaps} from './sitemaps.mjs';
+import {institutionCredits} from '../src/institution-identity.mjs';
+import {longWeekendPage} from '../src/long-weekend-view.mjs';
+import {benefitPage} from '../src/benefit-view.mjs';
+import {pensionPage} from '../src/pension-view.mjs';
+import {birthdayPage} from '../src/birthday-view.mjs';
+import {calendarLabPage} from '../src/calendar-lab-view.mjs';
+import {countdownPage} from '../src/countdown-view.mjs';
 import {vacationPlanner} from '../src/vacation-planner.mjs';
 import {relatedTopics} from '../src/related-view.mjs';
 import {lunarPhaseList} from '../src/lunar-phase-view.mjs';
@@ -6,14 +14,15 @@ import {workdayTool} from '../src/workday-view.mjs';
 import {workOverviewPage} from '../src/work-overview-view.mjs';
 import {dateTools} from '../src/date-tools-view.mjs';
 import {schoolIntegration,paymentWorkspace,nameDayPanel,writeCommunityCalendars} from '../src/community-view.mjs';
+import {namedaysPage} from '../src/namedays-view.mjs';
+import {flaggingPage} from '../src/flagging-view.mjs';
 import {personalWorkspace} from '../src/personal-view.mjs';
 import {lunarDirectory} from '../src/lunar-directory.mjs';
 import {notFoundPage} from '../src/not-found-view.mjs';
 import {seasonPage,seasonCredits,seasonImageSchema} from '../src/season-view.mjs';
 import {prepareSeasonAssets} from './season-assets.mjs';
-import {taxPage,admissionsPage,flagTool,electionPage,seasonalPage,northernLightTool,ALL_SERVICE_EVENTS} from '../src/services-view.mjs';
+import {taxPage,admissionsPage,electionPage,seasonalPage,northernLightTool,ALL_SERVICE_EVENTS} from '../src/services-view.mjs';
 import {serviceCalendar} from '../assets/finland-services-core.mjs';
-import {swedishPages,swedishLayout,swedishCounterpart} from '../src/swedish.mjs';
 import {holidayCalendarPanel} from '../src/holiday-actions.mjs';
 import {REMINDERS,eventCalendar,eventDownloadPath} from '../assets/calendar-event-core.mjs';
 import {studioBuilder} from '../src/studio-view.mjs';
@@ -34,6 +43,12 @@ import {shiftPlanner} from '../src/shift-ui.mjs';
 import {lunarCards,generateLunarSet} from './lunar-downloads.mjs';
 import {gardenHub,gardenDetails} from './garden.mjs';
 import {edition,dailyMarkup,PROFILES} from '../lib/horoscope.mjs';
+import {horoscopeGuide} from '../src/horoscope-guide.mjs';
+import {faqPage} from '../src/faq-view.mjs';
+import {clockChangePage} from '../src/clock-change-view.mjs';
+import {perseidPage} from '../src/perseids-view.mjs';
+import {lunarEclipsePage} from '../src/lunar-eclipse-view.mjs';
+import {solarEclipsePage} from '../src/solar-eclipse-view.mjs';
 import { PHOTO_CREDITS, photo } from "../src/photos.mjs";
 import { educationPages } from "./education.mjs";
 import { ascendantForm, sunStage } from "../src/enhanced-tools.mjs";
@@ -41,11 +56,12 @@ import { cover, writeSocialManifest } from "./social.mjs";
 import {favicons} from "./favicons.mjs";
 import {verifyShareIcons} from "./share-icon-assets.mjs";
 import { moonSVG } from "../src/lunar.mjs";
-import { TOPIC_COPY, FAQ, EDITORIAL_POLICY, METHODOLOGY_NOTE } from "../src/editorial.mjs";
+import { TOPIC_COPY, EDITORIAL_POLICY, METHODOLOGY_NOTE } from "../src/editorial.mjs";
 import {linkEditorialParagraphs} from '../src/editorial-links.mjs';
 import {periodGuide,cityGuide,periodDescription} from '../src/period-guide.mjs';
 import {pageMetadata,brandedTitle,assertUniqueMetadata} from '../src/metadata.mjs';
 import {toolGuide} from '../src/tool-guides.mjs';
+import {practicalExample} from '../src/practical-examples.mjs';
 import fs from "node:fs/promises";
 import { createHash } from "node:crypto";
 import path from "node:path";
@@ -96,7 +112,6 @@ import {
   phases,
   seasons,
   riseSet as calculateRiseSet,
-  localEclipses,
   time,
   moonMonth,
 } from "../src/astronomy.mjs";
@@ -109,6 +124,12 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".."),
 await fs.mkdir(OUT, { recursive: true });
 await fs.mkdir(path.join(ROOT, "reports"), { recursive: true });
 await fs.mkdir(ASSET, { recursive: true });
+// Retire the removed language section, including artifacts from incremental builds.
+await fs.rm(path.join(OUT, 'sv'), {recursive:true, force:true});
+await fs.rm(path.join(ASSET, 'sv-core.mjs'), {force:true});
+for (const file of await fs.readdir(path.join(ASSET, 'social')).catch(()=>[])) {
+  if (/^sv-.*\.jpg$/.test(file)) await fs.unlink(path.join(ASSET, 'social', file));
+}
 await fs.mkdir(path.join(OUT, "lataukset"), { recursive: true });
 const indexnow=JSON.parse(await fs.readFile(path.join(ROOT,'data/indexnow.json'),'utf8'));
 if(indexnow.host!=='kalenteri365.fi'||!/^[0-9a-f]{32}$/.test(indexnow.key)||indexnow.keyLocation!==`https://kalenteri365.fi/${indexnow.key}.txt`)throw Error('Invalid IndexNow host/key configuration');
@@ -169,6 +190,7 @@ await fs.copyFile(
   path.join(ASSET, "calendar.mjs"),
 );
 await fs.copyFile(path.join(ROOT, "src/ui.mjs"), path.join(ASSET, "ui.mjs"));
+for (const name of ['tax-calendar-core.mjs','tax-view.mjs','long-weekend-core.mjs','long-weekend-view.mjs','calendar-lab-core.mjs','calendar-lab-view.mjs','zodiac-signs.mjs','birthday-core.mjs','flagging-core.mjs','namedays-core.mjs','birthday-view.mjs','pension-view.mjs','payment-cards-view.mjs','benefit-view.mjs']) await fs.copyFile(path.join(ROOT,'src',name),path.join(ASSET,name));
 await fs.copyFile(path.join(ROOT, "src/site-icons.mjs"), path.join(ASSET, "site-icons.mjs"));
 await fs.copyFile(path.join(ROOT, "src/seo-title.mjs"), path.join(ASSET, "seo-title.mjs"));
 await fs.copyFile(path.join(ROOT, "src/storage-notice-view.mjs"), path.join(ASSET, "storage-notice-view.mjs"));
@@ -247,7 +269,7 @@ const pages = [],
   exportIndex = [];
 const metadataInventory = {title:new Map(),description:new Map()};
 async function page(p, title, desc, body, kind = "page", extra = {}) {
-  if(extra.locale!=='sv')desc=periodDescription(p,desc);
+  desc=periodDescription(p,desc);
   const metadata=pageMetadata(p,title,desc,extra),seoTitle=brandedTitle(metadata.title);
   assertUniqueMetadata({title:seoTitle,description:metadata.description},p,metadataInventory);
   const social = await cover(ASSET, p, metadata.title, metadata.description, {kind, ...extra, body});
@@ -255,14 +277,14 @@ async function page(p, title, desc, body, kind = "page", extra = {}) {
   const group=p.split('/')[1],plannerFamily={'viikkokalenteri':'week','perhekalenteri':'family','lukujarjestys':'school','koulukalenteri':'school','tyovuorosuunnittelija':'shift'}[group];
   if(plannerFamily&&p.split('/').filter(Boolean).length===1)body+=plannerCards(plannerFamily);
   if(group==='juhlapyhat'&&p==='/juhlapyhat/')body+=holidayDirectory();
-  body+=periodGuide(p)+cityGuide(p);
+  body+=(!extra.customPeriodGuide?periodGuide(p):'')+cityGuide(p);
   const period=p.match(/^\/(kalenteri|kuukausikalenteri|pdf-kalenteri)\/(202[7-9]|2030)\/(?:([a-z]+)\/)?$/);
   if(period&&period[1]!=='pdf-kalenteri')body=`<div class="calendar-workspace">${calendarNavigator(Number(period[2]),SLUGS.indexOf(period[3])+1)}<div class="calendar-content">${body}</div></div>`;
-  const richCopy=p.split("/").filter(Boolean).length===1&&!["paivamaaralaskuri","tyopaivalaskuri","tyovuorosuunnittelija","tyopaivat","koulujen-lomat","pdf-kalenteri"].includes(group)?contentGuide(group):"";
+  const richCopy=!extra.customGuide&&p.split("/").filter(Boolean).length===1&&!["verokalenteri","paivamaaralaskuri","tyopaivalaskuri","tyovuorosuunnittelija","tyopaivat","koulujen-lomat","pdf-kalenteri","kylvokalenteri","syntymapaivakalenteri"].includes(group)?contentGuide(group):"";
   body+=richCopy;
-  const practicalGuide=p.split('/').filter(Boolean).length===1?toolGuide(group):'';
+  const practicalGuide=!extra.customGuide&&p.split('/').filter(Boolean).length===1&&!['verokalenteri','pitkat-viikonloput','kellonsiirto','auringonpimennys','kuunpimennys','perseidit','kylvokalenteri','viikkonumerot','vuoden-paiva','karkausvuosi','horoskooppimerkki','syntymapaivakalenteri'].includes(group)?toolGuide(group):'';
   body+=practicalGuide;
-  const copy = richCopy||practicalGuide||["paivamaaralaskuri","tyopaivalaskuri","tyovuorosuunnittelija","tyopaivat","koulujen-lomat","pdf-kalenteri"].includes(group)?null:TOPIC_COPY[group];
+  const copy = extra.customGuide||group==="verokalenteri"||group==="syntymapaivakalenteri"||group==="kylvokalenteri"||richCopy||practicalGuide||["paivamaaralaskuri","tyopaivalaskuri","tyovuorosuunnittelija","tyopaivat","koulujen-lomat","pdf-kalenteri"].includes(group)?null:TOPIC_COPY[group];
   if (copy && p.split("/").filter(Boolean).length === 1)
     body += section(
       copy[0],
@@ -272,13 +294,14 @@ async function page(p, title, desc, body, kind = "page", extra = {}) {
         .join(""),
       "topic-guide",
     );
-  body=linkEditorialParagraphs(body,{path:p,locale:extra.locale||'fi'});
+  body+=practicalExample(p);
+  body=linkEditorialParagraphs(body,{path:p});
   body=body.replace(/((?:href|src)=")(\/lataukset\/[^"?]+\.(?:pdf|webp))"/g,(_,attribute,url)=>attribute+url+'?v='+downloadVersion+'"');
   let folder = path.join(OUT, p);
   await fs.mkdir(folder, { recursive: true });
   await fs.writeFile(
     path.join(folder, "index.html"),
-    (extra.locale==='sv'?swedishLayout:layout)({ relatedContent: relatedTopics(p), path: p, title, description: desc, body, kind, social, alternate:swedishCounterpart(p), structuredImages:[...PHOTO_CREDITS.filter(image=>(p==='/'&&['city','city-night','municipality'].includes(image.kind))||body.includes(image.src)||body.includes(image.src.replace('.webp','-640.webp'))||body.includes(image.src.replace('.webp','-320.webp'))||(image.id==='moon-full'&&(body.includes('moon-surface.jpg')||body.includes('moon-phase-texture.webp')))).map(image=>({'@type':'ImageObject',contentUrl:'https://kalenteri365.fi'+image.src,caption:image.alt,creditText:image.author+' · '+image.license,license:image.licenseUrl||image.source,acquireLicensePage:image.source})), ...(group==='vuodenajat'?seasonImageSchema:[])], ...extra, seoTitle, seoDescription:metadata.description }),
+    layout({ relatedContent: relatedTopics(p), path: p, title, description: desc, body, kind, social, structuredImages:[...PHOTO_CREDITS.filter(image=>(p==='/'&&['city','city-night','municipality'].includes(image.kind))||body.includes(image.src)||body.includes(image.src.replace('.webp','-640.webp'))||body.includes(image.src.replace('.webp','-320.webp'))||(image.id==='moon-full'&&(body.includes('moon-surface.jpg')||body.includes('moon-phase-texture.webp')))).map(image=>({'@type':'ImageObject',contentUrl:'https://kalenteri365.fi'+image.src,caption:image.alt,creditText:image.author+' · '+image.license,license:image.licenseUrl||image.source,acquireLicensePage:image.source})), ...(group==='vuodenajat'?seasonImageSchema:[])], ...extra, seoTitle, seoDescription:metadata.description }),
   );
   searchText.set(p,[...new Set(body.replace(/<script[\s\S]*?<\/script>/gi,' ').replace(/<style[\s\S]*?<\/style>/gi,' ').replace(/<(select|nav)\b[^>]*>[\s\S]*?<\/\1>/gi,' ').replace(/<[^>]*>/g,' ').replace(/&[^;]+;/g,' ').toLocaleLowerCase('fi').split(/[^\p{L}\p{N}]+/u).filter(w=>w.length>1))].join(' '));
   pages.push({
@@ -289,7 +312,7 @@ async function page(p, title, desc, body, kind = "page", extra = {}) {
     seoTitle,
     group: p.split("/")[1] || "etusivu",
     indexable: p !== "/valokuvat-ja-lisenssit/",
-    locale: extra.locale || "fi",
+    locale: "fi",
     social: {src:social.src,alt:social.alt,width:social.width,height:social.height,type:social.type,sha256:social.sha256,family:social.family},
   });
 }
@@ -371,12 +394,15 @@ for (const base of [
   "liputuspaivat",
   "merkkipaivat",
   "viikkokalenteri",
-  "pitkat-viikonloput",
 ]) {
   const title = tools.find((t) => t[0] === base)?.[1] || base,
     description = tools.find((t) => t[0] === base)?.[2] || "";
   if(base==='pdf-kalenteri'){
     await page('/pdf-kalenteri/','PDF-kalenterit 2027–2030','Tulostettavat kalenterit vuosittain. Valitse 2027, 2028, 2029 tai 2030 ja avaa vuosipohjat tai kuukausikalenterit PDF- ja kuvamuodossa.',printCatalogPage());
+    continue;
+  }
+  if(base==='liputuspaivat'){
+    await page('/liputuspaivat/','Suomen liputuspäivät 2027–2030','Suomen viralliset ja vakiintuneet liputuspäivät 2027–2030. Tarkista liputusaika paikkakunnittain ja lataa oma liputuskalenteri.',flaggingPage({hub:true}),'page',{customHeader:true,customGuide:true,customPeriodGuide:true});
     continue;
   }
   if(base==='tyopaivat'){
@@ -387,7 +413,7 @@ for (const base of [
     "/" + base + "/",
     `${title} 2027–2030`,
     description,
-    (base === "liputuspaivat" ? flagTool() : "") + yearLinks(base) +
+    yearLinks(base) +
       (base === "kalenteri"
         ? `<section class="year-picker-grid">${YEARS.map((y,i) => `<article class="year-picker"><a class="year-picker-cover" href="/kalenteri/${y}/"><img src="/lataukset/kalenteri-${y}-${['suomi','metsä','helsinki','revontulet'][i]}-preview.webp" width="1000" height="707" alt="Vuoden ${y} Suomen kalenterin tulostuspohja" loading="lazy"></a><div><p class="eyebrow">SUOMEN KALENTERI</p><h2>${link("/kalenteri/"+y+"/",y+' '+icon('arrow'))}</h2><p>${leap(y)?366:365} päivää · ${weeksInYear(y)} ISO-viikkoa</p><div class="actions">${link('/kalenteri/'+y+'/','Avaa vuosi','btn')}${link('/pdf-kalenteri/'+y+'/','15 tulostuspohjaa','btn secondary')}</div></div></article>`).join('')}</section>`
         : base === "pdf-kalenteri"
@@ -419,9 +445,10 @@ for (const base of [
                             ),
                           ),
                         )
-                      : base === "pitkat-viikonloput" ? `<div class="long-weekend-start"><h2>Yksi lomapäivä voi tehdä eron</h2><p>Valitse vuosi ja katso pyhien ympärille muodostuvat jaksot. Oman lomabudjetin ja aattojen vertailu onnistuu lomasuunnittelijassa.</p><div class="cards">${YEARS.map(y=>`<a href="/pitkat-viikonloput/${y}/" class="tool-card">${art('vacation')}<h3>Pitkät viikonloput ${y}</h3><p>Pyhät, viikonloput ja haettavat työpäivät samassa vertailussa.</p><span class="topic-open">Katso vaihtoehdot ${icon('arrow')}</span></a>`).join('')}</div><div class="actions form-actions">${link('/lomasuunnittelija/','Vertaa omalla lomabudjetilla '+icon('arrow'),'btn')}</div></div>` : ""),
+                      : ""),
   );
 }
+await page('/pitkat-viikonloput/','Pitkät viikonloput 2027–2030','Vertaa Suomen pyhien ympärille muodostuvia pitkiä viikonloppuja. Valitse vuosi ja haettavien työpäivien määrä, tarkista päivämäärät ja jatka omaan lomasuunnitelmaan.',longWeekendPage(),'page',{customHeader:true});
 for (const y of YEARS) {
   console.log("Generating year", y);
   const hs = holidays(y),
@@ -483,6 +510,10 @@ for (const y of YEARS) {
       { year: y },
     );
   for (const b of ["juhlapyhat", "liputuspaivat", "merkkipaivat"]) {
+    if(b==='liputuspaivat'){
+      await page(`/liputuspaivat/${y}/`,`Liputuspäivät ${y}`,`Suomen liputuspäivät ${y}, liputusajat ja kalenterin lataus.`,flaggingPage({year:y}),'page',{year:y,customHeader:true,customGuide:true,customPeriodGuide:true});
+      continue;
+    }
     let list = hs.filter((h) =>
       b === "juhlapyhat"
         ? ["holiday", "eve"].includes(h.type)
@@ -511,49 +542,9 @@ for (const y of YEARS) {
   await page(`/tyopaivat/${y}/`,`Työpäivät ${y} ja työtunnit`,
     `${y}: ${yearWorkdays} työpäivää ma–pe-oletuksella. Tarkista kuukausien tunnit, valitse aattojen käsittely ja vertaa vuosia.`,
     workOverviewPage({year:y,scope:'year'}),'page',{year:y});
-  let weekendRows = [];
-  for (
-    let start = date(y, 1, 1);
-    start <= date(y, 12, 31);
-    start = add(start, 1)
-  ) {
-    let end = add(start, 8),
-      ds = Array.from({ length: 9 }, (_, i) => add(start, i)),
-      off = ds.filter(
-        (d) =>
-          day(d) < 5 &&
-          !hs.some((h) => h.date === iso(d) && h.type === "holiday"),
-      );
-    if (
-      off.length <= 4 &&
-      ds.some((d) =>
-        hs.some((h) => h.date === iso(d) && h.type === "holiday"),
-      ) &&
-      day(start) === 5
-    )
-      weekendRows.push([
-        `${fi(start)}–${fi(end)}`,
-        `${off.length} lomapäivää`,
-        `${9} vapaapäivää`,
-        off.map(fi).join(", "),
-      ]);
-  }
-  await page(
-    `/pitkat-viikonloput/${y}/`,
-    `Pitkät viikonloput ${y}`,
-    `Yhdistä arkipyhät ja lomapäivät pidemmäksi vapaaksi vuonna ${y}.`,
-    yearLinks("pitkat-viikonloput") +
-      table(
-        ["Ajanjakso", "Tarvittava loma", "Vapaa yhteensä", "Haettavat päivät"],
-        weekendRows,
-      ) +
-      notice(
-        "Ehdotukset olettavat maanantai–perjantai-työviikon ja vapaana pidettävät pyhäpäivät. Työnantaja hyväksyy lomat erikseen. Aattoja ei lasketa automaattisesti vapaiksi.",
-      ) +
-      link("/lomasuunnittelija/", "Suunnittele oma loma →", "btn"),
-    "page",
-    { year: y },
-  );
+  await page(`/pitkat-viikonloput/${y}/`, `Pitkät viikonloput ${y}`,
+    `Vertaa vuoden ${y} pitkiä viikonloppuja Suomen pyhien ympärillä. Näe koko vapaa, tarvittavat työpäivät ja päivämäärät yhdellä silmäyksellä.`,
+    longWeekendPage(y), 'page', {year:y,customHeader:true});
   await page(
     `/viikkokalenteri/${y}/`,
     `Viikkokalenteri ${y}`,
@@ -633,6 +624,10 @@ for (const y of YEARS) {
       `${cap(MONTHS[m-1])} ${y}: ${s.workdays} työpäivää ja ${s.hours.toLocaleString('fi-FI')} tuntia oletuksilla ma–pe ja 7,5 h/päivä. Valitse oma tuntimäärä ja aattojen käsittely.`,
       workOverviewPage({year:y,month:m,scope:'month'}),'page',{year:y,month:m});
     for (const b of ["juhlapyhat", "liputuspaivat", "merkkipaivat"]) {
+      if(b==='liputuspaivat'){
+        await page(`/liputuspaivat/${y}/${SLUGS[m-1]}/`,`${cap(MONTHS[m-1])} ${y} | Liputuspäivät`,`Kuukauden ${MONTHS[m-1]} ${y} liputuspäivät, ajat ja kalenteriin tallennus.`,flaggingPage({year:y,month:m}),'page',{year:y,month:m,customHeader:true,customGuide:true,customPeriodGuide:true});
+        continue;
+      }
       let hh = hm.filter((h) =>
         b === "juhlapyhat"
           ? ["holiday", "eve"].includes(h.type)
@@ -694,20 +689,7 @@ function weeklySheet(d) {
 }
 const datesForm = (id, more = "") =>
   `<form id="${id}" class="panel"><div class="form-grid"><label>Alkupäivä<input name="start" type="date" value="2027-01-01" required></label><label>Loppupäivä<input name="end" type="date" value="2027-12-31" required></label>${more}</div><div class="form-actions"><button class="btn">Laske</button></div><div class="result" id="calc-result" aria-live="polite"></div></form>`;
-const SIGNS = [
-  ["oinas", "Oinas", "21.3.–19.4."],
-  ["harka", "Härkä", "20.4.–20.5."],
-  ["kaksoset", "Kaksoset", "21.5.–20.6."],
-  ["rapu", "Rapu", "21.6.–22.7."],
-  ["leijona", "Leijona", "23.7.–22.8."],
-  ["neitsyt", "Neitsyt", "23.8.–22.9."],
-  ["vaaka", "Vaaka", "23.9.–22.10."],
-  ["skorpioni", "Skorpioni", "23.10.–21.11."],
-  ["jousimies", "Jousimies", "22.11.–21.12."],
-  ["kauris", "Kauris", "22.12.–19.1."],
-  ["vesimies", "Vesimies", "20.1.–18.2."],
-  ["kalat", "Kalat", "19.2.–20.3."],
-];
+const SIGNS = PROFILES.map(profile=>profile.slice(0,3));
 await educationPages({ page, OUT });
 for (const [base, title, desc] of tools) {
   if (pages.some((p) => p.path === `/${base}/`)) continue;
@@ -723,39 +705,12 @@ for (const [base, title, desc] of tools) {
       break;
     case "tyopaivalaskuri":body=workdayTool();break;
     case "paivalaskuri":
-      body =
-        section(
-          "Oma lähtölaskenta",
-          `<form id="countdown-form"><div class="form-grid"><label>Tapahtuman nimi<input name="title" value="Oma tärkeä päivä" maxlength="100" required></label><label>Päivämäärä<input name="target" type="date" value="2027-01-01" required></label></div><button class="btn" style="margin-top:18px">Näytä lähtölaskenta</button><div id="countdown-result" class="result" aria-live="polite"></div></form>`,
-        ) +
-        notice(
-          "Laskuri näyttää kalenteripäivien erotuksen Suomen tämän päivän päivämäärästä.",
-        );
+      body = countdownPage();
       break;
     case "viikkonumerot":
-      body =
-        yearLinks("viikkokalenteri") +
-        section(
-          "Tarkista viikkonumero",
-          `<form id="week-calc"><label>Päivämäärä<input name="date" type="date" value="2027-01-01" required></label><button class="btn" style="margin-top:16px">Näytä ISO-viikko</button><div class="result" id="calc-result" aria-live="polite"></div></form>`,
-        );
-      break;
     case "vuoden-paiva":
-      body = section(
-        "Päivän järjestysnumero",
-        `<form id="day-calc"><label>Päivämäärä<input name="date" type="date" value="2027-01-01" required></label><button class="btn" style="margin-top:16px">Laske</button><div class="result" id="calc-result" aria-live="polite"></div></form>`,
-      );
-      break;
     case "karkausvuosi":
-      body =
-        section(
-          "Tarkista vuosi",
-          `<form id="leap-calc"><label>Vuosi<input name="year" type="number" value="2028" min="1583" max="9999" required></label><button class="btn" style="margin-top:16px">Tarkista</button><div class="result" id="calc-result" aria-live="polite"></div></form>`,
-        ) +
-        table(
-          ["Vuosi", "Päiviä", "Karkausvuosi"],
-          YEARS.map((y) => [y, leap(y) ? 366 : 365, leap(y) ? "Kyllä" : "Ei"]),
-        );
+      body = calendarLabPage(base);
       break;
     case "lomasuunnittelija":body=vacationPlanner();break;
     case "tyovuorosuunnittelija":body=shiftPlanner();break;
@@ -808,20 +763,21 @@ for (const [base, title, desc] of tools) {
       break;
     }
     case "syntymapaivakalenteri":
-      body = section(
-        "Tärkeät syntymäpäivät",
-        `<p>Tallenna syntymäpäivä vuosittain toistuvaksi tapahtumaksi. Näet merkinnät myös etusivun omassa kalenterissa.</p>${button(icon("plus") + " Lisää syntymäpäivä", "new-event", "btn")}<div id="birthdays" style="margin-top:18px"></div><div class="actions">${button("Vie ICS", "export-ics", "btn secondary")}${button("Lataa varmuuskopio", "backup", "btn secondary")}</div>`,
-      );
-      extra = { defaultRepeat: "yearly" };
+      body = birthdayPage();
       break;
     case "nimipaivat":
-      body = nameDayPanel()+`<section class="service-notes"><h2>Oma nimipäivämuistutus</h2><p>Suomen- ja ruotsinkielistä nimipäiväkalenteria ylläpitää Helsingin yliopiston almanakkatoimisto. Tarkista nimi ja päivämäärä alkuperäisestä kalenterista ennen muistutuksen lisäämistä.</p>${button(art("calendar-add")+" Lisää oma muistutus", "new-event", "btn secondary")}<p>Vuoden 2025 nimilistat ovat voimassa vuoden 2029 loppuun. Vuoden 2030 nimiä ei siirretä kalenteriin ilman vahvistettua aineistoa.</p></section>`;
+      body = namedaysPage();
       break;
     case "ylioppilaskirjoitukset":body=await examCalendar(OUT);break;
     case "kuun-vaiheet":
     case "taysikuu":
     case "uusikuu":
       body =
+        ({
+          'uusikuu': `<section class="lunar-intro new-moon-intro" aria-labelledby="new-moon-intro-title"><p class="eyebrow">KUUNKIERRON ALKU</p><h2 id="new-moon-intro-title">Mitä uusikuu tarkoittaa?</h2><p>Uusikuu on Kuun vaihe, jossa sen Maahan päin näkyvä puoli on lähes kokonaan varjossa. Kuu on taivaalla lähellä Auringon suuntaa, joten sitä ei yleensä näe paljain silmin. Uusikuun jälkeen ohut kasvava sirppi alkaa vähitellen erottua iltataivaalla. Näkyvyyteen vaikuttavat myös sää ja havaintopaikka.</p><p>Tältä sivulta löydät <strong>uusikuiden päivämäärät ja kellonajat vuosille 2027–2030</strong> Suomen paikallisessa ajassa, kesäaika huomioiden. Valitse vuosi ja tallenna Kuun vaiheet omaan kalenteriisi ICS-tiedostolla. ${link('/kuukalenteri/','Kuukalenterista')} voit seurata valaistuksen muuttumista päivä päivältä ja ${link('/kuun-vaiheet/','Kuun vaiheiden vertailusta')} tarkistaa myös neljännesten ja täysikuun ajankohdat.</p></section>`,
+          'taysikuu': `<section class="lunar-intro" aria-labelledby="full-moon-intro-title"><p class="eyebrow">KUU KOKONAAN VALOSSA</p><h2 id="full-moon-intro-title">Milloin on täysikuu ja miltä se näyttää?</h2><p>Täysikuun aikaan Kuun Maahan päin näkyvä puoli on lähes kokonaan Auringon valaisema. Kuu näyttää pyöreältä myös täysikuun hetkeä edeltävänä ja seuraavana yönä, vaikka tarkka vaihehetki osuu vain yhteen ajankohtaan. Täysikuu nousee yleensä auringonlaskun tienoilla ja laskee aamulla. Tarkat nousu- ja laskuajat riippuvat päivämäärästä ja havaintopaikasta.</p><p>Alla ovat <strong>täysikuiden päivämäärät ja kellonajat vuosille 2027–2030</strong> Suomen paikallisessa ajassa, kesäaika huomioiden. ${link('/kuukalenteri/','Kuukalenterista')} näet, miten valaistus muuttuu täysikuun molemmin puolin. Tarkista ${link('/kuun-nousu-ja-lasku/','Kuun paikalliset nousu- ja laskuajat')}, kun suunnittelet katselu- tai kuvaushetkeä. Voit myös ladata vuoden kaikkien ${link('/kuun-vaiheet/','Kuun päävaiheiden')} ajankohdat omaan kalenteriisi ICS-tiedostolla.</p></section>`,
+          'kuun-vaiheet': `<section class="lunar-intro" aria-labelledby="moon-phases-intro-title"><p class="eyebrow">NELJÄ PÄÄVAIHETTA</p><h2 id="moon-phases-intro-title">Miten Kuun vaiheet vaihtuvat?</h2><p>Kuun vaiheet syntyvät, kun näemme eri osan sen Auringon valaisemasta puolesta Kuun kiertäessä Maata. Kierto etenee uusikuusta ensimmäiseen neljännekseen, täysikuuhun ja viimeiseen neljännekseen. Neljännesten aikaan näkyvästä kiekosta on valaistunut noin puolet. Kasvava Kuu valaistuu päivä päivältä enemmän, vähenevä Kuu vähemmän. Yksi vaihekierto kestää noin 29,5 vuorokautta.</p><p>Tällä sivulla voit vertailla <strong>Kuun neljän päävaiheen ajankohtia vuosina 2027–2030</strong>. Kellonajat on muutettu Suomen paikalliseen aikaan, kesäaika huomioiden. Tarkka vaihehetki on sama kaikkialla maailmassa, mutta Kuun näkyvyys riippuu havaintopaikasta ja säästä. Avaa ${link('/uusikuu/','uusikuun')} tai ${link('/taysikuu/','täysikuun')} oma näkymä, jos etsit vain yhtä vaihetta. ${link('/kuukalenteri/','Päivittäisestä kuukalenterista')} näet valaistuksen myös päävaiheiden välissä. Vuoden päävaiheet voi tallentaa kalenteriin ICS-tiedostolla.</p></section>`,
+        })[base]+
         YEARS.map(
           (y) =>
             `<section class="content-section"><div class="actions content-section">${link(`/lataukset/kuun-vaiheet-${y}.ics`, art("ics")+" Kuun vaiheet kalenteriin", "btn secondary")}</div>${lunarPhaseList(data.phases[y].filter(p=>base==='taysikuu'?p.quarter===2:base==='uusikuu'?p.quarter===0:true),{title:`${y} · ${base==='taysikuu'?'Täysikuun ajankohdat':base==='uusikuu'?'Uusikuun ajankohdat':'Kuun päävaiheet'}`,id:`${base}-${y}`})}</section>`,
@@ -840,90 +796,33 @@ for (const [base, title, desc] of tools) {
       body = seasonPage(data.seasons) + sourceNote("astro");
       break;
     case "kellonsiirto":
-      body =
-        table(
-          ["Vuosi", "Kesäaikaan", "Normaaliaikaan"],
-          YEARS.map((y) => {
-            let mar = date(y, 4, 0),
-              oct = date(y, 11, 0);
-            mar = add(mar, -((day(mar) + 1) % 7));
-            oct = add(oct, -((day(oct) + 1) % 7));
-            return [
-              y,
-              `${fi(mar)} · 03.00 → 04.00`,
-              `${fi(oct)} · 04.00 → 03.00`,
-            ];
-          }),
-        ) +
-        notice(
-          "Päivämäärät on laskettu nykyisten EU:n kesäaikasääntöjen mukaan: maaliskuun ja lokakuun viimeinen sunnuntai. Mahdolliset tulevat säädösmuutokset voivat muuttaa myöhempien vuosien käytäntöä.",
-        ) +
-        `<p>Lähde: ${link("https://transport.ec.europa.eu/transport-themes/summertime_en", "Euroopan komissio: kesäaika")}</p>`;
+      body = clockChangePage();
       break;
     case "auringonpimennys":
-    case "kuunpimennys": {
-      let e = localEclipses(CITIES[0], 2027, 2030),
-        list =
-          base === "auringonpimennys"
-            ? e.sun
-            : e.moon.filter((x) => x.altitude > 0);
-      body =
-        notice(
-          "Havaintopaikka: Helsinki. Näkyvyys tarkoittaa, että kohde on horisontin yläpuolella huippuhetkellä; sää ja paikalliset esteet vaikuttavat havaintoon. Muualla Suomessa ajat ja näkyvyys poikkeavat.",
-        ) +
-        table(
-          [
-            "Päivä Suomessa",
-            "Huippu, Suomen aika",
-            "Tyyppi",
-            "Korkeus huipulla",
-          ],
-          list.map((x) => [
-            new Intl.DateTimeFormat("fi-FI", {
-              timeZone: "Europe/Helsinki",
-            }).format(new Date(x.peak)),
-            time(x.peak),
-            {
-              partial: "Osittainen",
-              total: "Täydellinen",
-              annular: "Rengasmainen",
-              penumbral: "Puolivarjopimennys",
-            }[x.kind] || x.kind,
-            x.altitude.toFixed(1) + "°",
-          ]),
-        ) +
-        (base === "auringonpimennys"
-          ? notice(
-              "Aurinkoa ei saa katsoa suoraan ilman asianmukaista aurinkosuodatinta. Tavalliset aurinkolasit eivät suojaa silmiä auringonpimennyksen katselussa.",
-            )
-          : "") +
-        sourceNote("astro");
+      body=solarEclipsePage();
       break;
-    }
+    case "kuunpimennys":
+      body=lunarEclipsePage();
+      break;
     case "perseidit":
-      body = `<div class="long-text"><h2>Kesäöiden tähdenlennot</h2><p>Perseidit ovat vuosittain heinä–elokuussa näkyvä meteoriparvi. Aktiivisin jakso sijoittuu tavallisesti elokuun puoliväliin. Tarkka vuotuinen huippu kannattaa tarkistaa Ursan havaintotiedoista.</p><h2>Valitse hyvä havaintopaikka</h2><p>Siirry pois kirkkaista kaupunkivaloista, etsi avoin näkymä taivaalle ja anna silmien tottua pimeään. Pohjoisen Suomen vaaleat kesäyöt sekä Kuun valo voivat heikentää havaintoja.</p><div class="actions">${link("https://www.ursa.fi/", "Ursan havaintotiedot →", "btn")}${link("/kuun-vaiheet/", "Tarkista Kuun vaihe", "btn secondary")}</div></div>`;
+      body=perseidPage();
       break;
     case "kylvokalenteri":body=gardenHub();break;
     case "elakkeiden-maksupaivat":
+      body = pensionPage();
+      break;
     case "etuuksien-maksupaivat":
-      body = paymentWorkspace(base === "elakkeiden-maksupaivat" ? 'pension' : 'benefit');
+      body = benefitPage();
       break;
     case "horoskooppi": {
-      const daily=edition();body=`<!-- COLLECTION:START --><div class="horoscope-updated" data-collection-date><span class="status-dot"></span><strong>Päivitetty tänään</strong><time datetime="${daily.date}">${fi(parse(daily.date))}</time></div><div class="cards horoscope-grid">${PROFILES.map(([slug,name,range,element])=>{const entry=daily.entries[slug];return link('/horoskooppi/'+slug+'/',`<span class="sign-sculpture">${art('zodiac-'+slug)}</span><div class="sign-copy"><p class="eyebrow">${element} · ${range}</p><h2>${name}</h2><h3 data-daily-title="${slug}">${entry.title}</h3><p data-daily-text="${slug}">${entry.summary}</p><span class="card-open">Lue päivän horoskooppi ${icon('arrow')}</span></div>`,'horoscope-card')}).join('')}</div><p class="small">${daily.method} ${link("/lahteet/#horoskoopit", "Näin päivän tulkinta muodostuu")}</p><!-- COLLECTION:END -->${ascendantForm()}`;break;}
+      const daily=edition();body=`<!-- COLLECTION:START --><div class="horoscope-updated" data-collection-date><span class="status-dot"></span><strong>Päivitetty tänään</strong><time datetime="${daily.date}">${fi(parse(daily.date))}</time></div><div class="cards horoscope-grid">${PROFILES.map(([slug,name,range,element])=>{const entry=daily.entries[slug];return link('/horoskooppi/'+slug+'/',`<div class="horoscope-card-heading"><span class="sign-sculpture">${art('zodiac-'+slug)}</span><div><p class="eyebrow">${element}</p><h2>${name}</h2><p class="sign-date">${range}</p></div></div><div class="sign-copy"><h3 data-daily-title="${slug}">${entry.title}</h3><span class="card-open">Lue horoskooppi ${icon('arrow')}</span></div>`,'horoscope-card')}).join('')}</div><p class="small">${daily.method} ${link("/lahteet/#horoskoopit", "Näin päivän tulkinta muodostuu")}</p><!-- COLLECTION:END -->${ascendantForm()}`;break;}
     case "horoskooppimerkki":
-      body =
-        section(
-          "Löydä horoskooppimerkkisi",
-          `<form id="zodiac-form"><label>Syntymäpäivä<input type="date" name="date" value="2000-01-01" required></label><button class="btn" style="margin-top:18px">Näytä merkki</button><div class="result" id="calc-result" aria-live="polite"></div></form>`,
-        ) +
-        notice(
-          "Laskuri käyttää länsimaisen horoskoopin tavanomaisia päivämäärärajoja. Merkin vaihtumisen tarkka hetki riippuu syntymävuodesta ja kellonajasta.",
-        );
+      body = calendarLabPage(base);
       break;
     default:
       throw Error("Unimplemented tool " + base);
   }
-  await page("/" + base + "/", title, desc, body, kind, { extra });
+  await page("/" + base + "/", title, desc, body, kind, { extra, customGuide:["nimipaivat","ylioppilaskirjoitukset","hakukalenteri"].includes(base), customHeader:["luo-kalenteri","tyhja-kalenteri","nimipaivat","hakukalenteri","ylioppilaskirjoitukset","verokalenteri","kellonsiirto","auringonpimennys","kuunpimennys","perseidit","kylvokalenteri","kausimuistutukset"].includes(base) });
 }
 function astroForm(base, city = "helsinki", y = 2027) {
   const selectedCity=CITIES.find(c=>c[0]===city),solar=base!=="kuun-nousu-ja-lasku",lengthPage=base==='paivan-pituus';
@@ -935,7 +834,19 @@ function astroForm(base, city = "helsinki", y = 2027) {
     (lengthPage?northernLightTool({linked:true,city,day:`${y}-01-01`}):'')+
     notice("Ajat ovat Suomen paikallista aikaa, kesäaika huomioiden. Horisontti oletetaan esteettömäksi. Viiva tarkoittaa, ettei tapahtumaa ole kyseisenä paikallisena päivänä. Napaseudulla Aurinko tai Kuu voi olla jatkuvasti horisontin ylä- tai alapuolella.");
 }
-for(const [slug,name,range] of SIGNS){const entry=edition().entries[slug];await page(`/horoskooppi/${slug}/`,`${name} | Päivän horoskooppi`,`${name}: päivän ajatus, ihmissuhteet ja oma aika. Lue tämän päivän pohdinta ja laske nouseva merkkisi.`, `<article class="panel horoscope-daily" data-horoscope-sign="${slug}"><!-- DAILY:START -->${dailyMarkup(entry)}<!-- DAILY:END --><div class="horoscope-day-nav"><button class="btn secondary" data-horoscope-step="-1">← Edellinen päivä</button><button class="btn secondary" data-horoscope-step="1" disabled>Seuraava päivä →</button></div><p class="small horoscope-disclosure">${esc(edition().method)}</p><p class="small"><a href="/lahteet/#horoskoopit">Näin päivän tulkinta muodostuu</a></p></article>${ascendantForm()}<nav class="other-signs" aria-label="Muut horoskooppimerkit">${SIGNS.filter(([id])=>id!==slug).map(([id,n])=>link('/horoskooppi/'+id+'/',art('zodiac-'+id)+'<span>'+n+'</span>')).join('')}</nav>`,'horoscope',{extra:{sign:slug}});}
+for(const [slug,name] of SIGNS){
+  const entry=edition().entries[slug];
+  await page(
+    `/horoskooppi/${slug}/`,
+    `${name} | Päivän horoskooppi`,
+    `${name}: päivän ajatus, ihmissuhteet ja oma aika. Lue tämän päivän pohdinta ja laske nouseva merkkisi.`,
+    `<article class="panel horoscope-daily" data-horoscope-sign="${slug}"><!-- DAILY:START -->${dailyMarkup(entry)}<!-- DAILY:END --><div class="horoscope-day-nav"><button class="btn secondary" data-horoscope-step="-1">← Edellinen päivä</button><button class="btn secondary" data-horoscope-step="1" disabled>Seuraava päivä →</button></div><p class="small horoscope-disclosure">${esc(edition().method)}</p><p class="small"><a href="/lahteet/#horoskoopit">Näin päivän tulkinta muodostuu</a></p></article>`+
+    horoscopeGuide(slug)+ascendantForm()+
+    `<nav class="other-signs" aria-label="Muut horoskooppimerkit">${SIGNS.filter(([id])=>id!==slug).map(([id,n])=>link('/horoskooppi/'+id+'/',art('zodiac-'+id)+'<span>'+n+'</span>')).join('')}</nav>`,
+    'horoscope',
+    {extra:{sign:slug}},
+  );
+}
 for (const base of [
   "auringonnousu-ja-lasku",
   "kuun-nousu-ja-lasku",
@@ -1018,7 +929,7 @@ const info = {
 };
 info.lahteet[1]=METHODOLOGY_NOTE+info.lahteet[1];
 const infoDescriptions={
-  tietoa:'Tutustu Kalenteri365-palveluun, Suomen kalentereihin ja arjen suunnittelutyökaluihin. Omat merkinnät säilyvät käyttämässäsi selaimessa.',
+  tietoa:'Tutustu Kalenteri365:n tarinaan. Suomen kalenterit, työpäivälaskurit, koulujen loma-ajat ja oman arjen suunnittelu samassa palvelussa.',
   lahteet:'Kalenteri365:n lähteet Suomen pyhäpäiville, koulujen loma-ajoille, säälle ja tähtitieteellisille laskelmille. Lue myös laskentatapojen rajaukset.',
   tietosuoja:'Lue, miten Kalenteri365 käsittelee selaimeen tallennettuja suunnitelmia, sijaintivalintaa ja teknisiä tietoja sekä miten poistat omat merkintäsi.',
   evasteet:'Mitä Kalenteri365 tallentaa selaimeesi? Lue paikallisesta tallennuksesta, välttämättömistä teknisistä toiminnoista ja tietojen poistamisesta.',
@@ -1043,7 +954,6 @@ await page(
 );
 await gardenDetails(page);
 await extraPages({ page, section, table, notice, toolCards, link, art });
-await swedishPages(page);
 await fs.mkdir(path.join(OUT,"kalenteriin/palvelut"),{recursive:true});
 await writeCommunityCalendars(OUT,fs,path);
 for(const e of ALL_SERVICE_EVENTS)await fs.writeFile(path.join(OUT,"kalenteriin/palvelut",e.id+".ics"),serviceCalendar(e));
@@ -1051,13 +961,15 @@ await page(
   "/usein-kysyttya/",
   "Usein kysyttyä",
   "Vastauksia kalenterin käyttöön, tulostamiseen, omiin merkintöihin ja Suomen juhlapäiviin.",
-  `<div class="faq-list">${FAQ.map(([q, a]) => `<details class="panel"><summary>${q}</summary><p>${a}</p></details>`).join("")}</div>`,
+  faqPage(),
+  'page',
+  {customHeader:true},
 );
 await page(
   "/valokuvat-ja-lisenssit/",
   "Valokuvat ja lisenssit",
   "Kalenteri365-palvelun valokuvien, kuvituksen ja kirjasinten lähteet.",
-  `<article class="long-text"><h2>Kalenteriperheen vektorikuvitus</h2><p>Kalenteri-, työkalu- ja horoskooppikuvitus on sivustoperheen omaa vektorigrafiikkaa. Suomen version kuvituksessa käytetään sinisiä, valkoisia ja luonnon sävyjä. Vuodenaikojen maisemat ovat kuvitusta, eivät valokuvia tietystä paikasta.</p>${seasonCredits()}<h2>Paikkakunnat ja yliopistot</h2><p>Kuvat ovat kyseisissä paikoissa otettuja valokuvia. Etusivun paikkakuntavalitsimen jokaisella 25 paikkakunnalla on erillinen päiväkuva ja yökuva. Kuvan vaihto perustuu paikkakunnan koordinaateista laskettuun Auringon korkeuteen: päiväkuva näkyy Auringon ollessa horisontin yläpuolella ja yökuva sen laskettua. Myös kaamos ja yötön yö huomioidaan. Valokuvat ovat arkistokuvia eivätkä reaaliaikaisia sääkameroita. Kuvausajankohdan vuodenaika ja sää voivat poiketa tämänhetkisistä oloista. Kuvaajien nimet, alkuperäiset julkaisut ja lisenssit on lueteltu kuvakohtaisesti. Kuvat säilyttävät alla mainitun lisenssinsä.</p><div class="photo-license-grid">${PHOTO_CREDITS.filter(
+  `<article class="long-text">${institutionCredits()}<h2>Kalenteriperheen vektorikuvitus</h2><p>Kalenteri-, työkalu- ja horoskooppikuvitus on sivustoperheen omaa vektorigrafiikkaa. Suomen version kuvituksessa käytetään sinisiä, valkoisia ja luonnon sävyjä. Vuodenaikojen maisemat ovat kuvitusta, eivät valokuvia tietystä paikasta.</p>${seasonCredits()}<h2>Paikkakunnat ja yliopistot</h2><p>Kuvat ovat kyseisissä paikoissa otettuja valokuvia. Etusivun paikkakuntavalitsimen jokaisella 25 paikkakunnalla on erillinen päiväkuva ja yökuva. Kuvan vaihto perustuu paikkakunnan koordinaateista laskettuun Auringon korkeuteen: päiväkuva näkyy Auringon ollessa horisontin yläpuolella ja yökuva sen laskettua. Myös kaamos ja yötön yö huomioidaan. Valokuvat ovat arkistokuvia eivätkä reaaliaikaisia sääkameroita. Kuvausajankohdan vuodenaika ja sää voivat poiketa tämänhetkisistä oloista. Kuvaajien nimet, alkuperäiset julkaisut ja lisenssit on lueteltu kuvakohtaisesti. Kuvat säilyttävät alla mainitun lisenssinsä.</p><div class="photo-license-grid">${PHOTO_CREDITS.filter(
     (p) => p.kind,
   )
     .map(
@@ -1082,7 +994,7 @@ await page(
   `<div class="sitemap-groups">${[...new Set(pages.map((p) => p.group))]
     .map(
       (g) =>
-        `<section><h2>${({etusivu:'Etusivu',sv:'På svenska'})[g] || tools.find((t) => t[0] === g)?.[1] || pages.find((p)=>p.path===`/${g}/`)?.title || cap(g)}</h2>${pages
+        `<section><h2>${({etusivu:'Etusivu'})[g] || tools.find((t) => t[0] === g)?.[1] || pages.find((p)=>p.path===`/${g}/`)?.title || cap(g)}</h2>${pages
           .filter((p) => p.group === g)
           .map((p) => link(p.path, esc(p.title)))
           .join("")}</section>`,
@@ -1103,26 +1015,8 @@ for (const entry of await fs.readdir(OUT, {
   }
 }
 await fs.writeFile(path.join(ASSET, "search.json"), JSON.stringify(pages.map(({social,...p})=>({...p,searchable:true,keywords:searchText.get(p.path)}))));
-await fs.writeFile(
-  path.join(OUT, "sitemap.xml"),
-  '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' +
-    pages.filter(p=>p.indexable)
-      .map((p) => `<url><loc>https://kalenteri365.fi${esc(p.path)}</loc></url>`)
-      .join("") +
-    "</urlset>",
-);
-const imageEntries=[];
-for(const p of pages.filter(p=>p.indexable)){
- const html=await fs.readFile(path.join(OUT,p.path,'index.html'),'utf8'),images=p.social?[{src:p.social.src,alt:p.social.alt}]:[];
- for(const m of html.matchAll(/<img\b[^>]*>/g)){const src=m[0].match(/src="([^"?]+)(?:[^"\s]*)?"/),alt=m[0].match(/alt="([^"]+)"/);if(src&&alt&&(/\/assets\/(?:photos|seasons)\//.test(src[1])||/\/lataukset\//.test(src[1]))){const original=PHOTO_CREDITS.find(p=>[p.src,p.src.replace('.webp','-320.webp'),p.src.replace('.webp','-640.webp')].includes(src[1]))?.src||(src[1].startsWith('/assets/seasons/')?src[1].replace(/-(360|720)\.(webp|avif)$/,'-1200.webp'):src[1].replace('-preview.webp','.webp'));const current=original.startsWith('/lataukset/')?original+'?v='+downloadVersion:original;if(!images.some(x=>x.src===current))images.push({src:current,alt:alt[1]});}}
- if(p.path==='/')for(const photo of PHOTO_CREDITS.filter(photo=>['city','city-night','municipality'].includes(photo.kind)))if(!images.some(image=>image.src===photo.src))images.push({src:photo.src,alt:photo.alt});
- if(images.length)imageEntries.push(`<url><loc>https://kalenteri365.fi${esc(p.path)}</loc>${images.map(i=>`<image:image><image:loc>https://kalenteri365.fi${esc(i.src)}</image:loc></image:image>`).join('')}</url>`);
-}
-await fs.writeFile(path.join(OUT,'sitemap-images.xml'),'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">'+imageEntries.join('')+'</urlset>');
-await fs.writeFile(
-  path.join(OUT, "robots.txt"),
-  "User-agent: *\nAllow: /\nSitemap: https://kalenteri365.fi/sitemap.xml\nSitemap: https://kalenteri365.fi/sitemap-images.xml\n",
-);
+const sitemapSummary = await writeSitemaps({out: OUT, pages, photos: PHOTO_CREDITS, downloadVersion});
+console.log('Sitemaps ready: ' + sitemapSummary.pages + ' pages, ' + sitemapSummary.images + ' image entries');
 const notFoundSocial=await cover(ASSET,"/404/","Sivua ei löytynyt","Etsimääsi osoitetta ei löytynyt.",{kind:"not-found"});
 await fs.writeFile(
   path.join(OUT, "404.html"),
@@ -1138,7 +1032,7 @@ await fs.writeFile(
 await writeSocialManifest(ASSET);
 await fs.writeFile(
   path.join(OUT, "_headers"),
-  `/*\n  Cache-Control: public, max-age=0, must-revalidate, no-transform\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n  X-Frame-Options: SAMEORIGIN\n  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'\n/favicon.ico\n  Content-Type: image/x-icon\n/assets/icon-*.png\n  Content-Type: image/png\n/assets/icon.svg\n  Content-Type: image/svg+xml\n/site.webmanifest\n  Content-Type: application/manifest+json; charset=utf-8\n/assets/runtime/*\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n/assets/fonts/*\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n/assets/site-runtime.*.css\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n/assets/art/*\n  ! Cache-Control\n  Cache-Control: public, max-age=86400\n/assets/art-*\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n/assets/photos/*\n  ! Cache-Control\n  Cache-Control: public, max-age=604800\n/assets/social/*\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n/assets/*.json\n  ! Cache-Control\n  Cache-Control: public, max-age=60\n/lataukset/*\n  ! Cache-Control\n  Cache-Control: public, max-age=86400\n/kalenteriin/*\n  Content-Type: text/calendar; charset=utf-8\n  Content-Disposition: attachment\n  X-Robots-Tag: noindex\n  ! Cache-Control\n  Cache-Control: public, max-age=86400\n`,
+  `/*\n  Cache-Control: public, max-age=0, must-revalidate, no-transform\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n  X-Frame-Options: SAMEORIGIN\n  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'\n/sitemap.xml\n  Content-Type: application/xml; charset=utf-8\n/sitemap-images.xml\n  Content-Type: application/xml; charset=utf-8\n/sitemap-index.xml\n  Content-Type: application/xml; charset=utf-8\n/robots.txt\n  Content-Type: text/plain; charset=utf-8\n/favicon.ico\n  Content-Type: image/x-icon\n/assets/icon-*.png\n  Content-Type: image/png\n/assets/icon.svg\n  Content-Type: image/svg+xml\n/site.webmanifest\n  Content-Type: application/manifest+json; charset=utf-8\n/assets/runtime/*\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n/assets/fonts/*\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n/assets/site-runtime.*.css\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n/assets/art/*\n  ! Cache-Control\n  Cache-Control: public, max-age=86400\n/assets/art-*\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n/assets/photos/*\n  ! Cache-Control\n  Cache-Control: public, max-age=604800\n/assets/social/*\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n/assets/*.json\n  ! Cache-Control\n  Cache-Control: public, max-age=60\n/lataukset/*\n  ! Cache-Control\n  Cache-Control: public, max-age=86400\n/kalenteriin/*\n  Content-Type: text/calendar; charset=utf-8\n  Content-Disposition: attachment\n  X-Robots-Tag: noindex\n  ! Cache-Control\n  Cache-Control: public, max-age=86400\n`,
 );
 const aliases = {
   "pdf-kalenterit": "pdf-kalenteri",

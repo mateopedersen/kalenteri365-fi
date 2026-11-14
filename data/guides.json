@@ -9,7 +9,7 @@
       {
         "title": "Miksi ensimmäinen viikko ei aina ala tammikuussa?",
         "paragraphs": [
-          "ISO-viikkovuoden ensimmäiseen viikkoon kuuluu tammikuun neljäs päivä. Sama sääntö voidaan ilmaista ensimmäisen torstain avulla. Viikko voi siis alkaa jo joulukuussa. Vuodessa on tämän jaon mukaan 52 tai 53 viikkoa, eikä joulukuun viimeinen viikko aina kuulu samaan viikkovuoteen kuin sen maanantai.",
+          "ISO-viikkovuoden ensimmäiseen viikkoon kuuluu tammikuun neljäs päivä. Sama sääntö voidaan ilmaista ensimmäisen torstain avulla. Viikko voi siis alkaa jo joulukuussa. Viikkovuodessa on tämän jaon mukaan 52 tai 53 viikkoa. Joulukuun viimeiset päivät voivat jo kuulua seuraavan vuoden ensimmäiseen ISO-viikkoon.",
           "Esimerkiksi 1.1.2027 on perjantai ja kuuluu vuoden 2026 viikkoon 53. Vuoden 2027 viikko 1 alkaa vasta maanantaina 4.1.2027. Pelkkä ilmaus ”viikko yksi” ei siten yksinään kerro, mitä vuodenvaihteen päiviä tarkoitetaan."
         ]
       },
@@ -57,7 +57,7 @@
         "title": "Varaa vapaat oman työrytmin mukaan",
         "paragraphs": [
           "Yleinen työpäivälaskuri ei tiedä henkilökohtaista työehtosopimustasi tai työvuoroluetteloasi. Aaton työaika käsitellään siksi laskureissa erillisellä valinnalla. Varmista vapaan ehdot omalta työnantajaltasi ennen varausta.",
-          "Lomasuunnittelijassa voit verrata vaihtoehtoja samalla lomapäivämäärällä. Valitse ensin vuosi, katso ehdotettu yhtenäinen vapaa ja tarkista sen sisältämät päivät. Vuorotyössä käytä lisäksi omaa vuorokiertoa, sillä maanantaista perjantaihin tehty laskelma ei kuvaa kaikkia työrytmejä."
+          "Lomasuunnittelijassa voit verrata vaihtoehtoja samalla lomapäivien määrällä. Valitse ensin vuosi, katso ehdotettu yhtenäinen vapaa ja tarkista sen sisältämät päivät. Vuorotyössä käytä lisäksi omaa vuorokiertoa, sillä maanantaista perjantaihin tehty laskelma ei kuvaa kaikkia työrytmejä."
         ]
       },
       {
@@ -84,7 +84,7 @@
     "title": "Perheen viikko selkeämmäksi",
     "art": "family",
     "photo": "turku",
-    "intro": "Perhekalenteri toimii parhaiten, kun siitä näkee nopeasti kuka, missä ja milloin. Kaikkea keskustelua ei tarvitse siirtää kalenteriin: merkitse ensin asiat, jotka vaikuttavat yhteiseen aikaan.",
+    "intro": "Perhekalenteri toimii parhaiten, kun siitä näkee nopeasti, kuka tekee mitäkin, missä ja milloin. Kaikkea keskustelua ei tarvitse siirtää kalenteriin: merkitse ensin asiat, jotka vaikuttavat yhteiseen aikaan.",
     "sections": [
       {
         "title": "Aloita kiinteistä menoista",
@@ -96,14 +96,14 @@
       {
         "title": "Yhdistä ruoka ja asiointi samaan näkymään",
         "paragraphs": [
-          "Viikon aterioita voi suunnitella vasta sen jälkeen, kun tiedät, milloin kaikki ovat kotona. Kiireiselle illalle sopii valmiiksi tehty ateria, kun taas vapaampana päivänä voi varata aikaa yhteiseen ruoanlaittoon. Ostoslistaa helpottaa, kun näet useamman päivän tarpeet kerralla.",
+          "Viikon aterioita voi suunnitella vasta sen jälkeen, kun tiedät, milloin kaikki ovat kotona. Kiireiselle illalle sopii valmiiksi tehty ateria, kun taas vapaampana päivänä voi varata aikaa yhteiseen ruoanlaittoon. Ostoslistan laatimista helpottaa, kun näet useamman päivän tarpeet kerralla.",
           "Jätä kalenteriin myös väljyyttä. Kaikkia vapaita hetkiä ei tarvitse täyttää. Tarkistakaa seuraava viikko yhdessä ja päättäkää, mikä meno on tärkeä ja mikä voidaan siirtää ilman haittaa."
         ]
       },
       {
         "title": "Jaa tuloste ja säilytä oma kopio",
         "paragraphs": [
-          "Kalenteri365:n perhesuunnitelma tallentuu käyttämääsi selaimeen, eikä se päivity automaattisesti perheen muihin puhelimiin. Tulosta valmis viikko yhteiseen käyttöön. Jos merkintöjä muutetaan myöhemmin, sopikaa miten uusi versio korvaa vanhan, jotta jääkaapin ovessa ei ole kahta keskenään erilaista aikataulua."
+          "Kalenteri365:n perhesuunnitelma tallentuu käyttämääsi selaimeen, eikä se päivity automaattisesti perheen muihin puhelimiin. Tulosta valmis viikko yhteiseen käyttöön. Jos merkintöjä muutetaan myöhemmin, sopikaa, miten uusi versio korvaa vanhan, jotta jääkaapin ovessa ei ole kahta keskenään erilaista aikataulua."
         ]
       }
     ],
@@ -173,7 +173,7 @@
       {
         "title": "Valitse oikea kunta ja koulumuoto",
         "paragraphs": [
-          "Saman kaupungin peruskoululla, lukiolla ja ammatillisella oppilaitoksella voi olla erilainen aikataulu. Myös esiopetuksessa tai kieliryhmien välillä voi esiintyä poikkeuksia. Varmista siksi ensin, minkä opetuksen tieto on kyseessä.",
+          "Saman kaupungin peruskoululla, lukiolla ja ammatillisella oppilaitoksella voi olla erilainen aikataulu. Myös esiopetuksessa tai kieliryhmien välillä voi esiintyä poikkeuksia. Varmista siksi ensin, mistä opetuksesta on kyse.",
           "Kalenteri365:n kuntasivuilla näkyy nimetty lukuvuosi ja alkuperäinen julkaisu. Jos myöhemmän vuoden aikataulua ei ole julkaistu, sitä ei päätellä edellisen vuoden lomista. Pelkkä viikon numero ei riitä tiedoksi, jos suunnitelma koskee useampaa lukuvuotta."
         ]
       },
@@ -264,7 +264,7 @@
       {
         "title": "Paikallinen horisontti ratkaisee havaintohetken",
         "paragraphs": [
-          "Täysikuuhetki tapahtuu samana maailmanlaajuisena hetkenä, vaikka sen kellonaika ja kalenteripäivä voivat vaihdella aikavyöhykkeittäin. Kuun nousu, lasku ja korkeus taas riippuvat havaintopaikasta. Täysikuuta ei välttämättä näe juuri sen täsmällisellä vaihehetkellä.",
+          "Täysikuun vaihehetki on sama kaikkialla maailmassa, vaikka sen kellonaika ja kalenteripäivä voivat vaihdella aikavyöhykkeittäin. Kuun nousu, lasku ja korkeus taas riippuvat havaintopaikasta. Täysikuuta ei välttämättä näe juuri sen täsmällisen vaihehetken aikaan.",
           "Suunnittele havainto yhdistämällä vaihetieto paikallisiin nousu- ja laskuaikoihin sekä sääennusteeseen. Pilvet, valaistu ympäristö ja horisontin esteet vaikuttavat siihen, mitä lopulta näet. Pienelläkin havaintopaikan muutoksella voi saada paremman näkymän."
         ]
       },
@@ -297,7 +297,7 @@
       {
         "title": "PDF vai kuva?",
         "paragraphs": [
-          "PDF sopii yleensä suoraan tulostukseen. Kalenteri365:n tekstit ja viivat piirretään PDF-tiedostoihin vektoreina, joten ne eivät muutu palikoiksi suurennettaessa. Jos tarvitset tiedoston kuvaohjelmaan, käytä kuva-latausta ja säilytä alkuperäiset pikselimitat.",
+          "PDF sopii yleensä suoraan tulostukseen. Kalenteri365:n tekstit ja viivat piirretään PDF-tiedostoihin vektoreina, joten ne eivät muutu palikoiksi suurennettaessa. Jos tarvitset tiedoston kuvaohjelmaan, käytä kuvalatausta ja säilytä alkuperäiset pikselimitat.",
           "600 dpi tarkoittaa kuvan pikselien suhdetta tulostettavaan mittaan. Pelkkä tiedostoon kirjoitettu tarkkuusmerkintä ei lisää yksityiskohtia. Siksi valmiiden kalentereiden kuvat muodostetaan paperikokoa vastaavaan suureen pikselikokoon."
         ]
       },
@@ -391,7 +391,7 @@
       {
         "title": "Luonto ja lukuvuosi ovat eri rytmejä",
         "paragraphs": [
-          "Koulun syyslukukausi, tähtitieteellinen syksy ja meteorologinen syksy alkavat eri perustein. Sään lämpötilaraja ei ole joka vuosi sama kalenteripäivä. Käytä vuodenajantietoa luonnon seuraamiseen ja koulun vahvistettua aikataulua läsnäolon suunnitteluun."
+          "Koulun syyslukukausi, tähtitieteellinen syksy ja meteorologinen syksy alkavat eri perustein. Sään lämpötilaraja ei ole joka vuosi sama kalenteripäivä. Käytä vuodenaikatietoa luonnon seuraamiseen ja koulun vahvistettua aikataulua läsnäolon suunnitteluun."
         ]
       }
     ],
@@ -412,13 +412,13 @@
     "title": "Mitä karkausvuosi 2028 muuttaa kalenterissa?",
     "art": "calendar",
     "photo": "holiday-runebergintorttu",
-    "intro": "Vuonna 2028 helmikuussa on 29 päivää ja vuodessa yhteensä 366 päivää. Ylimääräinen päivä vaikuttaa viikonpäivien etenemiseen ja päivämääräväleihin, mutta ei muuta kuukauden muiden päivien nimiä.",
+    "intro": "Vuonna 2028 helmikuussa on 29 päivää ja vuodessa yhteensä 366 päivää. Ylimääräinen päivä vaikuttaa viikonpäivien etenemiseen ja päivämääräväleihin. Se on huomioitava myös vuosittain toistuvissa merkinnöissä.",
     "sections": [
       {
         "title": "Tarkista helmikuun viimeinen päivä",
         "paragraphs": [
-          "Karkauspäivä 29.2. on vuoden 2028 kalenterissa tavallinen päivämäärä. Vuonna 2027 tai 2029 sitä ei ole. Kun syötät syntymäpäivää tai muuta vuosittaista tapahtumaa, varmista miten oma kalenteriohjelmasi käsittelee karkauspäivän sellaisena vuonna, jolloin päivämäärä puuttuu.",
-          "Gregoriaanisessa kalenterissa neljällä jaolliset vuodet ovat yleensä karkausvuosia. Sataluvut muodostavat poikkeuksen, ellei vuosiluku ole myös 400:lla jaollinen. Vuosi 2028 täyttää tavallisen neljän vuoden säännön."
+          "Karkauspäivä 29.2. on vuoden 2028 kalenterissa tavallinen päivämäärä. Vuonna 2027 tai 2029 sitä ei ole. Kun syötät syntymäpäivää tai muuta vuosittaista tapahtumaa, varmista, miten oma kalenteriohjelmasi käsittelee karkauspäivän sellaisena vuonna, jolloin päivämäärä puuttuu.",
+          "Gregoriaanisessa kalenterissa neljällä jaolliset vuodet ovat yleensä karkausvuosia. Sadalla jaolliset vuosiluvut ovat poikkeus: ne ovat karkausvuosia vain, jos vuosiluku on myös 400:lla jaollinen. Vuosi 2028 täyttää tavallisen neljän vuoden säännön."
         ]
       },
       {
@@ -452,7 +452,7 @@
         "title": "Kaikkia kellonaikoja ei ole joka päivä",
         "paragraphs": [
           "Kevään siirtymässä yksi paikallinen tunti jää väliin. Syksyn siirtymässä yksi tunti esiintyy kahdesti. Tällaiselle tunnille kirjoitettu kellonaika ei yksin kerro yksikäsitteistä ajanhetkeä. Syntymäajan tai yövuoron kohdalla ero voi olla olennainen.",
-          "Kalenteri365:n nousevan merkin laskuri tarkistaa puuttuvat ja kahdentuvat paikalliset ajat. Jos aika on epäselvä, tarkista alkuperäisestä merkinnästä kumpaa aikaa tarkoitetaan. Laskurin ei pidä valita tuntia puolestasi."
+          "Kalenteri365:n nousevan merkin laskuri tarkistaa puuttuvat ja kahdentuvat paikalliset ajat. Jos aika on epäselvä, tarkista alkuperäisestä merkinnästä, kumpaa aikaa tarkoitetaan. Laskurin ei pidä valita tuntia puolestasi."
         ]
       },
       {
@@ -520,14 +520,14 @@
         "title": "Erota päivän merkitys vapaapäivästä",
         "paragraphs": [
           "Suomalaisessa kalenterissa on virallisia ja vakiintuneita liputuspäiviä sekä muita merkkipäiviä. Työpäivälaskuri käyttää yleisiä pyhäpäiviä omana luokkanaan. Kalenterin värimerkintä on siksi luettava yhdessä selitteen kanssa.",
-          "Esimerkiksi juhannuspäivä on sekä pyhäpäivä että Suomen lipun päivä. Moni kulttuurin merkkipäivä taas voi osua tavalliselle arkipäivälle. Työstä vapaan kannalta ratkaisevaa on päivän luokitus sekä omat työehdot, ei pelkkä lippusymboli."
+          "Esimerkiksi juhannuspäivä on sekä pyhäpäivä että Suomen lipun päivä. Moni kulttuurin merkkipäivä taas voi osua tavalliselle arkipäivälle. Työstä vapaan kannalta ratkaisevia ovat päivän luokitus sekä omat työehdot, ei pelkkä lippusymboli."
         ]
       },
       {
         "title": "Tarkista vuosittainen sijoittuminen",
         "paragraphs": [
           "Äitienpäivä ja isänpäivä määräytyvät viikonpäiväsäännön perusteella. Niiden päivämäärä vaihtuu, vaikka juhlan merkitys säilyy. Kalenterista kannattaa tarkistaa kyseisen vuoden päivä ennen kutsujen tai yhteisen tapaamisen sopimista.",
-          "Vaali- ja muut kertaluonteiset liputuspäivät vaativat erillisen vahvistuksen. Sivuston vuosikalenterit erottavat päivien luokat ja linkittävät juhlan omaan selitykseen. Liputuksen käytännöt, kuten ajankohdat ja suruliputus, tarkistetaan Sisäministeriön ohjeista."
+          "Vaali- ja muut kertaluonteiset liputuspäivät vaativat erillisen vahvistuksen. Sivuston vuosikalenterit erottavat päivien luokat ja linkittävät juhlan omaan selitykseen. Liputuksen käytännöt, kuten ajankohdat ja suruliputus, tarkistetaan sisäministeriön ohjeista."
         ]
       }
     ],
@@ -548,7 +548,7 @@
     "title": "Suunnittele oma kalenteri kuvalle ja merkinnöille",
     "art": "edit",
     "photo": "turku",
-    "intro": "Oma kalenteri voi olla valokuvamuisto tai käytännöllinen työväline. Aloita käyttötarkoituksesta: pitääkö nähdä koko vuosi vai mahtuuko sivulle mieluummin yhden kuukauden muistiinpanot?",
+    "intro": "Oma kalenteri voi olla valokuvamuisto tai käytännöllinen työväline. Aloita käyttötarkoituksesta: pitääkö nähdä koko vuosi vai mahtuvatko sivulle mieluummin yhden kuukauden muistiinpanot?",
     "sections": [
       {
         "title": "Valitse rakenne ennen värejä",
@@ -560,7 +560,7 @@
       {
         "title": "Pidä teksti taustasta erottuvana",
         "paragraphs": [
-          "Valitse riittävän tumma teksti vaalealle taustalle tai vaalea teksti tummalle alueelle. Kuvan tärkeä yksityiskohta ei saisi jäädä päivämäärän tai otsikon alle. Pitkä kalenterin nimi kannattaa lyhentää niin, että se mahtuu myös tulosteessa.",
+          "Valitse riittävän tumma teksti vaalealle taustalle tai vaalea teksti tummalle alueelle. Kuvan tärkeä yksityiskohta ei saisi jäädä päivämäärän tai otsikon alle. Pitkä kalenterin nimi kannattaa lyhentää niin, että se mahtuu myös tulosteeseen.",
           "Merkitse omat tärkeät tapahtumat ja katso esikatselusta pisimmät otsikot. Päivän kenttä ei ole pitkä artikkeli: käytä lyhyttä nimeä ja säilytä tarkemmat tiedot omassa kalenteriohjelmassasi."
         ]
       },
@@ -593,7 +593,7 @@
       {
         "title": "Esikasvatus ja avomaan kylvö ovat eri vaiheita",
         "paragraphs": [
-          "Esikasvatuksessa siemen kylvetään sisälle ennen ulos istutusta. Avomaalle kylvössä siemen aloittaa kasvunsa suoraan kasvupaikalla. Pitkän kasvatusajan kasvi voi tarvita sisällä valoa ja tilaa jo silloin, kun maa on ulkona vielä jäässä.",
+          "Esikasvatuksessa siemen kylvetään sisälle ennen ulosistutusta. Avomaalle kylvettäessä siemen aloittaa kasvunsa suoraan kasvupaikalla. Pitkän kasvatusajan kasvi voi tarvita sisällä valoa ja tilaa jo silloin, kun maa on ulkona vielä jäässä.",
           "Aloita siemenpussin lajikekohtaisesta ohjeesta. Kylvökalenterin kuukausirajat ovat suunnittelun apu, eivät lupaus turvallisesta istutussäästä. Liian varhain esikasvatettu taimi voi kasvaa pitkäksi ja heikoksi, jos valoa on niukasti."
         ]
       },
@@ -647,7 +647,7 @@
       {
         "title": "Laskennan tarkkuus ja tulkinta ovat eri asioita",
         "paragraphs": [
-          "Geometrinen nousukulma voidaan laskea ja verrata toiseen laskentaan. Astrologinen luonnetulkinta ei tästä muutu tieteellisesti osoitetuksi ennusteeksi. Sivuston horoskoopit ovat viihteellisiä pohdintoja, eivät päätöksenteon tai terveyden arvioinnin väline."
+          "Geometrinen nousukulma voidaan laskea ja verrata toiseen laskentaan. Astrologinen luonnetulkinta ei tästä muutu tieteellisesti osoitetuksi ennusteeksi. Sivuston horoskoopit ovat viihteellisiä pohdintoja, eivät päätöksenteon tai terveyden arvioinnin välineitä."
         ]
       }
     ],
@@ -757,14 +757,14 @@
       {
         "title": "Päätä käytettävissä olevat lomapäivät",
         "paragraphs": [
-          "Aloita todellisesta lomapäivämäärästäsi ja valitse vuosi. Viikonloput ja yleiset pyhäpäivät voivat pidentää vapaan jaksoa, mutta työnantajan hyväksyntää ei voi päätellä laskurin parhaasta ehdotuksesta.",
-          "Katso ehdotuksen koko alku- ja loppuväli. Varmista, ettet tarvitse ylimääräistä työstä vapaata päivää matkan lähtöä tai paluuta varten. Iltaisin tai viikonloppuisin tehtävässä työssä tarkista ensin oma vuoroluettelo."
+          "Aloita käytettävissä olevien lomapäivien määrästä ja valitse vuosi. Viikonloput ja yleiset pyhäpäivät voivat pidentää vapaan jaksoa, mutta työnantajan hyväksyntää ei voi päätellä laskurin parhaasta ehdotuksesta.",
+          "Katso ehdotuksen aikaväli alusta loppuun. Varmista, ettet tarvitse ylimääräistä työstä vapaata päivää matkan lähtöä tai paluuta varten. Iltaisin tai viikonloppuisin tehtävässä työssä tarkista ensin oma vuoroluettelo."
         ]
       },
       {
         "title": "Vertaa useampaa sopivaa jaksoa",
         "paragraphs": [
-          "Pisin vapaa ei aina ole arjen kannalta paras. Koulujen lomat, perheen muut menot ja matkakohteen sesonki voivat tehdä lyhyemmästä vaihtoehdosta toimivamman. Käytä lomasuunnittelijaa vaihtoehtojen vertailuun, älä ainoaksi valintaperusteeksi.",
+          "Pisin vapaa ei aina ole arjen kannalta paras. Koulujen lomat, perheen muut menot ja matkakohteen sesonki voivat tehdä lyhyemmästä vaihtoehdosta toimivamman. Käytä lomasuunnittelijaa vaihtoehtojen vertailuun, mutta ota valinnassa huomioon myös muut tekijät.",
           "Tarkista aattojen käsittely erillisestä asetuksesta. Saman vuoden ehdotus voi muuttua, jos jouluaatto tai juhannusaatto on omassa työssäsi tavallinen työpäivä. Kalenterin liputuspäiviä ei lasketa automaattisesti vapaapäiviksi."
         ]
       },

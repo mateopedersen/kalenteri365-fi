@@ -1,0 +1,178 @@
+[
+  {
+    "id": "aalto",
+    "name": "Aalto-yliopisto",
+    "src": "/assets/institution-logos/aalto.svg",
+    "source": "https://www.aalto.fi/themes/custom/aalto_base/images/aalto_logo.svg",
+    "assetSource": "https://www.aalto.fi/themes/custom/aalto_base/images/aalto_logo.svg",
+    "sha256": "b82a01c235746742211895342723aea68b7821adefb2b5c7ad238a8a7cc440b8",
+    "checked": "2026-11-14",
+    "rights": "Oppilaitoksen tunnus. Tavaramerkkioikeudet kuuluvat tunnuksen haltijalle. Käytetään oppilaitoksen tunnistamiseen; ei osoita yhteistyötä."
+  },
+  {
+    "id": "hanken",
+    "name": "Hanken",
+    "src": "/assets/institution-logos/hanken.png",
+    "source": "https://www.hanken.fi/themes/custom/hanken_bootstrap/dist/images/hanken-logo.png",
+    "assetSource": "https://www.hanken.fi/themes/custom/hanken_bootstrap/dist/images/hanken-logo.png",
+    "sha256": "c1bf8e9e5c50b3b1c7234776870b713f3de641b0fcdd5da746d74626b8a18b6d",
+    "checked": "2026-11-14",
+    "rights": "Oppilaitoksen tunnus. Tavaramerkkioikeudet kuuluvat tunnuksen haltijalle. Käytetään oppilaitoksen tunnistamiseen; ei osoita yhteistyötä."
+  },
+  {
+    "id": "helsinki",
+    "name": "Helsingin yliopisto",
+    "src": "/assets/institution-logos/helsinki.png",
+    "source": "https://yliopistovalinnat.fi/koulutukset-hakeminen",
+    "assetSource": "https://yliopistovalinnat.fi/wp-content/uploads/2022/09/Helsingin_yliopisto_logo.png",
+    "sha256": "db1cf70bce780478182947befece50dee309d17119923160977dde1dbfdda291",
+    "checked": "2026-11-14",
+    "rights": "Oppilaitoksen tunnus. Tavaramerkkioikeudet kuuluvat tunnuksen haltijalle. Käytetään oppilaitoksen tunnistamiseen; ei osoita yhteistyötä.",
+    "sourceSha256": "f4931e125a2bba9f09c1f26174363e9eea80b58d9d135cad648d125214a5bd71",
+    "changes": "Tyhjien ulkomarginaalien rajaus; tunnusta ei ole muutettu."
+  },
+  {
+    "id": "uef",
+    "name": "Itä-Suomen yliopisto",
+    "src": "/assets/institution-logos/uef.svg",
+    "source": "https://www.uef.fi/themes/custom/uef/images/icons/src/LOGO_vaaka.svg",
+    "assetSource": "https://www.uef.fi/themes/custom/uef/images/icons/src/LOGO_vaaka.svg",
+    "sha256": "27d3d447aadf2420fbd9d96be70d7e4d0c7b8fd5a9da5e69546e1e284f201c19",
+    "checked": "2026-11-14",
+    "rights": "Oppilaitoksen tunnus. Tavaramerkkioikeudet kuuluvat tunnuksen haltijalle. Käytetään oppilaitoksen tunnistamiseen; ei osoita yhteistyötä."
+  },
+  {
+    "id": "jyu",
+    "name": "Jyväskylän yliopisto",
+    "src": "/assets/institution-logos/jyu.svg",
+    "source": "https://www.jyu.fi/themes/custom/jyu/images/logos/jyu-logo-fi.svg",
+    "assetSource": "https://www.jyu.fi/themes/custom/jyu/images/logos/jyu-logo-fi.svg",
+    "sha256": "c8dbd3b739c1304578b03dbe12ef0b0831a25ba19afa6cb1ae0a91fcf7a43309",
+    "checked": "2026-11-14",
+    "rights": "Oppilaitoksen tunnus. Tavaramerkkioikeudet kuuluvat tunnuksen haltijalle. Käytetään oppilaitoksen tunnistamiseen; ei osoita yhteistyötä."
+  },
+  {
+    "id": "lut",
+    "name": "LUT-yliopisto",
+    "src": "/assets/institution-logos/lut.svg",
+    "source": "https://www.lut.fi/themes/custom/lut/images/logos/lut-logo-nega.svg",
+    "assetSource": "https://www.lut.fi/themes/custom/lut/images/logos/lut-logo-nega.svg",
+    "sha256": "8a58df7c1182cfa6284a02061b4226dfa268e507cde5d290755a1b5b9800f689",
+    "checked": "2026-11-14",
+    "rights": "Oppilaitoksen tunnus. Tavaramerkkioikeudet kuuluvat tunnuksen haltijalle. Käytetään oppilaitoksen tunnistamiseen; ei osoita yhteistyötä."
+  },
+  {
+    "id": "oulu",
+    "name": "Oulun yliopisto",
+    "src": "/assets/institution-logos/oulu.svg",
+    "source": "https://www.oulu.fi/fi",
+    "assetSource": "https://www.oulu.fi/themes/custom/nextgen/dist/icons.svg",
+    "sha256": "9b23e7e1fbcd543ccd5265938eb4ad97816490c419f363425e348813541b96d1",
+    "checked": "2026-11-14",
+    "rights": "Oppilaitoksen tunnus. Tavaramerkkioikeudet kuuluvat tunnuksen haltijalle. Käytetään oppilaitoksen tunnistamiseen; ei osoita yhteistyötä."
+  },
+  {
+    "id": "uniarts",
+    "name": "Taideyliopisto",
+    "src": "/assets/institution-logos/uniarts.svg",
+    "source": "https://www.uniarts.fi/app/uploads/2020/03/8e4c1e5f-logo-fi.svg",
+    "assetSource": "https://www.uniarts.fi/app/uploads/2020/03/8e4c1e5f-logo-fi.svg",
+    "sha256": "33847ca420220d40ce42f0ad7254ed617e310e7e089243974937ced7bb06be87",
+    "checked": "2026-11-14",
+    "rights": "Oppilaitoksen tunnus. Tavaramerkkioikeudet kuuluvat tunnuksen haltijalle. Käytetään oppilaitoksen tunnistamiseen; ei osoita yhteistyötä."
+  },
+  {
+    "id": "turku",
+    "name": "Turun yliopisto",
+    "src": "/assets/institution-logos/turku.svg",
+    "source": "https://www.utu.fi/fi",
+    "assetSource": "https://www.utu.fi/sites/default/files/assets/sprite.svg",
+    "sha256": "72f3c8ca0126d1b9e7670887c67fd6fe5012e510689e1b9b214b453f5f92209f",
+    "checked": "2026-11-14",
+    "rights": "Oppilaitoksen tunnus. Tavaramerkkioikeudet kuuluvat tunnuksen haltijalle. Käytetään oppilaitoksen tunnistamiseen; ei osoita yhteistyötä."
+  },
+  {
+    "id": "vaasa",
+    "name": "Vaasan yliopisto",
+    "src": "/assets/institution-logos/vaasa.svg",
+    "source": "https://www.uwasa.fi/themes/custom/univaasa/logo.svg",
+    "assetSource": "https://www.uwasa.fi/themes/custom/univaasa/logo.svg",
+    "sha256": "8c5a20a280625a42ea3480116d836192f565ebbe3fc9910a4b7b7c0c12fb1de6",
+    "checked": "2026-11-14",
+    "rights": "Oppilaitoksen tunnus. Tavaramerkkioikeudet kuuluvat tunnuksen haltijalle. Käytetään oppilaitoksen tunnistamiseen; ei osoita yhteistyötä."
+  },
+  {
+    "id": "abo",
+    "name": "Åbo Akademi",
+    "src": "/assets/institution-logos/abo.svg",
+    "source": "https://www.abo.fi/wp-content/uploads/2025/01/logo.svg",
+    "assetSource": "https://www.abo.fi/wp-content/uploads/2025/01/logo.svg",
+    "sha256": "d8efdc6de6e6abe5863092208855890f5c1d854c3a9c9d98841024d4481b0c2a",
+    "checked": "2026-11-14",
+    "rights": "Oppilaitoksen tunnus. Tavaramerkkioikeudet kuuluvat tunnuksen haltijalle. Käytetään oppilaitoksen tunnistamiseen; ei osoita yhteistyötä."
+  },
+  {
+    "id": "haaga-helia",
+    "name": "Haaga-Helia ammattikorkeakoulu",
+    "src": "/assets/institution-logos/haaga-helia.png",
+    "source": "https://www.haaga-helia.fi/themes/custom/hh/logo.png",
+    "assetSource": "https://www.haaga-helia.fi/themes/custom/hh/logo.png",
+    "sha256": "e3eae1ebbc4f6056ccd8e90386ed7064344eec46a18d6c9c92714bb5dd1e5204",
+    "checked": "2026-11-14",
+    "rights": "Oppilaitoksen tunnus. Tavaramerkkioikeudet kuuluvat tunnuksen haltijalle. Käytetään oppilaitoksen tunnistamiseen; ei osoita yhteistyötä."
+  },
+  {
+    "id": "mpkk",
+    "name": "Maanpuolustuskorkeakoulu",
+    "src": "/assets/institution-logos/mpkk.png",
+    "source": "https://yliopistovalinnat.fi/koulutukset-hakeminen",
+    "assetSource": "https://yliopistovalinnat.fi/wp-content/uploads/2022/09/MPKK-logo-1.jpg",
+    "sha256": "a89f3ac9ca042a6cc3ecaf62baf83c3c2b8f83e6f344e402812df7416c08eccb",
+    "checked": "2026-11-14",
+    "rights": "Oppilaitoksen tunnus. Tavaramerkkioikeudet kuuluvat tunnuksen haltijalle. Käytetään oppilaitoksen tunnistamiseen; ei osoita yhteistyötä.",
+    "sourceSha256": "fb011cf5ac752e886a197a0ed05dfb898f1eb31ec71a78dd59a5ebe33d3152be",
+    "changes": "Tyhjien ulkomarginaalien rajaus; tunnusta ei ole muutettu."
+  },
+  {
+    "id": "lapland",
+    "name": "Lapin yliopisto",
+    "src": "/assets/institution-logos/lapland.svg",
+    "source": "https://ulapland.fi/",
+    "assetSource": "https://ulapland.fi/#header-logo",
+    "sha256": "a594b54dc32c96b5fa0d79fc90b97c602915239303599933837f2d0e2b3d2ac5",
+    "checked": "2026-11-14",
+    "rights": "Oppilaitoksen tunnus. Tavaramerkkioikeudet kuuluvat tunnuksen haltijalle. Käytetään oppilaitoksen tunnistamiseen; ei osoita yhteistyötä."
+  },
+  {
+    "id": "omnia",
+    "name": "Omnia",
+    "src": "/assets/institution-logos/omnia.svg",
+    "source": "https://www.omnia.fi/",
+    "assetSource": "https://www.omnia.fi/#header-logo",
+    "sha256": "8b7b2f08e184da0d4b893c503d6103771dc125bca8441a37c37eeb70d14221a2",
+    "checked": "2026-11-14",
+    "rights": "Oppilaitoksen tunnus. Tavaramerkkioikeudet kuuluvat tunnuksen haltijalle. Käytetään oppilaitoksen tunnistamiseen; ei osoita yhteistyötä."
+  },
+  {
+    "id": "tampere",
+    "name": "Tampereen yliopisto",
+    "src": "/assets/institution-logos/tampere.png",
+    "source": "https://yliopistovalinnat.fi/koulutukset-hakeminen",
+    "assetSource": "https://yliopistovalinnat.fi/wp-content/uploads/2022/09/Tampereen_yliopisto_logo.png",
+    "sha256": "8206168266a839bc4e778563619f16ecdfa2f8a5d89056ec040edea22f489bce",
+    "checked": "2026-11-14",
+    "rights": "Oppilaitoksen tunnus. Tavaramerkkioikeudet kuuluvat tunnuksen haltijalle. Käytetään oppilaitoksen tunnistamiseen; ei osoita yhteistyötä.",
+    "sourceSha256": "a7f212cf409f12baf1c1b3fdadd883b731095a339ad95ad201d9bdeb9346e430",
+    "changes": "Tyhjien ulkomarginaalien rajaus; tunnusta ei ole muutettu."
+  },
+  {
+    "id": "helsinki-city",
+    "name": "Helsingin kaupungin suomenkieliset lukiot",
+    "src": "/assets/institution-logos/helsinki-city.svg",
+    "source": "https://www.hel.fi/fi",
+    "assetSource": "https://www.hel.fi/etusivu-assets/themes/contrib/hdbt/dist/icons/sprite-f984c.svg#helsinki",
+    "sha256": "53f42e768f4be1699c9219ad5fe05a736f3fa92e236bc39643249ec995cccede",
+    "checked": "2026-11-14",
+    "rights": "Helsingin kaupungin tunnus. Käytetään koulutuksen järjestäjän tunnistamiseen; ei yksittäisen lukion logona."
+  }
+]

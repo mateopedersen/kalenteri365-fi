@@ -1,3 +1,5 @@
+import {benefitICS,paymentPath as benefitPath} from '../assets/benefit-core.mjs';
+import {pensionICS,paymentPath,REMINDERS} from '../assets/pension-core.mjs';
 import data from '../data/finland.json' with {type:'json'};
 import {schoolKey,schoolPeriods,schoolEvents,slug} from '../assets/community-core.mjs';
 import {PAYMENT_PLANS,paymentEvents} from '../assets/payment-data.mjs';
@@ -38,7 +40,13 @@ export async function writeCommunityCalendars(OUT,fs,path){
   const records=SCHOOL_RECORDS.filter(r=>r.municipality===city&&r.language===language);if(!records.length)continue;
   await fs.writeFile(path.join(target,`koululomat-${slug(city)}-${language}.ics`),serialize(records.flatMap(schoolEvents),city+' koululomat'));
  }
- for(const p of PAYMENT_PLANS)await fs.writeFile(path.join(target,'maksut-'+p.id+'.ics'),serialize(paymentEvents(p),p.institution+' '+p.name));
+ for(const p of PAYMENT_PLANS){
+  if(p.kind==='benefit'){for(const [reminder] of REMINDERS){await fs.writeFile(path.join(OUT,benefitPath(p,reminder)),benefitICS(p,{reminder}));for(const date of p.dates)await fs.writeFile(path.join(OUT,benefitPath(p,reminder,date)),benefitICS(p,{dates:[date],reminder}));}continue;}
+  for(const [reminder] of REMINDERS){
+   await fs.writeFile(path.join(OUT,paymentPath(p,reminder)),pensionICS(p,{reminder}));
+   for(const date of p.dates)await fs.writeFile(path.join(OUT,paymentPath(p,reminder,date)),pensionICS(p,{dates:[date],reminder}));
+  }
+ }
  const flags=[2027].flatMap(y=>holidays(y).filter(h=>h.isFlagDay).map(h=>({id:'liputus-'+h.slug+'-'+h.date,date:h.date,name:h.name,source:SERVICE_SOURCES.flags,applies:'Suomen liputuspäivä. Katso paikallinen liputusaika Kalenteri365:n liputustyökalusta.'})));
  await fs.writeFile(path.join(target,'suomen-liputuspaivat.ics'),serialize(flags,'Suomen liputuspäivät'));
 }

@@ -62,3 +62,20 @@
   .lunar-page-header h1,.lunar-page-header h1 span { color: #111; font-size: 24pt; }
   .lunar-header-eyebrow,.lunar-header-facts,.lunar-header-description,.lunar-header-art,.lunar-header-actions { display: none !important; }
 }
+
+@media print {
+  main:has(> .lunar-layout) > :not(.lunar-page-header):not(.lunar-layout) { display: none !important; }
+  main:has(> .lunar-layout) .lunar-layout { display: block; margin: 0; }
+  main:has(> .lunar-layout) .lunar-selected { display: none !important; }
+  main:has(> .lunar-layout) .lunar-month { margin: 0; padding: 0; border: 0; box-shadow: none; break-inside: avoid; }
+  main:has(> .lunar-layout) .lunar-month > h2 { display: none; }
+  main:has(> .lunar-layout) .lunar-month > p { margin: 0 0 3mm; font-size: 9pt; }
+  main:has(> .lunar-layout) .lunar-page-header h1 { margin: 0; font-size: 20pt; }
+  main:has(> .lunar-layout) .lunar-weekdays { gap: 2mm; margin: 0 0 2mm; font-size: 9pt; }
+  main:has(> .lunar-layout) .lunar-grid { gap: 2mm; }
+  main:has(> .lunar-layout) .lunar-day { min-height: 0; height: 22mm; padding: 1mm; gap: .4mm; border-radius: 2mm; box-shadow: none; break-inside: avoid; print-color-adjust: exact; }
+  main:has(> .lunar-layout) .lunar-day > span { font-size: 9pt; line-height: 1.1; }
+  main:has(> .lunar-layout) .lunar-day svg { flex: 0 0 12.5mm; width: 12.5mm; height: 12.5mm; }
+  main:has(> .lunar-layout) .lunar-day strong { font-size: 7pt; line-height: 1.1; }
+  main:has(> .lunar-layout)::after { display: block; margin-top: 3mm; color: #234761; text-align: right; font-size: 9pt; font-weight: 700; content: 'Kalenteri365.fi'; }
+}

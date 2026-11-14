@@ -1,3 +1,5 @@
+import {birthdayMeta} from './birthday-core.mjs';
+import {namedayMeta} from './namedays-core.mjs';
 import {sowingWindow} from './garden-model.mjs';
 import {initStorageNotice} from './storage-notice.mjs';
 import {occurs} from './personal-planner-core.mjs';
@@ -649,6 +651,8 @@ document.addEventListener("change", async (e) => {
       )
         throw Error("Varmuuskopion muotoa ei tunnistettu.");
       obj.events = obj.events.map((e) => ({
+        ...(birthdayMeta(e) ? {birthday:birthdayMeta(e)} : {}),
+        ...(namedayMeta(e) ? {nameday:namedayMeta(e)} : {}),
         id: e.id.replace(/[\r\n]/g, ""),
         date: e.date,
         title: e.title.slice(0, 160),
@@ -713,16 +717,7 @@ $("#task-form")?.addEventListener("submit", (e) => {
 $("#day-notes")?.addEventListener("blur", saveNotes);
 $("#day-notes")?.addEventListener("input", saveNotes);
 function renderBirthdays() {
-  if ($("#birthdays"))
-    $("#birthdays").innerHTML =
-      state.events
-        .filter((e) => e.repeat === "yearly")
-        .sort((a, b) => a.date.slice(5).localeCompare(b.date.slice(5)))
-        .map(
-          (e) =>
-            `<button class="agenda-item" data-edit-event="${esc(e.id)}">${esc(e.date.slice(8) + "." + e.date.slice(5, 7) + ".")} · ${esc(e.title)}</button>`,
-        )
-        .join("") || '<p class="empty">Ei vielä vuosittaisia muistutuksia.</p>';
+  window.dispatchEvent(new Event('birthdays:updated'));
 }
 function updateUpcoming() {
   if (!$('#upcoming')) return;
@@ -833,31 +828,6 @@ if(!document.querySelector("[data-workday-workspace]"))bindForm("#work-calc", (f
   }
   result(
     `<strong>${n} ${n === 1 ? "työpäivä" : "työpäivää"}</strong><p>${(n * +f.get("hours")).toLocaleString("fi-FI")} ${n * +f.get("hours") === 1 ? "tunti" : "tuntia"} · ${w} ${w === 1 ? "ma–pe-päivä" : "ma–pe-päivää"} − ${p} ${p === 1 ? "valittu pyhä- tai aattopäivä" : "valittua pyhä- tai aattopäivää"}. Rajapäivät mukana.</p>`,
-  );
-});
-bindForm("#week-calc", (f) => {
-  let w = week(parse(f.get("date")));
-  result(
-    `<strong>Viikko ${w.number} / ${w.year}</strong><p>${fi(weekStart(w.year, w.number))}–${fi(add(weekStart(w.year, w.number), 6))}</p>`,
-  );
-});
-bindForm("#day-calc", (f) => {
-  let d = parse(f.get("date")),
-    n = Math.round((d - date(d.getUTCFullYear(), 1, 1)) / 86400000) + 1;
-  result(
-    `<strong>Vuoden ${n}. päivä</strong><p>Vuodessa on ${leap(d.getUTCFullYear()) ? 366 : 365} päivää. Päivän jälkeen jäljellä ${(leap(d.getUTCFullYear()) ? 366 : 365) - n} ${(leap(d.getUTCFullYear()) ? 366 : 365) - n === 1 ? "päivä" : "päivää"}.</p>`,
-  );
-});
-bindForm("#leap-calc", (f) =>
-  result(
-    `<strong>${f.get("year")}: ${leap(+f.get("year")) ? "karkausvuosi" : "tavallinen vuosi"}</strong><p>${leap(+f.get("year")) ? "366 päivää · Helmikuussa 29 päivää." : "365 päivää · Helmikuussa 28 päivää."}</p>`,
-  ),
-);
-bindForm("#countdown-form", (f) => {
-  let n = Math.round((parse(f.get("target")) - parse(today)) / 86400000);
-  result(
-    `<strong>${Math.abs(n)} ${Math.abs(n) === 1 ? "päivä" : "päivää"} ${n < 0 ? "sitten" : "jäljellä"}</strong><p>${esc(f.get("title"))} · ${fi(parse(f.get("target")))}</p>`,
-    "#countdown-result",
   );
 });
 $$("[data-plan]").forEach((el) => {
@@ -971,29 +941,6 @@ if ($("#astro-form")) {
   form.addEventListener("change", () => {if(form.checkValidity()) form.requestSubmit();});
   form.requestSubmit();
 }
-const signNames = [
-  "Kauris",
-  "Vesimies",
-  "Kalat",
-  "Oinas",
-  "Härkä",
-  "Kaksoset",
-  "Rapu",
-  "Leijona",
-  "Neitsyt",
-  "Vaaka",
-  "Skorpioni",
-  "Jousimies",
-];
-bindForm("#zodiac-form", (f) => {
-  let d = parse(f.get("date")),
-    mo = d.getUTCMonth(),
-    cut = [20, 19, 21, 20, 21, 21, 23, 23, 23, 23, 22, 22][mo],
-    idx = (mo + (d.getUTCDate() >= cut ? 1 : 0)) % 12;
-  result(
-    `<strong>${signNames[idx]}</strong><p>Tavanomainen länsimainen horoskooppimerkki.</p>`,
-  );
-});
 $("#season-year")?.addEventListener("change", (e) => {
   $$("[data-season-year]").forEach(
     (s) => (s.hidden = s.dataset.seasonYear !== e.target.value),
@@ -1137,12 +1084,12 @@ window.addEventListener('afterprint',()=>document.querySelectorAll('.print-value
 document.addEventListener('click',async event=>{
  const button=event.target.closest('[data-share-open]');if(!button)return;
  button.disabled=true;
- try{const {openShare}=await import('./share-fi.mjs');openShare({url:document.querySelector('link[rel=canonical]')?.href||location.href,title:document.querySelector('h1')?.textContent||document.title,image:document.querySelector('meta[property="og:image"]')?.content});}
+ try{const {openShare}=await import('./share-fi.mjs');openShare({url:document.querySelector('link[rel=canonical]')?.href||location.href,title:document.querySelector('h1')?.textContent||document.title,image:document.querySelector('meta[property="og:image"]')?.content},button);}
  catch{toast('Jakamista ei voitu avata. Yritä uudelleen.');}
  finally{button.disabled=false;}
 });
 
-$('#exam-filter')?.addEventListener('input',e=>{const q=e.target.value.toLocaleLowerCase('fi').trim();let n=0;$$('[data-exam-subject]').forEach(row=>{row.hidden=!row.dataset.examSubject.includes(q);if(!row.hidden)n++;});$('#exam-filter-status').textContent=n+(n===1?' koepäivä':' koepäivää');});
+if(document.querySelector('[data-exam-workspace]'))import('./exams.mjs');
 
 if(document.querySelector("#blog-search,#tool-filter,[data-family-planner],#local-sun"))import("./edition-ui.mjs").then(({connectEdition})=>connectEdition({state,persist}));
 
@@ -1182,3 +1129,31 @@ if(document.querySelector('[data-print-catalog]'))import('./print-catalog-ui.mjs
 if(document.querySelector("[data-privacy-tools]"))import("./privacy-tools.mjs");
 
 if(document.querySelector("[data-vacation-planner]"))import("./vacation-planner.mjs");
+
+if(document.querySelector("[data-eclipse-workspace]"))import("./solar-eclipse-ui.mjs");
+
+if(document.querySelector("[data-lunar-eclipses]"))import("./lunar-eclipse-ui.mjs");
+
+if(document.querySelector("[data-perseids]"))import("./perseids-ui.mjs");
+
+if(document.querySelector('.season-reminders'))import('./season-reminders.mjs');
+
+if(document.querySelector('[data-countdown]'))import('./countdown.mjs');
+
+if(document.querySelector('[data-calendar-lab]'))import('./calendar-lab.mjs');
+
+if(document.querySelector('[data-birthday-calendar]'))import('./birthday-calendar.mjs').then(({connectBirthdays})=>connectBirthdays({state,persist,openEvent,onUpdate:()=>renderCalendar()}));
+
+if(document.querySelector('[data-pension-workspace]'))import('./pension-workspace.mjs').then(({connectPension})=>connectPension({state,persist,onUpdate(){renderCalendar();window.dispatchEvent(new Event('community:updated'));}}));
+
+if(document.querySelector('[data-benefit-workspace]'))import('./benefit-workspace.mjs').then(({connectBenefits})=>connectBenefits({state,persist,onUpdate(){renderCalendar();window.dispatchEvent(new Event('community:updated'));}}));
+
+if(document.querySelector('[data-weekend-workspace]'))import('./long-weekends.mjs');
+
+if(document.querySelector('[data-tax-workspace]'))import('./tax-calendar.mjs');
+
+if(document.querySelector('[data-admissions-workspace]'))import('./admissions.mjs');
+
+if(document.querySelector('[data-namedays-workspace]'))import('./namedays.mjs').then(({connectNamedays})=>connectNamedays({state,persist,onUpdate:()=>renderCalendar()}));
+
+if(document.querySelector('[data-flagging-workspace]'))import('./flagging.mjs');

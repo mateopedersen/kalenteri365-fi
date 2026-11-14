@@ -59,7 +59,7 @@ const guides={
   `${a('/kalenteri/2028/helmikuu/','Helmikuussa 2028')} on 29 päivää. Jos lisäät kalenterivuoden 29. helmikuuta alkavaan tapahtumaan, seuraavan vuoden päivämäärä ei ratkea pelkällä 365 päivän lisäyksellä. ${a('/blogi/karkausvuosi-2028/','Karkausvuoden oppaassa')} käsitellään tämän vaikutusta suunnitelmiin ja toistuviin päiviin.`,
  ]],
  'paivalaskuri':['Mitä lähtölaskenta laskee?',[
-  `Anna tapahtumalle tunnistettava nimi ja valitse sen päivämäärä. Laskenta vertaa valittua päivää Suomen tämän päivän päivämäärään. Se kertoo kalenteripäivien määrän, ei tarkkaa tuntien tai työpäivien määrää. Saman päivän erotus on nolla.`,
+  `Anna tapahtumalle nimi, päivämäärä ja Suomen paikallinen kellonaika. Laskuri vertaa tavoitehetkeä nykyhetkeen ja päivittyy joka sekunti. Päivät ovat täysiä 24 tunnin jaksoja ja muut yksiköt niiden yli jäävää aikaa. Menneen tapahtuman kohdalla näet siitä kuluneen ajan. Selaimen kellon tulee olla oikeassa ajassa.`,
   `Kun tarvitset kahden vapaasti valittavan päivän välisen ajan, avaa ${a('/paivamaaralaskuri/','päivämäärälaskuri')}. Jos määräaikaan lasketaan vain oman työviikon päivät, käytä ${a('/tyopaivalaskuri/','työpäivälaskuria')} ja tarkista sen rajapäivä- sekä pyhäpäivävalinnat.`,
  ]],
  'horoskooppimerkki':['Päivämääräraja on karkea lähtökohta',[

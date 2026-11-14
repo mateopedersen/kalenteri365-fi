@@ -15,7 +15,7 @@ test('Context links preserve markup and never link controls, existing anchors or
  assert.ok(out.includes('<form><p>Perhekalenteri'));
  assert.ok(out.includes('työpäivälaskurinkaan'));
  assert.equal(linkEditorialParagraphs(html,{path:'/',locale:'fi'}),html);
- assert.equal(linkEditorialParagraphs(html,{path:'/sv/kalender/',locale:'sv'}),html);
+ assert.equal(linkEditorialParagraphs(html,{path:'/other-language/',locale:'en'}),html);
  assert.equal(linkEditorialParagraphs('<p>Työpäivälaskuri laskee oman jakson päivät.</p>',{path:'/tyopaivalaskuri/'}).includes('data-editorial-link'),false);
 });
 

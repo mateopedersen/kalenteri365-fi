@@ -89,3 +89,13 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .blog-card-link:hover{color:var(--ink);text-decoration:none}
 .blog-card-link:hover h3{text-decoration:underline;text-underline-offset:4px}
 .blog-card-link:focus-visible{outline:3px solid #216ab1;outline-offset:-4px;border-radius:12px}
+
+/* Topic-specific reading examples keep tools first and explanations readable. */
+.reading-example{margin-block:24px;padding:clamp(20px,2.5vw,30px);border:1px solid #cbdced;border-left:4px solid #174f83;background:#fff;min-width:0}
+.reading-example>.eyebrow{margin:0 0 10px;color:#3b5d7e;font-size:.76rem;font-weight:800;letter-spacing:.1em}
+.reading-example>h2{font-size:clamp(1.2rem,1.4vw,1.55rem);line-height:1.35;margin:0 0 18px;color:#173b61;text-wrap:balance}
+.reading-example-copy{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 32px;align-items:start}
+.reading-example-copy>p{margin:0!important;font-size:1rem;line-height:1.75;color:#3d5369;max-width:74ch;overflow-wrap:break-word}
+.reading-example-copy a{font-weight:700;text-underline-offset:3px}
+@media(max-width:760px){.reading-example-copy{grid-template-columns:minmax(0,1fr);gap:16px}.reading-example{margin-block:20px}.reading-example-copy>p{font-size:1rem}}
+@media print{.reading-example{display:none!important}}

@@ -60,14 +60,14 @@
 .page-heading.lunar-page-heading p:last-child { color:#dceaf6; }
 .page-heading.lunar-page-heading>.page-art { border-radius:50%; }
 .lunar-page-heading .eyebrow { color:#b8d9f2; }
-.lunar-player .solar-overlay { max-width:calc(100% - 170px); }
+.lunar-player .solar-overlay { max-width:calc(100% - 244px); }
 .lunar-player .solar-overlay h2 { overflow-wrap:anywhere; }
 .lunar-detail { position:absolute;z-index:1;right:22px;top:66px;display:grid;justify-items:center;gap:4px;padding:10px 13px;border:1px solid #8badc74d;border-radius:16px;background:#071729e8;color:#fff; }
-#lunar-detail-disc { width:158px;height:158px; }
+#lunar-detail-disc { width:184px;height:184px; }
 #lunar-detail-disc svg,#lunar-sky-disc svg { display:block;width:100%;height:100%; }
 .lunar-detail strong { font-size:12px;line-height:1.4; }
 .lunar-detail>span { font-size:10px;color:#c7d9e9; }
-#lunar-sky-disc { position:absolute;z-index:1;width:9px;height:9px;transform:translate(-50%,-50%);pointer-events:none;filter:drop-shadow(0 0 5px #d8eaff8c); }
+#lunar-sky-disc { position:absolute;left:0;top:0;z-index:1;width:9px;height:9px;will-change:transform;transform:translate(-50%,-50%);pointer-events:none;filter:drop-shadow(0 0 5px #d8eaff8c); }
 #lunar-sky-disc[hidden] { display:none; }
 @media(max-width:600px){
  .page-heading.solar-page-heading { gap:12px;padding:17px 18px;margin:10px 0 16px; }
@@ -103,12 +103,29 @@
  .solar-explanation { font-size:11px;padding:0 15px 15px; }
  .solar-player #solar-polar-message { margin-inline:15px; }
  .solar-fullscreen-dialog .solar-stage { height:clamp(180px,calc(100dvh - 400px),650px); }
- .lunar-detail { right:14px;top:63px;padding:7px 8px;gap:3px;border-radius:12px; }
- #lunar-detail-disc { width:86px;height:86px; }
+ .lunar-detail { right:8px;top:63px;padding:7px 8px;gap:3px;border-radius:12px; }
+ #lunar-detail-disc { width:112px;height:112px; }
  .lunar-detail strong { font-size:10px; }
  .lunar-detail>span { font-size:8px; }
- .lunar-player .solar-overlay { max-width:calc(100% - 137px); }
+ .lunar-player .solar-overlay { max-width:calc(100% - 166px); }
  .lunar-player .solar-overlay .eyebrow { font-size:10px; }
 }
 @media(max-width:370px){.solar-settings .form-grid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}.solar-settings input{padding-inline:3px}.solar-settings{gap:6px}.solar-player .solar-stage{height:225px}.solar-player .solar-time{gap:7px}.solar-play{min-width:118px;font-size:12px}.solar-player .solar-time output{font-size:24px}}
 @media print {.solar-workspace .solar-settings,.solar-workspace .solar-player{display:none!important}}
+
+.lunar-player #lunar-detail-disc{filter:drop-shadow(0 4px 10px #0008)}
+@media(max-width:600px){.lunar-player .solar-stage{height:270px}.lunar-detail strong{font-size:11px}.lunar-detail>span{font-size:9px}}
+
+.lunar-player #solar-coordinates{white-space:pre-line;line-height:1.5}
+
+.solar-detail-bar:has(#solar-speed){display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center}
+@media(max-width:900px){
+ .solar-detail-bar:has(#solar-speed){grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ .solar-detail-bar:has(#solar-speed)>p{grid-column:1/-1}
+}
+@media(max-width:600px){
+ .solar-detail-bar:has(#solar-speed){grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+ .solar-detail-bar:has(#solar-speed)>p{grid-column:1/-1}
+ .solar-detail-bar:has(#solar-speed)>label{display:grid;gap:6px;min-width:0;width:auto;font-size:12px}
+ .solar-detail-bar:has(#solar-speed) select{width:100%;max-width:none;min-width:0;box-sizing:border-box}
+}

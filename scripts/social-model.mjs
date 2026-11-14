@@ -3,15 +3,13 @@ import articles from '../data/blog.json' with {type:'json'};
 import {CITIES,SLUGS,MONTHS,cap} from '../src/calendar.mjs';
 
 const calendarBases=new Set(['kalenteri','kuukausikalenteri','tyopaivat','juhlapyhat','liputuspaivat','merkkipaivat']);
-const swedishBases={kalender:'kalenteri',helgdagar:'juhlapyhat',skollov:'koulujen-lomat',arbetsdagar:'tyopaivat',datumraknare:'paivamaaralaskuri'};
 const moonCovers={2027:'moon-apollo17',2028:'moon-keeler',2029:'moon-bruce',2030:'moon-artemis-earthrise'};
 const PHOTO_BY_ID=new Map(photos.map(p=>[p.id,p]));
 const kindGroups={calendar:'Kalenterit',weekly:'Viikkosuunnittelu',print:'Tulostettavat kalenterit',lunar:'Kuu Suomen ajassa',solar:'Aurinko Suomen ajassa',moonrise:'Kuu ja havaintopaikka',daylength:'Päivän pituus',holiday:'Suomen juhlat',photo:'Suomen arki',school:'Koulu ja opiskelu',university:'Yliopistojen kalenterit',article:'Blogi ja oppaat',seasons:'Suomen vuodenajat',tool:'Arjen työkalut',zodiac:'Tähtimerkit ja horoskoopit',sky:'Taivas Suomen yllä',home:'Suomen kalenteri'};
 const PHOTO_ALIAS={'avomaankurkku':'kurkku'};
 
 export function socialModel(route,title,description='',context={}){
- const all=route.split('/').filter(Boolean),locale=context.locale==='sv'||all[0]==='sv'?'sv':'fi';
- const parts=locale==='sv'?all.slice(1):all,base=locale==='sv'?(swedishBases[parts[0]]||parts[0]||'etusivu'):(parts[0]||'etusivu');
+ const parts=route.split('/').filter(Boolean),locale='fi',base=parts[0]||'etusivu';
  const yearText=parts.find(p=>/^20\d{2}(?:-20\d{2})?$/.test(p));
  const year=yearText?Number(yearText.slice(0,4)):null;
  const monthIndex=parts.map(p=>SLUGS.indexOf(p)).find(i=>i>=0);
@@ -63,13 +61,12 @@ export function socialModel(route,title,description='',context={}){
  else if(family==='lunar')alt=`${label}: Kuun valokuvan pintadetaljit ja ${month?'kuukauden laskettu valaistus':'Kuun vaiheiden havainnekuvat'}.`;
  else if(family==='solar'||family==='daylength')alt=`${label}: ${photoRecords[0]?.alt||'Suomen maisema'} ${family==='daylength'?'Päivän pituuden vuosivaihtelun kaavio.':'Auringon kulun havainnekaari.'}`;
  else if(family==='moonrise')alt=`${label}: ${photoRecords[0]?.alt||'yömaisema'} Kuun nousun ja laskun havainnekuva.`;
- else if(family==='zodiac')alt=`${label}: kullanväriset eläinradan tunnukset kohokuvioina tummansinisellä taustalla.`;
+ else if(family==='zodiac')alt=`${label}: eläinradan aiheeseen liittyvä kuvitus tummansinisellä taustalla.`;
  else if(family==='seasons')alt=`${label}: kevään, kesän, syksyn ja talven suomalaiset maisemat neljässä digitaalisessa 3D-kuvituksessa.`;
  else if(family==='sky')alt=`${label}: ${base==='auringonpimennys'?'Kuun tumma kiekko peittää Auringon':'kirkkaat tähdet ja meteorien valojuovat'} tähtitaivaan havainnekuvassa.`;
  else if(photoRecords.length)alt=`${label}: ${photoRecords.map(p=>p.alt).join(' ')}`;
  else alt=`${label}: aiheeseen liittyvä sinivalkoinen kolmiulotteinen kuvitus.`;
  if(base==='kellonsiirto')alt=`${label}: selkeä kellotaulu ja kellon siirtoa kuvaavat nuolet.`;
  if(route.includes('/eduskuntavaalit/'))alt=`${label}: vaaliuurna ja äänestyslippu kolmiulotteisessa kuvituksessa.`;
- if(locale==='sv')alt=`${label}: en ämnesspecifik illustration${year?' för '+year:''} i blått och vitt.`;
- return {route,title:label,description,base,locale,family,year,yearText,month,week,city,seed,detail,category:locale==='sv'?'FINLAND':kindGroups[family]||'Arjen työkalut',photos:photoRecords,primaryId,alt};
+ return {route,title:label,description,base,locale,family,year,yearText,month,week,city,seed,detail,category:kindGroups[family]||'Arjen työkalut',photos:photoRecords,primaryId,alt};
 }

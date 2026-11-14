@@ -94,6 +94,7 @@ export async function auditSocial(root = ROOT) {
   const photos = await readJSON(path.join(root, 'data/photo-credits.json'), 'photo-registry');
   const imageXml = await read(path.join(out, 'sitemap-images.xml'), null, 'image-sitemap');
   const robots = await read(path.join(out, 'robots.txt'), null, 'robots-txt');
+  const sitemapIndex = await read(path.join(out, 'sitemap-index.xml'), null, 'sitemap-index');
   const expected = Array.isArray(pages) ? [...pages.filter(p => p.path !== '/404/'), {
     path: '/404/', title: 'Sivua ei löytynyt', description: 'Etsimääsi osoitetta ei löytynyt.', indexable: false, locale: 'fi',
   }] : [];
@@ -113,7 +114,7 @@ export async function auditSocial(root = ROOT) {
   const rendererVersion = rendererComplete ? renderer.digest('hex') : null;
   check(rendererComplete && manifest?.version === rendererVersion, null, 'current-renderer-version', {expected: rendererVersion, actual: manifest?.version});
   check(Boolean(imageXml?.includes('http://www.google.com/schemas/sitemap-image/1.1')), null, 'image-sitemap-namespace');
-  check(Boolean(robots?.toString().includes('Sitemap: ' + ORIGIN + '/sitemap-images.xml')), null, 'robots-image-sitemap-discovery');
+  check(Boolean(robots?.toString().includes('Sitemap: ' + ORIGIN + '/sitemap-index.xml') && sitemapIndex?.toString().includes('<loc>' + ORIGIN + '/sitemap-images.xml</loc>')), null, 'robots-image-sitemap-discovery');
   const sitemap = parseImageSitemap(imageXml?.toString() || '');
   const photoById = new Map((Array.isArray(photos) ? photos : []).map(p => [p.id, p]));
   const expectedPaths = new Set(expected.map(p => p.path)), byRoute = new Map(), byUrl = new Map(), byBytes = new Map();
@@ -266,7 +267,7 @@ export async function auditSocial(root = ROOT) {
       meta('og:description', page.description);
       meta('og:url', pageUrl);
       meta('og:type', /^\/blogi\/[^/]+\/$/.test(route) ? 'article' : 'website');
-      meta('og:locale', locale === 'sv' ? 'sv_FI' : 'fi_FI');
+      meta('og:locale', 'fi_FI');
       meta('og:site_name', 'Kalenteri365');
       meta('og:image', imageUrl);
       meta('og:image:secure_url', imageUrl);
@@ -283,7 +284,11 @@ export async function auditSocial(root = ROOT) {
       check(robotsMeta.length === 1, route, 'single-robots-meta');
       check(directives.includes('max-image-preview:large'), route, 'large-image-preview');
       check(directives.includes(indexable ? 'index' : 'noindex') && !directives.includes(indexable ? 'noindex' : 'index'), route, 'robots-indexability', {indexable, directives});
-      check(directives.includes('follow') && !directives.some(directive => ['nofollow', 'noimageindex', 'none'].includes(directive)), route, 'robots-images-followable');
+      if (route === '/valokuvat-ja-lisenssit/') {
+        check(directives.includes('noindex') && directives.includes('nofollow') && !directives.includes('follow'), route, 'license-page-noindex-nofollow');
+      } else {
+        check(directives.includes('follow') && !directives.some(directive => ['nofollow', 'noimageindex', 'none'].includes(directive)), route, 'robots-images-followable');
+      }
       const schemas = [];
       for (const json of head.json) {
         try {schemas.push(JSON.parse(json));}

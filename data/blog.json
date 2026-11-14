@@ -9,7 +9,7 @@
       {
         "title": "Miksi ensimmäinen viikko ei aina ala tammikuussa?",
         "paragraphs": [
-          "ISO-viikkovuoden ensimmäiseen viikkoon kuuluu tammikuun neljäs päivä. Sama sääntö voidaan ilmaista ensimmäisen torstain avulla. Viikko voi siis alkaa jo joulukuussa. Vuodessa on tämän jaon mukaan 52 tai 53 viikkoa, eikä joulukuun viimeinen viikko aina kuulu samaan viikkovuoteen kuin sen maanantai.",
+          "ISO-viikkovuoden ensimmäiseen viikkoon kuuluu tammikuun neljäs päivä. Sama sääntö voidaan ilmaista ensimmäisen torstain avulla. Viikko voi siis alkaa jo joulukuussa. Viikkovuodessa on tämän jaon mukaan 52 tai 53 viikkoa. Joulukuun viimeiset päivät voivat jo kuulua seuraavan vuoden ensimmäiseen ISO-viikkoon.",
           "Esimerkiksi 1.1.2027 on perjantai ja kuuluu vuoden 2026 viikkoon 53. Vuoden 2027 viikko 1 alkaa vasta maanantaina 4.1.2027. Pelkkä ilmaus ”viikko yksi” ei siten yksinään kerro, mitä vuodenvaihteen päiviä tarkoitetaan.",
           "Viikkovuoden sääntöä voi tarkistaa myös toiseen suuntaan. Joulukuun viimeisten päivien kohdalla katso, mihin viikko jatkuu tammikuussa. Jos jakso kuuluu seuraavan vuoden ensimmäiseen viikkoon, viikkovuoden numero vaihtuu ennen kalenterivuotta. Tämä ei siirrä itse päivämäärää: joulukuun päivä säilyy joulukuussa. Ero koskee vain viikon nimeämistä. Kun vertailet kahta kalenteria, varmista ensin, että niissä on sama viikon aloituspäivä ja sama numerointitapa. Eri numero ei aina tarkoita väärää päivämäärää, vaan joskus ohjelma käyttää eri viikkomääritelmää. Yhteiseen vuositaulukkoon on siksi hyödyllistä kirjoittaa, että kyse on ISO-viikoista maanantaista sunnuntaihin."
         ],
@@ -815,7 +815,7 @@
       {
         "title": "Paikallinen horisontti ratkaisee havaintohetken",
         "paragraphs": [
-          "Täysikuun vaihehetki on sama kaikkialla maailmassa, vaikka sen kellonaika ja kalenteripäivä voivat vaihdella aikavyöhykkeittäin. Kuun nousu, lasku ja korkeus taas riippuvat havaintopaikasta. Täysikuuta ei välttämättä näe juuri sen täsmällisellä vaihehetkellä.",
+          "Täysikuun vaihehetki on sama kaikkialla maailmassa, vaikka sen kellonaika ja kalenteripäivä voivat vaihdella aikavyöhykkeittäin. Kuun nousu, lasku ja korkeus taas riippuvat havaintopaikasta. Täysikuuta ei välttämättä näe juuri sen täsmällisen vaihehetken aikaan.",
           "Suunnittele havainto yhdistämällä vaihetieto paikallisiin nousu- ja laskuaikoihin sekä sääennusteeseen. Pilvet, valaistu ympäristö ja horisontin esteet vaikuttavat siihen, mitä lopulta näet. Pienelläkin havaintopaikan muutoksella voi saada paremman näkymän.",
           "Havaintosuunnitelman voi tehdä kahdessa vaiheessa. Etsi kuukalenterista ensin kiinnostava päivä ja tarkista sen jälkeen, milloin Kuu on omalta paikalta nähtävissä. Suunnittele sitten lyhyt aikaväli, jona voit todella mennä ulos. Täydenkuun täsmällisen minuutin odottaminen ei ole välttämätöntä, jos tarkoituksena on tunnistaa muoto tai ottaa oma muistikuva. Myös lähellä päävaihetta oleva ilta voi sopia omaan tavoitteeseen. Jos Kuu jää havaintopaikalla katveeseen, kirjaa este muistiin. Tämä tieto auttaa seuraavaa retkeä enemmän kuin oletus, että pelkkä kalenteriin merkitty vaihe takaisi esteettömän näkymän."
         ],
@@ -1302,13 +1302,13 @@
     "title": "Mitä karkausvuosi 2028 muuttaa kalenterissa?",
     "art": "calendar",
     "photo": "blog-monthly",
-    "intro": "Vuonna 2028 helmikuussa on 29 päivää ja vuodessa yhteensä 366 päivää. Ylimääräinen päivä vaikuttaa viikonpäivien etenemiseen ja päivämääräväleihin, mutta ei muuta kuukauden muiden päivien nimiä.",
+    "intro": "Vuonna 2028 helmikuussa on 29 päivää ja vuodessa yhteensä 366 päivää. Ylimääräinen päivä vaikuttaa viikonpäivien etenemiseen ja päivämääräväleihin. Se on huomioitava myös vuosittain toistuvissa merkinnöissä.",
     "sections": [
       {
         "title": "Tarkista helmikuun viimeinen päivä",
         "paragraphs": [
           "Karkauspäivä 29.2. on vuoden 2028 kalenterissa tavallinen päivämäärä. Vuonna 2027 tai 2029 sitä ei ole. Kun syötät syntymäpäivää tai muuta vuosittaista tapahtumaa, varmista, miten oma kalenteriohjelmasi käsittelee karkauspäivän sellaisena vuonna, jolloin päivämäärä puuttuu.",
-          "Gregoriaanisessa kalenterissa neljällä jaolliset vuodet ovat yleensä karkausvuosia. Sataluvut muodostavat poikkeuksen, ellei vuosiluku ole myös 400:lla jaollinen. Vuosi 2028 täyttää tavallisen neljän vuoden säännön.",
+          "Gregoriaanisessa kalenterissa neljällä jaolliset vuodet ovat yleensä karkausvuosia. Sadalla jaolliset vuosiluvut ovat poikkeus: ne ovat karkausvuosia vain, jos vuosiluku on myös 400:lla jaollinen. Vuosi 2028 täyttää tavallisen neljän vuoden säännön.",
           "Helmikuun lisäpäivä vaikuttaa myös kuukauden viimeiselle päivälle sovittuihin tehtäviin. Jos tarkoitus on tarkistaa yksi asia aina kuukauden päättyessä, sääntö on eri kuin joka kuukauden 28. päivä. Vuonna 2028 kuukauden viimeinen päivä on 29. helmikuuta, mutta seuraavana vuonna 28. helmikuuta. Valitse merkintään se sääntö, jota todella tarkoitat. Samalla kannattaa erottaa kalenteritehtävä mahdollisesta virallisesta määräajasta: sopimuksessa tai päätöksessä oleva päivä tarkistetaan alkuperäisestä asiakirjasta. Kalenterin oma toistotapa ei muuta ulkopuolisen määräajan ehtoja, vaikka se siirtäisi muistutuksen toiseen ruutuun."
         ],
         "links": []
@@ -1460,7 +1460,7 @@
       {
         "title": "Vuoden 2027 kellonsiirrot nykyisten sääntöjen mukaan",
         "paragraphs": [
-          "Nykyisten EU:ssa käytettyjen sääntöjen mukaan kesäaika alkaa maaliskuun ja päättyy lokakuun viimeisenä sunnuntaina. Vuonna 2027 nämä päivät ovat 28.3. ja 31.10. Suomessa kevään siirtymä on kello 03.00:sta kello 04.00:aan, ja syksyllä kello 04.00 palautuu kello 03.00:ksi.",
+          "Nykyisten EU:ssa käytettyjen sääntöjen mukaan kesäaika alkaa maaliskuun ja päättyy lokakuun viimeisenä sunnuntaina. Vuonna 2027 nämä päivät ovat 28.3. ja 31.10. Suomessa kello siirretään keväällä kolmesta neljään ja syksyllä neljästä kolmeen.",
           "Merkitse aamuyön tapahtumiin muutakin kuin pelkkä kellonaika. Keväällä esimerkiksi paikallista aikaa 03.30 ei ole olemassa kyseisenä päivänä. Syksyllä sama kellonaika 03.30 esiintyy kahdesti. Lentolippujen, työvuoron tai muun aikakriittisen tapahtuman alkuperäinen järjestäjä kertoo, mitä hetkeä tarkoitetaan. Jos sääntöjä myöhemmin muutetaan, tulevien vuosien aikataulu pitää päivittää. Ehdotus kellonsiirtojen poistamisesta ei yksin tarkoita, että siirrot olisivat jo päättyneet.",
           "Vuoden 2027 maaliskuun siirtymää voi kokeilla tavallisella yön yli jatkuvalla aikavälillä: lauantaina 27.3. kello 20 alkava ja sunnuntaina 28.3. kello 08 päättyvä jakso kestää todellisena aikana 11 tuntia. Lokakuun 30. ja 31. päivän vastaava jakso kestää 13 tuntia. Molemmissa kellotaulun nimellinen väli näyttää 12 tunnilta. Esimerkki koskee Europe/Helsinki-aikavyöhykettä nykyisten sääntöjen mukaan eikä sisällä taukojen tai korvausten laskentaa. Se havainnollistaa, miksi keston laskemiseen tarvitaan sekä päivämäärät että aikavyöhyke. Toiselle paikkakunnalle tai eri vuodelle samaa tulosta ei pidä kopioida tarkistamatta siirtymäpäivää."
         ],
