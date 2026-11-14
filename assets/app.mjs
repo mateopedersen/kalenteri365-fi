@@ -32,13 +32,14 @@ import { calTable, esc, icon, table, link } from "./ui.mjs";
 const $ = (s, root = document) => root.querySelector(s),
   $$ = (s, root = document) => [...root.querySelectorAll(s)];
 const config = JSON.parse($("#page-config").textContent),
-  KEY = "kalenteri365-fi-v1",
-  today = new Intl.DateTimeFormat("sv-SE", {
+  KEY = "kalenteri365-fi-v1";
+const localToday = () => new Intl.DateTimeFormat("sv-SE", {
     timeZone: "Europe/Helsinki",
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
   }).format(new Date());
+let today=localToday();
 let state;
 try{state=loadCalendarState(localStorage,CITIES);}catch{state=loadCalendarState({getItem:()=>null},CITIES);}
 let selected = today,
@@ -80,6 +81,7 @@ function listHTML(events, ds) {
 }
 function renderDay() {
   if (!$("#selected-date")) return;
+  if($('#day-panel-title'))$('#day-panel-title').textContent=selected===today?'Minun päiväni':'Valittu päivä';
   $("#selected-date").textContent =
     cap(DAYS[day(parse(selected))]) + ", " + fi(parse(selected));
   const items = eventAt(selected),
@@ -233,7 +235,7 @@ function renderCalendar() {
     root.innerHTML = `<div class="${view === "week" ? "week-agenda" : "day-agenda"}">${blocks.join("")}</div>`;
   }
   if (config.kind === "home") {
-    state.homeCalendar = { year: y, month: m, date: selected, view };
+    state.homeCalendar = { year: y, month: m, date: selected, view, followToday:selected===today };
     persist();
     const clean = cleanHomeURL(location.href);
     if (clean !== location.pathname + location.search + location.hash)
@@ -744,7 +746,17 @@ document.addEventListener('click', event => {
   const layer = event.target.closest('[data-focus-layer]');
   if (layer) setCalendarFilters(layer.dataset.focusLayer === 'all' ? CALENDAR_LAYERS.map(item => item[0]) : [layer.dataset.focusLayer]);
 });
-document.addEventListener('visibilitychange', () => { if (!document.hidden) updateUpcoming(); });
+function refreshLocalDay(){
+  const current=localToday();
+  if(current===today)return;
+  const following=selected===today;
+  saveNotes();today=current;
+  if(config.kind==='home'&&following){selected=today;y=Number(today.slice(0,4));m=Number(today.slice(5,7));}
+  renderCalendar();updateUpcoming();
+}
+document.addEventListener('visibilitychange', () => { if (!document.hidden){refreshLocalDay();updateUpcoming();} });
+window.addEventListener('focus',refreshLocalDay);
+setInterval(()=>{if(!document.hidden)refreshLocalDay();},30000);
 if ($("#calendar-view")) {
   if (config.kind === "home") {
     const initial = homeView(location.href, state.homeCalendar, today);

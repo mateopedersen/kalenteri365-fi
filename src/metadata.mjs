@@ -7,6 +7,11 @@ export {brandedTitle} from './seo-title.mjs';
 const compact = value => String(value ?? '').normalize('NFC').replace(/\s+/gu, ' ').trim();
 const shortDate = value => new Intl.DateTimeFormat('fi-FI', {day:'numeric',month:'numeric',timeZone:'Europe/Helsinki'}).format(new Date(value));
 const phaseCache = new Map();
+const properHolidayNames=new Set(['runebergin-paiva','kalevalan-paiva','minna-canthin-paiva','agricolan-paiva','snellmanin-paiva','eurooppa-paiva','ahvenanmaan-itsehallintopaiva','eino-leinon-paiva','tove-janssonin-paiva','suomen-luonnon-paiva','miina-sillanpaan-paiva','aleksis-kiven-paiva','ykn-paiva','sibeliuksen-paiva']);
+export function holidayDateQuestion(holiday,year){
+  const name=properHolidayNames.has(holiday.slug)?holiday.name:holiday.name[0].toLocaleLowerCase('fi')+holiday.name.slice(1);
+  return `Milloin ${name} ${holiday.slug==='eduskuntavaalit'?'ovat':'on'}${year?' vuonna '+year:''}?`;
+}
 
 function holidayDescription(base,year,month) {
   const entries=(base==='liputuspaivat'?flagDays(year).filter(h=>h.scope==='finland').map(h=>({...h,isFlagDay:true})):holidays(year)).filter(h=>(!month||Number(h.date.slice(5,7))===month)&&(
@@ -73,6 +78,16 @@ export function pageMetadata(path, title, description) {
   }
 
   result={...result,...overrides[path]};
+  if(base==='juhlapyhat'&&period&&!monthSlug&&!/^\d{4}$/.test(period)){
+    const holiday=holidays(2027).find(event=>event.slug===period);
+    if(holiday){
+      const when=new Date(holiday.date+'T12:00:00Z');
+      const answer=new Intl.DateTimeFormat('fi-FI',{weekday:'long',day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).format(when);
+      const range=period==='eduskuntavaalit'?'2027':'2027–2030';
+      result.title=`${holiday.name} ${range} | Päivämäärät`;
+      result.description=`${holidayDateQuestion(holiday,2027)} ${answer[0].toLocaleUpperCase('fi')+answer.slice(1)}. Katso ${range} päivämäärät, päivän tausta ja kalenterimuistutus.`;
+    }
+  }
   return {title:compact(result.title),description:compact(result.description)};
 }
 

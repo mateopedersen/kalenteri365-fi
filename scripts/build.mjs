@@ -65,7 +65,7 @@ import { moonSVG } from "../src/lunar.mjs";
 import { TOPIC_COPY, EDITORIAL_POLICY, METHODOLOGY_NOTE } from "../src/editorial.mjs";
 import {linkEditorialParagraphs} from '../src/editorial-links.mjs';
 import {periodGuide,cityGuide,periodDescription} from '../src/period-guide.mjs';
-import {pageMetadata,brandedTitle,assertUniqueMetadata} from '../src/metadata.mjs';
+import {holidayDateQuestion,pageMetadata,brandedTitle,assertUniqueMetadata} from '../src/metadata.mjs';
 import {toolGuide} from '../src/tool-guides.mjs';
 import {practicalExample} from '../src/practical-examples.mjs';
 import {introduceTool,TOOL_INTRODUCTIONS} from '../src/tool-introductions.mjs';
@@ -692,7 +692,7 @@ for (const h of holidays(2027).filter((h) => h.slug !== "eduskuntavaalit")){
       h.name,
       `${story?'':`<p class="holiday-lead">${esc(h.description)}</p>`}<p>${tag(h)}</p>` +
         (story ? `<div class="holiday-story"><h3>${esc(story.heading)}</h3>${story.paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}${reading}<div class="article-inline-links">${story.links.filter(l=>!readingDestinations.has(l.href)).map(l=>link(l.href,esc(l.label)+' '+icon('arrow'))).join('')}</div>${otherSources.length?`<details class="holiday-story-sources"><summary>Muut taustatiedot ja lähteet</summary><ul>${otherSources.map(s=>`<li>${link(s.url,esc(s.label))}</li>`).join('')}</ul></details>`:''}</div>` : '') +
-        '<h3>Ajankohdat 2027–2030</h3>' +
+        `<h3>${esc(holidayDateQuestion(h))} Ajankohdat 2027–2030</h3>` +
         table(
           ["Vuosi", "Päivämäärä", "Viikonpäivä"],
           YEARS.map((y) => {

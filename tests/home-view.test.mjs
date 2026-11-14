@@ -26,6 +26,15 @@ test('Saved calendar selections survive a reload; impossible dates do not roll i
   });
 });
 
+test('the current-day dashboard rolls forward across midnight and migrates the stale legacy default',()=>{
+  for(const [previous,current]of [['2026-11-13','2026-11-14'],['2026-12-31','2027-01-01'],['2028-02-29','2028-03-01']]){
+    const saved={year:Number(previous.slice(0,4)),month:Number(previous.slice(5,7)),date:previous,view:'month'};
+    for(const state of [saved,{...saved,followToday:true}])assert.equal(homeView('https://kalenteri365.fi/',state,current).date,current);
+    assert.equal(homeView('https://kalenteri365.fi/',{...saved,followToday:false},current).date,previous,'an explicit past-day selection remains available');
+    assert.equal(homeView('https://kalenteri365.fi/?date='+previous,saved,current).date,previous,'a dated shared link takes precedence');
+  }
+});
+
 test('All 48 monthly pages open and share with a clean path, including old default-state links', () => {
   for (const year of YEARS) for (const [index, slug] of SLUGS.entries()) {
     const month = index + 1, date = `${year}-${String(month).padStart(2, '0')}-01`;

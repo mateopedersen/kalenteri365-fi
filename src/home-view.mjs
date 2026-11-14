@@ -13,7 +13,10 @@ function validDate(value) {
 export function homeView(url, saved, today) {
   const query = new URL(url).searchParams;
   const linked = PARAMETERS.some(key => query.has(key));
-  const source = linked ? Object.fromEntries(query) : (saved || {});
+  // Older versions persisted yesterday's automatically selected day without
+  // recording that it followed today. Do not revive that stale default.
+  const followToday=!linked&&saved&&(saved.followToday===true||(saved.followToday===undefined&&validDate(saved.date)&&saved.date<today));
+  const source = linked ? Object.fromEntries(query) : followToday ? {view:saved.view} : (saved || {});
   const year = Number(source.year);
   const month = Number(source.month);
   const selected = validDate(source.date) ? source.date : today;
