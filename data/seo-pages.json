@@ -577,5 +577,53 @@
   "/koulujen-lomat/": {
     "title": "Koulujen lomat ja yliopistojen opetusperiodit | Kalenteri365",
     "description": "Katso koululomat kunnittain sekä lukioiden, ammatillisten oppilaitosten ja korkeakoulujen julkaistut aikataulut. Valitse lukuvuosi ja lataa kalenteri."
+  },
+  "/horoskooppi/oinas/": {
+    "title": "Oinas | Päivän horoskooppi",
+    "description": "Lue Oinaan päivän horoskooppi suomeksi: aloitteet, työ ja ihmissuhteet tänään. Tutustu Oinaan ajanjaksoon ja kokeile nousevan merkin laskuria."
+  },
+  "/horoskooppi/harka/": {
+    "title": "Härkä | Päivän horoskooppi",
+    "description": "Härän päivän horoskooppi käsittelee tämän päivän arkea, ihmissuhteita ja omaa aikaa. Katso myös Härän päivämäärät, piirteet ja nousevan merkin laskuri."
+  },
+  "/horoskooppi/kaksoset/": {
+    "title": "Kaksoset | Päivän horoskooppi",
+    "description": "Kaksosten päivän horoskooppi suomeksi: ajatuksia päivän keskusteluihin, työhön ja omiin valintoihin. Tutustu Kaksosten ajanjaksoon ja nousevaan merkkiin."
+  },
+  "/horoskooppi/rapu/": {
+    "title": "Rapu | Päivän horoskooppi",
+    "description": "Lue Ravun päivän horoskooppi ja pysähdy tämän päivän ihmissuhteiden, työn ja oman ajan äärelle. Katso Ravun päivämäärät ja laske nouseva merkkisi."
+  },
+  "/horoskooppi/leijona/": {
+    "title": "Leijona | Päivän horoskooppi",
+    "description": "Leijonan päivän horoskooppi tarjoaa pohdittavaa luovuuteen, ihmissuhteisiin ja päivän suunnitelmiin. Tutustu merkin ajanjaksoon ja nousevan merkin laskuriin."
+  },
+  "/horoskooppi/neitsyt/": {
+    "title": "Neitsyt | Päivän horoskooppi",
+    "description": "Neitsyen päivän horoskooppi suomeksi: arjen järjestelyt, työ ja ihmissuhteet tänään. Lue merkin kuvaus, tarkista päivämäärät ja laske nouseva merkkisi."
+  },
+  "/horoskooppi/vaaka/": {
+    "title": "Vaaka | Päivän horoskooppi",
+    "description": "Vaa’an päivän horoskooppi käsittelee tämän päivän valintoja, yhteistyötä ja omaa aikaa. Katso Vaa’an ajanjakso ja tutustu nousevan merkin laskuriin."
+  },
+  "/horoskooppi/skorpioni/": {
+    "title": "Skorpioni | Päivän horoskooppi",
+    "description": "Skorpionin päivän horoskooppi suomeksi: päivän ihmissuhteet, työ ja omat tavoitteet. Tutustu Skorpionin päivämääriin, symboliikkaan ja nousevaan merkkiin."
+  },
+  "/horoskooppi/jousimies/": {
+    "title": "Jousimies | Päivän horoskooppi",
+    "description": "Jousimiehen päivän horoskooppi tarjoaa ajatuksia tämän päivän suunnitelmiin ja kohtaamisiin. Katso merkin ajanjakso ja kokeile nousevan merkin laskuria."
+  },
+  "/horoskooppi/kauris/": {
+    "title": "Kauris | Päivän horoskooppi",
+    "description": "Kauriin päivän horoskooppi suomeksi: työ, vastuut ja aika palautumiselle tänään. Lue Kauriin kuvaus, tarkista päivämäärät ja laske nouseva merkkisi."
+  },
+  "/horoskooppi/vesimies/": {
+    "title": "Vesimies | Päivän horoskooppi",
+    "description": "Vesimiehen päivän horoskooppi käsittelee päivän ideoita, yhteistyötä ja omaa suuntaa. Tutustu merkin ajanjaksoon, piirteisiin ja nousevan merkin laskuriin."
+  },
+  "/horoskooppi/kalat/": {
+    "title": "Kalat | Päivän horoskooppi",
+    "description": "Kalojen päivän horoskooppi suomeksi: tämän päivän ihmissuhteet, oma aika ja suunnitelmat. Katso Kalojen päivämäärät ja tutustu nousevan merkin laskuriin."
   }
 }
