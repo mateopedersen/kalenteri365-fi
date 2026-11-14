@@ -14,7 +14,7 @@
 @media(max-width:480px){.countdown-number[data-countdown-unit="days"][data-length="5"] span{font-size:22px;letter-spacing:-.04em}}
 @media(max-width:350px){.countdown-number[data-countdown-unit="days"][data-length="5"] span{font-size:19px}}
 
-.countdown-picker{min-width:0}
+.countdown-picker{min-width:0;position:relative}
 .countdown-picker-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:9px}
 .countdown-settings .countdown-year-label{font-size:11px;gap:5px;max-width:180px}
 .countdown-settings .countdown-year-label select{height:38px;padding:7px 30px 7px 10px;font-size:13px}
@@ -26,9 +26,9 @@
 .countdown-search-field button:hover{background:#d9e9f9;color:#002f6c}
 .countdown-search-field button .icon{width:20px;height:20px;transform:rotate(90deg)}
 .countdown-picker #countdown-picker-help{font-size:13px;line-height:1.6;color:#47617c;margin:16px 0 0}
-.countdown-suggestions{margin-top:12px;border:1px solid #b8cce3;border-radius:10px;overflow:hidden;background:#f7faff}
+.countdown-suggestions{position:absolute;top:var(--countdown-menu-top,100%);left:0;right:0;z-index:20;display:grid;grid-template-rows:auto minmax(0,1fr) auto;max-height:min(360px,50svh);margin-top:8px;border:1px solid #b8cce3;border-radius:10px;overflow:hidden;background:#f7faff;box-shadow:0 14px 32px #062b5426}
 .countdown-suggestions>p{padding:10px 13px;margin:0;color:#49647d;font-size:12px;line-height:1.5;border-bottom:1px solid #d6e3f1}
-.countdown-suggestions ul{list-style:none;margin:0;padding:4px;max-height:290px;overflow-y:auto;overscroll-behavior:contain;scroll-padding:4px}
+.countdown-suggestions ul{list-style:none;margin:0;padding:4px;min-height:0;overflow-y:auto;overscroll-behavior:contain;scroll-padding:4px}
 .countdown-suggestions li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 10px;border-radius:7px;cursor:pointer;color:#193d65;min-height:58px}
 .countdown-suggestions li:hover,.countdown-suggestions li[aria-selected="true"]{background:#dfedfc;color:#002f6c}
 .countdown-suggestions li>span{display:grid;gap:4px;min-width:0}

@@ -10,6 +10,10 @@ const picker=root.querySelector('.countdown-picker'),suggestions=root.querySelec
 const suggestionYear=root.querySelector('#countdown-suggestion-year'),showEvents=root.querySelector('#countdown-show-events'),moreEvents=root.querySelector('#countdown-more-events');
 const eventRecords=JSON.parse(root.querySelector('[data-countdown-events]').textContent);
 let suggestionQuery='',suggestionLimit=8,visibleEvents=[],activeSuggestion=-1;
+function positionSuggestions(){
+ const field=picker.querySelector('.countdown-search-field');
+ picker.style.setProperty('--countdown-menu-top',`${field.offsetTop+field.offsetHeight}px`);
+}
 const suggestionDate=new Intl.DateTimeFormat('fi-FI',{timeZone:'UTC',day:'numeric',month:'numeric',year:'numeric'});
 const eventType=event=>event.type==='holiday'?'Pyhäpäivä':event.type==='eve'?'Aatto':event.isFlagDay?'Liputuspäivä':'Merkkipäivä';
 function closeSuggestions(){
@@ -33,7 +37,7 @@ function renderSuggestions(){
  root.querySelector('#countdown-suggestion-count').textContent=matches.length?`${matches.length} ehdotusta${matches.length>visibleEvents.length?` · näytetään ${visibleEvents.length}`:''}`:'Ei vastaavaa päivää. Voit kirjoittaa oman tapahtuman ja valita päivämäärän.';
  moreEvents.hidden=matches.length<=visibleEvents.length;
  moreEvents.textContent=`Näytä kaikki ${matches.length} ehdotusta`;
- suggestions.hidden=false;fields.title.setAttribute('aria-expanded','true');showEvents.setAttribute('aria-expanded','true');
+ positionSuggestions();suggestions.hidden=false;fields.title.setAttribute('aria-expanded','true');showEvents.setAttribute('aria-expanded','true');
 }
 function chooseSuggestion(index){
  const event=visibleEvents[index];if(!event)return;
@@ -57,6 +61,7 @@ eventList.addEventListener('click',event=>{const option=event.target.closest('[d
 showEvents.addEventListener('click',()=>{if(!suggestions.hidden){closeSuggestions();return;}suggestionQuery='';suggestionLimit=8;renderSuggestions();});
 suggestionYear.addEventListener('change',()=>{suggestionLimit=8;renderSuggestions();});
 moreEvents.addEventListener('click',()=>{suggestionLimit=eventRecords.length;renderSuggestions();});
+new ResizeObserver(()=>{if(!suggestions.hidden)positionSuggestions();}).observe(picker);
 picker.addEventListener('focusout',event=>{if(!picker.contains(event.relatedTarget))closeSuggestions();});
 document.addEventListener('click',event=>{if(!picker.contains(event.target))closeSuggestions();});
 const formatDate=new Intl.DateTimeFormat('fi-FI',{timeZone:'Europe/Helsinki',day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});

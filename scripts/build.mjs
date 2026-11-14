@@ -39,6 +39,7 @@ import {LEGAL_PAGES} from '../src/legal-pages.mjs';
 import {homeSections,homeDownloads,blogCards,toolDirectory,calendarDownloads,calendarNavigator,familyPlanner} from '../src/edition-view.mjs';
 import blog from '../data/blog.json' with {type:'json'};
 import holidayStories from '../data/holiday-stories.json' with {type:'json'};
+import {holidayReading,remainingHolidaySources} from '../src/holiday-reading.mjs';
 import {holidaySummary} from '../src/holiday-summaries.mjs';
 import {examCalendar} from './exams.mjs';
 import {runtimeAssets} from './runtime.mjs';
@@ -676,6 +677,9 @@ for (const y of YEARS) {
 for (const h of holidays(2027).filter((h) => h.slug !== "eduskuntavaalit")){
   const image=PHOTO_CREDITS.find(p=>p.applicableSlugs?.includes(h.slug));
   const story=holidayStories[h.slug];
+  const reading=story?holidayReading(h.slug):'';
+  const readingDestinations=contentDestinations(reading);
+  const otherSources=story?remainingHolidaySources(h.slug):[];
   for(const year of YEARS){
     const event={...holidays(year).find(event=>event.slug===h.slug),url:'https://kalenteri365.fi/juhlapyhat/'+h.slug+'/'};
     for(const [reminder] of REMINDERS){const target=path.join(OUT,eventDownloadPath(h.slug,year,reminder));await fs.mkdir(path.dirname(target),{recursive:true});await fs.writeFile(target,eventCalendar(event,reminder));}
@@ -687,7 +691,7 @@ for (const h of holidays(2027).filter((h) => h.slug !== "eduskuntavaalit")){
     `${image?`<figure class="holiday-cover ${image.width<image.height?'portrait':''}">${photo(image.id,{lazy:false,sizes:"(max-width:700px) 100vw, 1100px"})}<figcaption>${esc(image.caption)}</figcaption></figure>`:""}<div class="two-columns holiday-details">${section(
       h.name,
       `${story?'':`<p class="holiday-lead">${esc(h.description)}</p>`}<p>${tag(h)}</p>` +
-        (story ? `<div class="holiday-story"><h3>${esc(story.heading)}</h3>${story.paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}<div class="article-inline-links">${story.links.map(l=>link(l.href,esc(l.label)+' '+icon('arrow'))).join('')}</div><details class="holiday-story-sources"><summary>Taustatiedot ja lähteet</summary><ul>${story.sources.map(s=>`<li>${link(s.url,esc(s.label))}</li>`).join('')}</ul></details></div>` : '') +
+        (story ? `<div class="holiday-story"><h3>${esc(story.heading)}</h3>${story.paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}${reading}<div class="article-inline-links">${story.links.filter(l=>!readingDestinations.has(l.href)).map(l=>link(l.href,esc(l.label)+' '+icon('arrow'))).join('')}</div>${otherSources.length?`<details class="holiday-story-sources"><summary>Muut taustatiedot ja lähteet</summary><ul>${otherSources.map(s=>`<li>${link(s.url,esc(s.label))}</li>`).join('')}</ul></details>`:''}</div>` : '') +
         '<h3>Ajankohdat 2027–2030</h3>' +
         table(
           ["Vuosi", "Päivämäärä", "Viikonpäivä"],
@@ -966,7 +970,7 @@ await page(
   "/juhlapyhat/eduskuntavaalit/",
   "Eduskuntavaalit 2027",
   "Eduskuntavaalien vaalipäivä 18.4.2027 ja virallinen tietolähde.",
-  electionPage(),
+  electionPage()+section('Vaalit ja yhteiskunnallinen osallistuminen',`<div class="holiday-story">${holidayReading('eduskuntavaalit')}</div>`),
 );
 await gardenDetails(page);
 await extraPages({ page, section, table, notice, toolCards, link, art });
