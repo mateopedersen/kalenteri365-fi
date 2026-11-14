@@ -269,6 +269,11 @@ for(const source of ['data/calendar-packages.json','src/exports.mjs','src/print-
 const downloadVersion=downloadHash.digest('hex').slice(0,16);
 const pages = [],
   exportIndex = [];
+// Social covers embed the supplied print previews, so prepare the originals
+// and previews before rendering any pages on a clean build.
+if (!process.argv.includes("--html-only")) {
+  exportIndex.push(...await importCalendarPackages(OUT));
+}
 const metadataInventory = {title:new Map(),description:new Map()};
 async function page(p, title, desc, body, kind = "page", extra = {}) {
   desc=periodDescription(p,desc);
@@ -1076,10 +1081,6 @@ await fs.writeFile(
   path.join(ROOT, "reports/pages.json"),
   JSON.stringify(pages, null, 2),
 );
-if (!process.argv.includes("--html-only")) {
-  exportIndex.push(...await importCalendarPackages(OUT));
-}
-
 if(!process.argv.includes("--html-only")){await generateLunarSet(ROOT,OUT);await generatePlannerSet(ROOT,OUT);}
 console.log(
   "Build complete:",
