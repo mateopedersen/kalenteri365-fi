@@ -1,3 +1,4 @@
+import {calendarView,calendarViewURL} from './calendar-url.mjs';
 const ORIGIN='https://kalenteri365.fi';
 const months=['tammikuu','helmikuu','maaliskuu','huhtikuu','toukokuu','kesakuu','heinakuu','elokuu','syyskuu','lokakuu','marraskuu','joulukuu'];
 export const escapeShare=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -29,6 +30,11 @@ export function safePublicUrl(input,{date,view,year,month}={}){
    if((view||url.searchParams.get('view'))==='year')url.pathname=`/kalenteri/${y}/`;
    else if(m>=1&&m<=12)url.pathname=`/kalenteri/${y}/${months[m-1]}/`;
   }
+ }
+ const calendar = /^\/kalenteri\/(202[7-9]|2030)\/([a-z]+)\/?$/.exec(url.pathname);
+ if(calendar && months.includes(calendar[2])){
+  const y=Number(calendar[1]),m=months.indexOf(calendar[2])+1,initial=calendarView(source.href,y,m);
+  return new URL(calendarViewURL(url.href,{year:y,month:m,date:date&&validDate(date)?date:initial.date,view:view||initial.view}),ORIGIN).href;
  }
  return url.href;
 }

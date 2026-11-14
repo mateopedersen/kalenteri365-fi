@@ -7,7 +7,7 @@ import {CALENDAR_LAYERS, calendarFilterIds, upcomingItems} from './dashboard.mjs
 import {cityPhotoState, cityPhotoPeriod, cityPhotoVariant} from './city-light.mjs';
 import { dayEvents } from "./solar-day.mjs";
 import { moonSVG } from "./lunar.mjs";
-import { homeView, cleanHomeURL, loadCalendarState } from "./home-view.mjs";
+import { homeView, cleanHomeURL, calendarView, calendarViewURL, loadCalendarState } from "./home-view.mjs";
 import {
   MONTHS,
   SLUGS,
@@ -245,10 +245,9 @@ function renderCalendar() {
     if (clean !== location.pathname + location.search + location.hash)
       history.replaceState(null, "", clean);
   } else if (config.kind === "calendar") {
-    const u = new URL(location.href);
-    u.searchParams.set("date", selected);
-    u.searchParams.set("view", view);
-    history.replaceState(null, "", u);
+    const clean = calendarViewURL(location.href, {year: y, month: m, date: selected, view});
+    if (clean !== location.pathname + location.search + location.hash)
+      history.replaceState(null, "", clean);
   }
   renderDay();
   updateCalendarFilters();
@@ -502,7 +501,12 @@ document.addEventListener("click", (e) => {
   }
   if (gm) {
     m = +gm;
+    selected = iso(date(y, m, 1));
     view = "month";
+    if (config.kind === "calendar" && YEARS.includes(y)) {
+      location.href = "/kalenteri/" + y + "/" + SLUGS[m - 1] + "/";
+      return;
+    }
     renderCalendar();
     return;
   }
@@ -575,15 +579,7 @@ document.addEventListener("click", (e) => {
         selected = iso(d);
       }
       if (config.kind === "calendar" && view === "month" && YEARS.includes(y)) {
-        location.href =
-          "/kalenteri/" +
-          y +
-          "/" +
-          SLUGS[m - 1] +
-          "/?date=" +
-          selected +
-          "&view=" +
-          view;
+        location.href = "/kalenteri/" + y + "/" + SLUGS[m - 1] + "/";
       } else renderCalendar();
       break;
     }
@@ -755,7 +751,6 @@ document.addEventListener('click', event => {
 });
 document.addEventListener('visibilitychange', () => { if (!document.hidden) updateUpcoming(); });
 if ($("#calendar-view")) {
-  const q = new URL(location.href).searchParams;
   if (config.kind === "home") {
     const initial = homeView(location.href, state.homeCalendar, today);
     y = initial.year;
@@ -763,12 +758,9 @@ if ($("#calendar-view")) {
     selected = initial.date;
     view = initial.view;
   } else {
-    selected = /^\d{4}-\d{2}-\d{2}$/.test(q.get("date") || "")
-      ? q.get("date")
-      : iso(date(y, m, 1));
-    view = ["month", "week", "day", "list", "year"].includes(q.get("view"))
-      ? q.get("view")
-      : "month";
+    const initial = calendarView(location.href, y, m);
+    selected = initial.date;
+    view = initial.view;
   }
   renderCalendar();
   updateUpcoming();

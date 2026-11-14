@@ -1,3 +1,5 @@
+export {calendarView, calendarViewURL} from '../assets/calendar-url.mjs';
+
 const VIEWS = new Set(['month', 'week', 'day', 'list', 'year']);
 const PARAMETERS = ['year', 'month', 'date', 'view'];
 

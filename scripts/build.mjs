@@ -695,7 +695,7 @@ for (const h of holidays(2027).filter((h) => h.slug !== "eduskuntavaalit")){
             let d = holidays(y).find((x) => x.slug === h.slug);
             return [
               link("/juhlapyhat/" + y + "/", y),
-              link("/kalenteri/"+y+"/"+SLUGS[parse(d.date).getUTCMonth()]+"/?date="+d.date,fi(parse(d.date))),
+              link("/kalenteri/"+y+"/"+SLUGS[parse(d.date).getUTCMonth()]+"/#date="+d.date,fi(parse(d.date))),
               cap(DAYS[day(parse(d.date))]),
             ];
           }),
