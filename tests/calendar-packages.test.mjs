@@ -11,7 +11,7 @@ test('All 52 supplied collections contain exactly 15 correctly sized source-boun
   const styles=calendarStyles(year,month);assert.equal(styles.length,15);assert.equal(new Set(styles.map(s=>s.id)).size,15);
   for(const s of styles){assert.deepEqual([s.width,s.height],s.orientation==='landscape'?[7016,4961]:[4961,7016]);}
  }
- for(const c of manifest.calendars){assert.match(c.pdf.sha256,/^[a-f0-9]{64}$/);assert.match(c.image.sha256,/^[a-f0-9]{64}$/);assert.equal(c.dpi,600);assert(c.pdf.entry.endsWith('.pdf'));assert(c.image.entry.endsWith('.webp'));}
+ for(const c of manifest.calendars){assert.match(c.pdf.sha256,/^[a-f0-9]{64}$/);assert.match(c.image.sha256,/^[a-f0-9]{64}$/);assert.equal(c.dpi,600);assert(c.pdf.entry.endsWith('.pdf'));assert(c.image.entry.endsWith('.webp'));assert.match(c.preview.sha256,/^[a-f0-9]{64}$/);assert.equal(c.preview.sourceImageSha256,c.image.sha256);assert(c.preview.bytes>1000);}
 });
 test('Yearly and monthly cards describe the actual supplied designs and orientation',()=>{
  assert.equal(calendarStyles(2028,0)[0].name,'Sinivalkoinen vuosi');
