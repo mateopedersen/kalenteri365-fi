@@ -1,3 +1,4 @@
+import './calendar-downloads.js';
 import {quantity} from './fi-language.mjs';
 import {namedayMeta,namedayName,namedayReport,makeNameday,duplicateNameday,namedaysICS,NAME_DAY_CALENDARS,NAME_DAY_REMINDERS} from './namedays-core.mjs';
 import {esc,icon} from './ui.mjs';
@@ -6,7 +7,7 @@ import {MONTHS,cap} from './calendar.mjs';
 const todayFi=()=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Helsinki',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 const fullDate=ds=>new Intl.DateTimeFormat('fi-FI',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).format(new Date(ds+'T12:00Z'));
 const relative=r=>r.days===0?'Tänään':r.days===1?'Huomenna':r.days===null?'Ei tulevaa päivää':`${r.days} päivän päästä`;
-function download(name,body){const url=URL.createObjectURL(new Blob([body],{type:'text/calendar;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function download(name,body){return globalThis.Calendar365Downloads.save(body,name,'text/calendar;charset=utf-8');}
 export function connectNamedays({state,persist,onUpdate}){
  const root=document.querySelector('[data-namedays-workspace]');if(!root)return;
  const $=s=>root.querySelector(s),form=$('#nd-form'),f=form.elements;let today=todayFi(),deleted=null;

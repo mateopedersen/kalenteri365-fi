@@ -1,3 +1,4 @@
+import './calendar-downloads.js';
 import {countForm,quantity} from './fi-language.mjs';
 import {birthdayMeta,birthdayName,birthdayReport,makeBirthday,birthdayICS,birthdayCSV,BIRTHDAY_GROUPS,BIRTHDAY_REMINDERS} from './birthday-core.mjs';
 import {namedayMeta} from './namedays-core.mjs';
@@ -7,7 +8,7 @@ import {googleCalendarURL} from './calendar-event-core.mjs';
 const todayFi=()=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Helsinki',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 const labelDate=ds=>new Intl.DateTimeFormat('fi-FI',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).format(new Date(ds+'T12:00:00Z'));
 const relative=r=>r.days===0?'Tänään':r.days===1?'Huomenna':r.days===null?'Ei tulevaa päivää':`${r.days} päivän päästä`;
-function download(name,body,type){const url=URL.createObjectURL(new Blob([body],{type})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function download(name,body,type){return globalThis.Calendar365Downloads.save(body,name,type);}
 export function connectBirthdays({state,persist,onUpdate,openEvent}){
  const root=document.querySelector('[data-birthday-calendar]');if(!root)return;
  const $=s=>root.querySelector(s),form=$('#birthday-form'),dialog=$('#birthday-dialog');let today=todayFi(),deleted=null,lastTrigger=null;

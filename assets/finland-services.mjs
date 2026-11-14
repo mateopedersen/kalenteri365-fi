@@ -1,3 +1,4 @@
+import './calendar-downloads.js';
 import {CITIES,add,parse,iso} from './calendar.mjs';
 import {dayEvents} from './solar-day.mjs';
 import {serviceCalendar,flagHours,daylightDifference} from './finland-services-core.mjs';
@@ -5,7 +6,7 @@ import {ADMISSION_ROUTES} from './finland-services-data.mjs';
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const records=JSON.parse($('#service-records')?.textContent||'[]');
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const download=(name,text)=>{const u=URL.createObjectURL(new Blob([text],{type:'text/calendar;charset=utf-8'})),a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),2000);};
+const download=(name,text)=>globalThis.Calendar365Downloads.save(text,name,'text/calendar;charset=utf-8');
 function filter(){
  const kind=$('[data-services]')?.dataset.services;
  let count=0;

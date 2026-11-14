@@ -1,3 +1,4 @@
+import './calendar-downloads.js';
 import {filterExams,examCalendarFile} from './exam-core.mjs';
 import {esc,icon} from './ui.mjs';
 const root=document.querySelector('[data-exam-workspace]');
@@ -42,8 +43,7 @@ if(root){
     if(e.target.closest('[data-exam-clear]')){selected.clear();renderSelection();persist();}
     if(e.target.closest('[data-exam-download]')){
       const content=examCalendarFile(records.filter(e=>selected.has(e.id)),{reminder:$('#exam-reminder').value});
-      const url=URL.createObjectURL(new Blob([content],{type:'text/calendar;charset=utf-8'})),a=document.createElement('a');
-      a.href=url;a.download='kalenteri365-omat-ylioppilaskokeet-2027.ics';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+      globalThis.Calendar365Downloads.save(content,'kalenteri365-omat-ylioppilaskokeet-2027.ics','text/calendar;charset=utf-8');
       status.textContent=selected.size+' koepäivän tiedosto ladattu. Avaa tai tuo se omaan kalenterisovellukseesi.';
     }
     if(e.target.closest('[data-exam-print]')){preparePrint();window.print();}

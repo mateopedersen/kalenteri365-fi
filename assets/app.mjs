@@ -1,3 +1,4 @@
+import './calendar-downloads.js';
 import {birthdayMeta} from './birthday-core.mjs';
 import {namedayMeta} from './namedays-core.mjs';
 import {sowingWindow} from './garden-model.mjs';
@@ -67,14 +68,7 @@ function persist() {
     return false;
   }
 }
-function download(name, content, type) {
-  const url = URL.createObjectURL(new Blob([content], { type }));
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = name;
-  a.click();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
+function download(name, content, type){return globalThis.Calendar365Downloads.save(content,name,type);}
 const eventAt = (ds) => state.events.filter((e) => occurs(e, ds));
 function listHTML(events, ds) {
   return events
@@ -584,6 +578,7 @@ document.addEventListener("click", (e) => {
       break;
     }
     case "export-ics":
+      if(!state.events.length){toast("Ei vietäviä omia tapahtumia. Lisää ensin tapahtuma kalenteriisi.");break;}
       download("oma-kalenteri.ics", eventICS(), "text/calendar;charset=utf-8");
       break;
     case "backup":

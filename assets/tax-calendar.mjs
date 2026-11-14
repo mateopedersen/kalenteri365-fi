@@ -1,3 +1,4 @@
+import './calendar-downloads.js';
 import {quantity} from './fi-language.mjs';
 import {filterTaxEvents,calculateTaxDue,TAX_SOURCES,taxCalendarFile,taxCSV,validateTaxReminder} from './tax-calendar-core.mjs';
 import {serviceGoogleURL} from './finland-services-core.mjs';
@@ -11,7 +12,7 @@ if(root){
  const months=['Tammikuu','Helmikuu','Maaliskuu','Huhtikuu','Toukokuu','Kesäkuu','Heinäkuu','Elokuu','Syyskuu','Lokakuu','Marraskuu','Joulukuu'];
  const fields={audience:$('#tax-audience'),year:$('#tax-year'),month:$('#tax-month'),topic:$('#tax-topic'),scope:$('#tax-scope'),query:$('#tax-query')};
  let visible=[],own=[],calculated=null,storageReadable=true;const ownStatus=$('[data-tax-own-status]');
- function download(text,name,type='text/calendar;charset=utf-8'){const url=URL.createObjectURL(new Blob([text],{type})),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);}
+ function download(text,name,type='text/calendar;charset=utf-8'){return globalThis.Calendar365Downloads.save(text,name,type);}
  function topicOptions(){const list=fields.audience.value==='business'?[['all','Molemmat verolajit'],['vat','Arvonlisävero'],['employer','Työnantajasuoritukset']]:[['all','Kaikki aiheet'],['personal','Veroilmoitus ja ennakkovero'],['refund','Veronpalautus'],['residual','Jäännösvero']];fields.topic.replaceChildren(...list.map(([v,t])=>new Option(t,v)));}
  function render(sync=true){const settings=Object.fromEntries(Object.entries(fields).map(([k,e])=>[k,e.value]));visible=filterTaxEvents(records,settings,today);$('#tax-results').innerHTML=taxResults(visible);$('#tax-count').textContent=visible.length+(visible.length===1?' päivämäärä':' päivämäärää')+' · eräpäivävuosi '+fields.year.value;for(const b of root.querySelectorAll('[data-tax-export]'))b.disabled=!visible.length;
  $('#tax-coverage').textContent=fields.audience.value==='business'?'Vuoden 2026 kuukausiverokausille nykyohjeista lasketut maksut, rajattuna eräpäivän vuoteen. Vuoden 2027 valinta näyttää vain alkuvuoteen siirtyvät erät. Laske muiden verokausien päivät alla.':'Poimintoja vuoden 2026 henkilöasiakaskalenterin julkaistuista päivistä. Vuosi 2027 sisältää vain siitä seuraavat kaksi jäännösveron toista erää. Maksupäivä koskee vain kortissa kuvattua tilannetta.';

@@ -1,3 +1,4 @@
+import './calendar-downloads.js';
 import {quantity} from './fi-language.mjs';
 import {PENSION_PLANS,REMINDERS,paymentDates,pensionReport,paymentPath,pensionICS,paymentCSV,localPaymentEvents} from './pension-core.mjs';
 import {pensionNext,pensionDateCards,pensionSubscription,pensionComparison} from './pension-view.mjs';
@@ -19,7 +20,7 @@ export function connectPension({state,persist,onUpdate}){
   $('#pension-dates').innerHTML=pensionDateCards(current,selection,{today,reminder:reminder.value,view});$('#pension-result-count').textContent=`${selection.length} / ${current.dates.length} maksupäivää · ${current.institution}`;
   root.querySelectorAll('[data-pension-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.pensionView===view)));
   $('#pension-export-summary').textContent=selection.length?`Valittuna ${quantity(selection.length,'maksupäivä','maksupäivää')}: ${current.institution}, ${current.name}. Muistutus: ${REMINDERS.find(([v])=>v===reminder.value)[1].toLocaleLowerCase('fi-FI')}.`:'Rajauksessa ei ole maksupäiviä. Vaihda rajaus ennen vientiä.';
-  if(objectURL){URL.revokeObjectURL(objectURL);objectURL=null;}
+  if(objectURL){globalThis.Calendar365Downloads.release(objectURL);objectURL=null;}
   let href=paymentPath(current,reminder.value);if(selection.length!==current.dates.length){objectURL=URL.createObjectURL(new Blob([pensionICS(current,{dates:selection,reminder:reminder.value})],{type:'text/calendar;charset=utf-8'}));href=objectURL;}
   for(const id of ['pension-apple-file','pension-outlook-file','pension-google-file']){const a=$('#'+id);a.href=href;a.setAttribute('aria-disabled',String(!selection.length));if(id!=='pension-apple-file')a.download=`kalenteri365-${current.id}-2027.ics`;}
   for(const action of ['csv','add','google-help'])$(`[data-pension-action="${action}"]`).disabled=!selection.length;
@@ -35,7 +36,7 @@ export function connectPension({state,persist,onUpdate}){
   switch(button.dataset.pensionAction){
    case 'reset':month.value='all';scope.value='all';render(true);$('#pension-month').focus();break;
    case 'copy':{const field=$('#pension-feed-url');try{await navigator.clipboard.writeText(field.value);status('Kalenterin tilausosoite kopioitiin.');button.querySelector('span').textContent='Kopioitu';}catch{field.focus();field.select();status('Automaattinen kopiointi ei onnistunut. Osoite on valittu kopiointia varten.');}break;}
-   case 'csv':{const url=URL.createObjectURL(new Blob([paymentCSV(current,selection)],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download=`kalenteri365-${current.id}-2027.csv`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);status('Valitut maksupäivät ladattiin taulukkona.');break;}
+   case 'csv':{const url=URL.createObjectURL(new Blob([paymentCSV(current,selection)],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download=`kalenteri365-${current.id}-2027.csv`;a.click();setTimeout(()=>globalThis.Calendar365Downloads.release(url),1000);status('Valitut maksupäivät ladattiin taulukkona.');break;}
    case 'add':{const existing=new Set(state.events.map(e=>e.id)),added=localPaymentEvents(current,selection).filter(e=>!existing.has(e.id));if(!added.length){status('Valitut maksupäivät ovat jo omassa kalenterissasi.');break;}const before=state.events;state.events=[...before,...added];if(!persist()){state.events=before;status('Maksupäiviä ei tallennettu. Tarkista selaimen tallennustila ja yritä uudelleen.');break;}onUpdate();status(`${added.length} ${added.length===1?'maksupäivä lisättiin':'maksupäivää lisättiin'} omaan kalenteriisi. Merkinnät näkyvät etusivulla ja Oma arki -näkymässä.`);break;}
    case 'google-help':lastTrigger=button;dialog.showModal();dialog.querySelector('button').focus();break;
    case 'close':dialog.close();break;
@@ -46,5 +47,5 @@ export function connectPension({state,persist,onUpdate}){
  const comparisonMonth=Number(pensionReport(current,today).next?.slice(5,7)||1);$('#pension-compare-month').value=String(comparisonMonth);$('#pension-comparison').innerHTML=pensionComparison(comparisonMonth);
  setInterval(()=>{const now=todayFi();if(now!==today){today=now;render();}},60000);
  window.addEventListener('pageshow',e=>{if(e.persisted)render();});
- window.addEventListener('pagehide',()=>{if(objectURL)URL.revokeObjectURL(objectURL);});
+ window.addEventListener('pagehide',()=>{if(objectURL)globalThis.Calendar365Downloads.release(objectURL);});
 }

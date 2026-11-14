@@ -1,3 +1,4 @@
+import './calendar-downloads.js';
 import {countInterval,shiftDate} from './date-math.mjs';
 import {serviceCalendar} from './finland-services-core.mjs';
 const root=document.querySelector('[data-date-workspace]');
@@ -25,7 +26,7 @@ if(root){
  const copy=async(value,status)=>{try{await navigator.clipboard.writeText(value);status.textContent='Kopioitu.';}catch{status.textContent='Kopiointi ei onnistunut. Voit valita ja kopioida tulostekstin.';}};
  $('[data-copy-date-result]').addEventListener('click',()=>lastResult&&copy($('#calc-result').innerText,$('[data-date-status]')));
  $('[data-copy-date-link]').addEventListener('click',()=>{const s=lastSettings||setting(),u=new URL(location.href);u.search='';for(const [k,v]of Object.entries(s))u.searchParams.set(k,String(v));copy(u.href,$('[data-date-status]'));});
- $('[data-date-calendar]').addEventListener('click',event=>{if(!lastDate)return;const file=serviceCalendar({id:'oma-paivamaara',date:lastDate,name:'Oma päivämäärä',applies:'Päivämäärälaskurilla valittu päivä.',source:'https://kalenteri365.fi/paivamaaralaskuri/'},'1'),u=URL.createObjectURL(new Blob([file],{type:'text/calendar;charset=utf-8'})),a=document.createElement('a');a.href=u;a.download='kalenteri365-'+lastDate+'.ics';a.click();const button=event.currentTarget;setTimeout(()=>button.focus({preventScroll:true}),0);setTimeout(()=>URL.revokeObjectURL(u),2000);$('[data-add-status]').textContent='ICS-tiedosto ladattu. Avaa se omassa kalenterisovelluksessasi.';});
+ $('[data-date-calendar]').addEventListener('click',event=>{if(!lastDate)return;const file=serviceCalendar({id:'oma-paivamaara',date:lastDate,name:'Oma päivämäärä',applies:'Päivämäärälaskurilla valittu päivä.',source:'https://kalenteri365.fi/paivamaaralaskuri/'},'1');globalThis.Calendar365Downloads.save(file,'kalenteri365-'+lastDate+'.ics','text/calendar;charset=utf-8');const button=event.currentTarget;setTimeout(()=>button.focus({preventScroll:true}),0);$('[data-add-status]').textContent='ICS-tiedosto ladattu. Avaa se omassa kalenterisovelluksessasi.';});
  const q=new URL(location.href).searchParams;for(const key of ['start','end'])if(q.has(key))diff.elements[key].value=q.get(key);for(const key of ['includeStart','includeEnd','eves'])if(q.has(key))diff.elements[key].checked=q.get(key)==='true';if(q.has('sixDays'))diff.elements.sixDays.value=q.get('sixDays')==='true'?'1':'0';
  const options=adder.querySelector(".date-work-options");const showWork=()=>{options.hidden=adder.elements.unit.value!=="working";};adder.elements.unit.addEventListener("change",showWork);showWork();
  run();shift();

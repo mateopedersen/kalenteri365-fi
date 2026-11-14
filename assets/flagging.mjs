@@ -1,3 +1,4 @@
+import './calendar-downloads.js';
 import {CITIES,MONTHS,cap,parse} from './calendar.mjs';
 import {icon} from './ui.mjs';
 import {flagDate,flagWindow,filterFlagDays,groupFlagDays,finnishToday,FLAG_CLASSES,flagCalendar,flagGoogleURL} from './flagging-core.mjs';
@@ -46,6 +47,6 @@ if(root){
   if(target.dataset.fgJump){const row=q(`[data-fg-day="${target.dataset.fgJump}"]`);row?.scrollIntoView({block:'center',behavior:'smooth'});row?.classList.add('fg-highlight');setTimeout(()=>row?.classList.remove('fg-highlight'),2000);}
   if(target.id==='fg-own')dialog.close();
  });
- q('#fg-ics').addEventListener('click',()=>{try{const text=flagCalendar(selection,q('#fg-reminder').value),blob=new Blob([text],{type:'text/calendar;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`kalenteri365-liputuspaivat-${year}${selection.length===1?'-'+selection[0].id:''}.ics`;a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);q('#fg-dialog-status').textContent='Kalenteritiedosto ladattu. Avaa se kalenterisovelluksessasi.';}catch(error){q('#fg-dialog-status').textContent=error.message;}});
+ q('#fg-ics').addEventListener('click',()=>{try{globalThis.Calendar365Downloads.save(flagCalendar(selection,q('#fg-reminder').value),`kalenteri365-liputuspaivat-${year}${selection.length===1?'-'+selection[0].id:''}.ics`,'text/calendar;charset=utf-8');q('#fg-dialog-status').textContent='Kalenteritiedosto ladattu. Avaa se kalenterisovelluksessasi.';}catch(error){q('#fg-dialog-status').textContent=error.message;}});
  dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
 }

@@ -1,3 +1,4 @@
+import './calendar-downloads.js';
 import {quantity} from './fi-language.mjs';
 import {actionIcon} from './action-icons.mjs';
 import {SHIFT_PRESETS,cycleRows,shiftAt,shiftMonth,shiftTotals,shiftICS,shiftCSV,shiftReview,validateShiftPlan,checkedShift} from './shifts.mjs';
@@ -63,7 +64,7 @@ for(const id of ['shift-grid','shift-list-view'])$('#'+id).onclick=e=>{const b=e
 $('#shift-override').onchange=e=>{$('#shift-custom-fields').hidden=e.target.value!=='work';};
 $('#shift-override-form').onsubmit=e=>{e.preventDefault();if(!valid)return;try{const type=$('#shift-override').value,note=$('#shift-note').value;let row;if(type==='work')row=checkedShift({type:'work',name:$('#shift-override-name').value,start:$('#shift-override-start').value,end:$('#shift-override-end').value,break:$('#shift-override-break').value,note});else if(type)row=checkedShift({type:'off',name:{off:'Vapaa',vacation:'Loma',sick:'Sairauspoissaolo'}[type],note});else if(note){row={...shiftAt(state.rows,state.start,selected,{}),note};if(row.type==='none')row={type:'off',name:'Vapaa',note};}if(row)state.overrides[selected]=row;else delete state.overrides[selected];dirty=true;render();$('#shift-status').textContent='Päivän muutos tallennettu tähän selaimeen.';}catch(error){$('#shift-status').textContent=error.message;}};
 document.querySelectorAll('[data-shift-view]').forEach(b=>b.onclick=()=>{view=b.dataset.shiftView;document.querySelectorAll('[data-shift-view]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));render();});
-function download(text,type,name){const u=URL.createObjectURL(new Blob([text],{type})),a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),2000);}
+function download(text,type,name){return globalThis.Calendar365Downloads.save(text,name,type);}
 $('#shift-export').onclick=()=>{if(!valid)return;try{download(shiftICS(entries,state.title),'text/calendar;charset=utf-8',`kalenteri365-vuorot-${state.year}-${state.month}.ics`);$('#shift-status').textContent='Työvuorot ladattu. Avaa ICS-tiedosto omassa kalenterissasi.';}catch(e){$('#shift-status').textContent=e.message;}};
 $('#shift-csv').onclick=()=>{if(valid){download(shiftCSV(entries),'text/csv;charset=utf-8',`kalenteri365-vuorot-${state.year}-${state.month}.csv`);$('#shift-status').textContent='Kuukauden taulukko ladattu.';}};
 $('#shift-backup').onclick=()=>{if(valid){download(JSON.stringify({format:'kalenteri365-shift-plan',...state},null,2),'application/json','kalenteri365-vuorosuunnitelma.json');$('#shift-status').textContent='Varmuuskopio ladattu.';}};

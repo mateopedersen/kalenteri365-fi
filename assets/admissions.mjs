@@ -1,3 +1,4 @@
+import './calendar-downloads.js';
 import {quantity} from './fi-language.mjs';
 import {ADMISSIONS_REMINDERS,routeState,routeEvents,selectedAdmissionEvents,personalAdmissionEvent,admissionsCalendar} from './admissions-core.mjs';
 import {esc,icon} from './ui.mjs';
@@ -40,7 +41,7 @@ if(root){
  }
  function activate(id,{scroll=false}={}){if(!data.routes.some(r=>r.id===id))return;route=id;renderRoute();save();if(scroll){const p=$(`[data-ad-route="${id}"]`),h=p.querySelector('h2');h.tabIndex=-1;h.focus({preventScroll:true});p.scrollIntoView({block:'start',behavior:'instant'});}}
  function download(events){
-  try{const bytes=admissionsCalendar(events,reminder),url=URL.createObjectURL(new Blob([bytes],{type:'text/calendar;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download=events.length===1?'hakumuistutus-'+events[0].date+'.ics':'omat-hakumuistutukset.ics';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);$('#ad-action-status').textContent=quantity(events.length,'päivä','päivää')+' ladattu kalenteritiedostoon.';}
+  try{globalThis.Calendar365Downloads.save(admissionsCalendar(events,reminder),events.length===1?'hakumuistutus-'+events[0].date+'.ics':'omat-hakumuistutukset.ics','text/calendar;charset=utf-8');$('#ad-action-status').textContent=quantity(events.length,'päivä','päivää')+' ladattu kalenteritiedostoon.';}
   catch(error){status.textContent=error.message;}
  }
  root.addEventListener('click',e=>{

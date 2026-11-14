@@ -1,3 +1,4 @@
+import './calendar-downloads.js';
 import {serviceCalendar,serviceGoogleURL} from './finland-services-core.mjs';
 const form=document.querySelector('#seasonal-form'),root=document.querySelector('.season-reminders'),status=root.querySelector('[data-season-status]'),key='kalenteri365-season-draft-v1';
 let id=crypto.randomUUID();
@@ -7,6 +8,6 @@ function refresh(save=true){const f=Object.fromEntries(new FormData(form));root.
 form.addEventListener('input',()=>refresh());form.addEventListener('change',()=>refresh());
 root.querySelectorAll('[data-season-idea]').forEach(b=>b.addEventListener('click',()=>{id=crypto.randomUUID();form.elements.name.value=b.dataset.seasonIdea;form.elements.note.value='';refresh();form.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});form.elements.date.focus({preventScroll:true});}));
 function event(){if(!form.reportValidity())return null;const f=Object.fromEntries(new FormData(form));if(!valid(f.date)||!f.name.trim()){status.textContent='Kirjoita aihe ja valitse kelvollinen päivämäärä.';return null;}return {id:'kausi-'+id,date:f.date,name:f.name.trim(),applies:f.note||'Oma kausimuistutus.',source:'https://kalenteri365.fi/kausimuistutukset/'};}
-form.addEventListener('submit',e=>{e.preventDefault();const entry=event();if(!entry)return;const bytes=serviceCalendar(entry,form.elements.reminder.value),url=URL.createObjectURL(new Blob([bytes],{type:'text/calendar;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='kalenteri365-kausimuistutus.ics';a.click();setTimeout(()=>URL.revokeObjectURL(url),15000);status.textContent='Muistutus ladattu. Avaa ICS-tiedosto omassa kalenterisovelluksessasi.';});
+form.addEventListener('submit',e=>{e.preventDefault();const entry=event();if(!entry)return;const bytes=serviceCalendar(entry,form.elements.reminder.value);globalThis.Calendar365Downloads.save(bytes,'kalenteri365-kausimuistutus.ics','text/calendar;charset=utf-8');status.textContent='Muistutus ladattu. Avaa ICS-tiedosto omassa kalenterisovelluksessasi.';});
 root.querySelector('[data-season-google]').addEventListener('click',()=>{const entry=event();if(entry)window.open(serviceGoogleURL(entry),'_blank','noopener,noreferrer');});
 root.querySelector('[data-season-reset]').addEventListener('click',()=>{form.reset();id=crypto.randomUUID();refresh();form.elements.name.focus();});refresh(false);

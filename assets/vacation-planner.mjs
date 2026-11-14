@@ -1,3 +1,4 @@
+import './calendar-downloads.js';
 import {countForm,quantity} from './fi-language.mjs';
 import {buildVacationPlan, findVacationOptions, vacationCalendar, vacationGoogleURL} from './vacation-core.mjs';
 
@@ -121,11 +122,7 @@ export function initVacationPlanner(root = document.querySelector('[data-vacatio
     if (!current || stale) return;
     try {
       const raw = vacationCalendar(current, exportSettings());
-      const url = URL.createObjectURL(new Blob([raw], {type:'text/calendar;charset=utf-8'}));
-      const anchor = document.createElement('a');
-      anchor.href = url; anchor.download = `kalenteri365-loma-${current.start}-${current.end}.ics`;
-      document.body.append(anchor); anchor.click(); anchor.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 2000);
+      globalThis.Calendar365Downloads.save(raw,'kalenteri365-lomasuunnitelma.ics','text/calendar;charset=utf-8');
       $('[data-vacation-export-status]').textContent = `Avaa lataamasi ICS-tiedosto ${service === 'apple' ? 'Apple Kalenterissa' : 'Outlookissa'} ja tarkista päivät ennen tuontia.`;
     } catch (error) { $('[data-vacation-export-status]').textContent = error.message; }
   }

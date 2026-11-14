@@ -1,3 +1,4 @@
+import './calendar-downloads.js';
 import {actionIcon} from './action-icons.mjs';
 import {starterState,renderCalendar,normalize,updatePeriod,clone,uid,validDate,parseEvents,eventsICS,STICKERS,dimensions,STARTERS} from './studio/engine.mjs';
 import {VIEW_NAMES} from './studio/templates.mjs';
@@ -85,7 +86,7 @@ for(const[id,key]of Object.entries(controls))$('#'+id).addEventListener('input',
 });
 for(const[id,key]of Object.entries(checks))$('#'+id).addEventListener('change',()=>{checkpoint();state[key]=$('#'+id).checked;render();});
 for(const[id,key]of Object.entries(colors))$('#'+id).addEventListener('input',()=>{checkpoint(id);state.colors[key]=$('#'+id).value;requestRender();});
-function download(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);}
+function download(blob,name){return globalThis.Calendar365Downloads.save(blob,name);}
 function addLayer(layer){
  if(state.layers.length>=16){status('Voit lisätä enintään 16 kohdetta. Poista ensin jokin aiemmista.',true);return;}
  checkpoint();const id=uid(),slot=state.layers.length;

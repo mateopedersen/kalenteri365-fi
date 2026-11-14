@@ -1,3 +1,4 @@
+import './calendar-downloads.js';
 import {matchesCrop} from './garden-model.mjs';
 import {validateGardenPlan,validGardenDate,gardenPlanICS,mergeGardenPlans} from './garden-plan-model.mjs';
 const escape=s=>String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
@@ -48,7 +49,7 @@ export function initGardenPlanner({onAddEvent}) {
   else if(button.hasAttribute('data-task-calendar'))onAddEvent({date:task.date,title:task.crop+': '+task.activity,description:task.note});
   else {editing=id;for(const name of ['crop','activity','date','note'])taskForm.elements[name].value=task[name];document.querySelector('#garden-form-title').textContent='Muokkaa puutarhatyötä';taskForm.querySelector('[type=submit]').innerHTML=mark('edit')+'Tallenna muutokset';document.querySelector('[data-garden-cancel]').hidden=false;taskForm.scrollIntoView({block:'start',behavior:'smooth'});taskForm.elements.crop.focus({preventScroll:true});}
  });
- const download=(name,text,type)=>{const url=URL.createObjectURL(new Blob([text],{type})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),15000);};
+ const download=(name,text,type)=>globalThis.Calendar365Downloads.save(text,name,type);
  document.querySelector('[data-garden-save]').addEventListener('click',()=>download('kalenteri365-kylvosuunnitelma.json',JSON.stringify({type:'kalenteri365-garden',version:1,tasks},null,2),'application/json'));
  document.querySelector('[data-garden-ics]').addEventListener('click',()=>download('kalenteri365-kylvosuunnitelma.ics',gardenPlanICS(tasks,{reminder:document.querySelector('[data-garden-alarm]').checked}),'text/calendar;charset=utf-8'));
  document.querySelector('[data-garden-import]').addEventListener('change',async event=>{

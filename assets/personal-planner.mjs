@@ -1,3 +1,4 @@
+import './calendar-downloads.js';
 import {DAYS,add,cap,fi,iso,parse,week} from './calendar.mjs';
 import {esc,icon} from './ui.mjs';
 import {orderedTasks,personalWeekICS,validDay,validateTask,weekPlan} from './personal-planner-core.mjs';
@@ -119,8 +120,7 @@ export function connectPersonalPlanner({state,persist,openEvent,onUpdate}) {
     }
     if(button.hasAttribute('data-personal-export')){
       if(!saveNote())return;try{
-        const text=personalWeekICS(state,selected),url=URL.createObjectURL(new Blob([text],{type:'text/calendar;charset=utf-8'}));
-        const a=document.createElement('a');a.href=url;a.download='kalenteri365-oma-viikko-'+weekPlan(state,selected)[0].date+'.ics';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+        globalThis.Calendar365Downloads.save(personalWeekICS(state,selected),'kalenteri365-oma-viikko-'+weekPlan(state,selected)[0].date+'.ics','text/calendar;charset=utf-8');
         $('[data-personal-export-status]').textContent='Viikon tapahtumat ladattiin. Tehtävät ja muistiinpanot ovat tulostettavassa suunnitelmassa.';
       }catch(error){$('[data-personal-export-status]').textContent=error.message;}
     }
