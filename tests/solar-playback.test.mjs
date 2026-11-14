@@ -29,3 +29,11 @@ test('Playback quality reset preserves the learned pixel density while clearing 
   const scale=q.scale;q.reset();assert.equal(q.scale,scale);
   q.observe(1000);q.observe(0);q.observe(-10);assert.equal(q.scale,scale);
 });
+test('Sustained very slow devices still adapt, without treating tab suspension as drawing cost',()=>{
+  const q=createSolarQuality();
+  for(let i=0;i<48;i++)q.observe(250);
+  assert.ok(q.scale<1);
+  const scale=q.scale;
+  for(let i=0;i<100;i++)q.observe(2000);
+  assert.equal(q.scale,scale);
+});

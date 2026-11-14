@@ -224,6 +224,7 @@ function canvasRenderer(canvas) {
 
 export function createSolarPanorama(element) {
   let canvas=element,renderer;
+  const mobileViewport=matchMedia('(max-width: 700px)');
   try {renderer=webglRenderer(canvas);} catch(error) {console.warn('Solar panorama fallback:',error.message);renderer=null;}
   if(!renderer){
     // A canvas cannot change context type after a failed shader compilation.
@@ -241,8 +242,9 @@ export function createSolarPanorama(element) {
   return {kind:renderer.kind,canvas,resize,get size(){return {width,height};},draw(view,time=0,quality=1){
     // Keep expensive atmosphere shading bounded on retina phones and wide screens.
     // Static views use a finer image; playback can adapt without changing geometry.
-    const budget=quality===1?650000:650000*quality*quality;
-    const ratio=Math.min(devicePixelRatio||1,1.5,Math.sqrt(budget/area));
+    const mobile=mobileViewport.matches;
+    const budget=(mobile?220000:650000)*quality*quality;
+    const ratio=Math.min(devicePixelRatio||1,mobile?1.25:1.5,Math.sqrt(budget/area));
     const w=Math.max(1,Math.round(width*ratio)),h=Math.max(1,Math.round(height*ratio));
     if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;}
     return renderer.draw(view,time)!==false;

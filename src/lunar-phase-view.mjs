@@ -24,7 +24,7 @@ export function phaseDisc(quarter,id){
   </svg>`;
 }
 
-export function lunarPhaseList(phases,{title='Kuun päävaiheet',id='lunar-phases'}={}){
+export function lunarPhaseList(phases,{title='Kuun päävaiheet',id='lunar-phases',caption=true}={}){
   return `<section class="lunar-phase-section" aria-labelledby="${id}-title">
     <header class="lunar-phase-heading"><div><p>KUUN VAIHEIDEN AJANKOHDAT</p><h2 id="${id}-title">${title}</h2></div><span>Ajat Suomessa</span></header>
     <div class="lunar-phase-table-wrap"><table class="lunar-phase-table"><thead><tr><th scope="col">Kuun vaihe</th><th scope="col">Päivämäärä</th><th scope="col">Kellonaika</th></tr></thead><tbody>
@@ -32,6 +32,6 @@ export function lunarPhaseList(phases,{title='Kuun päävaiheet',id='lunar-phase
       const key=`${id}-${p.utc.replace(/[^0-9]/g,'')}`;
       return `<tr data-phase-quarter="${p.quarter}" data-phase-utc="${p.utc}"><th scope="row"><div class="lunar-phase-identity"><div class="lunar-phase-visual">${phaseDisc(p.quarter,key)}</div><div><strong>${p.name}</strong><span>${descriptions[p.quarter]}</span></div></div></th><td data-label="Päivämäärä"><time datetime="${p.date.slice(0,10)}">${fi(parse(p.date.slice(0,10)))}</time></td><td data-label="Suomen aika"><time datetime="${p.utc}">${time(p.utc)}</time></td></tr>`;
     }).join('')}</tbody></table></div>
-    <p class="lunar-phase-caption">Kuvat havainnollistavat päävaiheiden valaistusta oikean Kuun pintakuvan avulla.</p>
+    ${caption?'<p class="lunar-phase-caption">Kuvat havainnollistavat päävaiheiden valaistusta oikean Kuun pintakuvan avulla.</p>':''}
   </section>`;
 }

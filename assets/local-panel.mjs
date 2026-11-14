@@ -11,6 +11,10 @@ export function connectLocalPanel({state, onCityChange, onOpen}) {
   const timeFormat = new Intl.DateTimeFormat('en-GB', {timeZone: 'Europe/Helsinki', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false});
   const dateFormat = new Intl.DateTimeFormat('fi-FI', {timeZone: 'Europe/Helsinki', weekday: 'long', day: 'numeric', month: 'long'});
   const forecastTime = new Intl.DateTimeFormat('fi-FI', {timeZone: 'Europe/Helsinki', hour: '2-digit', minute: '2-digit'});
+  const zoneFormat = new Intl.DateTimeFormat('en-GB', {timeZone: 'Europe/Helsinki', timeZoneName: 'short'});
+  const dateKeyFormat = new Intl.DateTimeFormat('sv-SE', {timeZone: 'Europe/Helsinki'});
+  const clockElement = $('#helsinki-clock'), dateElement = $('#today-date'), zoneElement = $('#clock-zone');
+  let clockMinute = '', clockDate = '';
   let sequence = 0, controller, refreshTimer, manualSelection = false;
   let nextRefresh = 0, astronomicalPeriod, requestedCity;
   const city = () => CITIES.find(c => c[0] === state.city) || CITIES[0];
@@ -19,11 +23,19 @@ export function connectLocalPanel({state, onCityChange, onOpen}) {
   function clock() {
     if (document.hidden) return;
     const now = new Date(), [hours, minutes, seconds] = timeFormat.format(now).split(':');
-    $('#helsinki-clock').innerHTML = `<span>${hours}:${minutes}</span><sup>${seconds}</sup>`;
-    $('#helsinki-clock').dateTime = now.toISOString();
-    $('#clock-zone').textContent = new Intl.DateTimeFormat('en-GB', {timeZone: 'Europe/Helsinki', timeZoneName: 'short'}).formatToParts(now).find(p => p.type === 'timeZoneName').value;
-    $('#today-date').textContent = cap(dateFormat.format(now));
-    $('#today-date').dateTime = new Intl.DateTimeFormat('sv-SE', {timeZone: 'Europe/Helsinki'}).format(now);
+    if (clockMinute !== hours + ':' + minutes) {
+      clockMinute = hours + ':' + minutes;
+      clockElement.querySelector('span').textContent = clockMinute;
+      zoneElement.textContent = zoneFormat.formatToParts(now).find(p => p.type === 'timeZoneName').value;
+      const dateKey = dateKeyFormat.format(now);
+      if (clockDate !== dateKey) {
+        clockDate = dateKey;
+        dateElement.textContent = cap(dateFormat.format(now));
+        dateElement.dateTime = dateKey;
+      }
+    }
+    clockElement.querySelector('sup').textContent = seconds;
+    clockElement.dateTime = now.toISOString();
   }
 
   let photosPrepared = false;

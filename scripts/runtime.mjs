@@ -3,6 +3,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {build} from 'esbuild';
 import {transform} from 'lightningcss';
+import {pageStyleNames} from './page-styles.mjs';
 
 export async function runtimeAssets(ROOT,ASSET,OUT,pages){
   const shareSprite=await fs.readFile(path.join(ASSET,'share-icons.svg'));
@@ -13,7 +14,9 @@ export async function runtimeAssets(ROOT,ASSET,OUT,pages){
   for(const name of artFiles)artHash.update(name).update(await fs.readFile(path.join(ASSET,'art',name)));
   const artPrefix='/assets/art-'+artHash.digest('hex').slice(0,16)+'/',artFolder=path.join(OUT,artPrefix);
   await fs.mkdir(artFolder,{recursive:true});for(const name of artFiles)await fs.copyFile(path.join(ASSET,'art',name),path.join(artFolder,name));
-  const css=Buffer.concat(await Promise.all(['site.css','finland.css','edition.css','local-weather.css','home-dashboard.css','studio-workspace.css','tools-menu.css','holiday-calendar.css','finland-services.css','community.css','personal-planner.css','storage-notice.css','date-tools.css','work-tools.css','work-overview.css','education-hub.css','print-catalog.css','legal-pages.css','site-search.css','calendar-workspace.css','lunar-directory.css','lunar-header.css','lunar-phases.css','solar-workspace.css','daylength.css','not-found.css','seasons.css','download-controls.css','footer.css','document-pages.css','editorial.css','garden-planner.css','vacation-planner.css','zodiac-guide.css','faq.css','clock-change.css','solar-eclipse.css','lunar-eclipse.css','perseids.css','season-reminders.css','action-links.css','countdown.css','calendar-lab.css','birthday-calendar.css','pension-workspace.css','benefit-workspace.css','long-weekends.css','action-controls.css','tax-calendar.css','control-spacing.css','exams.css','admissions.css','namedays.css','flagging.css'].map(async name=>Buffer.from((await fs.readFile(path.join(ASSET,name),'utf8')).replaceAll('/assets/art/',artPrefix)+'\n'))));
+  const styleNames=['site.css','finland.css','edition.css','local-weather.css','home-dashboard.css','studio-workspace.css','tools-menu.css','holiday-calendar.css','finland-services.css','community.css','personal-planner.css','storage-notice.css','date-tools.css','work-tools.css','work-overview.css','education-hub.css','print-catalog.css','monthly-directory.css','legal-pages.css','site-search.css','calendar-workspace.css','lunar-directory.css','lunar-header.css','lunar-phases.css','solar-workspace.css','daylength.css','not-found.css','seasons.css','download-controls.css','footer.css','document-pages.css','editorial.css','garden-planner.css','vacation-planner.css','zodiac-guide.css','faq.css','clock-change.css','solar-eclipse.css','lunar-eclipse.css','perseids.css','season-reminders.css','action-links.css','countdown.css','calendar-lab.css','birthday-calendar.css','pension-workspace.css','benefit-workspace.css','long-weekends.css','action-controls.css','tax-calendar.css','control-spacing.css','exams.css','admissions.css','namedays.css','flagging.css','contact.css'];
+  const sources=new Map(await Promise.all(styleNames.map(async name=>[name,Buffer.from((await fs.readFile(path.join(ASSET,name),'utf8')).replaceAll('/assets/art/',artPrefix)+'\n')])));
+  const css=Buffer.concat([...sources.values()]);
   const packed=transform({filename:'site-runtime.css',code:css,minify:true}).code;
   const styleName='site-runtime.'+createHash('sha256').update(packed).digest('hex').slice(0,16)+'.css';
   await fs.writeFile(path.join(ASSET,styleName),packed);
@@ -30,15 +33,30 @@ export async function runtimeAssets(ROOT,ASSET,OUT,pages){
   const entry=Object.entries(compiled.metafile.outputs).find(([,value])=>value.entryPoint=== 'app.mjs'||value.entryPoint?.endsWith('/app.mjs'));
   if(!entry)throw Error('Compiled application entry was not generated.');
   const script='/assets/runtime/'+path.basename(entry[0]);
+  const solarEntry=Object.entries(compiled.metafile.outputs).find(([,value])=>value.entryPoint?.endsWith('solar-fi.mjs'));
+  if(!solarEntry)throw Error('Compiled simulation entry was not generated.');
+  const solarScript='/assets/runtime/'+path.basename(solarEntry[0]);
+  const styleCache=new Map();
   for(const p of [...pages,{path:'/404/'}]){
     const file=p.path==='/404/'?path.join(OUT,'404.html'):path.join(OUT,p.path,'index.html');
     let html=await fs.readFile(file,'utf8');
-    html=html.replace('/assets/site.css','/assets/'+styleName)
+    const selected=pageStyleNames(styleNames,html),key=selected.join(',');
+    let pageStyle=styleCache.get(key);
+    if(!pageStyle){
+      const code=transform({filename:'page-runtime.css',code:Buffer.concat(selected.map(name=>sources.get(name))),minify:true}).code;
+      const name='site-runtime.'+createHash('sha256').update(code).digest('hex').slice(0,16)+'.css';
+      await fs.writeFile(path.join(ASSET,name),code);
+      pageStyle={src:'/assets/'+name,bytes:code.length,modules:selected};styleCache.set(key,pageStyle);
+    }
+    html=html.replace('/assets/site.css',pageStyle.src)
       .replace('<link rel="stylesheet" href="/assets/finland.css">','').replace('<link rel="stylesheet" href="/assets/edition.css">','')
       .replace('/assets/app.mjs',script).replaceAll('/assets/art/',artPrefix);
+    const hints=`<link rel="modulepreload" href="${script}">`+(html.includes('id="astro-form"')?`<link rel="preload" href="/assets/astronomy.min.js" as="script"><link rel="modulepreload" href="${solarScript}">`:'');
+    html=html.replace('</head>',hints+'</head>');
     await fs.writeFile(file,html);
   }
   await fs.writeFile(path.join(ROOT,'reports/runtime-manifest.json'),JSON.stringify({
+    pageStyles:[...styleCache.values()],
     stylesheet:{src:'/assets/'+styleName,before:css.length,after:packed.length},
     artwork:{prefix:artPrefix,files:artFiles.length},
     shareIcons:{src:shareSpritePath,bytes:shareSprite.length},

@@ -1,6 +1,28 @@
 /* Separate explanatory copy from standalone actions without changing toolbars,
    calendar cells, card grids or the printed calendar layout. */
 @media screen {
+  /* Custom page headers and regular title cards share the same breadcrumb gap. */
+  main > .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 10px;
+    margin: 0;
+    padding-block: 22px 20px;
+    line-height: 1.6;
+  }
+
+  main > .breadcrumb > :is(a, span) {
+    min-inline-size: 0;
+    max-inline-size: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  main > .breadcrumb + .page-heading {
+    margin-block-start: 0;
+  }
+
   :is(main, dialog) .btn {
     min-inline-size: 0;
     max-inline-size: 100%;
@@ -36,4 +58,132 @@
     .button-row, .download-actions, form) + small {
     display: block;
   }
+
+  /* Dialog headers keep their close control visible and easy to reach. */
+  .dialog-head {
+    gap: 16px;
+    align-items: center;
+  }
+
+  .dialog-head > h2 {
+    min-inline-size: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .dialog-head > button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 44px;
+    inline-size: 44px;
+    min-block-size: 44px;
+    padding: 10px;
+    border: 1px solid #c2d4e7;
+    border-radius: 10px;
+    background: #f5f9fe;
+    color: #123d6e;
+    cursor: pointer;
+  }
+
+  .dialog-head > button:hover {
+    background: #dceafb;
+    border-color: #527eaf;
+    color: #002f67;
+  }
+
+  .dialog-head > button:focus-visible {
+    outline: 3px solid #296dba;
+    outline-offset: 3px;
+  }
+
+  /* One gap controls the event editor, instead of adding label margins to
+     the row gap. This also keeps the save action in reach on small screens. */
+  #event-form {
+    display: grid;
+    gap: 12px;
+    min-inline-size: 0;
+  }
+
+  #event-dialog {
+    box-sizing: border-box;
+    max-block-size: calc(100dvh - 24px);
+    padding: clamp(20px, 3vw, 28px);
+  }
+
+  #event-form label {
+    display: grid;
+    gap: 7px;
+    min-inline-size: 0;
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  #event-form .form-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin: 0;
+  }
+
+  #event-form :is(input:not([type=hidden]), select, textarea) {
+    inline-size: 100%;
+    min-inline-size: 0;
+    max-inline-size: 100%;
+    min-block-size: 48px;
+    box-sizing: border-box;
+    font-size: 16px;
+    margin: 0;
+  }
+
+  #event-form .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 12px;
+    margin: 0;
+  }
+
+  #event-form .actions .btn {
+    flex: 1 1 130px;
+    min-block-size: 48px;
+    margin: 0;
+  }
+
+  #event-form > .small {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+  }
 }
+
+@media screen and (max-width: 400px) {
+  #event-form .form-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.template-guidance{display:flex;align-items:center;gap:16px;margin-block:0 24px;padding:18px 22px;border:1px solid #ccdced;border-radius:12px;background:#edf4fc;color:#173b61}
+.template-guidance>.art{width:38px;height:38px;flex:none}
+.template-guidance p{margin:0;min-width:0;font-size:15px;line-height:1.6}
+.template-guidance p strong,.template-guidance p span{display:block}
+.template-guidance p span{margin-top:3px;color:#46617b;font-size:14px}
+.template-guidance a{display:inline-flex;align-items:center;justify-content:center;gap:10px;margin-left:auto;min-height:44px;padding:10px 14px;border:1px solid #b9cfe6;border-radius:8px;background:#fff;color:#073c78;font-size:14px;font-weight:700;line-height:1.4;text-decoration:none;flex-shrink:0}
+.template-guidance a:hover{background:#dceafb;color:#002f6c;border-color:#5985b4}
+.template-guidance a .icon{width:17px;height:17px;flex:none;transform:rotate(90deg)}
+:is(#tulostuspohjat,#lunar-print-templates,#tulostettavat){scroll-margin-top:24px}
+@media(max-width:700px){.template-guidance{display:grid;grid-template-columns:32px minmax(0,1fr);gap:12px;padding:16px;margin-bottom:20px}.template-guidance>.art{width:32px;height:32px;align-self:start}.template-guidance a{grid-column:1/-1;justify-content:space-between;margin-left:0;width:100%;white-space:normal}.template-guidance p{font-size:14px}.template-guidance p span{font-size:13px}}
+
+@media screen and (max-width: 700px) {
+  main > .breadcrumb {
+    padding-block: 18px 16px;
+    gap: 4px 8px;
+  }
+}
+
+/* One destination per holiday card: cover, heading and action share a link. */
+.holiday-topic > .holiday-topic-link { display:flex; flex-direction:column; height:100%; color:inherit; text-decoration:none; }
+.holiday-topic .holiday-topic-copy { padding:24px; display:flex; flex-direction:column; flex:1; }
+.holiday-topic .holiday-topic-copy .topic-open { margin-top:auto; }
+.holiday-topic-link:focus-visible { outline:3px solid #0055a6; outline-offset:-3px; border-radius:20px; }
+.holiday-topic-link:hover h3 { color:#0055a6; text-decoration:underline; text-underline-offset:4px; }

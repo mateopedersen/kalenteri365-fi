@@ -1,0 +1,88 @@
+import {PRACTICAL_EXAMPLES} from './practical-examples.mjs';
+import {esc} from './ui.mjs';
+
+// Entry guidance is limited to the named tool's landing page. Dated pages keep
+// their own period-specific explanation instead of inheriting a repeated essay.
+export const TOOL_INTRODUCTIONS = {
+  kalenteri: ['Vuosi kerralla, kuukausi tarkemmin', 'Vertaile vuosien 2027–2030 kuukausia ja Suomen pyhäpäivien paikkoja. Vuoden ruudukosta pääset kuukauteen, jossa viikonpäivät ja yksittäiset päivämäärät näkyvät tarkemmin. Valmiit tulosteet ja omien merkintöjen kalenteri palvelevat eri tarpeita.'],
+  'pdf-kalenteri': ['Valitse kalenteri sen käyttötarkoituksen mukaan', 'Seinäkalenteriin tarvitaan usein koko vuosi, työpöydälle väljempi kuukausi. Rajaa ensin vuosi ja ajanjakso, vertaa esikatseluja ja valitse paperin suunta. PDF säilyttää sivun asettelun; Kuva-lataus sopii myös kuvan jatkokäyttöön.'],
+  kuukausikalenteri: ['Oikea kuukausi omaan suunnitelmaan', 'Täältä löydät vuosien 2027–2030 kaikki 48 kuukautta. Kuukauden sivulla voit tutkia päivämääriä ja valita 15 tulostettavasta ulkoasusta. Suomen pyhät, maanantaista alkavat viikot ja oikean vuoden viikonpäivät kulkevat valinnan mukana.'],
+  viikkokalenteri: ['Viikon menot ja tehtävät samaan näkymään', 'Viikkosuunnitelmassa on oma tila kunkin päivän menoille, tärkeille tehtäville ja muistettaville asioille. Valitse viikon maanantai, nimeä suunnitelma ja täytä kentät. Voit palata aiempiin viikkoihin tai tulostaa täytetyn suunnitelman.'],
+  'tyhja-kalenteri': ['Pohja, jonka sisältöä päivämäärät eivät rajoita', 'Päiväämätön kalenteri toimii toistuvan rytmin, ruokalistan tai projektin luonnoksena. Valitse tyhjä pohja ja lisää tarvitsemasi otsikot, tekstit tai kuvat muokkaimessa. Päivättyyn kuukauteen vaihtaessasi tarkista myös vuosi ja viikonpäivien järjestys.'],
+  'luo-kalenteri': ['Muokkaa pohjasta oma kalenteri', 'Valitse kuukausi-, vuosi-, viikko- tai tyhjä pohja. Lisää omat kuvat, tekstit ja tapahtumat, säädä värejä ja tarkista lopputulos esikatselusta. Projektitiedosto säilyttää muokattavan työn; latausmuodot sopivat valmiin kalenterin tulostamiseen ja jatkokäyttöön.'],
+  juhlapyhat: ['Suomen juhlapäivät ja niiden ajankohdat', 'Katso, mille päivälle juhla osuu valittuna vuonna. Luettelo erottaa yleiset pyhäpäivät, aatot ja muut merkkipäivät. Avaa juhlan oma sivu, kun haluat lukea sen taustasta tai tallentaa päivän kalenterisovellukseesi.'],
+  liputuspaivat: ['Liputuspäivästä käytännön liputukseen', 'Suomen viralliset ja vakiintuneet liputuspäivät löytyvät vuoden ja kuukauden mukaan. Paikkakunnan valinta auttaa tarkistamaan liputusajan, kun laskuaika liittyy auringonlaskuun. Päivän voi tallentaa muistutukseksi omaan kalenteriin.'],
+  merkkipaivat: ['Päivämäärän lisäksi päivän tarina', 'Merkkipäivien hakemistossa voit tutustua Suomen kulttuuriin, yhteisiin juhliin ja muistettaviin päiviin. Avaa kiinnostava aihe nähdäksesi sen merkityksen ja ajankohdat. Merkkipäivän viettäminen ja työstä vapaana oleminen ovat erillisiä asioita.'],
+  'koulujen-lomat': ['Koululomat oman oppilaitoksen mukaan', 'Vertaa julkaistuja loma-aikoja paikkakunnan, koulumuodon ja lukuvuoden perusteella. Perusopetuksen ja lukion loma-ajat sekä korkeakoulujen opetusjaksot on erotettu toisistaan. Tallennettavat päivät auttavat perheen suunnittelussa, kun oikea paikallinen kalenteri on valittu.'],
+  koulukalenteri: ['Koulupäivien rinnalle tilaa valmistautumiselle', 'Kokoa viikon koulumenot, tehtävät ja vapaa-aika muokattavaan suunnitelmaan. Oman viikon kenttiin voit kirjoittaa myös kokeeseen lukemisen tai mukaan muistettavat välineet. Tämä on henkilökohtainen pohja, jonka sisältö täytetään koulun ilmoittamien tietojen perusteella.'],
+  lukujarjestys: ['Lukujärjestys, johon mahtuvat myös omat muistiinpanot', 'Täytä viikon oppitunnit ja niihin liittyvät tiedot päiväkohtaisesti. Valitse oikea aloitusviikko, anna suunnitelmalle nimi ja kirjoita tarvittavat tilat, tehtävät tai kurssitunnukset. Valmiin viikon voit tulostaa mukaan tai pitää käytössä selaimessa.'],
+  'yliopistojen-kalenterit': ['Lukuvuoden rakenne ennen kurssikohtaista suunnittelua', 'Yliopistojen julkaistut kalenterit auttavat löytämään lukukausien ja opetusperiodien rajat. Tarkista oppilaitos, lukuvuosi ja mahdolliset ohjelmakohtaiset huomautukset. Lisää kurssin omat tentit ja palautukset erikseen, sillä ne eivät ratkea yleisestä periodijaosta.'],
+  ylioppilaskirjoitukset: ['Omien kokeiden aikataulu selkeäksi', 'Etsi kevään tai syksyn tutkintokerrasta kirjoittamasi aineet. Voit koota valituista koepäivistä kalenterimerkinnät ja suunnitella valmistautumisen niiden ympärille. Käytännön järjestelyt, ilmoittautuminen ja ajantasaiset koeohjeet tarkistetaan lukiosta ja Ylioppilastutkintolautakunnalta.'],
+  opiskelukalenteri: ['Opiskeluaika näkyviin ennen määräpäivää', 'Viikon opintoja on helpompi sovittaa arkeen, kun tentit, palautukset ja vapaa-aika näkyvät yhdessä. Kirjoita päiväkohtaisiin kenttiin myös valmisteluvaiheet. Vaihtamalla viikkoa voit jatkaa suunnitelmaa ilman, että edellisen viikon muistiinpanot sekoittuvat siihen.'],
+  tyopaivat: ['Työkuukausien vertailu samoilla perusteilla', 'Taulukot näyttävät kuukausien työpäivät ja laskennalliset työtunnit. Maanantaista perjantaihin ulottuva perusmalli erottaa arkipyhät viikonlopuista. Jos oma työviikkosi tai tuntimääräsi poikkeaa oletuksesta, käytä henkilökohtaisen ajanjakson työpäivälaskuria.'],
+  tyopaivalaskuri: ['Laske työpäivät omilla valinnoillasi', 'Valitse ajanjakso, työviikon päivät ja päivittäinen tuntimäärä. Rajapäivien, pyhien, aattojen ja omien poissaolojen valinnat vaikuttavat tulokseen. Tarkista yhteenvedosta, mitä laskentaan sisältyy, ennen kuin vertaat työjaksoja keskenään.'],
+  paivamaaralaskuri: ['Päivien väli tai uusi päivämäärä', 'Laske kahden päivämäärän välinen ero tai siirrä lähtöpäivää eteen- tai taaksepäin. Rajapäivien valinnalla erotat kuluneen ajan jaksoon sisältyvien päivämäärien määrästä. Kalenteripäivien laskenta sopii esimerkiksi matkan, projektin tai muun ajanjakson hahmottamiseen.'],
+  paivalaskuri: ['Kuinka kauan tärkeään hetkeen on?', 'Valitse ehdotuksista Suomen juhla- tai merkkipäivä tai nimeä oma tapahtuma. Valmis ehdotus täyttää päivämäärän puolestasi. Anna tarvittaessa tarkka kellonaika: lähtölaskenta näyttää päivät, tunnit, minuutit ja sekunnit Suomen ajassa.'],
+  viikkonumerot: ['Päivämäärästä ISO-viikkoon ja takaisin', 'Selvitä päivämäärän viikkonumero tai etsi viikkonumeron perusteella koko viikon päivämäärät. ISO-viikko alkaa maanantaina. Vuodenvaihteessa myös viikkovuosi on tarkistettava, sillä tammikuun ensimmäinen päivä voi kuulua edellisen vuoden viimeiseen viikkoon.'],
+  'vuoden-paiva': ['Päivän paikka kalenterivuodessa', 'Valitse päivämäärä nähdäksesi sen järjestysnumeron ja vuoden etenemisen. Voit myös hakea päivämäärää järjestysnumeron avulla. Laskenta ottaa huomioon helmikuun lisäpäivän, joten sama maaliskuun päivämäärä saa karkausvuonna eri numeron kuin tavallisena vuonna.'],
+  karkausvuosi: ['Tarkista vuoden pituus ja laskennan sääntö', 'Anna vuosiluku ja katso, onko helmikuussa 28 vai 29 päivää. Laskuri näyttää gregoriaanisen kalenterin jaollisuussäännön vaiheittain. Näin myös tasasatavuosien poikkeukset erottuvat tavallisesta neljän vuoden rytmistä.'],
+  lomasuunnittelija: ['Vertaa yhtenäisiä vapaita omalla työviikolla', 'Etsi vaihtoehtoja, joissa viikonloput ja pyhät täydentävät haettavaa lomaa. Valitse työviikkosi ja käytettävissä olevat päivät, tutki jakson todelliset päivämäärät ja vie sopiva suunnitelma kalenteriisi. Työpäivien poissaolo ja vuosilomasaldon kuluminen lasketaan eri perustein.'],
+  'pitkat-viikonloput': ['Milloin muutama päivä muodostaa pidemmän vapaan?', 'Katso vuoden pyhien ympärille muodostuvat vapaat ja vertaa, kuinka monta työpäivää kukin vaihtoehto tarvitsee. Päivämäärät näyttävät koko jakson alusta loppuun. Valitse oman työrytmin ja muiden menojen kanssa yhteensopiva vaihtoehto.'],
+  tyovuorosuunnittelija: ['Toistuva kierto ja yksittäiset vuoronvaihdot', 'Rakenna työ- ja vapaapäivien järjestys, valitse kierron aloitus ja tarkista kuukauden tulos. Vuoroihin voi merkitä kellonajat ja palkattoman tauon. Päiväkohtainen poikkeus sopii vuoronvaihtoon ilman, että koko kiertoa täytyy muuttaa.'],
+  perhekalenteri: ['Perheen viikko, ruoat ja yhteiset muistettavat', 'Lisää perheenjäsenet ja erottele heidän menonsa väreillä. Yhteiset tapahtumat, päivän ruoka ja viikon ostoslista auttavat sovittamaan arkea yhteen. Selaimessa tehty suunnitelma ei päivity toisten laitteisiin itsestään, mutta viikon voi tulostaa ja tapahtumat viedä kalenteritiedostoon.'],
+  paivasuunnittelija: ['Päiväsuunnittelija tapaamisille ja tehtäville', 'Suunnittele yksi päivä tunnin tarkkuudella. Pohjassa on merkintätilaa kello 7–20: voit kirjoittaa tapaamiset, työvaiheet, tauot ja muistettavat asiat suoraan aikojen kohdalle. Päivämäärän vaihtaminen avaa kyseisen päivän omat merkinnät, ja täytetyn pohjan voi tulostaa.'],
+  syntymapaivakalenteri: ['Läheisten syntymäpäivät talteen', 'Kokoa tärkeät syntymäpäivät omaan luetteloon ja määritä niille vuosittaiset merkinnät. Ikätietoa varten tarvitaan syntymävuosi; pelkkään päivän muistamiseen riittävät nimi ja päivämäärä. Kalenterivienti auttaa ottamaan merkkipäivät käyttöön omassa puhelimessa.'],
+  nimipaivat: ['Nimipäivän tarkistus ja oma muistutus', 'Tarkista läheisesi nimipäivä Yliopiston almanakkatoimiston nimipalvelusta. Tämän sivun lomakkeella voit tallentaa varmistamasi nimen ja päivämäärän omaan muistutuslistaan. Suomen- ja ruotsinkieliset nimipäiväkalenterit ovat erillisiä luetteloita.'],
+  kuukalenteri: ['Kuun valaistus päivä päivältä', 'Valitse vuosi ja kuukausi nähdäksesi Kuun valaistun osuuden jokaisena päivänä. Päivän valinta avaa sen tarkemmat tiedot. Päävaiheiden kellonajat ja päivittäisen kuvan vertailuaika on erotettu toisistaan, jotta vaihetta voi seurata myös neljännesten välillä.'],
+  'kuun-vaiheet': ['Uusikuu, neljännekset ja täysikuu Suomen ajassa', 'Kuun neljän päävaiheen ajankohdat löytyvät valitsemasi vuoden taulukosta. Vaihe on täsmällinen hetki, vaikka Kuun valaistus muuttuu silmälle vähitellen. Kalenteritiedoston avulla voit liittää nämä ajankohdat myös omaan havaintosuunnitelmaasi.'],
+  taysikuu: ['Seuraavat täysikuut ja havaintoillan suunnittelu', 'Tarkista täysikuiden päivämäärät ja tarkat kellonajat vuosittain. Täysikuun hetki voi osua Suomessa päivään, mutta lähes pyöreää Kuuta voi havaita myös sen ympärillä olevina öinä. Paikallinen nousuaika ja sää ratkaisevat käytännön havaintoikkunan.'],
+  uusikuu: ['Uudenkuun ajankohta ja seuraava sirppi', 'Taulukosta näet uusikuiden tarkat ajat Suomessa. Tumma vaihekuva kuvaa Maahan päin olevan pinnan vähäistä valaistusta. Jos etsit ensimmäistä näkyvää sirppiä, seuraa uudenkuun jälkeisiä päiviä ja tarkista myös paikalliset nousu- ja laskuajat.'],
+  'auringonnousu-ja-lasku': ['Suunnittele päivä Auringon kulun mukaan', 'Valitse paikkakunta ja päivä. Näet nousun, laskun ja hämärän ajat sekä voit tutkia Auringon suuntaa ja korkeutta simulaatiossa. Laskennallinen horisontti ei huomioi lähimpiä puita, rakennuksia tai pilviä.'],
+  'kuun-nousu-ja-lasku': ['Milloin Kuu käy horisontin yläpuolella?', 'Hae paikkakuntasi Kuun nousu, lasku ja kulku valittuna päivänä. Ajansäädin näyttää, miten suunta ja korkeus muuttuvat. Kuun valaistuksen vaihe ja sen näkyminen paikallisella taivaalla ovat eri tietoja, joita havaintoillan suunnittelussa tarvitaan yhdessä.'],
+  'paivan-pituus': ['Valoisan ajan muutos omalla paikkakunnalla', 'Vertaa nousun ja laskun välistä aikaa eri päivinä ja seuraa valoisan jakson muuttumista vuoden aikana. Paikkakunta vaikuttaa sekä kellonaikoihin että päivän pituuteen. Erilliset hämärän ajat täydentävät tietoa ennen nousua ja laskun jälkeen.'],
+  vuodenajat: ['Vuodenajat taivaalla ja maan pinnalla', 'Tarkista päiväntasausten ja päivänseisausten hetket Suomen ajassa. Vuodenaikojen kalenterirajat ja tähtitieteelliset alkamishetket ovat eri tapoja jäsentää vuotta. Paikallinen sää ja luonnon eteneminen voivat poiketa kummastakin, erityisesti Suomen eri osissa.'],
+  kellonsiirto: ['Kellot eteen keväällä, taakse syksyllä', 'Tarkista tulevien kellonsiirtojen päivämäärät ja siirtymäyön kellonajat. Havainne auttaa näkemään, mikä tunti jää keväällä väliin ja mikä toistuu syksyllä. Tämä ero on tärkeä etenkin yömatkojen ja yövuorojen ajoittamisessa.'],
+  auringonpimennys: ['Pimennys omalta havaintopaikalta katsottuna', 'Valitse paikkakunta ja vertaa laskettuja alku-, huippu- ja loppuaikoja. Pimennyksen näkyvyys ja Auringon korkeus vaihtelevat paikan mukaan. Ennen havaintoa tarvitaan myös tarkoitukseen sopiva silmien ja havaintolaitteiden suojaus.'],
+  kuunpimennys: ['Maan varjo ja Kuun paikallinen näkyvyys', 'Tutki tulevien kuunpimennysten tyyppejä ja ajankohtia. Näkyvyyttä arvioitaessa tarvitaan sekä pimennyksen vaihe että tieto Kuun korkeudesta havaintopaikalla. Kaikki maailmalla tapahtuvat pimennykset eivät näy Suomessa, eikä huippuhetki kuvaa koko ilmiön kestoa.'],
+  perseidit: ['Pimeämpi havaintoilta elokuussa', 'Perseidit ovat elokuun meteoriparvi, jonka havaitsemisessa pimeys ja avoin taivas auttavat. Vertaa paikkakuntasi öitä ja Kuun valoa ennen retken suunnittelua. Meteorien määrä vaihtelee, joten pidempi rauhallinen havaintojakso on yksittäistä minuuttia hyödyllisempi suunnitelma.'],
+  kylvokalenteri: ['Kylvöstä sadonkorjuuseen Suomen oloissa', 'Vertaa kasvien esikasvatusta, kylvöä, istutusta ja sadonkorjuuta kuukausittain. Valitse kasvatuspaikka ja tarkista kasvin oma ohje ennen tehtävän lisäämistä suunnitelmaan. Lajike, paikallinen lämpötila ja maan kunto ratkaisevat lopullisen työpäivän.'],
+  'elakkeiden-maksupaivat': ['Eläkkeen maksupäivä oman maksajan mukaan', 'Tarkista julkaistut maksupäivät maksajittain ja valitse itsellesi kuuluva kalenteri. Voit ladata päivämerkinnät tai käyttää päivittyvää kalenteriosoitetta. Päätöksesi tiedot ja maksajan asiointipalvelu ratkaisevat henkilökohtaisen maksusi ajankohdan.'],
+  'etuuksien-maksupaivat': ['Etuuden maksupäivä muistettavaksi', 'Katso julkaistu maksukalenteri niille etuuksille, joilla on yhteiset maksupäivät. Muihin voit lisätä itse asiointipalvelusta varmistetun päivän. Muistutukset auttavat suunnittelemaan arkea, mutta eivät kerro hakemuksen käsittelytilaa tai etuuden määrää.'],
+  horoskooppi: ['Päivän tulkinta ja oman merkin tausta', 'Avaa yksi kahdestatoista horoskooppimerkistä lukeaksesi päivätyn tulkinnan ja merkin esittelyn. Aurinkomerkkiä voi etsiä syntymäpäivän perusteella, nousevaa merkkiä myös syntymäajan ja -paikan avulla. Astrologiset tulkinnat ovat viihdettä ja pohdittavaa, eivät tieteellisiä ennusteita.'],
+  horoskooppimerkki: ['Etsi syntymäpäivääsi vastaava horoskooppimerkki', 'Päivämäärähaku näyttää tavallisen trooppisen horoskoopin mukaisen merkin. Tuloksesta voit jatkaa merkin esittelyyn ja päivän tulkintaan. Rajapäivänä tarkka aurinkomerkki voi riippua myös syntymävuodesta ja kellonajasta.'],
+  verokalenteri: ['Verojen määräajat ja omat valmistelut', 'Rajaa verolaji ja ajanjakso nähdäksesi niitä koskevat julkaistut päivät. Voit siirtää valitut määräajat kalenteriin ja lisätä omia valmistelumuistutuksia. Henkilökohtaisen päätöksen eräpäivä, verokausi ja maksutiedot on aina tarkistettava OmaVerosta.'],
+  hakukalenteri: ['Hakuajan lisäksi muut hakemisen määräajat', 'Etsi koulutushakujen julkaistuja ajankohtia ja kokoa tarvitsemasi päivät kalenteriin. Hakeminen voi edellyttää erillisiä liitteitä, kokeita ja paikan vastaanottoa. Tarkista hakukohteen ohjeesta, mitkä yhteiset päivämäärät juuri sinun hakuusi kuuluvat.'],
+  kausimuistutukset: ['Vuodenkierron tehtävät omiin päiviisi', 'Kokoa kausittaiset tarkistukset ja omat tehtävät muistutuslistaksi. Anna tehtävälle selkeä nimi ja omaan arkeen sopiva päivä. Kalenteriin viety muistutus auttaa palaamaan asiaan, vaikka itse työn oikea hetki riippuisi säästä tai muista olosuhteista.'],
+};
+
+export function toolIntroduction(path) {
+  const parts=path.split('/').filter(Boolean);
+  if(parts.length!==1)return '';
+  const base=parts[0],record=TOOL_INTRODUCTIONS[base],example=PRACTICAL_EXAMPLES[base];
+  if(!record||!example)return '';
+  return `<section class="tool-introduction" aria-labelledby="intro-${esc(base)}" data-tool-introduction="${esc(base)}" data-editorial-skip><div class="tool-introduction-purpose"><h2 id="intro-${esc(base)}">${esc(record[0])}</h2><p>${esc(record[1])}</p></div><aside class="tool-introduction-example"><h3>Esimerkki käytöstä</h3><p>${example[1][0]}</p></aside></section>`;
+}
+
+// Custom page heroes live inside their workspace. Insert after the section or
+// header enclosing the H1, never before it or inside its text/controls.
+export function introduceTool(path,body,{customHeader=false}={}) {
+  const intro=toolIntroduction(path);
+  if(!intro)return body;
+  if(!customHeader)return intro+body;
+  const tags=/<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,stack=[];
+  const voids=new Set(['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr']);
+  let target;
+  for(const match of body.matchAll(tags)){
+    const tag=match[1].toLowerCase(),closing=match[0].startsWith('</');
+    if(!closing){
+      if(tag==='h1')target=[...stack].reverse().find(node=>node.tag==='header'||node.tag==='section');
+      if(!voids.has(tag)&&!match[0].endsWith('/>'))stack.push({tag,start:match.index});
+    }else{
+      const index=stack.findLastIndex(node=>node.tag===tag);
+      if(index<0)continue;
+      const node=stack[index];stack.length=index;
+      if(target&&node===target){const end=match.index+match[0].length;return body.slice(0,end)+intro+body.slice(end);}
+    }
+  }
+  throw new Error('Tool hero insertion point missing: '+path);
+}

@@ -10,7 +10,8 @@ export function createSolarQuality() {
   return {
     get scale() { return scale; },
     observe(interval) {
-      if (!(interval > 0 && interval < 120)) return scale;
+      if (!(interval > 0 && interval < 1000)) return scale;
+      interval=Math.min(interval,120);
       average += (interval - average) * .12;
       samples++;
       if (samples >= 24 && average > 24 && scale > .55) {

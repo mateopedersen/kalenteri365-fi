@@ -26,7 +26,7 @@ test('An explicitly saved vacation can be exported and deleted with personal pla
 test('Legal pages preserve material distinctions rather than claiming universal consent or compliance',()=>{
  for(const record of Object.values(LEGAL_PAGES)){const html=record.render();assert(!html.includes('undefined'));assert(!html.includes('>null<'));assert(!html.includes('100 %'));}
  const privacy=LEGAL_PAGES.tietosuoja.render(),cookies=LEGAL_PAGES.evasteet.render(),terms=LEGAL_PAGES.kayttoehdot.render();
- assert(privacy.includes('kalendars365@gmail.com'));assert(privacy.includes('ETA-alueen ulkopuolella'));assert(privacy.includes('syntymätietojasi'));assert(privacy.includes('tietosuojavaltuutetun'));assert(privacy.includes('13 vuoden'));
+ assert(privacy.includes('kalenteri365fi@gmail.com'));assert(privacy.includes('ETA-alueen ulkopuolella'));assert(privacy.includes('syntymätietojasi'));assert(privacy.includes('tietosuojavaltuutetun'));assert(privacy.includes('13 vuoden'));
  assert(cookies.includes('180 päivää'));assert(cookies.includes('sessionStorage'));assert(cookies.includes('KHO:2026:64'));assert(cookies.includes('KHO:2026:65'));assert(cookies.includes('ei ole suostumus'));assert(terms.includes('pakottavaan lainsäädäntöön'));
  assert(privacy.includes('data-delete-confirm disabled'));assert(cookies.includes('data-privacy-tools'));
 });

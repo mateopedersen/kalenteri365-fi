@@ -43,7 +43,7 @@ export function periodGuide(path){
       const start=weekStart(y,w),end=add(start,6),weekHolidays=[...holidays(start.getUTCFullYear()),...(end.getUTCFullYear()!==start.getUTCFullYear()?holidays(end.getUTCFullYear()):[])].filter(h=>new Date(h.date+'T00:00:00Z')>=start&&new Date(h.date+'T00:00:00Z')<=end);
       return shell('Viikon '+w+' suunnittelu',[
         `Vuoden ${y} ISO-viikko ${w} alkaa maanantaina ${fi(start)} ja päättyy sunnuntaina ${fi(end)}. ${weekHolidays.length?(weekHolidays.length===1?'Viikolle osuu ':'Viikolle osuvat ')+labelList(weekHolidays)+'.':'Viikolle ei osu sivuston Suomen kalenteriin merkittyjä juhla- tai merkkipäiviä.'}`,
-        `Kirjoita päivien kenttiin omat menot ja jätä siirtymille sekä tauoille aikaa. ${a('/perhekalenteri/','Perhekalenterissa')} voit jakaa menot henkilöittäin. Jos tarvitset viikon työpäivien määrän omilla valinnoillasi, avaa ${a('/tyopaivalaskuri/','työpäivälaskuri')}.`,
+        `Viikon ${w} maanantain ja perjantain väli on ${fi(start)}–${fi(add(start,4))}. ${a('/tyopaivalaskuri/?start='+start.toISOString().slice(0,10)+'&end='+add(start,4).toISOString().slice(0,10),'Laske tämän jakson työpäivät')} omalla työviikollasi ja poissaoloillasi.`,
         `Tämän viikon keskiviikko on ${fi(add(start,2))} ja perjantai ${fi(add(start,4))}. Jos sovit esimerkiksi perjantain palautuksesta, voit varata keskiviikon luonnokselle ja torstain tarkistukselle. Näin viikkonumero muuttuu konkreettisiksi työpäiviksi. Viikon päivämäärät eivät kuitenkaan vahvista henkilökohtaista työvuoroa tai oppilaitoksen läsnäoloa.`,
       ]);
     }

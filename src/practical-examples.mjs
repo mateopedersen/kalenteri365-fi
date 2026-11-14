@@ -222,10 +222,11 @@ export const PRACTICAL_EXAMPLES = {
   ]],
 };
 
-export function practicalExample(path) {
+export function practicalExample(path, {omitFirst=false}={}) {
   const bits=path.split('/').filter(Boolean);
   if(bits.length!==1)return '';
   const record=PRACTICAL_EXAMPLES[bits[0]];
   if(!record)return '';
-  return `<section class="reading-example panel" data-page-explanation="${esc(bits[0])}" data-editorial-skip><p class="eyebrow">KÄYTÄNNÖN ESIMERKKI</p><h2>${esc(record[0])}</h2><div class="reading-example-copy">${record[1].map(p=>`<p>${p}</p>`).join('')}</div></section>`;
+  const paragraphs=omitFirst?record[1].slice(1):record[1];
+  return `<section class="reading-example panel${omitFirst?' reading-example-followup':''}" data-page-explanation="${esc(bits[0])}" data-editorial-skip><p class="eyebrow">${omitFirst?'JATKA SUUNNITELMAA':'KÄYTÄNNÖN ESIMERKKI'}</p><h2>${esc(record[0])}</h2><div class="reading-example-copy">${paragraphs.map(p=>`<p>${p}</p>`).join('')}</div></section>`;
 }

@@ -1,8 +1,11 @@
 """Check built route, landmark, fragment, sitemap and local HTTP integrity."""
-import json,collections,urllib.parse,urllib.request,urllib.error,concurrent.futures,xml.etree.ElementTree as ET
+import json,collections,urllib.parse,urllib.request,urllib.error,concurrent.futures,xml.etree.ElementTree as ET,os
 from pathlib import Path
 from html.parser import HTMLParser
 ROOT=Path(__file__).resolve().parents[1]; OUT=ROOT/'dist'; origin='https://kalenteri365.fi'
+preview=os.environ.get('AUDIT_BASE_URL','http://127.0.0.1:4186').rstrip('/')
+if urllib.parse.urlparse(preview).hostname not in {'localhost','127.0.0.1','::1'}:
+ raise ValueError('Use a local preview URL for this audit.')
 class Page(HTMLParser):
  def __init__(self,html):
   super().__init__(convert_charrefs=True);self.ids=[];self.refs=[];self.images=[];self.headings=[];self.feed(html)
@@ -34,14 +37,15 @@ for u in image_urls:
  if not (OUT/urllib.parse.unquote(urllib.parse.urlparse(u).path).lstrip('/')).is_file():issues.append(['image sitemap','missing file',u])
 def get(route):
  try:
-  with urllib.request.urlopen('http://127.0.0.1:4186'+route,timeout=20) as res:
+  with urllib.request.urlopen(preview+route,timeout=20) as res:
    if res.status!=200 or 'text/html' not in res.headers.get('content-type',''):return [route,'bad HTTP response',res.status]
  except Exception as e:return [route,'HTTP error',str(e)]
 with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
  issues.extend(i for i in pool.map(get,pages) if i)
-try:urllib.request.urlopen('http://127.0.0.1:4186/nonexistent-seo-audit-page/',timeout=10);issues.append(['404','incorrect success response'])
+try:urllib.request.urlopen(preview+'/nonexistent-seo-audit-page/',timeout=10);issues.append(['404','incorrect success response'])
 except urllib.error.HTTPError as e:
  if e.code!=404:issues.append(['404','wrong status',e.code])
+except urllib.error.URLError as e:issues.append(['404','HTTP error',str(e)])
 result={'pages':len(pages),'http_checked':len(pages)+1,'sitemap_urls':len(urls),'image_sitemap_entries':len(image_urls),'issues':issues,'warnings':warnings}
 (ROOT/'reports/technical-crawl.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n');print(json.dumps({**{k:v for k,v in result.items() if k not in ('issues','warnings')},'issue_count':len(issues),'warning_count':len(warnings),'issues_sample':issues[:15],'warnings_sample':warnings[:5]},ensure_ascii=False))
 

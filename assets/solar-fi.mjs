@@ -27,7 +27,7 @@ export function connectSolar(A,form,events={}){
     return;
   }
   let selection,minute=Number(range.value),playing=false,frame=0,last=null,destroyed=false,dialog,placeholder;
-  let pendingFrame=0,lastUI=-Infinity,sceneTime=0;
+  let pendingFrame=0,lastUI=-Infinity,sceneTime=0,lastDraw=-Infinity;
   const quality=createSolarQuality();
   const elements=Object.fromEntries(['solar-time-label','solar-clock','solar-light','solar-duration','solar-coordinates','lunar-detail-disc','lunar-sky-disc','lunar-detail-percent'].map(id=>[id,document.getElementById(id)]));
   const lunarDiscs=isMoon?[connectLunarDisc(elements['lunar-detail-disc'],'lunar-scene'),connectLunarDisc(elements['lunar-sky-disc'],'lunar-sky')]:[];
@@ -51,8 +51,8 @@ export function connectSolar(A,form,events={}){
       const skyDisc=elements['lunar-sky-disc'];skyDisc.hidden=!point.visible;
       skyDisc.style.transform='translate3d('+point.x.toFixed(2)+'px,'+point.y.toFixed(2)+'px,0) translate(-50%,-50%)';
     }
-    // The scene moves on every animation frame. Text and accessibility values
-    // update separately, so layout and lunar SVG creation do not block the GPU.
+    // Text and accessibility values update less often than the canvas, so
+    // layout and lunar SVG updates do not compete with each drawing frame.
     if(forceUI||now-lastUI>=100){
       lastUI=now;
       const label=format(snapshot.instant);
@@ -101,14 +101,15 @@ export function connectSolar(A,form,events={}){
     quality.observe(elapsed);
     minute=advanceSolarMinute(minute,elapsed,Number(range.max),Number(speed?.value)||40);
     sceneTime+=Math.min(100,elapsed)/1000;
-    draw(now,false);
+    // Render at most 30 frames per second; elapsed time still advances exactly.
+    if(now-lastDraw>=1000/30-1){draw(now,false);lastDraw=now;}
     if(!playing)return;
     if(minute>=Number(range.max)){stop();draw(now);return;}
     frame=requestAnimationFrame(tick);
   }
   range.oninput=()=>{stop();minute=Number(range.value);scheduleDraw();};
   landscape.onchange=scheduleDraw;
-  play.onclick=()=>{if(playing){stop();draw();return;}reveal();if(reduced.matches){minute=(minute+60)%(Number(range.max)+1);range.value=String(Math.round(minute));draw();return;}if(minute>=Number(range.max))minute=0;playing=true;last=null;quality.reset();play.setAttribute('aria-pressed','true');play.querySelector('svg path').setAttribute('d','M6 4h4v16H6zM14 4h4v16h-4z');play.querySelector('span').textContent='Pysäytä';frame=requestAnimationFrame(tick);};
+  play.onclick=()=>{if(playing){stop();draw();return;}reveal();if(reduced.matches){minute=(minute+60)%(Number(range.max)+1);range.value=String(Math.round(minute));draw();return;}if(minute>=Number(range.max))minute=0;playing=true;last=null;lastDraw=-Infinity;quality.reset();play.setAttribute('aria-pressed','true');play.querySelector('svg path').setAttribute('d','M6 4h4v16H6zM14 4h4v16h-4z');play.querySelector('span').textContent='Pysäytä';frame=requestAnimationFrame(tick);};
   for(const button of player.querySelectorAll('[data-solar-jump]'))button.onclick=()=>{const event=selection.events[button.dataset.solarJump];if(!event)return;stop();minute=(new Date(event)-localDayBounds(selection.date).start)/60000;range.value=String(Math.round(minute));draw();reveal();};
   expand.onclick=()=>{
     if(dialog?.open){dialog.close();return;}
@@ -123,7 +124,8 @@ export function connectSolar(A,form,events={}){
   const visibility=()=>{if(document.hidden)stop();};document.addEventListener('visibilitychange',visibility);
   const motion=()=>{stop();draw();};reduced.addEventListener('change',motion);
   painter.canvas.addEventListener('solarcontextrestored',scheduleDraw);
+  const inView=new IntersectionObserver(entries=>{if(!entries[0].isIntersecting&&playing)stop();});inView.observe(player);
   const resize=new ResizeObserver(()=>{painter.resize();scheduleDraw();});resize.observe(painter.canvas);
-  window.fiSolar={canvas:painter.canvas,update,getState:()=>({city:selection.city[0],date:selection.date,minute,playing}),destroy(){stop();if(dialog?.open)dialog.close();destroyed=true;cancelAnimationFrame(pendingFrame);resize.disconnect();painter.canvas.removeEventListener('solarcontextrestored',scheduleDraw);document.removeEventListener('visibilitychange',visibility);reduced.removeEventListener('change',motion);dialog?.remove();painter.destroy();}};
+  window.fiSolar={canvas:painter.canvas,update,getState:()=>({city:selection.city[0],date:selection.date,minute,playing}),destroy(){stop();if(dialog?.open)dialog.close();destroyed=true;cancelAnimationFrame(pendingFrame);resize.disconnect();inView.disconnect();painter.canvas.removeEventListener('solarcontextrestored',scheduleDraw);document.removeEventListener('visibilitychange',visibility);reduced.removeEventListener('change',motion);dialog?.remove();painter.destroy();}};
   update(A,form,events);
 }

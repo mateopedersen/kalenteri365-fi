@@ -517,8 +517,9 @@ function siteFooter(path) {
     <div class="wrap footer-shell">
       <div class="footer-intro">
         <div class="footer-identity">
-          ${link("/", logo, "brand footer-brand")}
-          <p>Kalenterit, juhlapyhät ja arjen työkalut.</p>
+          <p class="footer-intro-label">KALENTERISTA KÄYTÄNTÖÖN</p>
+          <h2>Tarkista päivät.<br>Suunnittele viikko.</h2>
+          <p>Pyhät, vapaat ja omat menot samassa paikassa.</p>
         </div>
         <a class="footer-contact-card" href="/yhteystiedot/">
           <span class="footer-contact-art">${art("contact")}</span>
@@ -539,7 +540,7 @@ function siteFooter(path) {
         </div>
         <div class="footer-signoff-country">
           <svg class="footer-finland-flag" viewBox="0 0 18 11" aria-hidden="true"><rect width="18" height="11" rx=".7" fill="#fff"/><path fill="#003580" d="M5 0h3v11H5z"/><path fill="#003580" d="M0 4h18v3H0z"/></svg>
-          <span><strong>Suomen kalenterit</strong><span>Vuodet, pyhät ja omat suunnitelmat</span></span>
+          <span><strong>Tehty rakkaudella</strong><span><svg class="footer-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-9-5.7-9-12a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.3-9 12-9 12Z" fill="currentColor"/></svg> Helsingissä</span></span>
         </div>
         <a class="footer-back-top" href="#sisalto" aria-label="Takaisin ylös"><span>Takaisin ylös</span><span class="footer-back-top-icon">${icon("arrow")}</span></a>
       </div>

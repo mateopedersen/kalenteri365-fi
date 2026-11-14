@@ -62,8 +62,8 @@ export function relatedCard(href) {
   }
   return [base, title, description, illustration, "", href];
 }
-export function relatedTopics(path) {
-  const related = relatedRoutes(path).map(relatedCard);
+export function relatedTopics(path, {exclude = new Set()} = {}) {
+  const related = relatedRoutes(path).filter(target => !exclude.has(target)).map(relatedCard);
   if (!related.length) return "";
   return `<section class="related-content" aria-labelledby="related-content-title"><div class="section-heading"><h2 id="related-content-title">Jatka tästä</h2><span>Aiheeseen liittyvää</span></div>${toolCards(related)}</section>`;
 }
