@@ -115,7 +115,9 @@ import {
   time,
   moonMonth,
 } from "../src/astronomy.mjs";
-import { STYLES, exportCalendar } from "../src/exports.mjs";
+import { STYLES } from "../src/exports.mjs";
+import {calendarStyleTuples,calendarStyles} from "../src/calendar-package-catalog.mjs";
+import {importCalendarPackages} from "./import-calendar-packages.mjs";
 const riseCache=new Map();
 const riseSet=(city,d,body)=>{const key=[city[0],iso(d),body].join('|');if(!riseCache.has(key))riseCache.set(key,calculateRiseSet(city,d,body));return riseCache.get(key);};
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".."),
@@ -263,7 +265,7 @@ await fs.mkdir(path.join(ASSET,'studio/templates'),{recursive:true});
 for(const starter of studioEngine.STARTERS)await fs.writeFile(path.join(ASSET,'studio/templates',starter.id+'.svg'),studioEngine.renderCalendar(studioEngine.starterState(starter.id)));
 const searchText=new Map();
 const downloadHash=createHash('sha256');
-for(const source of ['src/exports.mjs','src/print-art.mjs','src/calendar.mjs','src/lunar-exports.mjs','src/astronomy.mjs','src/lunar.mjs','src/planner-exports.mjs','assets/photos/moon-full.jpg','assets/fonts/Lato-Regular.ttf','assets/fonts/Lato-Bold.ttf',...['school','week','family','shift'].map(name=>'assets/planner-art/'+name+'.svg')])downloadHash.update(await fs.readFile(path.join(ROOT,source)));
+for(const source of ['data/calendar-packages.json','src/exports.mjs','src/print-art.mjs','src/calendar.mjs','src/lunar-exports.mjs','src/astronomy.mjs','src/lunar.mjs','src/planner-exports.mjs','assets/photos/moon-full.jpg','assets/fonts/Lato-Regular.ttf','assets/fonts/Lato-Bold.ttf',...['school','week','family','shift'].map(name=>'assets/planner-art/'+name+'.svg')])downloadHash.update(await fs.readFile(path.join(ROOT,source)));
 const downloadVersion=downloadHash.digest('hex').slice(0,16);
 const pages = [],
   exportIndex = [];
@@ -340,10 +342,10 @@ const monthLinks = (base, y) =>
 const monthNav = (base, y, m) =>
   `<nav class="month-nav" aria-label="Kuukaudet">${m > 1 ? link(`/${base}/${y}/${SLUGS[m - 2]}/`, "← " + cap(MONTHS[m - 2])) : y > 2027 ? link(`/${base}/${y - 1}/joulukuu/`, "← Joulukuu " + (y - 1)) : "<span></span>"}${link("/" + base + "/" + y + "/", y)}${m < 12 ? link(`/${base}/${y}/${SLUGS[m]}/`, cap(MONTHS[m]) + " →") : y < 2030 ? link(`/${base}/${y + 1}/tammikuu/`, "Tammikuu " + (y + 1) + " →") : "<span></span>"}</nav>`;
 function downloadCards(y, m, moon = false) {
-  return `<div class="download-grid">${(moon ? STYLES.slice(0, 1) : STYLES)
-    .map(([s, n, d]) => {
+  return `<div class="download-grid">${(moon ? STYLES.slice(0, 1) : calendarStyleTuples(y,m))
+    .map(([s, n, d,,meta]) => {
       let stem = `kalenteri-${y}${m ? "-" + String(m).padStart(2, "0") : ""}-${s}${moon ? "-kuu" : ""}`;
-      return `<article class="download-card"><a class="preview-pad" href="/lataukset/${stem}.pdf" target="_blank" rel="noopener"><img src="/lataukset/${stem}-preview.webp" width="1000" height="${(STYLES.find(v=>v[0]===s)?.[4]?.orientation==='portrait'||s==='muistiinpanot') ? 1414 : 707}" loading="lazy" alt="${esc(n + ", " + (m ? MONTHS[m - 1] + "n " + y : "vuoden " + y) + " kalenteri")}"></a><div class="download-info"><h3>${n} · ${m ? cap(MONTHS[m - 1])+" "+y : y}</h3><p>${s==='suomi'?'Valkoinen arkki, siniristilippu ja selkeä kalenterinäkymä.':d} · A4 · PDF / kuva 600 dpi</p><div class="actions">${link("/lataukset/" + stem + ".pdf", art("pdf") + " PDF " + icon("download"), "btn")}${link("/lataukset/" + stem + ".webp", art("image") + " Kuva " + icon("download"), "btn secondary")}${link(`/luo-kalenteri/?year=${y}&month=${m || 1}`, "Muokkaa", "btn secondary download-edit")}</div></div></article>`;
+      return `<article class="download-card"><a class="preview-pad" href="/lataukset/${stem}.pdf" target="_blank" rel="noopener"><img src="/lataukset/${stem}-preview.webp" width="1000" height="${meta?.orientation==='portrait' ? 1414 : 707}" loading="lazy" alt="${esc(n + ", " + (m ? MONTHS[m - 1] + "n " + y : "vuoden " + y) + " kalenteri")}"></a><div class="download-info"><h3>${n} · ${m ? cap(MONTHS[m - 1])+" "+y : y}</h3><p>${d} · A4 · PDF / kuva 600 dpi</p><div class="actions">${link("/lataukset/" + stem + ".pdf", art("pdf") + " PDF " + icon("download"), "btn")}${link("/lataukset/" + stem + ".webp", art("image") + " Kuva " + icon("download"), "btn secondary")}${link(`/luo-kalenteri/?year=${y}&month=${m || 1}`, "Muokkaa", "btn secondary download-edit")}</div></div></article>`;
     })
     .join("")}</div>`;
 }
@@ -415,7 +417,7 @@ for (const base of [
     description,
     yearLinks(base) +
       (base === "kalenteri"
-        ? `<section class="year-picker-grid">${YEARS.map((y,i) => `<article class="year-picker"><a class="year-picker-cover" href="/kalenteri/${y}/"><img src="/lataukset/kalenteri-${y}-${['suomi','metsä','helsinki','revontulet'][i]}-preview.webp" width="1000" height="707" alt="Vuoden ${y} Suomen kalenterin tulostuspohja" loading="lazy"></a><div><p class="eyebrow">SUOMEN KALENTERI</p><h2>${link("/kalenteri/"+y+"/",y+' '+icon('arrow'))}</h2><p>${leap(y)?366:365} päivää · ${weeksInYear(y)} ISO-viikkoa</p><div class="actions">${link('/kalenteri/'+y+'/','Avaa vuosi','btn')}${link('/pdf-kalenteri/'+y+'/','15 tulostuspohjaa','btn secondary')}</div></div></article>`).join('')}</section>`
+        ? `<section class="year-picker-grid">${YEARS.map((y,i) => `<article class="year-picker"><a class="year-picker-cover" href="/kalenteri/${y}/"><img src="/lataukset/kalenteri-${y}-${['suomi','metsä','helsinki','muistiinpanot'][i]}-preview.webp" width="1000" height="${calendarStyles(y,0).find(s=>s.id===['suomi','metsä','helsinki','muistiinpanot'][i]).orientation==='portrait'?1414:707}" alt="Vuoden ${y} Suomen kalenterin tulostuspohja" loading="lazy"></a><div><p class="eyebrow">SUOMEN KALENTERI</p><h2>${link("/kalenteri/"+y+"/",y+' '+icon('arrow'))}</h2><p>${leap(y)?366:365} päivää · ${weeksInYear(y)} ISO-viikkoa</p><div class="actions">${link('/kalenteri/'+y+'/','Avaa vuosi','btn')}${link('/pdf-kalenteri/'+y+'/','15 tulostuspohjaa','btn secondary')}</div></div></article>`).join('')}</section>`
         : base === "pdf-kalenteri"
           ? downloadCards(2027, 0)
           : base === "kuukalenteri"
@@ -1075,45 +1077,9 @@ await fs.writeFile(
   JSON.stringify(pages, null, 2),
 );
 if (!process.argv.includes("--html-only")) {
-  const generationHash = createHash("sha256")
-    .update(await fs.readFile(path.join(ROOT, "src/exports.mjs")))
-    .update(await fs.readFile(path.join(ROOT, "src/print-art.mjs")))
-    .update(await fs.readFile(path.join(ROOT, "src/calendar.mjs")))
-    .digest("hex");
-  let cache = {};
-  try {
-    cache = JSON.parse(
-      await fs.readFile(path.join(ROOT, "reports/export-cache.json"), "utf8"),
-    );
-  } catch {}
-  for (const y of YEARS)
-    for (let m = 0; m <= 12; m++)
-      for (const [slug] of STYLES) {
-        let stem = `kalenteri-${y}${m ? "-" + String(m).padStart(2, "0") : ""}-${slug}`;
-        try {
-          if (cache[stem] !== generationHash)
-            throw Error("Changed export source");
-          await fs.access(path.join(OUT, "lataukset", stem + ".webp"));
-          await fs.access(path.join(OUT, "lataukset", stem + ".pdf"));
-          const orientation=STYLES.find(s=>s[0]===slug)?.[4]?.orientation||"landscape";
-          exportIndex.push({ stem, year: y, month: m, style: slug, orientation, width:orientation==="portrait"?4961:7016,height:orientation==="portrait"?7016:4961,dpi:600 });
-        } catch {
-          exportIndex.push(
-            await exportCalendar(path.join(OUT, "lataukset"), y, m, slug, slug),
-          );
-        }
-        cache[stem] = generationHash;
-        await fs.writeFile(
-          path.join(ROOT, "reports/export-cache.json"),
-          JSON.stringify(cache),
-        );
-        console.log("Export", stem);
-      }
-  await fs.writeFile(
-    path.join(ROOT, "reports/exports.json"),
-    JSON.stringify(exportIndex, null, 2),
-  );
+  exportIndex.push(...await importCalendarPackages(OUT));
 }
+
 if(!process.argv.includes("--html-only")){await generateLunarSet(ROOT,OUT);await generatePlannerSet(ROOT,OUT);}
 console.log(
   "Build complete:",

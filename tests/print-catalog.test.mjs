@@ -8,7 +8,7 @@ test('Print catalog keeps the real 15 design identities and year/month file name
 });
 test('Print filters combine text, orientation, ink and saved styles correctly',()=>{
  assert(printCatalogFilter(PRINT_STYLES,{query:'metsa'}).some(s=>s.id==='metsä'));
- assert.equal(printCatalogFilter(PRINT_STYLES,{kind:'ink'}).length,1);
+ assert.equal(printCatalogFilter(PRINT_STYLES,{kind:'ink'}).length,1);assert.equal(printCatalogFilter(PRINT_STYLES,{kind:'ink'})[0].name,'Selkeä vuosi');
  assert.equal(printCatalogFilter(PRINT_STYLES,{kind:'ink',orientation:'portrait'}).length,0);
  assert.equal(printCatalogFilter(PRINT_STYLES,{savedOnly:true,saved:['helsinki']})[0].id,'helsinki');
  assert.equal(printCatalogFilter(PRINT_STYLES,{query:'NO SUCH STYLE'}).length,0);
