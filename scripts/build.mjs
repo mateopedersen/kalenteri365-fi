@@ -1035,6 +1035,8 @@ for (const entry of await fs.readdir(OUT, {
   }
 }
 await fs.writeFile(path.join(ASSET, "search.json"), JSON.stringify(pages.map(({social,...p})=>({...p,searchable:true,keywords:searchText.get(p.path)}))));
+// Image sitemap verification needs the full planner and lunar exports on disk.
+if(!process.argv.includes("--html-only")){await generateLunarSet(ROOT,OUT);await generatePlannerSet(ROOT,OUT);}
 const sitemapSummary = await writeSitemaps({out: OUT, pages, photos: PHOTO_CREDITS, downloadVersion});
 console.log('Sitemaps ready: ' + sitemapSummary.pages + ' pages, ' + sitemapSummary.images + ' image entries');
 const notFoundSocial=await cover(ASSET,"/404/","Sivua ei löytynyt","Etsimääsi osoitetta ei löytynyt.",{kind:"not-found"});
@@ -1094,7 +1096,6 @@ await fs.writeFile(
   path.join(ROOT, "reports/pages.json"),
   JSON.stringify(pages, null, 2),
 );
-if(!process.argv.includes("--html-only")){await generateLunarSet(ROOT,OUT);await generatePlannerSet(ROOT,OUT);}
 console.log(
   "Build complete:",
   pages.length,
