@@ -20,7 +20,10 @@ test('all generated image metadata carries source-specific rights without invent
         for(const key of ['contentUrl','license','acquireLicensePage'])assert.match(image[key]||'',/^https:\/\//,label+' '+key);
         for(const key of ['creditText','copyrightNotice'])assert.ok(image[key]?.trim(),label+' '+key);
         if(!anonymous.has(image.contentUrl))assert.ok(image.creator?.name?.trim(),label+' creator');
-        else assert.equal(image.creator,undefined,label+' anonymous original');
+        else {
+          assert.match(html,/<meta name="robots" content="[^"]*noindex/,label+' anonymous archival images are limited to the non-indexed credits page');
+          assert.equal(image.creator,undefined,label+' anonymous original');
+        }
         checked++;
       }
     }

@@ -996,7 +996,7 @@ await page(
   )
     .map(
       (p) =>
-        `<article class="photo-credit"><img src="${p.src.replace(".webp", "-320.webp")}" alt="${esc(p.alt)}" width="${p.width}" height="${p.height}" loading="lazy"><h3>${esc(p.name)}</h3><p>${esc(p.author)} · ${p.licenseUrl && p.licenseUrl !== p.source ? link(p.licenseUrl, esc(p.license)) : esc(p.license)}</p><p>${esc(p.changes)} ${link(p.source, "Alkuperäinen kuva")}</p></article>`,
+        `<article class="photo-credit"><img src="${p.src.replace(".webp", "-320.webp")}" alt="${esc(p.alt)}" width="${p.width}" height="${p.height}" loading="lazy"><h3>${esc(p.name)}</h3><p>${esc(p.author || "Tekijää ei ole nimetty alkuperäisessä lähteessä")} · ${p.licenseUrl && p.licenseUrl !== p.source ? link(p.licenseUrl, esc(p.license)) : esc(p.license)}</p><p>${esc(p.changes)} ${link(p.source, "Alkuperäinen kuva")}</p></article>`,
     )
     .join(
       "",

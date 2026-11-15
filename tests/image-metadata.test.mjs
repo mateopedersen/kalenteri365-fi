@@ -29,6 +29,20 @@ test('social composition and original photo rights stay separate',()=>{
   assert.equal(socialImageSchema({}),null);
 });
 
+test('featured Kalevala photograph credits its photographer separately from the original artist',()=>{
+  const photo=photos.find(p=>p.applicableSlugs?.includes('kalevalan-paiva'));
+  const image=photoImageSchema(photo);
+  assert.equal(image.creator.name,'Jukka Paavola');
+  assert.equal(image.license,'https://creativecommons.org/licenses/by-sa/4.0/');
+  assert.match(image.creditText,/Akseli Gallen-Kallela/);
+  assert.match(image.creditText,/Gallen-Kallelan museo/);
+  assert.match(image.isBasedOn,/Koru-Kalevala_Sampolaiva/);
+  const archive=photos.find(p=>p.src==='/assets/photos/holiday-kalevala.webp');
+  assert.equal(archive.retiredFromFeaturedUse,true);
+  assert.equal(photoImageSchema(archive).creator,undefined);
+  assert.equal(archive.applicableSlugs,undefined);
+});
+
 test('an individual photographer stays a person when their credit also names an agency',()=>{
   assert.equal(photoImageSchema(photos.find(photo=>photo.author==='Stephen Ausmus, USDA ARS')).creator['@type'],'Person');
   assert.equal(photoImageSchema(photos.find(photo=>photo.author==='NASA · Apollo 17')).creator['@type'],'Organization');

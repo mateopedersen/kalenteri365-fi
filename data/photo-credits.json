@@ -793,6 +793,32 @@
   {
     "id": "holiday-kalevala",
     "kind": "holiday",
+    "name": "Koru-Kalevala: Sampolaiva",
+    "src": "/assets/photos/holiday-kalevala-sampolaiva.webp",
+    "author": "Jukka Paavola",
+    "artist": "Akseli Gallen-Kallela",
+    "collection": "Gallen-Kallelan museo",
+    "accessionNumber": "GKM-690",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:Koru-Kalevala_Sampolaiva,_GKM-690.tif",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Koru-Kalevala_Sampolaiva%2C_GKM-690.tif",
+    "originalSha256": "847562423fcab32c55e911b27ebcb24a795e758f0a021cebe2ee38570924c9ea",
+    "originalBytes": 53419324,
+    "alt": "Akseli Gallen-Kallelan mustavalkoinen Sampolaiva-grafiikka: purjelaiva soutajineen ja suuri lintu.",
+    "caption": "Akseli Gallen-Kallelan Sampolaiva-grafiikkaa Koru-Kalevalaa varten, 1920-luku. Valokuva: Jukka Paavola / Gallen-Kallelan museo, CC BY-SA 4.0.",
+    "creditText": "Valokuva: Jukka Paavola · Teos: Akseli Gallen-Kallela · Gallen-Kallelan museo · CC BY-SA 4.0",
+    "changes": "Pienennys ja WebP-muunnos. Teos: Akseli Gallen-Kallela, Koru-Kalevala: Sampolaiva, 1920-luku. Gallen-Kallelan museo, GKM-690.",
+    "sha256": "435887c62864f5b78a75b882d7f0941ea612188e7535702b9a1692ee5383fb4c",
+    "width": 1200,
+    "height": 791,
+    "applicableSlugs": [
+      "kalevalan-paiva"
+    ]
+  },
+  {
+    "id": "archive-kalevala-title-page",
+    "kind": "archive",
     "name": "Kalevalan vanhan painoksen nimiösivu",
     "src": "/assets/photos/holiday-kalevala.webp",
     "author": "",
@@ -806,9 +832,7 @@
     "sha256": "fe349a0fa46536864f8e846ac25906640631e1b17d7e38709681e02bed1dcc4f",
     "width": 200,
     "height": 327,
-    "applicableSlugs": [
-      "kalevalan-paiva"
-    ]
+    "retiredFromFeaturedUse": true
   },
   {
     "id": "holiday-kivi",

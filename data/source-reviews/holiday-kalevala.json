@@ -1,0 +1,27 @@
+{
+  "source": "https://commons.wikimedia.org/wiki/File:Koru-Kalevala_Sampolaiva,_GKM-690.tif",
+  "reviewedOn": "2026-11-15",
+  "originalSha1": "c531d3e5f6ada37a0377b767071f3f12587a4ad4",
+  "originalSha256": "847562423fcab32c55e911b27ebcb24a795e758f0a021cebe2ee38570924c9ea",
+  "originalBytes": 53419324,
+  "photographer": "Jukka Paavola",
+  "artist": "Akseli Gallen-Kallela",
+  "collection": "Gallen-Kallelan museo",
+  "accessionNumber": "GKM-690",
+  "workDate": "1920s",
+  "selectedLicense": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "sourceLicenseStatement": "Commons Licensing section: Attribution-Share Alike 4.0 International. The permission section also offers CC0; this rendition uses the documented CC BY-SA 4.0 option.",
+  "visualObservation": "Black-and-white print on off-white paper: long sailing ship with rowers, angular waves and a large bird above the sail. Inspected a 1200px rendering of the checksum-verified original TIFF.",
+  "publishedRendition": {
+    "src": "/assets/photos/holiday-kalevala-sampolaiva.webp",
+    "sha256": "435887c62864f5b78a75b882d7f0941ea612188e7535702b9a1692ee5383fb4c",
+    "width": 1200,
+    "height": 791
+  },
+  "replaces": {
+    "src": "/assets/photos/holiday-kalevala.webp",
+    "sha256": "fe349a0fa46536864f8e846ac25906640631e1b17d7e38709681e02bed1dcc4f",
+    "reason": "The old anonymous title-page reproduction has no documented photographer. It remains preserved with its original provenance; the featured Kalevala image now has a documented artist and photographer."
+  }
+}

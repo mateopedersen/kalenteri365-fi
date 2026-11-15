@@ -9,7 +9,7 @@ export function photoImageSchema(photo){
   const creator=author?{'@type':organizations.has(author)||author.startsWith('NASA · ')?'Organization':'Person',name:author}:null;
   return {'@type':'ImageObject',contentUrl:absolute(photo.src),caption:photo.alt,
     ...(creator?{creator}:{}),
-    creditText:[author||'Tekijää ei ole nimetty alkuperäisessä lähteessä',photo.license].filter(Boolean).join(' · '),
+  creditText:photo.creditText||[author||'Tekijää ei ole nimetty alkuperäisessä lähteessä',photo.license].filter(Boolean).join(' · '),
     copyrightNotice:[photo.license,author].filter(Boolean).join(' · '),
     license:absolute(photo.licenseUrl||photo.source),acquireLicensePage:photo.source,isBasedOn:photo.source};
 }
