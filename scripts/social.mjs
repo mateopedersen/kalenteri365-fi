@@ -13,10 +13,17 @@ export async function cover(out,route,title,description,context={}){
  const model=socialModel(route,title,description,context);
  if(['lunar','moonrise'].includes(model.family)&&!model.photos.some(p=>p.id==='moon-full'))model.photos.push(photos.find(p=>p.id==='moon-full'));
  const rendered=await renderSocial(model,out);
- const hash=sha(version+rendered.svg).slice(0,20),slug=route==='/'?'etusivu':route.slice(1,-1).replaceAll('/','-');
- const src='/assets/social/'+slug+'-'+hash+'.jpg',file=path.join(out,'social',path.basename(src));
+ const slug=route==='/'?'etusivu':route.slice(1,-1).replaceAll('/','-');
+ // Native JPEG encoders can differ across build hosts. Cache renders privately,
+ // and bind the public immutable URL to the bytes users will actually receive.
+ const cacheDir=new URL('../reports/social-render-cache/',import.meta.url);
+ const renderKey=sha(version+rendered.svg+process.platform+process.arch+JSON.stringify(sharp.versions));
+ const cached=new URL(renderKey+'.jpg',cacheDir);
+ await fs.mkdir(cacheDir,{recursive:true});
+ let bytes;try{bytes=await fs.readFile(cached);}catch(error){if(error.code!=='ENOENT')throw error;bytes=await sharp(Buffer.from(rendered.svg),{density:144,limitInputPixels:24e6}).resize(1200,630).jpeg({quality:88,mozjpeg:true,chromaSubsampling:'4:4:4'}).toBuffer();await fs.writeFile(cached,bytes);}
+ const src='/assets/social/'+slug+'-'+sha(bytes).slice(0,20)+'.jpg',file=path.join(out,'social',path.basename(src));
  await fs.mkdir(path.dirname(file),{recursive:true});
- let bytes;try{bytes=await fs.readFile(file);}catch{bytes=await sharp(Buffer.from(rendered.svg),{density:144,limitInputPixels:24e6}).resize(1200,630).jpeg({quality:88,mozjpeg:true,chromaSubsampling:'4:4:4'}).toBuffer();await fs.writeFile(file,bytes);}
+ await fs.writeFile(file,bytes);
  const sources=[];for(const p of model.photos){const checksum=sha(await sourceBytes(p.src));if(p.sha256&&p.sha256!==checksum)throw Error('Changed OG source needs review: '+p.id);sources.push({id:p.id,src:p.src,alt:p.alt,sha256:checksum,author:p.author,license:p.license,licenseUrl:p.licenseUrl,source:p.source});}
  const renderAssets=[];for(const input of model.renderAssets||[]){const bytes=await fs.readFile(input.file);renderAssets.push({src:path.posix.normalize('/assets/'+path.relative(out,input.file).split(path.sep).join('/')),role:input.role,sha256:sha(bytes)});}
  const record={renderAssets,route,src,alt:model.alt,width:1200,height:630,type:'image/jpeg',bytes:bytes.length,sha256:sha(bytes),family:model.family,base:model.base,locale:model.locale,year:model.year,month:model.month,week:model.week,city:model.city?.[0]||null,sourceIds:sources.map(s=>s.id),sources,textLayout:rendered.textLayout,renderer:version};

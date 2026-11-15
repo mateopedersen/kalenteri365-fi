@@ -208,6 +208,7 @@ export async function auditSocial(root = ROOT) {
         check(bytes.length > 0 && bytes.length <= MAX_BYTES, route, 'image-byte-budget', {bytes: bytes.length, maximum: MAX_BYTES});
         check(bytes.length === record.bytes, route, 'manifest-byte-length', {expected: record.bytes, actual: bytes.length});
         check(hash === record.sha256, route, 'image-file-checksum', {expected: record.sha256, actual: hash});
+        check(path.basename(record.src).endsWith('-'+hash.slice(0,20)+'.jpg'), route, 'immutable-url-matches-image-bytes', record.src);
         if (!byBytes.has(hash)) byBytes.set(hash, []);
         byBytes.get(hash).push(route);
         try {
