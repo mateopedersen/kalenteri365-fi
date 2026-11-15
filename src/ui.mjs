@@ -1,3 +1,4 @@
+import {socialImageSchema} from './image-metadata.mjs';
 import {actionLabel} from './action-icons.mjs';
 import {siteIconLinks} from './site-icons.mjs';
 import {brandedTitle} from './seo-title.mjs';
@@ -616,7 +617,7 @@ export function layout({
     for(let i=0;i<parts.length;i++){const prefix='/'+parts.slice(0,i+1).join('/')+'/';items.push({name:i===parts.length-1?title:(i===0?tools.find(t=>t[0]===parts[0])?.[1]||({blogi:"Blogi",oppaat:"Oppaat"})[parts[0]]:null)||cap(parts[i].replaceAll('-',' ')),url:'https://kalenteri365.fi'+prefix});}
     schema.breadcrumb={'@type':'BreadcrumbList',itemListElement:items.map((item,i)=>({'@type':'ListItem',position:i+1,name:item.name,item:item.url}))};
   }
-  const socialImage=social.src?{"@type":"ImageObject",url:"https://kalenteri365.fi"+social.src,contentUrl:"https://kalenteri365.fi"+social.src,caption:social.alt,width:social.width||1200,height:social.height||630,encodingFormat:social.type||"image/jpeg",creditText:social.creditText||"Kalenteri365",acquireLicensePage:"https://kalenteri365.fi/valokuvat-ja-lisenssit/"}:null;
+  const socialImage=socialImageSchema(social);
   if(socialImage){if(path==="/")schema.mainEntity={"@type":"WebPage","@id":"https://kalenteri365.fi/",primaryImageOfPage:socialImage};else schema.primaryImageOfPage=socialImage;}
   if(structuredImages.length)schema.image=structuredImages;
   if(kind==='article'&&extra.article){schema.mainEntity={'@type':'BlogPosting',headline:title,description:summary,inLanguage:'fi',mainEntityOfPage:'https://kalenteri365.fi'+path,author:{'@type':'Organization',name:'Kalenteri365',url:'https://kalenteri365.fi/tietoa/'},publisher:{'@type':'Organization',name:'Kalenteri365',url:'https://kalenteri365.fi/'},...extra.article,image:socialImage||structuredImages[0]?.contentUrl};}

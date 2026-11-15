@@ -1,3 +1,4 @@
+import {photoImageSchema} from '../src/image-metadata.mjs';
 import {contactPage} from '../src/contact-view.mjs';
 import {writeSitemaps} from './sitemaps.mjs';
 import {monthlyDirectory} from '../src/monthly-directory.mjs';
@@ -199,6 +200,7 @@ await fs.copyFile(
   path.join(ASSET, "calendar.mjs"),
 );
 await fs.copyFile(path.join(ROOT, "src/ui.mjs"), path.join(ASSET, "ui.mjs"));
+await fs.copyFile(path.join(ROOT, "src/image-metadata.mjs"), path.join(ASSET, "image-metadata.mjs"));
 for (const name of ['tax-calendar-core.mjs','tax-view.mjs','long-weekend-core.mjs','long-weekend-view.mjs','calendar-lab-core.mjs','calendar-lab-view.mjs','zodiac-signs.mjs','birthday-core.mjs','flagging-core.mjs','namedays-core.mjs','birthday-view.mjs','pension-view.mjs','payment-cards-view.mjs','benefit-view.mjs']) await fs.copyFile(path.join(ROOT,'src',name),path.join(ASSET,name));
 await fs.copyFile(path.join(ROOT, "src/site-icons.mjs"), path.join(ASSET, "site-icons.mjs"));
 await fs.copyFile(path.join(ROOT, "src/seo-title.mjs"), path.join(ASSET, "seo-title.mjs"));
@@ -317,7 +319,7 @@ async function page(p, title, desc, body, kind = "page", extra = {}) {
   await fs.mkdir(folder, { recursive: true });
   await fs.writeFile(
     path.join(folder, "index.html"),
-    layout({ relatedContent: relatedTopics(p,{exclude:contentDestinations(body)}), path: p, title, description: desc, body, kind, social, structuredImages:[...PHOTO_CREDITS.filter(image=>(p==='/'&&['city','city-night','municipality'].includes(image.kind))||body.includes(image.src)||body.includes(image.src.replace('.webp','-640.webp'))||body.includes(image.src.replace('.webp','-320.webp'))||(image.id==='moon-full'&&(body.includes('moon-surface.jpg')||body.includes('moon-phase-texture.webp')))).map(image=>({'@type':'ImageObject',contentUrl:'https://kalenteri365.fi'+image.src,caption:image.alt,creditText:image.author+' · '+image.license,license:image.licenseUrl||image.source,acquireLicensePage:image.source})), ...(group==='vuodenajat'?seasonImageSchema:[])], ...extra, seoTitle, seoDescription:metadata.description }),
+    layout({ relatedContent: relatedTopics(p,{exclude:contentDestinations(body)}), path: p, title, description: desc, body, kind, social, structuredImages:[...PHOTO_CREDITS.filter(image=>(p==='/'&&['city','city-night','municipality'].includes(image.kind))||body.includes(image.src)||body.includes(image.src.replace('.webp','-640.webp'))||body.includes(image.src.replace('.webp','-320.webp'))||(image.id==='moon-full'&&(body.includes('moon-surface.jpg')||body.includes('moon-phase-texture.webp')))).map(photoImageSchema), ...(group==='vuodenajat'?seasonImageSchema:[])], ...extra, seoTitle, seoDescription:metadata.description }),
   );
   searchText.set(p,[...new Set(body.replace(/<script[\s\S]*?<\/script>/gi,' ').replace(/<style[\s\S]*?<\/style>/gi,' ').replace(/<(select|nav)\b[^>]*>[\s\S]*?<\/\1>/gi,' ').replace(/<[^>]*>/g,' ').replace(/&[^;]+;/g,' ').toLocaleLowerCase('fi').split(/[^\p{L}\p{N}]+/u).filter(w=>w.length>1))].join(' '));
   pages.push({
@@ -989,7 +991,7 @@ await page(
   "/valokuvat-ja-lisenssit/",
   "Valokuvat ja lisenssit",
   "Kalenteri365-palvelun valokuvien, kuvituksen ja kirjasinten lähteet.",
-  `<article class="long-text">${institutionCredits()}<h2>Kalenteriperheen vektorikuvitus</h2><p>Kalenteri-, työkalu- ja horoskooppikuvitus on sivustoperheen omaa vektorigrafiikkaa. Suomen version kuvituksessa käytetään sinisiä, valkoisia ja luonnon sävyjä. Vuodenaikojen maisemat ovat kuvitusta, eivät valokuvia tietystä paikasta.</p>${seasonCredits()}<h2>Paikkakunnat ja yliopistot</h2><p>Kuvat ovat kyseisissä paikoissa otettuja valokuvia. Etusivun paikkakuntavalitsimen jokaisella 25 paikkakunnalla on erillinen päiväkuva ja yökuva. Kuvan vaihto perustuu paikkakunnan koordinaateista laskettuun Auringon korkeuteen: päiväkuva näkyy Auringon ollessa horisontin yläpuolella ja yökuva sen laskettua. Myös kaamos ja yötön yö huomioidaan. Valokuvat ovat arkistokuvia eivätkä reaaliaikaisia sääkameroita. Kuvausajankohdan vuodenaika ja sää voivat poiketa tämänhetkisistä oloista. Kuvaajien nimet, alkuperäiset julkaisut ja lisenssit on lueteltu kuvakohtaisesti. Kuvat säilyttävät alla mainitun lisenssinsä.</p><div class="photo-license-grid">${PHOTO_CREDITS.filter(
+  `<article class="long-text">${institutionCredits()}<section id="jakokuvat"><h2>Hakutulosten ja jakamisen kuvat</h2><p>Kalenteri365 tekee sivukohtaisten jakokuvien sommittelun, kalenterimerkinnät ja tekstit. Valokuvia sisältävien kansien alkuperäiset kuvat säilyttävät omat tekijänsä ja käyttöehtonsa. Kannen käyttö ei anna erillistä lupaa sen sisältämien valokuvien käyttöön. Tarkista kuvakohtainen lisenssi ja alkuperäinen lähde alla olevasta luettelosta. Sivuston omien sommittelujen käyttöluvasta voit kysyä ylläpidolta <a href="/yhteystiedot/">yhteystietosivun kautta</a>.</p></section><h2>Kalenteriperheen vektorikuvitus</h2><p>Kalenteri-, työkalu- ja horoskooppikuvitus on sivustoperheen omaa vektorigrafiikkaa. Suomen version kuvituksessa käytetään sinisiä, valkoisia ja luonnon sävyjä. Vuodenaikojen maisemat ovat kuvitusta, eivät valokuvia tietystä paikasta.</p>${seasonCredits()}<h2>Paikkakunnat ja yliopistot</h2><p>Kuvat ovat kyseisissä paikoissa otettuja valokuvia. Etusivun paikkakuntavalitsimen jokaisella 25 paikkakunnalla on erillinen päiväkuva ja yökuva. Kuvan vaihto perustuu paikkakunnan koordinaateista laskettuun Auringon korkeuteen: päiväkuva näkyy Auringon ollessa horisontin yläpuolella ja yökuva sen laskettua. Myös kaamos ja yötön yö huomioidaan. Valokuvat ovat arkistokuvia eivätkä reaaliaikaisia sääkameroita. Kuvausajankohdan vuodenaika ja sää voivat poiketa tämänhetkisistä oloista. Kuvaajien nimet, alkuperäiset julkaisut ja lisenssit on lueteltu kuvakohtaisesti. Kuvat säilyttävät alla mainitun lisenssinsä.</p><div class="photo-license-grid">${PHOTO_CREDITS.filter(
     (p) => p.kind,
   )
     .map(

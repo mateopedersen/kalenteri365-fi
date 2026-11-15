@@ -1,3 +1,4 @@
+import {illustrationImageSchema} from './image-metadata.mjs';
 import scenes from '../data/season-scenes.json' with {type:'json'};
 import {YEARS,fi,parse} from './calendar.mjs';
 import {esc} from './ui.mjs';
@@ -25,6 +26,6 @@ export function seasonPage(seasons){
  `<p class="season-visual-note">Maisemat ovat vuodenaikoja havainnollistavaa digitaalista 3D-kuvitusta. Päivämäärät kertovat tähtitieteellisen vuodenajan alkamisesta, eivät paikallisen sään muuttumisesta.</p>`;
 }
 
-export const seasonImageSchema=scenes.map(scene=>({'@type':'ImageObject',contentUrl:'https://kalenteri365.fi/assets/seasons/'+scene.id+'-1200.webp',caption:scene.alt,creator:{'@type':'Organization',name:'Kalenteri365'},creditText:'Kalenteri365 · tekoälyavusteinen digitaalinen kuvitus',license:'https://kalenteri365.fi/valokuvat-ja-lisenssit/#vuodenaikojen-kuvitus',acquireLicensePage:'https://kalenteri365.fi/valokuvat-ja-lisenssit/#vuodenaikojen-kuvitus'}));
+export const seasonImageSchema=scenes.map(scene=>illustrationImageSchema({src:'/assets/seasons/'+scene.id+'-1200.webp',alt:scene.alt}));
 
 export function seasonCredits(){return `<section id="vuodenaikojen-kuvitus"><h2>Vuodenaikojen 3D-kuvitus</h2><p>Vuosien 2027–2030 vuodenaikakortteihin on tehty 16 erillistä, tekoälyavusteista digitaalista maisemakuvaa. Kuvitukset havainnollistavat Suomen luontoa. Ne eivät ole valokuvia nimetyistä paikoista tai tulevien vuosien säästä. Kuvien käyttöön muualla voi pyytää luvan sivuston ylläpidolta.</p><div class="season-credit-grid">${scenes.map(scene=>`<figure>${seasonPicture(scene)}<figcaption>${scene.name} ${scene.year} · Kalenteri365</figcaption></figure>`).join('')}</div></section>`;}
