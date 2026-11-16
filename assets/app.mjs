@@ -1,3 +1,4 @@
+import './advertising.mjs';
 import './calendar-downloads.js';
 import {birthdayMeta} from './birthday-core.mjs';
 import {namedayMeta} from './namedays-core.mjs';

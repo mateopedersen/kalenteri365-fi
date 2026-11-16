@@ -1,5 +1,6 @@
 // Only this site's documented records are included. Never clear an origin wholesale.
 export const LOCAL_RECORDS = [
+  {key:'kalenteri365.advertising-consent.v1', name:'Mainonnan valinta', detail:'Erillinen mainoslupa tai kieltäytyminen, voimassa 180 päivää', group:'preferences'},
   {key:'kalenteri365-fi-v1', name:'Oma kalenteri', detail:'Tapahtumat, tehtävät, muistiinpanot, suunnitelmat ja käyttövalinnat', group:'plans'},
   {key:'kalenteri365-v1', name:'Aiemman version kalenteri', detail:'Mahdollinen vanha paikallinen kalenteritallennus', group:'plans'},
   {key:'kalenteri365-studio-project-v1', name:'Kalenterin muokkain', detail:'Projektin asetukset, tekstit, kuvat ja omat tapahtumat', group:'plans'},

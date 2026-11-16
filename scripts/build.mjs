@@ -1,3 +1,4 @@
+import {advertisingEligible,advertisingSlot,advertisingConfigMarkup} from '../src/advertising-view.mjs';
 import {shoppingPages,shoppingHub,shoppingStylesheet} from '../src/shopping-pages.mjs';
 import {photoImageSchema} from '../src/image-metadata.mjs';
 import {contactPage} from '../src/contact-view.mjs';
@@ -301,6 +302,7 @@ async function page(p, title, desc, body, kind = "page", extra = {}) {
   if (pages.some((x) => x.path === p)) throw Error("Duplicate page " + p);
   const group=p.split('/')[1],plannerFamily={'viikkokalenteri':'week','perhekalenteri':'family','lukujarjestys':'school','koulukalenteri':'school','tyovuorosuunnittelija':'shift'}[group];
   body=introduceTool(p,body,{customHeader:extra.customHeader});
+  if(advertisingEligible(p))body+=advertisingSlot();
   if(plannerFamily&&p.split('/').filter(Boolean).length===1)body+=plannerCards(plannerFamily);
   body=templateGuidance(body);
   if(group==='juhlapyhat'&&p==='/juhlapyhat/')body+=holidayDirectory();
@@ -328,7 +330,7 @@ async function page(p, title, desc, body, kind = "page", extra = {}) {
   await fs.mkdir(folder, { recursive: true });
   await fs.writeFile(
     path.join(folder, "index.html"),
-    layout({ relatedContent: relatedTopics(p,{exclude:contentDestinations(body)}), path: p, title, description: desc, body, kind, social, structuredImages:[...PHOTO_CREDITS.filter(image=>(p==='/'&&['city','city-night','municipality'].includes(image.kind))||body.includes(image.src)||body.includes(image.src.replace('.webp','-640.webp'))||body.includes(image.src.replace('.webp','-320.webp'))||(image.id==='moon-full'&&(body.includes('moon-surface.jpg')||body.includes('moon-phase-texture.webp')))).map(photoImageSchema), ...(group==='vuodenajat'?seasonImageSchema:[])], ...extra, seoTitle, seoDescription:metadata.description }),
+    layout({advertisingConfig:advertisingConfigMarkup(), relatedContent: relatedTopics(p,{exclude:contentDestinations(body)}), path: p, title, description: desc, body, kind, social, structuredImages:[...PHOTO_CREDITS.filter(image=>(p==='/'&&['city','city-night','municipality'].includes(image.kind))||body.includes(image.src)||body.includes(image.src.replace('.webp','-640.webp'))||body.includes(image.src.replace('.webp','-320.webp'))||(image.id==='moon-full'&&(body.includes('moon-surface.jpg')||body.includes('moon-phase-texture.webp')))).map(photoImageSchema), ...(group==='vuodenajat'?seasonImageSchema:[])], ...extra, seoTitle, seoDescription:metadata.description }),
   );
   searchText.set(p,[...new Set(body.replace(/<script[\s\S]*?<\/script>/gi,' ').replace(/<style[\s\S]*?<\/style>/gi,' ').replace(/<(select|nav)\b[^>]*>[\s\S]*?<\/\1>/gi,' ').replace(/<[^>]*>/g,' ').replace(/&[^;]+;/g,' ').toLocaleLowerCase('fi').split(/[^\p{L}\p{N}]+/u).filter(w=>w.length>1))].join(' '));
   pages.push({
@@ -1054,7 +1056,7 @@ console.log('Sitemaps ready: ' + sitemapSummary.pages + ' pages, ' + sitemapSumm
 const notFoundSocial=await cover(ASSET,"/404/","Sivua ei löytynyt","Etsimääsi osoitetta ei löytynyt.",{kind:"not-found"});
 await fs.writeFile(
   path.join(OUT, "404.html"),
-  layout({
+  layout({advertisingConfig:advertisingConfigMarkup(),
     path: "/404/",
     title: "Sivua ei löytynyt",
     description: "Etsimääsi osoitetta ei löytynyt.",
@@ -1066,7 +1068,7 @@ await fs.writeFile(
 await writeSocialManifest(ASSET);
 await fs.writeFile(
   path.join(OUT, "_headers"),
-  `/*\n  Cache-Control: public, max-age=0, must-revalidate, no-transform\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n  X-Frame-Options: SAMEORIGIN\n  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; frame-src 'self' https://docs.google.com; object-src 'none'; base-uri 'self'; frame-ancestors 'self'\n/sitemap.xml\n  Content-Type: application/xml; charset=utf-8\n/sitemap-images.xml\n  Content-Type: application/xml; charset=utf-8\n/sitemap-index.xml\n  Content-Type: application/xml; charset=utf-8\n/robots.txt\n  Content-Type: text/plain; charset=utf-8\n/favicon.ico\n  Content-Type: image/x-icon\n/assets/icon-*.png\n  Content-Type: image/png\n/assets/icon.svg\n  Content-Type: image/svg+xml\n/site.webmanifest\n  Content-Type: application/manifest+json; charset=utf-8\n/assets/runtime/*\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n/assets/fonts/*\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n/assets/site-runtime.*.css\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n/assets/art/*\n  ! Cache-Control\n  Cache-Control: public, max-age=86400\n/assets/art-*\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n/assets/photos/*\n  ! Cache-Control\n  Cache-Control: public, max-age=604800\n/assets/social/*\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n/assets/*.json\n  ! Cache-Control\n  Cache-Control: public, max-age=60\n/lataukset/*\n  ! Cache-Control\n  Cache-Control: public, max-age=86400\n/*.ics\n  Content-Type: text/calendar; charset=utf-8\n  Content-Disposition: attachment\n/kalenteriin/*\n  X-Robots-Tag: noindex\n  ! Cache-Control\n  Cache-Control: public, max-age=86400\n`,
+  `/*\n  Cache-Control: public, max-age=0, must-revalidate, no-transform\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n  X-Frame-Options: SAMEORIGIN\n  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://bauval.org; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://bauval.org; font-src 'self'; connect-src 'self' https://bauval.org; frame-src 'self' https://docs.google.com https://bauval.org; object-src 'none'; base-uri 'self'; frame-ancestors 'self'\n/sitemap.xml\n  Content-Type: application/xml; charset=utf-8\n/sitemap-images.xml\n  Content-Type: application/xml; charset=utf-8\n/sitemap-index.xml\n  Content-Type: application/xml; charset=utf-8\n/robots.txt\n  Content-Type: text/plain; charset=utf-8\n/favicon.ico\n  Content-Type: image/x-icon\n/assets/icon-*.png\n  Content-Type: image/png\n/assets/icon.svg\n  Content-Type: image/svg+xml\n/site.webmanifest\n  Content-Type: application/manifest+json; charset=utf-8\n/assets/runtime/*\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n/assets/fonts/*\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n/assets/site-runtime.*.css\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n/assets/art/*\n  ! Cache-Control\n  Cache-Control: public, max-age=86400\n/assets/art-*\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n/assets/photos/*\n  ! Cache-Control\n  Cache-Control: public, max-age=604800\n/assets/social/*\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n/assets/*.json\n  ! Cache-Control\n  Cache-Control: public, max-age=60\n/lataukset/*\n  ! Cache-Control\n  Cache-Control: public, max-age=86400\n/*.ics\n  Content-Type: text/calendar; charset=utf-8\n  Content-Disposition: attachment\n/kalenteriin/*\n  X-Robots-Tag: noindex\n  ! Cache-Control\n  Cache-Control: public, max-age=86400\n`,
 );
 const aliases = {
   "pdf-kalenterit": "pdf-kalenteri",

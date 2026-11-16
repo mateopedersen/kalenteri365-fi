@@ -1,0 +1,35 @@
+{
+  "enabled": true,
+  "storageKey": "kalenteri365.advertising-consent.v1",
+  "hosts": [
+    "kalenteri365.fi",
+    "www.kalenteri365.fi"
+  ],
+  "scriptHosts": [
+    "bauval.org"
+  ],
+  "desktop": {
+    "key": "49a145036760dacb9635c091ff9620dd",
+    "width": 728,
+    "height": 90,
+    "src": "https://bauval.org/22/49a145036760dacb9635c091ff9620dd"
+  },
+  "mobile": {
+    "key": "d86aa501560e06dbb3d53eaa907ee254",
+    "width": 300,
+    "height": 250,
+    "src": "https://bauval.org/22/d86aa501560e06dbb3d53eaa907ee254"
+  },
+  "privacy": "/tietosuoja/#mainonta",
+  "labels": {
+    "title": "Mainonnan asetukset",
+    "description": "Näytämme Adsterran mainoksia vain, jos sallit niiden lataamisen. Mainospalvelu saa verkkoyhteyden ja laitteen teknisiä tietoja ja voi käyttää evästeitä.",
+    "detail": "Mainostunnisteen asetuksiin ei lisätä kalenterimerkintöjä tai lomakkeiden sisältöä. Kolmannen osapuolen mainoskoodi toimii selaimessa sen oman tietosuojakäytännön mukaisesti. Valinta säilyy 180 päivää; voit perua luvan milloin tahansa. Kieltäytyminen ei estä sivuston käyttöä.",
+    "deny": "Älä salli mainoksia",
+    "allow": "Salli mainokset",
+    "close": "Sulje",
+    "policy": "Tietosuojaseloste ja mainonta",
+    "allowed": "Mainosten lataaminen on sallittu.",
+    "denied": "Mainoksia ei ladata."
+  }
+}
