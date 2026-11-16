@@ -5,7 +5,7 @@ import {CITIES,SLUGS,MONTHS,cap} from '../src/calendar.mjs';
 const calendarBases=new Set(['kalenteri','kuukausikalenteri','tyopaivat','juhlapyhat','liputuspaivat','merkkipaivat']);
 const moonCovers={2027:'moon-apollo17',2028:'moon-keeler',2029:'moon-bruce',2030:'moon-artemis-earthrise'};
 const PHOTO_BY_ID=new Map(photos.map(p=>[p.id,p]));
-const kindGroups={calendar:'Kalenterit',weekly:'Viikkosuunnittelu',print:'Tulostettavat kalenterit',lunar:'Kuu Suomen ajassa',solar:'Aurinko Suomen ajassa',moonrise:'Kuu ja havaintopaikka',daylength:'Päivän pituus',holiday:'Suomen juhlat',photo:'Suomen arki',school:'Koulu ja opiskelu',university:'Yliopistojen kalenterit',article:'Blogi ja oppaat',seasons:'Suomen vuodenajat',tool:'Arjen työkalut',zodiac:'Tähtimerkit ja horoskoopit',sky:'Taivas Suomen yllä',home:'Suomen kalenteri'};
+const kindGroups={shopping:'Ostosoppaat',calendar:'Kalenterit',weekly:'Viikkosuunnittelu',print:'Tulostettavat kalenterit',lunar:'Kuu Suomen ajassa',solar:'Aurinko Suomen ajassa',moonrise:'Kuu ja havaintopaikka',daylength:'Päivän pituus',holiday:'Suomen juhlat',photo:'Suomen arki',school:'Koulu ja opiskelu',university:'Yliopistojen kalenterit',article:'Blogi ja oppaat',seasons:'Suomen vuodenajat',tool:'Arjen työkalut',zodiac:'Tähtimerkit ja horoskoopit',sky:'Taivas Suomen yllä',home:'Suomen kalenteri'};
 const PHOTO_ALIAS={'avomaankurkku':'kurkku'};
 
 export function socialModel(route,title,description='',context={}){
@@ -18,7 +18,8 @@ export function socialModel(route,title,description='',context={}){
  const city=CITIES.find(c=>parts.includes(c[0]))||null;
  let family='tool',ids=[],primaryId=null;
  const add=(id)=>{if(id&&PHOTO_BY_ID.has(id)&&!ids.includes(id))ids.push(id);};
- if(base==='etusivu'){family='home';add('helsinki');}
+ if(['black-friday','cyber-monday'].includes(base))family='shopping';
+ else if(base==='etusivu'){family='home';add('helsinki');}
  else if(base==='horoskooppi'||base==='horoskooppimerkki')family='zodiac';
  else if(base==='auringonpimennys'||base==='perseidit'||base==='tahtitieteellinen-kalenteri')family='sky';
  else if(base==='pdf-kalenteri')family='print';
@@ -66,6 +67,7 @@ export function socialModel(route,title,description='',context={}){
  else if(family==='sky')alt=`${label}: ${base==='auringonpimennys'?'Kuun tumma kiekko peittää Auringon':'kirkkaat tähdet ja meteorien valojuovat'} tähtitaivaan havainnekuvassa.`;
  else if(photoRecords.length)alt=`${label}: ${photoRecords.map(p=>p.alt).join(' ')}`;
  else alt=`${label}: aiheeseen liittyvä sinivalkoinen kolmiulotteinen kuvitus.`;
+ if(family==='shopping')alt=`${label}: ostoskassi, kuitti ja päivämäärä ${base==='black-friday'?'27.11.2026':'30.11.2026'} sinivalkoisessa kuvituksessa.`;
  if(base==='kellonsiirto')alt=`${label}: selkeä kellotaulu ja kellon siirtoa kuvaavat nuolet.`;
  if(route.includes('/eduskuntavaalit/'))alt=`${label}: vaaliuurna ja äänestyslippu kolmiulotteisessa kuvituksessa.`;
  return {route,title:label,description,base,locale,family,year,yearText,month,week,city,seed,detail,category:kindGroups[family]||'Arjen työkalut',photos:photoRecords,primaryId,alt};

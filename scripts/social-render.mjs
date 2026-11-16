@@ -140,6 +140,10 @@ function electionScene(){return background()+`<g transform="rotate(-3 580 340)">
 export async function renderSocial(m,out){
  let scene;
  if(m.family==='calendar')scene=calendarScene(m);
+ else if(m.family==='shopping'){
+  const n=m.base==='black-friday'?'27':'30';
+  scene=background()+`<ellipse cx="610" cy="459" rx="285" ry="30" fill="#183d5b" opacity=".13"/><g transform="rotate(-7 580 300)"><path d="M402 183h300l31 258H370Z" fill="url(#paper)" stroke="#b3c9d9" stroke-width="3"/><path d="M459 205v-39a94 94 0 0 1 188 0v39" fill="none" stroke="#688eac" stroke-width="13"/><text x="550" y="360" text-anchor="middle" font-family="Lato,sans-serif" font-size="145" font-weight="900" fill="#123f70">${n}</text><text x="550" y="403" text-anchor="middle" font-family="Lato,sans-serif" font-size="23" letter-spacing="4" fill="#426b89">MARRASKUU</text></g><g transform="rotate(8 800 330)"><rect x="700" y="246" width="241" height="190" rx="7" fill="#fffdf7" stroke="#d8dedc"/><text x="721" y="284" font-family="Lato,sans-serif" font-size="16" font-weight="800" fill="#133f6b">VERTAA LOPPUSUMMAA</text><path d="M720 305h201M720 355h201" stroke="#b5c6d1" stroke-dasharray="5 4"/><text x="723" y="337" font-family="Lato,sans-serif" font-size="18" fill="#456377">Tuote + toimitus</text><text x="723" y="397" font-family="Lato,sans-serif" font-size="27" font-weight="800" fill="#123f70">${n}.11.2026</text></g>`;
+ }
  else if(m.family==='weekly')scene=weeklyScene(m);
  else if(m.family==='print')scene=await printScene(m,out);
  else if(m.family==='lunar')scene=await lunarScene(m,out);

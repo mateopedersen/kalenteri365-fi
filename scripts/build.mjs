@@ -1,3 +1,4 @@
+import {shoppingPages,shoppingHub,shoppingStylesheet} from '../src/shopping-pages.mjs';
 import {photoImageSchema} from '../src/image-metadata.mjs';
 import {contactPage} from '../src/contact-view.mjs';
 import {writeSitemaps} from './sitemaps.mjs';
@@ -285,6 +286,7 @@ if (!process.argv.includes("--html-only")) {
 }
 const metadataInventory = {title:new Map(),description:new Map()};
 async function page(p, title, desc, body, kind = "page", extra = {}) {
+  if(p==='/merkkipaivat/'){body+=shoppingHub();extra.shoppingGuide=true;extra.shoppingStylesheet=shoppingStylesheet;}
   desc=periodDescription(p,desc);
   const metadata=pageMetadata(p,title,desc,extra),seoTitle=brandedTitle(metadata.title);
   assertUniqueMetadata({title:seoTitle,description:metadata.description},p,metadataInventory);
@@ -976,6 +978,7 @@ await page(
 );
 await gardenDetails(page);
 await extraPages({ page, section, table, notice, toolCards, link, art });
+await shoppingPages(page);
 await fs.mkdir(path.join(OUT,"kalenteriin/palvelut"),{recursive:true});
 await writeCommunityCalendars(OUT,fs,path);
 for(const e of ALL_SERVICE_EVENTS)await fs.writeFile(path.join(OUT,"kalenteriin/palvelut",e.id+".ics"),serviceCalendar(e));
