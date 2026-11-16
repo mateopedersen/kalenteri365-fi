@@ -39,7 +39,7 @@
     "reference": "Sivulla näkyvä vertailuhinta",
     "member": "Jäsenyys tai kampanjaehdot",
     "dates": "Päivämäärät 2026–2030",
-    "dateNote": "Musta perjantai on Yhdysvaltain marraskuun neljännen torstain jälkeinen perjantai. kybermaanantai on sitä seuraava maanantai. Kaupat päättävät itse kampanjoidensa keston.",
+    "dateNote": "Musta perjantai on Yhdysvalloissa vietettävää kiitospäivää seuraava perjantai. Kiitospäivää vietetään marraskuun neljäntenä torstaina. Kybermaanantai on mustaa perjantaita seuraava maanantai. Kaupat päättävät itse kampanjoidensa keston.",
     "year": "Vuosi",
     "friday": "Musta perjantai",
     "monday": "Kybermaanantai",
@@ -183,7 +183,7 @@
       "faq": [
         [
           "Milloin on musta perjantai 2026 Suomessa?",
-          "Perjantaina 27.11.2026. alennusviikko voi alkaa tätä ennen, ja kampanjan kesto vaihtelee myyjän sekä tuotteen mukaan."
+          "Perjantaina 27.11.2026. Alennusviikko voi alkaa tätä ennen, ja kampanjan kesto vaihtelee myyjän sekä tuotteen mukaan."
         ],
         [
           "Miten musta perjantai eroaa alennusviikosta?",
@@ -304,7 +304,7 @@
         ],
         [
           "Miksi kybermaanantai 2030 on joulukuussa?",
-          "Vuoden 2030 musta perjantai on 29.11. Sitä seuraava maanantai on 2.12.2030. kybermaanantai ei siis aina osu marraskuulle."
+          "Vuoden 2030 musta perjantai on 29.11. Sitä seuraava maanantai on 2.12.2030. Kybermaanantai ei siis aina osu marraskuulle."
         ]
       ]
     }
