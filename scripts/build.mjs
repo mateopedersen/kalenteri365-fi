@@ -141,6 +141,13 @@ await fs.rm(path.join(ASSET, 'sv-core.mjs'), {force:true});
 for (const file of await fs.readdir(path.join(ASSET, 'social')).catch(()=>[])) {
   if (/^sv-.*\.jpg$/.test(file)) await fs.unlink(path.join(ASSET, 'social', file));
 }
+// Retire English shopping routes and cached files without creating redirects.
+for (const slug of ['black-friday', 'cyber-monday']) {
+  await fs.rm(path.join(OUT, slug), {recursive:true, force:true});
+}
+for (const file of await fs.readdir(path.join(ASSET, 'shopping')).catch(()=>[])) {
+  if (/^(?:black-friday|cyber-monday)-/.test(file)) await fs.unlink(path.join(ASSET, 'shopping', file));
+}
 await fs.mkdir(path.join(OUT, "lataukset"), { recursive: true });
 const indexnow=JSON.parse(await fs.readFile(path.join(ROOT,'data/indexnow.json'),'utf8'));
 if(indexnow.host!=='kalenteri365.fi'||!/^[0-9a-f]{32}$/.test(indexnow.key)||indexnow.keyLocation!==`https://kalenteri365.fi/${indexnow.key}.txt`)throw Error('Invalid IndexNow host/key configuration');
@@ -1062,8 +1069,6 @@ await fs.writeFile(
   `/*\n  Cache-Control: public, max-age=0, must-revalidate, no-transform\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n  X-Frame-Options: SAMEORIGIN\n  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; frame-src 'self' https://docs.google.com; object-src 'none'; base-uri 'self'; frame-ancestors 'self'\n/sitemap.xml\n  Content-Type: application/xml; charset=utf-8\n/sitemap-images.xml\n  Content-Type: application/xml; charset=utf-8\n/sitemap-index.xml\n  Content-Type: application/xml; charset=utf-8\n/robots.txt\n  Content-Type: text/plain; charset=utf-8\n/favicon.ico\n  Content-Type: image/x-icon\n/assets/icon-*.png\n  Content-Type: image/png\n/assets/icon.svg\n  Content-Type: image/svg+xml\n/site.webmanifest\n  Content-Type: application/manifest+json; charset=utf-8\n/assets/runtime/*\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n/assets/fonts/*\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n/assets/site-runtime.*.css\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n/assets/art/*\n  ! Cache-Control\n  Cache-Control: public, max-age=86400\n/assets/art-*\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n/assets/photos/*\n  ! Cache-Control\n  Cache-Control: public, max-age=604800\n/assets/social/*\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n/assets/*.json\n  ! Cache-Control\n  Cache-Control: public, max-age=60\n/lataukset/*\n  ! Cache-Control\n  Cache-Control: public, max-age=86400\n/*.ics\n  Content-Type: text/calendar; charset=utf-8\n  Content-Disposition: attachment\n/kalenteriin/*\n  X-Robots-Tag: noindex\n  ! Cache-Control\n  Cache-Control: public, max-age=86400\n`,
 );
 const aliases = {
-  "black-friday": "musta-perjantai",
-  "cyber-monday": "kybermaanantai",
   "pdf-kalenterit": "pdf-kalenteri",
   pyhapaivat: "juhlapyhat",
   "oma-kalenteri": "luo-kalenteri",
@@ -1071,7 +1076,6 @@ const aliases = {
 };
 await fs.writeFile(
   path.join(OUT, "_redirects"),
-  "/assets/shopping/black-friday-* /assets/shopping/musta-perjantai-:splat 301\n/assets/shopping/cyber-monday-* /assets/shopping/kybermaanantai-:splat 301\n"+
   blog.map(g=>`/oppaat/${g.slug}/ /blogi/${g.slug}/ 301`).join('\n')+'\n'+Object.entries(aliases)
     .map(([a, b]) => `/${a} /${b}/ 301\n/${a}/* /${b}/:splat 301`)
     .join("\n") +
