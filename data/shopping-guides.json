@@ -94,7 +94,7 @@
       "kind": "friday",
       "slug": "black-friday",
       "name": "Musta perjantai",
-      "title": "Musta perjantai 2026: tarjoukset ja päivämäärä Suomessa",
+      "title": "Musta perjantai 2026: tarjoukset Suomessa",
       "description": "Milloin on musta perjantai 2026? Suomen kauppojen kampanjat, Finlaysonin tarjousesimerkki, toimituskulujen vertailu ja päivämäärät vuosille 2027–2030.",
       "intro": "Musta perjantai on 27.11.2026. Monet kaupat aloittavat alennuskampanjansa jo ennen varsinaista päivää. Tästä oppaasta näet julkaistut kampanjat, niihin kuuluvat tuoteryhmät ja ostoksen kokonaishintaan vaikuttavat kulut.",
       "lead": "Aloita tarpeesta. Vertaile loppuhintaa.",
@@ -182,7 +182,7 @@
       ],
       "faq": [
         [
-          "Milloin on musta perjantai 2026 Suomessa?",
+          "Milloin musta perjantai on vuonna 2026?",
           "Perjantaina 27.11.2026. Alennusviikko voi alkaa tätä ennen, ja kampanjan kesto vaihtelee myyjän sekä tuotteen mukaan."
         ],
         [
@@ -203,9 +203,9 @@
       "kind": "monday",
       "slug": "cyber-monday",
       "name": "Kybermaanantai",
-      "title": "Kybermaanantai 2026: verkkokauppojen tarjoukset 30.11.",
+      "title": "Kybermaanantai 2026: tarjoukset Suomessa",
       "description": "Kybermaanantai on 30.11.2026. Tarkista Suomen verkkokauppojen kampanjoiden päättyminen, kuponkien ehdot, toimituskulut ja päivämäärät vuoteen 2030.",
-      "intro": "Kybermaanantai on maanantaina 30.11.2026. Se on hyvä hetki palata omaan ostoslistaan, ei syy aloittaa listaa alusta. Suomessa osa alennusviikko -tarjouksista jatkuu maanantaille, mutta erillistä kybermaanantain alennusta ei pidä olettaa ilman kaupan ilmoitusta.",
+      "intro": "Kybermaanantai on maanantaina 30.11.2026. Vertaa valitsemiesi tuotteiden loppuhintoja, toimitusaikoja ja kampanjaehtoja. Suomessa osa alennusviikon tarjouksista jatkuu maanantaille. Tarkista kuitenkin jokaisen tuotteen tarjous ja sen voimassaolo erikseen.",
       "lead": "Vertaa ostoskorin loppusummaa.",
       "sections": [
         [
@@ -214,7 +214,7 @@
         ],
         [
           "Mikä tarjous jatkuu 30. marraskuuta?",
-          "POWERin julkaistu alennusjakso ulottuu 30.11.2026 asti. Se antaa syyn tarkistaa valikoima maanantaina, mutta yksittäinen tuote voi loppua tai sen oma kampanja päättyä aiemmin. Finlaysonin alennusviikko -edut on puolestaan julkaistu jo ennen perjantaita; erillisen maanantaikoodin ehtoja ei tässä oppaassa ole vahvistettu."
+          "POWERin julkaistu alennusjakso ulottuu 30.11.2026 asti. Se antaa syyn tarkistaa valikoima maanantaina, mutta yksittäinen tuote voi loppua tai sen oma kampanja päättyä aiemmin. Finlaysonin alennusviikon edut on puolestaan julkaistu jo ennen perjantaita; erillisen maanantaikoodin ehtoja ei tässä oppaassa ole vahvistettu."
         ],
         [
           "Tarkista kuponki ennen maksua",
@@ -232,7 +232,7 @@
         ],
         [
           "Finlayson",
-          "Jo julkaistut alennusviikko -edut",
+          "Jo julkaistut alennusviikon edut",
           "Kampanjasivulla on valikoituja enintään 50 % alennuksia ja 20 % etu muuhun valikoimaan ilmoitetuin poikkeuksin.",
           "Kybermaanantain omaa lisäkoodia ei ole vahvistettu. Käytä vain ostoskorissa hyväksyttyä, voimassa olevaa etua.",
           "https://www.finlayson.fi/collections/black-friday",
@@ -270,7 +270,7 @@
           "alennusviikon valikoidut alennukset",
           "jopa 50 %",
           "",
-          "Tarkistettu alennusviikon etu, ei vahvistettu kybermaanantain lisäalennus. Kunnas by Makia ei kuulu koko valikoiman 20 % etuun.",
+          "Etu kuuluu aiemmin julkaistuun alennuskampanjaan. Mahdollinen maanantain lisäalennus on tarkistettava kaupan sivulta. Kunnas by Makia ei kuulu koko valikoiman 20 % etuun.",
           "https://www.finlayson.fi/collections/black-friday",
           null
         ]
@@ -291,11 +291,11 @@
       ],
       "faq": [
         [
-          "Milloin on kybermaanantai 2026?",
+          "Milloin kybermaanantai on vuonna 2026?",
           "Maanantaina 30.11.2026. Päivä on kolme päivää saman vuoden mustan perjantain jälkeen."
         ],
         [
-          "Onko kybermaanantai halvempi kuin musta perjantai?",
+          "Ovatko tuotteet kybermaanantaina halvempia kuin mustana perjantaina?",
           "Sitä ei voi luvata. Tarkista saman tuotteen todellinen loppuhinta molempina päivinä ja vertaa myös toimituskuluja."
         ],
         [
@@ -303,7 +303,7 @@
           "Vain jos sen voimassaolo ja muut ehdot sallivat sen. Tarkista päivämäärä ja kellonaika, tuoterajaus sekä se, voiko koodin yhdistää muuhun etuun."
         ],
         [
-          "Miksi kybermaanantai 2030 on joulukuussa?",
+          "Miksi vuoden 2030 kybermaanantai on joulukuussa?",
           "Vuoden 2030 musta perjantai on 29.11. Sitä seuraava maanantai on 2.12.2030. Kybermaanantai ei siis aina osu marraskuulle."
         ]
       ]
