@@ -10,8 +10,8 @@ DTSTART;VALUE=DATE:20271126
 DTEND;VALUE=DATE:20271127
 SUMMARY:Musta perjantai 2027
 DESCRIPTION:Kaupallinen ostospäivä\, ei suomalainen pyhäpäivä.\nhttps
- ://kalenteri365.fi/black-friday/
-URL:https://kalenteri365.fi/black-friday/
+ ://kalenteri365.fi/musta-perjantai/
+URL:https://kalenteri365.fi/musta-perjantai/
 TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY

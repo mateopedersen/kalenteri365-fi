@@ -6,8 +6,8 @@
   "country": "SUOMI",
   "theme": "fi",
   "paths": [
-    "/black-friday/",
-    "/cyber-monday/"
+    "/musta-perjantai/",
+    "/kybermaanantai/"
   ],
   "hub": "/merkkipaivat/",
   "hubName": "Merkkipäivät",
@@ -92,7 +92,7 @@
   "pages": [
     {
       "kind": "friday",
-      "slug": "black-friday",
+      "slug": "musta-perjantai",
       "name": "Musta perjantai",
       "title": "Musta perjantai 2026: tarjoukset Suomessa",
       "description": "Milloin on musta perjantai 2026? Suomen kauppojen kampanjat, Finlaysonin tarjousesimerkki, toimituskulujen vertailu ja päivämäärät vuosille 2027–2030.",
@@ -197,11 +197,12 @@
           "Kannattaako joululahjat ostaa mustana perjantaina?",
           "Jos lahja on jo valittu, tarkista kokonaishinta, toimitusaika ja palautusehdot ennen tilausta. Pitkä palautusaika on kaupan oma etu, joka on varmistettava kyseisestä tarjouksesta."
         ]
-      ]
+      ],
+      "eventId": "black-friday"
     },
     {
       "kind": "monday",
-      "slug": "cyber-monday",
+      "slug": "kybermaanantai",
       "name": "Kybermaanantai",
       "title": "Kybermaanantai 2026: tarjoukset Suomessa",
       "description": "Kybermaanantai on 30.11.2026. Tarkista Suomen verkkokauppojen kampanjoiden päättyminen, kuponkien ehdot, toimituskulut ja päivämäärät vuoteen 2030.",
@@ -306,7 +307,8 @@
           "Miksi vuoden 2030 kybermaanantai on joulukuussa?",
           "Vuoden 2030 musta perjantai on 29.11. Sitä seuraava maanantai on 2.12.2030. Kybermaanantai ei siis aina osu marraskuulle."
         ]
-      ]
+      ],
+      "eventId": "cyber-monday"
     }
   ],
   "checked": "2026-11-16",

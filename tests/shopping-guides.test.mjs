@@ -26,6 +26,8 @@ test('All localized calendar files match their exclusive dates and stable IDs',a
   assert.ok(content.endsWith('END:VCALENDAR\r\n'));
   for(const line of content.split('\r\n'))assert.ok(Buffer.byteLength(line)<=75);
   const uid=unfolded.match(/UID:([^\r]+)/)[1];assert.ok(!ids.has(uid));ids.add(uid);
+  const originalId={friday:'black-friday',monday:'cyber-monday'}[page.kind];
+  assert.equal(uid,originalId+'-'+year+'@kalenteri365.fi','URL localization preserves existing calendar events');
   const start=dates(year)[page.kind],end=new Date(+new Date(start+'T00:00:00Z')+86400000).toISOString().slice(0,10);
   assert.ok(unfolded.includes('DTSTART;VALUE=DATE:'+start.replaceAll('-','')+'\r\n'));
   assert.ok(unfolded.includes('DTEND;VALUE=DATE:'+end.replaceAll('-','')+'\r\n'));
