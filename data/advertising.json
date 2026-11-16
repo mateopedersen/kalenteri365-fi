@@ -1,5 +1,5 @@
 {
-  "enabled": false,
+  "enabled": true,
   "storageKey": "kalenteri365.advertising-consent.v1",
   "hosts": [
     "kalenteri365.fi",
