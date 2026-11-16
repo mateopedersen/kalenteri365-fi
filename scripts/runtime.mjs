@@ -40,7 +40,12 @@ export async function runtimeAssets(ROOT,ASSET,OUT,pages){
   for(const p of [...pages,{path:'/404/'}]){
     const file=p.path==='/404/'?path.join(OUT,'404.html'):path.join(OUT,p.path,'index.html');
     let html=await fs.readFile(file,'utf8');
-    const selected=pageStyleNames(styleNames,html),key=selected.join(',');
+    // Keep page-specific shopping styles in the same content-versioned bundle.
+    // Their source link is a build hint, not another blocking browser request.
+    const shoppingLinks=[...html.matchAll(/<link rel="stylesheet" href="(\/assets\/shopping\/guides-[a-f0-9]{12}\.css)">/g)];
+    const shoppingNames=shoppingLinks.map(([,src])=>src.slice('/assets/'.length));
+    for(const name of shoppingNames)if(!sources.has(name))sources.set(name,await fs.readFile(path.join(ASSET,name)));
+    const selected=[...pageStyleNames(styleNames,html),...shoppingNames],key=selected.join(',');
     let pageStyle=styleCache.get(key);
     if(!pageStyle){
       const code=transform({filename:'page-runtime.css',code:Buffer.concat(selected.map(name=>sources.get(name))),minify:true}).code;
@@ -51,6 +56,7 @@ export async function runtimeAssets(ROOT,ASSET,OUT,pages){
     html=html.replace('/assets/site.css',pageStyle.src)
       .replace('<link rel="stylesheet" href="/assets/finland.css">','').replace('<link rel="stylesheet" href="/assets/edition.css">','')
       .replace('/assets/app.mjs',script).replaceAll('/assets/art/',artPrefix);
+    for(const [link] of shoppingLinks)html=html.replace(link,'');
     const hints=`<link rel="modulepreload" href="${script}">`+(html.includes('id="astro-form"')?`<link rel="preload" href="/assets/astronomy.min.js" as="script"><link rel="modulepreload" href="${solarScript}">`:'');
     html=html.replace('</head>',hints+'</head>');
     await fs.writeFile(file,html);
