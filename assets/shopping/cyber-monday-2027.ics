@@ -8,7 +8,7 @@ UID:cyber-monday-2027@kalenteri365.fi
 DTSTAMP:20261116T000000Z
 DTSTART;VALUE=DATE:20271129
 DTEND;VALUE=DATE:20271130
-SUMMARY:Cyber Monday 2027
+SUMMARY:Kybermaanantai 2027
 DESCRIPTION:Kaupallinen ostospäivä\, ei suomalainen pyhäpäivä.\nhttps
  ://kalenteri365.fi/cyber-monday/
 URL:https://kalenteri365.fi/cyber-monday/
@@ -16,7 +16,7 @@ TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
 TRIGGER:-P1D
-DESCRIPTION:Cyber Monday
+DESCRIPTION:Kybermaanantai
 END:VALARM
 END:VEVENT
 END:VCALENDAR

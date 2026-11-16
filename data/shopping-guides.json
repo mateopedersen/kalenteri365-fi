@@ -39,10 +39,10 @@
     "reference": "Sivulla näkyvä vertailuhinta",
     "member": "Jäsenyys tai kampanjaehdot",
     "dates": "Päivämäärät 2026–2030",
-    "dateNote": "Black Friday on Yhdysvaltain marraskuun neljännen torstain jälkeinen perjantai. Cyber Monday on sitä seuraava maanantai. Kaupat päättävät itse kampanjoidensa keston.",
+    "dateNote": "Musta perjantai on Yhdysvaltain marraskuun neljännen torstain jälkeinen perjantai. kybermaanantai on sitä seuraava maanantai. Kaupat päättävät itse kampanjoidensa keston.",
     "year": "Vuosi",
-    "friday": "Black Friday",
-    "monday": "Cyber Monday",
+    "friday": "Musta perjantai",
+    "monday": "Kybermaanantai",
     "calendar": "Lisää kalenteriin",
     "download": "Lataa ICS",
     "google": "Google Kalenteri",
@@ -93,14 +93,14 @@
     {
       "kind": "friday",
       "slug": "black-friday",
-      "name": "Black Friday",
-      "title": "Black Friday 2026 Suomessa, tarjoukset ja päivämäärä",
-      "description": "Milloin on Black Friday 2026? Suomen kauppojen kampanjat, Finlaysonin tarjousesimerkki, toimituskulujen vertailu ja päivämäärät vuosille 2027–2030.",
-      "intro": "Musta perjantai on 27.11.2026. Suomessa ostospäivä alkaa monessa kaupassa jo Black Weekinä. Tästä oppaasta näet, mitä kampanjoita on julkaistu, mitä valikoitu alennus tarkoittaa ja miten erotat tuotehinnan koko ostoksen hinnasta.",
+      "name": "Musta perjantai",
+      "title": "Musta perjantai 2026: tarjoukset ja päivämäärä Suomessa",
+      "description": "Milloin on musta perjantai 2026? Suomen kauppojen kampanjat, Finlaysonin tarjousesimerkki, toimituskulujen vertailu ja päivämäärät vuosille 2027–2030.",
+      "intro": "Musta perjantai on 27.11.2026. Monet kaupat aloittavat alennuskampanjansa jo ennen varsinaista päivää. Tästä oppaasta näet julkaistut kampanjat, niihin kuuluvat tuoteryhmät ja ostoksen kokonaishintaan vaikuttavat kulut.",
       "lead": "Aloita tarpeesta. Vertaile loppuhintaa.",
       "sections": [
         [
-          "Mitä Black Friday tarkoittaa Suomessa?",
+          "Mitä musta perjantai tarkoittaa Suomessa?",
           "Musta perjantai on kauppojen kampanjapäivä, ei yleinen vapaapäivä. Verkossa voit tarkistaa hinnat ilman myymälään lähtemistä, mutta sovittaminen tai tuotteen kokeilu voi puoltaa myymälää. Päätä etukäteen, etsitkö tiettyä mallia vai vasta sopivaa tuoteryhmää. Ensimmäinen tapa tekee hintavertailusta selvästi helpompaa."
         ],
         [
@@ -109,7 +109,7 @@
         ],
         [
           "Ostaisinko ennen perjantaita?",
-          "Jos jo julkaistu kampanja sopii budjettiin, kirjaa tuotehinta sekä toimitusaika ja vertaa aiempaan hintatasoon. Perjantain odottaminen voi muuttaa hintaa tai saatavuutta kumpaan tahansa suuntaan. Kauppojen omat ilmoitukset ratkaisevat, milloin tietty tarjous alkaa. Älä sekoita ennakkotarjouksen päättymistä koko Black Weekin loppuun."
+          "Jos jo julkaistu kampanja sopii budjettiin, kirjaa tuotehinta sekä toimitusaika ja vertaa aiempaan hintatasoon. Perjantain odottaminen voi muuttaa hintaa tai saatavuutta kumpaan tahansa suuntaan. Kauppojen omat ilmoitukset ratkaisevat, milloin tietty tarjous alkaa. Älä sekoita ennakkotarjouksen päättymistä koko alennusviikon loppuun."
         ]
       ],
       "stores": [
@@ -124,7 +124,7 @@
         [
           "POWER",
           "Elektroniikka ja kodinkoneet",
-          "Black Weekin kampanjasivulla ilmoitetaan ajaksi 9.–30.11.2026. Puhelimet, televisiot ja kodinkoneet ovat kampanjan tuoteryhmiä.",
+          "alennusviikon kampanjasivulla ilmoitetaan ajaksi 9.–30.11.2026. Puhelimet, televisiot ja kodinkoneet ovat kampanjan tuoteryhmiä.",
           "Tarkista tuotekohtainen voimassaolo. Saman kampanjan nimen alla olevilla tuotteilla voi olla eri päättymispäivä.",
           "https://www.power.fi/tarjoukset/black-friday/all/",
           "confirmed"
@@ -132,15 +132,15 @@
         [
           "Gigantti",
           "Puhelimet, tietokoneet ja pelaaminen",
-          "Black Fridayn päivämääräksi on julkaistu 27.11.2026. Kauppa nostaa esiin myös televisiot, kuulokkeet ja kodinkoneet.",
+          "Mustan perjantain päivämääräksi on julkaistu 27.11.2026. Kauppa nostaa esiin myös televisiot, kuulokkeet ja kodinkoneet.",
           "Julkaistu päivämäärä ei vielä kerro jokaisen tuotteen alennusta. Tarkista saatavuus ja mahdollinen klubihinta.",
           "https://www.gigantti.fi/kampanja/black-friday",
           "announced"
         ],
         [
           "Verkkokauppa.com",
-          "Black Week ja laitevertailu",
-          "Kaupan vuoden 2026 Black Week -sivu kokoaa kampanjan omat tiedot ja ohjaa tarjousvalikoimaan.",
+          "Alennusviikko ja laitevertailu",
+          "Kaupan vuoden 2026 alennusviikon sivu kokoaa kampanjan omat tiedot ja ohjaa tarjousvalikoimaan.",
           "Tarkista toimitustapa, noutopaikka ja myyntierä tuotteen sivulta. Älä päättele palautusaikaa vanhasta kampanjatekstistä.",
           "https://www.verkkokauppa.com/fi/black-week",
           "announced"
@@ -158,7 +158,7 @@
         ],
         [
           "POWER",
-          "Black Weekin julkaistu aika",
+          "alennusviikon julkaistu aika",
           "9.–30.11.2026",
           "",
           "Kampanja-aika on julkaistu. Tämä on aikaraja, ei kaikille tuotteille luvattu alennusprosentti.",
@@ -182,19 +182,19 @@
       ],
       "faq": [
         [
-          "Milloin on Black Friday 2026 Suomessa?",
-          "Perjantaina 27.11.2026. Black Week voi alkaa tätä ennen, ja kampanjan kesto vaihtelee myyjän sekä tuotteen mukaan."
+          "Milloin on musta perjantai 2026 Suomessa?",
+          "Perjantaina 27.11.2026. alennusviikko voi alkaa tätä ennen, ja kampanjan kesto vaihtelee myyjän sekä tuotteen mukaan."
         ],
         [
-          "Ovatko Black Friday ja musta perjantai sama asia?",
-          "Kyllä. Musta perjantai on Black Fridayn suomenkielinen nimi. Black Week tarkoittaa sen ympärille rakennettua pidempää kampanjaa."
+          "Miten musta perjantai eroaa alennusviikosta?",
+          "Musta perjantai on yksittäinen ostospäivä. Alennusviikko on kaupan määrittelemä pidempi kampanja, jonka alkamis- ja päättymisaika sekä tuotekohtaiset ehdot on tarkistettava myyjältä."
         ],
         [
           "Onko verkkokaupassa aina sama hinta kuin myymälässä?",
           "Ei kaikissa kaupoissa. Tarkista, koskeeko tarjous verkkoa, tiettyä myymälää tai vain kanta-asiakkaita. POWER kertoo omalla kampanjasivullaan samanaikaisista verkko- ja myymälähinnoista."
         ],
         [
-          "Kannattaako joululahjat ostaa Black Fridayna?",
+          "Kannattaako joululahjat ostaa mustana perjantaina?",
           "Jos lahja on jo valittu, tarkista kokonaishinta, toimitusaika ja palautusehdot ennen tilausta. Pitkä palautusaika on kaupan oma etu, joka on varmistettava kyseisestä tarjouksesta."
         ]
       ]
@@ -202,19 +202,19 @@
     {
       "kind": "monday",
       "slug": "cyber-monday",
-      "name": "Cyber Monday",
-      "title": "Cyber Monday 2026 Suomessa, verkkotarjoukset 30.11.",
-      "description": "Cyber Monday on 30.11.2026. Tarkista Suomen verkkokauppojen kampanjoiden päättyminen, kuponkien ehdot, toimituskulut ja päivämäärät vuoteen 2030.",
-      "intro": "Cyber Monday on maanantaina 30.11.2026. Se on hyvä hetki palata omaan ostoslistaan, ei syy aloittaa listaa alusta. Suomessa osa Black Week -tarjouksista jatkuu maanantaille, mutta erillistä Cyber Monday -alennusta ei pidä olettaa ilman kaupan ilmoitusta.",
-      "lead": "Maanantain ratkaisee koko ostoskori.",
+      "name": "Kybermaanantai",
+      "title": "Kybermaanantai 2026: verkkokauppojen tarjoukset 30.11.",
+      "description": "Kybermaanantai on 30.11.2026. Tarkista Suomen verkkokauppojen kampanjoiden päättyminen, kuponkien ehdot, toimituskulut ja päivämäärät vuoteen 2030.",
+      "intro": "Kybermaanantai on maanantaina 30.11.2026. Se on hyvä hetki palata omaan ostoslistaan, ei syy aloittaa listaa alusta. Suomessa osa alennusviikko -tarjouksista jatkuu maanantaille, mutta erillistä kybermaanantain alennusta ei pidä olettaa ilman kaupan ilmoitusta.",
+      "lead": "Vertaa ostoskorin loppusummaa.",
       "sections": [
         [
-          "Mitä Cyber Mondayna tapahtuu?",
-          "Cyber Monday on Black Fridayta seuraava verkkokaupan kampanjapäivä. Se voi näkyä uusina tarjouksina tai aiemman kampanjan viimeisenä päivänä. Vertaa maanantain ostoskoria siihen, jonka tallensit perjantaina: sama malli, toimitusosoite ja maksutapa. Muuten hinnan muutoksesta on vaikea tehdä johtopäätöstä."
+          "Mitä kybermaanantaina tapahtuu?",
+          "Kybermaanantai on mustaa perjantaita seuraava verkkokaupan kampanjapäivä. Se voi näkyä uusina tarjouksina tai aiemman kampanjan viimeisenä päivänä. Vertaa maanantain ostoskoria siihen, jonka tallensit perjantaina: sama malli, toimitustapa ja maksutapa. Muuten hinnan muutoksesta on vaikea tehdä johtopäätöstä."
         ],
         [
           "Mikä tarjous jatkuu 30. marraskuuta?",
-          "POWERin julkaistu Black Week -jakso ulottuu 30.11.2026 asti. Se antaa syyn tarkistaa valikoima maanantaina, mutta yksittäinen tuote voi loppua tai sen oma kampanja päättyä aiemmin. Finlaysonin Black Week -edut on puolestaan julkaistu jo ennen perjantaita; erillisen maanantaikoodin ehtoja ei tässä oppaassa ole vahvistettu."
+          "POWERin julkaistu alennusjakso ulottuu 30.11.2026 asti. Se antaa syyn tarkistaa valikoima maanantaina, mutta yksittäinen tuote voi loppua tai sen oma kampanja päättyä aiemmin. Finlaysonin alennusviikko -edut on puolestaan julkaistu jo ennen perjantaita; erillisen maanantaikoodin ehtoja ei tässä oppaassa ole vahvistettu."
         ],
         [
           "Tarkista kuponki ennen maksua",
@@ -225,40 +225,40 @@
         [
           "POWER",
           "Kampanja ulottuu maanantaille",
-          "Julkaistu Black Week -jakso päättyy 30.11.2026. Aloita aiemmin valitsemasi tuotteen tarkasta mallista.",
+          "Julkaistu alennusjakso päättyy 30.11.2026. Aloita aiemmin valitsemasi tuotteen tarkasta mallista.",
           "Varmista tuotekohtainen tarjous ja viimeinen tilaushetki. Maanantaina ei ole automaattisesti lisäalennusta.",
           "https://www.power.fi/tarjoukset/black-friday/all/",
           "confirmed"
         ],
         [
           "Finlayson",
-          "Jo julkaistut Black Week -edut",
+          "Jo julkaistut alennusviikko -edut",
           "Kampanjasivulla on valikoituja enintään 50 % alennuksia ja 20 % etu muuhun valikoimaan ilmoitetuin poikkeuksin.",
-          "Cyber Mondayn omaa lisäkoodia ei ole vahvistettu. Käytä vain ostoskorissa hyväksyttyä, voimassa olevaa etua.",
+          "Kybermaanantain omaa lisäkoodia ei ole vahvistettu. Käytä vain ostoskorissa hyväksyttyä, voimassa olevaa etua.",
           "https://www.finlayson.fi/collections/black-friday",
           "unknown"
         ],
         [
           "Verkkokauppa.com",
           "Toimitus ja nouto vertailuun",
-          "Palaa vuoden 2026 Black Week -sivulta tuotteen tämänhetkisiin tietoihin ja vertaile saatavuutta.",
+          "Palaa vuoden 2026 alennusviikon sivulta tuotteen tämänhetkisiin tietoihin ja vertaile saatavuutta.",
           "Eri toimitustapojen hinnat ja ajat voivat ratkaista valinnan. Tässä oppaassa ei luvata erillistä maanantaialennusta.",
           "https://www.verkkokauppa.com/fi/black-week",
           "unknown"
         ],
         [
           "Gigantti",
-          "Seuraa omaa malliasi",
-          "Black Friday -sivu toimii lähtöpisteenä laitetarjousten tarkistamiseen myös viikonlopun jälkeen.",
-          "Varmista maanantain voimassaolo kaupan sivulta. Perjantain mainos ei yksin osoita, että tarjous jatkuu.",
-          "https://www.gigantti.fi/kampanja/black-friday",
-          "unknown"
+          "Verkkokaupan maanantaikampanja",
+          "Kauppa on julkaissut kybermaanantain vuoden 2026 kampanjasivun. Se ohjaa tarkistamaan tarjouskauden viimeiset edut.",
+          "Tarkista tuotteen hinta, saatavuus ja tarjouksen päättymisaika. Kampanjasivu ei takaa lisäalennusta jokaisesta tuotteesta.",
+          "https://www.gigantti.fi/kampanja/cyber-monday-2026",
+          "announced"
         ]
       ],
       "offers": [
         [
           "POWER",
-          "Black Week jatkuu kalenterin mukaan",
+          "Alennusviikko jatkuu kalenterin mukaan",
           "30.11.2026 asti",
           "",
           "Kaupan ilmoittama kampanjan päättymispäivä. Tarkista silti haluamasi tuotteen ehdot.",
@@ -267,10 +267,10 @@
         ],
         [
           "Finlayson",
-          "Black Weekin valikoidut alennukset",
+          "alennusviikon valikoidut alennukset",
           "jopa 50 %",
           "",
-          "Tarkistettu Black Week -etu, ei vahvistettu Cyber Monday -lisäalennus. Kunnas by Makia ei kuulu koko valikoiman 20 % etuun.",
+          "Tarkistettu alennusviikon etu, ei vahvistettu kybermaanantain lisäalennus. Kunnas by Makia ei kuulu koko valikoiman 20 % etuun.",
           "https://www.finlayson.fi/collections/black-friday",
           null
         ]
@@ -291,11 +291,11 @@
       ],
       "faq": [
         [
-          "Milloin on Cyber Monday 2026?",
-          "Maanantaina 30.11.2026. Päivä on kolme päivää saman vuoden Black Fridayn jälkeen."
+          "Milloin on kybermaanantai 2026?",
+          "Maanantaina 30.11.2026. Päivä on kolme päivää saman vuoden mustan perjantain jälkeen."
         ],
         [
-          "Onko Cyber Monday halvempi kuin Black Friday?",
+          "Onko kybermaanantai halvempi kuin musta perjantai?",
           "Sitä ei voi luvata. Tarkista saman tuotteen todellinen loppuhinta molempina päivinä ja vertaa myös toimituskuluja."
         ],
         [
@@ -303,8 +303,8 @@
           "Vain jos sen voimassaolo ja muut ehdot sallivat sen. Tarkista päivämäärä ja kellonaika, tuoterajaus sekä se, voiko koodin yhdistää muuhun etuun."
         ],
         [
-          "Miksi Cyber Monday 2030 on joulukuussa?",
-          "Vuoden 2030 Black Friday on 29.11. Sitä seuraava maanantai on 2.12.2030. Cyber Monday ei siis aina osu marraskuulle."
+          "Miksi kybermaanantai 2030 on joulukuussa?",
+          "Vuoden 2030 musta perjantai on 29.11. Sitä seuraava maanantai on 2.12.2030. kybermaanantai ei siis aina osu marraskuulle."
         ]
       ]
     }
