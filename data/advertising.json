@@ -21,7 +21,9 @@
     "src": "https://bauval.org/22/d86aa501560e06dbb3d53eaa907ee254"
   },
   "privacy": "/tietosuoja/#mainonta",
-  "mode": "sponsored-link",
-  "directLink": "https://asiafilm.org/4/6b6aabe64d2bbfcdadd73b76443164f4",
-  "directLinkUnit": "32322917"
+  "mode": "display-banner",
+  "displayLabels": {
+    "on": "Mainokset ovat käytössä. Muutos tulee kokonaan voimaan seuraavalla sivulatauksella.",
+    "off": "Mainokset on poistettu käytöstä. Tallenna keskeneräiset muutokset ja päivitä sivu pysäyttääksesi jo ladatun mainoskoodin."
+  }
 }

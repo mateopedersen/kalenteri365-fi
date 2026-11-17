@@ -1117,4 +1117,9 @@ console.log(
   "PDF + WebP pairs",
 );
 
+const advertisingPaths=pages.map(page=>page.path).filter(advertisingEligible);
+await fs.writeFile(path.join(ROOT,'functions/advertising-routes.js'),'// Generated public Banner paths.\nexport default '+JSON.stringify(advertisingPaths)+';\n');
+const functionRoutes=[...new Set(['/api/*','/horoskooppi/*','/sv/*','/black-friday/*','/cyber-monday/*',...advertisingPaths.map(p=>p==='/'?'/':'/'+p.split('/')[1]+'*')])];
+if(functionRoutes.length>100)throw Error('Cloudflare route limit exceeded');
+await fs.writeFile(path.join(OUT,'_routes.json'),JSON.stringify({version:1,include:functionRoutes,exclude:[]}));
 await runtimeAssets(ROOT,ASSET,OUT,pages);

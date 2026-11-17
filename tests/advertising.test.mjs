@@ -15,10 +15,7 @@ test('retained legacy unit identifiers: only the exact official host, key and su
  assert.equal(unitForWidth(728,config),config.desktop);assert.equal(unitForWidth(727,config),config.mobile);assert.equal(unitForWidth(299,config),null);
 });
 
-test('the complete sponsored banner is visible in initial HTML without a permission or script gate',()=>{
- const html=advertisingSlot();assert.equal(config.mode,'sponsored-link');assert.equal(config.directLinkUnit,'32322917');assert.equal(config.directLink,'https://asiafilm.org/4/6b6aabe64d2bbfcdadd73b76443164f4');
- assert.match(html,/data-sponsored-link/);assert.match(html,/rel="sponsored external noopener noreferrer"/);assert.match(html,/referrerpolicy="no-referrer"/);assert.match(html,/Tutustu mainostajien tarjontaan/);assert.match(html,/Katso tarjoukset/);assert.doesNotMatch(html,/<script|iframe|<section[^>]*\shidden(?:\s|>|=)|data-advertising-stage/);
-});
+test('the public slot renders a genuine Banner stage rather than an intermediary offer',()=>{const html=advertisingSlot();assert.equal(config.mode,'display-banner');assert.match(html,/data-advertising-stage/);assert.doesNotMatch(html,/data-sponsored-link|sponsored-banner|asiafilm|<a /);});
 test('canonical public route classes receive static placement without private query data',()=>{
  for(const path of ['/','/tyokalut/','/musta-perjantai/','/kybermaanantai/','/juhlapyhat/joulu/','/horoskooppi/','/tietosuoja/','/yhteystiedot/','/paivasuunnittelija/','/luo-kalenteri/','/kalenteri/2027/tammikuu/'])assert(advertisingEligible(path),path);
  for(const path of ['/404/','/500/','/assets/test/','/api/x/','/preview/foo/','/tyokalut/?draft=secret','/tyokalut/#draft'])assert.equal(advertisingEligible(path),false,path);
@@ -26,11 +23,8 @@ test('canonical public route classes receive static placement without private qu
 test('storage information opens and restores focus without reading storage or requesting an ad',()=>{
  let click,focus=0,requests=0;const nodes=[];
  const element=()=>({append(){},setAttribute(){},addEventListener(type,fn){this[type]=fn;},showModal(){this.open=true;},close(){this.open=false;this.closeEvent?.();},focus(){focus++;},isConnected:true});
- const document={createElement(tag){const e=element();nodes.push([tag,e]);return e;},body:{append(){}},addEventListener(type,fn){if(type==='click')click=fn;}};
+ const document={getElementById(){return null;},createElement(tag){const e=element();nodes.push([tag,e]);return e;},body:{append(){}},addEventListener(type,fn){if(type==='click')click=fn;}};
  const context={document,fetch(){requests++;throw Error('No network allowed');},localStorage:{getItem(){throw Error('Do not read legacy consent');}},window:{location:{reload(){throw Error('Do not reload drafts');}}}};
- vm.runInNewContext(read('assets/advertising.mjs'),context);const opener=element();click({target:{closest:()=>opener},preventDefault(){}});assert(nodes.find(([t])=>t==='dialog')[1].open);assert(focus>0);assert.equal(requests,0);assert.equal(nodes.some(([t])=>['iframe','script','img'].includes(t)),false);
+ vm.runInNewContext(read('assets/advertising.mjs').replace(/^import.*$/gm,''),context);const opener=element();click({target:{closest:()=>opener},preventDefault(){}});assert(nodes.find(([t])=>t==='dialog')[1].open);assert(focus>0);assert.equal(requests,0);assert.equal(nodes.some(([t])=>['iframe','script','img'].includes(t)),false);
 });
-test('advertising requires no provider CSP permissions and stays out of printed documents',()=>{
- assert.doesNotMatch(read('scripts/build.mjs'),/bauval\.org|nresystems\.com|storageimagedisplay\.com/);
- const css=read('assets/advertising.css');assert.match(css,/@media print/);assert.match(css,/grid-template-columns:56px minmax\(0,1fr\)/);assert.match(css,/min-height:44px/);
-});
+test('provider permissions are scoped to actual public Banner responses and advertising stays out of print',()=>{assert.doesNotMatch(read('scripts/build.mjs'),/bauval\.org|nresystems\.com|storageimagedisplay\.com/);const css=read('assets/advertising.css');assert.match(css,/@media print/);assert.match(css,/min-height:250px/);assert.match(css,/min-height:90px/);assert.match(read('src/advertising-csp.mjs'),/candidate\|\|response.status/);});
