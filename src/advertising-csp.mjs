@@ -22,9 +22,15 @@ export function advertisingCsp(original){
 }
 export async function advertisingResponse(context,paths,hosts){
  const candidate=advertisingCandidate(context.request,paths,hosts),response=await context.next();
- if(!candidate||response.status!==200||!/^text\/html(?:;|$)/i.test(response.headers.get('Content-Type')||''))return response;
+ if(!candidate)return response;
+ // This inventory is generated only from public HTML containing a display slot.
+ // A conditional 304 validates that same unchanged representation without a body.
+ // Keep its policy consistent with 200 so cache revalidation cannot replace the
+ // stored public ad policy with the stricter generic asset policy.
+ const revalidated=response.status===304&&Boolean(context.request.headers.get('If-None-Match')?.trim()||context.request.headers.get('If-Modified-Since')?.trim());
+ if(!revalidated&&(response.status!==200||!/^text\/html(?:;|$)/i.test(response.headers.get('Content-Type')||'')))return response;
  const policy=advertisingCsp(response.headers.get('Content-Security-Policy'));
- if(!policy||!(await response.clone().text()).includes('data-advertising-mode="display-banner"'))return response;
+ if(!policy||(!revalidated&&!(await response.clone().text()).includes('data-advertising-mode="display-banner"')))return response;
  const headers=new Headers(response.headers);headers.set('Content-Security-Policy',policy);
  return new Response(response.body,{status:response.status,statusText:response.statusText,headers});
 }

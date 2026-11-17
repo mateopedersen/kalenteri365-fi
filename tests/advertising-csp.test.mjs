@@ -24,3 +24,19 @@ test('the generated public placement inventory is unique and excludes queries/pr
  assert(advertisingCandidate(new Request(`https://${host}/`),exact,hosts));
  assert(!advertisingCandidate(new Request(`https://${host}/?private=note`),exact,hosts));assert(!advertisingCandidate(new Request('https://preview.pages.dev/'),exact,hosts));assert(!advertisingCandidate(new Request(`https://${host}/`,{method:'POST'}),exact,hosts));
 });
+test('conditional public cache validation keeps the display policy, validators and empty body without buffering',async()=>{
+ for(const validator of [{'If-None-Match':'"public-page"'},{'If-Modified-Since':'Tue, 17 Nov 2026 12:00:00 GMT'}]){
+  for(const etag of [null,'"public-page"']){
+   const headers={'Content-Security-Policy':original,'Cache-Control':'public,max-age=0,must-revalidate'};if(etag)headers.ETag=etag;
+   const response=new Response(null,{status:304,headers});response.clone=()=>{throw Error('A cache validation has no body to buffer');};
+   const result=await advertisingResponse({request:new Request(`https://${host}/`,{headers:validator}),next:async()=>response},paths,hosts);
+   assert.equal(result.status,304);assert.equal(result.body,null);assert.equal(result.headers.get('ETag'),etag);assert.equal(result.headers.get('Cache-Control'),headers['Cache-Control']);assert.equal(result.headers.get('Content-Security-Policy'),advertisingCsp(original));
+  }
+ }
+});
+test('a 304 never grants an exception without a conditional request for an exact public production page',async()=>{
+ for(const [url,method,headers]of [[`https://${host}/`,'GET',{}],[`https://${host}/`,'GET',{'If-None-Match':'  '}],[`https://${host}/?q=private`,'GET',{'If-None-Match':'"public-page"'}],[`https://${host}/private/`,'GET',{'If-None-Match':'"public-page"'}],['https://preview.pages.dev/','GET',{'If-None-Match':'"public-page"'}],[`https://${host}/`,'HEAD',{'If-None-Match':'"public-page"'}]]){
+  const response=new Response(null,{status:304,headers:{'Content-Security-Policy':original}});response.clone=()=>{throw Error('A rejected response must not be buffered');};
+  const result=await advertisingResponse({request:new Request(url,{method,headers}),next:async()=>response},paths,hosts);assert.equal(result,response);assert.equal(result.headers.get('Content-Security-Policy'),original);
+ }
+});
