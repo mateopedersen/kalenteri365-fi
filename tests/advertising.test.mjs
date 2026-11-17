@@ -10,13 +10,13 @@ const code=fs.readFileSync(new URL('../assets/advertising.mjs',import.meta.url),
 function browser({width=1000,choice=null,query='',host=config.hosts[0],blocked=false,hasSlot=true,settings=config}={}){
  const scripts=[],events={},docEvents={},data=new Map(),dialogs=[];let observer;
  if(choice)data.set(config.storageKey,JSON.stringify(choice));
- const node=()=>({dataset:{},style:{},children:[],hidden:false,setAttribute(){},addEventListener(){},append(...children){this.children.push(...children);},showModal(){this.open=true;},close(){this.open=false;}});
+ const node=()=>({contains:()=>false,querySelectorAll:()=>[],dataset:{},style:{},children:[],hidden:false,setAttribute(){},addEventListener(){},append(...children){this.children.push(...children);},showModal(){this.open=true;},close(){this.open=false;}});
  const placeholder=node(),stage={...node(),clientWidth:width,append(n){scripts.push(n);}};
  const slot={...node(),clientWidth:width,querySelector:s=>s==='[data-advertising-stage]'?stage:placeholder,getBoundingClientRect:()=>({top:300,bottom:700})};
- const document={visibilityState:'visible',getElementById:()=>({textContent:JSON.stringify(settings)}),querySelector:()=>hasSlot?slot:null,createElement(tag){const n=node();if(tag==='dialog')dialogs.push(n);return n;},body:{append(){}},addEventListener:(k,f)=>docEvents[k]=f};
- const context={document,URL,Date,innerHeight:800,location:{hostname:host,search:query,reload(){context.reloads++;}},localStorage:{getItem(k){if(blocked)throw Error('blocked');return data.get(k)||null;},setItem(k,v){if(blocked)throw Error('blocked');data.set(k,v);}},consentRecord,validConsent,unitForWidth,addEventListener:(k,f)=>events[k]=f,reloads:0,IntersectionObserver:function(cb){observer={cb,observe(){},disconnect(){}};return observer;}};context.window=context;
+ const document={visibilityState:'visible',getElementById:()=>({textContent:JSON.stringify(settings)}),querySelector:selector=>selector==='[data-advertising-slot]'&&hasSlot?slot:null,querySelectorAll:()=>[],createTextNode:text=>({textContent:text}),createElement(tag){const n=node();if(tag==='dialog')dialogs.push(n);return n;},body:{append(){}},addEventListener:(k,f)=>docEvents[k]=f};
+ const context={confirm:()=>true,document,URL,Date,innerHeight:800,location:{hostname:host,search:query,reload(){context.reloads++;}},localStorage:{getItem(k){if(blocked)throw Error('blocked');return data.get(k)||null;},setItem(k,v){if(blocked)throw Error('blocked');data.set(k,v);}},consentRecord,validConsent,unitForWidth,addEventListener:(k,f)=>events[k]=f,reloads:0,IntersectionObserver:function(cb){observer={cb,observe(){},disconnect(){}};return observer;}};context.window=context;
  vm.createContext(context);vm.runInContext(code,context);
- return {context,scripts,data,slot,stage,placeholder,dialogs,near:()=>observer?.cb([{isIntersecting:true}]),storage:(key,newValue)=>events.storage({key,newValue}),click(action){docEvents.click({target:{closest:()=>({dataset:{advertisingChoice:action},hasAttribute:()=>false})},preventDefault(){}});},resize(w){slot.clientWidth=w;events.resize();}};
+ return {edit:()=>docEvents.input({target:{matches:()=>true,value:'UNSAVED_PRIVATE_TEST'}}),context,scripts,data,slot,stage,placeholder,dialogs,near:()=>observer?.cb([{isIntersecting:true}]),storage:(key,newValue)=>events.storage({key,newValue}),click(action){docEvents.click({target:{closest:()=>({dataset:{advertisingChoice:action},hasAttribute:()=>false})},preventDefault(){}});},resize(w){slot.clientWidth=w;events.resize();}};
 }
 test('advertising records reject expired, forged, analytics-only and necessary-only choices',()=>{
  const now=Date.now();assert(validConsent(consentRecord(false,now),now));assert(validConsent(consentRecord(true,now),now));
@@ -43,7 +43,7 @@ test('private query strings, preview hosts and refusals cannot start ads; revoca
  const blocked=browser({blocked:true});blocked.near();blocked.click('allow');assert.equal(blocked.scripts.length,1);assert.equal(blocked.data.has(config.storageKey),false);
 });
 test('ad placement is responsive, transparent and excluded from print',()=>{
- const css=fs.readFileSync(new URL('../assets/advertising.css',import.meta.url),'utf8');assert.match(css,/@media print\{\.ad-placement/);assert.match(css,/min-height:250px/);assert.match(css,/@container\(min-width:728px\)/);assert(!css.includes('position:fixed'));assert(!code.includes('document.write'));assert(!code.includes('setInterval'));
+ const css=fs.readFileSync(new URL('../assets/advertising.css',import.meta.url),'utf8');assert.match(css,/@media print\{\.ad-placement/);assert.match(css,/min-height:250px/);assert.match(css,/@container\(min-width:728px\)/);assert(!css.slice(0,css.indexOf('.cookie-choice-banner')).includes('position:fixed'));assert(!code.includes('document.write'));assert(!code.includes('setInterval'));
 });
 
 test('the observed pixel and creative image origins are restricted to img-src',()=>{
@@ -104,11 +104,11 @@ test('disabled delivery switch prevents any vendor request even with a grant and
  assert.equal(b.scripts.length,0);assert.equal(b.context.reloads,0);
 });
 
-test('approved active production admits only public information routes and keeps private routes excluded',async()=>{
+test('all public canonical HTML routes admit advertising while query data stays excluded',async()=>{
  const {advertisingEligible,advertisingConfigMarkup}=await import('../src/advertising-view.mjs');
  assert.equal(productionConfig.enabled,true);
  for(const path of ['/musta-perjantai/','/kybermaanantai/','/juhlapyhat/joulu/','/horoskooppi/'])assert.equal(advertisingEligible(path),true);
- for(const path of ['/','/tietosuoja/','/paivasuunnittelija/','/luo-kalenteri/','/yhteystiedot/','/musta-perjantai/?name=private'])assert.equal(advertisingEligible(path),false);
+ for(const path of ['/','/tietosuoja/','/paivasuunnittelija/','/luo-kalenteri/','/yhteystiedot/'])assert.equal(advertisingEligible(path),true);assert.equal(advertisingEligible('/musta-perjantai/?name=private'),false);
  assert.match(advertisingConfigMarkup(),/"enabled":true/);
 });
 
@@ -117,3 +117,5 @@ test('approved active production still requires explicit advertising consent and
  const b=browser({settings:productionConfig});b.click('allow');assert.equal(b.scripts.length,0);b.near();assert.equal(b.scripts.length,1);
  for(const options of [{hasSlot:false},{query:'?name=private'},{host:'127.0.0.1'}]){const excluded=browser({...options,settings:productionConfig,choice:consentRecord(true)});excluded.near();assert.equal(excluded.scripts.length,0);}
 });
+
+test('combined cookie withdrawal preserves dirty inputs when the visitor cancels',()=>{const b=browser({choice:consentRecord(true)});b.near();assert.equal(b.scripts.length,1);b.edit();b.context.confirm=()=>false;b.click('deny');assert.equal(b.context.reloads,0);assert.equal(JSON.parse(b.data.get(config.storageKey)).advertising,true);assert(!JSON.stringify([...b.data]).includes('UNSAVED_PRIVATE_TEST'));b.context.confirm=()=>true;b.click('deny');assert.equal(b.context.reloads,1);assert.equal(JSON.parse(b.data.get(config.storageKey)).advertising,false);});

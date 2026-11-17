@@ -4,6 +4,7 @@ const ACKNOWLEDGEMENT_DAYS=180;
 export function initStorageNotice(){
   const notice=document.querySelector('#storage-notice');
   if(!notice)return;
+  if(document.querySelector('#advertising-config')){notice.hidden=true;return;}
   let acknowledged=false;
   let opener=null;
   try{acknowledged=Number(localStorage.getItem(ACKNOWLEDGEMENT_KEY))>Date.now();}catch{}

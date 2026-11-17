@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {advertisingEligible} from '../../src/advertising-view.mjs';
 
-test('every built page has one public information slot or no private-page slot and no eager vendor tag',()=>{
+test('every canonical built page has one slot and no eager vendor tag',()=>{
  const pages=JSON.parse(readFileSync(new URL('../../reports/pages.json',import.meta.url),'utf8'));
  let eligible=0,excluded=0;
  for(const page of pages){
@@ -16,5 +16,5 @@ test('every built page has one public information slot or no private-page slot a
   assert(!/<script\b[^>]*src=["'][^"']*bauval\.org/i.test(html),page.path+' eager vendor');
   if(expected)eligible++;else excluded++;
  }
- assert(eligible>400);assert(excluded>800);
+ assert(eligible>1200,'all sitemap sections covered');assert.equal(eligible+excluded,pages.length);
 });

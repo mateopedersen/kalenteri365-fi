@@ -65,8 +65,8 @@ export function toolIntroduction(path) {
 
 // Custom page heroes live inside their workspace. Insert after the section or
 // header enclosing the H1, never before it or inside its text/controls.
-export function introduceTool(path,body,{customHeader=false}={}) {
-  const intro=toolIntroduction(path);
+export function introduceTool(path,body,{customHeader=false,afterIntroduction=""}={}) {
+  const intro=toolIntroduction(path)+afterIntroduction;
   if(!intro)return body;
   if(!customHeader)return intro+body;
   const tags=/<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,stack=[];

@@ -301,8 +301,7 @@ async function page(p, title, desc, body, kind = "page", extra = {}) {
   const social = await cover(ASSET, p, metadata.title, metadata.description, {kind, ...extra, body});
   if (pages.some((x) => x.path === p)) throw Error("Duplicate page " + p);
   const group=p.split('/')[1],plannerFamily={'viikkokalenteri':'week','perhekalenteri':'family','lukujarjestys':'school','koulukalenteri':'school','tyovuorosuunnittelija':'shift'}[group];
-  body=introduceTool(p,body,{customHeader:extra.customHeader});
-  if(advertisingEligible(p))body+=advertisingSlot();
+  body=introduceTool(p,body,{customHeader:extra.customHeader||p==='/',afterIntroduction:advertisingEligible(p)?advertisingSlot():''});
   if(plannerFamily&&p.split('/').filter(Boolean).length===1)body+=plannerCards(plannerFamily);
   body=templateGuidance(body);
   if(group==='juhlapyhat'&&p==='/juhlapyhat/')body+=holidayDirectory();
