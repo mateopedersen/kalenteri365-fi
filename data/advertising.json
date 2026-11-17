@@ -21,15 +21,7 @@
     "src": "https://bauval.org/22/d86aa501560e06dbb3d53eaa907ee254"
   },
   "privacy": "/tietosuoja/#mainonta",
-  "labels": {
-    "title": "Mainonnan asetukset",
-    "description": "Näytämme Adsterran mainoksia vain, jos sallit niiden lataamisen. Mainospalvelu saa verkkoyhteyden ja laitteen teknisiä tietoja ja voi käyttää evästeitä.",
-    "detail": "Mainostunnisteen asetuksiin ei lisätä kalenterimerkintöjä tai lomakkeiden sisältöä. Kolmannen osapuolen mainoskoodi toimii selaimessa sen oman tietosuojakäytännön mukaisesti. Valinta säilyy 180 päivää; voit perua luvan milloin tahansa. Kieltäytyminen ei estä sivuston käyttöä.",
-    "deny": "Älä salli mainoksia",
-    "allow": "Salli mainokset",
-    "close": "Sulje",
-    "policy": "Tietosuojaseloste ja mainonta",
-    "allowed": "Mainosten lataaminen on sallittu.",
-    "denied": "Mainoksia ei ladata."
-  }
+  "mode": "sponsored-link",
+  "directLink": "https://asiafilm.org/4/6b6aabe64d2bbfcdadd73b76443164f4",
+  "directLinkUnit": "32322917"
 }

@@ -12,7 +12,7 @@ test('every canonical built page has one slot and no eager vendor tag',()=>{
   assert.equal((html.match(/data-advertising-slot\b/g)||[]).length,expected,page.path);
   assert.equal((html.match(/id="advertising-config"/g)||[]).length,1,page.path+' configuration');
   const config=JSON.parse(html.match(/id="advertising-config"[^>]*>([^<]*)<\/script>/)[1]);
-  assert.equal(config.enabled,true,page.path+' approved active configuration');
+  assert.equal(config.enabled,true,page.path+' approved active configuration');assert.equal(config.mode,'sponsored-link');if(expected){assert(html.includes('data-sponsored-link'),page.path+' first-paint sponsored link');assert(html.includes('href="'+config.directLink+'"'),page.path+' exact provider link');assert(!/<section[^>]*data-advertising-slot[^>]*\bhidden\b/.test(html),page.path+' visible before interaction');}
   assert(!/<script\b[^>]*src=["'][^"']*bauval\.org/i.test(html),page.path+' eager vendor');
   if(expected)eligible++;else excluded++;
  }
