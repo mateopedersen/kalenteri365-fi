@@ -1,12 +1,12 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
-import {createReadStream,createWriteStream} from 'node:fs';
+import {createReadStream} from 'node:fs';
 import {pipeline} from 'node:stream/promises';
-import {Readable} from 'node:stream';
 import {spawn} from 'node:child_process';
 import {createZstdDecompress,constants} from 'node:zlib';
 import {packageManifest as manifest} from '../src/calendar-package-catalog.mjs';
+import {downloadBundle} from './bundle-download.mjs';
 const root=path.resolve(import.meta.dirname,'..');
 const digest=async filename=>{const hash=createHash('sha256');await pipeline(createReadStream(filename),hash);return hash.digest('hex');};
 const matches=async(file,record)=>{try{return (await fs.stat(file)).size===record.bytes&&await digest(file)===record.sha256;}catch{return false;}};
@@ -17,11 +17,13 @@ async function restoreVerifiedBundle(files,bundle,environmentKey){
   let archive=process.env[environmentKey]||path.join(root,'work/calendar-packages-20261114',bundle.name),temporary=false;
   try{await fs.access(archive);}catch{
    archive=path.join(work,bundle.name);temporary=true;
-   const response=await fetch(bundle.url,{signal:AbortSignal.timeout(600000)});if(!response.ok)throw Error('Calendar bundle response '+response.status);
-   await pipeline(Readable.fromWeb(response.body),createWriteStream(archive));
+   const transferStarted=Date.now();console.log('Restoring immutable calendar bundle with up to four bounded range requests.');
+   await downloadBundle(bundle,archive);
+   console.log('Calendar bundle transfer completed in '+Math.round((Date.now()-transferStarted)/1000)+' seconds; checking complete archive SHA-256.');
   }
   try{
    if(!await matches(archive,bundle))throw Error('Calendar bundle SHA-256 mismatch');
+   console.log('Archive checksum verified; restoring '+files.length+' individually verified files.');
    // Only manifest paths are accepted; verify each file before atomic replacement.
    const extractor=`import sys,json,tarfile,hashlib,pathlib,unicodedata\np=json.load(open(sys.argv[1]));allowed={f['path']:f for f in p};seen=set()\nwith tarfile.open(fileobj=sys.stdin.buffer,mode='r|') as tar:\n for item in tar:\n  name=unicodedata.normalize('NFC',item.name)\n  if not item.isfile() or name not in allowed or name in seen: raise ValueError('Unexpected bundle path: '+name)\n  f=allowed[name]\n  if item.size!=f['bytes']: raise ValueError('Bundle file size: '+name)\n  b=tar.extractfile(item).read()\n  if hashlib.sha256(b).hexdigest()!=f['sha256']: raise ValueError('Source checksum mismatch: '+name)\n  dest=pathlib.Path(f['destination']);tmp=dest.with_name(dest.name+'.importing');tmp.write_bytes(b);tmp.replace(dest);seen.add(name)\nif len(seen)!=len(allowed): raise ValueError('Calendar bundle incomplete')\n`;
    const expectedPath=path.join(work,bundle.name+'.json');await fs.writeFile(expectedPath,JSON.stringify(files));
