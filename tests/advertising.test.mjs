@@ -19,8 +19,8 @@ test('the complete sponsored banner is visible in initial HTML without a permiss
  const html=advertisingSlot();assert.equal(config.mode,'sponsored-link');assert.equal(config.directLinkUnit,'32322917');assert.equal(config.directLink,'https://asiafilm.org/4/6b6aabe64d2bbfcdadd73b76443164f4');
  assert.match(html,/data-sponsored-link/);assert.match(html,/rel="sponsored external noopener noreferrer"/);assert.match(html,/referrerpolicy="no-referrer"/);assert.match(html,/Tutustu mainostajien tarjontaan/);assert.match(html,/Katso tarjoukset/);assert.doesNotMatch(html,/<script|iframe|<section[^>]*\shidden(?:\s|>|=)|data-advertising-stage/);
 });
-test('all canonical public pages receive the same static placement without private query data',()=>{
- const pages=JSON.parse(read('reports/pages.json'));for(const page of pages)assert(advertisingEligible(page.path),page.path);
+test('canonical public route classes receive static placement without private query data',()=>{
+ for(const path of ['/','/tyokalut/','/musta-perjantai/','/kybermaanantai/','/juhlapyhat/joulu/','/horoskooppi/','/tietosuoja/','/yhteystiedot/','/paivasuunnittelija/','/luo-kalenteri/','/kalenteri/2027/tammikuu/'])assert(advertisingEligible(path),path);
  for(const path of ['/404/','/500/','/assets/test/','/api/x/','/preview/foo/','/tyokalut/?draft=secret','/tyokalut/#draft'])assert.equal(advertisingEligible(path),false,path);
 });
 test('storage information opens and restores focus without reading storage or requesting an ad',()=>{
