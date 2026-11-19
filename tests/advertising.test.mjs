@@ -2,7 +2,7 @@ import test from 'node:test';import assert from 'node:assert/strict';import fs f
 import {consentRecord,validConsent,validUnit,unitForWidth} from '../assets/ad-policy.mjs';
 import {advertisingEligible,advertisingSlot} from '../src/advertising-view.mjs';
 import {advertisingResponse} from '../src/advertising-csp.mjs';
-const productionConfig=JSON.parse(fs.readFileSync(new URL('../data/advertising.json',import.meta.url),'utf8')),config=productionConfig;
+const productionConfig=JSON.parse(fs.readFileSync(new URL('../data/advertising.json',import.meta.url),'utf8')),config={...productionConfig,enabled:true};
 const read=p=>fs.readFileSync(new URL('../'+p,import.meta.url),'utf8');
 test('legacy advertising records reject expired, forged, analytics-only and necessary-only choices',()=>{
  const now=Date.now();assert(validConsent(consentRecord(false,now),now));assert(validConsent(consentRecord(true,now),now));
