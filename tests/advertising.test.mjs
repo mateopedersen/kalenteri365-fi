@@ -17,8 +17,8 @@ test('retained legacy unit identifiers: only the exact official host, key and su
 });
 
 test('the public slot renders a genuine Banner stage rather than an intermediary offer',()=>{const html=advertisingSlot();assert.equal(config.mode,'display-banner');assert.match(html,/data-advertising-stage/);assert.doesNotMatch(html,/data-sponsored-link|sponsored-banner|asiafilm|<a /);});
-test('canonical public route classes receive static placement without private query data',()=>{
- for(const path of ['/','/tyokalut/','/musta-perjantai/','/kybermaanantai/','/juhlapyhat/joulu/','/horoskooppi/','/tietosuoja/','/yhteystiedot/','/paivasuunnittelija/','/luo-kalenteri/','/kalenteri/2027/tammikuu/'])assert(advertisingEligible(path),path);
+test('canonical public routes have advertising disabled',()=>{
+ for(const path of ['/','/tyokalut/','/musta-perjantai/','/kybermaanantai/','/juhlapyhat/joulu/','/horoskooppi/','/tietosuoja/','/yhteystiedot/','/paivasuunnittelija/','/luo-kalenteri/','/kalenteri/2027/tammikuu/'])assert.equal(advertisingEligible(path),false,path);
  for(const path of ['/404/','/500/','/assets/test/','/api/x/','/preview/foo/','/tyokalut/?draft=secret','/tyokalut/#draft'])assert.equal(advertisingEligible(path),false,path);
 });
 test('storage information opens and restores focus without reading storage or requesting an ad',()=>{
