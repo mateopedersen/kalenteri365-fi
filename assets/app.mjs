@@ -145,14 +145,17 @@ function renderCalendar() {
   $("#jump-month").value = m;
   const foot = $(".calendar-footer");
   if (foot) {
+    const printableYear = YEARS.includes(y);
     const dl = $('a[href^="/pdf-kalenteri/"]', foot),
       ed = $('a[href^="/luo-kalenteri/"]', foot);
     if (dl) {
-      dl.hidden = !YEARS.includes(y);
-      dl.href = "/pdf-kalenteri/" + y + "/" + SLUGS[m - 1] + "/";
+      dl.hidden = !printableYear;
+      dl.href = printableYear
+        ? "/pdf-kalenteri/" + y + "/" + SLUGS[m - 1] + "/"
+        : "/pdf-kalenteri/";
     }
     if (ed) {
-      ed.hidden = !YEARS.includes(y);
+      ed.hidden = !printableYear;
       ed.href = "/luo-kalenteri/?year=" + y + "&month=" + m;
     }
   }
