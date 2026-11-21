@@ -830,7 +830,7 @@ if(!document.querySelector("[data-workday-workspace]"))bindForm("#work-calc", (f
     else n++;
   }
   result(
-    `<strong>${n} ${n === 1 ? "työpäivä" : "työpäivää"}</strong><p>${(n * +f.get("hours")).toLocaleString("fi-FI")} ${n * +f.get("hours") === 1 ? "tunti" : "tuntia"} · ${w} ${w === 1 ? "ma–pe-päivä" : "ma–pe-päivää"} − ${p} ${p === 1 ? "valittu pyhä- tai aattopäivä" : "valittua pyhä- tai aattopäivää"}. Rajapäivät mukana.</p>`,
+    `<strong>${n} ${n === 1 ? "työpäivä" : "työpäivää"}</strong><p>${(n * +f.get("hours")).toLocaleString("fi-FI", {useGrouping:false})} ${n * +f.get("hours") === 1 ? "tunti" : "tuntia"} · ${w} ${w === 1 ? "ma–pe-päivä" : "ma–pe-päivää"} − ${p} ${p === 1 ? "valittu pyhä- tai aattopäivä" : "valittua pyhä- tai aattopäivää"}. Rajapäivät mukana.</p>`,
   );
 });
 $$("[data-plan]").forEach((el) => {
@@ -973,7 +973,7 @@ document.addEventListener("click", (e) => {
     "selected-disc",
   );
   $("#moon-selected-light").textContent =
-    (100 * Number(b.dataset.moonLight)).toLocaleString("fi-FI", {
+    (100 * Number(b.dataset.moonLight)).toLocaleString("fi-FI", {useGrouping:false,
       maximumFractionDigits: 1,
     }) + " % valaistuna";
 });

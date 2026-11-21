@@ -19,7 +19,7 @@ async function update(ds=today()){
    root.querySelector('.horoscope-daily-head h2').textContent=e.title;root.querySelector('[data-daily-intro]').textContent=e.intro;
    for(const key of fields)paragraphs(root.querySelector(`[data-daily-section="${key}"] .horoscope-paragraphs`),e[key]);
    root.querySelector('[data-daily-moon]').textContent='Kuu '+payload.sky.positions.Moon.locative;
-   root.querySelector('[data-daily-phase]').textContent=payload.sky.moon.phase+' · '+(payload.sky.moon.illumination*100).toLocaleString('fi-FI',{maximumFractionDigits:1})+' % valaistuna';
+   root.querySelector('[data-daily-phase]').textContent=payload.sky.moon.phase+' · '+(payload.sky.moon.illumination*100).toLocaleString('fi-FI',{useGrouping:false,maximumFractionDigits:1})+' % valaistuna';
    root.querySelector('[data-daily-aspect]').textContent=e.aspectFact;root.querySelector('.horoscope-disclosure').textContent=payload.method;
   }else if(dateNode){
    const entries=Object.values(payload.entries);if(entries.length!==12)throw Error('Kaikkia merkkejä ei saatu ladattua.');

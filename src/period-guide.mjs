@@ -53,9 +53,9 @@ export function periodGuide(path){
     const months=m?[m]:Array.from({length:12},(_,i)=>i+1);
     const totals=months.map(n=>workStats(y,n)).reduce((sum,row)=>Object.fromEntries(Object.keys(row).map(key=>[key,(sum[key]||0)+row[key]])),{});
     return shell(period+': mistä työpäivien määrä muodostuu?',[
-      `${m?'Kuukaudessa':'Vuodessa'} on ${totals.days} kalenteripäivää. Niistä ${totals.weekdays} osuu maanantain ja perjantain välille. Näille arkipäiville osuvia yleisiä pyhäpäiviä on ${totals.holidays}. Kukin niistä vähennetään kerran, joten vertailuluku on ${totals.workdays} työpäivää. Oletuksella 7,5 tuntia päivässä se vastaa ${totals.hours.toLocaleString('fi-FI')} tuntia.`,
+      `${m?'Kuukaudessa':'Vuodessa'} on ${totals.days} kalenteripäivää. Niistä ${totals.weekdays} osuu maanantain ja perjantain välille. Näille arkipäiville osuvia yleisiä pyhäpäiviä on ${totals.holidays}. Kukin niistä vähennetään kerran, joten vertailuluku on ${totals.workdays} työpäivää. Oletuksella 7,5 tuntia päivässä se vastaa ${totals.hours.toLocaleString('fi-FI', {useGrouping:false})} tuntia.`,
       `Taulukon malli ei vähennä henkilökohtaisia poissaoloja eikä erikseen vapaita aattoja. Valitse omat viikonpäivät, päivittäiset tunnit ja poissaolojaksot ${a('/tyopaivalaskuri/?start='+y+'-'+String(m||1).padStart(2,'0')+'-01&end='+y+'-'+String(m||12).padStart(2,'0')+'-'+daysInMonth(y,m||12),'työpäivälaskurissa')}. Pyhien ajankohdat löydät ${a(monthPath('juhlapyhat',y,m),'saman ajanjakson juhlapäivistä')}. Tulosta ei tule käyttää sellaisenaan palkka- tai vuosilomalaskelmana.`,
-      `Jos vaihdat päivittäisen työajan 7,5 tunnista 8 tuntiin samoilla ${totals.workdays} työpäivällä, tuntisumma on ${(totals.workdays*8).toLocaleString('fi-FI')} tuntia. Päivien määrä ei tässä esimerkissä muutu. Tämä auttaa erottamaan kalenterista johtuvan eron tuntimäärän valinnasta, kun vertailet ${m?'kuukausia':'vuosia'} keskenään.`,
+      `Jos vaihdat päivittäisen työajan 7,5 tunnista 8 tuntiin samoilla ${totals.workdays} työpäivällä, tuntisumma on ${(totals.workdays*8).toLocaleString('fi-FI', {useGrouping:false})} tuntia. Päivien määrä ei tässä esimerkissä muutu. Tämä auttaa erottamaan kalenterista johtuvan eron tuntimäärän valinnasta, kun vertailet ${m?'kuukausia':'vuosia'} keskenään.`,
     ]);
   }
   if(!['kalenteri','kuukausikalenteri','pdf-kalenteri','kuukalenteri','juhlapyhat','liputuspaivat','merkkipaivat'].includes(base))return '';
@@ -109,7 +109,7 @@ export function cityGuide(path){
   const bits=path.split('/').filter(Boolean),base=bits[0],city=CITIES.find(c=>c[0]===bits[1]),year=Number(bits[2])||2027;
   if(!city||!['auringonnousu-ja-lasku','kuun-nousu-ja-lasku','paivan-pituus'].includes(base))return '';
   const suffix='/'+city[0]+'/'+(bits[2]?year+'/':'');
-  const coordinates=`Laskennan havaintopaikka on ${city[1]}, ${city[2].toLocaleString('fi-FI')}° pohjoista leveyttä ja ${city[3].toLocaleString('fi-FI')}° itäistä pituutta.`;
+  const coordinates=`Laskennan havaintopaikka on ${city[1]}, ${city[2].toLocaleString('fi-FI', {useGrouping:false})}° pohjoista leveyttä ja ${city[3].toLocaleString('fi-FI', {useGrouping:false})}° itäistä pituutta.`;
   const controls=`Valitse laskurista oma päivämäärä. ${bits[2]?'Vuoden '+year+' kuukausivertailu käyttää kunkin kuukauden 15. päivää. ':''}Kellonajat noudattavat Suomen kesä- ja normaaliaikaa.`;
   if(base==='kuun-nousu-ja-lasku'){
     const example=cityExample(city,year,'Moon',1,1);

@@ -3,7 +3,7 @@ const root=document.querySelector('[data-workday-workspace]');
 if(root){
  const $=s=>root.querySelector(s),form=$('#work-calc');let current=null;
  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- const fmt=n=>n.toLocaleString('fi-FI',{maximumFractionDigits:2});
+ const fmt=n=>n.toLocaleString('fi-FI',{useGrouping:false,maximumFractionDigits:2});
  const dateLabel=d=>new Intl.DateTimeFormat('fi-FI',{dateStyle:'medium',timeZone:'UTC'}).format(new Date(d+'T12:00Z'));
  const options=()=>({start:form.elements.start.value,end:form.elements.end.value,hours:Number(form.elements.hours.value),includeStart:form.elements.includeStart.checked,includeEnd:form.elements.includeEnd.checked,eves:form.elements.eves.checked,holidays:form.elements.holidays.checked,weekdays:[...form.querySelectorAll('[name=weekday]:checked')].map(i=>Number(i.value)),exclusions:[...form.querySelectorAll('[data-absence]')].map(row=>({start:row.querySelector('[data-absence-start]').value,end:row.querySelector('[data-absence-end]').value}))});
  function renderDays(r){$('#workday-days').innerHTML=r.days.map(d=>`<tr class="workday-row-${d.reason}"><td>${dateLabel(d.date)}</td><td>${WORKDAY_REASONS[d.reason]}</td><td>${fmt(d.hours)}</td><td>${d.events.map(h=>`<a href="/juhlapyhat/${esc(h.slug)}/">${esc(h.name)}</a>`).join(', ')||' '}</td></tr>`).join('');}

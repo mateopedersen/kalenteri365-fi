@@ -67,7 +67,7 @@ export function pageMetadata(path, title, description) {
     }
     if(base==='tyopaivat'&&month){
       const stats=workStats(year,month);
-      result.description=`${label}: ${stats.workdays} työpäivää ja ${stats.hours.toLocaleString('fi-FI')} tuntia oletuksilla ma–pe ja 7,5 h/päivä. Pyhät vähennetään; muuta aattojen käsittelyä laskurissa.`;
+      result.description=`${label}: ${stats.workdays} työpäivää ja ${stats.hours.toLocaleString('fi-FI', {useGrouping:false})} tuntia oletuksilla ma–pe ja 7,5 h/päivä. Pyhät vähennetään; muuta aattojen käsittelyä laskurissa.`;
     }
     if(base==='kuukalenteri'&&month){
       result.description=lunarDescription(year,month);

@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {yearOverview,overviewComparison,overviewCSV,overviewSettings} from '../src/work-overview.mjs';
 import {workStats} from '../src/calendar.mjs';
-import {overviewURL,workOverviewPage} from '../src/work-overview-view.mjs';
+import {overviewSummary,overviewURL,workOverviewPage} from '../src/work-overview-view.mjs';
 test('The four years reconcile monthly totals with the existing Finnish workday calendar',()=>{
  for(const year of [2027,2028,2029,2030])for(const eves of [false,true]){
   const r=yearOverview({year,eves});
@@ -29,4 +29,8 @@ test('Saturday work and hour selection flow consistently through comparisons and
  for(const hours of[0.01,7.33,24]){const r=yearOverview({year:2028,hours});assert.equal(Math.round(r.months.reduce((sum,m)=>sum+m.hours,0)*100),Math.round(r.hours*100));}
  assert.equal(overviewURL(2028,2,{hours:8,eves:true,sixDays:true}),'/tyopaivat/2028/helmikuu/?hours=8&eves=1&week=6');
  const html=workOverviewPage({year:2028,month:2,scope:'month'});assert(html.includes('Helmikuu 2028'));assert(html.includes('data-overview-month="2"'));assert(!html.includes('undefined'));
+});
+
+test('Finnish yearly work hours keep the decimal comma without digit grouping',()=>{
+ assert.match(overviewSummary(yearOverview({year:2027})), /<strong>1912,5<\/strong>/);
 });

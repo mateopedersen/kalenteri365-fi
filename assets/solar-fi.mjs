@@ -19,7 +19,7 @@ export function connectSolar(A,form,events={}){
   const body=player.dataset.body||'Sun',isMoon=body==='Moon';
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   const clock=new Intl.DateTimeFormat('fi-FI',{timeZone:'Europe/Helsinki',hour:'2-digit',minute:'2-digit',hour12:false});
-  const percentage=new Intl.NumberFormat('fi-FI',{maximumFractionDigits:1});
+  const percentage=new Intl.NumberFormat('fi-FI',{useGrouping:false,maximumFractionDigits:1});
   let painter;
   try{painter=createSolarPanorama(canvas);}catch{
     status.textContent='Simulaatio ei avaudu tässä selaimessa. Lasketut ajat näkyvät alla.';

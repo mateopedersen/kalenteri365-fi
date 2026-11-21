@@ -56,7 +56,7 @@ export function connectEdition({state,persist}){
     const phaseNames = ['Uusikuu', 'Kasvava sirppi', 'Ensimmäinen neljännes', 'Kasvava kupera kuu', 'Täysikuu', 'Vähenevä kupera kuu', 'Viimeinen neljännes', 'Vähenevä sirppi'];
     $('#local-moon-disc').innerHTML = moonSVG(angle, 'home-moon').replace('href="/assets/photos/moon-surface.jpg"', 'href="/assets/photos/moon-phase-texture.webp"');
     $('#local-moon-phase').textContent = phaseNames[Math.floor((angle + 22.5) / 45) % 8];
-    $('#local-moon-light').textContent = (fraction * 100).toLocaleString('fi-FI', {maximumFractionDigits: 0}) + ' % valaistuna';
+    $('#local-moon-light').textContent = (fraction * 100).toLocaleString('fi-FI', {useGrouping:false,maximumFractionDigits: 0}) + ' % valaistuna';
    } catch {
     $('#local-daylength').textContent = 'Avaa paikkakunnan laskuri tarkempia aikoja varten.';
    }

@@ -18,7 +18,7 @@ export function connectLocalPanel({state, onCityChange, onOpen}) {
   let sequence = 0, controller, refreshTimer, manualSelection = false;
   let nextRefresh = 0, astronomicalPeriod, requestedCity;
   const city = () => CITIES.find(c => c[0] === state.city) || CITIES[0];
-  const number = value => Number.isFinite(value) ? value.toLocaleString('fi-FI', {maximumFractionDigits: 1}) : 'Ei tietoa';
+  const number = value => Number.isFinite(value) ? value.toLocaleString('fi-FI', {useGrouping:false,maximumFractionDigits: 1}) : 'Ei tietoa';
 
   function clock() {
     if (document.hidden) return;
