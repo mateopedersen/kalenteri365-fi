@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
-import {dates,ics,calendarURL} from '../scripts/shopping-guides/render.mjs';
+import {dates,ics,calendarURL,render} from '../scripts/shopping-guides/render.mjs';
 import config from '../data/shopping-guides.json' with {type:'json'};
 const moduleFile=new URL('../assets/shopping/'+config.script.split('/').at(-1),import.meta.url);
 const {compareCosts}=await import(moduleFile.href);
@@ -16,6 +16,19 @@ test('Delivery changes the winner; currency comparison uses cents',()=>{
 test('Shopping dates include the December rollover in 2030',()=>{
  const expected={2026:['2026-11-27','2026-11-30'],2027:['2027-11-26','2027-11-29'],2028:['2028-11-24','2028-11-27'],2029:['2029-11-23','2029-11-26'],2030:['2030-11-29','2030-12-02']};
  for(const [year,pair] of Object.entries(expected))assert.deepEqual(dates(Number(year)),{friday:pair[0],monday:pair[1]});
+});
+
+test('Shopping guides expose existing calendar files instead of an asset directory',async()=>{
+ for(const page of config.pages){
+  const html=render(config,page);
+  assert.ok(!html.includes(JSON.stringify(config.asset)));
+  const inline=html.match(/<script type="application\/json" data-shopping-config>(.*?)<\/script>/s);
+  const calendar=JSON.parse(inline[1]).calendar;
+  assert.ok(html.includes('data-calendar-download href="'+calendar[2026].download+'"'));
+  for(const {download} of Object.values(calendar)){
+   assert.match(await fs.readFile(new URL('..'+download,import.meta.url),'utf8'),/^BEGIN:VCALENDAR/);
+  }
+ }
 });
 
 test('All localized calendar files match their exclusive dates and stable IDs',async()=>{
