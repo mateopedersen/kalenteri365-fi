@@ -126,7 +126,7 @@ function saveNotes() {
 const noteTools = globalThis.CalendarDateNoteTools;
 function paintCalendarNote(element, text) {
   element.textContent = text;
-  element.hidden = !text.trim();
+  element.hidden = !noteTools.hasContent(element.dataset.calendarDayNote, text);
   noteTools.apply(element, noteTools.read(element.dataset.calendarDayNote));
 }
 function saveCalendarNote(day, text, format) {
@@ -138,7 +138,7 @@ function saveCalendarNote(day, text, format) {
 }
 function calendarNoteMarkup(day) {
   const text = state.notes[day] || "";
-  return `<span class="calendar-day-note" data-calendar-day-note="${day}" ${noteTools.attributes(day)} ${text.trim() ? "" : "hidden"}>${esc(text)}</span>`;
+  return `<span class="calendar-day-note" data-calendar-day-note="${day}" ${noteTools.attributes(day)} ${noteTools.hasContent(day,text) ? "" : "hidden"}>${esc(text)}</span>`;
 }
 function enableCalendarNote(cell, button, day) {
   cell.dataset.noteDay = day;
@@ -155,10 +155,7 @@ function openCalendarNote(day) {
   calendarNoteDialog.returnValue = "";
   $("#calendar-note-date").textContent = fi(parse(day));
   calendarNoteInput.value = state.notes[day] || "";
-  calendarNoteFormat = noteTools.toolbar(calendarNoteInput, day, {
-    tools: "Muistiinpanon muotoilu", font: "Kirjasin", fonts: ["Tavallinen", "Päätteellinen", "Tasalevyinen"],
-    bold: "Lihavointi", underline: "Alleviivaus", important: "Tärkeä", emoji: "Emojit",
-  });
+  calendarNoteFormat = noteTools.toolbar(calendarNoteInput, day);
   const related = $("#calendar-note-events");
   related.replaceChildren();
   const titles = new Set([
