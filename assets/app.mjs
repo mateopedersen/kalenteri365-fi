@@ -118,11 +118,64 @@ function renderDay() {
 }
 function saveNotes() {
   if ($("#day-notes")) {
-    state.notes[selected] = $("#day-notes").value;
-    const saved = persist();
+    const saved = saveCalendarNote(selected, $("#day-notes").value);
     if ($("#notes-status")) $("#notes-status").textContent = saved ? "Tallennettu tähän selaimeen" : "Tallennus ei onnistunut";
   }
 }
+function paintCalendarNote(element, text) {
+  element.textContent = text;
+  element.hidden = !text.trim();
+}
+function saveCalendarNote(day, text) {
+  if (text.trim()) state.notes[day] = text;
+  else delete state.notes[day];
+  for (const element of $$('[data-calendar-day-note="'+day+'"]')) paintCalendarNote(element, text);
+  return persist();
+}
+function calendarNoteMarkup(day) {
+  const text = state.notes[day] || "";
+  return `<span class="calendar-day-note" data-calendar-day-note="${day}" ${text.trim() ? "" : "hidden"}>${esc(text)}</span>`;
+}
+function calendarNoteButton(day) {
+  return `<button class="calendar-note-add" type="button" data-calendar-note-edit="${day}" aria-label="Muistiinpano · ${esc(fi(parse(day)))}">+</button>`;
+}
+const calendarNoteDialog = $("#calendar-note-dialog");
+const calendarNoteInput = $("#calendar-note-text");
+let editingCalendarNote;
+function openCalendarNote(day) {
+  if (!calendarNoteDialog) return;
+  editingCalendarNote = day;
+  calendarNoteDialog.returnValue = "";
+  $("#calendar-note-date").textContent = fi(parse(day));
+  calendarNoteInput.value = state.notes[day] || "";
+  const related = $("#calendar-note-events");
+  related.replaceChildren();
+  const titles = new Set([
+    ...holidays(parse(day).getUTCFullYear()).filter(item => item.date === day).map(item => item.name),
+    ...eventAt(day).map(item => item.title),
+  ]);
+  for (const title of titles) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = title;
+    button.onclick = () => {
+      if (!calendarNoteInput.value.split("\n").includes(title))
+        calendarNoteInput.value = [calendarNoteInput.value.trim(), title].filter(Boolean).join("\n");
+      calendarNoteInput.focus();
+    };
+    related.append(button);
+  }
+  related.parentElement.hidden = !titles.size;
+  calendarNoteDialog.showModal();
+}
+calendarNoteDialog?.addEventListener("close", () => {
+  if (calendarNoteDialog.returnValue !== "save" || !editingCalendarNote) return;
+  const text = calendarNoteInput.value;
+  if (editingCalendarNote === selected) {
+    $("#day-notes").value = text;
+    saveNotes();
+  } else saveCalendarNote(editingCalendarNote, text);
+});
 function selectDate(ds) {
   saveNotes();
   selected = ds;
@@ -201,6 +254,9 @@ function renderCalendar() {
         td.append(marker);
         dayButton.setAttribute("aria-label", dayButton.getAttribute("aria-label") + ", " + entries.length + (entries.length === 1 ? " merkintä" : " merkintää"));
       }
+      if (!td.classList.contains("outside")) {
+        td.insertAdjacentHTML("beforeend", calendarNoteMarkup(ds) + calendarNoteButton(ds));
+      }
     });
     const monthPrefix = String(y) + "-" + String(m).padStart(2, "0") + "-";
     const groups = Array.from(root.querySelectorAll("td[data-date]")).filter(td => td.dataset.date.startsWith(monthPrefix)).map(td => ({
@@ -214,6 +270,9 @@ function renderCalendar() {
   } else if (view === "year") {
     root.innerHTML = `<div class="year-grid">${MONTHS.map((mm, i) => `<article class="month-card"><h3><button class="textbtn" data-goto-month="${i + 1}">${cap(mm)}</button></h3>${calTable(y, i + 1, { mini: true })}</article>`).join("")}</div>`;
     $$(".mini .dot", root).forEach(dot => { dot.hidden = !filters.has("holiday"); });
+    for (const cell of $$("td[data-date]:not(.outside)", root)) {
+      if (state.notes[cell.dataset.date]?.trim()) cell.insertAdjacentHTML("beforeend", calendarNoteMarkup(cell.dataset.date));
+    }
   } else {
     let ds =
       view === "week"
@@ -234,7 +293,7 @@ function renderCalendar() {
             ),
         ),
         es = eventAt(s).filter((e) => filters.has(e.category || "personal"));
-      return `<article class="${view === "week" ? "week-day" : "day-agenda-item"}"><strong><button class="textbtn" data-select-date="${s}">${cap(DAYS[day(parse(s))])} ${fi(parse(s))}</button></strong>${hs.map((h) => `<div class="agenda-item">${link("/juhlapyhat/" + h.slug + "/", esc(h.name))}</div>`).join("")}${listHTML(es, s)}${!es.length && !hs.length ? '<p class="small">Ei merkintöjä</p>' : ""}</article>`;
+      return `<article class="${view === "week" ? "week-day" : "day-agenda-item"}"><strong><button class="textbtn" data-select-date="${s}">${cap(DAYS[day(parse(s))])} ${fi(parse(s))}</button></strong>${hs.map((h) => `<div class="agenda-item">${link("/juhlapyhat/" + h.slug + "/", esc(h.name))}</div>`).join("")}${listHTML(es, s)}${calendarNoteMarkup(s)}${calendarNoteButton(s)}${!es.length && !hs.length ? '<p class="small">Ei merkintöjä</p>' : ""}</article>`;
     });
     root.innerHTML = `<div class="${view === "week" ? "week-agenda" : "day-agenda"}">${blocks.join("")}</div>`;
   }
@@ -478,6 +537,8 @@ async function importICS(file) {
   );
 }
 document.addEventListener("click", (e) => {
+  const noteDate = e.target.closest("[data-calendar-note-edit]")?.dataset.calendarNoteEdit;
+  if (noteDate) { openCalendarNote(noteDate); return; }
   const action = e.target.closest("[data-action]")?.dataset.action,
     edit = e.target.closest("[data-edit-event]"),
     ds = e.target.closest("[data-select-date]")?.dataset.selectDate,
