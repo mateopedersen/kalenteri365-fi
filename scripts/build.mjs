@@ -1075,9 +1075,11 @@ const aliases = {
   "oma-kalenteri": "luo-kalenteri",
   palaute: "yhteystiedot",
 };
+// This historical page has no surviving PDF. Keep the original month reachable in the calendar.
+const legacyMonthRedirect = "/pdf-kalenteri/2026/marraskuu/ /?date=2026-11-01 301\n";
 await fs.writeFile(
   path.join(OUT, "_redirects"),
-  blog.map(g=>`/oppaat/${g.slug}/ /blogi/${g.slug}/ 301`).join('\n')+'\n'+Object.entries(aliases)
+  legacyMonthRedirect + blog.map(g=>`/oppaat/${g.slug}/ /blogi/${g.slug}/ 301`).join('\n')+'\n'+Object.entries(aliases)
     .map(([a, b]) => `/${a} /${b}/ 301\n/${a}/* /${b}/:splat 301`)
     .join("\n") +
     "\n" +
