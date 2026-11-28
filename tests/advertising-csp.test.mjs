@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import productionAdPaths from '../functions/advertising-routes.js';
+import {advertisingEligible} from '../src/advertising-view.mjs';
 import {advertisingCandidate,advertisingCsp,advertisingResponse} from '../src/advertising-csp.mjs';
 const original="default-src 'self'; script-src 'self' 'sha256-abc' 'nonce-xyz'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-src https://docs.google.com; object-src 'none'; form-action 'self'; frame-ancestors 'none'";
 const host='kalenteri365.fi',hosts=[host],paths=new Set(['/']);
@@ -20,8 +21,11 @@ test('only successful public HTML actually containing the display slot gains the
  }
 });
 test('the generated public placement inventory is unique and excludes queries/preview hosts/writes',()=>{
- const exact=new Set(productionAdPaths);assert.equal(exact.size,productionAdPaths.length);assert(exact.has('/'));
- assert(advertisingCandidate(new Request(`https://${host}/`),exact,hosts));
+ const exact=new Set(productionAdPaths);assert.equal(exact.size,productionAdPaths.length);assert.equal(exact.has('/'),advertisingEligible('/'));
+ if(!advertisingEligible('/'))assert.equal(exact.size,0,'Disabled advertising cannot retain eligible production routes');
+ for(const path of exact)assert(advertisingEligible(path),path);
+ assert.equal(advertisingCandidate(new Request(`https://${host}/`),exact,hosts),advertisingEligible('/'));
+ assert(advertisingCandidate(new Request(`https://${host}/`),paths,hosts),'The explicit public fixture still exercises enabled candidate handling');
  assert(!advertisingCandidate(new Request(`https://${host}/?private=note`),exact,hosts));assert(!advertisingCandidate(new Request('https://preview.pages.dev/'),exact,hosts));assert(!advertisingCandidate(new Request(`https://${host}/`,{method:'POST'}),exact,hosts));
 });
 test('conditional public cache validation keeps the display policy, validators and empty body without buffering',async()=>{
