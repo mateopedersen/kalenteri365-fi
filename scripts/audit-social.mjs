@@ -40,7 +40,7 @@ export function parseHead(html) {
     if (key) meta.set(key, [...(meta.get(key) || []), a.content ?? '']);
   }
   const links = [...head.matchAll(/<link\b[^>]*>/gi)].map(match => attributes(match[0]));
-  const json = [...head.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script\s*>/gi)]
+  const json = [...head.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script\s*[^>]*>/gi)]
     .filter(match => attributes(match[1]).type === 'application/ld+json').map(match => match[2]);
   return {meta, links, json, title: decodeEntities(head.match(/<title\b[^>]*>([\s\S]*?)<\/title\s*>/i)?.[1] || '')};
 }

@@ -1,0 +1,263 @@
+{
+  "reviewDate": "2026-11-28",
+  "repository": "mateopedersen/kalenteri365-fi",
+  "sourceRevision": "2b559a9f60bc5de955234cbb4b68b95958400012",
+  "scope": "First complete default CodeQL analysis (Actions, JavaScript/TypeScript and Python). Every initial result reviewed against source and SARIF; no query exclusions, blanket suppressions, artwork rewrites or weakened tests. GitHub follow-up scan and deployment receipts are separate evidence.",
+  "initialAlerts": 18,
+  "codeHardened": 11,
+  "reviewedFalsePositives": 7,
+  "alerts": [
+    {
+      "alert": 1,
+      "rule": "js/xss-through-dom",
+      "originalLocation": {
+        "path": "assets/app.mjs",
+        "start_line": 229,
+        "end_line": 229,
+        "start_column": 17,
+        "end_column": 60
+      },
+      "disposition": "code-hardened",
+      "evidence": "Calendar editor parameters now pass through numeric conversion and URLSearchParams; user text is never concatenated into URL syntax.",
+      "url": "https://github.com/mateopedersen/kalenteri365-fi/security/code-scanning/1"
+    },
+    {
+      "alert": 2,
+      "rule": "js/xss-through-dom",
+      "originalLocation": {
+        "path": "assets/community.mjs",
+        "start_line": 58,
+        "end_line": 58,
+        "start_column": 68,
+        "end_column": 162
+      },
+      "disposition": "code-hardened",
+      "evidence": "Subscription markup is static; the read-only address, copy token and webcal link are assigned as DOM properties after an anchored local ICS path check.",
+      "url": "https://github.com/mateopedersen/kalenteri365-fi/security/code-scanning/2"
+    },
+    {
+      "alert": 3,
+      "rule": "js/xss-through-dom",
+      "originalLocation": {
+        "path": "assets/app.mjs",
+        "start_line": 283,
+        "end_line": 283,
+        "start_column": 44,
+        "end_column": 595
+      },
+      "disposition": "code-hardened",
+      "evidence": "Monthly agenda clones existing event nodes instead of serializing user text through outerHTML and reparsing it.",
+      "url": "https://github.com/mateopedersen/kalenteri365-fi/security/code-scanning/3"
+    },
+    {
+      "alert": 4,
+      "rule": "js/xss-through-dom",
+      "originalLocation": {
+        "path": "assets/community.mjs",
+        "start_line": 82,
+        "end_line": 82,
+        "start_column": 41,
+        "end_column": 516
+      },
+      "disposition": "code-hardened",
+      "evidence": "Payment dates are escaped in datetime attributes; civil() rejects noncanonical dates before date formatting.",
+      "url": "https://github.com/mateopedersen/kalenteri365-fi/security/code-scanning/4"
+    },
+    {
+      "alert": 5,
+      "rule": "js/xss-through-dom",
+      "originalLocation": {
+        "path": "assets/community.mjs",
+        "start_line": 83,
+        "end_line": 83,
+        "start_column": 89,
+        "end_column": 92
+      },
+      "disposition": "code-hardened",
+      "evidence": "Payment IDs are percent-encoded in a fixed /kalenterit/ prefix and validated before subscription URLs are exposed.",
+      "url": "https://github.com/mateopedersen/kalenteri365-fi/security/code-scanning/5"
+    },
+    {
+      "alert": 6,
+      "rule": "js/xss-through-dom",
+      "originalLocation": {
+        "path": "assets/community.mjs",
+        "start_line": 83,
+        "end_line": 83,
+        "start_column": 136,
+        "end_column": 153
+      },
+      "disposition": "code-hardened",
+      "evidence": "Subscription rendering uses DOM properties and replaceChildren instead of interpolating JSON fields into HTML.",
+      "url": "https://github.com/mateopedersen/kalenteri365-fi/security/code-scanning/6"
+    },
+    {
+      "alert": 7,
+      "rule": "js/xss-through-dom",
+      "originalLocation": {
+        "path": "assets/exams.mjs",
+        "start_line": 16,
+        "end_line": 16,
+        "start_column": 35,
+        "end_column": 492
+      },
+      "disposition": "code-hardened",
+      "evidence": "Exam IDs and date attributes now use the existing complete HTML escaper, as exam titles already did.",
+      "url": "https://github.com/mateopedersen/kalenteri365-fi/security/code-scanning/7"
+    },
+    {
+      "alert": 8,
+      "rule": "js/xss-through-dom",
+      "originalLocation": {
+        "path": "assets/holiday-calendar.mjs",
+        "start_line": 14,
+        "end_line": 14,
+        "start_column": 72,
+        "end_column": 127
+      },
+      "disposition": "reviewed-false-positive",
+      "evidence": "eventDownloadPath in assets/calendar-event-core.mjs accepts only an anchored alphanumeric slug, numeric years 2027–2030 and the finite REMINDERS list. It returns a fixed relative /kalenteriin/ path ending in .ics. The numeric year is normalized. Assigning this path to href cannot introduce an active or foreign scheme.",
+      "url": "https://github.com/mateopedersen/kalenteri365-fi/security/code-scanning/8"
+    },
+    {
+      "alert": 9,
+      "rule": "js/xss-through-dom",
+      "originalLocation": {
+        "path": "assets/workday-tools.mjs",
+        "start_line": 17,
+        "end_line": 17,
+        "start_column": 286,
+        "end_column": 650
+      },
+      "disposition": "code-hardened",
+      "evidence": "Absence rows use constant HTML and assign the selected date via input.value, without inserting form values into markup.",
+      "url": "https://github.com/mateopedersen/kalenteri365-fi/security/code-scanning/9"
+    },
+    {
+      "alert": 10,
+      "rule": "js/incomplete-url-substring-sanitization",
+      "originalLocation": {
+        "path": "tests/admissions.test.mjs",
+        "start_line": 43,
+        "end_line": 43,
+        "start_column": 184,
+        "end_column": 251
+      },
+      "disposition": "reviewed-false-positive",
+      "evidence": "This assert checks that an official source URL is present in human-readable Google Calendar details. The actual destination is separately parsed and asserted to have hostname calendar.google.com; the substring is never an authorization decision.",
+      "url": "https://github.com/mateopedersen/kalenteri365-fi/security/code-scanning/10"
+    },
+    {
+      "alert": 11,
+      "rule": "js/incomplete-url-substring-sanitization",
+      "originalLocation": {
+        "path": "tests/advertising-csp.test.mjs",
+        "start_line": 8,
+        "end_line": 8,
+        "start_column": 398,
+        "end_column": 437
+      },
+      "disposition": "reviewed-false-positive",
+      "evidence": "This is a positive CSP regression assertion over the generated directive, paired with nonce/hash retention and unsafe-inline/object-src denial checks. It does not authorize a URL supplied by a visitor.",
+      "url": "https://github.com/mateopedersen/kalenteri365-fi/security/code-scanning/11"
+    },
+    {
+      "alert": 12,
+      "rule": "js/incomplete-url-substring-sanitization",
+      "originalLocation": {
+        "path": "tests/advertising-csp.test.mjs",
+        "start_line": 19,
+        "end_line": 19,
+        "start_column": 133,
+        "end_column": 209
+      },
+      "disposition": "reviewed-false-positive",
+      "evidence": "This assertion compares generated CSP output with an expected presence flag after middleware has checked the exact production host and eligible response. It is not URL validation.",
+      "url": "https://github.com/mateopedersen/kalenteri365-fi/security/code-scanning/12"
+    },
+    {
+      "alert": 13,
+      "rule": "js/incomplete-url-substring-sanitization",
+      "originalLocation": {
+        "path": "tests/advertising.test.mjs",
+        "start_line": 31,
+        "end_line": 31,
+        "start_column": 730,
+        "end_column": 808
+      },
+      "disposition": "reviewed-false-positive",
+      "evidence": "This assertion verifies an exact middleware response fixture receives the provider CSP only on the public eligible path. Other assertions reject provider hosts in static build code. No attacker-controlled URL is accepted here.",
+      "url": "https://github.com/mateopedersen/kalenteri365-fi/security/code-scanning/13"
+    },
+    {
+      "alert": 14,
+      "rule": "js/incomplete-url-substring-sanitization",
+      "originalLocation": {
+        "path": "tests/holiday-calendar.test.mjs",
+        "start_line": 43,
+        "end_line": 43,
+        "start_column": 69,
+        "end_column": 162
+      },
+      "disposition": "reviewed-false-positive",
+      "evidence": "This assertion checks that a canonical source page is included in calendar event details, while the Google Calendar destination is separately parsed and checked. Human-readable details are not an origin allowlist.",
+      "url": "https://github.com/mateopedersen/kalenteri365-fi/security/code-scanning/14"
+    },
+    {
+      "alert": 15,
+      "rule": "js/incomplete-url-substring-sanitization",
+      "originalLocation": {
+        "path": "tests/university-content.test.mjs",
+        "start_line": 29,
+        "end_line": 29,
+        "start_column": 188,
+        "end_column": 278
+      },
+      "disposition": "reviewed-false-positive",
+      "evidence": "This assertion checks a literal official source link in generated editorial HTML. It does not accept or route any external URL. The expected source href is static repository content.",
+      "url": "https://github.com/mateopedersen/kalenteri365-fi/security/code-scanning/15"
+    },
+    {
+      "alert": 16,
+      "rule": "js/incomplete-hostname-regexp",
+      "originalLocation": {
+        "path": "tests/horoscope-sky.test.mjs",
+        "start_line": 48,
+        "end_line": 48,
+        "start_column": 327,
+        "end_column": 337
+      },
+      "disposition": "code-hardened",
+      "evidence": "The allowed W3C namespace host has escaped dots and an explicit host boundary, rejecting lookalike hosts.",
+      "url": "https://github.com/mateopedersen/kalenteri365-fi/security/code-scanning/16"
+    },
+    {
+      "alert": 17,
+      "rule": "js/bad-tag-filter",
+      "originalLocation": {
+        "path": "scripts/audit-social.mjs",
+        "start_line": 43,
+        "end_line": 43,
+        "start_column": 35,
+        "end_column": 75
+      },
+      "disposition": "code-hardened",
+      "evidence": "Structured-data inspection recognizes script end tags with browser-accepted whitespace and attributes.",
+      "url": "https://github.com/mateopedersen/kalenteri365-fi/security/code-scanning/17"
+    },
+    {
+      "alert": 18,
+      "rule": "js/bad-tag-filter",
+      "originalLocation": {
+        "path": "scripts/build.mjs",
+        "start_line": 334,
+        "end_line": 334,
+        "start_column": 46,
+        "end_column": 71
+      },
+      "disposition": "code-hardened",
+      "evidence": "Search extraction recognizes script/style end tags with browser-accepted whitespace and attributes.",
+      "url": "https://github.com/mateopedersen/kalenteri365-fi/security/code-scanning/18"
+    }
+  ]
+}

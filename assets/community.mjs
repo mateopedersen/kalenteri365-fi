@@ -6,8 +6,13 @@ const today=()=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Helsinki'}).fo
 const range=p=>dt(p.start)+' – '+dt(p.end);
 const options=(items,selected)=>items.map(([v,l])=>`<option value="${esc(v)}" ${v===selected?'selected':''}>${esc(l)}</option>`).join('');
 function subscription(url){
- const absolute='https://kalenteri365.fi'+url;
- return `<div class="calendar-subscription"><strong>Tilaa päivittyvä kalenteri</strong><p>Kalenterisovellus hakee muutokset tästä pysyvästä osoitteesta omalla päivitysaikataulullaan. Ladattu ICS-tiedosto on kertaluonteinen kopio.</p><label>Kalenterin osoite<input readonly value="${absolute}"></label><div class="community-actions"><button class="btn secondary" type="button" data-copy-feed="${absolute}">Kopioi osoite</button><a class="btn secondary" href="${absolute.replace('https:','webcal:')}">Avaa kalenterisovelluksessa</a><a href="https://support.google.com/calendar/answer/37100?hl=fi" target="_blank" rel="noopener">Google Kalenterin ohje</a></div></div>`;
+ if(!/^\/kalenterit\/[a-z0-9-]+\.ics$/.test(url))throw Error('Virheellinen kalenteriosoite');
+ const absolute='https://kalenteri365.fi'+url,node=document.createElement('div');
+ node.className='calendar-subscription';
+ node.innerHTML='<strong>Tilaa päivittyvä kalenteri</strong><p>Kalenterisovellus hakee muutokset tästä pysyvästä osoitteesta omalla päivitysaikataulullaan. Ladattu ICS-tiedosto on kertaluonteinen kopio.</p><label>Kalenterin osoite<input readonly></label><div class="community-actions"><button class="btn secondary" type="button" data-copy-feed>Kopioi osoite</button><a class="btn secondary" data-open-feed>Avaa kalenterisovelluksessa</a><a href="https://support.google.com/calendar/answer/37100?hl=fi" target="_blank" rel="noopener">Google Kalenterin ohje</a></div>';
+ node.querySelector('input').value=absolute;node.querySelector('[data-copy-feed]').dataset.copyFeed=absolute;
+ node.querySelector('[data-open-feed]').href='webcal://kalenteri365.fi'+url;
+ return node;
 }
 export function connectCommunity({state,persist,onUpdate}){
  const data=JSON.parse(document.querySelector('#community-records')?.textContent||'{"schools":[],"payments":[]}');
@@ -55,7 +60,7 @@ export function connectCommunity({state,persist,onUpdate}){
     }else{
      $('[data-school-result]').innerHTML=`<div class="community-school-meta"><strong>${esc(current.municipality)} · ${esc(current.academicYear.replace('/','–'))}</strong><span>Perusopetus · ${current.language==='sv'?'Ruotsi':'Suomi'}</span></div><div class="community-table-wrap" tabindex="0" role="region" aria-label="Kalenterin päivämäärät"><table class="community-table"><thead><tr><th scope="col">Loma</th><th scope="col">Alkaa</th><th scope="col">Päättyy</th></tr></thead><tbody>${periods.map(p=>`<tr><th scope="row">${esc(p.label)}</th><td>${dt(p.start)}</td><td>${dt(p.end)}</td></tr>`).join('')}</tbody></table></div><p>${esc(current.notes_fi)}</p>${full?'<p class="community-scope">Vieressä olevat lauantait ja sunnuntait on liitetty lomajaksoon. Arkipyhiä tai koulukohtaisia lisävapaita ei oleteta.</p>':''}<p class="community-source"><a href="${esc(current.source)}" target="_blank" rel="noopener">Kunnan alkuperäinen julkaisu</a> · Tarkistettu ${dt(current.checked)}</p>`;
     }
-    const sub=$('[data-school-subscription]');if(sub)sub.innerHTML=subscription('/kalenterit/koululomat-'+slug(current.municipality)+'-'+current.language+'.ics');
+    const sub=$('[data-school-subscription]');if(sub)sub.replaceChildren(subscription('/kalenterit/koululomat-'+slug(current.municipality)+'-'+current.language+'.ics'));
     compare();
    };
    const compare=()=>{
@@ -79,8 +84,8 @@ export function connectCommunity({state,persist,onUpdate}){
     prefs.paymentPlan=current.id;save();const next=nextPayment(current,today());
     $('[data-payment-next]').innerHTML=`<small>${next?'Seuraava julkaistu maksupäivä':'Vuoden kalenteri päättynyt'}</small><strong>${next?dt(next):'2027'}</strong><span>${esc(current.name)}</span>`;
     $('[data-payment-note]').textContent=current.note;
-    $('[data-payment-table]').innerHTML=`<div class="community-table-wrap" tabindex="0" role="region" aria-label="Kalenterin päivämäärät"><table class="community-table"><thead><tr><th scope="col">Kuukausi</th><th scope="col">Maksupäivä</th></tr></thead><tbody>${current.dates.map(d=>`<tr ${d===next?'class="next-payment"':''}><th scope="row">${new Intl.DateTimeFormat('fi-FI',{month:'long',timeZone:'UTC'}).format(civil(d))}</th><td><time datetime="${d}">${dt(d)}</time></td></tr>`).join('')}</tbody></table></div>`;
-    const url='/kalenterit/maksut-'+current.id+'.ics';$('[data-payment-download]').href=url;$('[data-payment-subscription]').innerHTML=subscription(url);
+    $('[data-payment-table]').innerHTML=`<div class="community-table-wrap" tabindex="0" role="region" aria-label="Kalenterin päivämäärät"><table class="community-table"><thead><tr><th scope="col">Kuukausi</th><th scope="col">Maksupäivä</th></tr></thead><tbody>${current.dates.map(d=>`<tr ${d===next?'class="next-payment"':''}><th scope="row">${new Intl.DateTimeFormat('fi-FI',{month:'long',timeZone:'UTC'}).format(civil(d))}</th><td><time datetime="${esc(d)}">${dt(d)}</time></td></tr>`).join('')}</tbody></table></div>`;
+    const url='/kalenterit/maksut-'+encodeURIComponent(current.id)+'.ics';$('[data-payment-download]').href=url;$('[data-payment-subscription]').replaceChildren(subscription(url));
     $('[data-payment-source]').innerHTML=`<a href="${esc(current.source)}" target="_blank" rel="noopener">Maksajan alkuperäinen taulukko</a> · Tarkistettu ${dt(current.checked)}`;
    };
    const previous=plans.find(p=>p.id===prefs.paymentPlan);if(previous){institution.value=previous.institution;selector.innerHTML=options(plans.filter(p=>p.institution===previous.institution).map(p=>[p.id,p.name]),previous.id);}

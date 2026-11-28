@@ -45,6 +45,6 @@ test('edge API does not cache an old day over Finnish midnight and archive limit
 test('every Finnish sign maps to its own checksum-verified native vector without embedded raster or font glyphs',async()=>{
  const manifest=JSON.parse(await fs.readFile(new URL('../data/zodiac-art.json',import.meta.url))),hashes=new Set();
  assert.equal(Object.keys(manifest.artifacts).length,12);
- for(const [slug,name] of PROFILES){const record=manifest.artifacts[slug],bytes=await fs.readFile(new URL('../'+record.filename,import.meta.url)),svg=bytes.toString();assert.equal(record.name,name);assert.equal(createHash('sha256').update(bytes).digest('hex'),record.sha256);assert(!/<image\b|<text\b|data:image|https?:\/\/(?!www.w3.org)/.test(svg));assert(svg.includes('<svg'));hashes.add(record.sha256);}
+  for(const [slug,name] of PROFILES){const record=manifest.artifacts[slug],bytes=await fs.readFile(new URL('../'+record.filename,import.meta.url)),svg=bytes.toString();assert.equal(record.name,name);assert.equal(createHash('sha256').update(bytes).digest('hex'),record.sha256);assert(!/<image\b|<text\b|data:image|https?:\/\/(?!www\.w3\.org(?:[\/"'\s>]|$))/.test(svg));assert(svg.includes('<svg'));hashes.add(record.sha256);}
  assert.equal(hashes.size,12);
 });

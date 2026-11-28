@@ -20,7 +20,7 @@ export function reminderInstant(date,reminder){
 }
 export function eventDownloadPath(slug,year,reminder='1'){
  if(!/^[a-z0-9-]+$/.test(slug)||![2027,2028,2029,2030].includes(Number(year))||!REMINDERS.some(([id])=>id===String(reminder)))throw Error('Virheellinen kalenterivalinta.');
- return `/kalenteriin/${slug}/${year}-${reminder}.ics`;
+ return `/kalenteriin/${slug}/${Number(year)}-${reminder}.ics`;
 }
 export function googleCalendarURL(event){
  const start=dateOnly(event.date),end=new Date(+start+86400000),url=new URL('https://calendar.google.com/calendar/r/eventedit');

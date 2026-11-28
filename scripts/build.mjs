@@ -331,7 +331,7 @@ async function page(p, title, desc, body, kind = "page", extra = {}) {
     path.join(folder, "index.html"),
     layout({advertisingConfig:advertisingConfigMarkup(), relatedContent: relatedTopics(p,{exclude:contentDestinations(body)}), path: p, title, description: desc, body, kind, social, structuredImages:[...PHOTO_CREDITS.filter(image=>(p==='/'&&['city','city-night','municipality'].includes(image.kind))||body.includes(image.src)||body.includes(image.src.replace('.webp','-640.webp'))||body.includes(image.src.replace('.webp','-320.webp'))||(image.id==='moon-full'&&(body.includes('moon-surface.jpg')||body.includes('moon-phase-texture.webp')))).map(photoImageSchema), ...(group==='vuodenajat'?seasonImageSchema:[])], ...extra, seoTitle, seoDescription:metadata.description }),
   );
-  searchText.set(p,[...new Set(body.replace(/<script[\s\S]*?<\/script>/gi,' ').replace(/<style[\s\S]*?<\/style>/gi,' ').replace(/<(select|nav)\b[^>]*>[\s\S]*?<\/\1>/gi,' ').replace(/<[^>]*>/g,' ').replace(/&[^;]+;/g,' ').toLocaleLowerCase('fi').split(/[^\p{L}\p{N}]+/u).filter(w=>w.length>1))].join(' '));
+  searchText.set(p,[...new Set(body.replace(/<script[\s\S]*?<\/script\s*[^>]*>/gi,' ').replace(/<style[\s\S]*?<\/style\s*[^>]*>/gi,' ').replace(/<(select|nav)\b[^>]*>[\s\S]*?<\/\1>/gi,' ').replace(/<[^>]*>/g,' ').replace(/&[^;]+;/g,' ').toLocaleLowerCase('fi').split(/[^\p{L}\p{N}]+/u).filter(w=>w.length>1))].join(' '));
   pages.push({
     path: p,
     title,

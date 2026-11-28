@@ -226,7 +226,7 @@ function renderCalendar() {
     }
     if (ed) {
       ed.hidden = !printableYear;
-      ed.href = "/luo-kalenteri/?year=" + y + "&month=" + m;
+      ed.href = "/luo-kalenteri/?" + new URLSearchParams({year:String(Number(y)),month:String(Number(m))});
     }
   }
   $$(".subyears a").forEach((a) =>
@@ -280,7 +280,17 @@ function renderCalendar() {
     })).filter(group => group.entries.length);
     if (groups.length) {
       const total = groups.reduce((sum, group) => sum + group.entries.length, 0);
-      root.insertAdjacentHTML("beforeend", `<details class="calendar-month-agenda" open><summary>${icon("calendar")}<span>Kuukauden merkinnät</span><span class="calendar-agenda-total">${total}</span>${icon("chevron")}</summary><ul>${groups.map(group => `<li><button type="button" class="calendar-agenda-date" data-select-date="${group.date}" aria-label="Valitse ${esc(fi(parse(group.date)))}" aria-pressed="${group.date === selected}">${Number(group.date.slice(-2))}<small>${m}.</small></button><div>${group.entries.map(entry => entry.outerHTML).join("")}</div></li>`).join("")}</ul></details>`);
+      const agenda=document.createElement('details');
+      agenda.className='calendar-month-agenda';agenda.open=true;
+      agenda.innerHTML=`<summary>${icon("calendar")}<span>Kuukauden merkinnät</span><span class="calendar-agenda-total">${total}</span>${icon("chevron")}</summary><ul></ul>`;
+      for(const group of groups){
+        const row=document.createElement('li'),button=document.createElement('button'),month=document.createElement('small'),entries=document.createElement('div');
+        button.type='button';button.className='calendar-agenda-date';button.dataset.selectDate=group.date;
+        button.setAttribute('aria-label','Valitse '+fi(parse(group.date)));button.setAttribute('aria-pressed',String(group.date===selected));
+        button.textContent=String(Number(group.date.slice(-2)));month.textContent=m+'.';button.append(month);
+        entries.append(...group.entries.map(entry=>entry.cloneNode(true)));row.append(button,entries);agenda.querySelector('ul').append(row);
+      }
+      root.append(agenda);
     }
   } else if (view === "year") {
     root.innerHTML = `<div class="year-grid">${MONTHS.map((mm, i) => `<article class="month-card"><h3><button class="textbtn" data-goto-month="${i + 1}">${cap(mm)}</button></h3>${calTable(y, i + 1, { mini: true })}</article>`).join("")}</div>`;

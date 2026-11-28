@@ -13,7 +13,7 @@ if(root){
   function renderSelection(){
     $('#exam-selected-count').textContent=selected.size;
     $('[data-exam-toggle] span').textContent=(root.querySelector('.matric-own').classList.contains('is-open')?'Sulje oma koekalenteri':'Avaa oma koekalenteri')+(selected.size?' ('+selected.size+')':'');
-    $('#exam-selected').innerHTML=selected.size?records.filter(e=>selected.has(e.id)).map(e=>`<li><time datetime="${e.date}">${shortDate(e.date)}</time><span>${esc(e.title)}<small>${e.season==='kevaan'?'Kevät':'Syksy'} 2027</small></span><button type="button" data-exam-remove="${e.id}" aria-label="Poista ${esc(e.title)}, ${shortDate(e.date)}">${icon('close')}</button></li>`).join(''):'<li class="matric-own-empty">Omat päivät tulevat tähän.<br>Valitse ensimmäinen koepäivä listasta.</li>';
+    $('#exam-selected').innerHTML=selected.size?records.filter(e=>selected.has(e.id)).map(e=>`<li><time datetime="${esc(e.date)}">${shortDate(e.date)}</time><span>${esc(e.title)}<small>${e.season==='kevaan'?'Kevät':'Syksy'} 2027</small></span><button type="button" data-exam-remove="${esc(e.id)}" aria-label="Poista ${esc(e.title)}, ${shortDate(e.date)}">${icon('close')}</button></li>`).join(''):'<li class="matric-own-empty">Omat päivät tulevat tähän.<br>Valitse ensimmäinen koepäivä listasta.</li>';
     for(const check of $$('[data-exam-pick]')){const chosen=selected.has(check.value);check.checked=chosen;check.closest('.matric-day').classList.toggle('is-selected',chosen);check.closest('label').querySelector('[data-pick-label]').textContent=chosen?'Valittu':'Valitse päivä';}
     $('[data-exam-download]').disabled=!selected.size;$('[data-exam-clear]').disabled=!selected.size;
     $('[data-exam-print]').disabled=!selected.size&&!visible.length;
